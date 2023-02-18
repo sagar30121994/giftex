@@ -14,14 +14,14 @@ import 'package:giftex/screens/signup/login.dart';
 import 'package:giftex/utils/themeutils.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
-//
-// SharedPreferences? myGlobalPreference;
+import 'package:shared_preferences/shared_preferences.dart';
+
+SharedPreferences? myGlobalPreference;
 
 void main()  async{
   WidgetsFlutterBinding.ensureInitialized();
-  //await Firebase.initializeApp();
-  // myGlobalPreference = await SharedPreferences.getInstance();
+  // await Firebase.initializeApp();
+  myGlobalPreference = await SharedPreferences.getInstance();
   runApp(MyApp());
 }
 
