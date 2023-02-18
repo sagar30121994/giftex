@@ -652,7 +652,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin{
                     },
                     indicator: UnderlineTabIndicator(
                       borderSide:
-                      BorderSide(color: Color(0xff8DAB7F), width: 2.0),
+                      BorderSide(color: Theme.of(context).colorScheme.primary, width: 2.0),
                     ),
                     padding: EdgeInsets.all(0),
                     labelPadding:  EdgeInsets.all(0),
@@ -686,7 +686,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin{
 
               width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.all(0),
-              child:  PageView.builder(
+              child:  ListView.builder(
                 controller: controller,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (BuildContext context, int pos) {
@@ -1149,7 +1149,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin{
               child: Column(
                 children: [
                   Container(
-                      color: Color(0Xff1F2A52),
+
                       width: MediaQuery.of(context).size.width,
                       child: Footer()),
                   Container(

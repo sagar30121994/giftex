@@ -27,17 +27,12 @@ class _GetOtppageState extends State<GetOtppage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      backgroundColor: Color(0xffF7FAFD),
       body: SingleChildScrollView(
           child:Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("image/Rectangle 1535.png"),
-                fit: BoxFit.cover,
-              ),
-            ),
+
             child: Column(
               children: [
                 Container(
@@ -46,18 +41,18 @@ class _GetOtppageState extends State<GetOtppage> {
                       children: [
                         Padding(
                           padding: EdgeInsets.only(top: 0,bottom: 0,right:0,left: 0),
-                          child: Image.asset("image/Shape (13).png", height: 200.0,width: MediaQuery.of(context).size.width,fit: BoxFit.cover,),
+                          child: Image.asset("image/Shapebgup.png", height: 200.0,width: MediaQuery.of(context).size.width,fit: BoxFit.cover,),
                         ),
                         Padding(
                           padding: EdgeInsets.only(top: 0,bottom: 0,right:0,left: 0),
-                          child: Image.asset("image/Shape (14).png", height: 140.0,width: MediaQuery.of(context).size.width,fit: BoxFit.cover,),
+                          child: Image.asset("image/Shapebh.png", height: 130.0,width: MediaQuery.of(context).size.width,fit: BoxFit.cover,),
                         ),
                         Padding(
                           padding: EdgeInsets.only(top: 90,bottom: 0,right:0,left:130),
-                          child: Image.asset("image/Layer 2.png", height:100.0,width: 80,fit: BoxFit.cover,),
+                          child: Image.asset("image/otp.png", height:120.0,width: 120,fit: BoxFit.cover,),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(top: 200,bottom: 0,right:0,left:30),
+                          padding: EdgeInsets.only(top: 220,bottom: 0,right:0,left:30),
                           child: Text("INDIA'S BEST AUCTION MARKETPLACE",
                             textAlign: TextAlign.center,
                             style:
@@ -95,13 +90,13 @@ class _GetOtppageState extends State<GetOtppage> {
                      SizedBox(height: 10,),
                      Row(
                        children: [
-                         Icon(Icons.call,size: 20,color: Color(0xff779868),),
+                         Icon(Icons.call_outlined,size: 20,color: Theme.of(context).colorScheme.secondary,),
                          SizedBox(width: 10,),
                          Text("+91 986734 456721 ",
                            textAlign: TextAlign.center,
                            style:
                            Theme.of(context).textTheme.subtitle1!.copyWith(
-                             color: Color(0xff779868),
+                             color: Theme.of(context).colorScheme.secondary,
                              fontWeight: FontWeight.w400,
                            ),
                          ),
@@ -110,13 +105,13 @@ class _GetOtppageState extends State<GetOtppage> {
                      SizedBox(height: 10,),
                      Row(
                        children: [
-                         Icon(Icons.email_outlined,size: 20,color: Color(0xff779868),),
+                         Icon(Icons.email_outlined,size: 20,color: Theme.of(context).colorScheme.secondary,),
                          SizedBox(width: 10,),
                          Text("johndoe@gmail.com",
                            textAlign: TextAlign.center,
                            style:
                            Theme.of(context).textTheme.subtitle1!.copyWith(
-                             color: Color(0xff779868),
+                             color:Theme.of(context).colorScheme.secondary,
                              fontWeight: FontWeight.w400,
                            ),
                          ),
@@ -126,7 +121,12 @@ class _GetOtppageState extends State<GetOtppage> {
                      OtpTextField(
                        numberOfFields: 4,
                        fieldWidth: 70,
-                       borderColor: Color(0xFF512DA8),
+                       fillColor: Colors.white,
+                       filled: true,
+
+                       borderColor: Colors.transparent,
+                       disabledBorderColor: Colors.transparent,
+                       enabledBorderColor:Colors.transparent,
                        //set to true to show as box or false to show as dash
                        showFieldAsBox: true,
                        //runs when a code is typed in
@@ -164,7 +164,7 @@ class _GetOtppageState extends State<GetOtppage> {
                              textAlign: TextAlign.center,
                              style:
                              Theme.of(context).textTheme.bodyText1!.copyWith(
-                               color: Color(0xff466D33),
+                               color: Theme.of(context).colorScheme.secondary,
                                fontWeight: FontWeight.w600,
                              ),
                            ),
@@ -200,10 +200,9 @@ class _GetOtppageState extends State<GetOtppage> {
                     height: 50,
                     width: 150,
                     decoration: BoxDecoration(
-                      // gradient: LinearGradient(
-                      //   colors: [Color(0xff8DAB7F),Color(0xff466D33),Color(0xff8DAB7F),]
-                      // )
-                        color: Color(0xff466D33),
+                        gradient: LinearGradient(
+                            colors: [Color(0xffE74B52),Color(0xffE74B52),]
+                        ),
                         borderRadius: BorderRadius.circular(20)
                     ),
                     child: Center(

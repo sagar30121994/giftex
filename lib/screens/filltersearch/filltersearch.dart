@@ -631,7 +631,7 @@ class _FillterSearchpageState extends State<FillterSearchpage> {
                     ),
                     SizedBox(height: 16,),
                     SizedBox(
-                        height: 820,
+
                         width: MediaQuery.of(context).size.width,
                         child: Footer()),
                   ],

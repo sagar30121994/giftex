@@ -117,8 +117,10 @@ class _LoginpageState extends State<Loginpage> {
                           padding: EdgeInsets.only(top: 0,left: 16,right: 16),
                           child: Column(
                             children: [
-                              Padding(
-                                padding: EdgeInsets.only(top: 15),
+                              SizedBox(height: 16,),
+                              Container(
+                                color: Colors.white,
+                                padding: EdgeInsets.only(left:8),
                                 child: TextField(
                                   // controller: nameController,
                                   keyboardType: TextInputType.name,
@@ -130,7 +132,8 @@ class _LoginpageState extends State<Loginpage> {
                                       labelText: 'Full Name',
                                       hintText: 'Enter Your Name',
                                       // prefixIcon:
-                                      prefixIcon: Image.asset("image/people.png",height: 8),
+                                      // prefixIcon: ,
+                                      icon: Image.asset("image/people.png",height: 32),
                                       filled: true,
                                       isDense: false,
                                       fillColor: Color(0xffFFFFFF),
@@ -138,8 +141,10 @@ class _LoginpageState extends State<Loginpage> {
                                   ),
                                 ),
                               ),
-                              Padding(
-                                padding: EdgeInsets.only(top: 15),
+                              SizedBox(height: 16,),
+                              Container(
+                                  color: Colors.white,
+                                padding: EdgeInsets.only(left:8),
                                 child: TextField(
                                   // controller: nameController,
                                   keyboardType: TextInputType.emailAddress,
@@ -150,7 +155,7 @@ class _LoginpageState extends State<Loginpage> {
                                       border: InputBorder.none,
                                       labelText: 'Email Address',
                                       hintText: 'aryansethi@gmail.com',
-                                    prefixIcon: Image.asset("image/email.png",height: 8),
+                                      icon: Image.asset("image/email.png",height: 28),
                                       // prefixIcon: Icon(Icons.email_outlined,color: Color(0xff779868)),
                                       filled: true,
                                     fillColor: Color(0xffFFFFFF),
@@ -158,8 +163,10 @@ class _LoginpageState extends State<Loginpage> {
                                   ),
                                 ),
                               ),
-                              Padding(
-                                padding: EdgeInsets.only(top: 15),
+                              SizedBox(height: 16,),
+                              Container(
+                                color: Colors.white,
+                                padding: EdgeInsets.only(left:8),
                                 child: TextField(
                                   // controller: nameController,
                                   keyboardType: TextInputType.phone,
@@ -170,7 +177,7 @@ class _LoginpageState extends State<Loginpage> {
                                       border: InputBorder.none,
                                       labelText: 'Contact Number',
                                       hintText: '91+ 9867345212',
-                                    prefixIcon: Image.asset("image/phone.png",height: 8),
+                                    icon: Image.asset("image/phone.png",height: 32),
                                       // prefixIcon: Icon(Icons.call,color: Color(0xff779868),),
                                       filled: true,
                                     fillColor: Color(0xffFFFFFF),
@@ -178,8 +185,10 @@ class _LoginpageState extends State<Loginpage> {
                                   ),
                                 ),
                               ),
-                              Padding(
-                                padding: EdgeInsets.only(top: 15),
+                              SizedBox(height: 16,),
+                              Container(
+                                color: Colors.white,
+                                padding: EdgeInsets.only(left:8),
                                 child: TextField(
                                   // controller: nameController,
                                   obscureText: true,
@@ -193,7 +202,7 @@ class _LoginpageState extends State<Loginpage> {
                                       border: InputBorder.none,
                                       labelText: 'Set Password',
                                       hintText: '22/03/1998',
-                                       prefixIcon: Image.asset("image/pass.png",height: 4,fit: BoxFit.contain),
+                                       icon: Image.asset("image/pass.png",height: 32),
                                     // prefixIcon: Image.asset("image/pass.png",height: 8),
                                     filled: true,
                                       fillColor: Color(0xffFFFFFF),

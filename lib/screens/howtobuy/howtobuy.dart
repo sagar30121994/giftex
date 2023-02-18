@@ -102,7 +102,7 @@ class _HowToBuyPageState extends State<HowToBuyPage> {
                     Theme
                         .of(context)
                         .textTheme
-                        .headline6!
+                        .headline5!
                         .copyWith(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -118,7 +118,7 @@ class _HowToBuyPageState extends State<HowToBuyPage> {
                         .textTheme
                         .bodyText1!
                         .copyWith(
-                      color: Color(0xff466D33),
+                      color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -146,75 +146,72 @@ class _HowToBuyPageState extends State<HowToBuyPage> {
                   ),
                   const SizedBox(height: 16,),
                   Container(
-                    height: 230,
+                    height: 260,
                     child: Stack(
                       children: [
-                        Padding(
-                          padding: EdgeInsets.only(top: 30, bottom: 0),
-                          child: Container(
-                            //replace this Container with your Card
-                            color: Color(0Xff3C5233),
-                            height: 160.0,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 30, bottom: 0),
+                        Positioned(
+                          top: 54,
+                          left: 0,
+                          right: 0,
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 40.0),
+                            padding: EdgeInsets.only(top: 30, bottom: 0),
                             child: Container(
-
-                              decoration: const BoxDecoration(
-                                color: Color.fromRGBO(109, 144, 93, 0.44),
-                                borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(250),
-                                  bottomRight: Radius.circular(250),
-                                ),
-                              ),
-                              height: 140.0,
+                              //replace this Container with your Card
+                              color: Color(0xff1F2A52),
+                              height: 160.0,
                             ),
                           ),
                         ),
+                        Positioned(
+                          top: 54,
+                          left: 0,
+                          right: 0,
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 30, bottom: 0),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 40.0),
+                              child: Container(
+
+                                decoration: const BoxDecoration(
+                                  color: Color(0xff8C9FB1),
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(265),
+                                    bottomRight: Radius.circular(265),
+
+                                  ),
+                                ),
+                                height: 140.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                            left: 0,
+                            right: 0,
+                            bottom: 54,
+                            child: Image.asset("image/howtobuy.png",height: 200,)),
                       ],
                     ),
                   ),
                   SizedBox(height: 16,),
                   Container(
-                    padding: EdgeInsets.only(left: 0,right: 16),
                     margin: EdgeInsets.only(left: 16,right: 16),
-                    decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(2, 2),
-                            blurRadius: 6,
-                            color: Color.fromRGBO(226, 223, 202, 0.39),
-                          ),
-                          BoxShadow(
-                            offset: Offset(2, 2),
-                            blurRadius: 8,
-                            color: Color.fromRGBO(226, 223, 202, 0.39),
-                          )
-                        ],
-                        border: Border.all(color: Color(0xffDDE3E8),width: 1),
-                        // image: DecorationImage(
-                        //   image: AssetImage("image/Rectangle 2 (2).png"),
-                        //   fit: BoxFit.cover,
-                        // ),
-                        color: Colors.white
-                    ),
+
                     child: ExpansionTileCard(
                       baseColor: Colors.white,
-                      expandedColor: Colors.red[50],
+                      expandedColor: Color(0xffEAEEF2),
+                      elevation: 0,
+                      shadowColor:Color(0xff1F2A52),
+                      initialElevation: 0,
+                      contentPadding: EdgeInsets.all(4),
                       key: cardA,
                       leading: Container(
                         height: 60,
                         width: 60,
 
-                        child: Stack(
-                            children: [
-                              Image.asset("image/Shape (19).png",height:60,fit: BoxFit.cover,),
-                              Center(child: Image.asset("image/Group (23).png",height:35,fit: BoxFit.cover,))
-                            ],),
+                        child: Image.asset("image/estimate.png",height:60,fit: BoxFit.cover,),
+
                       ),
                       title: Text("ESTIMATE",textAlign: TextAlign.start,
                         style:
@@ -245,41 +242,22 @@ class _HowToBuyPageState extends State<HowToBuyPage> {
                   ),
                   SizedBox(height: 16,),
                   Container(
-                    padding: EdgeInsets.only(left: 0,right: 16),
                     margin: EdgeInsets.only(left: 16,right: 16),
-                    decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(2, 2),
-                            blurRadius: 6,
-                            color: Color.fromRGBO(226, 223, 202, 0.39),
-                          ),
-                          BoxShadow(
-                            offset: Offset(2, 2),
-                            blurRadius: 8,
-                            color: Color.fromRGBO(226, 223, 202, 0.39),
-                          )
-                        ],
-                        border: Border.all(color: Color(0xffDDE3E8),width: 1),
-                        // image: DecorationImage(
-                        //   image: AssetImage("image/Rectangle 2 (2).png"),
-                        //   fit: BoxFit.cover,
-                        // ),
-                        color: Colors.white
-                    ),
+
                     child: ExpansionTileCard(
                       baseColor: Colors.white,
-                      expandedColor: Colors.red[50],
+                      expandedColor: Color(0xffEAEEF2),
+                      elevation: 0,
+                      shadowColor:Color(0xff1F2A52),
+                      initialElevation: 0,
+                      contentPadding: EdgeInsets.all(4),
                       key: cardB,
                       leading: Container(
-                        height: 60,
+                        height: 40,
                         width: 60,
 
-                        child: Stack(
-                            children: [
-                              Image.asset("image/Shape (19).png",height:60,fit: BoxFit.cover,),
-                              Center(child: Image.asset("image/Group (24).png",height:35,fit: BoxFit.cover,))
-                            ],),
+                        child: Image.asset("image/reserves.png",height:40,width: 40),
+
                       ),
                       title: Text("RESERVES",textAlign: TextAlign.start,
                         style:
@@ -311,41 +289,21 @@ class _HowToBuyPageState extends State<HowToBuyPage> {
                   ),
                   SizedBox(height: 16,),
                   Container(
-                    padding: EdgeInsets.only(left: 0,right: 16),
                     margin: EdgeInsets.only(left: 16,right: 16),
-                    decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(2, 2),
-                            blurRadius: 6,
-                            color: Color.fromRGBO(226, 223, 202, 0.39),
-                          ),
-                          BoxShadow(
-                            offset: Offset(2, 2),
-                            blurRadius: 8,
-                            color: Color.fromRGBO(226, 223, 202, 0.39),
-                          )
-                        ],
-                        border: Border.all(color: Color(0xffDDE3E8),width: 1),
-                        // image: DecorationImage(
-                        //   image: AssetImage("image/Rectangle 2 (2).png"),
-                        //   fit: BoxFit.cover,
-                        // ),
-                        color: Colors.white
-                    ),
                     child: ExpansionTileCard(
                       baseColor: Colors.white,
-                      expandedColor: Colors.red[50],
+                      expandedColor: Color(0xffEAEEF2),
+                      elevation: 0,
+                      shadowColor:Color(0xff1F2A52),
+                      initialElevation: 0,
+                      contentPadding: EdgeInsets.all(4),
                       key: cardC,
                       leading: Container(
-                        height: 60,
+                        height: 30,
                         width: 60,
 
-                        child: Stack(
-                            children: [
-                              Image.asset("image/Shape (19).png",height:60,fit: BoxFit.cover,),
-                              Center(child: Image.asset("image/Group (25).png",height:35,fit: BoxFit.cover,))
-                            ],),
+                        child: Image.asset("image/margins.png",height:40,width: 40),
+
                       ),
                       title: Text("MARGINS",textAlign: TextAlign.start,
                         style:
@@ -377,41 +335,23 @@ class _HowToBuyPageState extends State<HowToBuyPage> {
                   ),
                   SizedBox(height: 16,),
                   Container(
-                    padding: EdgeInsets.only(left: 0,right: 16),
+
                     margin: EdgeInsets.only(left: 16,right: 16),
-                    decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(2, 2),
-                            blurRadius: 6,
-                            color: Color.fromRGBO(226, 223, 202, 0.39),
-                          ),
-                          BoxShadow(
-                            offset: Offset(2, 2),
-                            blurRadius: 8,
-                            color: Color.fromRGBO(226, 223, 202, 0.39),
-                          )
-                        ],
-                        border: Border.all(color: Color(0xffDDE3E8),width: 1),
-                        // image: DecorationImage(
-                        //   image: AssetImage("image/Rectangle 2 (2).png"),
-                        //   fit: BoxFit.cover,
-                        // ),
-                        color: Colors.white
-                    ),
+
                     child: ExpansionTileCard(
                       baseColor: Colors.white,
-                      expandedColor: Colors.red[50],
+                      expandedColor: Color(0xffEAEEF2),
+                      elevation: 0,
+                      shadowColor:Color(0xff1F2A52),
+                      initialElevation: 0,
+                      contentPadding: EdgeInsets.all(4),
                       key: cardD,
                       leading: Container(
-                        height: 60,
+                        height: 30,
                         width: 60,
 
-                        child: Stack(
-                            children: [
-                              Image.asset("image/Shape (19).png",height:60,fit: BoxFit.cover,),
-                              Center(child: Image.asset("image/Group (26).png",height:35,fit: BoxFit.cover,))
-                            ],),
+                        child:Image.asset("image/biding.png",height:40,),
+
                       ),
                       title: Text("BIDDING",textAlign: TextAlign.start,
                         style:
@@ -442,41 +382,22 @@ class _HowToBuyPageState extends State<HowToBuyPage> {
                     ),
                   ), SizedBox(height: 16,),
                   Container(
-                    padding: EdgeInsets.only(left: 0,right: 16),
                     margin: EdgeInsets.only(left: 16,right: 16),
-                    decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(2, 2),
-                            blurRadius: 6,
-                            color: Color.fromRGBO(226, 223, 202, 0.39),
-                          ),
-                          BoxShadow(
-                            offset: Offset(2, 2),
-                            blurRadius: 8,
-                            color: Color.fromRGBO(226, 223, 202, 0.39),
-                          )
-                        ],
-                        border: Border.all(color: Color(0xffDDE3E8),width: 1),
-                        // image: DecorationImage(
-                        //   image: AssetImage("image/Rectangle 2 (2).png"),
-                        //   fit: BoxFit.cover,
-                        // ),
-                        color: Colors.white
-                    ),
+
                     child: ExpansionTileCard(
                       baseColor: Colors.white,
-                      expandedColor: Colors.red[50],
+                      expandedColor: Color(0xffEAEEF2),
+                      elevation: 0,
+                      shadowColor:Color(0xff1F2A52),
+                      initialElevation: 0,
+                      contentPadding: EdgeInsets.all(4),
                       key: cardE,
                       leading: Container(
-                        height: 60,
+                        height: 30,
                         width: 60,
 
-                        child: Stack(
-                            children: [
-                              Image.asset("image/Shape (19).png",height:60,fit: BoxFit.cover,),
-                              Center(child: Image.asset("image/Group (27).png",height:35,fit: BoxFit.cover,))
-                            ],),
+                        child: Image.asset("image/aftersale.png",height:40),
+
                       ),
                       title: Text("AFTER SALE",textAlign: TextAlign.start,
                         style:
@@ -508,41 +429,23 @@ class _HowToBuyPageState extends State<HowToBuyPage> {
                   ),
                   SizedBox(height: 16,),
                   Container(
-                    padding: EdgeInsets.only(left: 0,right: 16),
+
                     margin: EdgeInsets.only(left: 16,right: 16),
-                    decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(2, 2),
-                            blurRadius: 6,
-                            color: Color.fromRGBO(226, 223, 202, 0.39),
-                          ),
-                          BoxShadow(
-                            offset: Offset(2, 2),
-                            blurRadius: 8,
-                            color: Color.fromRGBO(226, 223, 202, 0.39),
-                          )
-                        ],
-                        border: Border.all(color: Color(0xffDDE3E8),width: 1),
-                        // image: DecorationImage(
-                        //   image: AssetImage("image/Rectangle 2 (2).png"),
-                        //   fit: BoxFit.cover,
-                        // ),
-                        color: Colors.white
-                    ),
+
                     child: ExpansionTileCard(
                       baseColor: Colors.white,
-                      expandedColor: Colors.red[50],
+                      expandedColor: Color(0xffEAEEF2),
+                      elevation: 0,
+                      shadowColor:Color(0xff1F2A52),
+                      initialElevation: 0,
+                      contentPadding: EdgeInsets.all(4),
                       key: cardF,
                       leading: Container(
-                        height: 60,
+                        height: 30,
                         width: 60,
 
-                        child: Stack(
-                            children: [
-                              Image.asset("image/Shape (19).png",height:60,fit: BoxFit.cover,),
-                              Center(child: Image.asset("image/Group (28).png",height:35,fit: BoxFit.cover,))
-                            ],),
+                        child: Image.asset("image/payment.png",height:30),
+
                       ),
                       title: Text("PAYMENT",textAlign: TextAlign.start,
                         style:
@@ -574,41 +477,23 @@ class _HowToBuyPageState extends State<HowToBuyPage> {
                   ),
                   SizedBox(height: 16,),
                   Container(
-                    padding: EdgeInsets.only(left: 0,right: 16),
+
                     margin: EdgeInsets.only(left: 16,right: 16),
-                    decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(2, 2),
-                            blurRadius: 6,
-                            color: Color.fromRGBO(226, 223, 202, 0.39),
-                          ),
-                          BoxShadow(
-                            offset: Offset(2, 2),
-                            blurRadius: 8,
-                            color: Color.fromRGBO(226, 223, 202, 0.39),
-                          )
-                        ],
-                        border: Border.all(color: Color(0xffDDE3E8),width: 1),
-                        // image: DecorationImage(
-                        //   image: AssetImage("image/Rectangle 2 (2).png"),
-                        //   fit: BoxFit.cover,
-                        // ),
-                        color: Colors.white
-                    ),
+
                     child: ExpansionTileCard(
                       baseColor: Colors.white,
-                      expandedColor: Colors.red[50],
+                      expandedColor: Color(0xffEAEEF2),
+                      elevation: 0,
+                      shadowColor:Color(0xff1F2A52),
+                      initialElevation: 0,
+                      contentPadding: EdgeInsets.all(4),
                       key: cardG,
                       leading: Container(
-                        height: 60,
+                        height: 30,
                         width: 60,
 
-                        child: Stack(
-                            children: [
-                              Image.asset("image/Shape (19).png",height:60,fit: BoxFit.cover,),
-                              Center(child: Image.asset("image/Group (29).png",height:35,fit: BoxFit.cover,))
-                            ],),
+                        child:Image.asset("image/delivery.png",height:30,),
+
                       ),
                       title: Text("DELIVERY CONDUCT OF PURCHASE",textAlign: TextAlign.start,
                         style:
@@ -641,7 +526,7 @@ class _HowToBuyPageState extends State<HowToBuyPage> {
                   const SizedBox(height: 30,),
                   const SizedBox(height: 16,),
                   SizedBox(
-                      height: 1100,
+
                       width: MediaQuery.of(context).size.width,
                       child: Footer()),
                   SizedBox(
@@ -653,7 +538,7 @@ class _HowToBuyPageState extends State<HowToBuyPage> {
           ),
         ),
       ),
-      bottomNavigationBar: Dashboard2Ui(),
+      // bottomNavigationBar: Dashboard2Ui(),
     );
   }
 }

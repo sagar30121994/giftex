@@ -79,13 +79,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0XFFFFFFFF),
+      backgroundColor: Color(0xffF7FAFD),
       appBar: NavBar(),
       // bottomNavigationBar: BottomNavigationBarUi(),
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height*.90,
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -127,9 +127,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           ),
                         ),
                         SizedBox(width: 100,),
-                        Icon(Icons.share_outlined,size: 22,color: Color(0xff6D905D),),
+                        Image.asset("image/share.png",height: 32,),
+
                         SizedBox(width: 20,),
-                        Icon(Icons.bookmark_border,size: 24,color: Color(0xff6D905D),),
+                        Image.asset("image/save.png",height: 32,),
+                        // Icon(Icons.bookmark_border,size: 24,color: Theme.of(context).colorScheme.primary,),
                       ],
                     )
                   ],
@@ -187,18 +189,18 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     ),
                     SizedBox(height: 16,),
                     Text('FURNITURE \nDECORATIVE ART', style:
-                    Theme.of(context).textTheme.headline6!.copyWith(
+                    Theme.of(context).textTheme.headline5!.copyWith(
                       color: Color(0XFF2D2D2D),
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.bold,
                       letterSpacing: 2
                     ),),
                     SizedBox(height: 16,),
                     Row(
                       children: [
                         Text('Yaminy Roy', style:
-                        Theme.of(context).textTheme.subtitle1!.copyWith(
-                          color: Color(0XFF466D33),
-                          fontWeight: FontWeight.w600,
+                        Theme.of(context).textTheme.headline6!.copyWith(
+                          color: Color(0xffE74B52),
+                          fontWeight: FontWeight.bold,
                         ),),
                         Spacer(),
                         ElevatedButton(
@@ -217,7 +219,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             padding: const EdgeInsets.only(right: 5.0,left: 5,top: 10,bottom: 10),
                             child: Text('Follow', style:
                             Theme.of(context).textTheme.bodyText1!.copyWith(
-                              color: Color(0XFF466D33),
+                              color: Theme.of(context).colorScheme.primary,
                               fontWeight: FontWeight.w600,
                               letterSpacing: 1.33333
                             ),),
@@ -233,7 +235,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     ),),
                     SizedBox(height: 10,),
                     Text('₹50,000 - ₹75,000', style:
-                    Theme.of(context).textTheme.subtitle1!.copyWith(
+                    Theme.of(context).textTheme.headline6!.copyWith(
                       color: Color(0XFF202232),
                       fontWeight: FontWeight.w500,
                     ),),
@@ -252,7 +254,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             ),),
                             SizedBox(height: 10,),
                             Text('₹50,000', style:
-                            Theme.of(context).textTheme.bodyText1!.copyWith(
+                            Theme.of(context).textTheme.headline6!.copyWith(
                               color: Color(0XFF202232),
                               fontWeight: FontWeight.w600,
                             ),),
@@ -270,9 +272,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             ),),
                             SizedBox(height: 10,),
                             Text('₹55,000', style:
-                            Theme.of(context).textTheme.bodyText1!.copyWith(
-                              color: Color(0XFF7B9B6C),
-                              fontWeight: FontWeight.w600,
+                            Theme.of(context).textTheme.headline6!.copyWith(
+                              color: Color(0xffE74B52),
+                              fontWeight: FontWeight.bold,
                             ),),
                           ],
                         )
@@ -281,7 +283,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     SizedBox(height: 16,),
                     ElevatedButton(
                       style:   ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(Color.fromRGBO(234,243, 231, 1)),
+                          backgroundColor: MaterialStateProperty.all(Color(0xffF3E8E9)),
                           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                               RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20.0),
@@ -517,7 +519,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         padding: const EdgeInsets.only(right: 5.0,left: 5,top: 10,bottom: 10),
                         child: Text('View Additional charges', style:
                         Theme.of(context).textTheme.bodyText1!.copyWith(
-                          color: Color(0XFF6D905D),
+                          color: Color(0xffE74B52),
                           fontWeight: FontWeight.w600,
                           decoration: TextDecoration.underline
                         ),),
@@ -538,7 +540,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     SizedBox(height: 16,),
                     Row(
                       children: [
-                        Image.asset("image/Vector.png",height: 20,width: 20,color: Color(0xff466D33)),
+                        Image.asset("image/Vector.png",height: 20,width: 20),
                         SizedBox(width: 16,),
                         Text('Medium: Teracotta', style:
                         Theme.of(context).textTheme.subtitle1!.copyWith(
@@ -550,7 +552,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     SizedBox(height: 16,),
                     Row(
                       children: [
-                        Image.asset("image/Shape (8).png",height: 20,width: 20,color: Color(0xff466D33)),
+                        Image.asset("image/Shape (8).png",height: 20,width: 20),
                         SizedBox(width: 16,),
                         Text('Year: 1987', style:
                         Theme.of(context).textTheme.subtitle1!.copyWith(
@@ -562,7 +564,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     SizedBox(height: 16,),
                     Row(
                       children: [
-                        Image.asset("image/Vector (1).png",height: 20,width: 20,color: Color(0xff466D33)),
+                        Image.asset("image/Vector (1).png",height: 20,width: 20),
                         SizedBox(width: 16,),
                         Text('Size: 17cm X 15 Cm', style:
                         Theme.of(context).textTheme.subtitle1!.copyWith(
@@ -599,7 +601,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         Spacer(),
                         ElevatedButton(
                           style:   ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(Color.fromRGBO(234,243, 231, 1)),
+                              backgroundColor: MaterialStateProperty.all(Color(0xff75CEF6).withOpacity(.24)),
                               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20.0),
@@ -632,7 +634,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20.0),
-                                      side: BorderSide(color: Color(0xff747474),width: 0.38)
+                                      side: BorderSide(color: Colors.black,width: 0.38)
                                   )
                               )
                           ),
@@ -649,28 +651,33 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           ),
                         ),
                         SizedBox(width: 10,),
-                        ElevatedButton(
-                          style:   ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(Color(0XFF8DAB7F)),
-                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    // side: BorderSide(color: Colors.red)
-                                  )
-                              )
-                          ),
-                          onPressed: (){
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.only(right: 8.0,left: 8,top: 12,bottom: 12),
-                            child: Text('BID NOW', style:
-                            Theme.of(context).textTheme.bodyText1!.copyWith(
-                              color: Color(0XFFFFFFFF),
-                              fontWeight: FontWeight.w600,
-                                letterSpacing: 1.33333
-                            ),),
-                          ),
+                        InkWell(
+                        onTap: (){
+                        // Navigator.push(context, MaterialPageRoute(builder: (context) => GetOtppage()));
+                        },
+                        child: Container(
+                        height: 50,
+                        width: 150,
+                        decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                        colors: [Color(0xffE74B52),Color(0xffE74B52),]
                         ),
+                        // color: Color(0xff466D33),
+                        borderRadius: BorderRadius.circular(28)
+                        ),
+
+                          child: Center(
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 8.0,left: 8,top: 12,bottom: 12),
+                              child: Text('BID NOW', style:
+                              Theme.of(context).textTheme.bodyText1!.copyWith(
+                                color: Color(0XFFFFFFFF),
+                                fontWeight: FontWeight.w600,
+                                  letterSpacing: 1.33333
+                              ),),
+                            ),
+                          ),
+                        ),),
                       ],
                     ),
                     SizedBox(height: 16,),
@@ -683,76 +690,84 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
                                 children: [
                                   Container(
-                                    height: 55,
-                                    padding: EdgeInsets.all(15),
+                                    height: 60,
+
                                     width: MediaQuery.of(context).size.width/3.2,
-                                    decoration: BoxDecoration(
-                                        color: Color(0xffFAF7E5),
-                                      image: DecorationImage(
-                                        image: AssetImage("image/Shape (7).png"), fit: BoxFit.cover,
-                                      )
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        Image.asset("image/1.png",height: 20,),
-                                        SizedBox(width: 5,),
-                                        Text('BIDDER', style:
-                                        Theme.of(context).textTheme.caption!.copyWith(
-                                          color: Color(0XFF2D2D2D),
-                                          fontWeight: FontWeight.w600,
-                                        ),),
-                                      ],
-                                    ),
+                                    // decoration: BoxDecoration(
+                                    //     color: Color(0xffFAF7E5),
+                                    //   image: DecorationImage(
+                                    //     image: AssetImage("image/Shape (7).png"), fit: BoxFit.cover,
+                                    //   )
+                                    // ),
+                                    child: Image.asset("image/bidder.png",height: 65,fit: BoxFit.fill,),
+
+                                    // Row(
+                                    //   mainAxisAlignment: MainAxisAlignment.center,
+                                    //   crossAxisAlignment: CrossAxisAlignment.center,
+                                    //   children: [
+                                    //
+                                    //     // SizedBox(width: 5,),
+                                    //     // Text('BIDDER', style:
+                                    //     // Theme.of(context).textTheme.caption!.copyWith(
+                                    //     //   color: Color(0XFF2D2D2D),
+                                    //     //   fontWeight: FontWeight.w600,
+                                    //     / Image.asset("image/bidder.png",height: 20,),/ ),),
+                                    //   ],
+                                    // ),
                                   ),
                                   SizedBox(width: 5,),
                                   Container(
-                                    height: 50,
-                                    padding: EdgeInsets.all(10),
-                                    width: MediaQuery.of(context).size.width/3.7,
-                                    decoration: BoxDecoration(
-                                        color: Color(0xffFAF7E5),
-                                      image: DecorationImage(
-                                        image: AssetImage("image/Shape (7).png"), fit: BoxFit.cover,
-                                      )
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        Image.asset("image/date.png",height: 20,),
-                                        SizedBox(width: 10,),
-                                        Text('DATE &\nTIME', style:
-                                        Theme.of(context).textTheme.caption!.copyWith(
-                                          color: Color(0XFF2D2D2D),
-                                          fontWeight: FontWeight.w600,
-                                        ),),
-                                      ],
-                                    ),
+                                    height: 60,
+
+                                    width: MediaQuery.of(context).size.width/3.2,
+                                    // decoration: BoxDecoration(
+                                    //     color: Color(0xffFAF7E5),
+                                    //   image: DecorationImage(
+                                    //     image: AssetImage("image/Shape (7).png"), fit: BoxFit.cover,
+                                    //   )
+                                    // ),
+                                    child: Image.asset("image/datentime.png",height: 65,fit: BoxFit.fill,),
+
+                                    // Row(
+                                    //   mainAxisAlignment: MainAxisAlignment.center,
+                                    //   crossAxisAlignment: CrossAxisAlignment.center,
+                                    //   children: [
+                                    //
+                                    //     // SizedBox(width: 5,),
+                                    //     // Text('BIDDER', style:
+                                    //     // Theme.of(context).textTheme.caption!.copyWith(
+                                    //     //   color: Color(0XFF2D2D2D),
+                                    //     //   fontWeight: FontWeight.w600,
+                                    //     / Image.asset("image/bidder.png",height: 20,),/ ),),
+                                    //   ],
+                                    // ),
                                   ),
                                   SizedBox(width: 5,),
                                   Container(
-                                    height: 50,
-                                    padding: EdgeInsets.all(15),
-                                    width: MediaQuery.of(context).size.width/3.4,
-                                    decoration: BoxDecoration(
-                                        color: Color(0xffFAF7E5),
-                                      image: DecorationImage(
-                                        image: AssetImage("image/Shape (7).png"), fit: BoxFit.cover,
-                                      )
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        Image.asset("image/Vector (2).png",height: 15,fit: BoxFit.cover,),
-                                        SizedBox(width: 5,),
-                                        Text('AMOUNT', style:
-                                        Theme.of(context).textTheme.caption!.copyWith(
-                                          color: Color(0XFF2D2D2D),
-                                          fontWeight: FontWeight.w600,
-                                        ),),
-                                      ],
-                                    ),
+                                    height: 60,
+
+                                    width: MediaQuery.of(context).size.width/3.2,
+                                    // decoration: BoxDecoration(
+                                    //     color: Color(0xffFAF7E5),
+                                    //   image: DecorationImage(
+                                    //     image: AssetImage("image/Shape (7).png"), fit: BoxFit.cover,
+                                    //   )
+                                    // ),
+                                    child: Image.asset("image/amount.png",height: 65,fit: BoxFit.fill,),
+
+                                    // Row(
+                                    //   mainAxisAlignment: MainAxisAlignment.center,
+                                    //   crossAxisAlignment: CrossAxisAlignment.center,
+                                    //   children: [
+                                    //
+                                    //     // SizedBox(width: 5,),
+                                    //     // Text('BIDDER', style:
+                                    //     // Theme.of(context).textTheme.caption!.copyWith(
+                                    //     //   color: Color(0XFF2D2D2D),
+                                    //     //   fontWeight: FontWeight.w600,
+                                    //     / Image.asset("image/bidder.png",height: 20,),/ ),),
+                                    //   ],
+                                    // ),
                                   ),
                                 ],
                               )),
@@ -816,11 +831,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           ),
                         ])
                     ),
-                    SizedBox(height: 26,),
+                    SizedBox(height: 32,),
                     Text('About Artist', style:
-                    Theme.of(context).textTheme.headline6!.copyWith(
+                    Theme.of(context).textTheme.headline5!.copyWith(
                       color: Color(0XFF202232),
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.bold,
                     ),),
                     SizedBox(height: 10,),
                     Text('Bid on works you love with auctions. With bidding opening daily, connects collectors like you to art from leading auction houses, nonprofit organizations, and sellers across the globe.', style:
@@ -830,7 +845,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     ),),
                     SizedBox(height: 16,),
                     Container(
-                      color: Color(0xffFFFFFF),
+                      color: Color(0xffF7FAFD),
                       child: DefaultTabController(
                         length: 5,
                         child:  SingleChildScrollView(
@@ -847,6 +862,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             // indicator: BoxDecoration(
                             //     color: tabColor
                             // ),
+                            indicatorColor: Theme.of(context).colorScheme.primary,
                             isScrollable: true,
                             padding: EdgeInsets.all(0),
                             unselectedLabelColor: Color(0xff2D2D2D).withOpacity(0.6),
@@ -880,7 +896,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     ),
                     const SizedBox(height: 16,),
                     Container(
-                        height: 280,
+                        height: 320,
+                        padding: EdgeInsets.only(top: 16,bottom: 16),
                         child: CustomScrollView(slivers: [
                           SliverAnimatedPaintExtent(
                             duration: const Duration(milliseconds: 150),
@@ -889,7 +906,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                     (BuildContext context, int index) {
                                   return Container(
                                       padding: EdgeInsets.only(top: 10),
-                                      color: Color(0xffFFFFFF),
+                                      color: Colors.white,
                                       alignment: Alignment.center,
                                       child: Column(
                                         children: [
@@ -897,7 +914,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             crossAxisAlignment: CrossAxisAlignment.center,
                                             children: [
-                                              Image.asset("image/Vector (3).png",height: 25,width: 25,),
+                                              Image.asset("image/Vector (3).png",height: 25,width: 25,color: Theme.of(context).colorScheme.primary),
                                               SizedBox(width: 10,),
                                               Container(
                                                 width: MediaQuery.of(context).size.width*.7,
@@ -933,242 +950,327 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     ),
                     SizedBox(height: 18,),
                     Container(
-                        height: 500,
-                        child: CustomScrollView(slivers: [
-                          SliverAnimatedPaintExtent(
-                            duration: const Duration(milliseconds: 150),
-                            child: SliverList(
-                              delegate: SliverChildBuilderDelegate(
-                                    (BuildContext context, int index) {
-                                  return Padding(
-                                    padding: const EdgeInsets.all(15.0),
-                                    child: Container(
-                                        color: Color(0xffFFFFFF),
-                                        height:450,
-                                        alignment: Alignment.center,
-                                        child: Stack(
+                        height: 570,
+                        child: Container(
+                            color: Color(0xffFFFFFF),
+                            height:580,
+                            alignment: Alignment.center,
+                            child: Stack(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(top: 150 / 2.0,bottom: 0),
+                                  child: Container(
+                                    //replace this Container with your Card
+                                    color: Color(0xffF9F9F9),
+                                    height:500.0,
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailPage()));
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 25.0,right: 25),
+                                    child: Image.asset("image/Bitmap6.png",height: 250,
+                                      width: MediaQuery.of(context).size.width*.65,
+                                      fit: BoxFit.contain,
+
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                    padding: EdgeInsets.only(top: 250,bottom: 0,left: 25.0,right: 25),
+                                    child:Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(width: 20,),
+                                        Text("JAMINI ROY",
+                                          textAlign: TextAlign.center,
+                                          style:
+                                          Theme.of(context).textTheme.headline6!.copyWith(
+                                            color: Colors.black,
+                                            letterSpacing: 2,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        SizedBox(height: 10,),
+                                        Text("Mother & Child",
+                                          textAlign: TextAlign.center,
+                                          style:
+                                          Theme.of(context).textTheme.subtitle1!.copyWith(
+                                            color: Color(0xff747474),
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                        SizedBox(height: 20,),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
-                                            Padding(
-                                              padding: EdgeInsets.only(top: 150 / 2.0,bottom: 0),
-                                              child: Container(
-                                                //replace this Container with your Card
-                                                color: Color(0xffF9F9F9),
-                                                height:500.0,
-                                              ),
+                                            Column(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text("Estimate Value ",
+                                                  textAlign: TextAlign.center,
+                                                  style:
+                                                  Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                    color: Color(0xff747474),
+                                                    fontWeight: FontWeight.w400,
+                                                  ),
+                                                ),
+                                                SizedBox(height: 10,),
+                                                Text("₹50,000- ₹75,000",
+                                                  textAlign: TextAlign.center,
+                                                  style:
+                                                  Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                    color: Color(0xff202232),
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(left: 25.0,right: 25),
-                                              child: Image.asset("image/Bitmap6.png",height: 180,),
-                                            ),
-                                            Padding(
-                                                padding: EdgeInsets.only(top: 370 / 2.0,bottom: 0,left: 25.0,right: 25),
-                                                child:Column(
-                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                            Spacer(),
+                                            Column(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text("Bid Closing in",
+                                                  textAlign: TextAlign.center,
+                                                  style:
+                                                  Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                    color: Color(0xff747474),
+                                                    fontWeight: FontWeight.w400,
+                                                  ),
+                                                ),
+                                                SizedBox(height: 10,),
+                                                Row(
                                                   children: [
-                                                    SizedBox(width: 20,),
-                                                    Text("Jamini Roy",
-                                                      textAlign: TextAlign.center,
-                                                      style:
-                                                      Theme.of(context).textTheme.headline6!.copyWith(
-                                                        color: Colors.black,
-                                                        fontWeight: FontWeight.w600,
-                                                      ),
+                                                    Container(
+                                                        decoration: BoxDecoration(
+                                                          borderRadius: BorderRadius.circular(8),
+                                                          color: Color(0xff8C9FB1),
+                                                        ),
+                                                        padding: EdgeInsets.all(4),
+                                                        child:Text("02",style: Theme.of(context).textTheme.subtitle2!.copyWith(color: Colors.white),)
                                                     ),
-                                                    SizedBox(height: 10,),
-                                                    Text("Mother & Child",
-                                                      textAlign: TextAlign.center,
-                                                      style:
-                                                      Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                        color: Color(0xff747474),
-                                                        fontWeight: FontWeight.w400,
-                                                      ),
+                                                    Container(
+                                                      // color: Colors.black,
+                                                        padding: EdgeInsets.all(4),
+                                                        child:Text(":")
                                                     ),
-                                                    SizedBox(height: 20,),
-                                                    Row(
-                                                      mainAxisAlignment: MainAxisAlignment.start,
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                      children: [
-                                                        Column(
-                                                          mainAxisAlignment: MainAxisAlignment.start,
-                                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                                          children: [
-                                                            Text("Estimate Value ",
-                                                              textAlign: TextAlign.center,
-                                                              style:
-                                                              Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                color: Color(0xff747474),
-                                                                fontWeight: FontWeight.w400,
-                                                              ),
-                                                            ),
-                                                            SizedBox(height: 10,),
-                                                            Text("₹50,000- ₹75,000",
-                                                              textAlign: TextAlign.center,
-                                                              style:
-                                                              Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                                color: Color(0xff202232),
-                                                                fontWeight: FontWeight.w600,
-                                                              ),
-                                                            ),
-                                                          ],
+                                                    Container(
+                                                        decoration: BoxDecoration(
+                                                          borderRadius: BorderRadius.circular(8),
+                                                          color: Color(0xff8C9FB1),
                                                         ),
-                                                        Spacer(),
-                                                        Column(
-                                                          mainAxisAlignment: MainAxisAlignment.start,
-                                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                                          children: [
-                                                            Text("Bid Closing in",
-                                                              textAlign: TextAlign.center,
-                                                              style:
-                                                              Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                color: Color(0xff747474),
-                                                                fontWeight: FontWeight.w400,
-                                                              ),
-                                                            ),
-                                                            SizedBox(height: 10,),
-                                                            Text("₹50,000- ₹75,000",
-                                                              textAlign: TextAlign.center,
-                                                              style:
-                                                              Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                                color: Color(0xff202232),
-                                                                fontWeight: FontWeight.w600,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
+
+                                                        padding: EdgeInsets.all(4),
+                                                        child:Text("14",style: Theme.of(context).textTheme.subtitle2!.copyWith(color: Colors.white),)
                                                     ),
-                                                    SizedBox(height: 20,),
-                                                    Row(
-                                                      mainAxisAlignment: MainAxisAlignment.start,
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                      children: [
-                                                        Column(
-                                                          mainAxisAlignment: MainAxisAlignment.start,
-                                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                                          children: [
-                                                            Text("Current Bid",
-                                                              textAlign: TextAlign.center,
-                                                              style:
-                                                              Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                color: Color(0xff747474),
-                                                                fontWeight: FontWeight.w400,
-                                                              ),
-                                                            ),
-                                                            SizedBox(height: 10,),
-                                                            Text("₹50,000",
-                                                              textAlign: TextAlign.center,
-                                                              style:
-                                                              Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                                color: Color(0xff202232),
-                                                                fontWeight: FontWeight.w600,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Spacer(),
-                                                        Column(
-                                                          mainAxisAlignment: MainAxisAlignment.start,
-                                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                                          children: [
-                                                            Text("Next Valid Bid",
-                                                              textAlign: TextAlign.center,
-                                                              style:
-                                                              Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                color: Color(0xff747474),
-                                                                fontWeight: FontWeight.w400,
-                                                              ),
-                                                            ),
-                                                            SizedBox(height: 10,),
-                                                            Text("₹75,000",
-                                                              textAlign: TextAlign.center,
-                                                              style:
-                                                              Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                                color: Color(0xff202232),
-                                                                fontWeight: FontWeight.w600,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
+
+                                                    Container(
+                                                      // color: Colors.black,
+                                                        padding: EdgeInsets.all(4),
+                                                        child:Text(":")
                                                     ),
-                                                    SizedBox(height: 20,),
-                                                    Row(
-                                                      mainAxisAlignment: MainAxisAlignment.end,
-                                                      children: [
-                                                        ElevatedButton(
-                                                          style:   ButtonStyle(
-                                                              backgroundColor: MaterialStateProperty.all(Color(0XFFF9F9F9)),
-                                                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                                                  RoundedRectangleBorder(
-                                                                      borderRadius: BorderRadius.circular(20.0),
-                                                                      side: BorderSide(color: Color(0xff747474),width: 0.38)
-                                                                  )
-                                                              )
-                                                          ),
-                                                          onPressed: (){
-                                                          },
-                                                          child: Padding(
-                                                            padding: const EdgeInsets.only(right: 8.0,left: 8,top: 12,bottom: 12),
-                                                            child: Text('Proxy Bid', style:
-                                                            Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                              color: Color(0XFF2D2D2D),
-                                                              fontWeight: FontWeight.w600,
-                                                            ),),
-                                                          ),
+
+                                                    Container(
+                                                        decoration: BoxDecoration(
+                                                          borderRadius: BorderRadius.circular(8),
+                                                          color: Color(0xff8C9FB1),
                                                         ),
-                                                        SizedBox(width: 10,),
-                                                        ElevatedButton(
-                                                          style:   ButtonStyle(
-                                                              backgroundColor: MaterialStateProperty.all(Color(0XFF8DAB7F)),
-                                                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                                                  RoundedRectangleBorder(
-                                                                    borderRadius: BorderRadius.circular(20.0),
-                                                                    // side: BorderSide(color: Colors.red)
-                                                                  )
-                                                              )
-                                                          ),
-                                                          onPressed: (){
-                                                          },
-                                                          child: Padding(
-                                                            padding: const EdgeInsets.only(right: 8.0,left: 8,top: 12,bottom: 12),
-                                                            child: Text('Buy Now', style:
-                                                            Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                              color: Color(0XFFFFFFFF),
-                                                              fontWeight: FontWeight.w600,
-                                                            ),),
-                                                          ),
-                                                        ),
-                                                      ],
+                                                        padding: EdgeInsets.all(4),
+                                                        child:Text("59",style: Theme.of(context).textTheme.subtitle2!.copyWith(color: Colors.white),)
                                                     ),
                                                   ],
-                                                )
+                                                ),
+                                              ],
                                             ),
                                           ],
-                                        )
-                                    ),
-                                  );
-                                },
-                                // 40 list items
-                                childCount: 1,
-                              ),
-                            ),
-                          ),
-                        ])
+                                        ),
+                                        SizedBox(height: 20,),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Column(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text("Current Bid",
+                                                  textAlign: TextAlign.center,
+                                                  style:
+                                                  Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                    color: Color(0xff747474),
+                                                    fontWeight: FontWeight.w400,
+                                                  ),
+                                                ),
+                                                SizedBox(height: 10,),
+                                                Text("₹50,000",
+                                                  textAlign: TextAlign.center,
+                                                  style:
+                                                  Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                    color: Color(0xff202232),
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Spacer(),
+                                            Column(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text("Next Valid Bid",
+                                                  textAlign: TextAlign.center,
+                                                  style:
+                                                  Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                    color: Color(0xff747474),
+                                                    fontWeight: FontWeight.w400,
+                                                  ),
+                                                ),
+                                                SizedBox(height: 10,),
+                                                Text("₹75,000",
+                                                  textAlign: TextAlign.center,
+                                                  style:
+                                                  Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                    color: Theme.of(context).colorScheme.primary,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(height: 20,),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            ElevatedButton(
+                                              style:   ButtonStyle(
+                                                  backgroundColor: MaterialStateProperty.all(Color(0XFFF9F9F9)),
+                                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                      RoundedRectangleBorder(
+                                                          borderRadius: BorderRadius.circular(20.0),
+                                                          side: BorderSide(color: Color(0xff747474),width: 0.38)
+                                                      )
+                                                  )
+                                              ),
+                                              onPressed: (){
+                                              },
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(right: 8.0,left: 8,top: 12,bottom: 12),
+                                                child: Text('PROXY BID', style:
+                                                Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                  color: Color(0XFF2D2D2D),
+                                                  fontWeight: FontWeight.bold,
+                                                ),),
+                                              ),
+                                            ),
+                                            SizedBox(width: 10,),
+                                            InkWell(
+                                              onTap: (){
+                                                // Navigator.push(context, MaterialPageRoute(builder: (context) => GetOtppage()));
+                                              },
+                                              child: Container(
+                                                height: 50,
+                                                // width: 150,
+                                                decoration: BoxDecoration(
+                                                    gradient: LinearGradient(
+                                                        colors: [Color(0xffE74B52),Color(0xffE74B52),]
+                                                    ),
+                                                    // color: Color(0xff466D33),
+                                                    borderRadius: BorderRadius.circular(24)
+                                                ),
+                                                child: Center(
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.only(right: 32.0,left: 32,top: 12,bottom: 12),
+                                                    child: Text('BID NOW', style:
+                                                    Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                      color: Color(0XFFFFFFFF),
+                                                      fontWeight: FontWeight.bold,
+                                                    ),),
+                                                  ),
+                                                ),
+                                              ),),
+                                          ],
+                                        ),
+                                        SizedBox(height: 8,),
+                                      ],
+                                    )
+                                ),
+
+                                Positioned(
+                                  right: 16,
+                                  top: 50,
+                                  child: Column(
+                                    children: [
+                                      Container(
+
+
+                                        child: Text("Lot 01"),
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(16),
+                                          color: Colors.lightBlueAccent.withOpacity(.2),
+
+                                        ),
+                                        padding: EdgeInsets.symmetric(horizontal: 10,vertical: 4),
+
+                                      ),
+
+                                      SizedBox(height:12),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(16),
+                                            color: Color(0xffEAF1DB)
+
+                                        ),
+                                        padding: EdgeInsets.symmetric(horizontal: 10,vertical: 4),
+                                        child: Text("5 BIDS"),
+
+                                      ),
+                                      SizedBox(height:12),
+                                      Icon(Icons.favorite_border,color: Colors.grey,),
+                                      SizedBox(height:12),
+                                      Icon(Icons.open_in_full,color: Colors.grey,),
+                                      SizedBox(height:12),
+                                      // Container(
+                                      //   padding: EdgeInsets.all(16),
+                                      //   decoration: BoxDecoration(
+                                      //     color:  Colors.lightBlueAccent.withOpacity(.2),
+                                      //     borderRadius: BorderRadius.circular(32)
+                                      //
+                                      //   ),
+                                      // )
+                                      Image.asset("image/earth.png",height: 50,)
+                                    ],
+                                  ),
+                                )
+
+                              ],
+                            )
+                        ),
+
                     ),
                   ],
                 ),
               ),
               const SizedBox(height: 16,),
               SizedBox(
-                  height: 820,
+                  height: 1100,
                   width: MediaQuery.of(context).size.width,
                   child: Footer()),
+              SizedBox(
+                height: 30,
+                width: MediaQuery.of(context).size.width,
+              )
             ],
           ),
         ),
       ),
-      bottomNavigationBar: Dashboard2Ui(),
+      // bottomNavigationBar: Dashboard2Ui(),
     );
   }
 }

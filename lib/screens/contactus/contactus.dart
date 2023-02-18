@@ -381,7 +381,7 @@ class _ContactusPageState extends State<ContactusPage> {
                   ),
                   const SizedBox(height: 30,),
                   SizedBox(
-                      height: 820,
+
                       width: MediaQuery.of(context).size.width,
                       child: Footer()),
                 ],

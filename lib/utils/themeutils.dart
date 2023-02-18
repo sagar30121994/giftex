@@ -8,9 +8,11 @@ ThemeData _buildDarkTheme() {
   final ThemeData base = ThemeData.light();
 
   const ColorScheme _shrineColorScheme = ColorScheme(
-    primary: Color(0XffF2A52),
+    primary: Color(0XffB45156),
+
+
     onPrimary: Color(0xff1F2A52),
-    secondary:Color(0XFF8DAB7F),
+    secondary:Color(0XFFE74B52),
     onSecondary: Color(0xffEAEEF2),
     surface: Color(0xffF3E8E9),
     onSecondaryContainer: Color(0xffF2F4F7),
@@ -36,6 +38,7 @@ ThemeData _buildDarkTheme() {
     ),
 
 
+
     scrollbarTheme: ScrollbarThemeData(
       thumbColor: MaterialStateProperty.all(Color(0Xff3C5233),),
       thumbVisibility: MaterialStateProperty.all(true,),
@@ -43,7 +46,7 @@ ThemeData _buildDarkTheme() {
 
     ),
 
-    scaffoldBackgroundColor: Colors.white,
+    scaffoldBackgroundColor: Color(0xffF7FAFD),
     buttonTheme: ButtonThemeData(
       buttonColor: Color(0xff32429A),
     ),

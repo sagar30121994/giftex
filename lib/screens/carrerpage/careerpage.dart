@@ -180,7 +180,7 @@ class _CareerPageState extends State<CareerPage> {
                     ),
                   ),
                   SizedBox(
-                      height: 820,
+
                       width: MediaQuery.of(context).size.width,
                       child: Footer()),
                 ],

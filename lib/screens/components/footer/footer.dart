@@ -26,15 +26,18 @@ class _FooterState extends State<Footer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0Xff1F2A52),
+       color: Colors.white,
       child: Column(
         children: [
           Stack(
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 480 / 2.0,bottom: 0),
+                padding: EdgeInsets.only(top: 170,bottom: 0),
                 child: Container(
                   //replace this Container with your Card
+                  width: MediaQuery.of(context).size.width,
+                  height: 1700,
+                  // color: Color(0Xff1F2A52),
                   color: Color(0Xff1F2A52),
                   // height: 830.0,
                 ),
@@ -44,6 +47,7 @@ class _FooterState extends State<Footer> {
                 children: [
                   Container(
                     height: 340,
+
                     color: Theme.of(context).colorScheme.surface,
                     width: MediaQuery.of(context).size.width*.90,
                     padding: EdgeInsets.all(16),
@@ -198,6 +202,11 @@ class _FooterState extends State<Footer> {
                                finalPadding: EdgeInsets.all(0),
                                baseColor: Color(0xff1F2A52),
                                expandedColor: Color(0xff1F2A52),
+                               elevation: 0,
+                               shadowColor:Color(0xff1F2A52),
+                               initialElevation: 0,
+                               contentPadding: EdgeInsets.all(4),
+
                                key: cardA,
 
                                trailing: Icon(Icons.add,size: 18,color: Colors.white,),
@@ -382,6 +391,10 @@ class _FooterState extends State<Footer> {
                                expandedColor: Color(0xff1F2A52),
                                key: cardB,
                                trailing: Icon(Icons.add,size: 18,color: Colors.white,),
+                               elevation: 0,
+                               shadowColor:Color(0xff1F2A52),
+                               initialElevation: 0,
+                               contentPadding: EdgeInsets.all(4),
                                // leading: Container(
                                //   height: 60,
                                //   width: 60,
@@ -551,6 +564,10 @@ class _FooterState extends State<Footer> {
                                baseColor: Color(0xff1F2A52),
                                expandedColor: Color(0xff1F2A52),
                                key: cardC,
+                               elevation: 0,
+                               shadowColor:Color(0xff1F2A52),
+                               initialElevation: 0,
+                               contentPadding: EdgeInsets.all(4),
                                trailing: Icon(Icons.add,size: 18,color: Colors.white,),
                                // leading: Container(
                                //   height: 60,

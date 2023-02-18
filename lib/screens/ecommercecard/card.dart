@@ -34,16 +34,17 @@ class _CardpageState extends State<Cardpage> {
       //   backgroundColor: Colors.white,
       //   leading:
       // ),
+
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("image/Rectangle 12.png"),
-              fit: BoxFit.cover,
-              opacity: 8
-            ),
-          ),
+          // decoration: BoxDecoration(
+          //   image: DecorationImage(
+          //     image: AssetImage("image/Rectangle 12.png"),
+          //     fit: BoxFit.cover,
+          //     opacity: 8
+          //   ),
+          // ),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -86,12 +87,14 @@ class _CardpageState extends State<Cardpage> {
                       isScrollable: true,
                       indicator: UnderlineTabIndicator(
                         borderSide:
-                        BorderSide(color: Color(0xff8DAB7F), width: 2.0),
+                        BorderSide(color: Theme.of(context).colorScheme.primary, width: 2.0),
                       ),
                       padding: EdgeInsets.all(0),
                       labelPadding:  EdgeInsets.all(10),
                       unselectedLabelColor: Color(0xff2D2D2D).withOpacity(0.59),
-                      labelColor: const Color(0xFF2D2D2D),
+                      indicatorColor: Theme.of(context).colorScheme.primary,
+                      labelColor:  Theme.of(context).colorScheme.primary,
+                      // unselectedLabelStyle: ,
                       labelStyle:
                       Theme.of(context).textTheme.bodyText1!.copyWith(
                         color: Color(0xff2D2D2D),
@@ -137,10 +140,11 @@ class _CardpageState extends State<Cardpage> {
                       width: MediaQuery.of(context).size.width,
                       padding: EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage("image/Rectangle 1536.png"),
-                          fit: BoxFit.cover,
-                        ),
+                        // image: DecorationImage(
+                        //   image: AssetImage("image/Rectangle 1536.png"),
+                        //   fit: BoxFit.cover,
+                        // ),
+                        color: Color(0xffEAEEF2)
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -172,7 +176,7 @@ class _CardpageState extends State<Cardpage> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Icon(Icons.edit,color: Colors.black,size: 15,),
+                              Icon(Icons.edit_outlined,color: Colors.black,size: 15,),
                             ],
                           ),
                         ],
@@ -194,27 +198,37 @@ class _CardpageState extends State<Cardpage> {
                         Spacer(),
                         SizedBox(
                           height: 50,
-                          child: Center(
-                            child: ElevatedButton(
-                              style:   ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(Color(0XFF466D33)),
-                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20.0),
-                                        // side: BorderSide(color: Colors.red)
-                                      )
-                                  )
+                          child: InkWell(
+                            onTap: (){
+                              shippingType="SHIPPING INFO";
+                            },
+                            child: Container(
+                              height: 50,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                      colors: [Color(0xffE74B52),Color(0xffE74B52),]
+                                  ),
+                                  borderRadius: BorderRadius.circular(20)
                               ),
-                              onPressed: (){
-                                shippingType="SHIPPING INFO";
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 8.0,left: 8,top: 12,bottom: 12),
-                                child: Text('Next', style:
-                                Theme.of(context).textTheme.bodyText1!.copyWith(
-                                  color: Color(0XFFFFFFFF),
-                                  fontWeight: FontWeight.w600,
-                                ),),
+
+                              child: Center(
+                                child: Padding(
+                                  padding:  EdgeInsets.only(right: 8.0,left: 8,top: 12,bottom: 12),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text('Next', style:
+                                      Theme.of(context).textTheme.bodyText1!.copyWith(
+                                        color: Color(0XFFFFFFFF),
+                                        fontWeight: FontWeight.w600,
+                                      ),),
+
+                                      SizedBox(width: 8,),
+                                      Icon(Icons.arrow_forward,color: Color(0XFFFFFFFF),)
+                                    ],
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -223,14 +237,11 @@ class _CardpageState extends State<Cardpage> {
                     ),
                     SizedBox(height: 16,),
                     Container(
-                      height:630,
+                      height:670,
                       width: MediaQuery.of(context).size.width,
                       padding: EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage("image/Rectangle 1490.png"),
-                          fit: BoxFit.cover,
-                        ),
+                       color:Color(0xffEAEEF2)
                       ),
                       child:Column(
                         children: [
@@ -424,9 +435,10 @@ class _CardpageState extends State<Cardpage> {
                             padding: EdgeInsets.all(016),
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: AssetImage("image/Rectangle 1494.png"),
+                                image: AssetImage("image/backgroundsc.png"),
                                 fit: BoxFit.cover,
                               ),
+                              color: Colors.transparent
                             ),
                             child: Column(
                               children: [
@@ -528,10 +540,11 @@ class _CardpageState extends State<Cardpage> {
                             width: 200,
                             padding: EdgeInsets.all(016),
                             decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage("image/Rectangle 1572.png"),
-                                fit: BoxFit.cover,
-                              ),
+                              // image: DecorationImage(
+                              //   image: AssetImage("image/Rectangle 1572.png"),
+                              //   fit: BoxFit.cover,
+                              // ),
+                              color:Color(0xffF3E8E9),
                               borderRadius: BorderRadius.circular(20)
                             ),
                             child: Row(
@@ -557,6 +570,7 @@ class _CardpageState extends State<Cardpage> {
                 ),
               ):Container(),
               shippingType=="SHIPPING INFO"?Container(
+                margin: EdgeInsets.all(16),
                 padding: EdgeInsets.all(16),
                 child: Column(
                   children: [
@@ -577,22 +591,11 @@ class _CardpageState extends State<Cardpage> {
                       children: [
                         Container(
                           // margin: EdgeInsets.all(15),
-                          width: MediaQuery.of(context).size.width*.8,
-                          height: 38,
+                          width: MediaQuery.of(context).size.width*.70,
+                           height: 50,
                           padding: EdgeInsets.all(10),
                           decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  offset: Offset(2, 2),
-                                  blurRadius: 6,
-                                  color: Color.fromRGBO(226, 223, 202, 0.39),
-                                ),
-                                BoxShadow(
-                                  offset: Offset(2, 2),
-                                  blurRadius: 8,
-                                  color: Color.fromRGBO(226, 223, 202, 0.39),
-                                )
-                              ],
+
                               border: Border.all(color: Color(0xffDDE3E8),width: 1),
                               // image: DecorationImage(
                               //   image: AssetImage("image/Rectangle 2 (2).png"),
@@ -643,6 +646,7 @@ class _CardpageState extends State<Cardpage> {
                         SizedBox(width: 6,),
                         Container(
                           // margin: EdgeInsets.all(15),
+                          height: 50,
                           padding: EdgeInsets.all(10),
                           decoration: BoxDecoration(
                               boxShadow: [
@@ -664,7 +668,7 @@ class _CardpageState extends State<Cardpage> {
                               // ),
                               color: Colors.white
                           ),
-                          child: Image.asset("image/Vector (11).png"),
+                          child: Image.asset("image/Vector (11).png",color: Theme.of(context).colorScheme.primary),
                         ),
                       ],
                     ),
@@ -685,7 +689,7 @@ class _CardpageState extends State<Cardpage> {
                     ),
                     SizedBox(height: 10,),
                     Container(
-                      // margin: EdgeInsets.all(15),
+
                       padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
                           boxShadow: [
@@ -730,7 +734,7 @@ class _CardpageState extends State<Cardpage> {
                           //make hint text
                           hintStyle:
                           Theme.of(context).textTheme.subtitle1!.copyWith(
-                            color: Color(0xff2D2D2D).withOpacity(0.4),
+                            color: Color(0xff788995).withOpacity(0.4),
                             fontWeight: FontWeight.w500,
                           ),
 
@@ -799,7 +803,7 @@ class _CardpageState extends State<Cardpage> {
                               ),
                               SizedBox(height: 5,),
                               SizedBox(
-                                width: MediaQuery.of(context).size.width*.6,
+                                width: MediaQuery.of(context).size.width*.55,
                                 child: Text("Estimated 14-20 Day Shipping (Duties and taxes may be due upon delivery)",
                                   textAlign: TextAlign.start,
                                   style:
@@ -915,26 +919,37 @@ class _CardpageState extends State<Cardpage> {
                         Spacer(),
                         SizedBox(
                           height: 50,
-                          child: Center(
-                            child: ElevatedButton(
-                              style:   ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(Color(0XFF466D33)),
-                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20.0),
-                                        // side: BorderSide(color: Colors.red)
-                                      )
-                                  )
+                          child: InkWell(
+                            onTap: (){
+                              shippingType="SHIPPING INFO";
+                            },
+                            child: Container(
+                              height: 50,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                      colors: [Color(0xffE74B52),Color(0xffE74B52),]
+                                  ),
+                                  borderRadius: BorderRadius.circular(20)
                               ),
-                              onPressed: (){
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 8.0,left: 8,top: 12,bottom: 12),
-                                child: Text('Next', style:
-                                Theme.of(context).textTheme.bodyText1!.copyWith(
-                                  color: Color(0XFFFFFFFF),
-                                  fontWeight: FontWeight.w600,
-                                ),),
+
+                              child: Center(
+                                child: Padding(
+                                  padding:  EdgeInsets.only(right: 8.0,left: 8,top: 12,bottom: 12),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text('Next', style:
+                                      Theme.of(context).textTheme.bodyText1!.copyWith(
+                                        color: Color(0XFFFFFFFF),
+                                        fontWeight: FontWeight.w600,
+                                      ),),
+
+                                      SizedBox(width: 8,),
+                                      Icon(Icons.arrow_forward,color: Color(0XFFFFFFFF),)
+                                    ],
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -943,14 +958,11 @@ class _CardpageState extends State<Cardpage> {
                     ),
                     SizedBox(height: 16,),
                     Container(
-                      height:630,
+                      height:670,
                       width: MediaQuery.of(context).size.width,
                       padding: EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage("image/Rectangle 1490.png"),
-                          fit: BoxFit.cover,
-                        ),
+                          color:Color(0xffEAEEF2)
                       ),
                       child:Column(
                         children: [
@@ -1143,10 +1155,11 @@ class _CardpageState extends State<Cardpage> {
                             height: 200,
                             padding: EdgeInsets.all(016),
                             decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage("image/Rectangle 1494.png"),
-                                fit: BoxFit.cover,
-                              ),
+                                image: DecorationImage(
+                                  image: AssetImage("image/backgroundsc.png"),
+                                  fit: BoxFit.cover,
+                                ),
+                                color: Colors.transparent
                             ),
                             child: Column(
                               children: [
@@ -1248,10 +1261,11 @@ class _CardpageState extends State<Cardpage> {
                             width: 200,
                             padding: EdgeInsets.all(016),
                             decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage("image/Rectangle 1572.png"),
-                                  fit: BoxFit.cover,
-                                ),
+                              // image: DecorationImage(
+                              //   image: AssetImage("image/Rectangle 1572.png"),
+                              //   fit: BoxFit.cover,
+                              // ),
+                                color:Color(0xffF3E8E9),
                                 borderRadius: BorderRadius.circular(20)
                             ),
                             child: Row(
@@ -1560,27 +1574,37 @@ class _CardpageState extends State<Cardpage> {
                         Spacer(),
                         SizedBox(
                           height: 50,
-                          child: Center(
-                            child: ElevatedButton(
-                              style:   ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(Color(0XFF466D33)),
-                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20.0),
-                                        // side: BorderSide(color: Colors.red)
-                                      )
-                                  )
+                          child: InkWell(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => OrderPlacedpage()));
+                            },
+                            child: Container(
+                              height: 50,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                      colors: [Color(0xffE74B52),Color(0xffE74B52),]
+                                  ),
+                                  borderRadius: BorderRadius.circular(20)
                               ),
-                              onPressed: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => OrderPlacedpage()));
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 8.0,left: 8,top: 12,bottom: 12),
-                                child: Text('Next', style:
-                                Theme.of(context).textTheme.bodyText1!.copyWith(
-                                  color: Color(0XFFFFFFFF),
-                                  fontWeight: FontWeight.w600,
-                                ),),
+
+                              child: Center(
+                                child: Padding(
+                                  padding:  EdgeInsets.only(right: 8.0,left: 8,top: 12,bottom: 12),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text('Next', style:
+                                      Theme.of(context).textTheme.bodyText1!.copyWith(
+                                        color: Color(0XFFFFFFFF),
+                                        fontWeight: FontWeight.w600,
+                                      ),),
+
+                                      SizedBox(width: 8,),
+                                      Icon(Icons.arrow_forward,color: Color(0XFFFFFFFF),)
+                                    ],
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -1589,14 +1613,11 @@ class _CardpageState extends State<Cardpage> {
                     ),
                     SizedBox(height: 16,),
                     Container(
-                      height:630,
+                      height:670,
                       width: MediaQuery.of(context).size.width,
                       padding: EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage("image/Rectangle 1490.png"),
-                          fit: BoxFit.cover,
-                        ),
+                          color:Color(0xffEAEEF2)
                       ),
                       child:Column(
                         children: [
@@ -1789,10 +1810,11 @@ class _CardpageState extends State<Cardpage> {
                             height: 200,
                             padding: EdgeInsets.all(016),
                             decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage("image/Rectangle 1494.png"),
-                                fit: BoxFit.cover,
-                              ),
+                                image: DecorationImage(
+                                  image: AssetImage("image/backgroundsc.png"),
+                                  fit: BoxFit.cover,
+                                ),
+                                color: Colors.transparent
                             ),
                             child: Column(
                               children: [
@@ -1894,10 +1916,11 @@ class _CardpageState extends State<Cardpage> {
                             width: 200,
                             padding: EdgeInsets.all(016),
                             decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage("image/Rectangle 1572.png"),
-                                  fit: BoxFit.cover,
-                                ),
+                              // image: DecorationImage(
+                              //   image: AssetImage("image/Rectangle 1572.png"),
+                              //   fit: BoxFit.cover,
+                              // ),
+                                color:Color(0xffF3E8E9),
                                 borderRadius: BorderRadius.circular(20)
                             ),
                             child: Row(

@@ -757,7 +757,7 @@ class _ArtistPageState extends State<ArtistPage> {
                 const SizedBox(height: 30,),
                 const SizedBox(height: 16,),
                 SizedBox(
-                    height: 1100,
+
                     width: MediaQuery.of(context).size.width,
                     child: Footer()),
 

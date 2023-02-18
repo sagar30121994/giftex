@@ -45,9 +45,9 @@ class _ProfilepageState extends State<Profilepage> {
                         alignment: AlignmentDirectional.center,
                         children: [
 
-                          Image.asset("image/Ellipse 94.png",height: 75,),
+                          Image.asset("image/Ellipse 94.png",height: 95,color: Color(0xffF3E8E9),),
                           CircleAvatar(
-                            radius: 25,
+                            radius: 37,
                             backgroundImage: AssetImage('image/image 40.png'),
                             // child: Image.asset("image/image 40.png",fit: BoxFit.fill,),
                           ),
@@ -72,7 +72,7 @@ class _ProfilepageState extends State<Profilepage> {
                                       // Child text spans will inherit styles from parent
                                       children: <TextSpan>[
                                         TextSpan(text: 'Hello ',style:  Theme.of(context).textTheme.headline6!.copyWith(
-                                          color: Color(0xff8DAB7F),
+                                          color: Theme.of(context).colorScheme.primary,
                                           fontWeight: FontWeight.bold,),),
                                         TextSpan(text: 'Aryan R.', style:  Theme.of(context).textTheme.headline6!.copyWith(
                                           color: Colors.black,
@@ -83,7 +83,7 @@ class _ProfilepageState extends State<Profilepage> {
                                   SizedBox(height: 3,),
                                   Row(
                                     children: [
-                                      Image.asset("image/Vector (11).png",height: 16,color: Colors.yellow,),
+                                      Image.asset("image/Vector (11).png",height: 16,color: Colors.red,),
                                       SizedBox(width: 3,),
                                       Text("Mumbai. India",
                                         textAlign: TextAlign.center,
