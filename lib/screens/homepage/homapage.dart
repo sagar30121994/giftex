@@ -939,7 +939,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin{
                 Text("NEWS & UPDATES.",
                   textAlign: TextAlign.center,
                   style:
-                  Theme.of(context).textTheme.headline6!.copyWith(
+                  Theme.of(context).textTheme.headline5!.copyWith(
                     color: Color(0xff373737),
                     fontWeight: FontWeight.bold,
                   ),
@@ -947,7 +947,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin{
               ],
             ),
             const SizedBox(height: 30,),
-            const SizedBox(height: 20,),
+            // const SizedBox(height: 20,),
 
             Container(
               color: Color(0xffFFFFFF),

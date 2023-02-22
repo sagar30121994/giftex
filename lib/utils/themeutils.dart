@@ -40,10 +40,9 @@ ThemeData _buildDarkTheme() {
 
 
     scrollbarTheme: ScrollbarThemeData(
-      thumbColor: MaterialStateProperty.all(Color(0Xff3C5233),),
+      thumbColor: MaterialStateProperty.all(Color(0XffB45156),),
       thumbVisibility: MaterialStateProperty.all(true,),
       interactive: true
-
     ),
 
     scaffoldBackgroundColor: Color(0xffF7FAFD),

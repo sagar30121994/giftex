@@ -25,6 +25,7 @@ class _ProfilepageState extends State<Profilepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: NavBar(),
+      backgroundColor:Colors.white,
       // bottomNavigationBar: BottomNavigationBarUi(),
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -72,7 +73,7 @@ class _ProfilepageState extends State<Profilepage> {
                                       // Child text spans will inherit styles from parent
                                       children: <TextSpan>[
                                         TextSpan(text: 'Hello ',style:  Theme.of(context).textTheme.headline6!.copyWith(
-                                          color: Theme.of(context).colorScheme.primary,
+                                          color: Color(0xffE74B52),
                                           fontWeight: FontWeight.bold,),),
                                         TextSpan(text: 'Aryan R.', style:  Theme.of(context).textTheme.headline6!.copyWith(
                                           color: Colors.black,
@@ -152,10 +153,7 @@ class _ProfilepageState extends State<Profilepage> {
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    image: DecorationImage  (
-                      image: AssetImage("image/Rectangle 1622.png"),
-                      fit: BoxFit.cover,
-                    ),
+                    color: Color(0xffF7FAFD)
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -180,14 +178,15 @@ class _ProfilepageState extends State<Profilepage> {
                               },
                               child: Row(
                                 children: [
-                                  Image.asset("image/Group (16).png",height: 23,color: Color(0xff7F986B),),
+                                  Image.asset("image/pprofile.png",height: 23,),
                                   SizedBox(width: 10,),
                                   Text("MY PROFILE",
                                     textAlign: TextAlign.left,
                                     style:
                                     Theme.of(context).textTheme.subtitle1!.copyWith(
-                                      color: Color(0xff7F986B),
-                                      fontWeight: FontWeight.w600,
+                                      color: Color(0xff1F2A52),
+                                      fontWeight: FontWeight.w900,
+
                                     ),
                                   ),
                                 ],
@@ -202,14 +201,14 @@ class _ProfilepageState extends State<Profilepage> {
                              },
                              child: Row(
                                 children: [
-                                  Image.asset("image/Group (13).png",height: 32,color: Color(0xff7F986B),),
+                                  Image.asset("image/orderhis.png",height: 32,),
                                   SizedBox(width: 10,),
                                   Text("MY ORDER HISTORY",
                                     textAlign: TextAlign.left,
                                     style:
                                     Theme.of(context).textTheme.subtitle1!.copyWith(
-                                      color: Color(0xff7F986B),
-                                      fontWeight: FontWeight.w600,
+                                      color:Color(0xff1F2A52),
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                 ],
@@ -224,14 +223,14 @@ class _ProfilepageState extends State<Profilepage> {
                               },
                               child: Row(
                                 children: [
-                                  Image.asset("image/Group (14).png",height: 23,color: Color(0xff7F986B),),
+                                  Image.asset("image/mgallery.png",height: 23,),
                                   SizedBox(width: 10,),
                                   Text("MY GALLERY",
                                     textAlign: TextAlign.left,
                                     style:
                                     Theme.of(context).textTheme.subtitle1!.copyWith(
-                                      color: Color(0xff7F986B),
-                                      fontWeight: FontWeight.w600,
+                                      color:Color(0xff1F2A52),
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                 ],
@@ -246,14 +245,14 @@ class _ProfilepageState extends State<Profilepage> {
                               },
                               child: Row(
                                 children: [
-                                  Image.asset("image/Group (15).png",height: 32,color: Color(0xff7F986B),),
+                                  Image.asset("image/auctionreview.png",height: 32,),
                                   SizedBox(width: 10,),
                                   Text("MY AUCTION REVIEW",
                                     textAlign: TextAlign.left,
                                     style:
                                     Theme.of(context).textTheme.subtitle1!.copyWith(
-                                      color: Color(0xff7F986B),
-                                      fontWeight: FontWeight.w600,
+                                      color:Color(0xff1F2A52),
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                 ],
@@ -264,14 +263,14 @@ class _ProfilepageState extends State<Profilepage> {
                             SizedBox(height: 16,),
                             Row(
                               children: [
-                                Image.asset("image/Group (17).png",height: 27,color: Color(0xff7F986B),),
+                                Image.asset("image/auction_dash.png",height: 27,),
                                 SizedBox(width: 10,),
                                 Text("AUCTION DASHBOARD",
                                   textAlign: TextAlign.left,
                                   style:
                                   Theme.of(context).textTheme.subtitle1!.copyWith(
-                                    color: Color(0xff7F986B),
-                                    fontWeight: FontWeight.w600,
+                                    color:Color(0xff1F2A52),
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ],
@@ -284,7 +283,7 @@ class _ProfilepageState extends State<Profilepage> {
                               padding: EdgeInsets.only(top: 16,bottom: 16,left: 10),
                               child: Row(
                                 children: [
-                                  Icon(Icons.logout,size: 20,color: Color(0xff3A3C38),),
+                                 Image.asset("image/logout.png",height: 24),
                                   SizedBox(width: 10,),
                                   Text("Log Out",
                                     textAlign: TextAlign.left,

@@ -689,85 +689,96 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               child: Row(
 
                                 children: [
-                                  Container(
-                                    height: 60,
+                                  Flexible(
+                                    flex: 1,
+                                    child: Container(
+                                      height: 60,
 
-                                    width: MediaQuery.of(context).size.width/3.2,
-                                    // decoration: BoxDecoration(
-                                    //     color: Color(0xffFAF7E5),
-                                    //   image: DecorationImage(
-                                    //     image: AssetImage("image/Shape (7).png"), fit: BoxFit.cover,
-                                    //   )
-                                    // ),
-                                    child: Image.asset("image/bidder.png",height: 65,fit: BoxFit.fill,),
+                                      width: MediaQuery.of(context).size.width/3.2,
+                                      // decoration: BoxDecoration(
+                                      //     color: Color(0xffFAF7E5),
+                                      //   image: DecorationImage(
+                                      //     image: AssetImage("image/Shape (7).png"), fit: BoxFit.cover,
+                                      //   )
+                                      // ),
+                                      child: Image.asset("image/bidder.png",height: 65,fit: BoxFit.fill,),
 
-                                    // Row(
-                                    //   mainAxisAlignment: MainAxisAlignment.center,
-                                    //   crossAxisAlignment: CrossAxisAlignment.center,
-                                    //   children: [
-                                    //
-                                    //     // SizedBox(width: 5,),
-                                    //     // Text('BIDDER', style:
-                                    //     // Theme.of(context).textTheme.caption!.copyWith(
-                                    //     //   color: Color(0XFF2D2D2D),
-                                    //     //   fontWeight: FontWeight.w600,
-                                    //     / Image.asset("image/bidder.png",height: 20,),/ ),),
-                                    //   ],
-                                    // ),
+                                      // Row(
+                                      //   mainAxisAlignment: MainAxisAlignment.center,
+                                      //   crossAxisAlignment: CrossAxisAlignment.center,
+                                      //   children: [
+                                      //
+                                      //     // SizedBox(width: 5,),
+                                      //     // Text('BIDDER', style:
+                                      //     // Theme.of(context).textTheme.caption!.copyWith(
+                                      //     //   color: Color(0XFF2D2D2D),
+                                      //     //   fontWeight: FontWeight.w600,
+                                      //     / Image.asset("image/bidder.png",height: 20,),/ ),),
+                                      //   ],
+                                      // ),
+                                    ),
                                   ),
-                                  SizedBox(width: 5,),
-                                  Container(
-                                    height: 60,
+                                  // SizedBox(width: 5,),
+                                  Flexible(
+                                    flex: 1,
 
-                                    width: MediaQuery.of(context).size.width/3.2,
-                                    // decoration: BoxDecoration(
-                                    //     color: Color(0xffFAF7E5),
-                                    //   image: DecorationImage(
-                                    //     image: AssetImage("image/Shape (7).png"), fit: BoxFit.cover,
-                                    //   )
-                                    // ),
-                                    child: Image.asset("image/datentime.png",height: 65,fit: BoxFit.fill,),
+                                    child: Container(
+                                      height: 60,
 
-                                    // Row(
-                                    //   mainAxisAlignment: MainAxisAlignment.center,
-                                    //   crossAxisAlignment: CrossAxisAlignment.center,
-                                    //   children: [
-                                    //
-                                    //     // SizedBox(width: 5,),
-                                    //     // Text('BIDDER', style:
-                                    //     // Theme.of(context).textTheme.caption!.copyWith(
-                                    //     //   color: Color(0XFF2D2D2D),
-                                    //     //   fontWeight: FontWeight.w600,
-                                    //     / Image.asset("image/bidder.png",height: 20,),/ ),),
-                                    //   ],
-                                    // ),
+                                      width: MediaQuery.of(context).size.width/3.2,
+                                      // decoration: BoxDecoration(
+                                      //     color: Color(0xffFAF7E5),
+                                      //   image: DecorationImage(
+                                      //     image: AssetImage("image/Shape (7).png"), fit: BoxFit.cover,
+                                      //   )
+                                      // ),
+                                      child: Image.asset("image/datentime.png",height: 65,fit: BoxFit.fill,),
+
+                                      // Row(
+                                      //   mainAxisAlignment: MainAxisAlignment.center,
+                                      //   crossAxisAlignment: CrossAxisAlignment.center,
+                                      //   children: [
+                                      //
+                                      //     // SizedBox(width: 5,),
+                                      //     // Text('BIDDER', style:
+                                      //     // Theme.of(context).textTheme.caption!.copyWith(
+                                      //     //   color: Color(0XFF2D2D2D),
+                                      //     //   fontWeight: FontWeight.w600,
+                                      //     / Image.asset("image/bidder.png",height: 20,),/ ),),
+                                      //   ],
+                                      // ),
+                                    ),
                                   ),
-                                  SizedBox(width: 5,),
-                                  Container(
-                                    height: 60,
+                                  // SizedBox(width: 5,),
+                                  Flexible(
+                                    flex: 1,
 
-                                    width: MediaQuery.of(context).size.width/3.2,
-                                    // decoration: BoxDecoration(
-                                    //     color: Color(0xffFAF7E5),
-                                    //   image: DecorationImage(
-                                    //     image: AssetImage("image/Shape (7).png"), fit: BoxFit.cover,
-                                    //   )
-                                    // ),
-                                    child: Image.asset("image/amount.png",height: 65,fit: BoxFit.fill,),
+                                    child: Container(
+                                      height: 60,
 
-                                    // Row(
-                                    //   mainAxisAlignment: MainAxisAlignment.center,
-                                    //   crossAxisAlignment: CrossAxisAlignment.center,
-                                    //   children: [
-                                    //
-                                    //     // SizedBox(width: 5,),
-                                    //     // Text('BIDDER', style:
-                                    //     // Theme.of(context).textTheme.caption!.copyWith(
-                                    //     //   color: Color(0XFF2D2D2D),
-                                    //     //   fontWeight: FontWeight.w600,
-                                    //     / Image.asset("image/bidder.png",height: 20,),/ ),),
-                                    //   ],
-                                    // ),
+                                      width: MediaQuery.of(context).size.width/3.2,
+                                      // decoration: BoxDecoration(
+                                      //     color: Color(0xffFAF7E5),
+                                      //   image: DecorationImage(
+                                      //     image: AssetImage("image/Shape (7).png"), fit: BoxFit.cover,
+                                      //   )
+                                      // ),
+                                      child: Image.asset("image/amount.png",height: 65,fit: BoxFit.fill,),
+
+                                      // Row(
+                                      //   mainAxisAlignment: MainAxisAlignment.center,
+                                      //   crossAxisAlignment: CrossAxisAlignment.center,
+                                      //   children: [
+                                      //
+                                      //     // SizedBox(width: 5,),
+                                      //     // Text('BIDDER', style:
+                                      //     // Theme.of(context).textTheme.caption!.copyWith(
+                                      //     //   color: Color(0XFF2D2D2D),
+                                      //     //   fontWeight: FontWeight.w600,
+                                      //     / Image.asset("image/bidder.png",height: 20,),/ ),),
+                                      //   ],
+                                      // ),
+                                    ),
                                   ),
                                 ],
                               )),
@@ -1259,7 +1270,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               ),
               const SizedBox(height: 16,),
               SizedBox(
-                  height: 1100,
+
                   width: MediaQuery.of(context).size.width,
                   child: Footer()),
               SizedBox(

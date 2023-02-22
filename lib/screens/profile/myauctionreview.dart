@@ -91,9 +91,9 @@ class _MyAuctionReviewpageState extends State<MyAuctionReviewpage> {
                           alignment: AlignmentDirectional.center,
                           children: [
 
-                            Image.asset("image/Ellipse 94.png",height: 75,),
+                            Image.asset("image/Ellipse 94.png",height: 95,color: Color(0xffF3E8E9),),
                             CircleAvatar(
-                              radius: 25,
+                              radius: 37,
                               backgroundImage: AssetImage('image/image 40.png'),
                               // child: Image.asset("image/image 40.png",fit: BoxFit.fill,),
                             ),
@@ -118,18 +118,18 @@ class _MyAuctionReviewpageState extends State<MyAuctionReviewpage> {
                                         // Child text spans will inherit styles from parent
                                         children: <TextSpan>[
                                           TextSpan(text: 'Hello ',style:  Theme.of(context).textTheme.headline6!.copyWith(
-                                            color: Color(0xff8DAB7F),
-                                            fontWeight: FontWeight.w400,),),
+                                            color: Color(0xffE74B52),
+                                            fontWeight: FontWeight.bold,),),
                                           TextSpan(text: 'Aryan R.', style:  Theme.of(context).textTheme.headline6!.copyWith(
                                             color: Colors.black,
-                                            fontWeight: FontWeight.w400,),),
+                                            fontWeight: FontWeight.bold,),),
                                         ],
                                       ),
                                     ),
                                     SizedBox(height: 3,),
                                     Row(
                                       children: [
-                                        Image.asset("image/Vector (11).png",height: 16,),
+                                        Image.asset("image/Vector (11).png",height: 16,color: Colors.red,),
                                         SizedBox(width: 3,),
                                         Text("Mumbai. India",
                                           textAlign: TextAlign.center,
@@ -146,7 +146,7 @@ class _MyAuctionReviewpageState extends State<MyAuctionReviewpage> {
                                 SizedBox(width: 16,),
                                 ElevatedButton(
                                   style:   ButtonStyle(
-                                      backgroundColor: MaterialStateProperty.all(Color(0XFFF9F9F9)),
+                                      backgroundColor: MaterialStateProperty.all(Color(0XFFFFFFFF)),
                                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                           RoundedRectangleBorder(
                                               borderRadius: BorderRadius.circular(20.0),
@@ -158,11 +158,19 @@ class _MyAuctionReviewpageState extends State<MyAuctionReviewpage> {
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.only(right: 8.0,left: 8,top: 12,bottom: 12),
-                                    child: Text('Edit', style:
-                                    Theme.of(context).textTheme.bodyText1!.copyWith(
-                                      color: Color(0XFF2D2D2D),
-                                      fontWeight: FontWeight.w600,
-                                    ),),
+                                    child: Row(
+                                      children: [
+                                        Text('EDIT', style:
+                                        Theme.of(context).textTheme.bodyText1!.copyWith(
+                                            color: Theme.of(context).colorScheme.primary,
+                                            fontWeight: FontWeight.bold,
+                                            letterSpacing: 2
+                                        ),),
+
+                                        SizedBox(width: 5,),
+                                        Icon(Icons.edit_outlined, color: Color(0XFF2D2D2D),size: 15,)
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ],
@@ -174,7 +182,7 @@ class _MyAuctionReviewpageState extends State<MyAuctionReviewpage> {
                                 textAlign: TextAlign.left,
                                 style:
                                 Theme.of(context).textTheme.bodyText1!.copyWith(
-                                  color: Color(0xff747474),
+                                  color: Color(0xff959595),
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
@@ -204,10 +212,10 @@ class _MyAuctionReviewpageState extends State<MyAuctionReviewpage> {
                       // itemExtent: 150,
                         scrollDirection: Axis.vertical,
                         itemBuilder: (context, index) =>  Padding(
-                          padding: const EdgeInsets.only(left: 0.0,right: 0.0,top: 16),
+                          padding: const EdgeInsets.all(15.0),
                           child: Container(
                               color: Color(0xffFFFFFF),
-                              height:400,
+                              height:550,
                               alignment: Alignment.center,
                               child: Stack(
                                 children: [
@@ -225,22 +233,27 @@ class _MyAuctionReviewpageState extends State<MyAuctionReviewpage> {
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.only(left: 25.0,right: 25),
-                                      child: Image.asset("image/Bitmap6.png",height: 180,),
+                                      child: Image.asset("image/Bitmap6.png",height: 250,
+                                        width: MediaQuery.of(context).size.width*.65,
+                                        fit: BoxFit.contain,
+
+                                      ),
                                     ),
                                   ),
                                   Padding(
-                                      padding: EdgeInsets.only(top: 370 / 2.0,bottom: 0,left: 25.0,right: 25),
+                                      padding: EdgeInsets.only(top: 250,bottom: 0,left: 25.0,right: 25),
                                       child:Column(
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           SizedBox(width: 20,),
-                                          Text("Jamini Roy",
+                                          Text("JAMINI ROY",
                                             textAlign: TextAlign.center,
                                             style:
                                             Theme.of(context).textTheme.headline6!.copyWith(
                                               color: Colors.black,
-                                              fontWeight: FontWeight.w600,
+                                              letterSpacing: 2,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                           ),
                                           SizedBox(height: 10,),
@@ -261,21 +274,21 @@ class _MyAuctionReviewpageState extends State<MyAuctionReviewpage> {
                                                 mainAxisAlignment: MainAxisAlignment.start,
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
-                                                  Text("Category Name",
+                                                  Text("Estimate Value ",
                                                     textAlign: TextAlign.center,
                                                     style:
-                                                    Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                      color: Color(0xff747580),
+                                                    Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                      color: Color(0xff747474),
                                                       fontWeight: FontWeight.w400,
                                                     ),
                                                   ),
                                                   SizedBox(height: 10,),
-                                                  Text("20cm X 25cm",
+                                                  Text("₹50,000- ₹75,000",
                                                     textAlign: TextAlign.center,
                                                     style:
                                                     Theme.of(context).textTheme.bodyText1!.copyWith(
                                                       color: Color(0xff202232),
-                                                      fontWeight: FontWeight.w600,
+                                                      fontWeight: FontWeight.bold,
                                                     ),
                                                   ),
                                                 ],
@@ -294,13 +307,46 @@ class _MyAuctionReviewpageState extends State<MyAuctionReviewpage> {
                                                     ),
                                                   ),
                                                   SizedBox(height: 10,),
-                                                  Text("₹50,000- ₹75,000",
-                                                    textAlign: TextAlign.center,
-                                                    style:
-                                                    Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                      color: Color(0xff202232),
-                                                      fontWeight: FontWeight.w600,
-                                                    ),
+                                                  Row(
+                                                    children: [
+                                                      Container(
+                                                          decoration: BoxDecoration(
+                                                            borderRadius: BorderRadius.circular(8),
+                                                            color: Color(0xff8C9FB1),
+                                                          ),
+                                                          padding: EdgeInsets.all(4),
+                                                          child:Text("02",style: Theme.of(context).textTheme.subtitle2!.copyWith(color: Colors.white),)
+                                                      ),
+                                                      Container(
+                                                        // color: Colors.black,
+                                                          padding: EdgeInsets.all(4),
+                                                          child:Text(":")
+                                                      ),
+                                                      Container(
+                                                          decoration: BoxDecoration(
+                                                            borderRadius: BorderRadius.circular(8),
+                                                            color: Color(0xff8C9FB1),
+                                                          ),
+
+                                                          padding: EdgeInsets.all(4),
+                                                          child:Text("14",style: Theme.of(context).textTheme.subtitle2!.copyWith(color: Colors.white),)
+                                                      ),
+
+                                                      Container(
+                                                        // color: Colors.black,
+                                                          padding: EdgeInsets.all(4),
+                                                          child:Text(":")
+                                                      ),
+
+                                                      Container(
+                                                          decoration: BoxDecoration(
+                                                            borderRadius: BorderRadius.circular(8),
+                                                            color: Color(0xff8C9FB1),
+                                                          ),
+                                                          padding: EdgeInsets.all(4),
+                                                          child:Text("59",style: Theme.of(context).textTheme.subtitle2!.copyWith(color: Colors.white),)
+                                                      ),
+                                                    ],
                                                   ),
                                                 ],
                                               ),
@@ -335,6 +381,35 @@ class _MyAuctionReviewpageState extends State<MyAuctionReviewpage> {
                                                 ],
                                               ),
                                               Spacer(),
+                                              Column(
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Text("Next Valid Bid",
+                                                    textAlign: TextAlign.center,
+                                                    style:
+                                                    Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                      color: Color(0xff747474),
+                                                      fontWeight: FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 10,),
+                                                  Text("₹75,000",
+                                                    textAlign: TextAlign.center,
+                                                    style:
+                                                    Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                      color: Theme.of(context).colorScheme.primary,
+                                                      fontWeight: FontWeight.w600,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(height: 20,),
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.end,
+                                            children: [
                                               ElevatedButton(
                                                 style:   ButtonStyle(
                                                     backgroundColor: MaterialStateProperty.all(Color(0XFFF9F9F9)),
@@ -348,41 +423,94 @@ class _MyAuctionReviewpageState extends State<MyAuctionReviewpage> {
                                                 onPressed: (){
                                                 },
                                                 child: Padding(
-                                                  padding: const EdgeInsets.only(right: 0.0,left: 0,top: 12,bottom: 12),
-                                                  child: Text('Proxy Bid', style:
+                                                  padding: const EdgeInsets.only(right: 8.0,left: 8,top: 12,bottom: 12),
+                                                  child: Text('PROXY BID', style:
                                                   Theme.of(context).textTheme.bodyText1!.copyWith(
                                                     color: Color(0XFF2D2D2D),
-                                                    fontWeight: FontWeight.w600,
+                                                    fontWeight: FontWeight.bold,
                                                   ),),
                                                 ),
                                               ),
                                               SizedBox(width: 10,),
-                                              ElevatedButton(
-                                                style:   ButtonStyle(
-                                                    backgroundColor: MaterialStateProperty.all(Color(0XFF8DAB7F)),
-                                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                                        RoundedRectangleBorder(
-                                                          borderRadius: BorderRadius.circular(20.0),
-                                                          // side: BorderSide(color: Colors.red)
-                                                        )
-                                                    )
-                                                ),
-                                                onPressed: (){
+                                              InkWell(
+                                                onTap: (){
+                                                  // Navigator.push(context, MaterialPageRoute(builder: (context) => GetOtppage()));
                                                 },
-                                                child: Padding(
-                                                  padding: const EdgeInsets.only(right: 0.0,left:0,top: 12,bottom: 12),
-                                                  child: Text('Buy Now', style:
-                                                  Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                    color: Color(0XFFFFFFFF),
-                                                    fontWeight: FontWeight.w600,
-                                                  ),),
-                                                ),
-                                              ),
+                                                child: Container(
+                                                  height: 50,
+                                                  // width: 150,
+                                                  decoration: BoxDecoration(
+                                                      gradient: LinearGradient(
+                                                          colors: [Color(0xffE74B52),Color(0xffE74B52),]
+                                                      ),
+                                                      // color: Color(0xff466D33),
+                                                      borderRadius: BorderRadius.circular(24)
+                                                  ),
+                                                  child: Center(
+                                                    child: Padding(
+                                                      padding: const EdgeInsets.only(right: 32.0,left: 32,top: 12,bottom: 12),
+                                                      child: Text('BID NOW', style:
+                                                      Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                        color: Color(0XFFFFFFFF),
+                                                        fontWeight: FontWeight.bold,
+                                                      ),),
+                                                    ),
+                                                  ),
+                                                ),),
                                             ],
                                           ),
+                                          SizedBox(height: 8,),
                                         ],
                                       )
                                   ),
+
+                                  Positioned(
+                                    right: 16,
+                                    top: 50,
+                                    child: Column(
+                                      children: [
+                                        Container(
+
+
+                                          child: Text("Lot 01"),
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(16),
+                                            color: Colors.lightBlueAccent.withOpacity(.2),
+
+                                          ),
+                                          padding: EdgeInsets.symmetric(horizontal: 10,vertical: 4),
+
+                                        ),
+
+                                        SizedBox(height:12),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(16),
+                                              color: Color(0xffEAF1DB)
+
+                                          ),
+                                          padding: EdgeInsets.symmetric(horizontal: 10,vertical: 4),
+                                          child: Text("5 BIDS"),
+
+                                        ),
+                                        SizedBox(height:12),
+                                        Icon(Icons.favorite_border,color: Colors.grey,),
+                                        SizedBox(height:12),
+                                        Icon(Icons.open_in_full,color: Colors.grey,),
+                                        SizedBox(height:12),
+                                        // Container(
+                                        //   padding: EdgeInsets.all(16),
+                                        //   decoration: BoxDecoration(
+                                        //     color:  Colors.lightBlueAccent.withOpacity(.2),
+                                        //     borderRadius: BorderRadius.circular(32)
+                                        //
+                                        //   ),
+                                        // )
+                                        Image.asset("image/earth.png",height: 50,)
+                                      ],
+                                    ),
+                                  )
+
                                 ],
                               )
                           ),
@@ -403,7 +531,7 @@ class _MyAuctionReviewpageState extends State<MyAuctionReviewpage> {
           ),
         ),
       ),
-      bottomNavigationBar: Dashboard2Ui(),
+
     );
   }
 

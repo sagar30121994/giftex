@@ -19,16 +19,31 @@ class _MyProfilepageState extends State<MyProfilepage> {
   int _pageIndex = 0;
   String type="account";
   TextEditingController nameController=TextEditingController();
+  TextEditingController adharController=TextEditingController();
+  TextEditingController panController=TextEditingController();
+  TextEditingController emailController=TextEditingController();
+  TextEditingController contactController=TextEditingController();
+  TextEditingController dobController=TextEditingController();
+  TextEditingController genderController=TextEditingController();
+  TextEditingController nationalityController=TextEditingController();
   @override
   void initState() {
     // TODO: implement initState
    nameController.text="Aryan Raj";
+   adharController.text="*1234";
+   panController.text="*1234";
+   emailController.text="aryansethi@gmail.com";
+   contactController.text="91+ 9867345212";
+   dobController.text="22/03/1998";
+   genderController.text="Male";
+   nationalityController.text="India";
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: NavBar(),
+      backgroundColor:Colors.white,
       // bottomNavigationBar: BottomNavigationBarUi(),
       body: SingleChildScrollView(
         child: Container(
@@ -49,9 +64,9 @@ class _MyProfilepageState extends State<MyProfilepage> {
                           alignment: AlignmentDirectional.center,
                           children: [
 
-                            Image.asset("image/Ellipse 94.png",height: 75,),
+                            Image.asset("image/Ellipse 94.png",height: 95,color: Color(0xffF3E8E9),),
                             CircleAvatar(
-                              radius: 25,
+                              radius: 37,
                               backgroundImage: AssetImage('image/image 40.png'),
                               // child: Image.asset("image/image 40.png",fit: BoxFit.fill,),
                             ),
@@ -76,18 +91,18 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                         // Child text spans will inherit styles from parent
                                         children: <TextSpan>[
                                           TextSpan(text: 'Hello ',style:  Theme.of(context).textTheme.headline6!.copyWith(
-                                            color: Color(0xff8DAB7F),
-                                            fontWeight: FontWeight.w600,),),
+                                            color: Color(0xffE74B52),
+                                            fontWeight: FontWeight.bold,),),
                                           TextSpan(text: 'Aryan R.', style:  Theme.of(context).textTheme.headline6!.copyWith(
                                             color: Colors.black,
-                                            fontWeight: FontWeight.w600,),),
+                                            fontWeight: FontWeight.bold,),),
                                         ],
                                       ),
                                     ),
                                     SizedBox(height: 3,),
                                     Row(
                                       children: [
-                                        Image.asset("image/Vector (11).png",height: 16,),
+                                        Image.asset("image/Vector (11).png",height: 16,color: Colors.red,),
                                         SizedBox(width: 3,),
                                         Text("Mumbai. India",
                                           textAlign: TextAlign.center,
@@ -118,14 +133,15 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                     padding: const EdgeInsets.only(right: 8.0,left: 8,top: 12,bottom: 12),
                                     child: Row(
                                       children: [
-                                        Text('Edit', style:
+                                        Text('EDIT', style:
                                         Theme.of(context).textTheme.bodyText1!.copyWith(
-                                          color: Color(0XFF2D2D2D),
-                                          fontWeight: FontWeight.w600,
+                                            color: Theme.of(context).colorScheme.primary,
+                                            fontWeight: FontWeight.bold,
+                                            letterSpacing: 2
                                         ),),
 
                                         SizedBox(width: 5,),
-                                        Icon(Icons.edit, color: Color(0XFF2D2D2D),size: 15,)
+                                        Icon(Icons.edit_outlined, color: Color(0XFF2D2D2D),size: 15,)
                                       ],
                                     ),
                                   ),
@@ -151,7 +167,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
                   ),
                   SizedBox(height: 16,),
                   Container(
-                    color: Color(0xffFFFFFF),
+                    color: Colors.white,
                     child: DefaultTabController(
                       length: 3,
                       child:  SingleChildScrollView(
@@ -172,6 +188,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
                           padding: EdgeInsets.all(0),
                           unselectedLabelColor: Color(0xff2D2D2D).withOpacity(0.6),
                           labelColor: const Color(0xFF000000),
+                          indicatorColor: Theme.of(context).colorScheme.primary,
                           labelStyle:
                           Theme.of(context).textTheme.subtitle1!.copyWith(
                             color: Colors.black,
@@ -192,145 +209,194 @@ class _MyProfilepageState extends State<MyProfilepage> {
 
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  // SizedBox(height: 10,),
                   type=="account"?Container(
+                    color:Colors.white,
                     padding: EdgeInsets.only(top: 0,left: 16,right: 16),
                     child: Column(
                       children: [
-                        Padding(
-                          padding: EdgeInsets.only(top: 15),
+                        Container(
+                          margin: EdgeInsets.only(top: 24),
+                          padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+                          decoration: BoxDecoration(
+                            color:Colors.white,
+                              boxShadow: [
+                                BoxShadow(color:  Color(0xffEAEEF2),blurRadius: 2,offset: Offset(2,2))
+                              ]
+                          ),
                           child: TextField(
+
                             controller: nameController,
                             style: Theme.of(context).textTheme.subtitle1!.copyWith(
                               color: Colors.black,
                               fontWeight: FontWeight.w500,),
                             decoration: InputDecoration(
-                                border: OutlineInputBorder(),
                                 labelText: 'Full Name',
                                 hintText: 'Enter Your Name',
-                                filled: true,
-                                fillColor: Color(0xffF9F9F9),
+                                fillColor: Colors.white,
                                 isDense: true
+
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 15),
+                        Container(
+                          margin: EdgeInsets.only(top: 24),
+                          padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+                          decoration: BoxDecoration(
+                              color:Colors.white,
+                              boxShadow: [
+                                BoxShadow(color:  Color(0xffEAEEF2),blurRadius: 2,offset: Offset(2,2))
+                              ]
+                          ),
                           child: TextField(
-                            controller: nameController,
+                            controller: adharController,
                             style: Theme.of(context).textTheme.subtitle1!.copyWith(
                               color: Colors.black,
                               fontWeight: FontWeight.w500,),
                             decoration: InputDecoration(
-                                border: OutlineInputBorder(),
+
                                 labelText: 'Aadhar Details',
                                 hintText: '*1234',
-                                filled: true,
-                                fillColor: Color(0xffF9F9F9),
+
                                 isDense: true
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 15),
+                        Container(
+                          margin: EdgeInsets.only(top: 24),
+                          padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+                          decoration: BoxDecoration(
+                              color:Colors.white,
+                              boxShadow: [
+                                BoxShadow(color:  Color(0xffEAEEF2),blurRadius: 2,offset: Offset(2,2))
+                              ]
+                          ),
                           child: TextField(
-                            controller: nameController,
+                            controller: panController,
                             style: Theme.of(context).textTheme.subtitle1!.copyWith(
                               color: Colors.black,
                               fontWeight: FontWeight.w500,),
                             decoration: InputDecoration(
-                                border: OutlineInputBorder(),
+
                                 labelText: 'PAN Card Details',
                                 hintText: '*1234',
-                                filled: true,
-                                fillColor: Color(0xffF9F9F9),
+
                                 isDense: true
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 15),
+                        Container(
+                          margin: EdgeInsets.only(top: 24),
+                          padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+                          decoration: BoxDecoration(
+                              color:Colors.white,
+                              boxShadow: [
+                                BoxShadow(color:  Color(0xffEAEEF2),blurRadius: 2,offset: Offset(2,2))
+                              ]
+                          ),
                           child: TextField(
-                            controller: nameController,
+                            controller: emailController,
                             style: Theme.of(context).textTheme.subtitle1!.copyWith(
                               color: Colors.black,
                               fontWeight: FontWeight.w500,),
                             decoration: InputDecoration(
-                                border: OutlineInputBorder(),
+
                                 labelText: 'Email Address',
                                 hintText: 'aryansethi@gmail.com',
                                 suffixIcon: Icon(Icons.edit,color: Colors.black,),
-                                filled: true,
-                                fillColor: Color(0xffF9F9F9),
+
                                 isDense: true
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 15),
+                        Container(
+                          margin: EdgeInsets.only(top: 24),
+                          padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+                          decoration: BoxDecoration(
+                              color:Colors.white,
+                              boxShadow: [
+                                BoxShadow(color:  Color(0xffEAEEF2),blurRadius: 2,offset: Offset(2,2))
+                              ]
+                          ),
                           child: TextField(
-                            controller: nameController,
+                            controller: contactController,
                             style: Theme.of(context).textTheme.subtitle1!.copyWith(
                               color: Colors.black,
                               fontWeight: FontWeight.w500,),
                             decoration: InputDecoration(
-                                border: OutlineInputBorder(),
+
                                 labelText: 'Contact Number',
                                 hintText: '91+ 9867345212',
                                 suffixIcon: Icon(Icons.edit,color: Colors.black,),
-                                filled: true,
-                                fillColor: Color(0xffF9F9F9),
-                                isDense: true
+                               isDense: true
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 15),
+                        Container(
+                          margin: EdgeInsets.only(top: 24),
+                          padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+                          decoration: BoxDecoration(
+                              color:Colors.white,
+                              boxShadow: [
+                                BoxShadow(color:  Color(0xffEAEEF2),blurRadius: 2,offset: Offset(2,2))
+                              ]
+                          ),
                           child: TextField(
-                            controller: nameController,
+                            controller: dobController,
                             style: Theme.of(context).textTheme.subtitle1!.copyWith(
                               color: Colors.black,
                               fontWeight: FontWeight.w500,),
                             decoration: InputDecoration(
-                                border: OutlineInputBorder(),
+
                                 labelText: 'Date of Birth',
                                 hintText: '22/03/1998',
-                                filled: true,
-                                fillColor: Color(0xffF9F9F9),
+
                                 isDense: true
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 15),
+                        Container(
+                          margin: EdgeInsets.only(top: 24),
+                          padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+                          decoration: BoxDecoration(
+                              color:Colors.white,
+                              boxShadow: [
+                                BoxShadow(color:  Color(0xffEAEEF2),blurRadius: 2,offset: Offset(2,2))
+                              ]
+                          ),
                           child: TextField(
-                            controller: nameController,
+                            controller: genderController,
                             style: Theme.of(context).textTheme.subtitle1!.copyWith(
                               color: Colors.black,
                               fontWeight: FontWeight.w500,),
                             decoration: InputDecoration(
-                                border: OutlineInputBorder(),
+
                                 labelText: 'Gender',
                                 hintText: 'Male',
-                                filled: true,
-                                fillColor: Color(0xffF9F9F9),
+
                                 isDense: true
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 15),
+                        Container(
+                          margin: EdgeInsets.only(top: 24),
+                          padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+                          decoration: BoxDecoration(
+                              color:Colors.white,
+                              boxShadow: [
+                                BoxShadow(color:  Color(0xffEAEEF2),blurRadius: 2,offset: Offset(2,2))
+                              ]
+                          ),
                           child: TextField(
-                            controller: nameController,
+                            controller: nationalityController,
                             style: Theme.of(context).textTheme.subtitle1!.copyWith(
                               color: Colors.black,
                               fontWeight: FontWeight.w500,),
                             decoration: InputDecoration(
-                                border: OutlineInputBorder(),
+
                                 labelText: 'Nationality',
                                 hintText: 'Indian',
-                                filled: true,
-                                fillColor: Color(0xffF9F9F9),
+
                                 isDense: true
                             ),
                           ),
@@ -354,10 +420,11 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                 child: Container(
                                   padding: EdgeInsets.all(16),
                                     decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: AssetImage("image/Rectangle 1536.png"),
-                                        fit: BoxFit.cover,
-                                      ),
+                                      color: Color(0xffF9F9F9)
+                                      // image: DecorationImage(
+                                      //   image: AssetImage("image/Rectangle 1536.png"),
+                                      //   fit: BoxFit.cover,
+                                      // ),
                                     ),
                                   height:140,
                                   alignment: Alignment.center,
@@ -366,7 +433,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                     children: [
                                       Row(
                                         children: [
-                                          Text("Address Line 1",
+                                          Text("Address Line ${index+1}",
                                             textAlign: TextAlign.center,
                                             style:
                                             Theme.of(context).textTheme.subtitle1!.copyWith(
@@ -377,29 +444,31 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                           Spacer(),
                                           ElevatedButton(
                                             style:   ButtonStyle(
-                                                backgroundColor: MaterialStateProperty.all(Color(0XFFF9F9F9)),
+                                                backgroundColor: MaterialStateProperty.all(index==0?Color(0XFFF9F9F9):Theme.of(context).colorScheme.primary.withOpacity(0.2)),
                                                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                                     RoundedRectangleBorder(
-                                                        borderRadius: BorderRadius.circular(10.0),
+                                                        borderRadius: BorderRadius.circular(18.0),
                                                         side: BorderSide(color: Color(0xff747474),width: 0.38)
                                                     )
                                                 )
                                             ),
                                             onPressed: (){
                                             },
-                                            child: Padding(
+                                            child: Container(
                                               padding: const EdgeInsets.only(right: 8.0,left: 8,top: 10,bottom: 10),
-                                              child: Text('Default', style:
+                                              child: Text(index==0?'Default':"Make Default", style:
                                               Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                color: Color(0XFF466D33),
-                                                fontWeight: FontWeight.w400,
+                                                color: Theme.of(context).colorScheme.primary,
+                                                decoration:index==0?TextDecoration.none: TextDecoration.underline,
+                                                fontWeight:index==0? FontWeight.w400:FontWeight.bold,
                                               ),),
                                             ),
                                           ),
                                           Spacer(),
-                                          Icon(Icons.edit,size: 20,color: Color(0xff747474),),
+                                          Image.asset("image/oredit.png",height: 18,),
+                                          // Icon(Icons.edit,size: 20,color: Color(0xff747474),),
                                           SizedBox(width: 5,),
-                                          Icon(Icons.delete,size: 20,color: Color(0xff747474),),
+                                          Image.asset("image/updelete.png",height: 18,),
 
                                         ],
                                       ),
@@ -418,27 +487,54 @@ class _MyProfilepageState extends State<MyProfilepage> {
                               ),
                               itemCount: 2),
                         ),
-                        ElevatedButton(
-                          style:   ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(Color(0XFF8DAB7F)),
-                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                    // side: BorderSide(color: Colors.red)
-                                  )
-                              )
-                          ),
-                          onPressed: (){
+                        // ElevatedButton(
+                        //   style:   ButtonStyle(
+                        //       backgroundColor: MaterialStateProperty.all(Color(0XFF8DAB7F)),
+                        //       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        //           RoundedRectangleBorder(
+                        //             borderRadius: BorderRadius.circular(15.0),
+                        //             // side: BorderSide(color: Colors.red)
+                        //           )
+                        //       )
+                        //   ),
+                        //   onPressed: (){
+                        //   },
+                        //   child: Padding(
+                        //     padding: const EdgeInsets.only(right: 10.0,left: 10,top: 12,bottom: 12),
+                        //     child: Text('Add new address', style:
+                        //     Theme.of(context).textTheme.subtitle1!.copyWith(
+                        //       color: Color(0XFFFFFFFF),
+                        //       fontWeight: FontWeight.w600,
+                        //     ),),
+                        //   ),
+                        // ),
+
+                        InkWell(
+                          onTap: (){
+                            // Navigator.push(context, MaterialPageRoute(builder: (context) => GetOtppage()));
                           },
-                          child: Padding(
-                            padding: const EdgeInsets.only(right: 10.0,left: 10,top: 12,bottom: 12),
-                            child: Text('Add new address', style:
-                            Theme.of(context).textTheme.subtitle1!.copyWith(
-                              color: Color(0XFFFFFFFF),
-                              fontWeight: FontWeight.w600,
-                            ),),
+                          child: Container(
+                            height: 50,
+                            width: MediaQuery.of(context).size.width*.75,
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                    colors: [Color(0xffB45156),Color(0xffE74B52),]
+                                ),
+                                borderRadius: BorderRadius.circular(20)
+                            ),
+                            child: Center(
+                              child: Text("ADD NEW ADDRESS",
+                                textAlign: TextAlign.center,
+                                style:
+                                Theme.of(context).textTheme.subtitle1!.copyWith(
+                                  color: Color(0xffffffff),
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
+                        SizedBox(height: 32,)
                       ],
                     ),
                   ):Container(),
@@ -462,7 +558,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                   backgroundColor: MaterialStateProperty.all(Color(0XFFF9F9F9)),
                                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                       RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(10.0),
+                                          borderRadius: BorderRadius.circular(18.0),
                                           side: BorderSide(color: Color(0xff747474),width: 0.38)
                                       )
                                   )
@@ -473,7 +569,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                 padding: const EdgeInsets.only(right: 8.0,left: 8,top: 10,bottom: 10),
                                 child: Text('Default', style:
                                 Theme.of(context).textTheme.bodyText1!.copyWith(
-                                  color: Color(0XFF466D33),
+                                  color: Theme.of(context).colorScheme.primary,
                                   fontWeight: FontWeight.w400,
                                 ),),
                               ),
@@ -482,87 +578,136 @@ class _MyProfilepageState extends State<MyProfilepage> {
 
                           ],
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 15),
+                        Container(
+                          margin: EdgeInsets.only(top: 24),
+                          padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                          decoration: BoxDecoration(
+                              color:Color(0xffF9F9F9),
+                              boxShadow: [
+                                BoxShadow(color:  Color(0xffEAEEF2),blurRadius: 2,offset: Offset(2,2))
+                              ]
+                          ),
                           child: TextField(
                             controller: nameController,
                             style: Theme.of(context).textTheme.subtitle1!.copyWith(
                               color: Colors.black,
                               fontWeight: FontWeight.w500,),
                             decoration: InputDecoration(
-                                border: OutlineInputBorder(),
+
                                 labelText: 'Mode of Deposit',
                                 hintText: 'Net Banking',
-                                filled: true,
-                                fillColor: Color(0xffF9F9F9),
+
                                 isDense: true
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 15),
+                        Container(
+                          margin: EdgeInsets.only(top: 24),
+                          padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                          decoration: BoxDecoration(
+                              color:Color(0xffF9F9F9),
+                              boxShadow: [
+                                BoxShadow(color:  Color(0xffEAEEF2),blurRadius: 2,offset: Offset(2,2))
+                              ]
+                          ),
                           child: TextField(
                             controller: nameController,
                             style: Theme.of(context).textTheme.subtitle1!.copyWith(
                               color: Colors.black,
                               fontWeight: FontWeight.w500,),
                             decoration: InputDecoration(
-                                border: OutlineInputBorder(),
+
                                 labelText: 'Deposit Amount',
                                 hintText: '1,00,000',
-                                filled: true,
-                                fillColor: Color(0xffF9F9F9),
+
                                 isDense: true
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 15),
+                        Container(
+                          margin: EdgeInsets.only(top: 24),
+                          padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                          decoration: BoxDecoration(
+                              color:Color(0xffF9F9F9),
+                              boxShadow: [
+                                BoxShadow(color:  Color(0xffEAEEF2),blurRadius: 2,offset: Offset(2,2))
+                              ]
+                          ),
                           child: TextField(
                             controller: nameController,
                             style: Theme.of(context).textTheme.subtitle1!.copyWith(
                               color: Colors.black,
                               fontWeight: FontWeight.w500,),
                             decoration: InputDecoration(
-                                border: OutlineInputBorder(),
+
                                 labelText: 'Bid Limit',
                                 hintText: '`10,00,000',
-                                filled: true,
-                                fillColor: Color(0xffF9F9F9),
+
                                 isDense: true
                             ),
                           ),
                         ),
                         SizedBox(height: 20,),
-                        SizedBox(
-                          width: 240,
-                          child: ElevatedButton(
-                            style:   ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(Color(0XFF8DAB7F)),
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15.0),
-                                      // side: BorderSide(color: Colors.red)
-                                    )
-                                )
+                        // SizedBox(
+                        //   width: 240,
+                        //   child: ElevatedButton(
+                        //     style:   ButtonStyle(
+                        //         backgroundColor: MaterialStateProperty.all(Color(0XFF8DAB7F)),
+                        //         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        //             RoundedRectangleBorder(
+                        //               borderRadius: BorderRadius.circular(15.0),
+                        //               // side: BorderSide(color: Colors.red)
+                        //             )
+                        //         )
+                        //     ),
+                        //     onPressed: (){
+                        //     },
+                        //     child: Padding(
+                        //       padding: const EdgeInsets.only(right: 10.0,left: 10,top: 12,bottom: 12),
+                        //       child: Row(
+                        //         crossAxisAlignment: CrossAxisAlignment.center,
+                        //         mainAxisAlignment: MainAxisAlignment.center,
+                        //         children: [
+                        //           Text('Increade Bid Limit', style:
+                        //           Theme.of(context).textTheme.subtitle1!.copyWith(
+                        //             color: Color(0XFFFFFFFF),
+                        //             fontWeight: FontWeight.w600,
+                        //           ),),
+                        //           SizedBox(width: 10,),
+                        //           Icon(Icons.info_outline,color: Color(0XFFFFFFFF),size: 20,)
+                        //         ],
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
+
+                        InkWell(
+                          onTap: (){
+                            // Navigator.push(context, MaterialPageRoute(builder: (context) => GetOtppage()));
+                          },
+                          child: Container(
+                            height: 50,
+                            width: MediaQuery.of(context).size.width*.75,
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                    colors: [Color(0xffB45156),Color(0xffE74B52),]
+                                ),
+                                borderRadius: BorderRadius.circular(20)
                             ),
-                            onPressed: (){
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 10.0,left: 10,top: 12,bottom: 12),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text('Increade Bid Limit', style:
-                                  Theme.of(context).textTheme.subtitle1!.copyWith(
-                                    color: Color(0XFFFFFFFF),
-                                    fontWeight: FontWeight.w600,
-                                  ),),
-                                  SizedBox(width: 10,),
-                                  Icon(Icons.info_outline,color: Color(0XFFFFFFFF),size: 20,)
-                                ],
-                              ),
+                            child: Center(
+                              child:  Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text('Increade Bid Limit', style:
+                                Theme.of(context).textTheme.subtitle1!.copyWith(
+                                  color: Color(0XFFFFFFFF),
+                                  fontWeight: FontWeight.w600,
+                                ),),
+                                SizedBox(width: 10,),
+                                Icon(Icons.info_outline,color: Color(0XFFFFFFFF),size: 20,)
+                              ],
+                            ),
                             ),
                           ),
                         ),

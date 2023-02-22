@@ -5,6 +5,7 @@ import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:giftex/screens/components/footer/footer.dart';
+import 'package:giftex/screens/components/header.dart';
 import 'package:scaled_list/scaled_list.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
@@ -24,23 +25,7 @@ class _ContactusPageState extends State<ContactusPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        bottomOpacity: 0,
-        elevation: 0,
-        backgroundColor: Colors.white,
-        leading: Image.asset("image/app1.png"),
-        actions: [
-          Image.asset("image/app2.png"),
-          SizedBox(width: 3,),
-          Image.asset("image/app3.png"),
-          SizedBox(width: 3,),
-          Container(
-              width: 45,
-              color: Color(0XFF8DAB7F),
-              child: Image.asset("image/app4.png")),
-          // SizedBox(width: 3,),
-        ],
-      ),
+      appBar: NavBar(),
       // bottomNavigationBar: BottomNavigationBarUi(),
       body: SingleChildScrollView(
         child: Container(
@@ -64,7 +49,7 @@ class _ContactusPageState extends State<ContactusPage> {
                     textAlign: TextAlign.left,
                     style:
                     Theme.of(context).textTheme.subtitle1!.copyWith(
-                      color: Color(0xff466D33),
+                      color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -74,7 +59,7 @@ class _ContactusPageState extends State<ContactusPage> {
                     child: Text("We feature premium artworks including modern, contemporary, and street art",
                       textAlign: TextAlign.center,
                       style:
-                      Theme.of(context).textTheme.bodyText1!.copyWith(
+                      Theme.of(context).textTheme.bodyText2!.copyWith(
                         color: Colors.black,
                         fontWeight: FontWeight.w500,
                       ),
@@ -82,44 +67,51 @@ class _ContactusPageState extends State<ContactusPage> {
                   ),
                   // const SizedBox(height: 16,),
                   Container(
-                    height: 290,
+                    height: 260,
                     child: Stack(
                       children: [
-                        Padding(
-                          padding: EdgeInsets.only(top:70 ,bottom: 0),
-                          child: Container(
-                            //replace this Container with your Card
-                            color: Color(0Xff3C5233),
-                            height: 200.0,
-                          ),
-                        ),
-
-                        Padding(
-                          padding: EdgeInsets.only(top: 70,bottom: 0),
+                        Positioned(
+                          top: 54,
+                          left: 0,
+                          right: 0,
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal:50.0),
+                            padding: EdgeInsets.only(top: 30, bottom: 0),
                             child: Container(
-
-                              decoration: const BoxDecoration(
-                                color: Color.fromRGBO(109, 144, 93, 0.44),
-                                borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(200),
-                                  bottomRight: Radius.circular(200),
-                                ),
-                              ),
-                              height: 130.0,
+                              //replace this Container with your Card
+                              color: Color(0xff1F2A52),
+                              height: 160.0,
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 25,bottom: 0,left: 80),
-                          child: Image.asset("image/7 1.png",height: 100,),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20,bottom: 0,left: 150),
-                          child: Image.asset("image/8 10.png",height: 150,),
-                        ),
+                        Positioned(
+                          top: 54,
+                          left: 0,
+                          right: 0,
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 30, bottom: 0),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 40.0),
+                              child: Container(
 
+                                decoration: const BoxDecoration(
+                                  color: Color(0xff8C9FB1),
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(265),
+                                    bottomRight: Radius.circular(265),
+
+                                  ),
+                                ),
+                                height: 140.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                            left: 0,
+                            right: 0,
+                            bottom: 54,
+                            child: Image.asset("image/table.png",height: 184,)),
                       ],
                     ),
                   ),
@@ -132,7 +124,7 @@ class _ContactusPageState extends State<ContactusPage> {
                       children: [
                         Container(
                           height: 255,
-                          color:Color.fromRGBO(241, 237, 215, 1),
+                          color:Color(0xffF3E8E9),
                           padding: EdgeInsets.all(16),
                           child: Column(
                             children: [
@@ -144,8 +136,8 @@ class _ContactusPageState extends State<ContactusPage> {
                                     textAlign: TextAlign.left,
                                     style:
                                     Theme.of(context).textTheme.headline6!.copyWith(
-                                      color: Color(0xff466D33),
                                       letterSpacing: 2,
+                                      color: Theme.of(context).colorScheme.primary,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -165,7 +157,7 @@ class _ContactusPageState extends State<ContactusPage> {
                               SizedBox(height: 16,),
                               Row(
                                 children: [
-                                  Icon(Icons.call_outlined,size: 25,color: Colors.black,),
+                                  Image.asset("image/rcall.png",width: 24,),
                                   SizedBox(width: 10,),
                                   Text("+91 22 6901 4800",
                                     textAlign: TextAlign.left,
@@ -180,7 +172,7 @@ class _ContactusPageState extends State<ContactusPage> {
                               SizedBox(height: 16,),
                               Row(
                                 children: [
-                                  Icon(Icons.email_outlined,size: 25,color: Colors.black,),
+                                  Image.asset("image/mail.png",width: 24,),
                                   SizedBox(width: 10,),
                                   Text("contact@astaguru.com",
                                     textAlign: TextAlign.left,
@@ -198,7 +190,7 @@ class _ContactusPageState extends State<ContactusPage> {
                         SizedBox(height: 16,),
                         Container(
                           height: 220,
-                          color:Color.fromRGBO(241, 237, 215, 1),
+                          color:Color(0xffEAEEF2),
                           padding: EdgeInsets.all(16),
                           child: Column(
                             children: [
@@ -210,7 +202,7 @@ class _ContactusPageState extends State<ContactusPage> {
                                     textAlign: TextAlign.left,
                                     style:
                                     Theme.of(context).textTheme.headline6!.copyWith(
-                                      color: Color(0xff466D33),
+                                      color: Theme.of(context).colorScheme.primary,
                                       letterSpacing: 2,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -229,7 +221,7 @@ class _ContactusPageState extends State<ContactusPage> {
                               SizedBox(height: 16,),
                               Row(
                                 children: [
-                                  Icon(Icons.call_outlined,size: 25,color: Colors.black,),
+                                  Image.asset("image/rcall.png",width: 24,),
                                   SizedBox(width: 10,),
                                   Text("+91 22 6901 4800",
                                     textAlign: TextAlign.left,
@@ -244,7 +236,7 @@ class _ContactusPageState extends State<ContactusPage> {
                               SizedBox(height: 16,),
                               Row(
                                 children: [
-                                  Icon(Icons.email_outlined,size: 25,color: Colors.black,),
+                                  Image.asset("image/mail.png",width: 24,),
                                   SizedBox(width: 10,),
                                   Text("contact@astaguru.com",
                                     textAlign: TextAlign.left,
@@ -261,118 +253,180 @@ class _ContactusPageState extends State<ContactusPage> {
                         ),
                         SizedBox(height: 16,),
                         Container(
-                          height: 420,
-                          child: Stack(
+
+                          width: MediaQuery.of(context).size.width,
+                          color:Color(0xffEAEEF2),
+                          padding: EdgeInsets.all(16),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              Text(
+                                "Lets Get In Touch",
+                                style:
+                                Theme.of(context).textTheme.subtitle1!.copyWith(
+                                  color: Color(0XFF000000),
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              SizedBox(height: 5,),
+                              Text(
+                                "Fill The Form Below And Get In Touch",
+                                style:
+                                Theme.of(context).textTheme.bodyText1!.copyWith(
+                                  color: Color(0XFF000000),
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              SizedBox(height: 16,),
                               Container(
-                                height: 420,
-                                width: 410,
-                                color: Color(0xffEAF1DB).withOpacity(0.7),
-                                padding: EdgeInsets.all(16),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Lets Get In Touch",
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(color:  Color(0xffEAEEF2),blurRadius: 2,offset: Offset(2,2))
+                                    ]
+
+                                ),
+                                padding: EdgeInsets.only(left:8),
+                                child: TextField(
+                                  // controller: nameController,
+                                  keyboardType: TextInputType.name,
+                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w500,),
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    labelText: 'Name',
+                                    hintText: 'Enter Your Name',
+                                    // prefixIcon:
+                                    // prefixIcon: ,
+                                    icon: Image.asset("image/people.png",height: 32),
+                                    filled: true,
+                                    isDense: false,
+                                    fillColor: Color(0xffFFFFFF),
+                                    // isDense: true
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 16,),
+                              Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(color:  Color(0xffEAEEF2),blurRadius: 2,offset: Offset(2,2))
+                                    ]
+
+                                ),
+                                padding: EdgeInsets.only(left:8),
+                                child: TextField(
+                                  // controller: nameController,
+                                  keyboardType: TextInputType.emailAddress,
+                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w500,),
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    labelText: 'Email ID',
+                                    hintText: 'aryansethi@gmail.com',
+                                    icon: Image.asset("image/email.png",height: 24),
+                                    // prefixIcon: Icon(Icons.email_outlined,color: Color(0xff779868)),
+                                    filled: true,
+                                    fillColor: Color(0xffFFFFFF),
+                                    // isDense: true
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 16,),
+                              Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(color:  Color(0xffEAEEF2),blurRadius: 2,offset: Offset(2,2))
+                                    ]
+
+                                ),
+                                padding: EdgeInsets.only(left:8),
+                                child: TextField(
+                                  // controller: nameController,
+                                  keyboardType: TextInputType.phone,
+                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w500,),
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    labelText: 'Mobile No.',
+                                    hintText: '91+ 9867345212',
+                                    icon: Image.asset("image/phone.png",height: 28),
+                                    // prefixIcon: Icon(Icons.call,color: Color(0xff779868),),
+                                    filled: true,
+                                    fillColor: Color(0xffFFFFFF),
+                                    // isDense: true
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 16,),
+                              Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(color:  Color(0xffEAEEF2),blurRadius: 2,offset: Offset(2,2))
+                                    ]
+
+                                ),
+                                padding: EdgeInsets.only(left:8),
+                                child: TextField(
+                                  // controller: nameController,
+
+
+                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                    color: Colors.black,
+
+                                    fontWeight: FontWeight.w500,),
+
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    labelText: 'Queries',
+
+                                    icon: Image.asset("image/pqueries.png",height: 28),
+                                    // prefixIcon: Image.asset("image/pass.png",height: 8),
+                                    filled: true,
+                                    fillColor: Color(0xffFFFFFF),
+                                    // isDense: true
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 8,),
+                              SizedBox(height: 5,),
+                              InkWell(
+                                onTap: (){
+                                  // Navigator.push(context, MaterialPageRoute(builder: (context) => GetOtppage()));
+                                },
+                                child: Container(
+                                  height: 50,
+                                  width: 150,
+                                  decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                          colors: [Color(0xffB45156),Color(0xffE74B52),]
+                                      ),
+                                      borderRadius: BorderRadius.circular(20)
+                                  ),
+                                  child: Center(
+                                    child: Text("SUBMIT",
+                                      textAlign: TextAlign.center,
                                       style:
                                       Theme.of(context).textTheme.subtitle1!.copyWith(
-                                        color: Color(0XFF000000),
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                    SizedBox(height: 5,),
-                                    Text(
-                                      "Fill The Form Below And Get In Touch",
-                                      style:
-                                      Theme.of(context).textTheme.bodyText1!.copyWith(
-                                        color: Color(0XFF000000),
+                                        color: Color(0xffffffff),
                                         fontWeight: FontWeight.w400,
                                       ),
                                     ),
-                                    Padding(
-                                      padding: EdgeInsets.only(top: 15),
-                                      child: TextField(
-                                        decoration: InputDecoration(
-                                            border: OutlineInputBorder(),
-                                            labelText: 'Name',
-                                            hintText: 'Enter Your Name',
-                                            prefixIcon: Icon(Icons.person_outline_sharp),
-                                            filled: true,
-                                            fillColor: Color(0xffFFFFFF),
-                                            isDense: true
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(top: 15),
-                                      child: TextField(
-                                        decoration: InputDecoration(
-                                            border: OutlineInputBorder(),
-                                            labelText: 'Email Id',
-                                            hintText: 'Enter Your Email',
-                                            prefixIcon: Icon(Icons.email_outlined),
-                                            filled: true,
-                                            fillColor: Color(0xffFFFFFF),
-                                            isDense: true
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(top: 15),
-                                      child: TextField(
-                                        decoration: InputDecoration(
-                                            border: OutlineInputBorder(),
-                                            labelText: 'Mobile No',
-                                            hintText: 'Enter Your No',
-                                            prefixIcon: Icon(Icons.add_ic_call),
-                                            filled: true,
-                                            fillColor: Color(0xffFFFFFF),
-                                            isDense: true
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(top: 15),
-                                      child: TextField(
-                                        decoration: InputDecoration(
-                                            border: OutlineInputBorder(),
-                                            labelText: 'Queries',
-                                            prefixIcon: Icon(Icons.question_mark),
-                                            hintText: 'Queries',
-                                            filled: true,
-                                            fillColor: Color(0xffFFFFFF),
-                                            isDense: true
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(height: 5,),
-                                    ElevatedButton(
-                                      style:   ButtonStyle(
-                                          backgroundColor: MaterialStateProperty.all(Color(0XFF8DAB7F)),
-                                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                              RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.circular(20.0),
-                                                // side: BorderSide(color: Colors.red)
-                                              )
-                                          )
-                                      ),
-                                      onPressed: (){
-                                      },
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(right: 8.0,left: 8,top: 12,bottom: 12),
-                                        child: Text('SUBMIT', style:
-                                        Theme.of(context).textTheme.bodyText1!.copyWith(
-                                          color: Color(0XFFFFFFFF),
-                                          letterSpacing: 1,
-                                          fontWeight: FontWeight.w600,
-                                        ),),
-                                      ),
-                                    ),
-                                  ],
+                                  ),
                                 ),
                               ),
-
+                              SizedBox(height: 8,),
+                              SizedBox(height: 5,),
+                              SizedBox(height: 32,),
+                              Image.asset("image/imapo.png"),
+                              SizedBox(height: 32,),
                             ],
                           ),
                         )
@@ -389,7 +443,7 @@ class _ContactusPageState extends State<ContactusPage> {
           ),
         ),
       ),
-      bottomNavigationBar: Dashboard2Ui(),
+      // bottomNavigationBar: Dashboard2Ui(),
     );
   }
   Widget _buildPlayerModelList() {

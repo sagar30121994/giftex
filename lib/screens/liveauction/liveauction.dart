@@ -689,7 +689,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Image.asset("image/Vector (21).png"),
+                              Image.asset("image/Vector (21).png",color: Theme.of(context).colorScheme.primary,),
                               SizedBox(width: 10,),
                               Container(
                                 width: MediaQuery.of(context).size.width*.8,
@@ -725,726 +725,731 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                               style:
                               Theme.of(context).textTheme.subtitle1!.copyWith(
                                   color: Colors.black,
-                                  fontWeight: FontWeight.w500,
+                                  fontWeight: FontWeight.bold,
                                   letterSpacing: 1
                               ),
                             ),
                           ),
                           SizedBox(height: 20,),
                           Container(
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Column(
+                            child: Scrollbar(
+                              scrollbarOrientation: ScrollbarOrientation.bottom,
+                              interactive: true,
 
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        height: 55,
-                                        padding: EdgeInsets.all(15),
-                                        width: MediaQuery.of(context).size.width/3.6,
-                                        decoration: BoxDecoration(
-                                            color: Color(0xffFAF7E5),
-                                            image: DecorationImage(
-                                              image: AssetImage("image/Shape (20).png",),
-                                              fit: BoxFit.fill
-                                            )
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Column(
+
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Container(
+                                          height: 55,
+                                          padding: EdgeInsets.all(15),
+                                          width: MediaQuery.of(context).size.width/3.6,
+                                          decoration: BoxDecoration(
+                                              color: Color(0xffEAEEF2),
+                                              image: DecorationImage(
+                                                image: AssetImage("image/maskbtn.png",),
+                                                fit: BoxFit.fill
+                                              )
+                                          ),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+
+                                              Text('GROUP', style:
+                                              Theme.of(context).textTheme.caption!.copyWith(
+                                                color: Color(0XFF2D2D2D),
+                                                fontWeight: FontWeight.w600,
+                                              ),),
+                                            ],
+                                          ),
                                         ),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
+                                        SizedBox(width: 5,),
+                                        Container(
+                                          height: 55,
+                                          padding: EdgeInsets.all(15),
+                                          width: MediaQuery.of(context).size.width/2.4,
+                                          decoration: BoxDecoration(
+                                              color: Color(0xffEAEEF2),
+                                              image: DecorationImage(
+                                                  image: AssetImage("image/maskbtn.png",),
+                                                  fit: BoxFit.fill
+                                              )
+                                          ),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
 
-                                            Text('GROUP', style:
-                                            Theme.of(context).textTheme.caption!.copyWith(
+                                              Text('NO.OF LOTS', style:
+                                              Theme.of(context).textTheme.caption!.copyWith(
+                                                color: Color(0XFF2D2D2D),
+                                                fontWeight: FontWeight.w600,
+                                              ),),
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          height: 60,
+                                          padding: EdgeInsets.all(10),
+                                          width: MediaQuery.of(context).size.width/2.4,
+                                          decoration: BoxDecoration(
+                                              color: Color(0xffEAEEF2),
+                                              image: DecorationImage(
+                                                  image: AssetImage("image/maskbtn.png",),
+                                                  fit: BoxFit.fill
+                                              )
+                                          ),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+
+                                              Column(
+                                                children: [
+                                                  Text('CLOSING TIME', style:
+                                                  Theme.of(context).textTheme.caption!.copyWith(
+                                                    color: Color(0XFF2D2D2D),
+                                                    fontWeight: FontWeight.w600,
+                                                  ),),
+                                                  Text('IST', style:
+                                                  Theme.of(context).textTheme.caption!.copyWith(
+                                                    color: Color(0XFF2D2D2D),
+                                                    fontWeight: FontWeight.w400,
+                                                  ),),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          height: 60,
+                                          padding: EdgeInsets.all(10),
+                                          width: MediaQuery.of(context).size.width/2.4,
+                                          decoration: BoxDecoration(
+                                              color: Color(0xffEAEEF2),
+                                              image: DecorationImage(
+                                                  image: AssetImage("image/maskbtn.png",),
+                                                  fit: BoxFit.fill
+                                              )
+                                          ),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+
+                                              Column(
+                                                children: [
+                                                  Text('CLOSING TIME', style:
+                                                  Theme.of(context).textTheme.caption!.copyWith(
+                                                    color: Color(0XFF2D2D2D),
+                                                    fontWeight: FontWeight.w600,
+                                                  ),),
+                                                  Text('US Eastern Time', style:
+                                                  Theme.of(context).textTheme.caption!.copyWith(
+                                                    color: Color(0XFF2D2D2D),
+                                                    fontWeight: FontWeight.w400,
+                                                  ),),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          height: 60,
+                                          padding: EdgeInsets.all(10),
+                                          width: MediaQuery.of(context).size.width/2.4,
+                                          decoration: BoxDecoration(
+                                              color: Color(0xffEAEEF2),
+                                              image: DecorationImage(
+                                                  image: AssetImage("image/maskbtn.png",),
+                                                  fit: BoxFit.fill
+                                              )
+                                          ),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+
+                                              Column(
+                                                children: [
+                                                  Text('CLOSING TIME', style:
+                                                  Theme.of(context).textTheme.caption!.copyWith(
+                                                    color: Color(0XFF2D2D2D),
+                                                    fontWeight: FontWeight.w600,
+                                                  ),),
+                                                  Text('US Western Time', style:
+                                                  Theme.of(context).textTheme.caption!.copyWith(
+                                                    color: Color(0XFF2D2D2D),
+                                                    fontWeight: FontWeight.w400,
+                                                  ),),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          height: 60,
+                                          padding: EdgeInsets.all(10),
+                                          width: MediaQuery.of(context).size.width/2.4,
+                                          decoration: BoxDecoration(
+                                              color: Color(0xffEAEEF2),
+                                              image: DecorationImage(
+                                                  image: AssetImage("image/maskbtn.png",),
+                                                  fit: BoxFit.fill
+                                              )
+                                          ),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+
+                                              Column(
+                                                children: [
+                                                  Text('CLOSING TIME', style:
+                                                  Theme.of(context).textTheme.caption!.copyWith(
+                                                    color: Color(0XFF2D2D2D),
+                                                    fontWeight: FontWeight.w600,
+                                                  ),),
+                                                  Text('UK', style:
+                                                  Theme.of(context).textTheme.caption!.copyWith(
+                                                    color: Color(0XFF2D2D2D),
+                                                    fontWeight: FontWeight.w400,
+                                                  ),),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          height: 60,
+                                          padding: EdgeInsets.all(10),
+                                          width: MediaQuery.of(context).size.width/2.4,
+                                          decoration: BoxDecoration(
+                                              color: Color(0xffEAEEF2),
+                                              image: DecorationImage(
+                                                  image: AssetImage("image/maskbtn.png",),
+                                                  fit: BoxFit.fill
+                                              )
+                                          ),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+
+                                              Column(
+                                                children: [
+                                                  Text('CLOSING TIME', style:
+                                                  Theme.of(context).textTheme.caption!.copyWith(
+                                                    color: Color(0XFF2D2D2D),
+                                                    fontWeight: FontWeight.w600,
+                                                  ),),
+                                                  Text('Japan', style:
+                                                  Theme.of(context).textTheme.caption!.copyWith(
+                                                    color: Color(0XFF2D2D2D),
+                                                    fontWeight: FontWeight.w400,
+                                                  ),),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          height: 60,
+                                          padding: EdgeInsets.all(10),
+                                          width: MediaQuery.of(context).size.width/2.4,
+                                          decoration: BoxDecoration(
+                                              color: Color(0xffEAEEF2),
+                                              image: DecorationImage(
+                                                  image: AssetImage("image/maskbtn.png",),
+                                                  fit: BoxFit.fill
+                                              )
+                                          ),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+
+                                              Column(
+                                                children: [
+                                                  Text('CLOSING TIME', style:
+                                                  Theme.of(context).textTheme.caption!.copyWith(
+                                                    color: Color(0XFF2D2D2D),
+                                                    fontWeight: FontWeight.w600,
+                                                  ),),
+                                                  Text('Hongkong', style:
+                                                  Theme.of(context).textTheme.caption!.copyWith(
+                                                    color: Color(0XFF2D2D2D),
+                                                    fontWeight: FontWeight.w400,
+                                                  ),),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 10,),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+
+                                            width: MediaQuery.of(context).size.width/3.6,
+                                            child: Text('1', textAlign: TextAlign.center,style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
                                               color: Color(0XFF2D2D2D),
-                                              fontWeight: FontWeight.w600,
+                                              fontWeight: FontWeight.w400,
                                             ),),
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(width: 5,),
-                                      Container(
-                                        height: 55,
-                                        padding: EdgeInsets.all(15),
-                                        width: MediaQuery.of(context).size.width/2.4,
-                                        decoration: BoxDecoration(
-                                            color: Color(0xffFAF7E5),
-                                            image: DecorationImage(
-                                              image: AssetImage("image/Shape (20).png",),
-                                              fit: BoxFit.fill
-                                            )
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
-
-                                            Text('NO.OF LOTS', style:
-                                            Theme.of(context).textTheme.caption!.copyWith(
+                                          ),
+                                          SizedBox(width: 5,),
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text('1-10',  textAlign: TextAlign.center,style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
                                               color: Color(0XFF2D2D2D),
-                                              fontWeight: FontWeight.w600,
+                                              fontWeight: FontWeight.w400,
                                             ),),
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 60,
-                                        padding: EdgeInsets.all(10),
-                                        width: MediaQuery.of(context).size.width/2.4,
-                                        decoration: BoxDecoration(
-                                            color: Color(0xffFAF7E5),
-                                            image: DecorationImage(
-                                              image: AssetImage("image/Shape (20).png",),
-                                              fit: BoxFit.fill
-                                            )
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
-
-                                            Column(
-                                              children: [
-                                                Text('CLOSING TIME', style:
-                                                Theme.of(context).textTheme.caption!.copyWith(
-                                                  color: Color(0XFF2D2D2D),
-                                                  fontWeight: FontWeight.w600,
-                                                ),),
-                                                Text('IST', style:
-                                                Theme.of(context).textTheme.caption!.copyWith(
-                                                  color: Color(0XFF2D2D2D),
-                                                  fontWeight: FontWeight.w400,
-                                                ),),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 60,
-                                        padding: EdgeInsets.all(10),
-                                        width: MediaQuery.of(context).size.width/2.4,
-                                        decoration: BoxDecoration(
-                                            color: Color(0xffFAF7E5),
-                                            image: DecorationImage(
-                                              image: AssetImage("image/Shape (20).png",),
-                                              fit: BoxFit.fill
-                                            )
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
-
-                                            Column(
-                                              children: [
-                                                Text('CLOSING TIME', style:
-                                                Theme.of(context).textTheme.caption!.copyWith(
-                                                  color: Color(0XFF2D2D2D),
-                                                  fontWeight: FontWeight.w600,
-                                                ),),
-                                                Text('US Eastern Time', style:
-                                                Theme.of(context).textTheme.caption!.copyWith(
-                                                  color: Color(0XFF2D2D2D),
-                                                  fontWeight: FontWeight.w400,
-                                                ),),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 60,
-                                        padding: EdgeInsets.all(10),
-                                        width: MediaQuery.of(context).size.width/2.4,
-                                        decoration: BoxDecoration(
-                                            color: Color(0xffFAF7E5),
-                                            image: DecorationImage(
-                                              image: AssetImage("image/Shape (20).png",),
-                                              fit: BoxFit.fill
-                                            )
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
-
-                                            Column(
-                                              children: [
-                                                Text('CLOSING TIME', style:
-                                                Theme.of(context).textTheme.caption!.copyWith(
-                                                  color: Color(0XFF2D2D2D),
-                                                  fontWeight: FontWeight.w600,
-                                                ),),
-                                                Text('US Western Time', style:
-                                                Theme.of(context).textTheme.caption!.copyWith(
-                                                  color: Color(0XFF2D2D2D),
-                                                  fontWeight: FontWeight.w400,
-                                                ),),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 60,
-                                        padding: EdgeInsets.all(10),
-                                        width: MediaQuery.of(context).size.width/2.4,
-                                        decoration: BoxDecoration(
-                                            color: Color(0xffFAF7E5),
-                                            image: DecorationImage(
-                                              image: AssetImage("image/Shape (20).png",),
-                                              fit: BoxFit.fill
-                                            )
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
-
-                                            Column(
-                                              children: [
-                                                Text('CLOSING TIME', style:
-                                                Theme.of(context).textTheme.caption!.copyWith(
-                                                  color: Color(0XFF2D2D2D),
-                                                  fontWeight: FontWeight.w600,
-                                                ),),
-                                                Text('UK', style:
-                                                Theme.of(context).textTheme.caption!.copyWith(
-                                                  color: Color(0XFF2D2D2D),
-                                                  fontWeight: FontWeight.w400,
-                                                ),),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 60,
-                                        padding: EdgeInsets.all(10),
-                                        width: MediaQuery.of(context).size.width/2.4,
-                                        decoration: BoxDecoration(
-                                            color: Color(0xffFAF7E5),
-                                            image: DecorationImage(
-                                              image: AssetImage("image/Shape (20).png",),
-                                              fit: BoxFit.fill
-                                            )
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
-
-                                            Column(
-                                              children: [
-                                                Text('CLOSING TIME', style:
-                                                Theme.of(context).textTheme.caption!.copyWith(
-                                                  color: Color(0XFF2D2D2D),
-                                                  fontWeight: FontWeight.w600,
-                                                ),),
-                                                Text('Japan', style:
-                                                Theme.of(context).textTheme.caption!.copyWith(
-                                                  color: Color(0XFF2D2D2D),
-                                                  fontWeight: FontWeight.w400,
-                                                ),),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 60,
-                                        padding: EdgeInsets.all(10),
-                                        width: MediaQuery.of(context).size.width/2.4,
-                                        decoration: BoxDecoration(
-                                            color: Color(0xffFAF7E5),
-                                            image: DecorationImage(
-                                              image: AssetImage("image/Shape (20).png",),
-                                              fit: BoxFit.fill
-                                            )
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
-
-                                            Column(
-                                              children: [
-                                                Text('CLOSING TIME', style:
-                                                Theme.of(context).textTheme.caption!.copyWith(
-                                                  color: Color(0XFF2D2D2D),
-                                                  fontWeight: FontWeight.w600,
-                                                ),),
-                                                Text('Hongkong', style:
-                                                Theme.of(context).textTheme.caption!.copyWith(
-                                                  color: Color(0XFF2D2D2D),
-                                                  fontWeight: FontWeight.w400,
-                                                ),),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 10,),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 8.0),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-
-                                          width: MediaQuery.of(context).size.width/3.6,
-                                          child: Text('1', textAlign: TextAlign.center,style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
+                                          ),
+                                          SizedBox(width: 5,),
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text('8PM', textAlign: TextAlign.center, style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                          SizedBox(width: 5,),
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text('10:30PM', textAlign: TextAlign.center, style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
                                         SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text('1-10',  textAlign: TextAlign.center,style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                        SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text('8PM', textAlign: TextAlign.center, style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                        SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text('10:30PM', textAlign: TextAlign.center, style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                      SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text('07:30PM',  textAlign: TextAlign.center,style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                        SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text(' 3PM', textAlign: TextAlign.center, style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                        SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text(' 11:30PM', textAlign: TextAlign.center, style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                        SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text(' 10:30PM', textAlign: TextAlign.center, style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                      ],
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text('07:30PM',  textAlign: TextAlign.center,style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                          SizedBox(width: 5,),
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text(' 3PM', textAlign: TextAlign.center, style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                          SizedBox(width: 5,),
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text(' 11:30PM', textAlign: TextAlign.center, style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                          SizedBox(width: 5,),
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text(' 10:30PM', textAlign: TextAlign.center, style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(height: 10,),
-                                  Image.asset("image/Line 4.png",fit: BoxFit.cover, ),
-                                  SizedBox(height: 10,),SizedBox(height: 10,),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 8.0),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
+                                    SizedBox(height: 10,),
+                                    Image.asset("image/Line 4.png",fit: BoxFit.cover, ),
+                                    SizedBox(height: 10,),SizedBox(height: 10,),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
 
-                                          width: MediaQuery.of(context).size.width/3.6,
-                                          child: Text('2', textAlign: TextAlign.center,style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
+                                            width: MediaQuery.of(context).size.width/3.6,
+                                            child: Text('2', textAlign: TextAlign.center,style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                          SizedBox(width: 5,),
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text('1-10',  textAlign: TextAlign.center,style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                          SizedBox(width: 5,),
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text('8PM', textAlign: TextAlign.center, style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                          SizedBox(width: 5,),
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text('10:30PM', textAlign: TextAlign.center, style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
                                         SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text('1-10',  textAlign: TextAlign.center,style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                        SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text('8PM', textAlign: TextAlign.center, style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                        SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text('10:30PM', textAlign: TextAlign.center, style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                      SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text('07:30PM',  textAlign: TextAlign.center,style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                        SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text(' 3PM', textAlign: TextAlign.center, style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                        SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text(' 11:30PM', textAlign: TextAlign.center, style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                        SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text(' 10:30PM', textAlign: TextAlign.center, style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                      ],
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text('07:30PM',  textAlign: TextAlign.center,style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                          SizedBox(width: 5,),
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text(' 3PM', textAlign: TextAlign.center, style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                          SizedBox(width: 5,),
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text(' 11:30PM', textAlign: TextAlign.center, style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                          SizedBox(width: 5,),
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text(' 10:30PM', textAlign: TextAlign.center, style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(height: 10,),
-                                  Image.asset("image/Line 4.png",fit: BoxFit.cover, ),
-                                  SizedBox(height: 10,),SizedBox(height: 10,),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 8.0),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
+                                    SizedBox(height: 10,),
+                                    Image.asset("image/Line 4.png",fit: BoxFit.cover, ),
+                                    SizedBox(height: 10,),SizedBox(height: 10,),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
 
-                                          width: MediaQuery.of(context).size.width/3.6,
-                                          child: Text('3', textAlign: TextAlign.center,style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
+                                            width: MediaQuery.of(context).size.width/3.6,
+                                            child: Text('3', textAlign: TextAlign.center,style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                          SizedBox(width: 5,),
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text('1-10',  textAlign: TextAlign.center,style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                          SizedBox(width: 5,),
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text('8PM', textAlign: TextAlign.center, style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                          SizedBox(width: 5,),
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text('10:30PM', textAlign: TextAlign.center, style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
                                         SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text('1-10',  textAlign: TextAlign.center,style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                        SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text('8PM', textAlign: TextAlign.center, style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                        SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text('10:30PM', textAlign: TextAlign.center, style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                      SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text('07:30PM',  textAlign: TextAlign.center,style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                        SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text(' 3PM', textAlign: TextAlign.center, style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                        SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text(' 11:30PM', textAlign: TextAlign.center, style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                        SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text(' 10:30PM', textAlign: TextAlign.center, style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                      ],
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text('07:30PM',  textAlign: TextAlign.center,style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                          SizedBox(width: 5,),
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text(' 3PM', textAlign: TextAlign.center, style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                          SizedBox(width: 5,),
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text(' 11:30PM', textAlign: TextAlign.center, style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                          SizedBox(width: 5,),
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text(' 10:30PM', textAlign: TextAlign.center, style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(height: 10,),
-                                  Image.asset("image/Line 4.png",fit: BoxFit.cover, ),
-                                  SizedBox(height: 10,),SizedBox(height: 10,),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 8.0),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
+                                    SizedBox(height: 10,),
+                                    Image.asset("image/Line 4.png",fit: BoxFit.cover, ),
+                                    SizedBox(height: 10,),SizedBox(height: 10,),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
 
-                                          width: MediaQuery.of(context).size.width/3.6,
-                                          child: Text('4', textAlign: TextAlign.center,style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
+                                            width: MediaQuery.of(context).size.width/3.6,
+                                            child: Text('4', textAlign: TextAlign.center,style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                          SizedBox(width: 5,),
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text('1-10',  textAlign: TextAlign.center,style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                          SizedBox(width: 5,),
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text('8PM', textAlign: TextAlign.center, style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                          SizedBox(width: 5,),
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text('10:30PM', textAlign: TextAlign.center, style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
                                         SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text('1-10',  textAlign: TextAlign.center,style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                        SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text('8PM', textAlign: TextAlign.center, style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                        SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text('10:30PM', textAlign: TextAlign.center, style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                      SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text('07:30PM',  textAlign: TextAlign.center,style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                        SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text(' 3PM', textAlign: TextAlign.center, style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                        SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text(' 11:30PM', textAlign: TextAlign.center, style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                        SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text(' 10:30PM', textAlign: TextAlign.center, style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                      ],
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text('07:30PM',  textAlign: TextAlign.center,style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                          SizedBox(width: 5,),
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text(' 3PM', textAlign: TextAlign.center, style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                          SizedBox(width: 5,),
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text(' 11:30PM', textAlign: TextAlign.center, style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                          SizedBox(width: 5,),
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text(' 10:30PM', textAlign: TextAlign.center, style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(height: 10,),
-                                  Image.asset("image/Line 4.png",fit: BoxFit.cover, ),
-                                  SizedBox(height: 10,),SizedBox(height: 10,),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 8.0),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
+                                    SizedBox(height: 10,),
+                                    Image.asset("image/Line 4.png",fit: BoxFit.cover, ),
+                                    SizedBox(height: 10,),SizedBox(height: 10,),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
 
-                                          width: MediaQuery.of(context).size.width/3.6,
-                                          child: Text('5', textAlign: TextAlign.center,style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
+                                            width: MediaQuery.of(context).size.width/3.6,
+                                            child: Text('5', textAlign: TextAlign.center,style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                          SizedBox(width: 5,),
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text('1-10',  textAlign: TextAlign.center,style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                          SizedBox(width: 5,),
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text('8PM', textAlign: TextAlign.center, style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                          SizedBox(width: 5,),
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text('10:30PM', textAlign: TextAlign.center, style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
                                         SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text('1-10',  textAlign: TextAlign.center,style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                        SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text('8PM', textAlign: TextAlign.center, style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                        SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text('10:30PM', textAlign: TextAlign.center, style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                      SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text('07:30PM',  textAlign: TextAlign.center,style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                        SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text(' 3PM', textAlign: TextAlign.center, style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                        SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text(' 11:30PM', textAlign: TextAlign.center, style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                        SizedBox(width: 5,),
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          width: MediaQuery.of(context).size.width/2.4,
-                                          child: Text(' 10:30PM', textAlign: TextAlign.center, style:
-                                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.w400,
-                                          ),),
-                                        ),
-                                      ],
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text('07:30PM',  textAlign: TextAlign.center,style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                          SizedBox(width: 5,),
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text(' 3PM', textAlign: TextAlign.center, style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                          SizedBox(width: 5,),
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text(' 11:30PM', textAlign: TextAlign.center, style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                          SizedBox(width: 5,),
+                                          Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            width: MediaQuery.of(context).size.width/2.4,
+                                            child: Text(' 10:30PM', textAlign: TextAlign.center, style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF2D2D2D),
+                                              fontWeight: FontWeight.w400,
+                                            ),),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(height: 10,),
-                                  Image.asset("image/Line 4.png",fit: BoxFit.cover, ),
-                                  SizedBox(height: 10,),
-                                ],
+                                    SizedBox(height: 10,),
+                                    Image.asset("image/Line 4.png",fit: BoxFit.cover, ),
+                                    SizedBox(height: 10,),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -1486,6 +1491,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                 ):
                 Container(
                   padding: EdgeInsets.all(16),
+                  color: Colors.white,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -1499,131 +1505,116 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                         ),
                       ),
                       SizedBox(height: 16,),
-                      Container(
-                        width: 230,
-                        child: ElevatedButton(
-                            style:   ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(Color(0XFF8DAB7F)),
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20.0),
-                                      // side: BorderSide(color: Colors.red)
-                                    )
-                                )
+                      InkWell(
+                        onTap: (){
+                          // Navigator.push(context, MaterialPageRoute(builder: (context) => GetOtppage()));
+                        },
+                        child: Container(
+                            height: 50,
+                            width: MediaQuery.of(context).size.width*.65,
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                    colors: [Color(0xffB45156),Color(0xffE74B52),]
+                                ),
+                                borderRadius: BorderRadius.circular(20)
                             ),
-                            onPressed: (){
-                            },
                             child: Padding(
                               padding: const EdgeInsets.only(right: 5.0,left: 5,top: 12,bottom: 12),
-                              child: Row(
-                                children: [
-                                  Text('ADD TO CALENDER', style:
-                                  Theme.of(context).textTheme.bodyText1!.copyWith(
-                                    color: Color(0XFFFFFFFF),
-                                    fontWeight: FontWeight.w600,
-                                  ),),
-                                  SizedBox(width: 10,),
-                                  Image.asset("image/cal.png",height: 25,width: 25,color: Color(0XFFFFFFFF),)
-                                ],
+                              child: Center(
+                                child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+
+                                     children: [
+                                    Text('ADD TO CALENDER', style:
+                                    Theme.of(context).textTheme.bodyText1!.copyWith(
+                                      color: Color(0XFFFFFFFF),
+                                      fontWeight: FontWeight.w600,
+                                    ),),
+                                    SizedBox(width: 16,),
+                                    Image.asset("image/cal.png",height: 25,width: 25,color: Color(0XFFFFFFFF),)
+                                  ],
+                                ),
                               ),
                             )
                         ),
                       ),
                       SizedBox(height: 16,),
-                      Container(
-                          height: 500,
-                          child: CustomScrollView(slivers: [
 
-                            SliverAnimatedPaintExtent(
-                              duration: const Duration(milliseconds: 150),
-                              child: SliverList(
-                                delegate: SliverChildBuilderDelegate(
-                                      (BuildContext context, int index) {
-                                    return Padding(
-                                      padding: const EdgeInsets.all(3.0),
-                                      child:  Container(
-                                        width: MediaQuery.of(context).size.width,
-                                        height: 225,
-                                        decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                              image: AssetImage("image/Bitmap3.png"),
-                                              fit: BoxFit.cover,
+                       Container(
+                         child: Stack(
+                           children: [
 
-                                            ),
-                                            color: Color(0xff3C5233)
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(20.0),
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.end,
-                                            crossAxisAlignment: CrossAxisAlignment.end,
-                                            children: [
-                                              const SizedBox(height: 0,),
-                                              SizedBox(
-                                                width: MediaQuery.of(context).size.width*.70,
-                                                child: Text("Modern Indian",
-                                                  textAlign: TextAlign.end,
-                                                  style:
-                                                  Theme.of(context).textTheme.headline6!.copyWith(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
-                                                ),
-                                              ),
-                                              const SizedBox(height: 16,),
-                                              Container(
-                                                padding: EdgeInsets.all(8),
-                                                decoration: BoxDecoration(
-                                                    color: Color(0xffEAF1DB),
-                                                    borderRadius: BorderRadius.all(Radius.circular(20))
-                                                ),
-                                                child:  Text("Explore",
-                                                  textAlign: TextAlign.start,
-                                                  style:
-                                                  Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.w400,
-                                                  ),
-                                                ),
-                                              ),
-                                              const SizedBox(height: 16,),
-                                              SizedBox(
-                                                width: MediaQuery.of(context).size.width*.70,
-                                                child: Text("30th-31st Aug",
-                                                  textAlign: TextAlign.end,
-                                                  style:
-                                                  Theme.of(context).textTheme.headline6!.copyWith(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.w400,
-                                                  ),
-                                                ),
-                                              ),
-                                              const SizedBox(height: 16,),
-                                              SizedBox(
-                                                width: MediaQuery.of(context).size.width*.70,
-                                                child: Text("2022",
-                                                  textAlign: TextAlign.end,
-                                                  style:
-                                                  Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.w400,
-                                                  ),
-                                                ),
-                                              ),
-                                              const SizedBox(height: 14,),
-                                            ],
-                                          ),
-                                        ),
-                                      )
-                                    );
-                                  },
-                                  // 40 list items
-                                  childCount: 3,
-                                ),
-                              ),
-                            ),
-                          ])
-                      ),
+
+                             Positioned(
+                              top: 54,
+                               child: Container(
+                                 height: 500,
+                                 width:MediaQuery.of(context).size.width,
+                                 decoration: BoxDecoration(
+                                  color: Color(0xffF8F8F8)
+                                 ),
+                               ),
+                             ),
+
+                             Align(
+                               alignment: Alignment.topCenter,
+                               child: Column(
+                                 crossAxisAlignment: CrossAxisAlignment.start,
+                                 children: [
+
+                                   Image.asset("image/pcollectible.png"),
+                                   
+                                   Container(
+
+                                     child: Row(
+                                       mainAxisAlignment: MainAxisAlignment.start,
+                                       mainAxisSize: MainAxisSize.min,
+                                       children: [
+                                         Text("OPULENT",style: Theme.of(context).textTheme.headline6!.copyWith(fontWeight: FontWeight.bold,
+
+                                           letterSpacing: 2,
+                                             color: Color(0xff585858),
+                                             )),
+                                         SizedBox(width: 8,),
+                                         Text("Collectible",style: Theme.of(context).textTheme.headline6!.copyWith(fontWeight: FontWeight.normal)),
+
+                                       ],
+                                     ),
+                                   ),
+                                   const SizedBox(height: 16,),
+                                   Container(
+                                     padding: EdgeInsets.all(8),
+                                     decoration: BoxDecoration(
+                                         color: Color(0xffEAEEF2),
+                                         borderRadius: BorderRadius.all(Radius.circular(10))
+                                     ),
+                                     child:  Text("EXPLORE",
+                                       textAlign: TextAlign.start,
+                                       style:
+                                       Theme.of(context).textTheme.subtitle1!.copyWith(
+                                         color: Colors.black,
+                                         fontWeight: FontWeight.bold,
+                                           letterSpacing: 2
+                                       ),
+                                     ),
+                                   ),
+                                   SizedBox(height: 8,),
+                                   Text("30th-31th Jul",style: Theme.of(context).textTheme.headline5!.copyWith(
+                                       fontWeight: FontWeight.normal,
+                                     color: Theme.of(context).colorScheme.primary,
+                                     letterSpacing: 2
+                                   )),
+                                   SizedBox(height: 8,),
+                                   Text("2022",style: Theme.of(context).textTheme.subtitle1!.copyWith(color:Color(0xff585858))),
+                                 ],
+                               ),
+                             )
+
+
+                           ],
+                         ),
+                       )
+                      
                     ],
                   ),
                 ),
@@ -1667,28 +1658,28 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                       Container(
                           height: 500,
                           child: CustomScrollView(slivers: [
-                            SliverPinnedHeader(
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                      Image.asset("image/cal.png",color: Color(0xff80A071),),
-                                        SizedBox(width: 10,),
-                                        Text("2022",
-                                          textAlign: TextAlign.center,
-                                          style:
-                                          Theme.of(context).textTheme.headline6!.copyWith(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(height: 16,)
-                                  ],
-                                )),
+                            // SliverPinnedHeader(
+                            //     child: Column(
+                            //       children: [
+                            //         Row(
+                            //           mainAxisAlignment: MainAxisAlignment.center,
+                            //           crossAxisAlignment: CrossAxisAlignment.center,
+                            //           children: [
+                            //           Image.asset("image/cal.png",color: Color(0xff80A071),),
+                            //             SizedBox(width: 10,),
+                            //             Text("2022",
+                            //               textAlign: TextAlign.center,
+                            //               style:
+                            //               Theme.of(context).textTheme.headline6!.copyWith(
+                            //                 color: Colors.black,
+                            //                 fontWeight: FontWeight.w600,
+                            //               ),
+                            //             ),
+                            //           ],
+                            //         ),
+                            //         SizedBox(height: 16,)
+                            //       ],
+                            //     )),
                             SliverAnimatedPaintExtent(
                               duration: const Duration(milliseconds: 150),
                               child: SliverList(
@@ -1728,7 +1719,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                       Text("TRADITIONAL PAINTINGS",
                                                         textAlign: TextAlign.center,
                                                         style:
-                                                        Theme.of(context).textTheme.headline6!.copyWith(
+                                                        Theme.of(context).textTheme.headline5!.copyWith(
                                                           color: Colors.black,
                                                           letterSpacing: 1,
                                                           fontWeight: FontWeight.bold,
@@ -1766,7 +1757,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                                 style:
                                                                 Theme.of(context).textTheme.headline6!.copyWith(
                                                                   color: Theme.of(context).colorScheme.primary,
-                                                                  fontWeight: FontWeight.w600,
+                                                                  fontWeight: FontWeight.bold,
                                                                 ),
                                                               ),
                                                             ],
@@ -1780,10 +1771,10 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                                 padding: const EdgeInsets.only(right: 8.0,left: 8,top: 12,bottom: 12),
                                                                 child: Text('View All', style:
                                                                 Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                  color: Color(0XFF6D905D),
+                                                                  color: Color(0XFF1F2A52),
                                                                   decoration: TextDecoration.underline,
                                                                   letterSpacing: 1,
-                                                                  fontWeight: FontWeight.w600,
+                                                                  fontWeight: FontWeight.bold,
                                                                 ),),
                                                               ),
                                                             ],
