@@ -667,7 +667,7 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
 
                 const SizedBox(height: 16,),
                 SizedBox(
-                    height: 1100,
+
                     width: MediaQuery.of(context).size.width,
                     child: Footer()),
 

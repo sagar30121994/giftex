@@ -154,7 +154,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                       padding: EdgeInsets.only(top: 20,bottom: 0),
                       child: Container(
                         //replace this Container with your Card
-                        color: Theme.of(context).colorScheme.primary,
+                        color: Theme.of(context).colorScheme.onPrimary,
                         height: 250.0,
                       ),
                     ),
@@ -169,7 +169,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Image.asset("image/calender.png",color: Color(0xff80A071),height: 22,),
+                          Image.asset("image/calender.png",color: Colors.white,height: 22,),
                           // Icon(Icons.calendar_today,size: 22,color: Color(0xff80A071),),
                           SizedBox(width: 20,),
                           Text("25th-27th Aug, 2022",
@@ -181,9 +181,10 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                             ),
                           ),
                           Spacer(),
-                          Icon(Icons.share_outlined,size: 22,color: Color(0xff80A071),),
+                          Image.asset("image/share.png",height: 32,),
+
                           SizedBox(width: 20,),
-                          Icon(Icons.bookmark_border,size: 24,color: Color(0xff80A071),),
+                          Image.asset("image/save.png",height: 32,),
                           // SizedBox(width: 10,),
                         ],
                       )
@@ -201,19 +202,21 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
               ),
 
               Container(
-                color: Color(0xff3C5233),
+                margin: EdgeInsets.only(top:1),
+                color: Theme.of(context).colorScheme.onPrimary,
                 child: DefaultTabController(
                   length: 3,
+
                   initialIndex: widget.auction=="live"?0:widget.auction=="upcoming"?1:2,
                   child:  TabBar(
                     onTap: (index) {
                       setState(() {
 
-                        if(index==0) { tabColor = Color(0xff6D905D);
+                        if(index==0) { tabColor =  Color(0xffE74B52);
                         auctionType="live";}
-                        if(index==1) {tabColor =  Color(0xff6D905D);
+                        if(index==1) {tabColor =  Color(0xffE74B52);
                         auctionType="upcoming";}
-                        if(index==2) {tabColor =  Color(0xff6D905D);
+                        if(index==2) {tabColor =  Color(0xffE74B52);
                         auctionType="past";}
                       });
                       print(index);
@@ -302,20 +305,20 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                             onTap: (index) {
                               setState(() {
 
-                                if(index==0) { tabColor = Color(0xff6D905D);
+                                if(index==0) { tabColor =  Color(0xffE74B52);
                                 liveAuctionType="browselist";}
-                                if(index==1) {tabColor =  Color(0xff6D905D);
+                                if(index==1) {tabColor =   Color(0xffE74B52);
                                 liveAuctionType="mygallery";}
-                                if(index==2) {tabColor =  Color(0xff6D905D);
+                                if(index==2) {tabColor =   Color(0xffE74B52);
                                 liveAuctionType="review";}
-                                if(index==3) {tabColor =  Color(0xff6D905D);
+                                if(index==3) {tabColor =   Color(0xffE74B52);
                                 liveAuctionType="closingschedule";}
                               });
                               print(index);
                             },
                             indicator: UnderlineTabIndicator(
                               borderSide:
-                              BorderSide(color: Color(0xff8DAB7F), width: 2.0),
+                              BorderSide(color:  Color(0xffE74B52), width: 2.0),
                             ),
                             isScrollable: true,
                             padding: EdgeInsets.all(0),
@@ -467,7 +470,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                                 Container(
                                                                     decoration: BoxDecoration(
                                                                       borderRadius: BorderRadius.circular(8),
-                                                                      color: Color(0xffC8B290),
+                                                                      color: Color(0xff8C9FB1),
                                                                     ),
                                                                     padding: EdgeInsets.all(4),
                                                                     child:Text("02",style: Theme.of(context).textTheme.subtitle2!.copyWith(color: Colors.white),)
@@ -480,7 +483,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                                 Container(
                                                                     decoration: BoxDecoration(
                                                                       borderRadius: BorderRadius.circular(8),
-                                                                        color: Color(0xffC8B290),
+                                                                        color: Color(0xff8C9FB1),
                                                                     ),
 
                                                                     padding: EdgeInsets.all(4),
@@ -496,7 +499,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                                 Container(
                                                                     decoration: BoxDecoration(
                                                                       borderRadius: BorderRadius.circular(8),
-                                                                      color: Color(0xffC8B290),
+                                                                      color: Color(0xff8C9FB1),
                                                                     ),
                                                                     padding: EdgeInsets.all(4),
                                                                     child:Text("59",style: Theme.of(context).textTheme.subtitle2!.copyWith(color: Colors.white),)
@@ -587,27 +590,31 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                           ),
                                                         ),
                                                         SizedBox(width: 10,),
-                                                        ElevatedButton(
-                                                          style:   ButtonStyle(
-                                                              backgroundColor: MaterialStateProperty.all(Color(0XFF8DAB7F)),
-                                                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                                                  RoundedRectangleBorder(
-                                                                    borderRadius: BorderRadius.circular(20.0),
-                                                                    // side: BorderSide(color: Colors.red)
-                                                                  )
-                                                              )
-                                                          ),
-                                                          onPressed: (){
+                                                        InkWell(
+                                                          onTap: (){
+                                                            // Navigator.push(context, MaterialPageRoute(builder: (context) => GetOtppage()));
                                                           },
-                                                          child: Padding(
-                                                            padding: const EdgeInsets.only(right: 8.0,left: 8,top: 12,bottom: 12),
-                                                            child: Text('BID NOW', style:
-                                                            Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                              color: Color(0XFFFFFFFF),
-                                                              fontWeight: FontWeight.bold,
-                                                            ),),
+                                                          child: Container(
+                                                            height: 50,
+                                                            // width: 150,
+                                                            decoration: BoxDecoration(
+                                                                gradient: LinearGradient(
+                                                                    colors: [Color(0xffE74B52),Color(0xffE74B52),]
+                                                                ),
+                                                                // color: Color(0xff466D33),
+                                                                borderRadius: BorderRadius.circular(24)
+                                                            ),
+                                                            child: Center(
+                                                              child: Padding(
+                                                              padding: const EdgeInsets.only(right: 32.0,left: 32,top: 12,bottom: 12),
+                                                              child: Text('BID NOW', style:
+                                                              Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                                color: Color(0XFFFFFFFF),
+                                                                fontWeight: FontWeight.bold,
+                                                              ),),
                                                           ),
-                                                        ),
+                                                            ),
+                                                        ),),
                                                       ],
                                                     ),
                                                     SizedBox(height: 8,),
@@ -649,14 +656,15 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                   SizedBox(height:12),
                                                   Icon(Icons.open_in_full,color: Colors.grey,),
                                                   SizedBox(height:12),
-                                                  Container(
-                                                    padding: EdgeInsets.all(16),
-                                                    decoration: BoxDecoration(
-                                                      color:  Colors.lightBlueAccent.withOpacity(.2),
-                                                      borderRadius: BorderRadius.circular(32)
-
-                                                    ),
-                                                  )
+                                                  // Container(
+                                                  //   padding: EdgeInsets.all(16),
+                                                  //   decoration: BoxDecoration(
+                                                  //     color:  Colors.lightBlueAccent.withOpacity(.2),
+                                                  //     borderRadius: BorderRadius.circular(32)
+                                                  //
+                                                  //   ),
+                                                  // )
+                                                  Image.asset("image/earth.png",height: 50,)
                                                 ],
                                               ),
                                             )
@@ -2225,7 +2233,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
 
 
               SizedBox(
-                  height: 1100,
+
                   width: MediaQuery.of(context).size.width,
                   child: Footer()),
               SizedBox(

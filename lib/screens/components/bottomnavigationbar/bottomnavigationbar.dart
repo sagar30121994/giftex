@@ -1,19 +1,10 @@
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-
-
-import 'package:giftex/screens/artistpage/artistpage.dart';
-import 'package:giftex/screens/components/bottomappbar.dart';
-import 'package:giftex/screens/howtosell/howtosell.dart';
 import 'package:giftex/screens/liveauction/liveauction.dart';
-import 'package:giftex/screens/newsandupdates/newsandupdates.dart';
-import 'package:giftex/screens/productdetailspage/productdetailpage.dart';
 import 'package:giftex/screens/profile/profile.dart';
-import 'package:giftex/screens/recordpage/recordpage.dart';
 import 'package:giftex/screens/servicepage/servicepage.dart';
 import 'package:giftex/viewmodel/bottomviewmodel.dart';
-
 import '../../artmovement/artmovement.dart';
 import '../../homepage/homapage.dart';
 
@@ -49,11 +40,11 @@ class _DashboardUiState extends State<DashboardUi> {
     return SafeArea(
       child: Observer(
         builder:(ctx)=> Scaffold(
-          backgroundColor: Colors.white,
+          // backgroundColor: Color(0xffF9F9F9),
           bottomNavigationBar:  BottomAppBar(
             shape: CircularNotchedRectangle(),
 
-            color: Colors.white,
+             color: Color(0xffF9F9F9),
             child: Observer(
                 builder: (context) {
                   return Container(
@@ -74,7 +65,7 @@ class _DashboardUiState extends State<DashboardUi> {
                               Container(
                                   padding: EdgeInsets.all(4),
                                   child: Image.asset("image/home.png",width: 24,height: 24,
-                                    color: bottomViewModel.selectedIndex==0?Color(0xffB45156):Theme.of(context).colorScheme.primary,
+                                    color: bottomViewModel.selectedIndex==0?Theme.of(context).colorScheme.primary:Color(0xff2D2D2D),
 
 
                                   )),
@@ -84,7 +75,8 @@ class _DashboardUiState extends State<DashboardUi> {
 
                                 style: Theme.of(context).textTheme.caption!.copyWith(
                                   letterSpacing: 1,
-                                  color: bottomViewModel.selectedIndex==0?Color(0xffB45156):Theme.of(context).colorScheme.primary,
+                                  fontWeight:bottomViewModel.selectedIndex==0? FontWeight.bold:FontWeight.normal,
+                                  color: bottomViewModel.selectedIndex==0?Theme.of(context).colorScheme.primary:Color(0xff2D2D2D),
                                 ),)
                             ],
                           ),
@@ -104,7 +96,7 @@ class _DashboardUiState extends State<DashboardUi> {
                               Container(
                                   padding: EdgeInsets.all(4),
                                   child: Image.asset("image/service.png",width: 24,height: 24,
-                                    color:  bottomViewModel.selectedIndex==1?Color(0xffB45156):Theme.of(context).colorScheme.primary,
+                                    color:  bottomViewModel.selectedIndex==1?Theme.of(context).colorScheme.primary:Color(0xff2D2D2D),
 
                                   )),
                               // Icon(
@@ -114,7 +106,8 @@ class _DashboardUiState extends State<DashboardUi> {
                               Text("SERVICE",
                                 style: Theme.of(context).textTheme.caption!.copyWith(
                                   letterSpacing: 1,
-                                  color: bottomViewModel.selectedIndex==1?Color(0xffB45156):Theme.of(context).colorScheme.primary,
+                                  fontWeight:bottomViewModel.selectedIndex==1? FontWeight.bold:FontWeight.normal,
+                                  color: bottomViewModel.selectedIndex==1?Theme.of(context).colorScheme.primary:Color(0xff2D2D2D),
                                 ),)
                             ],
                           ),
@@ -600,7 +593,7 @@ class _DashboardUiState extends State<DashboardUi> {
                               Container(
                                   padding: EdgeInsets.all(4),
                                   child: Image.asset("image/bag.png",width: 24,height: 24,
-                                    color: bottomViewModel.selectedIndex==2?Color(0xffB45156):Theme.of(context).colorScheme.primary,
+                                    color: bottomViewModel.selectedIndex==2?Theme.of(context).colorScheme.primary:Color(0xff2D2D2D),
                                   )),
 
                               // Icon(
@@ -608,7 +601,8 @@ class _DashboardUiState extends State<DashboardUi> {
                               Text("STORE",
                                 style: Theme.of(context).textTheme.caption!.copyWith(
                                   letterSpacing: 1,
-                                  color: bottomViewModel.selectedIndex==2?Color(0xffB45156):Theme.of(context).colorScheme.primary,
+                                  fontWeight:bottomViewModel.selectedIndex==2? FontWeight.bold:FontWeight.normal,
+                                  color: bottomViewModel.selectedIndex==2?Theme.of(context).colorScheme.primary:Color(0xff2D2D2D),
                                 ),)
                             ],
                           ),
@@ -623,14 +617,15 @@ class _DashboardUiState extends State<DashboardUi> {
                               Container(
                                   padding: EdgeInsets.all(4),
                                   child: Image.asset("image/profile.png",width: 24,height: 24,
-                                    color: bottomViewModel.selectedIndex==3?Color(0xffB45156):Theme.of(context).colorScheme.primary)),
+                                    color: bottomViewModel.selectedIndex==3?Theme.of(context).colorScheme.primary:Color(0xff2D2D2D),)),
                               // Icon(
                               //   Icons.person_outline,size: 32),
 
                               Text("PROFILE",
                                 style: Theme.of(context).textTheme.caption!.copyWith(
                                   letterSpacing: 1,
-                                  color: bottomViewModel.selectedIndex==3?Color(0xffB45156):Theme.of(context).colorScheme.primary,
+                                  fontWeight:bottomViewModel.selectedIndex==3? FontWeight.bold:FontWeight.normal,
+                                  color: bottomViewModel.selectedIndex==3?Theme.of(context).colorScheme.primary:Color(0xff2D2D2D),
                                 ),)
                             ],
                           ),
@@ -797,7 +792,7 @@ class _DashboardUiState extends State<DashboardUi> {
     if (bottomViewModel.selectedIndex == 0) {
       return Homepage();
     }else   if(bottomViewModel.selectedIndex==1){
-      return  Homepage();
+      return  Servicepage();
 
     }  else if (bottomViewModel.selectedIndex == 2) {
       return Servicepage();

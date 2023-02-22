@@ -68,35 +68,48 @@ class _AboutuspageState extends State<Aboutuspage> {
                   height: 260,
                   child: Stack(
                     children: [
-                      Padding(
-                        padding: EdgeInsets.only(top: 210 / 2.0,bottom: 0),
-                        child: Container(
-                          //replace this Container with your Card
-                          color: Color(0Xff3C5233),
-                          height: 160.0,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 210 / 2.0,bottom: 0),
+                      Positioned(
+                        top: 54,
+                        left: 0,
+                        right: 0,
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal:50.0),
+                          padding: EdgeInsets.only(top: 30, bottom: 0),
                           child: Container(
-
-                            decoration: const BoxDecoration(
-                              color: Color.fromRGBO(109, 144, 93, 0.44),
-                              borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(250),
-                                bottomRight: Radius.circular(250),
-                              ),
-                            ),
-                            height: 120.0,
+                            //replace this Container with your Card
+                            color: Color(0xff1F2A52),
+                            height: 160.0,
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 80.0,right: 80,top: 0,bottom: 0),
-                        child: Image.asset("image/2.png"),
+                      Positioned(
+                        top: 54,
+                        left: 0,
+                        right: 0,
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 30, bottom: 0),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 40.0),
+                            child: Container(
+
+                              decoration: const BoxDecoration(
+                                color: Color(0xff8C9FB1),
+                                borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(265),
+                                  bottomRight: Radius.circular(265),
+
+                                ),
+                              ),
+                              height: 140.0,
+                            ),
+                          ),
+                        ),
                       ),
+                      Positioned(
+                          left: 0,
+                          right: 0,
+                          bottom: 54,
+                          child: Image.asset("image/2.png",height: 220,)),
                     ],
                   ),
                 ),
@@ -467,7 +480,7 @@ class _AboutuspageState extends State<Aboutuspage> {
                 ),
                 const SizedBox(height: 16,),
                 SizedBox(
-                    height: 820,
+
                     width: MediaQuery.of(context).size.width,
                     child: Footer()),
               ],

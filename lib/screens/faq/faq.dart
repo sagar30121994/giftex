@@ -39,7 +39,7 @@ class _FaqPageState extends State<FaqPage> {
                   Text("FAQ’s",
                     textAlign: TextAlign.left,
                     style:
-                    Theme.of(context).textTheme.headline6!.copyWith(
+                    Theme.of(context).textTheme.headline5!.copyWith(
                       color: Colors.black,
                       letterSpacing: 1,
                       fontWeight: FontWeight.bold,
@@ -50,7 +50,7 @@ class _FaqPageState extends State<FaqPage> {
                     textAlign: TextAlign.left,
                     style:
                     Theme.of(context).textTheme.bodyText1!.copyWith(
-                      color: Color(0xff466D33),
+                      color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -68,66 +68,68 @@ class _FaqPageState extends State<FaqPage> {
                   ),
                   const SizedBox(height: 16,),
                   Container(
-                    height: 230,
+                    height: 260,
                     child: Stack(
                       children: [
-                        Padding(
-                          padding: EdgeInsets.only(top: 30 ,bottom: 0),
-                          child: Container(
-                            //replace this Container with your Card
-                            color: Color(0Xff3C5233),
-                            height: 160.0,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 30,bottom: 0),
+                        Positioned(
+                          top: 54,
+                          left: 0,
+                          right: 0,
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal:40.0),
+                            padding: EdgeInsets.only(top: 30, bottom: 0),
                             child: Container(
-
-                              decoration: const BoxDecoration(
-                                color: Color.fromRGBO(109, 144, 93, 0.44),
-                                borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(250),
-                                  bottomRight: Radius.circular(250),
-                                ),
-                              ),
-                              height: 140.0,
+                              //replace this Container with your Card
+                              color: Color(0xff1F2A52),
+                              height: 160.0,
                             ),
                           ),
                         ),
+                        Positioned(
+                          top: 54,
+                          left: 0,
+                          right: 0,
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 30, bottom: 0),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 40.0),
+                              child: Container(
+
+                                decoration: const BoxDecoration(
+                                  color: Color(0xff8C9FB1),
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(265),
+                                    bottomRight: Radius.circular(265),
+
+                                  ),
+                                ),
+                                height: 140.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                            left: 0,
+                            right: 0,
+                            bottom: 32,
+                            child: Image.asset("image/faq.png",height: 200,)),
                       ],
                     ),
                   ),
                   // SizedBox(height: 16,),
                   //
                   Container(
-                    padding: EdgeInsets.only(left: 0,right: 16),
+
                     margin: EdgeInsets.only(left: 16,right: 16),
-                    decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(2, 2),
-                            blurRadius: 6,
-                            color: Color.fromRGBO(226, 223, 202, 0.39),
-                          ),
-                          BoxShadow(
-                            offset: Offset(2, 2),
-                            blurRadius: 8,
-                            color: Color.fromRGBO(226, 223, 202, 0.39),
-                          )
-                        ],
-                        border: Border.all(color: Color(0xffDDE3E8),width: 1),
-                        // image: DecorationImage(
-                        //   image: AssetImage("image/Rectangle 2 (2).png"),
-                        //   fit: BoxFit.cover,
-                        // ),
-                        color: Colors.white
-                    ),
+
                     child: ExpansionTileCard(
                       trailing: Icon(Icons.add,size: 18,color: Colors.black,),
                       baseColor: Colors.white,
-                      expandedColor: Colors.red[50],
+                      expandedColor: Color(0xffEAEEF2),
+                      elevation: 0,
+                      shadowColor:Color(0xff1F2A52),
+                      initialElevation: 0,
+                      contentPadding: EdgeInsets.all(4),
                       key: cardA,
                       // leading: Container(
                       //   height: 60,
@@ -169,31 +171,16 @@ class _FaqPageState extends State<FaqPage> {
                   ),
                   SizedBox(height: 16,),
                   Container(
-                    padding: EdgeInsets.only(left: 0,right: 16),
+
                     margin: EdgeInsets.only(left: 16,right: 16),
-                    decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(2, 2),
-                            blurRadius: 6,
-                            color: Color.fromRGBO(226, 223, 202, 0.39),
-                          ),
-                          BoxShadow(
-                            offset: Offset(2, 2),
-                            blurRadius: 8,
-                            color: Color.fromRGBO(226, 223, 202, 0.39),
-                          )
-                        ],
-                        border: Border.all(color: Color(0xffDDE3E8),width: 1),
-                        // image: DecorationImage(
-                        //   image: AssetImage("image/Rectangle 2 (2).png"),
-                        //   fit: BoxFit.cover,
-                        // ),
-                        color: Colors.white
-                    ),
+
                     child: ExpansionTileCard(
                       baseColor: Colors.white,
-                      expandedColor: Colors.red[50],
+                      expandedColor: Color(0xffEAEEF2),
+                      elevation: 0,
+                      shadowColor:Color(0xff1F2A52),
+                      initialElevation: 0,
+                      contentPadding: EdgeInsets.all(4),
                       key: cardB,
                       trailing: Icon(Icons.add,size: 18,color: Colors.black,),
                       // leading: Container(
@@ -236,32 +223,17 @@ class _FaqPageState extends State<FaqPage> {
                   ),
                   SizedBox(height: 16,),
                   Container(
-                    padding: EdgeInsets.only(left: 0,right: 16),
+
                     margin: EdgeInsets.only(left: 16,right: 16),
-                    decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(2, 2),
-                            blurRadius: 6,
-                            color: Color.fromRGBO(226, 223, 202, 0.39),
-                          ),
-                          BoxShadow(
-                            offset: Offset(2, 2),
-                            blurRadius: 8,
-                            color: Color.fromRGBO(226, 223, 202, 0.39),
-                          )
-                        ],
-                        border: Border.all(color: Color(0xffDDE3E8),width: 1),
-                        // image: DecorationImage(
-                        //   image: AssetImage("image/Rectangle 2 (2).png"),
-                        //   fit: BoxFit.cover,
-                        // ),
-                        color: Colors.white
-                    ),
+
                     child: ExpansionTileCard(
                       trailing: Icon(Icons.add,size: 18,color: Colors.black,),
                       baseColor: Colors.white,
-                      expandedColor: Colors.red[50],
+                      expandedColor: Color(0xffEAEEF2),
+                      elevation: 0,
+                      shadowColor:Color(0xff1F2A52),
+                      initialElevation: 0,
+                      contentPadding: EdgeInsets.all(4),
                       key: cardC,
                       // leading: Container(
                       //   height: 60,
@@ -303,31 +275,16 @@ class _FaqPageState extends State<FaqPage> {
                   ),
                   SizedBox(height: 16,),
                   Container(
-                    padding: EdgeInsets.only(left: 0,right: 16),
+
                     margin: EdgeInsets.only(left: 16,right: 16),
-                    decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(2, 2),
-                            blurRadius: 6,
-                            color: Color.fromRGBO(226, 223, 202, 0.39),
-                          ),
-                          BoxShadow(
-                            offset: Offset(2, 2),
-                            blurRadius: 8,
-                            color: Color.fromRGBO(226, 223, 202, 0.39),
-                          )
-                        ],
-                        border: Border.all(color: Color(0xffDDE3E8),width: 1),
-                        // image: DecorationImage(
-                        //   image: AssetImage("image/Rectangle 2 (2).png"),
-                        //   fit: BoxFit.cover,
-                        // ),
-                        color: Colors.white
-                    ),
+
                     child: ExpansionTileCard(
                       baseColor: Colors.white,
-                      expandedColor: Colors.red[50],
+                      expandedColor: Color(0xffEAEEF2),
+                      elevation: 0,
+                      shadowColor:Color(0xff1F2A52),
+                      initialElevation: 0,
+                      contentPadding: EdgeInsets.all(4),
                       key: cardD,
                       trailing: Icon(Icons.add,size: 18,color: Colors.black,),
                       // leading: Container(
@@ -370,31 +327,16 @@ class _FaqPageState extends State<FaqPage> {
                   ),
                   SizedBox(height: 16,),
                   Container(
-                    padding: EdgeInsets.only(left: 0,right: 16),
+
                     margin: EdgeInsets.only(left: 16,right: 16),
-                    decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(2, 2),
-                            blurRadius: 6,
-                            color: Color.fromRGBO(226, 223, 202, 0.39),
-                          ),
-                          BoxShadow(
-                            offset: Offset(2, 2),
-                            blurRadius: 8,
-                            color: Color.fromRGBO(226, 223, 202, 0.39),
-                          )
-                        ],
-                        border: Border.all(color: Color(0xffDDE3E8),width: 1),
-                        // image: DecorationImage(
-                        //   image: AssetImage("image/Rectangle 2 (2).png"),
-                        //   fit: BoxFit.cover,
-                        // ),
-                        color: Colors.white
-                    ),
+
                     child: ExpansionTileCard(
                       baseColor: Colors.white,
-                      expandedColor: Colors.red[50],
+                      expandedColor: Color(0xffEAEEF2),
+                      elevation: 0,
+                      shadowColor:Color(0xff1F2A52),
+                      initialElevation: 0,
+                      contentPadding: EdgeInsets.all(4),
                       key: cardE,
                       trailing: Icon(Icons.add,size: 18,color: Colors.black,),
                       // leading: Container(
@@ -435,7 +377,7 @@ class _FaqPageState extends State<FaqPage> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 16,),
+                  SizedBox(height: 32,),
                   ElevatedButton(
                     style:   ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(Color(0XFFF9F9F9)),
@@ -458,9 +400,9 @@ class _FaqPageState extends State<FaqPage> {
                       ),),
                     ),
                   ),
-                  const SizedBox(height: 30,),
+                  const SizedBox(height: 48,),
                   SizedBox(
-                      height: 820,
+
                       width: MediaQuery.of(context).size.width,
                       child: Footer()),
                 ],
@@ -468,7 +410,7 @@ class _FaqPageState extends State<FaqPage> {
           ),
         ),
       ),
-      bottomNavigationBar: Dashboard2Ui(),
+
     );
   }
 }

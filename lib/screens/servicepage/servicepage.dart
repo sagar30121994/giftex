@@ -35,7 +35,7 @@ class _ServicepageState extends State<Servicepage> {
                   Text("OUR SERVICES",
                     textAlign: TextAlign.left,
                     style:
-                    Theme.of(context).textTheme.headline6!.copyWith(
+                    Theme.of(context).textTheme.headline5!.copyWith(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
                       letterSpacing:  0.888889
@@ -46,7 +46,7 @@ class _ServicepageState extends State<Servicepage> {
                     textAlign: TextAlign.left,
                     style:
                     Theme.of(context).textTheme.bodyText1!.copyWith(
-                      color: Color(0xff466D33),
+                      color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -56,7 +56,7 @@ class _ServicepageState extends State<Servicepage> {
                     child: Text("We feature premium artworks including modern, contemporary, and street art",
                       textAlign: TextAlign.center,
                       style:
-                      Theme.of(context).textTheme.bodyText1!.copyWith(
+                      Theme.of(context).textTheme.subtitle1!.copyWith(
                         color: Color(0XFF000000),
                         fontWeight: FontWeight.w500,
                         letterSpacing: 1
@@ -73,7 +73,7 @@ class _ServicepageState extends State<Servicepage> {
                           padding: EdgeInsets.only(top: 150 / 2.0,bottom: 0),
                           child: Container(
                             //replace this Container with your Card
-                            color: Color(0Xff3C5233),
+                            color: Color(0Xff1F2A52),
                             height: 160.0,
                           ),
                         ),
@@ -84,7 +84,7 @@ class _ServicepageState extends State<Servicepage> {
                             child: Container(
 
                               decoration: const BoxDecoration(
-                                color: Color.fromRGBO(109, 144, 93, 0.44),
+                                color: Color(0xff8C9FB1),
                                 borderRadius: BorderRadius.only(
                                   bottomLeft: Radius.circular(250),
                                   bottomRight: Radius.circular(250),
@@ -94,14 +94,12 @@ class _ServicepageState extends State<Servicepage> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 220.0,right: 80,top: 10,bottom: 0),
-                          child: Image.asset("image/Servu 2.png"),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 80.0,right: 80,top: 10,bottom: 0),
-                          child: Image.asset("image/service.png"),
-                        ),
+                        Positioned(
+                            left: 0,
+                            right: 0,
+                            child: Image.asset("image/services.png",height: 180,)),
+
+
                       ],
                     ),
                   ),
@@ -145,7 +143,7 @@ class _ServicepageState extends State<Servicepage> {
                                 //replace this Container with your Card
                                 // color: Color(0Xff3C5233),
                                 // height: 260.0,
-                                child: Image.asset("image/Rectangle (1).png",fit: BoxFit.fill,width: 100,height: 150,),
+                                child: Image.asset("image/Rectangle (1).png",fit: BoxFit.fill,width: 100,height: 150,color: Color(0xffEAEEF2)),
                               ),
                             ),
                           ],
@@ -156,7 +154,7 @@ class _ServicepageState extends State<Servicepage> {
                             //replace this Container with your Card
                             // color: Color(0Xff3C5233),
                             // height: 260.0,
-                            child: Image.asset("image/Shape (9).png",fit: BoxFit.fill,width: 50,),
+                            child: Image.asset("image/Shape (9).png",fit: BoxFit.fill,width: 50,color: Color(0xff1F2A52)),
                           ),
                         ),
                         Padding(
@@ -171,12 +169,12 @@ class _ServicepageState extends State<Servicepage> {
                                   textAlign: TextAlign.left,
                                   style:
                                   Theme.of(context).textTheme.bodyText1!.copyWith(
-                                    color: Color(0xff466D33),
+                                    color: Color(0xff1F2A52),
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
                                 SizedBox(width: 10,),
-                                Image.asset("image/Line.png"),
+                                Image.asset("image/Line.png",color: Color(0xff1F2A52)),
 
                               ],
                             ),
@@ -235,7 +233,7 @@ class _ServicepageState extends State<Servicepage> {
                                 //replace this Container with your Card
                                 // color: Color(0Xff3C5233),
                                 // height: 260.0,
-                                child: Image.asset("image/Rectangle (1).png",fit: BoxFit.fill,width: 100,height: 150,),
+                                child: Image.asset("image/Rectangle (1).png",fit: BoxFit.fill,width: 100,height: 150,color:Color(0xffEAEEF2)),
                               ),
                             ),
                           ],
@@ -246,7 +244,7 @@ class _ServicepageState extends State<Servicepage> {
                             //replace this Container with your Card
                             // color: Color(0Xff3C5233),
                             // height: 260.0,
-                            child: Image.asset("image/Shape (11).png",fit: BoxFit.fill,width: 50,),
+                            child: Image.asset("image/Shape (11).png",fit: BoxFit.fill,width: 50,color: Color(0xff1F2A52)),
                           ),
                         ),
                         Padding(
@@ -257,13 +255,13 @@ class _ServicepageState extends State<Servicepage> {
                             // height: 260.0,
                             child: Row(
                               children: [
-                                Image.asset("image/Line.png"),
+                                Image.asset("image/Line.png",color: Color(0xff1F2A52)),
                                 SizedBox(width: 10,),
                                 Text("02",
                                   textAlign: TextAlign.left,
                                   style:
                                   Theme.of(context).textTheme.bodyText1!.copyWith(
-                                    color: Color(0xff000000),
+                                    color: Color(0xff1F2A52),
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -324,7 +322,7 @@ class _ServicepageState extends State<Servicepage> {
                                 //replace this Container with your Card
                                 // color: Color(0Xff3C5233),
                                 // height: 260.0,
-                                child: Image.asset("image/Rectangle (1).png",fit: BoxFit.fill,width: 100,height: 150,),
+                                child: Image.asset("image/Rectangle (1).png",fit: BoxFit.fill,width: 100,height: 150,color:Color(0xffEAEEF2)),
                               ),
                             ),
                           ],
@@ -335,7 +333,7 @@ class _ServicepageState extends State<Servicepage> {
                             //replace this Container with your Card
                             // color: Color(0Xff3C5233),
                             // height: 260.0,
-                            child: Image.asset("image/Shape (10).png",fit: BoxFit.fill,width: 50,),
+                            child: Image.asset("image/Shape (10).png",fit: BoxFit.fill,width: 50,color: Color(0xff1F2A52)),
                           ),
                         ),
                         Padding(
@@ -350,12 +348,12 @@ class _ServicepageState extends State<Servicepage> {
                                   textAlign: TextAlign.left,
                                   style:
                                   Theme.of(context).textTheme.bodyText1!.copyWith(
-                                    color: Color(0xff466D33),
+                                    color: Color(0xff1F2A52),
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
                                 SizedBox(width: 10,),
-                                Image.asset("image/Line.png"),
+                                Image.asset("image/Line.png",color: Color(0xff1F2A52)),
                               ],
                             ),
                           ),
@@ -414,7 +412,7 @@ class _ServicepageState extends State<Servicepage> {
                                 //replace this Container with your Card
                                 // color: Color(0Xff3C5233),
                                 // height: 260.0,
-                                child: Image.asset("image/Rectangle (1).png",fit: BoxFit.fill,width: 100,height: 150,),
+                                child: Image.asset("image/Rectangle (1).png",fit: BoxFit.fill,width: 100,height: 150,color:Color(0xffEAEEF2)),
                               ),
                             ),
                           ],
@@ -425,7 +423,7 @@ class _ServicepageState extends State<Servicepage> {
                             //replace this Container with your Card
                             // color: Color(0Xff3C5233),
                             // height: 260.0,
-                            child: Image.asset("image/Shape (12).png",fit: BoxFit.fill,width: 50,),
+                            child: Image.asset("image/Shape (12).png",fit: BoxFit.fill,width: 50,  color: Color(0xff1F2A52),),
                           ),
                         ),
                         Padding(
@@ -437,13 +435,13 @@ class _ServicepageState extends State<Servicepage> {
                             child: Row(
                               children: [
 
-                                Image.asset("image/Line.png"),
+                                Image.asset("image/Line.png" , color: Color(0xff1F2A52),),
                                 SizedBox(width: 10,),
                                 Text("04",
                                   textAlign: TextAlign.left,
                                   style:
                                   Theme.of(context).textTheme.bodyText1!.copyWith(
-                                    color: Color(0xff000000),
+                                    color: Color(0xff1F2A52),
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -492,9 +490,12 @@ class _ServicepageState extends State<Servicepage> {
                   SizedBox(height: 20,),
 
                   const SizedBox(height: 16,),
-                  Footer(),
                   SizedBox(
-                    height: 60,
+
+                      width: MediaQuery.of(context).size.width,
+                      child: Footer()),
+                  SizedBox(
+                    height: 30,
                     width: MediaQuery.of(context).size.width,
                   )
                 ],
