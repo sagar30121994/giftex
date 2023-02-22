@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 
 import '../../base/base.dart' as BaseUrl;
@@ -21,7 +23,7 @@ class LoginRepo {
         BaseOptions(contentType: Headers.formUrlEncodedContentType);
     await httpClient!
         .post(BaseUrl.baseUrl + endPoints.User().userLogin,
-        body: model.toJson())
+        body: json.encode(model))
         .then((responce) async {
       print(responce);
 

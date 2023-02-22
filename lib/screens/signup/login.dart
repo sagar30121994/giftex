@@ -20,7 +20,7 @@ class Loginpage extends StatefulWidget {
 
 class _LoginpageState extends State<Loginpage> {
   String loginType="signup";
-
+  String signin="email";
   @override
   void initState() {
     // TODO: implement initState
@@ -254,180 +254,326 @@ class _LoginpageState extends State<Loginpage> {
                       ],
                     ),
                   ):Container(),
-                  loginType=="signin"?Container(
-                    child: Column(
-                      children: [
-                        SizedBox(height: 8,),
-                        Center(
-                          child: Text("Welcome Back",
-                            textAlign: TextAlign.center,
-                            style:
-                            Theme.of(context).textTheme.subtitle1!.copyWith(
-                              color: Color(0xff2D2D2D),
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(top: 0,left: 16,right: 16),
+                  loginType=="signin"?Column(
+                    children: [
+                      Container(
+                        child: signin=="email"?Container(
                           child: Column(
                             children: [
-                              Padding(
-                                padding: EdgeInsets.only(top: 15),
-                                child: TextField(
-                                  // controller: nameController,
-                                  onChanged: (str){
-                                    loginViewModel.setEmail(str);
-                                  },
-                                  keyboardType: TextInputType.emailAddress,
-                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500,),
-                                  decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      labelText: 'Email Address',
-                                      hintText: 'aryansethi@gmail.com',
-                                    prefixIcon: Padding(
-                                      padding: const EdgeInsets.all(13.0),
-                                      child: Image.asset("image/email.png",height: 8),
-                                    ),
-                                      // prefixIcon: Icon(Icons.email_outlined,color: Color(0xff779868)),
-                                      filled: true,
-                                    fillColor: Color(0xffFFFFFF),
-                                      // isDense: true
-                                  ),
-                                ),
-                              ),
-
-                              Padding(
-                                padding: EdgeInsets.only(top: 15),
-                                child: TextField(
-                                  onChanged: (str){
-                                    loginViewModel.setPass(str);
-                                  },
-                                  // controller: nameController,
-                                  obscureText: true,
-                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500,),
-                                  decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      labelText: 'Set Password',
-                                      hintText: '22/03/1998',
-                                       prefixIcon: Padding(
-                                         padding: const EdgeInsets.all(13.0),
-                                         child: Image.asset("image/pass.png",height: 4,fit: BoxFit.contain),
-                                       ),
-                                    // prefixIcon: Image.asset("image/pass.png",height: 8),
-                                    filled: true,
-                                      fillColor: Color(0xffFFFFFF),
-                                      // isDense: true
-                                  ),
-                                ),
-                              ),
                               SizedBox(height: 8,),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-
-                                  Text("Forget Password?",
-                                    textAlign: TextAlign.center,
-                                    style:
-                                    Theme.of(context).textTheme.bodyText1!.copyWith(
-                                      color: Color(0xff2D2D2D),
-                                      fontWeight: FontWeight.w400,
-                                    ),
+                              Center(
+                                child: Text("Welcome Back",
+                                  textAlign: TextAlign.center,
+                                  style:
+                                  Theme.of(context).textTheme.subtitle1!.copyWith(
+                                    color: Color(0xff2D2D2D),
+                                    fontWeight: FontWeight.w600,
                                   ),
-                                ],
+                                ),
                               ),
-                              SizedBox(height: 90,),
-                              RichText(
-                                textAlign: TextAlign.center,
-                                text: TextSpan(
-                                  // Note: Styles for TextSpans must be explicitly defined.
-                                  // Child text spans will inherit styles from parent
-                                  children: <TextSpan>[
-                                    TextSpan(text: 'or Sign in using ',style:  Theme.of(context).textTheme.subtitle2!.copyWith(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w400,),),
-                                    TextSpan(text: 'OTP', style:  Theme.of(context).textTheme.subtitle2!.copyWith(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w600,),),
+                              Container(
+                                padding: EdgeInsets.only(top: 0,left: 16,right: 16),
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(top: 15),
+                                      child: TextField(
+                                        // controller: nameController,
+                                        onChanged: (str){
+                                          loginViewModel.setEmail(str);
+                                        },
+                                        keyboardType: TextInputType.emailAddress,
+                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w500,),
+                                        decoration: InputDecoration(
+                                            border: InputBorder.none,
+                                            labelText: 'Email Address',
+                                            hintText: 'aryansethi@gmail.com',
+                                          prefixIcon: Padding(
+                                            padding: const EdgeInsets.all(13.0),
+                                            child: Image.asset("image/email.png",height: 8),
+                                          ),
+                                            // prefixIcon: Icon(Icons.email_outlined,color: Color(0xff779868)),
+                                            filled: true,
+                                          fillColor: Color(0xffFFFFFF),
+                                            // isDense: true
+                                        ),
+                                      ),
+                                    ),
+
+                                    Padding(
+                                      padding: EdgeInsets.only(top: 15),
+                                      child: TextField(
+                                        onChanged: (str){
+                                          loginViewModel.setPass(str);
+                                        },
+                                        // controller: nameController,
+                                        obscureText: true,
+                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w500,),
+                                        decoration: InputDecoration(
+                                            border: InputBorder.none,
+                                            labelText: 'Set Password',
+                                            hintText: '22/03/1998',
+                                             prefixIcon: Padding(
+                                               padding: const EdgeInsets.all(13.0),
+                                               child: Image.asset("image/pass.png",height: 4,fit: BoxFit.contain),
+                                             ),
+                                          // prefixIcon: Image.asset("image/pass.png",height: 8),
+                                          filled: true,
+                                            fillColor: Color(0xffFFFFFF),
+                                            // isDense: true
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 8,),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: [
+
+                                        Text("Forget Password?",
+                                          textAlign: TextAlign.center,
+                                          style:
+                                          Theme.of(context).textTheme.bodyText1!.copyWith(
+                                            color: Color(0xff2D2D2D),
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 90,),
+                                    InkWell(
+                                      onTap: (){
+                                        signin="mobile";
+                                      },
+                                      child: RichText(
+                                        textAlign: TextAlign.center,
+                                        text: TextSpan(
+                                          // Note: Styles for TextSpans must be explicitly defined.
+                                          // Child text spans will inherit styles from parent
+                                          children: <TextSpan>[
+                                            TextSpan(text: 'or Sign in using ',style:  Theme.of(context).textTheme.subtitle2!.copyWith(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w400,),),
+
+                                            TextSpan(text: 'OTP', style:  Theme.of(context).textTheme.subtitle2!.copyWith(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w600,),),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 20,),
+                                    InkWell(
+                                      onTap: (){
+                                        // loginViewModel.getLogin().then((value) => {
+                                        //   if( value.status==200) {
+                                        //     Navigator.pushReplacement(
+                                        //         context,
+                                        //         MaterialPageRoute(
+                                        //             builder: (BuildContext context) => Homepage())),
+                                        //
+                                        //     // if(localSharedPrefrence.getRole()=="admin"){
+                                        //     //   print("admin"),
+                                        //     //   Navigator.pushReplacement(
+                                        //     //       context,
+                                        //     //       MaterialPageRoute(
+                                        //     //           builder: (BuildContext context) => DashBoard())),
+                                        //     // }else{
+                                        //     //   ScaffoldMessenger.of(context).showSnackBar(
+                                        //     //       SnackBar(content: Text('No Access',style: Theme.of(context).textTheme.headline6,),
+                                        //     //         backgroundColor: Colors.red,
+                                        //     //
+                                        //     //       )
+                                        //     //
+                                        //     //   ),
+                                        //     // }
+                                        //
+                                        //   }else{
+                                        //     ScaffoldMessenger.of(context).showSnackBar(
+                                        //         SnackBar(content: Text('Enter Valid Credentials ${value.message}',style: Theme.of(context).textTheme.headline6,),
+                                        //           backgroundColor: Colors.red,
+                                        //
+                                        //         )
+                                        //
+                                        //     ),                      }
+                                        // });
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => GetOtppage()));
+                                      },
+                                      child: Container(
+                                        height: 50,
+                                          width: 150,
+                                        decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                            begin: Alignment.bottomLeft,
+                                            end: Alignment.topRight,
+                                            colors: [
+                                              Color(0xffB45156),
+                                              Color(0xffE74B52),
+                                            ],
+                                          ),
+                                          // color: Color(0xff466D33),
+                                          borderRadius: BorderRadius.circular(20)
+                                        ),
+                                        child: Center(
+                                          child: Text("GET Started",
+                                            textAlign: TextAlign.center,
+                                            style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0xffffffff),
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 30,)
                                   ],
                                 ),
                               ),
-                              SizedBox(height: 20,),
-                              InkWell(
-                                onTap: (){
-                                  loginViewModel.getLogin().then((value) => {
-                                    if( value.status==200) {
-                                      Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (BuildContext context) => Homepage())),
 
-                                      // if(localSharedPrefrence.getRole()=="admin"){
-                                      //   print("admin"),
-                                      //   Navigator.pushReplacement(
-                                      //       context,
-                                      //       MaterialPageRoute(
-                                      //           builder: (BuildContext context) => DashBoard())),
-                                      // }else{
-                                      //   ScaffoldMessenger.of(context).showSnackBar(
-                                      //       SnackBar(content: Text('No Access',style: Theme.of(context).textTheme.headline6,),
-                                      //         backgroundColor: Colors.red,
-                                      //
-                                      //       )
-                                      //
-                                      //   ),
-                                      // }
-
-                                    }else{
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                          SnackBar(content: Text('Enter Valid Credentials ${value.message}',style: Theme.of(context).textTheme.headline6,),
-                                            backgroundColor: Colors.red,
-
-                                          )
-
-                                      ),                      }
-                                  });
-                                  // Navigator.push(context, MaterialPageRoute(builder: (context) => GetOtppage()));
-                                },
-                                child: Container(
-                                  height: 50,
-                                    width: 150,
-                                  decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                      begin: Alignment.bottomLeft,
-                                      end: Alignment.topRight,
-                                      colors: [
-                                        Color(0xffB45156),
-                                        Color(0xffE74B52),
-                                      ],
-                                    ),
-                                    // color: Color(0xff466D33),
-                                    borderRadius: BorderRadius.circular(20)
-                                  ),
-                                  child: Center(
-                                    child: Text("GET Started",
-                                      textAlign: TextAlign.center,
-                                      style:
-                                      Theme.of(context).textTheme.subtitle1!.copyWith(
-                                        color: Color(0xffffffff),
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
+                            ],
+                          ),
+                        ):Container()     ,
+                      ),
+                      Container(
+                        child: signin=="mobile"?Container(
+                          child: Column(
+                            children: [
+                              SizedBox(height: 8,),
+                              Center(
+                                child: Text("Welcome Back",
+                                  textAlign: TextAlign.center,
+                                  style:
+                                  Theme.of(context).textTheme.subtitle1!.copyWith(
+                                    color: Color(0xff2D2D2D),
+                                    fontWeight: FontWeight.w600,
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 30,)
+                              Container(
+                                padding: EdgeInsets.only(top: 0,left: 16,right: 16),
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(top: 15),
+                                      child: TextField(
+                                        // controller: nameController,
+                                        onChanged: (str){
+                                          loginViewModel.setEmail(str);
+                                        },
+                                        keyboardType: TextInputType.emailAddress,
+                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w500,),
+                                        decoration: InputDecoration(
+                                            border: InputBorder.none,
+                                            labelText: 'Email Address',
+                                            hintText: 'aryansethi@gmail.com',
+                                          prefixIcon: Padding(
+                                            padding: const EdgeInsets.all(13.0),
+                                            child: Image.asset("image/email.png",height: 8),
+                                          ),
+                                            // prefixIcon: Icon(Icons.email_outlined,color: Color(0xff779868)),
+                                            filled: true,
+                                          fillColor: Color(0xffFFFFFF),
+                                            // isDense: true
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 90,),
+                                    RichText(
+                                      textAlign: TextAlign.center,
+                                      text: TextSpan(
+                                        // Note: Styles for TextSpans must be explicitly defined.
+                                        // Child text spans will inherit styles from parent
+                                        children: <TextSpan>[
+                                          TextSpan(text: 'or Sign in using ',style:  Theme.of(context).textTheme.subtitle2!.copyWith(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w400,),),
+                                          TextSpan(text: 'OTP', style:  Theme.of(context).textTheme.subtitle2!.copyWith(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w600,),),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(height: 20,),
+                                    InkWell(
+                                      onTap: (){
+                                        loginViewModel.getLogin().then((value) => {
+                                          if( value.status==200) {
+                                            Navigator.pushReplacement(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (BuildContext context) => Homepage())),
+
+                                            // if(localSharedPrefrence.getRole()=="admin"){
+                                            //   print("admin"),
+                                            //   Navigator.pushReplacement(
+                                            //       context,
+                                            //       MaterialPageRoute(
+                                            //           builder: (BuildContext context) => DashBoard())),
+                                            // }else{
+                                            //   ScaffoldMessenger.of(context).showSnackBar(
+                                            //       SnackBar(content: Text('No Access',style: Theme.of(context).textTheme.headline6,),
+                                            //         backgroundColor: Colors.red,
+                                            //
+                                            //       )
+                                            //
+                                            //   ),
+                                            // }
+
+                                          }else{
+                                            ScaffoldMessenger.of(context).showSnackBar(
+                                                SnackBar(content: Text('Enter Valid Credentials ${value.message}',style: Theme.of(context).textTheme.headline6,),
+                                                  backgroundColor: Colors.red,
+
+                                                )
+
+                                            ),                      }
+                                        });
+                                        // Navigator.push(context, MaterialPageRoute(builder: (context) => GetOtppage()));
+                                      },
+                                      child: Container(
+                                        height: 50,
+                                          width: 150,
+                                        decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                            begin: Alignment.bottomLeft,
+                                            end: Alignment.topRight,
+                                            colors: [
+                                              Color(0xffB45156),
+                                              Color(0xffE74B52),
+                                            ],
+                                          ),
+                                          // color: Color(0xff466D33),
+                                          borderRadius: BorderRadius.circular(20)
+                                        ),
+                                        child: Center(
+                                          child: Text("GET Started",
+                                            textAlign: TextAlign.center,
+                                            style:
+                                            Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0xffffffff),
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 30,)
+                                  ],
+                                ),
+                              ),
+
                             ],
                           ),
-                        ),
-
-                      ],
-                    ),
+                        ):Container()     ,
+                      ),
+                    ],
                   ):Container(),
                 ],
               )
