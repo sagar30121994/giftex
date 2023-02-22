@@ -6,11 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:giftex/screens/components/bottomnavigationbar/dashborard2.dart';
 import 'package:giftex/screens/signup/getotp.dart';
 import 'package:giftex/screens/profile/orderproductdetails.dart';
+import 'package:giftex/viewmodel/user/loginviewmodel.dart';
 
 import '../components/bottomnavigationbar/bottomnavigationbar.dart';
 import '../components/footer/footer.dart';
 import '../customepaint.dart';
-
+LoginViewModel loginViewModel=LoginViewModel();
 class Loginpage extends StatefulWidget {
   @override
   _LoginpageState createState() => _LoginpageState();
@@ -22,6 +23,7 @@ class _LoginpageState extends State<Loginpage> {
   @override
   void initState() {
     // TODO: implement initState
+    loginViewModel.setupValidations();
     super.initState();
   }
   @override
@@ -242,6 +244,119 @@ class _LoginpageState extends State<Loginpage> {
                                   ),
                                   child: Center(
                                     child: Text("GET OTP",
+                                      textAlign: TextAlign.center,
+                                      style:
+                                      Theme.of(context).textTheme.subtitle1!.copyWith(
+                                        color: Color(0xffffffff),
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 30,)
+                            ],
+                          ),
+                        ),
+
+                      ],
+                    ),
+                  ):Container(),
+                  loginType=="signin"?Container(
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(top: 0,left: 16,right: 16),
+                          child: Column(
+                            children: [
+
+                              SizedBox(height: 16,),
+                              Container(
+                                  color: Colors.white,
+                                padding: EdgeInsets.only(left:8),
+                                child: TextField(
+                                  // controller: nameController,
+                                  onChanged: (str){
+                                    loginViewModel.setEmail(str);
+                                  },
+                                  keyboardType: TextInputType.emailAddress,
+                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w500,),
+                                  decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      labelText: 'Email Address',
+                                      hintText: 'aryansethi@gmail.com',
+                                      icon: Image.asset("image/email.png",height: 28),
+                                      // prefixIcon: Icon(Icons.email_outlined,color: Color(0xff779868)),
+                                      filled: true,
+                                    fillColor: Color(0xffFFFFFF),
+                                      errorText: loginViewModel.loginViewModelErrorState.email
+                                      // isDense: true
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 16,),
+                              Container(
+                                color: Colors.white,
+                                padding: EdgeInsets.only(left:8),
+                                child: TextField(
+                                  // controller: nameController,
+                                  obscureText: true,
+                                  onChanged: (str){
+                                    loginViewModel.setPass(str);
+                                  },
+                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                    color: Colors.black,
+
+                                    fontWeight: FontWeight.w500,),
+
+                                  decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      labelText: 'Password',
+                                      hintText: '********',
+                                       icon: Image.asset("image/pass.png",height: 32),
+                                    // prefixIcon: Image.asset("image/pass.png",height: 8),
+                                    filled: true,
+                                      fillColor: Color(0xffFFFFFF),
+                                      errorText: loginViewModel.loginViewModelErrorState.pass
+                                      // isDense: true
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 8,),
+                              InkWell(
+                                onTap: (){
+                                  loginViewModel.getLogin().then((value) => {
+                                    if( value.status==200) {
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (BuildContext context) => GetOtppage())),
+                                    }else{
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(content: Text('Enter Valid Credentials ${value.message}',style: Theme.of(context).textTheme.headline6,),
+                                            backgroundColor: Colors.red,
+
+                                          )
+
+                                      ),                      }
+                                  });
+
+
+                                },
+                                child: Container(
+                                  height: 50,
+                                    width: 150,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [Color(0xffE74B52),Color(0xffE74B52),]
+                                    ),
+                                    // color: Color(0xff466D33),
+                                    borderRadius: BorderRadius.circular(20)
+                                  ),
+                                  child: Center(
+                                    child: Text("GET STARTED",
                                       textAlign: TextAlign.center,
                                       style:
                                       Theme.of(context).textTheme.subtitle1!.copyWith(

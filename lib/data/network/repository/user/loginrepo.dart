@@ -18,12 +18,12 @@ class LoginRepo {
 
   Future<HttpResponse> login(LoginReqestModel model) async {
     HttpResponse httpResponse = HttpResponse();
-
+  String userlogin=json.encode(LoginReqestModel);
     httpClient!.client!.options =
         BaseOptions(contentType: Headers.formUrlEncodedContentType);
     await httpClient!
         .post(BaseUrl.baseUrl + endPoints.User().userLogin,
-        body: json.encode(model))
+        body: userlogin)
         .then((responce) async {
       print(responce);
 
