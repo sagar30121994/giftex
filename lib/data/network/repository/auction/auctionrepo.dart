@@ -1,0 +1,52 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
+import 'package:giftex/data/network/models/request/auction/analysisrequestmodel.dart';
+
+import '../../base/base.dart' as BaseUrl;
+import '../../base/endpoints.dart' as endPoints;
+import '../../client/dioclient.dart';
+import '../../models/httpreponsehandler.dart';
+import '../../models/request/webapimodel/userloginrequestmodel.dart';
+import '../../models/responce/user/loginrespose.dart';
+
+class AuctionRepo {
+  DioClientNew? httpClient;
+
+  AuctionRepo() {
+    httpClient = DioClientNew();
+  }
+
+  Future<HttpResponse> auctionAnalysis(AnalysisRequestModel model) async {
+    HttpResponse httpResponse = HttpResponse();
+    String userlogin=json.encode(LoginReqestModel);
+    httpClient!.client!.options =
+        BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    await httpClient!
+        .post(BaseUrl.baseUrl + endPoints.Auction().analysis,
+        body: userlogin)
+        .then((responce) async {
+      print(responce);
+
+      if (responce.statusCode == 200) {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = 'Successful';
+        // httpResponse.data = LoginResponse.fromJson(responce.data);
+      } else {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = responce.data['message'];
+        httpResponse.data = null;
+      }
+      return httpResponse;
+    }).catchError((err) {
+      print(err);
+      httpResponse.status = 400;
+      httpResponse.message = err.toString();
+      httpResponse.data = err.toString();
+      return httpResponse;
+    });
+
+    return httpResponse;
+  }
+
+}

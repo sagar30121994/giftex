@@ -10,6 +10,7 @@ class User {
   final String auctioncalender = 'User/DashboardAuctionCalendar';
   final String highlights = 'User/highlights';
   final String mypurchses = 'User/mypurchases';
+  final String dashboardchart = 'User/dashboardchart';
   final String savesetting = 'User/savesettings';
   final String getsetting = 'User/getsettings';
   final String deleteaccount = 'User/deleteMyAccount';
