@@ -17,6 +17,7 @@ class LocalSharedPrefrence{
   }
 
   String userId='UserId';
+  String crmId='CRMId';
   String isLogin='UserLoginStatus';
   String slider='slider';
   String token='accesstoken';
@@ -40,19 +41,25 @@ class LocalSharedPrefrence{
   }
 
 
-  Future<void> setUserId(int flag)async{
+  Future<void> setUserId(String flag)async{
     if(prefsAvailable){
-      await  myGlobalPreference!.setInt(userId, flag);
+      await  myGlobalPreference!.setString(userId, flag);
+    }
+  }
+
+  Future<void> setCrmClinetId(String flag)async{
+    if(prefsAvailable){
+      await  myGlobalPreference!.setString(crmId, flag);
     }
   }
 
 
 
-  int getUserId(){
+  String getUserId(){
     if(prefsAvailable){
-      return myGlobalPreference!.getInt(userId)??0;
+      return myGlobalPreference!.getString(userId)??"0";
     }
-    return 0;
+    return "0";
   }
 
   Future<void> setLoginStatus(bool flag)async {

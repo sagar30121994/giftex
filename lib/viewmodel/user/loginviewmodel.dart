@@ -34,6 +34,12 @@ abstract class _LoginViewModel with Store {
   @observable
   String pass = '';
 
+  @observable
+  String otp = '';
+
+  @observable
+  String mobile = '';
+
   List<ReactionDisposer>? _disposers;
 
   @action
@@ -46,17 +52,33 @@ abstract class _LoginViewModel with Store {
     pass = value;
   }
 
+
+  @action
+  setMobile(String value) {
+    mobile = value;
+  }
+
   @action
   void setupValidations() {
     _disposers = [
       reaction((_) => email, validateEmail),
       reaction((_) => pass, validatePassowrd),
+      reaction((_) => mobile, validateMobile),
     ];
   }
 
   @action
   void disposeValidations() {
     _disposers!.clear();
+  }
+
+  @action
+  validateMobile(String email) {
+    // if (isEmail(email)) {
+    //   loginViewModelErrorState.email = null;
+    // } else {
+    //   loginViewModelErrorState.email = 'Enter A Valid Mail';
+    // }
   }
 
   @action
@@ -79,11 +101,77 @@ abstract class _LoginViewModel with Store {
 
   Future<HttpResponse> getLogin() async {
     isLoading = true;
-    String role="warehouseadmin";
+
     HttpResponse httpResponse =
     await orderRepo!.login(LoginReqestModel(
-      email: email,
-      password: pass
+        email: email,
+        password: pass
+    ));
+
+    if(httpResponse.status==200) {
+      loginResponse = httpResponse.data;
+      // localSharedPrefrence
+      //     .setLoginStatus(true);
+      // await localSharedPrefrence.setToken(loginResponse!.!);
+      await localSharedPrefrence.setUserId(loginResponse!.result!.userid!);
+      //await localSharedPrefrence.setRole(loginResponse!.user!.role!);
+    }
+    isLoading = false;
+    return httpResponse;
+  }
+
+
+
+
+  Future<HttpResponse> getLoginWithMobile() async {
+    isLoading = true;
+
+    HttpResponse httpResponse =
+    await orderRepo!.loginMobile(LoginReqestModel(
+        countryCode: "91",
+        mobile: mobile,
+        authkeyMobile: "",
+        authkeyWeb: "",
+        deviceCode: "",
+        email: "",
+        fcmTockenMobile: "",
+        fcmTockenWebsite: "",
+        loginFrom: "Website",
+        password: "",
+        userid: ""
+    ));
+
+    if(httpResponse.status==200) {
+      loginResponse = httpResponse.data;
+      // localSharedPrefrence
+      //     .setLoginStatus(true);
+      // await localSharedPrefrence.setToken(loginResponse!.!);
+      await localSharedPrefrence.setUserId(loginResponse!.result!.userid!);
+      await localSharedPrefrence.setCrmClinetId(loginResponse!.result!.cRMClientID!);
+      //await localSharedPrefrence.setRole(loginResponse!.user!.role!);
+    }
+    isLoading = false;
+    return httpResponse;
+  }
+
+
+  Future<HttpResponse> getLoginWithOTPConfirm() async {
+    isLoading = true;
+
+    HttpResponse httpResponse =
+    await orderRepo!.loginMobileConfirm(LoginReqestModel(
+        countryCode: "91",
+        mobile: mobile,
+        authkeyMobile: "",
+        authkeyWeb: "",
+        deviceCode: "",
+        email: "",
+       otp: otp,
+        fcmTockenMobile: "",
+        fcmTockenWebsite: "",
+        loginFrom: "Website",
+        password: "",
+        userid: loginResponse!.result!.userid??""
     ));
 
     if(httpResponse.status==200) {
@@ -91,12 +179,15 @@ abstract class _LoginViewModel with Store {
       localSharedPrefrence
           .setLoginStatus(true);
       // await localSharedPrefrence.setToken(loginResponse!.!);
-      await localSharedPrefrence.setUserId(int.parse(loginResponse!.result!.userid!));
+      await localSharedPrefrence.setUserId(loginResponse!.result!.userid!);
+      // await localSharedPrefrence.setCrmClinetId(loginResponse!.result!.cRMClientID!);
       //await localSharedPrefrence.setRole(loginResponse!.user!.role!);
     }
     isLoading = false;
     return httpResponse;
   }
+
+
 
   Future<void> logout() async{
     USERToken = "";
@@ -115,6 +206,7 @@ abstract class _LoginViewModelErrorState with Store {
 
   @observable
   String? pass;
+
 
   @computed
   bool get hasErrors => email != null || pass != null;

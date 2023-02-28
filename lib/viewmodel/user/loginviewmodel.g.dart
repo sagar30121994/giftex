@@ -69,6 +69,36 @@ mixin _$LoginViewModel on _LoginViewModel, Store {
     });
   }
 
+  final _$otpAtom = Atom(name: '_LoginViewModel.otp');
+
+  @override
+  String get otp {
+    _$otpAtom.reportRead();
+    return super.otp;
+  }
+
+  @override
+  set otp(String value) {
+    _$otpAtom.reportWrite(value, super.otp, () {
+      super.otp = value;
+    });
+  }
+
+  final _$mobileAtom = Atom(name: '_LoginViewModel.mobile');
+
+  @override
+  String get mobile {
+    _$mobileAtom.reportRead();
+    return super.mobile;
+  }
+
+  @override
+  set mobile(String value) {
+    _$mobileAtom.reportWrite(value, super.mobile, () {
+      super.mobile = value;
+    });
+  }
+
   final _$_LoginViewModelActionController =
       ActionController(name: '_LoginViewModel');
 
@@ -95,6 +125,17 @@ mixin _$LoginViewModel on _LoginViewModel, Store {
   }
 
   @override
+  dynamic setMobile(String value) {
+    final _$actionInfo = _$_LoginViewModelActionController.startAction(
+        name: '_LoginViewModel.setMobile');
+    try {
+      return super.setMobile(value);
+    } finally {
+      _$_LoginViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setupValidations() {
     final _$actionInfo = _$_LoginViewModelActionController.startAction(
         name: '_LoginViewModel.setupValidations');
@@ -111,6 +152,17 @@ mixin _$LoginViewModel on _LoginViewModel, Store {
         name: '_LoginViewModel.disposeValidations');
     try {
       return super.disposeValidations();
+    } finally {
+      _$_LoginViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic validateMobile(String email) {
+    final _$actionInfo = _$_LoginViewModelActionController.startAction(
+        name: '_LoginViewModel.validateMobile');
+    try {
+      return super.validateMobile(email);
     } finally {
       _$_LoginViewModelActionController.endAction(_$actionInfo);
     }
@@ -144,7 +196,9 @@ mixin _$LoginViewModel on _LoginViewModel, Store {
 isLoading: ${isLoading},
 loginResponse: ${loginResponse},
 email: ${email},
-pass: ${pass}
+pass: ${pass},
+otp: ${otp},
+mobile: ${mobile}
     ''';
   }
 }

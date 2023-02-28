@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:giftex/screens/components/bottomnavigationbar/dashborard2.dart';
 import 'package:giftex/screens/signup/getotp.dart';
 import 'package:giftex/screens/profile/orderproductdetails.dart';
+import 'package:giftex/viewmodel/user/loginviewmodel.dart';
 
 import '../components/bottomnavigationbar/bottomnavigationbar.dart';
 import '../components/footer/footer.dart';
@@ -298,10 +299,10 @@ class _LoginpageState extends State<Loginpage> {
                                   onTap: (){
                                     loginViewModel.getLogin().then((value) => {
                                       if( value.status==200) {
-                                        Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (BuildContext context) => GetOtppage())),
+                                        // Navigator.pushReplacement(
+                                        //     context,
+                                        //     MaterialPageRoute(
+                                        //         builder: (BuildContext context) => GetOtppage(value.data,))),
                                       }else{
                                         ScaffoldMessenger.of(context).showSnackBar(
                                             SnackBar(content: Text('Enter Valid Credentials ${value.message}',style: Theme.of(context).textTheme.headline6,),
@@ -342,7 +343,96 @@ class _LoginpageState extends State<Loginpage> {
 
                         ],
                       ),
-                    ):Container(),
+                    ):Container(
+                      child: Column(
+                        children: [
+                          SizedBox(height: 20,),
+                          Text("Welcome Back",style:Theme.of(context).textTheme.subtitle1!.copyWith(
+                            fontWeight: FontWeight.w900
+                          )),
+                          SizedBox(height: 20,),
+                          Container(
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(color:  Color(0xffEAEEF2),blurRadius: 2,offset: Offset(2,2))
+                                ]
+
+                            ),
+                             margin: EdgeInsets.all(28),
+                             padding: EdgeInsets.all(8),
+                            child: TextField(
+                              // controller: nameController,
+                              onChanged: (str){
+                                loginViewModel.setMobile(str);
+                              },
+                              keyboardType: TextInputType.name,
+                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500,),
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                // labelText: 'Name',
+                                hintText: 'Enter Mobile Number',
+                                // prefixIcon:
+                                // prefixIcon: ,
+                                // icon: Image.asset("image/people.png",height: 32),
+                                filled: true,
+                                isDense: false,
+                                fillColor: Color(0xffFFFFFF),
+                                // isDense: true
+                              ),
+                            ),
+                          ),
+
+                          Align(
+                            alignment:Alignment.bottomCenter,
+                            child: InkWell(
+                              onTap: (){
+                                loginViewModel.getLoginWithMobile().then((value) => {
+                                  if( value.status==200) {
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (BuildContext context) => GetOtppage(value.data,loginViewModel.mobile,loginViewModel))),
+                                  }else{
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(content: Text('Enter Valid Credentials ${value.message}',style: Theme.of(context).textTheme.headline6,),
+                                          backgroundColor: Colors.red,
+
+                                        )
+
+                                    ),                      }
+                                });
+
+                                // Navigator.push(context, MaterialPageRoute(builder: (context) => GetOtppage()));
+                              },
+                              child: Container(
+                                height: 50,
+                                width: MediaQuery.of(context).size.width*.75,
+                                decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                        colors: [Color(0xffB45156),Color(0xffE74B52),]
+                                    ),
+                                    borderRadius: BorderRadius.circular(20)
+                                ),
+                                child: Center(
+                                  child: Text("GET OTP",
+                                    textAlign: TextAlign.center,
+                                    style:
+                                    Theme.of(context).textTheme.subtitle1!.copyWith(
+                                      color: Color(0xffffffff),
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 32,),
+                        ],
+                      ),
+                    ),
                   ],
                 )
             ),

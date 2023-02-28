@@ -1,18 +1,17 @@
 
 
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
-import 'package:giftex/screens/components/bottomnavigationbar/dashborard2.dart';
+import 'package:giftex/data/network/models/responce/user/loginrespose.dart';
 import 'package:giftex/screens/kyc/kycpage.dart';
-import 'package:giftex/screens/profile/orderproductdetails.dart';
-
-import '../components/bottomnavigationbar/bottomnavigationbar.dart';
-import '../components/footer/footer.dart';
-import '../customepaint.dart';
+import 'package:giftex/viewmodel/user/loginviewmodel.dart';
 
 class GetOtppage extends StatefulWidget {
+  GetOtppage (this.loginResponse,this.mobile,this.loginViewModel);
+  LoginResponse loginResponse;
+  LoginViewModel loginViewModel;
+  String mobile;
   @override
   _GetOtppageState createState() => _GetOtppageState();
 }
@@ -102,7 +101,7 @@ class _GetOtppageState extends State<GetOtppage> {
                          children: [
                            Image.asset("image/phonesys.png",height: 20),
                            SizedBox(width: 10,),
-                           Text("+91 986734 456721 ",
+                           Text("+91 ${widget.mobile} ",
                              textAlign: TextAlign.center,
                              style:
                              Theme.of(context).textTheme.subtitle1!.copyWith(
@@ -120,7 +119,7 @@ class _GetOtppageState extends State<GetOtppage> {
                            Image.asset("image/mailbox.png",height: 20,width: 18),
                            SizedBox(width: 10,),
 
-                           Text("johndoe@gmail.com",
+                           Text("${widget.loginResponse!.result!.email}",
                              textAlign: TextAlign.center,
                              style:
                              Theme.of(context).textTheme.subtitle1!.copyWith(
@@ -154,15 +153,18 @@ class _GetOtppageState extends State<GetOtppage> {
                          },
                          //runs when every textfield is filled
                          onSubmit: (String verificationCode){
-                           showDialog(
-                               context: context,
-                               builder: (context){
-                                 return AlertDialog(
-                                   title: Text("Verification Code"),
-                                   content: Text('Code entered is $verificationCode'),
-                                 );
-                               }
-                           );
+                           widget.loginViewModel.otp=verificationCode;
+                           // showDialog(
+                           //     context: context,
+                           //     builder: (context){
+                           //       return AlertDialog(
+                           //         title: Text("Verification Code"),
+                           //         content: Text('Code entered is $verificationCode'),
+                           //       );
+                           //     }
+                           // );
+
+
                          }, // end onSubmit
                        ),
                        SizedBox(height: 10,),
@@ -231,7 +233,24 @@ class _GetOtppageState extends State<GetOtppage> {
                   SizedBox(height: 25,),
                   InkWell(
                     onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => KYCPage()));
+
+                      widget.loginViewModel.getLoginWithOTPConfirm().then((value) => {
+                        if( value.status==200) {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) => KYCPage())),
+                        }else{
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Enter Valid Credentials ${value.message}',style: Theme.of(context).textTheme.headline6,),
+                                backgroundColor: Colors.red,
+
+                              )
+
+                          ),                      }
+                      });
+
+                      // Navigator.push(context, MaterialPageRoute(builder: (context) => KYCPage()));
                     },
                     child: Container(
                       height: 50,

@@ -10,6 +10,7 @@ class LoginReqestModel {
   String? deviceCode;
   String? fcmTockenMobile;
   String? fcmTockenWebsite;
+  String? otp;
 
   LoginReqestModel(
       {this.authkeyWeb,
@@ -19,6 +20,7 @@ class LoginReqestModel {
         this.countryCode,
         this.mobile,
         this.password,
+        this.otp,
         this.loginFrom,
         this.deviceCode,
         this.fcmTockenMobile,
@@ -30,6 +32,7 @@ class LoginReqestModel {
     userid = json['userid'];
     email = json['email'];
     countryCode = json['country_code'];
+    otp = json['otp'];
     mobile = json['mobile'];
     password = json['password'];
     loginFrom = json['login_from'];
@@ -43,6 +46,7 @@ class LoginReqestModel {
     data['authkey_web'] = this.authkeyWeb;
     data['authkey_mobile'] = this.authkeyMobile;
     data['userid'] = this.userid;
+    data['otp'] = this.otp;
     data['email'] = this.email;
     data['country_code'] = this.countryCode;
     data['mobile'] = this.mobile;
