@@ -180,7 +180,7 @@ abstract class _LoginViewModel with Store {
           .setLoginStatus(true);
       // await localSharedPrefrence.setToken(loginResponse!.!);
       await localSharedPrefrence.setUserId(loginResponse!.result!.userid!);
-      // await localSharedPrefrence.setCrmClinetId(loginResponse!.result!.cRMClientID!);
+       await localSharedPrefrence.setAuthKeyWeb(loginResponse!.result!.authkeyWeb!);
       //await localSharedPrefrence.setRole(loginResponse!.user!.role!);
     }
     isLoading = false;

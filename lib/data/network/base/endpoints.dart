@@ -17,6 +17,7 @@ class User {
 }
 class Auction{
   final String analysis = 'Auction/analysis';
+  final String upcommingAuction = 'UpcomingAuction';
 }
 class LiveAuction{
     final String liveaction = 'Live/getliveauctions';
@@ -112,14 +113,14 @@ class WebCMSApiModel{
   final String getourcollections = 'artistdata';
   final String getartmovement = 'InsertsubscribeForm';
   final String getauctionguide = 'getHashStr';
-  final String getnewsvideos = 'GetPaymentGrid';
+  final String getnewsvideos = 'HomeNewsVideosBlogs';
   final String getartistlisting = 'artistdata';
   final String getartistlistingpage = 'InsertsubscribeForm';
   final String getartistprofile = 'getHashStr';
   final String getnewsdetails = 'GetPaymentGrid';
   final String getfooterpage = 'artistdata';
-  final String homebanner = 'InsertsubscribeForm';
-  final String homeupcomingauction = 'getHashStr';
+  final String homebanner = 'HomeBanner';
+  final String homeupcomingauction = 'HomeUpcomingAuctions';
   final String homerecentauction = 'GetPaymentGrid';
   final String homeourservice = 'artistdata';
   final String homeartistofmonth = 'InsertsubscribeForm';
@@ -127,8 +128,8 @@ class WebCMSApiModel{
   final String homeourcollecters = 'GetPaymentGrid';
   final String homenewsvideoblog = 'artistdata';
   final String homehighlightlot = 'artistdata';
-  final String homerecordpricelot = 'InsertsubscribeForm';
-  final String recordpricelots = 'getHashStr';
+  final String homerecordpricelot = 'HomeRecordPriceLots';
+  final String recordpricelots = 'RecordPriceLots';
   final String getdepartments = 'GetPaymentGrid';
   final String getdepartmentdetails = 'artistdata';
   final String getpurchasefaq = 'InsertsubscribeForm';

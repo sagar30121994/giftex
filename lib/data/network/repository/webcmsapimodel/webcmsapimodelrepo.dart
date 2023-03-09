@@ -1,7 +1,12 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:giftex/data/local/client/prefs.dart';
 import 'package:giftex/data/network/models/request/auction/analysisrequestmodel.dart';
+import 'package:giftex/data/network/models/responce/home/homeresponse.dart';
+import 'package:giftex/data/network/models/responce/home/newsblogsvideoresponse.dart';
+import 'package:giftex/data/network/models/responce/home/recordpricelots.dart';
+import 'package:giftex/data/network/models/responce/home/upcommingauctionresponse.dart';
 
 import '../../base/base.dart' as BaseUrl;
 import '../../base/endpoints.dart' as endPoints;
@@ -12,9 +17,11 @@ import '../../models/responce/user/loginrespose.dart';
 
 class WebCmsApiModelRepo {
   DioClientNew? httpClient;
+  LocalSharedPrefrence? localSharedPrefrence;
 
   WebCmsApiModelRepo() {
     httpClient = DioClientNew();
+    localSharedPrefrence= LocalSharedPrefrence();
   }
 
   Future<HttpResponse> getBuyDetails() async {
@@ -546,19 +553,28 @@ Future<HttpResponse> getPrivateSellDetails() async {
   }
   Future<HttpResponse> getNewsVideos() async {
     HttpResponse httpResponse = HttpResponse();
-    String userlogin=json.encode(LoginReqestModel);
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    // String userlogin=json.encode(LoginReqestModel);
+    // httpClient!.client!.options =
+    //     BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    String userid=localSharedPrefrence!.getUserId();
+    String authKey=localSharedPrefrence!.getAuthKeyWeb();
+    String crmClientId=localSharedPrefrence!.getCrmClinetId();
+
     await httpClient!
-        .post(BaseUrl.notificationbaseUrl + endPoints.WebCMSApiModel().getnewsvideos,
-        body: userlogin)
+        .post(BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().getnewsvideos,
+        body: {
+          "userId":userid,
+          "authkey_mobile":"",
+          "authkey_web":authKey,
+          "CRMClientID":crmClientId
+        })
         .then((responce) async {
       print(responce);
 
       if (responce.statusCode == 200) {
         httpResponse.status = responce.statusCode;
         httpResponse.message = 'Successful';
-        // httpResponse.data = LoginResponse.fromJson(responce.data);
+         httpResponse.data = HomeNewsVideosBlogsResponse.fromJson(responce.data);
       } else {
         httpResponse.status = responce.statusCode;
         httpResponse.message = responce.data['message'];
@@ -730,21 +746,26 @@ Future<HttpResponse> getFotterPage() async {
 
     return httpResponse;
   }
-Future<HttpResponse> HomeBanner() async {
+Future<HttpResponse> getHomeBanner() async {
     HttpResponse httpResponse = HttpResponse();
-    String userlogin=json.encode(LoginReqestModel);
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    String userid=localSharedPrefrence!.getUserId();
+    String authKey=localSharedPrefrence!.getAuthKeyWeb();
+     String crmClientId=localSharedPrefrence!.getCrmClinetId();
+
     await httpClient!
-        .post(BaseUrl.notificationbaseUrl + endPoints.WebCMSApiModel().homebanner,
-        body: userlogin)
-        .then((responce) async {
+        .post(BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().homebanner,
+    body: {
+          "userId":userid,
+          "authkey_mobile":"",
+          "authkey_web":authKey,
+          "CRMClientID":crmClientId
+         }).then((responce) async {
       print(responce);
 
       if (responce.statusCode == 200) {
         httpResponse.status = responce.statusCode;
         httpResponse.message = 'Successful';
-        // httpResponse.data = LoginResponse.fromJson(responce.data);
+        httpResponse.data = HomeBanerResponse.fromJson(responce.data);
       } else {
         httpResponse.status = responce.statusCode;
         httpResponse.message = responce.data['message'];
@@ -761,21 +782,28 @@ Future<HttpResponse> HomeBanner() async {
 
     return httpResponse;
   }
-Future<HttpResponse> HomeUpcomingAuction() async {
+Future<HttpResponse> getHomeUpcomingAuction() async {
     HttpResponse httpResponse = HttpResponse();
-    String userlogin=json.encode(LoginReqestModel);
+    String userid=localSharedPrefrence!.getUserId();
+    String authKey=localSharedPrefrence!.getAuthKeyWeb();
+    String crmClientId=localSharedPrefrence!.getCrmClinetId();
     httpClient!.client!.options =
         BaseOptions(contentType: Headers.formUrlEncodedContentType);
     await httpClient!
-        .post(BaseUrl.notificationbaseUrl + endPoints.WebCMSApiModel().homeupcomingauction,
-        body: userlogin)
+        .post(BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().homeupcomingauction,
+      body: {
+        "userId":userid,
+        "authkey_mobile":"",
+        "authkey_web":authKey,
+        "CRMClientID":crmClientId
+        })
         .then((responce) async {
       print(responce);
 
       if (responce.statusCode == 200) {
         httpResponse.status = responce.statusCode;
         httpResponse.message = 'Successful';
-        // httpResponse.data = LoginResponse.fromJson(responce.data);
+         httpResponse.data = HomeUpcommingAuctionResponse.fromJson(responce.data);
       } else {
         httpResponse.status = responce.statusCode;
         httpResponse.message = responce.data['message'];
@@ -1009,21 +1037,32 @@ Future<HttpResponse> homeHighlightLots() async {
 
     return httpResponse;
   }
-Future<HttpResponse> homeRecordPriceLots() async {
+
+
+
+Future<HttpResponse> gethomeRecordPriceLots() async {
     HttpResponse httpResponse = HttpResponse();
-    String userlogin=json.encode(LoginReqestModel);
+    String userid=localSharedPrefrence!.getUserId();
+    String authKey=localSharedPrefrence!.getAuthKeyWeb();
+    String crmClientId=localSharedPrefrence!.getCrmClinetId();
+    // String userlogin=json.encode(LoginReqestModel);
     httpClient!.client!.options =
-        BaseOptions(contentType: Headers.formUrlEncodedContentType);
+        BaseOptions(contentType: Headers.jsonContentType);
     await httpClient!
-        .post(BaseUrl.notificationbaseUrl + endPoints.WebCMSApiModel().homerecordpricelot,
-        body: userlogin)
+        .post(BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().homerecordpricelot,
+        body: {
+          "userId":userid,
+          "authkey_mobile":"",
+          "authkey_web":authKey,
+          "CRMClientID":crmClientId
+        })
         .then((responce) async {
       print(responce);
 
       if (responce.statusCode == 200) {
         httpResponse.status = responce.statusCode;
         httpResponse.message = 'Successful';
-        // httpResponse.data = LoginResponse.fromJson(responce.data);
+         httpResponse.data = RecordPriceLots.fromJson(responce.data);
       } else {
         httpResponse.status = responce.statusCode;
         httpResponse.message = responce.data['message'];
@@ -1040,6 +1079,9 @@ Future<HttpResponse> homeRecordPriceLots() async {
 
     return httpResponse;
   }
+
+
+
 Future<HttpResponse> recordPriceLots() async {
     HttpResponse httpResponse = HttpResponse();
     String userlogin=json.encode(LoginReqestModel);

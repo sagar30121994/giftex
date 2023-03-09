@@ -22,6 +22,7 @@ class LocalSharedPrefrence{
   String slider='slider';
   String token='accesstoken';
   String name='name';
+  String authkey='authkey';
 
 
 
@@ -53,6 +54,25 @@ class LocalSharedPrefrence{
     }
   }
 
+  Future<void> setAuthKeyWeb(String flag)async{
+    if(prefsAvailable){
+      await  myGlobalPreference!.setString(authkey, flag);
+    }
+  }
+
+  String getAuthKeyWeb(){
+    if(prefsAvailable){
+      return myGlobalPreference!.getString(authkey)??"0";
+    }
+    return "0";
+  }
+
+  String getCrmClinetId(){
+    if(prefsAvailable){
+      return myGlobalPreference!.getString(crmId)??"0";
+    }
+    return "0";
+  }
 
 
   String getUserId(){

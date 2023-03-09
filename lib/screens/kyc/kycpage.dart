@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
 
 class KYCPage extends StatefulWidget {
   const KYCPage({Key? key}) : super(key: key);
@@ -179,20 +180,25 @@ class _KYCPageState extends State<KYCPage> {
                 ),
               ),
               SizedBox(height: 16,),
-              Container(
-                height: 40,
-                 width: 150,
-                decoration: BoxDecoration(
-                    color: Color(0xffF3E8E9),
-                    borderRadius: BorderRadius.circular(20)
-                ),
-                child: Center(
-                  child: Text("Skip For Now",
-                    textAlign: TextAlign.center,
-                    style:
-                    Theme.of(context).textTheme.subtitle1!.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                      fontWeight: FontWeight.w400,
+              InkWell(
+                onTap: (){
+                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => DashboardUi(0)),(route) => false,);
+                },
+                child: Container(
+                  height: 40,
+                   width: 150,
+                  decoration: BoxDecoration(
+                      color: Color(0xffF3E8E9),
+                      borderRadius: BorderRadius.circular(20)
+                  ),
+                  child: Center(
+                    child: Text("Skip For Now",
+                      textAlign: TextAlign.center,
+                      style:
+                      Theme.of(context).textTheme.subtitle1!.copyWith(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
                   ),
                 ),

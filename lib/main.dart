@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:giftex/data/local/client/prefs.dart';
 import 'package:giftex/screens/aboutus/aboutus.dart';
 import 'package:giftex/screens/artistpage/artistpage.dart';
 import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
@@ -31,13 +32,14 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  LocalSharedPrefrence?  localSharedPrefrence;
   // This widget is the root of your application.
   // late LocalSharedPrefrence localSharedPrefrence;
 
   @override
   void initState() {
     // TODO: implement initState
-    // localSharedPrefrence=LocalSharedPrefrence();
+     localSharedPrefrence=LocalSharedPrefrence();
     super.initState();
   }
 
@@ -47,7 +49,10 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'Giftex',
       theme: kDarkTheme,
-      home: Loginpage(),
+      home: localSharedPrefrence!
+          .getLoginStatus()?DashboardUi(0):Loginpage()
+
+      // home: Loginpage(),
     );
   }
 }

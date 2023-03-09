@@ -12,7 +12,7 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       bottomOpacity: 0,
       elevation: 0,
-      toolbarHeight: 150, //
+      toolbarHeight: 90, //
       backgroundColor: Colors.white,
       leadingWidth: 96,
       leading: Container(
