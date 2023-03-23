@@ -18,6 +18,11 @@ class User {
 class Auction{
   final String analysis = 'Auction/analysis';
   final String upcommingAuction = 'UpcomingAuction';
+  final String upcommingAuctionLots = 'UpcomingLots';
+  final String singleAuctionLots = 'UpcomingAuctionInformation';
+  final String bidHistory = 'GetBidHistory';
+  final String myAuctionGallery = 'User/myauctiongallary';
+  final String getReviewauctions = 'live/reviewlots';
 }
 class LiveAuction{
     final String liveaction = 'Live/getliveauctions';
@@ -27,6 +32,9 @@ class LiveAuction{
 class Lots{
     final String highlightsPDP = 'Lot/highlightsPDP';
     final String lotbyid = 'Lot/getbyLotId';
+    final String proxyBidAmount = 'GetProxyBidAmount';
+    final String addremoveToWishlist = 'AddRemoveLotToWishList';
+    final String placeBid = 'InsertProxyBidAmount';
 }
 class MyCollection{
     final String create = 'MyCollection/Create';

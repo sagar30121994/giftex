@@ -36,7 +36,7 @@ class _MyAuctionReviewpageState extends State<MyAuctionReviewpage> {
                   value: selected,
                   onChanged: (bool? value){},
                 ),
-                title: Text(list!.name!, style:
+                title: Text(list.name!, style:
                 Theme.of(context).textTheme.bodyText1!.copyWith(
                   color: Colors.black,
                   fontWeight: FontWeight.w400,
@@ -229,7 +229,7 @@ class _MyAuctionReviewpageState extends State<MyAuctionReviewpage> {
                                   ),
                                   InkWell(
                                     onTap: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailPage()));
+                                      // Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailPage()));
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.only(left: 25.0,right: 25),

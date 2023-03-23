@@ -21,12 +21,12 @@ class LiveAuctionReviewLotRequestModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['userid'] = this.userid;
-    data['authkey_web'] = this.authkeyWeb;
-    data['authkey_mobile'] = this.authkeyMobile;
-    data['filterType'] = this.filterType;
-    data['auctionID'] = this.auctionID;
+    final Map<String, dynamic> data =  Map<String, dynamic>();
+    data['userid'] = userid;
+    data['authkey_web'] = authkeyWeb;
+    data['authkey_mobile'] = authkeyMobile;
+    data['filterType'] = filterType;
+    data['auctionID'] = auctionID;
     return data;
   }
 }

@@ -37,12 +37,16 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin{
    int position=0;
   //
   // PageController controller=PageController();
+  Timer? timer;
 
   startTimer(){
-    Timer.periodic(Duration(seconds: 4), (_) async {
+    timer=Timer.periodic(Duration(seconds: 4), (_) async {
 
       setState(() {
 
+        if(homeViewModel.homeBanerResponse==null){
+
+        }else{
 
         if(position!=homeViewModel.homeBanerResponse!.pageContent!.banner!.length-1){
           position++;
@@ -51,7 +55,8 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin{
           position=0;
           sliderController.animateTo(0, duration: Duration(milliseconds: 500), curve: Curves.easeInCirc);
         }
-      });
+        }
+        });
 
     });
   }
@@ -66,6 +71,13 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin{
     homeViewModel.gethomeRecordPriceLots();
     homeViewModel.getNewsVideos();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    timer!.cancel();
+    super.dispose();
   }
 
   @override
@@ -115,7 +127,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin{
                             });
                           },
 
-                          itemCount: homeViewModel.homeBanerResponse!.pageContent!.banner!.length??0,
+                          itemCount:homeViewModel.homeBanerResponse==null?0:homeViewModel.homeBanerResponse!.pageContent!.banner!.length,
                           itemBuilder:(context,pos) =>
 
 
@@ -220,7 +232,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin{
 
 
 
-            Observer(
+            homeViewModel.homeBanerResponse==null?Container(): Observer(
               builder: (context) {
                 return homeViewModel.isLoading?Container():Row(
                   children: [
@@ -396,7 +408,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin{
               ),
             ),
             const SizedBox(height: 30,),
-            Observer(
+            homeViewModel.homeUpcommingAuctionResponse==null?Container(): Observer(
               builder: (context) {
                 return homeViewModel.isLoadingForUpCommingAuction?LinearProgressIndicator():
                     Column(
@@ -1281,7 +1293,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin{
                         ),
                       );
                     },
-                    itemCount:  homeViewModel.selectedNewsTabIndex==0?  homeViewModel.homeNewsVideosBlogsResponse!.news!.length:
+                    itemCount:  homeViewModel.selectedNewsTabIndex==0?homeViewModel.homeNewsVideosBlogsResponse==null?0: homeViewModel.homeNewsVideosBlogsResponse!.news!.length:
                     homeViewModel.selectedNewsTabIndex==1?  homeViewModel.homeNewsVideosBlogsResponse!.videos!.length:
                    homeViewModel.homeNewsVideosBlogsResponse!.blogs!.length,
                   ),
@@ -1291,7 +1303,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin{
             SizedBox(height: 24,),
             Observer(
               builder: (context) {
-                return homeViewModel.isLoadingForNews?Container():Center(
+                return homeViewModel.isLoadingForNews?Container():homeViewModel.homeNewsVideosBlogsResponse==null?Container():Center(
                   child: SmoothPageIndicator(
                     controller: controller1,
                     count: homeViewModel.selectedNewsTabIndex==0?  homeViewModel.homeNewsVideosBlogsResponse!.news!.length:

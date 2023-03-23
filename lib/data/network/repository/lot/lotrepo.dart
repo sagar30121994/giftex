@@ -2,6 +2,9 @@
 import 'package:dio/dio.dart';
 import 'package:giftex/data/network/models/request/lot/lotbyidrequestmodel.dart';
 import 'package:giftex/data/network/models/request/lot/lothighlightpdprequestmodel.dart';
+import 'package:giftex/data/network/models/request/lot/proxybidreq.dart';
+import 'package:giftex/data/network/models/responce/liveauction/upcommingauctionresponse.dart';
+import 'package:giftex/data/network/models/responce/lot/proxybidamountresponse.dart';
 import '../../base/base.dart' as BaseUrl;
 import '../../base/endpoints.dart' as endPoints;
 import '../../client/dioclient.dart';
@@ -76,4 +79,7 @@ class LotRepo {
 
     return httpResponse;
   }
+
+
+
 }

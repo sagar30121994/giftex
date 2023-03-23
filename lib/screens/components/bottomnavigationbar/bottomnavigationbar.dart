@@ -2,6 +2,7 @@ import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/screens/liveauction/liveauction.dart';
+import 'package:giftex/screens/liveauction/liveauctiondetailpage.dart';
 import 'package:giftex/screens/profile/profile.dart';
 import 'package:giftex/screens/servicepage/servicepage.dart';
 import 'package:giftex/viewmodel/bottomviewmodel.dart';
@@ -810,6 +811,8 @@ class _DashboardUiState extends State<DashboardUi> {
 
     }else if (bottomViewModel.selectedIndex == 7) {
       return LiveAuctionUi("past");
+    }else if (bottomViewModel.selectedIndex == 8) {
+      return LiveAuctionUiDetails();
     }
     return Container();
   }

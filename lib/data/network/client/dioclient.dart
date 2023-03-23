@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import '../../../main.dart';
 import '../base/base.dart' as BaseUrl;
 
 class DioClientNew {
@@ -20,7 +19,7 @@ class DioClientNew {
       headers: headers,
     );
 
-    RequestOptions optionsMain;
+    // RequestOptions optionsMain;
     client = Dio(options);
     // client.interceptors.add(DioCacheManager(CacheConfig(baseUrl: BaseUrl.baseUrl)).interceptor);
     // client.interceptors.add(LogInterceptor());
@@ -36,35 +35,35 @@ class DioClientNew {
   }
 
   Future<Response> get(String endpoint, {dynamic body}) async {
-    print("$endpoint    ${body.toString()} ");
+
     return client!.request(endpoint,
         data: body,
         options: Options(method: "GET"));
   }
 
   Future<Response> post(String endpoint, {dynamic body}) async {
-    print("$endpoint    ${body.toString()} ");
+
     Response response;
     try {
       response = await client!
           .request(endpoint, data: body, options: Options(
           method: "POST"));
     } on DioError catch (e) {
-      print(e);
+
       response = e.response!;
     }
     return response;
   }
 
   Future<Response> put(String endpoint, {dynamic body}) async {
-    print("$endpoint    ${body.toString()} ");
+
 
     return client!
         .request(endpoint, data: body, options: Options(method: "PUT"));
   }
 
   Future<Response> delete(String endpoint, {dynamic body}) async {
-    print("$endpoint    ${body.toString()} ");
+
     return client!
         .request(endpoint, data: body, options: Options(method: "DELETE"));
   }

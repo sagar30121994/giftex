@@ -119,7 +119,7 @@ class _GetOtppageState extends State<GetOtppage> {
                            Image.asset("image/mailbox.png",height: 20,width: 18),
                            SizedBox(width: 10,),
 
-                           Text("${widget.loginResponse!.result!.email}",
+                           Text("${widget.loginResponse.result!.email}",
                              textAlign: TextAlign.center,
                              style:
                              Theme.of(context).textTheme.subtitle1!.copyWith(

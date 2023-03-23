@@ -14,7 +14,7 @@ class LotByIdRequestModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data =  Map<String, dynamic>();
     data['authkey_web'] = this.authkeyWeb;
     data['authkey_mobile'] = this.authkeyMobile;
     data['userid'] = this.userid;

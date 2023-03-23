@@ -47,7 +47,7 @@ class _HowToBuyPageState extends State<HowToBuyPage> {
                   value: selected,
                   onChanged: (bool? value) {},
                 ),
-                title: Text(list!.name!, style:
+                title: Text(list.name!, style:
                 Theme
                     .of(context)
                     .textTheme

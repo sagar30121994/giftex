@@ -1,5 +1,5 @@
 
-
+import 'package:add_2_calendar/add_2_calendar.dart';
 import 'dart:async';
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -103,7 +103,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                   shape: RoundedRectangleBorder(),
                   onChanged: (bool? value){},
                 ),
-                title: Text(list!.name!, style:
+                title: Text(list.name!, style:
                 Theme.of(context).textTheme.bodyText1!.copyWith(
                   color: Colors.black,
                   fontWeight: FontWeight.w400,
@@ -1490,8 +1490,21 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
           //       ),
           //     ),
 
-
-              auctionViewModel.isLoadingForUpCommingAuction?SliverToBoxAdapter(child: LinearProgressIndicator()):
+              // auctionViewModel.isLoadingForUpCommingAuction?SliverToBoxAdapter(child: Container()):
+              //
+              // auctionViewModel.auctionType=="live"?
+              //
+              // auctionViewModel.upcomingAuctionResponse!.result == null?SliverToBoxAdapter(child: Container()):
+              //
+              // auctionViewModel.isLoadingForUpCommingAuction?SliverToBoxAdapter(child: Container()):SliverToBoxAdapter(
+              //   child: Row(
+              //     children: [
+              //       Image.asset("image/list.png"),
+              //     ],
+              //   ),
+              // ):SliverToBoxAdapter(child: Container()),
+              //
+              //
 
               auctionViewModel.auctionType=="live"?
 
@@ -1594,6 +1607,24 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                             InkWell(
                               onTap: (){
                                 // Navigator.push(context, MaterialPageRoute(builder: (context) => GetOtppage()));
+                                final Event event = Event(
+                                  title: 'Event title',
+                                  description: 'Event description',
+                                  location: 'Event location',
+                                  startDate: DateTime.now(),
+                                  endDate: DateTime.now().add(Duration(days: 2)),
+                                  iosParams: IOSParams(
+                                    reminder: Duration(/* Ex. hours:1 */), // on iOS, you can set alarm notification after your event.
+                                    url: 'https://www.example.com', // on iOS, you can set url to your event.
+                                  ),
+                                  androidParams: AndroidParams(
+                                    emailInvites: [], // on Android, you can add invite emails to your event.
+                                  ),
+                                );
+
+
+                                Add2Calendar.addEvent2Cal(event);
+
                               },
                               child: Container(
                                   height: 50,

@@ -36,7 +36,7 @@ class _MyOrderHistorypageState extends State<MyOrderHistorypage> {
                   value: selected,
                   onChanged: (bool? value){},
                 ),
-                title: Text(list!.name!, style:
+                title: Text(list.name!, style:
                 Theme.of(context).textTheme.bodyText1!.copyWith(
                   color: Colors.black,
                   fontWeight: FontWeight.w400,

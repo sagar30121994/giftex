@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:giftex/data/network/models/responce/liveauction/upcommingauctionresponse.dart';
-import 'package:giftex/screens/productdetailspage/productdetailpage.dart';
+import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
+import 'package:giftex/screens/liveauction/liveauction.dart';
+
 
 class LiveItem extends StatefulWidget {
    LiveItem(this.auction,this. index);
@@ -41,7 +43,7 @@ class _LiveItemState extends State<LiveItem> {
                   Flexible(
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
-                      child: Image.network("${widget.auction!.image}",height: 191,
+                      child: Image.network("${widget.auction.image}",height: 191,
                         width: 130,
                         fit: BoxFit.fill,
                       ),
@@ -74,19 +76,28 @@ class _LiveItemState extends State<LiveItem> {
                         //   ),),
                         // ),
 
-                        Container(
-                          padding: EdgeInsets.symmetric(horizontal: 24,vertical: 8),
-                          decoration: BoxDecoration(
-                              color: Color(0xffE74B52),
-                              borderRadius: BorderRadius.all(Radius.circular(16))
-                          ),
-                          child:  Text("EXPLORE",
-                            textAlign: TextAlign.start,
-                            style:
-                            Theme.of(context).textTheme.button!.copyWith(
-                              color: Colors.white,
-                              letterSpacing: 2,
-                              fontWeight: FontWeight.bold,
+                        InkWell(
+                          onTap:(){
+                            // Navigator.push(context, MaterialPageRoute(builder: (context) => LiveAuctionUiDetails(widget.auction)));
+                            auctionViewModel.selectedAuction=widget.auction;
+
+                            bottomViewModel.selectedIndex=8;
+
+                          } ,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(horizontal: 24,vertical: 8),
+                            decoration: BoxDecoration(
+                                color: Color(0xffE74B52),
+                                borderRadius: BorderRadius.all(Radius.circular(16))
+                            ),
+                            child:  Text("EXPLORE",
+                              textAlign: TextAlign.start,
+                              style:
+                              Theme.of(context).textTheme.button!.copyWith(
+                                color: Colors.white,
+                                letterSpacing: 2,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),

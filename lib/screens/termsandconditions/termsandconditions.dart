@@ -757,12 +757,12 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 16,),
+                  const SizedBox(height: 16,),
                   Container(
-                    padding: EdgeInsets.only(left: 0,right: 16),
-                    margin: EdgeInsets.only(left: 16,right: 16),
+                    padding:const EdgeInsets.only(left: 0,right: 16),
+                    margin:const EdgeInsets.only(left: 16,right: 16),
                     decoration: BoxDecoration(
-                        boxShadow: [
+                        boxShadow:const [
                           BoxShadow(
                             offset: Offset(2, 2),
                             blurRadius: 6,
@@ -785,7 +785,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                       baseColor: Colors.white,
                       expandedColor: Colors.red[50],
                       key: cardI,
-                      trailing: Icon(Icons.add,size: 18,color: Colors.black,),
+                      trailing:const Icon(Icons.add,size: 18,color: Colors.black,),
                       // leading: Container(
                       //   height: 60,
                       //   width: 60,
@@ -803,7 +803,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                             .textTheme
                             .subtitle1!
                             .copyWith(
-                          color: Color(0XFF000000),
+                          color:const Color(0XFF000000),
                           fontWeight: FontWeight.w500,
                         ),),
                       children: <Widget>[
@@ -817,19 +817,19 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                                 .textTheme
                                 .bodyText1!
                                 .copyWith(
-                              color: Color(0XFF000000),
+                              color:const Color(0XFF000000),
                               fontWeight: FontWeight.w400,
                             ),),
                         ),
                       ],
                     ),
                   ),
-                  SizedBox(height: 16,),
+                  const SizedBox(height: 16,),
                   Container(
-                    padding: EdgeInsets.only(left: 0,right: 16),
-                    margin: EdgeInsets.only(left: 16,right: 16),
+                    padding:const EdgeInsets.only(left: 0,right: 16),
+                    margin:const EdgeInsets.only(left: 16,right: 16),
                     decoration: BoxDecoration(
-                        boxShadow: [
+                        boxShadow:const [
                           BoxShadow(
                             offset: Offset(2, 2),
                             blurRadius: 6,
@@ -841,7 +841,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                             color: Color.fromRGBO(226, 223, 202, 0.39),
                           )
                         ],
-                        border: Border.all(color: Color(0xffDDE3E8),width: 1),
+                        border: Border.all(color:const Color(0xffDDE3E8),width: 1),
                         // image: DecorationImage(
                         //   image: AssetImage("image/Rectangle 2 (2).png"),
                         //   fit: BoxFit.cover,
@@ -870,7 +870,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                             .textTheme
                             .subtitle1!
                             .copyWith(
-                          color: Color(0XFF000000),
+                          color:const Color(0XFF000000),
                           fontWeight: FontWeight.w500,
                         ),),
                       children: <Widget>[
@@ -884,31 +884,31 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                                 .textTheme
                                 .bodyText1!
                                 .copyWith(
-                              color: Color(0XFF000000),
+                              color:const Color(0XFF000000),
                               fontWeight: FontWeight.w400,
                             ),),
                         ),
                       ],
                     ),
                   ),
-                   SizedBox(height: 16,),
+                  const SizedBox(height: 16,),
                   Container(
-                    padding: EdgeInsets.only(left: 0,right: 16),
-                    margin: EdgeInsets.only(left: 16,right: 16),
+                    padding:const EdgeInsets.only(left: 0,right: 16),
+                    margin:const EdgeInsets.only(left: 16,right: 16),
                     decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
+                        boxShadow: const [
+                           BoxShadow(
                             offset: Offset(2, 2),
                             blurRadius: 6,
                             color: Color.fromRGBO(226, 223, 202, 0.39),
                           ),
-                          BoxShadow(
+                             BoxShadow(
                             offset: Offset(2, 2),
                             blurRadius: 8,
                             color: Color.fromRGBO(226, 223, 202, 0.39),
                           )
                         ],
-                        border: Border.all(color: Color(0xffDDE3E8),width: 1),
+                        border: Border.all(color:const Color(0xffDDE3E8),width: 1),
                         // image: DecorationImage(
                         //   image: AssetImage("image/Rectangle 2 (2).png"),
                         //   fit: BoxFit.cover,
@@ -919,7 +919,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                       baseColor: Colors.white,
                       expandedColor: Colors.red[50],
                       key: cardK,
-                      trailing: Icon(Icons.add,size: 18,color: Colors.black,),
+                      trailing:const Icon(Icons.add,size: 18,color: Colors.black,),
                       // leading: Container(
                       //   height: 60,
                       //   width: 60,
@@ -958,14 +958,14 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 16,),
+                  const SizedBox(height: 16,),
                   ElevatedButton(
                     style:   ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Color(0XFFF9F9F9)),
+                        backgroundColor: MaterialStateProperty.all(const Color(0XFFF9F9F9)),
                         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
+                             RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(14.0),
-                                side: BorderSide(color: Color(0xff747474),width: 0.38)
+                                side:const BorderSide(color: Color(0xff747474),width: 0.38)
                             )
                         )
                     ),

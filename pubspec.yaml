@@ -63,6 +63,9 @@ dependencies:
   expansion_tile_card: ^2.0.0
   flutter_otp_text_field: ^1.1.0+2
   smooth_page_indicator: ^1.0.0+2
+  add_2_calendar: ^2.1.2
+  intl: ^0.18.0
+  signalr_flutter: ^0.2.0
 #  validators: ^3.0.0
 
 

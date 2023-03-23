@@ -15,11 +15,11 @@ class AnalysisRequestModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['authkey_web'] = this.authkeyWeb;
-    data['authkey_mobile'] = this.authkeyMobile;
-    data['userid'] = this.userid;
-    data['AuctionId'] = this.auctionId;
+    final Map<String, dynamic> data =  Map<String, dynamic>();
+    data['authkey_web'] = authkeyWeb;
+    data['authkey_mobile'] = authkeyMobile;
+    data['userid'] = userid;
+    data['AuctionId'] = auctionId;
     return data;
   }
 }

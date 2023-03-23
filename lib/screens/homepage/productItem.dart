@@ -29,7 +29,7 @@ class _ProductItemState extends State<ProductItem> {
               ),
               InkWell(
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailPage()));
+                  // Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailPage()));
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(left: 25.0,right: 25),

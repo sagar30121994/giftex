@@ -30,28 +30,28 @@ ThemeData _buildDarkTheme() {
     colorScheme: _shrineColorScheme,
     cardColor: Colors.grey[100],
     dividerColor:Colors.black,
-    drawerTheme: DrawerThemeData(
+    drawerTheme:const DrawerThemeData(
       backgroundColor: Color(0xff32429A)
     ),
-    appBarTheme: AppBarTheme(
+    appBarTheme:const AppBarTheme(
       backgroundColor: Color(0xff32429A),
     ),
 
 
 
     scrollbarTheme: ScrollbarThemeData(
-      thumbColor: MaterialStateProperty.all(Color(0XffB45156),),
+      thumbColor: MaterialStateProperty.all(const Color(0XffB45156),),
       thumbVisibility: MaterialStateProperty.all(true,),
       interactive: true
     ),
 
-    scaffoldBackgroundColor: Color(0xffF7FAFD),
-    buttonTheme: ButtonThemeData(
+    scaffoldBackgroundColor:const Color(0xffF7FAFD),
+    buttonTheme:const ButtonThemeData(
       buttonColor: Color(0xff32429A),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
-        backgroundColor:MaterialStateProperty.all<Color>(Color(0xffB45156),),
+        backgroundColor:MaterialStateProperty.all<Color>(const Color(0xffB45156),),
         shadowColor:
         MaterialStateProperty.all(Colors.transparent),
 
@@ -60,21 +60,21 @@ ThemeData _buildDarkTheme() {
 
 
 
-    iconTheme: IconThemeData(color: Colors.black),
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
+    iconTheme:const IconThemeData(color: Colors.black),
+    floatingActionButtonTheme:const FloatingActionButtonThemeData(
         backgroundColor: Color(0xff32429A),
         splashColor: Colors.greenAccent),
     textTheme: TextTheme(
         headline6: GoogleFonts.poppins(
-            color: Colors.black, textStyle: TextStyle(color: Colors.black)),
+            color: Colors.black, textStyle:const TextStyle(color: Colors.black)),
         bodyText1: GoogleFonts.poppins(
-            color: Colors.black, textStyle: TextStyle(color: Colors.black)),
+            color: Colors.black, textStyle:const TextStyle(color: Colors.black)),
         bodyText2: GoogleFonts.poppins(
-            color: Colors.black, textStyle: TextStyle(color: Colors.black)),
+            color: Colors.black, textStyle:const TextStyle(color: Colors.black)),
         subtitle1: GoogleFonts.poppins(
-            color: Colors.black, textStyle: TextStyle(color: Colors.black)),
+            color: Colors.black, textStyle:const TextStyle(color: Colors.black)),
         subtitle2: GoogleFonts.poppins(
-            color: Colors.black, textStyle: TextStyle(color: Colors.black)),
+            color: Colors.black, textStyle:const TextStyle(color: Colors.black)),
         headline4: GoogleFonts.poppins(
           color: Colors.black,
         ),
@@ -87,7 +87,7 @@ ThemeData _buildDarkTheme() {
         button: GoogleFonts.poppins(
           color: Colors.black,
         )),
-    cardTheme: CardTheme(
+    cardTheme:const CardTheme(
       elevation: 8,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
