@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
+import 'package:giftex/screens/kyc/kycdetails.dart';
 
 class KYCPage extends StatefulWidget {
   const KYCPage({Key? key}) : super(key: key);
@@ -156,7 +157,7 @@ class _KYCPageState extends State<KYCPage> {
               SizedBox(height: 16,),
               InkWell(
                 onTap: (){
-                  // Navigator.push(context, MaterialPageRoute(builder: (context) => KYCPage()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => KYCDetailspage()));
                 },
                 child: Container(
                   height: 50,

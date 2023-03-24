@@ -66,6 +66,8 @@ dependencies:
   add_2_calendar: ^2.1.2
   intl: ^0.18.0
   signalr_flutter: ^0.2.0
+  flutter_datetime_picker: ^1.5.1
+#  country_picker: ^1.1.4
 #  validators: ^3.0.0
 
 

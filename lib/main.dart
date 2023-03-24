@@ -7,6 +7,7 @@ import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationba
 import 'package:giftex/screens/ecommercecard/card.dart';
 import 'package:giftex/screens/homepage/homapage.dart';
 import 'package:giftex/screens/howtosell/howtosell.dart';
+import 'package:giftex/screens/kyc/kycpage.dart';
 import 'package:giftex/screens/liveauction/liveauction.dart';
 import 'package:giftex/screens/newsandupdates/newsandupdates.dart';
 import 'package:giftex/screens/productdetailspage/productdetailpage.dart';
@@ -49,10 +50,10 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'Giftex',
       theme: kDarkTheme,
-      home: localSharedPrefrence!
-          .getLoginStatus()?DashboardUi(0):Loginpage()
+      // home: localSharedPrefrence!
+      //     .getLoginStatus()?DashboardUi(0):Loginpage()
 
-      // home: Loginpage(),
+      home: KYCPage(),
     );
   }
 }
