@@ -18,7 +18,8 @@ class KYCDetailspage extends StatefulWidget {
 
 class _KYCDetailspageState extends State<KYCDetailspage> {
   TextEditingController dobController=TextEditingController();
-
+  bool male=false;
+  bool female=false;
   @override
   void initState() {
     // TODO: implement initState
@@ -123,7 +124,10 @@ class _KYCDetailspageState extends State<KYCDetailspage> {
                             hintText: 'DD/MM/YYYY',
                             // prefixIcon:
                             // prefixIcon: ,
-                            // icon: Image.asset("image/people.png",height: 32),
+                            suffixIcon: Padding(
+                              padding: const EdgeInsets.all(13.0),
+                              child: Image.asset("image/Vector-13.png",height: 12,fit: BoxFit.fill,),
+                            ),
                             filled: true,
                             isDense: false,
                             fillColor: Color(0xffFFFFFF),
@@ -157,45 +161,65 @@ class _KYCDetailspageState extends State<KYCDetailspage> {
                       SizedBox(height: 10,),
                       Row(
                         children: [
-                          Container(
-                            height: 150,
-                            color: Color(0xffFFFFFF),
-                            width: MediaQuery.of(context).size.width*.40,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset("image/Group (30).png"),
-                                SizedBox(height: 10,),
-                                Text("Male",
-                                  textAlign: TextAlign.center,
-                                  style:
-                                  Theme.of(context).textTheme.subtitle1!.copyWith(
-                                    color: Color(0xff2D2D2D),
-                                    fontWeight: FontWeight.w400,
+                          InkWell(
+                            onTap: (){
+                              male=true;
+                              female=false;
+                            },
+                            child: Container(
+                              height: 150,
+
+                              width: MediaQuery.of(context).size.width*.40,
+                              decoration: BoxDecoration(
+                                color: Color(0xffFFFFFF),
+                                border: Border.all(color: male?Color(0xff8C9FB1):Color(0xffFFFFFF))
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset("image/Group (30).png"),
+                                  SizedBox(height: 10,),
+                                  Text("Male",
+                                    textAlign: TextAlign.center,
+                                    style:
+                                    Theme.of(context).textTheme.subtitle1!.copyWith(
+                                      color: Color(0xff2D2D2D),
+                                      fontWeight: FontWeight.w400,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                           Spacer(),
-                          Container(
-                            height: 150,
-                            color: Color(0xffFFFFFF),
-                            width: MediaQuery.of(context).size.width*.40,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset("image/Group (31).png"),
-                                SizedBox(height: 10,),
-                                Text("Female",
-                                  textAlign: TextAlign.center,
-                                  style:
-                                  Theme.of(context).textTheme.subtitle1!.copyWith(
-                                    color: Color(0xff2D2D2D),
-                                    fontWeight: FontWeight.w400,
+                          InkWell(
+                            onTap: (){
+                              male=false;
+                              female=true;
+                            },
+                            child: Container(
+                              height: 150,
+                              // color: Color(0xffFFFFFF),
+                              width: MediaQuery.of(context).size.width*.40,
+                              decoration: BoxDecoration(
+                                  color: Color(0xffFFFFFF),
+                                  border: Border.all(color: female?Color(0xff8C9FB1):Color(0xffFFFFFF))
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset("image/Group (31).png"),
+                                  SizedBox(height: 10,),
+                                  Text("Female",
+                                    textAlign: TextAlign.center,
+                                    style:
+                                    Theme.of(context).textTheme.subtitle1!.copyWith(
+                                      color: Color(0xff2D2D2D),
+                                      fontWeight: FontWeight.w400,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           )
                         ],

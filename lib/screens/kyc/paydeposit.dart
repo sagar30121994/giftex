@@ -109,6 +109,7 @@ class _KYCPayDepositpageState extends State<KYCPayDepositpage> {
                             Radio(
                               value: Biding.bid1,
                               groupValue: _bid,
+                              activeColor: Theme.of(context).colorScheme.error,
                               onChanged: (Biding? value) {
                                 setState(() {
                                   _bid = value;
@@ -171,6 +172,16 @@ class _KYCPayDepositpageState extends State<KYCPayDepositpage> {
                         color: Color(0xffEAEEF2),
                         child: Row(
                           children: [
+                            Radio(
+                              value: Biding.bid2,
+                              groupValue: _bid,
+                              activeColor: Theme.of(context).colorScheme.error,
+                              onChanged: (Biding? value) {
+                                setState(() {
+                                  _bid = value;
+                                });
+                              },
+                            ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -227,6 +238,17 @@ class _KYCPayDepositpageState extends State<KYCPayDepositpage> {
                         color: Color(0xffEAEEF2),
                         child: Row(
                           children: [
+                            Radio(
+                              value: Biding.bid3,
+                              groupValue: _bid,
+                              // fillColor: MaterialStateProperty.all(const Color(0XffFFFFFF),),
+                              activeColor: Theme.of(context).colorScheme.error,
+                              onChanged: (Biding? value) {
+                                setState(() {
+                                  _bid = value;
+                                });
+                              },
+                            ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
