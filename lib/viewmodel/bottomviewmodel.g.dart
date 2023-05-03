@@ -24,6 +24,20 @@ mixin _$BottomViewModel on _BottomViewModel, Store {
     });
   }
 
+  final _$_BottomViewModelActionController =
+      ActionController(name: '_BottomViewModel');
+
+  @override
+  void setIndex(int index) {
+    final _$actionInfo = _$_BottomViewModelActionController.startAction(
+        name: '_BottomViewModel.setIndex');
+    try {
+      return super.setIndex(index);
+    } finally {
+      _$_BottomViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''

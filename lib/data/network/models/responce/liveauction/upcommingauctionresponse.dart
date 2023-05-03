@@ -57,7 +57,7 @@ class Auctions {
   String? auctionId;
   String? displayDate;
   int? remainingSeconds;
-  int? totalSaleValue;
+  dynamic totalSaleValue;
   // List<Null>? departments;
 
   Auctions(

@@ -21,6 +21,7 @@ class Auction{
   final String upcommingAuctionLots = 'UpcomingLots';
   final String singleAuctionLots = 'UpcomingAuctionInformation';
   final String bidHistory = 'GetBidHistory';
+  final String getLotById = 'Lot/GetByLotId';
   final String myAuctionGallery = 'User/myauctiongallary';
   final String getReviewauctions = 'live/reviewlots';
 }

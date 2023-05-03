@@ -1,28 +1,30 @@
 
 
+
 import 'dart:async';
 
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'dart:io';
+import 'package:http/http.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:giftex/data/network/models/responce/liveauction/upcommingauctionresponse.dart';
-import 'package:giftex/screens/components/bottomappbar.dart';
-import 'package:giftex/screens/components/bottomnavigationbar/dashborard2.dart';
 import 'package:giftex/screens/filltersearch/filltersearch.dart';
-import 'package:giftex/screens/homepage/liveitem.dart';
 import 'package:giftex/screens/liveauction/browsitemlistitem.dart';
 import 'package:giftex/screens/liveauction/liveauction.dart';
-import 'package:giftex/screens/productdetailspage/productdetailpage.dart';
-import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
-import 'package:sliver_tools/sliver_tools.dart';
-
-import '../components/bottomnavigationbar/bottomnavigationbar.dart';
+import 'package:logging/logging.dart';
+import 'package:signalr_netcore/signalr_client.dart';
 import '../components/footer/footer.dart';
 import '../components/header.dart';
-import '../customepaint.dart';
 import 'dart:math';
-// AuctionViewModel auctionViewModel=AuctionViewModel();
+
+class HttpOverrideCertificateVerificationInDev extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
+}
 class LiveAuctionUiDetails extends StatefulWidget {
   LiveAuctionUiDetails();
   @override
@@ -39,6 +41,14 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
   Timer? timer;
 
   bool countDown =true, selected=false;
+  bool? _connectionIsOpen;
+
+  bool get connectionIsOpen => _connectionIsOpen??false;
+  String _serverUrl="https://api-uat.astaguru.com/leadingnotify";
+  HubConnection? _hubConnection;
+  Logger? _logger;
+  StreamSubscription<LogRecord>? _logMessagesSub;
+
 
   @override
   void initState() {
@@ -59,9 +69,75 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
 
     auctionViewModel.getSingleAuctionDetails(auctionViewModel.selectedAuction!.auctionId!);
     auctionViewModel.getUpcommingBidAuction(auctionViewModel.selectedAuction!.auctionId!);
+    _connectionIsOpen = false;
 
+
+    Logger.root.level = Level.ALL;
+    _logMessagesSub = Logger.root.onRecord.listen(_handleLogMessage);
+    _logger = Logger("LeadingBroacastMessege");
+
+    openChatConnection();
     super.initState();
     reset();
+  }
+
+
+  void _handleLogMessage(LogRecord msg) {
+    print("*********"+msg.toString());
+  }
+  set connectionIsOpen(bool value) {
+    // updateValue(connectionIsOpenPropName, _connectionIsOpen, value,
+    //         (v) => _connectionIsOpen = v);
+    // return
+  }
+  Future<void> openChatConnection() async {
+    final logger = _logger;
+
+    if (_hubConnection == null) {
+      final httpConnectionOptions = HttpConnectionOptions(
+          httpClient: WebSupportingHttpClient(logger,
+              httpClientCreateCallback:(cl)=>_httpClientCreateCallback(cl)),
+          logger: logger,
+          logMessageContent: true);
+
+      _hubConnection = HubConnectionBuilder()
+          .withUrl(_serverUrl, options: httpConnectionOptions)
+          .withAutomaticReconnect(retryDelays: [2000, 5000, 10000, 20000])
+          .configureLogging(logger!)
+
+          .build();
+      _hubConnection!.onclose(({error}) => connectionIsOpen = false);
+      _hubConnection!.onreconnecting(({error}) {
+        print("onreconnecting called");
+        connectionIsOpen = false;
+      });
+      _hubConnection!.onreconnected(({connectionId}) {
+        print("onreconnected called");
+        connectionIsOpen = true;
+      });
+      _hubConnection!.on("LeadingBroacastMessage", _handleIncommingChatMessage);
+    }
+
+    if (_hubConnection!.state != HubConnectionState.Connected) {
+      await _hubConnection!.start();
+      connectionIsOpen = true;
+    }
+  }
+  void _httpClientCreateCallback(Client httpClient) {
+    HttpOverrides.global = HttpOverrideCertificateVerificationInDev();
+  }
+
+  void _handleIncommingChatMessage(List<Object?>? args) {
+
+    args!.forEach((element) {
+      print("********"+element.toString());
+    });
+
+    auctionViewModel.getLotById("${args[0]}");
+    // final String senderName = args[0];
+    // final String message = args[1];
+    // _chatMessages.add(ChatMessage(senderName, message));
+    // notifyPropertyChanged(chatMessagesPropName);
   }
 
   void reset(){

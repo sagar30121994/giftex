@@ -299,6 +299,13 @@ mixin _$AuctionViewModel on _AuctionViewModel, Store {
     });
   }
 
+  final _$getLotByIdAsyncAction = AsyncAction('_AuctionViewModel.getLotById');
+
+  @override
+  Future<HttpResponse> getLotById(String lotId) {
+    return _$getLotByIdAsyncAction.run(() => super.getLotById(lotId));
+  }
+
   @override
   String toString() {
     return '''

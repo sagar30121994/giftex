@@ -13,6 +13,10 @@ abstract class _BottomViewModel with Store {
   int selectedIndex=0;
 
 
+  @action
+  void setIndex(int index){
+    selectedIndex=index;
+  }
 
 
 }

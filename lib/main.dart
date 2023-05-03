@@ -50,10 +50,10 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'Giftex',
       theme: kDarkTheme,
-      // home: localSharedPrefrence!
-      //     .getLoginStatus()?DashboardUi(0):Loginpage()
+      home: localSharedPrefrence!
+          .getLoginStatus()?DashboardUi(0):Loginpage()
 
-      home: KYCPage(),
+      // home: KYCPage(),
     );
   }
 }

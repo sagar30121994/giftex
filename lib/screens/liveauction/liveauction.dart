@@ -1,24 +1,18 @@
 
 import 'package:add_2_calendar/add_2_calendar.dart';
 import 'dart:async';
-
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:giftex/screens/components/bottomappbar.dart';
-import 'package:giftex/screens/components/bottomnavigationbar/dashborard2.dart';
+import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
 import 'package:giftex/screens/filltersearch/filltersearch.dart';
 import 'package:giftex/screens/homepage/liveitem.dart';
-import 'package:giftex/screens/productdetailspage/productdetailpage.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
-import 'package:sliver_tools/sliver_tools.dart';
 
-import '../components/bottomnavigationbar/bottomnavigationbar.dart';
 import '../components/footer/footer.dart';
 import '../components/header.dart';
-import '../customepaint.dart';
 import 'dart:math';
+
 AuctionViewModel auctionViewModel=AuctionViewModel();
 class LiveAuctionUi extends StatefulWidget {
   String auction;
@@ -1702,19 +1696,32 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                           ),
                                         ),
                                         const SizedBox(height: 16,),
-                                        Container(
-                                          padding: EdgeInsets.all(8),
-                                          decoration: BoxDecoration(
-                                              color: Color(0xffEAEEF2),
-                                              borderRadius: BorderRadius.all(Radius.circular(10))
-                                          ),
-                                          child:  Text("EXPLORE",
-                                            textAlign: TextAlign.start,
-                                            style:
-                                            Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold,
-                                                letterSpacing: 2
+                                        InkWell(
+                                          onTap:(){
+                                            // Navigator.push(context, MaterialPageRoute(builder: (context) => LiveAuctionUiDetails(widget.auction)));
+
+                                           setState((){
+                                             auctionViewModel.selectedAuction=auctionViewModel.upcomingAuctionResponse!.result!.auctions![0];
+
+                                             bottomViewModel.setIndex(8);
+                                           });
+
+
+                                          } ,
+                                          child: Container(
+                                            padding: EdgeInsets.all(8),
+                                            decoration: BoxDecoration(
+                                                color: Color(0xffEAEEF2),
+                                                borderRadius: BorderRadius.all(Radius.circular(10))
+                                            ),
+                                            child:  Text("EXPLORE",
+                                              textAlign: TextAlign.start,
+                                              style:
+                                              Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                  letterSpacing: 2
+                                              ),
                                             ),
                                           ),
                                         ),

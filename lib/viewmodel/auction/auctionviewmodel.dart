@@ -26,7 +26,7 @@ abstract class _AuctionViewModel with Store {
   late LocalSharedPrefrence localSharedPrefrence;
 
   @observable
-  String liveAuctionType = "";
+  String liveAuctionType = "browselist";
 
   @observable
   bool isLoadingForUpCommingAuction = false;
@@ -130,6 +130,50 @@ abstract class _AuctionViewModel with Store {
       upComingLotsResponse = httpResponse.data;
     }
     isLoadingForUpCommingAuction = false;
+    return httpResponse;
+  }
+
+
+  @action
+  Future<HttpResponse> getLotById(String lotId) async {
+    // isLoadingForUpCommingAuction = true;
+
+    HttpResponse httpResponse =
+    await auctionRepo.getLotById(lotId);
+    UpComingLotsResponse tempResponse =  upComingLotsResponse!;
+    if(liveAuctionType=="browselist"){
+      tempResponse =  upComingLotsResponse!;
+    }else if(liveAuctionType=="review"){
+      tempResponse =  getliveauctionsResponse!;
+    }else if(liveAuctionType=="mygallery"){
+      tempResponse =  myAuctionGalleryResponse!;
+    }
+
+    if(httpResponse.status==200) {
+      // upComingLotsResponse = httpResponse.data;
+
+      for(int i=0;i<tempResponse.result!.lots!.length;i++){
+        if(tempResponse.result!.lots![i].lotId == lotId){
+          tempResponse.result!.lots!.removeAt(i);
+          tempResponse.result!.lots!.insert(i,httpResponse.data);
+
+        }
+      }
+      if(liveAuctionType=="browselist"){
+        upComingLotsResponse=tempResponse;
+      }else if(liveAuctionType=="review"){
+        getliveauctionsResponse=tempResponse;
+      }else if(liveAuctionType=="mygallery"){
+        myAuctionGalleryResponse=tempResponse ;
+      }
+
+
+      // upComingLotsResponse=tempResponse;
+
+
+
+    }
+    // isLoadingForUpCommingAuction = false;
     return httpResponse;
   }
 

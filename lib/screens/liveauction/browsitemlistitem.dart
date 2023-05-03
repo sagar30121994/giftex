@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -7,9 +8,13 @@ import 'package:giftex/screens/liveauction/liveauction.dart';
 import 'package:giftex/screens/productdetailspage/productdetailpage.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
 import 'package:intl/intl.dart';
-import 'package:signalr_flutter/signalr_api.dart';
-import 'package:signalr_flutter/signalr_flutter.dart';
+import 'package:logging/logging.dart';
+
+import 'package:http/http.dart';
+import 'package:signalr_netcore/signalr_client.dart';
 import '../../data/network/models/responce/lot/upcominglotsresponse.dart';
+
+
 
 class BrowseItemListItem extends StatefulWidget {
    BrowseItemListItem(this.lots,this.grid,this.auctionViewModel);
@@ -27,22 +32,30 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> {
   Timer? countdownTimer;
   Duration myDuration = Duration(days: 5);
 
+
+
   @override
   void initState() {
     print("remaining time ${widget.lots.liveStatus!.remainingSeconds}");
     myDuration = Duration(seconds: int.parse(widget.lots.liveStatus!.remainingSeconds??"0"));
     startTimer();
     auctionViewModel.selectedProxyBid='';
-    SignalR signalR = SignalR(
-        'wss://api-uat.astaguru.com/leadingnotify',
-        "LeadingBroadcatMessage",
-        hubMethods: ["param1","param2","param3"],
-        statusChangeCallback: (status) => print(status),
-    hubCallback: (methodName, message) => print('MethodName = $methodName, Message = $message'));
-    signalR.connect();
+
+
+
+    // final hubConnection = HubConnectionBuilder().withUrl("https://api-uat.astaguru.com/leadingnotify").build();
+    //
+    //
+    // hubConnection.start()!.then((value)async => {
+    //       await hubConnection.invoke("LeadingBroacastMessege", args: <Object>["param1","param2","param3"]),
+    //
+    // });
+
+
 
     super.initState();
   }
+
 
   void startTimer() {
     countdownTimer =
@@ -57,9 +70,9 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> {
     stopTimer();
     setState(() => myDuration = Duration(days: 5));
   }
-  String hours = "0";
-  String minutes = "0";
-  String seconds = "0";
+  String hours = "00";
+  String minutes = "00";
+  String seconds = "00";
   void setCountDown() {
     final reduceSecondsBy = 1;
 
@@ -595,7 +608,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> {
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Container(
           color: Color(0xffF9F9F9),
-          height: (hours=="00" && minutes=="00" && seconds=="00")?280:350,
+          height: (hours=="00" && minutes=="00" && seconds=="00")?290:350,
           alignment: Alignment.center,
           child: Column(
             children: [
@@ -715,7 +728,18 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> {
                         SizedBox(
                           height: 8,
                         ),
-                        (hours=="00" && minutes=="00" && seconds=="00")?Container():Row(
+                        (hours=="00" && minutes=="00" && seconds=="00")?Container(
+                           child:(widget.lots.leadingUser!.id==widget.auctionViewModel.localSharedPrefrence.getUserId())?Align(
+                             alignment: Alignment.topRight,
+                             child: Column(
+
+                               children: [
+                                 Text("₹${widget.lots.leadingUser!.bid!.iNR}",style: Theme.of(context).textTheme.subtitle2,),
+                                 Text("${widget.lots.leadingUser!.notes}"),
+                               ],
+                             ),
+                           ):Container()
+                        ):Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -843,7 +867,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> {
                   ),
                   child: Text("${(widget.lots.leadingUser!.id==widget.auctionViewModel.localSharedPrefrence.getUserId())?"YOU OWN":widget.lots.bidCount!="0"?"BOUGHT IN":"THIS BID IS CLOSED"}",style: Theme.of(context).textTheme.subtitle2!.copyWith(color: Colors.white)),
                 ),
-              ):  Row(
+              ):Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisSize: MainAxisSize.max,
@@ -1190,7 +1214,17 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> {
                     ),
                   ),
                   SizedBox(width: 16,),
-                  (widget.lots.leadingUser!.id==widget.auctionViewModel.localSharedPrefrence.getUserId())?Container():InkWell(
+                  (widget.lots.leadingUser!.id==widget.auctionViewModel.localSharedPrefrence.getUserId())?myDuration.inSeconds > 0?Align(
+                    alignment: Alignment.topRight,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 24,vertical: 8),
+                      decoration: BoxDecoration(
+                          color:(widget.lots.leadingUser!.id==widget.auctionViewModel.localSharedPrefrence.getUserId())? Colors.blue: Colors.red,
+                          borderRadius: BorderRadius.circular(16)
+                      ),
+                      child: Text("${(widget.lots.leadingUser!.id==widget.auctionViewModel.localSharedPrefrence.getUserId())?"YOU ARE LEADING":widget.lots.bidCount!="0"?"BOUGHT IN":"THIS BID IS CLOSED"}",style: Theme.of(context).textTheme.subtitle2!.copyWith(color: Colors.white)),
+                    ),
+                  ):Container():InkWell(
                     onTap: () {
                       bool checked=false;
                       showModalBottomSheet<void>(
