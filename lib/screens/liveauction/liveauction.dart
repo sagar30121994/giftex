@@ -59,12 +59,12 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
       duration = countdownDuration);
     } else{
       setState(() =>
-      duration = Duration());
+      duration = new Duration());
     }
   }
 
   void startTimer(){
-    timer = Timer.periodic(Duration(seconds: 1),(_) => addTime());
+    timer = Timer.periodic(new Duration(seconds: 1),(_) => addTime());
   }
 
   void addTime(){
