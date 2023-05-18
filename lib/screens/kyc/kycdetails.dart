@@ -135,9 +135,9 @@ class _KYCDetailspageState extends State<KYCDetailspage> {
                           ),
                           onTap: (){
                             DatePicker.showDatePicker(context,
-                                theme: DatePickerTheme(
-                                  containerHeight: 210.0,
-                                ),
+                                // theme: DatePickerTheme(
+                                //   containerHeight: 210.0,
+                                // ),
                                 showTitleActions: true,
                                 minTime: DateTime(1, 1,1900),
                                 maxTime: DateTime.now(), onConfirm: (date) {
