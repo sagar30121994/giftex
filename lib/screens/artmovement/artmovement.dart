@@ -1,7 +1,7 @@
 
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:expansion_tile_card/expansion_tile_card.dart';
+// import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:giftex/screens/artistpage/artistpage.dart';
@@ -23,8 +23,8 @@ class _ArtMovementPageState extends State<ArtMovementPage> {
   String newsType="LATEST NEWS";
   PageController _controller=PageController();
   final controller = PageController(viewportFraction: 0.8, keepPage: true);
-  final GlobalKey<ExpansionTileCardState> cardA = new GlobalKey();
-  final GlobalKey<ExpansionTileCardState> cardB= new GlobalKey();
+  // final GlobalKey<ExpansionTileCardState> cardA = new GlobalKey();
+  // final GlobalKey<ExpansionTileCardState> cardB= new GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
