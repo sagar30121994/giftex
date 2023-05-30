@@ -1,4 +1,4 @@
-package com.example.giftex
+package com.astaguru
 
 import io.flutter.embedding.android.FlutterActivity
 

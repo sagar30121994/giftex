@@ -12,7 +12,7 @@ import 'package:giftex/screens/filltersearch/filltersearch.dart';
 import 'package:giftex/screens/liveauction/browsitemlistitem.dart';
 import 'package:giftex/screens/liveauction/liveauction.dart';
 import 'package:logging/logging.dart';
-import 'package:signalr_netcore/signalr_client.dart';
+// import 'package:signalr_netcore/signalr_client.dart';
 import '../components/footer/footer.dart';
 import '../components/header.dart';
 import 'dart:math';
@@ -45,7 +45,7 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
 
   bool get connectionIsOpen => _connectionIsOpen??false;
   String _serverUrl="https://api-uat.astaguru.com/leadingnotify";
-  HubConnection? _hubConnection;
+  // HubConnection? _hubConnection;
   Logger? _logger;
   StreamSubscription<LogRecord>? _logMessagesSub;
 
@@ -76,7 +76,7 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
     _logMessagesSub = Logger.root.onRecord.listen(_handleLogMessage);
     _logger = Logger("LeadingBroacastMessege");
 
-    openChatConnection();
+    // openChatConnection();
     super.initState();
     reset();
   }
@@ -90,39 +90,39 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
     //         (v) => _connectionIsOpen = v);
     // return
   }
-  Future<void> openChatConnection() async {
-    final logger = _logger;
-
-    if (_hubConnection == null) {
-      final httpConnectionOptions = HttpConnectionOptions(
-          httpClient: WebSupportingHttpClient(logger,
-              httpClientCreateCallback:(cl)=>_httpClientCreateCallback(cl)),
-          logger: logger,
-          logMessageContent: true);
-
-      _hubConnection = HubConnectionBuilder()
-          .withUrl(_serverUrl, options: httpConnectionOptions)
-          .withAutomaticReconnect(retryDelays: [2000, 5000, 10000, 20000])
-          .configureLogging(logger!)
-
-          .build();
-      _hubConnection!.onclose(({error}) => connectionIsOpen = false);
-      _hubConnection!.onreconnecting(({error}) {
-        print("onreconnecting called");
-        connectionIsOpen = false;
-      });
-      _hubConnection!.onreconnected(({connectionId}) {
-        print("onreconnected called");
-        connectionIsOpen = true;
-      });
-      _hubConnection!.on("LeadingBroacastMessage", _handleIncommingChatMessage);
-    }
-
-    if (_hubConnection!.state != HubConnectionState.Connected) {
-      await _hubConnection!.start();
-      connectionIsOpen = true;
-    }
-  }
+  // Future<void> openChatConnection() async {
+  //   final logger = _logger;
+  //
+  //   if (_hubConnection == null) {
+  //     final httpConnectionOptions = HttpConnectionOptions(
+  //         httpClient: WebSupportingHttpClient(logger,
+  //             httpClientCreateCallback:(cl)=>_httpClientCreateCallback(cl)),
+  //         logger: logger,
+  //         logMessageContent: true);
+  //
+  //     _hubConnection = HubConnectionBuilder()
+  //         .withUrl(_serverUrl, options: httpConnectionOptions)
+  //         .withAutomaticReconnect(retryDelays: [2000, 5000, 10000, 20000])
+  //         .configureLogging(logger!)
+  //
+  //         .build();
+  //     _hubConnection!.onclose(({error}) => connectionIsOpen = false);
+  //     _hubConnection!.onreconnecting(({error}) {
+  //       print("onreconnecting called");
+  //       connectionIsOpen = false;
+  //     });
+  //     _hubConnection!.onreconnected(({connectionId}) {
+  //       print("onreconnected called");
+  //       connectionIsOpen = true;
+  //     });
+  //     _hubConnection!.on("LeadingBroacastMessage", _handleIncommingChatMessage);
+  //   }
+  //
+  //   if (_hubConnection!.state != HubConnectionState.Connected) {
+  //     await _hubConnection!.start();
+  //     connectionIsOpen = true;
+  //   }
+  // }
   void _httpClientCreateCallback(Client httpClient) {
     HttpOverrides.global = HttpOverrideCertificateVerificationInDev();
   }
