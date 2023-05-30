@@ -6,13 +6,12 @@ part of 'signupresponce.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-SignUpResponse _$SignUpResponseFromJson(Map<String, dynamic> json) {
-  return SignUpResponse(
-    User.fromJson(json['user'] as Map<String, dynamic>),
-    json['token'] as String,
-    json['success'] as bool,
-  );
-}
+SignUpResponse _$SignUpResponseFromJson(Map<String, dynamic> json) =>
+    SignUpResponse(
+      User.fromJson(json['user'] as Map<String, dynamic>),
+      json['token'] as String,
+      json['success'] as bool,
+    );
 
 Map<String, dynamic> _$SignUpResponseToJson(SignUpResponse instance) =>
     <String, dynamic>{
@@ -21,22 +20,20 @@ Map<String, dynamic> _$SignUpResponseToJson(SignUpResponse instance) =>
       'token': instance.token,
     };
 
-User _$UserFromJson(Map<String, dynamic> json) {
-  return User(
-    json['username'] as String?,
-    json['password'] as String?,
-    json['name'] as String?,
-    json['phone'] as String?,
-    json['device_token'] as String?,
-    json['email'] as String?,
-    json['role'] as String?,
-    json['updatedAt'] as String?,
-    json['createdAt'] as String?,
-    json['id'] as int?,
-    json['franchise_id'] as String?,
-    json['is_deleted'] as bool?,
-  );
-}
+User _$UserFromJson(Map<String, dynamic> json) => User(
+      json['username'] as String?,
+      json['password'] as String?,
+      json['name'] as String?,
+      json['phone'] as String?,
+      json['device_token'] as String?,
+      json['email'] as String?,
+      json['role'] as String?,
+      json['updatedAt'] as String?,
+      json['createdAt'] as String?,
+      json['id'] as int?,
+      json['franchise_id'] as String?,
+      json['is_deleted'] as bool?,
+    );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'username': instance.username,

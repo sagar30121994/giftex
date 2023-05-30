@@ -36,7 +36,7 @@ class _FooterState extends State<Footer> {
                 child: Container(
                   //replace this Container with your Card
                   width: MediaQuery.of(context).size.width,
-                  height: 1700,
+                  height: 1100,
                   // color: Color(0Xff1F2A52),
                   color: Color(0Xff1F2A52),
                   // height: 830.0,
@@ -776,11 +776,14 @@ class _FooterState extends State<Footer> {
                       onTap: (){
                         Navigator.push(context, MaterialPageRoute(builder: (context) => TermsAndConditions()));
                       },
-                      child: Text("Terms & Condition | Privacy Policy | Copyright 2022",textAlign: TextAlign.center,
-                        style:
-                        Theme.of(context).textTheme.bodyText1!.copyWith(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text("Terms & Condition | Privacy Policy | Copyright 2022",textAlign: TextAlign.center,
+                          style:
+                          Theme.of(context).textTheme.bodyText1!.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),

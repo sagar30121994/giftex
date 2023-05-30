@@ -147,3 +147,7 @@ class WebCMSApiModel{
   final String loadtest = 'artistdata';
 
 }
+
+class Profile{
+  final String getUserAllDetails = 'GetUserAllDetails';
+}

@@ -30,12 +30,11 @@ class _GetOtppageState extends State<GetOtppage> {
       top: true,
       child: Scaffold(
         backgroundColor: Color(0xffF7FAFD),
-        body: SingleChildScrollView(
-            child:Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-
-              child: Column(
+        body: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          child: SingleChildScrollView(
+            child: Column(
                 children: [
                   Container(
                       height: 270,
@@ -214,7 +213,8 @@ class _GetOtppageState extends State<GetOtppage> {
                    ),
                  ),
 
-                  Spacer(),
+                //  Spacer(),
+                 // Expanded(child: Container()),
                   RichText(
                     textAlign: TextAlign.center,
                     text: TextSpan(
@@ -276,7 +276,7 @@ class _GetOtppageState extends State<GetOtppage> {
                   SizedBox(height: 50,)
                 ],
               ),
-            )
+          ),
         ),
       ),
     );

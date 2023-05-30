@@ -6,10 +6,11 @@ part of 'loginviewmodel.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$LoginViewModel on _LoginViewModel, Store {
-  final _$isLoadingAtom = Atom(name: '_LoginViewModel.isLoading');
+  late final _$isLoadingAtom =
+      Atom(name: '_LoginViewModel.isLoading', context: context);
 
   @override
   bool get isLoading {
@@ -24,7 +25,8 @@ mixin _$LoginViewModel on _LoginViewModel, Store {
     });
   }
 
-  final _$loginResponseAtom = Atom(name: '_LoginViewModel.loginResponse');
+  late final _$loginResponseAtom =
+      Atom(name: '_LoginViewModel.loginResponse', context: context);
 
   @override
   LoginResponse? get loginResponse {
@@ -39,7 +41,8 @@ mixin _$LoginViewModel on _LoginViewModel, Store {
     });
   }
 
-  final _$emailAtom = Atom(name: '_LoginViewModel.email');
+  late final _$emailAtom =
+      Atom(name: '_LoginViewModel.email', context: context);
 
   @override
   String get email {
@@ -54,7 +57,7 @@ mixin _$LoginViewModel on _LoginViewModel, Store {
     });
   }
 
-  final _$passAtom = Atom(name: '_LoginViewModel.pass');
+  late final _$passAtom = Atom(name: '_LoginViewModel.pass', context: context);
 
   @override
   String get pass {
@@ -69,7 +72,7 @@ mixin _$LoginViewModel on _LoginViewModel, Store {
     });
   }
 
-  final _$otpAtom = Atom(name: '_LoginViewModel.otp');
+  late final _$otpAtom = Atom(name: '_LoginViewModel.otp', context: context);
 
   @override
   String get otp {
@@ -84,7 +87,8 @@ mixin _$LoginViewModel on _LoginViewModel, Store {
     });
   }
 
-  final _$mobileAtom = Atom(name: '_LoginViewModel.mobile');
+  late final _$mobileAtom =
+      Atom(name: '_LoginViewModel.mobile', context: context);
 
   @override
   String get mobile {
@@ -99,8 +103,8 @@ mixin _$LoginViewModel on _LoginViewModel, Store {
     });
   }
 
-  final _$_LoginViewModelActionController =
-      ActionController(name: '_LoginViewModel');
+  late final _$_LoginViewModelActionController =
+      ActionController(name: '_LoginViewModel', context: context);
 
   @override
   dynamic setEmail(String value) {
@@ -212,7 +216,8 @@ mixin _$LoginViewModelErrorState on _LoginViewModelErrorState, Store {
               name: '_LoginViewModelErrorState.hasErrors'))
           .value;
 
-  final _$emailAtom = Atom(name: '_LoginViewModelErrorState.email');
+  late final _$emailAtom =
+      Atom(name: '_LoginViewModelErrorState.email', context: context);
 
   @override
   String? get email {
@@ -227,7 +232,8 @@ mixin _$LoginViewModelErrorState on _LoginViewModelErrorState, Store {
     });
   }
 
-  final _$passAtom = Atom(name: '_LoginViewModelErrorState.pass');
+  late final _$passAtom =
+      Atom(name: '_LoginViewModelErrorState.pass', context: context);
 
   @override
   String? get pass {

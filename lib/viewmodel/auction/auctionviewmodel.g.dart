@@ -6,10 +6,11 @@ part of 'auctionviewmodel.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$AuctionViewModel on _AuctionViewModel, Store {
-  final _$auctionTypeAtom = Atom(name: '_AuctionViewModel.auctionType');
+  late final _$auctionTypeAtom =
+      Atom(name: '_AuctionViewModel.auctionType', context: context);
 
   @override
   String get auctionType {
@@ -24,7 +25,8 @@ mixin _$AuctionViewModel on _AuctionViewModel, Store {
     });
   }
 
-  final _$liveAuctionTypeAtom = Atom(name: '_AuctionViewModel.liveAuctionType');
+  late final _$liveAuctionTypeAtom =
+      Atom(name: '_AuctionViewModel.liveAuctionType', context: context);
 
   @override
   String get liveAuctionType {
@@ -39,8 +41,8 @@ mixin _$AuctionViewModel on _AuctionViewModel, Store {
     });
   }
 
-  final _$isLoadingForUpCommingAuctionAtom =
-      Atom(name: '_AuctionViewModel.isLoadingForUpCommingAuction');
+  late final _$isLoadingForUpCommingAuctionAtom = Atom(
+      name: '_AuctionViewModel.isLoadingForUpCommingAuction', context: context);
 
   @override
   bool get isLoadingForUpCommingAuction {
@@ -56,8 +58,8 @@ mixin _$AuctionViewModel on _AuctionViewModel, Store {
     });
   }
 
-  final _$isLoadingForlotsAtom =
-      Atom(name: '_AuctionViewModel.isLoadingForlots');
+  late final _$isLoadingForlotsAtom =
+      Atom(name: '_AuctionViewModel.isLoadingForlots', context: context);
 
   @override
   bool get isLoadingForlots {
@@ -72,8 +74,8 @@ mixin _$AuctionViewModel on _AuctionViewModel, Store {
     });
   }
 
-  final _$isLoadingForProxyAtom =
-      Atom(name: '_AuctionViewModel.isLoadingForProxy');
+  late final _$isLoadingForProxyAtom =
+      Atom(name: '_AuctionViewModel.isLoadingForProxy', context: context);
 
   @override
   bool get isLoadingForProxy {
@@ -88,7 +90,8 @@ mixin _$AuctionViewModel on _AuctionViewModel, Store {
     });
   }
 
-  final _$isGridAtom = Atom(name: '_AuctionViewModel.isGrid');
+  late final _$isGridAtom =
+      Atom(name: '_AuctionViewModel.isGrid', context: context);
 
   @override
   bool get isGrid {
@@ -103,8 +106,8 @@ mixin _$AuctionViewModel on _AuctionViewModel, Store {
     });
   }
 
-  final _$selectedProxyBidAtom =
-      Atom(name: '_AuctionViewModel.selectedProxyBid');
+  late final _$selectedProxyBidAtom =
+      Atom(name: '_AuctionViewModel.selectedProxyBid', context: context);
 
   @override
   String get selectedProxyBid {
@@ -119,7 +122,8 @@ mixin _$AuctionViewModel on _AuctionViewModel, Store {
     });
   }
 
-  final _$countAtom = Atom(name: '_AuctionViewModel.count');
+  late final _$countAtom =
+      Atom(name: '_AuctionViewModel.count', context: context);
 
   @override
   int get count {
@@ -134,7 +138,8 @@ mixin _$AuctionViewModel on _AuctionViewModel, Store {
     });
   }
 
-  final _$selectedAuctionAtom = Atom(name: '_AuctionViewModel.selectedAuction');
+  late final _$selectedAuctionAtom =
+      Atom(name: '_AuctionViewModel.selectedAuction', context: context);
 
   @override
   Auctions? get selectedAuction {
@@ -149,8 +154,8 @@ mixin _$AuctionViewModel on _AuctionViewModel, Store {
     });
   }
 
-  final _$upcomingAuctionResponseAtom =
-      Atom(name: '_AuctionViewModel.upcomingAuctionResponse');
+  late final _$upcomingAuctionResponseAtom =
+      Atom(name: '_AuctionViewModel.upcomingAuctionResponse', context: context);
 
   @override
   UpcomingAuctionResponse? get upcomingAuctionResponse {
@@ -166,7 +171,8 @@ mixin _$AuctionViewModel on _AuctionViewModel, Store {
     });
   }
 
-  final _$bidInfoResponseAtom = Atom(name: '_AuctionViewModel.bidInfoResponse');
+  late final _$bidInfoResponseAtom =
+      Atom(name: '_AuctionViewModel.bidInfoResponse', context: context);
 
   @override
   BidInfoResponse? get bidInfoResponse {
@@ -181,8 +187,8 @@ mixin _$AuctionViewModel on _AuctionViewModel, Store {
     });
   }
 
-  final _$getProxyBidAmountResponseAtom =
-      Atom(name: '_AuctionViewModel.getProxyBidAmountResponse');
+  late final _$getProxyBidAmountResponseAtom = Atom(
+      name: '_AuctionViewModel.getProxyBidAmountResponse', context: context);
 
   @override
   GetProxyBidAmountResponse? get getProxyBidAmountResponse {
@@ -198,8 +204,8 @@ mixin _$AuctionViewModel on _AuctionViewModel, Store {
     });
   }
 
-  final _$additionalChargeResponseAtom =
-      Atom(name: '_AuctionViewModel.additionalChargeResponse');
+  late final _$additionalChargeResponseAtom = Atom(
+      name: '_AuctionViewModel.additionalChargeResponse', context: context);
 
   @override
   AdditionalChargeResponse? get additionalChargeResponse {
@@ -215,8 +221,8 @@ mixin _$AuctionViewModel on _AuctionViewModel, Store {
     });
   }
 
-  final _$proxyBidResponseAtom =
-      Atom(name: '_AuctionViewModel.proxyBidResponse');
+  late final _$proxyBidResponseAtom =
+      Atom(name: '_AuctionViewModel.proxyBidResponse', context: context);
 
   @override
   ProxyBidResponse? get proxyBidResponse {
@@ -231,8 +237,8 @@ mixin _$AuctionViewModel on _AuctionViewModel, Store {
     });
   }
 
-  final _$singleAuctionDetsilaResponseAtom =
-      Atom(name: '_AuctionViewModel.singleAuctionDetsilaResponse');
+  late final _$singleAuctionDetsilaResponseAtom = Atom(
+      name: '_AuctionViewModel.singleAuctionDetsilaResponse', context: context);
 
   @override
   SingleAuctionDetsilaResponse? get singleAuctionDetsilaResponse {
@@ -248,8 +254,8 @@ mixin _$AuctionViewModel on _AuctionViewModel, Store {
     });
   }
 
-  final _$upComingLotsResponseAtom =
-      Atom(name: '_AuctionViewModel.upComingLotsResponse');
+  late final _$upComingLotsResponseAtom =
+      Atom(name: '_AuctionViewModel.upComingLotsResponse', context: context);
 
   @override
   UpComingLotsResponse? get upComingLotsResponse {
@@ -265,8 +271,8 @@ mixin _$AuctionViewModel on _AuctionViewModel, Store {
     });
   }
 
-  final _$myAuctionGalleryResponseAtom =
-      Atom(name: '_AuctionViewModel.myAuctionGalleryResponse');
+  late final _$myAuctionGalleryResponseAtom = Atom(
+      name: '_AuctionViewModel.myAuctionGalleryResponse', context: context);
 
   @override
   UpComingLotsResponse? get myAuctionGalleryResponse {
@@ -282,8 +288,8 @@ mixin _$AuctionViewModel on _AuctionViewModel, Store {
     });
   }
 
-  final _$getliveauctionsResponseAtom =
-      Atom(name: '_AuctionViewModel.getliveauctionsResponse');
+  late final _$getliveauctionsResponseAtom =
+      Atom(name: '_AuctionViewModel.getliveauctionsResponse', context: context);
 
   @override
   UpComingLotsResponse? get getliveauctionsResponse {
@@ -299,7 +305,8 @@ mixin _$AuctionViewModel on _AuctionViewModel, Store {
     });
   }
 
-  final _$getLotByIdAsyncAction = AsyncAction('_AuctionViewModel.getLotById');
+  late final _$getLotByIdAsyncAction =
+      AsyncAction('_AuctionViewModel.getLotById', context: context);
 
   @override
   Future<HttpResponse> getLotById(String lotId) {
