@@ -3,7 +3,7 @@
 // import 'package:country_picker/country_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+// import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:giftex/data/network/models/responce/user/loginrespose.dart';
 import 'package:giftex/screens/kyc/kycpage.dart';
@@ -134,17 +134,17 @@ class _KYCDetailspageState extends State<KYCDetailspage> {
                             // isDense: true
                           ),
                           onTap: (){
-                            DatePicker.showDatePicker(context,
-                                theme: DatePickerTheme(
-                                  containerHeight: 210.0,
-                                ),
-                                showTitleActions: true,
-                                minTime: DateTime(1, 1,1900),
-                                maxTime: DateTime.now(), onConfirm: (date) {
-                                  print('confirm $date');
-                                  dobController.text = '${date.day}/${date.month}/${date.year}';
-                                  setState(() {});
-                          });
+                            // DatePicker.showDatePicker(context,
+                            //     // theme: DatePickerTheme(
+                            //     //   containerHeight: 210.0,
+                            //     // ),
+                            //     showTitleActions: true,
+                            //     minTime: DateTime(1, 1,1900),
+                            //     maxTime: DateTime.now(), onConfirm: (date) {
+                            //       print('confirm $date');
+                            //       dobController.text = '${date.day}/${date.month}/${date.year}';
+                            //       setState(() {});
+                          // });
                           }
                         ),
                       ),

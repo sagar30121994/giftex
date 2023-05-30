@@ -1,28 +1,21 @@
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:giftex/data/local/client/prefs.dart';
-import 'package:giftex/screens/aboutus/aboutus.dart';
-import 'package:giftex/screens/artistpage/artistpage.dart';
 import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
-import 'package:giftex/screens/ecommercecard/card.dart';
-import 'package:giftex/screens/homepage/homapage.dart';
-import 'package:giftex/screens/howtosell/howtosell.dart';
-import 'package:giftex/screens/kyc/kycpage.dart';
-import 'package:giftex/screens/liveauction/liveauction.dart';
-import 'package:giftex/screens/newsandupdates/newsandupdates.dart';
-import 'package:giftex/screens/productdetailspage/productdetailpage.dart';
-import 'package:giftex/screens/servicepage/servicepage.dart';
 import 'package:giftex/screens/signup/login.dart';
 import 'package:giftex/utils/themeutils.dart';
-
-import 'package:google_fonts/google_fonts.dart';
+import 'firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 SharedPreferences? myGlobalPreference;
 
 void main()  async{
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   myGlobalPreference = await SharedPreferences.getInstance();
   runApp(MyApp());
 }

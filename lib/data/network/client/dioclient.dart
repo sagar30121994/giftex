@@ -14,8 +14,8 @@ class DioClientNew {
     // headers['x-access-token'] = globalSharePrefs!.getString(USERToken);
     BaseOptions options = BaseOptions(
       baseUrl: BaseUrl.baseUrl,
-      connectTimeout: 60000,
-      receiveTimeout: 60000,
+      connectTimeout: Duration(seconds: 20),
+      receiveTimeout: Duration(seconds: 20),
       headers: headers,
     );
 

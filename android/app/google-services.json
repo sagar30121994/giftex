@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "696737965101",
+    "firebase_url": "https://astaguru-prod-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "astaguru-prod",
+    "storage_bucket": "astaguru-prod.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:696737965101:android:a8b1c8f5a79dcd9d8504a4",
+        "android_client_info": {
+          "package_name": "com.astaguru"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "696737965101-9jgdcc6j835jg6o58eo31qm3hovksc9m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFRRwiqjxFf_3oYgclJ0Ln9iYwRqt9GmA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "696737965101-9jgdcc6j835jg6o58eo31qm3hovksc9m.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "696737965101-ptqmgd8pq285p1u3volc8p23uca6ecrp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.AstaGuru.AuctionHouse",
+                "app_store_id": "1483891832"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

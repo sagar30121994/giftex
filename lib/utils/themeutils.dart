@@ -14,6 +14,7 @@ ThemeData _buildDarkTheme() {
     onPrimary: Color(0xff1F2A52),
     secondary:Color(0XFFE74B52),
     onSecondary: Color(0xffEAEEF2),
+
     surface: Color(0xffF3E8E9),
     onSecondaryContainer: Color(0xffF2F4F7),
     onTertiary: Color(0xff1F2A52),
@@ -30,6 +31,7 @@ ThemeData _buildDarkTheme() {
     colorScheme: _shrineColorScheme,
     cardColor: Colors.grey[100],
     dividerColor:Colors.black,
+
     drawerTheme:const DrawerThemeData(
       backgroundColor: Color(0xff32429A)
     ),

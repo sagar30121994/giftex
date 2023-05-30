@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -11,7 +12,7 @@ import 'package:intl/intl.dart';
 import 'package:logging/logging.dart';
 
 import 'package:http/http.dart';
-import 'package:signalr_netcore/signalr_client.dart';
+// import 'package:signalr_netcore/signalr_client.dart';
 import '../../data/network/models/responce/lot/upcominglotsresponse.dart';
 
 
@@ -32,7 +33,9 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> {
   Timer? countdownTimer;
   Duration myDuration = Duration(days: 5);
 
-
+  FirebaseDatabase database = FirebaseDatabase.instance;
+  DatabaseReference? lotReference;
+  DatabaseReference? likeReference;
 
   @override
   void initState() {
@@ -41,6 +44,21 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> {
     startTimer();
     auctionViewModel.selectedProxyBid='';
 
+    lotReference = database.ref("Lot/" + widget.lots.lotId!);
+    likeReference = database.ref("Like/" +widget.auctionViewModel.localSharedPrefrence.getUserId()+"/"+ widget.lots.lotId!);
+
+
+    lotReference!.onValue.listen((DatabaseEvent event) {
+      final data = event.snapshot.value;
+      // updateStarCount(data);
+    });
+
+
+    likeReference!.onValue.listen((DatabaseEvent event) {
+      final data = event.snapshot.value;
+      print(data);
+      // updateStarCount(data);
+    });
 
 
     // final hubConnection = HubConnectionBuilder().withUrl("https://api-uat.astaguru.com/leadingnotify").build();

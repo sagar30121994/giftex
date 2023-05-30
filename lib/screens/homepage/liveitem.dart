@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:giftex/data/network/models/responce/liveauction/upcommingauctionresponse.dart';
 import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
@@ -15,6 +16,16 @@ class LiveItem extends StatefulWidget {
 }
 
 class _LiveItemState extends State<LiveItem> {
+
+  // FirebaseDatabase database = FirebaseDatabase.instance;
+  // DatabaseReference? lotReference;
+  @override
+  void initState() {
+    // TODO: implement initState
+    // lotReference = database.ref("Lot/" + widget.auction.);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
