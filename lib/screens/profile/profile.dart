@@ -62,7 +62,7 @@ class _ProfilepageState extends State<Profilepage> {
                               Image.asset("image/Ellipse 94.png",height: 95,color: Color(0xffF3E8E9),),
                               CircleAvatar(
                                 radius: 37,
-                                backgroundImage: NetworkImage('${downloadurl+(profileViewModel.getUserAllDetailsResponse!.result!.profile!.basicDetails!.profilePicUrl??'')}'),
+                                backgroundImage: NetworkImage('${(profileViewModel.getUserAllDetailsResponse!.result!.profile!.basicDetails!.profilePicUrl??'')}'),
                                 // child: Image.asset("image/image 40.png",fit: BoxFit.fill,),
                               ),
                             ],

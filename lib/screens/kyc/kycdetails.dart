@@ -5,11 +5,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
+import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/data/network/models/responce/user/loginrespose.dart';
 import 'package:giftex/screens/kyc/kycpage.dart';
 import 'package:giftex/screens/kyc/kysacoountdetails.dart';
+import 'package:giftex/viewmodel/profile/profileviewmodel.dart';
 import 'package:giftex/viewmodel/user/loginviewmodel.dart';
-
+import 'package:intl/intl.dart';
+ProfileViewModel profileViewModel=ProfileViewModel();
 class KYCDetailspage extends StatefulWidget {
 
   @override
@@ -133,7 +136,7 @@ class _KYCDetailspageState extends State<KYCDetailspage> {
                             fillColor: Color(0xffFFFFFF),
                             // isDense: true
                           ),
-                          onTap: (){
+                          onTap: () async {
                             // DatePicker.showDatePicker(context,
                             //     // theme: DatePickerTheme(
                             //     //   containerHeight: 210.0,
@@ -145,6 +148,46 @@ class _KYCDetailspageState extends State<KYCDetailspage> {
                             //       dobController.text = '${date.day}/${date.month}/${date.year}';
                             //       setState(() {});
                           // });
+                            DateTime? pickedDate = await showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime(2000),
+                                builder: (  context,   child) {
+                                  return Theme(
+                                    data: ThemeData.light().copyWith(
+                                      colorScheme: ColorScheme.fromSwatch(
+                                        primarySwatch: Colors.teal,
+                                        primaryColorDark: Colors.teal,
+                                        accentColor: Colors.teal,
+                                      ),
+                                      dialogBackgroundColor:Colors.white,
+                                    ), child: child!,
+
+                                  );
+                                },
+                                //DateTime.now() - not to allow to choose before today.
+                                lastDate: DateTime(2101));
+                            
+
+                            if (pickedDate != null) {
+                              print(
+                                  pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                              String formattedDate ='${pickedDate.day}/${pickedDate.month}/${pickedDate.year}';
+
+                              print(''); //formatted date output using intl package =>  2021-03-16
+                              //you can implement different kind of Date Format here according to your requirement
+
+                              setState(() {
+                                dobController.text =
+                                    formattedDate; //set output date to TextField value.
+                              });
+
+                              profileViewModel.setDOB(formattedDate);
+
+
+                            } else {
+                              print("Date is not selected");
+                            }
                           }
                         ),
                       ),
@@ -165,6 +208,8 @@ class _KYCDetailspageState extends State<KYCDetailspage> {
                             onTap: (){
                               male=true;
                               female=false;
+
+                              profileViewModel.setDOB(male?"MALE":"FEMALE");
                             },
                             child: Container(
                               height: 150,
@@ -278,7 +323,13 @@ class _KYCDetailspageState extends State<KYCDetailspage> {
                 ),
                 SizedBox(height: 16,),
                 InkWell(
-                  onTap: (){
+                  onTap: () async {
+                    HttpResponse res= await profileViewModel.updateRegPersonalDetails();
+                    if(res.status==200){
+                      ScaffoldMessenger.of(context).showSnackBar(  SnackBar(content: Text('Record Updated....'),backgroundColor: Colors.green,),);
+                    }else{
+                      ScaffoldMessenger.of(context).showSnackBar(  SnackBar(content: Text("${res.message!}"),backgroundColor: Colors.orange,),);
+                    }
                     Navigator.push(context, MaterialPageRoute(builder: (context) => KYCAccountDetailspage()));
                   },
                   child: Container(

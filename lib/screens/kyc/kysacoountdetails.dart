@@ -5,11 +5,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
+import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/data/network/models/responce/user/loginrespose.dart';
 import 'package:giftex/screens/kyc/kycaddressdetails.dart';
 import 'package:giftex/screens/kyc/kycpage.dart';
+import 'package:giftex/viewmodel/profile/profileviewmodel.dart';
 import 'package:giftex/viewmodel/user/loginviewmodel.dart';
 
+ProfileViewModel profileViewModel=ProfileViewModel();
 class KYCAccountDetailspage extends StatefulWidget {
 
   @override
@@ -17,7 +20,8 @@ class KYCAccountDetailspage extends StatefulWidget {
 }
 
 class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
-  TextEditingController dobController=TextEditingController();
+  TextEditingController panController=TextEditingController();
+  TextEditingController adharController=TextEditingController();
 
   @override
   void initState() {
@@ -101,8 +105,11 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
                         ),
                         padding: EdgeInsets.only(left:0),
                         child: TextField(
-                            controller: dobController,
+                            controller: adharController,
                             // keyboardType: TextInputType.name,
+                          onChanged: (v){
+                            profileViewModel.setaddress(v);
+                          },
 
                             style: Theme.of(context).textTheme.subtitle1!.copyWith(
                               color: Colors.black,
@@ -226,8 +233,11 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
                         ),
                         padding: EdgeInsets.only(left:0),
                         child: TextField(
-                            controller: dobController,
+                            controller: panController,
                             // keyboardType: TextInputType.name,
+                          onChanged: (v){
+                            profileViewModel.setaddress(v);
+                          },
 
                             style: Theme.of(context).textTheme.subtitle1!.copyWith(
                               color: Colors.black,
@@ -288,7 +298,13 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
                 ),
                 SizedBox(height: 16,),
                 InkWell(
-                  onTap: (){
+                  onTap: () async {
+                    HttpResponse res= await profileViewModel.updateRegBankingDetails();
+                    if(res.status==200){
+                      ScaffoldMessenger.of(context).showSnackBar(  SnackBar(content: Text('Record Updated....'),backgroundColor: Colors.green,),);
+                    }else{
+                      ScaffoldMessenger.of(context).showSnackBar(  SnackBar(content: Text("${res.message!}"),backgroundColor: Colors.orange,),);
+                    }
                     Navigator.push(context, MaterialPageRoute(builder: (context) => KYCAddresspage()));
                   },
                   child: Container(

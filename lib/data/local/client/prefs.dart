@@ -42,6 +42,21 @@ class LocalSharedPrefrence{
   }
 
 
+  Future<void> setName(String flag)async{
+    if(prefsAvailable){
+      await  myGlobalPreference!.setString(name, flag);
+    }
+  }
+
+
+  String getName(){
+    if(prefsAvailable){
+      return myGlobalPreference!.getString(name)??"";
+    }
+    return "";
+  }
+
+
   Future<void> setUserId(String flag)async{
     if(prefsAvailable){
       await  myGlobalPreference!.setString(userId, flag);

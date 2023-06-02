@@ -5,12 +5,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
+import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/data/network/models/responce/user/loginrespose.dart';
 import 'package:giftex/screens/kyc/kycpage.dart';
 import 'package:giftex/screens/kyc/kysacoountdetails.dart';
 import 'package:giftex/screens/kyc/paydeposit.dart';
+import 'package:giftex/viewmodel/profile/profileviewmodel.dart';
 import 'package:giftex/viewmodel/user/loginviewmodel.dart';
-
+ProfileViewModel profileViewModel=ProfileViewModel();
 class KYCAddresspage extends StatefulWidget {
 
   @override
@@ -227,6 +229,7 @@ class _KYCAddresspageState extends State<KYCAddresspage> {
                           ),
                           onChanged: (value) {
                             setState(() {
+                              profileViewModel.setaddress(value);
                               // userInput.text = value.toString();
                             });
                           },
@@ -261,7 +264,13 @@ class _KYCAddresspageState extends State<KYCAddresspage> {
                 ),
                 SizedBox(height: 16,),
                 InkWell(
-                  onTap: (){
+                  onTap: () async {
+                    HttpResponse res= await profileViewModel.UpdateRegMyAddress();
+                    if(res.status==200){
+                      ScaffoldMessenger.of(context).showSnackBar(  SnackBar(content: Text('Record Updated....'),backgroundColor: Colors.green,),);
+                    }else{
+                      ScaffoldMessenger.of(context).showSnackBar(  SnackBar(content: Text("${res.message!}"),backgroundColor: Colors.orange,),);
+                    }
                     Navigator.push(context, MaterialPageRoute(builder: (context) => KYCPayDepositpage()));
                   },
                   child: Container(

@@ -151,3 +151,8 @@ class WebCMSApiModel{
 class Profile{
   final String getUserAllDetails = 'GetUserAllDetails';
 }
+class KYC{
+  final String UpdateRegPersonalDetails = 'UpdateRegPersonalDetails';
+  final String UpdateRegMyAddress = 'UpdateRegMyAddress';
+  final String UpdateRegBankingDetails = 'UpdateRegBankingDetails';
+}
