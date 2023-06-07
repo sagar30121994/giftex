@@ -9,7 +9,7 @@ class UpComingLotsResponse {
     status = json['status'];
     message = json['message'];
     result =
-    json['result'] != null ? new Result.fromJson(json['result']) : null;
+        json['result'] != null ? new Result.fromJson(json['result']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -95,7 +95,7 @@ class Lots {
   String? auctionType;
   String? auctionDated;
   String? isHistorical;
-  int? dollarRate;
+  dynamic dollarRate;
   String? description;
   String? artistImage;
   String? artistDesc;
@@ -104,59 +104,59 @@ class Lots {
 
   Lots(
       {this.auctionId,
-        this.lotId,
-        this.auctionInventoryPID,
-        this.exportType,
-        this.bidCount,
-        this.lotDesc,
-        this.category,
-        this.lotDetDesc,
-        this.categoryID,
-        this.lotURL,
-        this.lotNumber,
-        this.leadingUser,
-        this.liveStatus,
-        this.url3D,
-        this.images,
-        this.lotTitle,
-        this.isLiked,
-        this.proxyStatus,
-        this.bidAccess,
-        this.status,
-        this.estimateFrom,
-        this.estimateTo,
-        this.estimateDisplayText,
-        this.openingBid,
-        this.detailInfo,
-        this.additionalInfo,
-        // this.remainTimeObj,
-        this.remainingSecondsInNumber,
-        this.lastStatus,
-        this.auctionStatus,
-        this.thumbImage,
-        this.currentBid,
-        this.currentBidUS,
-        this.artistName,
-        this.type,
-        this.productsize,
-        this.medium,
-        this.year,
-        this.estimateToLegacy,
-        this.estimateFromLegacy,
-        this.estimateToLegacyINR,
-        this.estimateFromLegacyINR,
-        this.bidIncrementPercentage,
-        this.info,
-        this.bidincrement,
-        this.auctionType,
-        this.auctionDated,
-        this.isHistorical,
-        this.dollarRate,
-        this.description,
-        this.artistImage,
-        this.artistDesc,
-        this.auctionDate,
-        this.auctionMargin});
+      this.lotId,
+      this.auctionInventoryPID,
+      this.exportType,
+      this.bidCount,
+      this.lotDesc,
+      this.category,
+      this.lotDetDesc,
+      this.categoryID,
+      this.lotURL,
+      this.lotNumber,
+      this.leadingUser,
+      this.liveStatus,
+      this.url3D,
+      this.images,
+      this.lotTitle,
+      this.isLiked,
+      this.proxyStatus,
+      this.bidAccess,
+      this.status,
+      this.estimateFrom,
+      this.estimateTo,
+      this.estimateDisplayText,
+      this.openingBid,
+      this.detailInfo,
+      this.additionalInfo,
+      // this.remainTimeObj,
+      this.remainingSecondsInNumber,
+      this.lastStatus,
+      this.auctionStatus,
+      this.thumbImage,
+      this.currentBid,
+      this.currentBidUS,
+      this.artistName,
+      this.type,
+      this.productsize,
+      this.medium,
+      this.year,
+      this.estimateToLegacy,
+      this.estimateFromLegacy,
+      this.estimateToLegacyINR,
+      this.estimateFromLegacyINR,
+      this.bidIncrementPercentage,
+      this.info,
+      this.bidincrement,
+      this.auctionType,
+      this.auctionDated,
+      this.isHistorical,
+      this.dollarRate,
+      this.description,
+      this.artistImage,
+      this.artistDesc,
+      this.auctionDate,
+      this.auctionMargin});
 
   Lots.fromJson(Map<String, dynamic> json) {
     auctionId = json['AuctionId'];
@@ -381,11 +381,11 @@ class LiveStatus {
 
   LiveStatus(
       {this.remainingSeconds,
-        this.currentBid,
-        this.nextValidBid,
-        this.next5ValidBid,
-        this.status,
-        this.isOutBid});
+      this.currentBid,
+      this.nextValidBid,
+      this.next5ValidBid,
+      this.status,
+      this.isOutBid});
 
   LiveStatus.fromJson(Map<String, dynamic> json) {
     remainingSeconds = json['remainingSeconds'];
@@ -445,7 +445,7 @@ class Images {
 
 class ProxyStatus {
   String? status;
-  int? maxProxyAmount;
+  dynamic maxProxyAmount;
   Bid? proxyAmount;
 
   ProxyStatus({this.status, this.maxProxyAmount, this.proxyAmount});
@@ -571,16 +571,16 @@ class Info {
 
   Info(
       {this.artistPageName,
-        this.title,
-        this.lotTitle,
-        this.subTitle,
-        this.medium,
-        this.size,
-        this.year,
-        this.description,
-        this.circa,
-        this.artistImage,
-        this.artistDescription});
+      this.title,
+      this.lotTitle,
+      this.subTitle,
+      this.medium,
+      this.size,
+      this.year,
+      this.description,
+      this.circa,
+      this.artistImage,
+      this.artistDescription});
 
   Info.fromJson(Map<String, dynamic> json) {
     artistPageName = json['artistPageName'];
