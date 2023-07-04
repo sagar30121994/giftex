@@ -154,6 +154,39 @@ mixin _$AuctionViewModel on _AuctionViewModel, Store {
     });
   }
 
+  late final _$autionResultResponseAtom =
+      Atom(name: '_AuctionViewModel.autionResultResponse', context: context);
+
+  @override
+  AutionResultResponse? get autionResultResponse {
+    _$autionResultResponseAtom.reportRead();
+    return super.autionResultResponse;
+  }
+
+  @override
+  set autionResultResponse(AutionResultResponse? value) {
+    _$autionResultResponseAtom.reportWrite(value, super.autionResultResponse,
+        () {
+      super.autionResultResponse = value;
+    });
+  }
+
+  late final _$searchResponseAtom =
+      Atom(name: '_AuctionViewModel.searchResponse', context: context);
+
+  @override
+  UpcomingAuctionResponse? get searchResponse {
+    _$searchResponseAtom.reportRead();
+    return super.searchResponse;
+  }
+
+  @override
+  set searchResponse(UpcomingAuctionResponse? value) {
+    _$searchResponseAtom.reportWrite(value, super.searchResponse, () {
+      super.searchResponse = value;
+    });
+  }
+
   late final _$upcomingAuctionResponseAtom =
       Atom(name: '_AuctionViewModel.upcomingAuctionResponse', context: context);
 
@@ -305,12 +338,199 @@ mixin _$AuctionViewModel on _AuctionViewModel, Store {
     });
   }
 
+  late final _$getsingleResponseAtom =
+      Atom(name: '_AuctionViewModel.getsingleResponse', context: context);
+
+  @override
+  UpComingLotsResponse? get getsingleResponse {
+    _$getsingleResponseAtom.reportRead();
+    return super.getsingleResponse;
+  }
+
+  @override
+  set getsingleResponse(UpComingLotsResponse? value) {
+    _$getsingleResponseAtom.reportWrite(value, super.getsingleResponse, () {
+      super.getsingleResponse = value;
+    });
+  }
+
+  late final _$sortAtom =
+      Atom(name: '_AuctionViewModel.sort', context: context);
+
+  @override
+  String get sort {
+    _$sortAtom.reportRead();
+    return super.sort;
+  }
+
+  @override
+  set sort(String value) {
+    _$sortAtom.reportWrite(value, super.sort, () {
+      super.sort = value;
+    });
+  }
+
+  late final _$getUpcommingAuctionAsyncAction =
+      AsyncAction('_AuctionViewModel.getUpcommingAuction', context: context);
+
+  @override
+  Future<HttpResponse> getUpcommingAuction(String auction) {
+    return _$getUpcommingAuctionAsyncAction
+        .run(() => super.getUpcommingAuction(auction));
+  }
+
+  late final _$getBidHistoryAuctionAsyncAction =
+      AsyncAction('_AuctionViewModel.getBidHistoryAuction', context: context);
+
+  @override
+  Future<HttpResponse> getBidHistoryAuction(String LotId) {
+    return _$getBidHistoryAuctionAsyncAction
+        .run(() => super.getBidHistoryAuction(LotId));
+  }
+
+  late final _$getAuctionResultAsyncAction =
+      AsyncAction('_AuctionViewModel.getAuctionResult', context: context);
+
+  @override
+  Future<HttpResponse> getAuctionResult() {
+    return _$getAuctionResultAsyncAction.run(() => super.getAuctionResult());
+  }
+
+  late final _$getUpcommingBidAuctionAsyncAction =
+      AsyncAction('_AuctionViewModel.getUpcommingBidAuction', context: context);
+
+  @override
+  Future<HttpResponse> getUpcommingBidAuction(String auction) {
+    return _$getUpcommingBidAuctionAsyncAction
+        .run(() => super.getUpcommingBidAuction(auction));
+  }
+
+  late final _$replaceLotsAsyncAction =
+      AsyncAction('_AuctionViewModel.replaceLots', context: context);
+
+  @override
+  Future<dynamic> replaceLots(Lots lot) {
+    return _$replaceLotsAsyncAction.run(() => super.replaceLots(lot));
+  }
+
   late final _$getLotByIdAsyncAction =
       AsyncAction('_AuctionViewModel.getLotById', context: context);
 
   @override
   Future<HttpResponse> getLotById(String lotId) {
     return _$getLotByIdAsyncAction.run(() => super.getLotById(lotId));
+  }
+
+  late final _$myAuctionGalleryAsyncAction =
+      AsyncAction('_AuctionViewModel.myAuctionGallery', context: context);
+
+  @override
+  Future<HttpResponse> myAuctionGallery() {
+    return _$myAuctionGalleryAsyncAction.run(() => super.myAuctionGallery());
+  }
+
+  late final _$getLotDetailsAsyncAction =
+      AsyncAction('_AuctionViewModel.getLotDetails', context: context);
+
+  @override
+  Future<HttpResponse> getLotDetails(String lotId) {
+    return _$getLotDetailsAsyncAction.run(() => super.getLotDetails(lotId));
+  }
+
+  late final _$getReviewauctionsAsyncAction =
+      AsyncAction('_AuctionViewModel.getReviewauctions', context: context);
+
+  @override
+  Future<HttpResponse> getReviewauctions({Auctions? lot}) {
+    return _$getReviewauctionsAsyncAction
+        .run(() => super.getReviewauctions(lot: lot));
+  }
+
+  late final _$getGlobalauctionsAsyncAction =
+      AsyncAction('_AuctionViewModel.getGlobalauctions', context: context);
+
+  @override
+  Future<HttpResponse> getGlobalauctions(String search) {
+    return _$getGlobalauctionsAsyncAction
+        .run(() => super.getGlobalauctions(search));
+  }
+
+  late final _$getProxyAmountByLotAsyncAction =
+      AsyncAction('_AuctionViewModel.getProxyAmountByLot', context: context);
+
+  @override
+  Future<HttpResponse> getProxyAmountByLot(Lots lot) {
+    return _$getProxyAmountByLotAsyncAction
+        .run(() => super.getProxyAmountByLot(lot));
+  }
+
+  late final _$addRemoveLotToWishlistAsyncAction =
+      AsyncAction('_AuctionViewModel.addRemoveLotToWishlist', context: context);
+
+  @override
+  Future<HttpResponse> addRemoveLotToWishlist(Lots lot, String flag) {
+    return _$addRemoveLotToWishlistAsyncAction
+        .run(() => super.addRemoveLotToWishlist(lot, flag));
+  }
+
+  late final _$getAdditionChargeAsyncAction =
+      AsyncAction('_AuctionViewModel.getAdditionCharge', context: context);
+
+  @override
+  Future<HttpResponse> getAdditionCharge(Lots lot) {
+    return _$getAdditionChargeAsyncAction
+        .run(() => super.getAdditionCharge(lot));
+  }
+
+  late final _$placeBidAsyncAction =
+      AsyncAction('_AuctionViewModel.placeBid', context: context);
+
+  @override
+  Future<HttpResponse> placeBid(
+      Lots lot, String proxyamount, String currentBid) {
+    return _$placeBidAsyncAction
+        .run(() => super.placeBid(lot, proxyamount, currentBid));
+  }
+
+  late final _$getSingleAuctionDetailsAsyncAction = AsyncAction(
+      '_AuctionViewModel.getSingleAuctionDetails',
+      context: context);
+
+  @override
+  Future<HttpResponse> getSingleAuctionDetails(String auction) {
+    return _$getSingleAuctionDetailsAsyncAction
+        .run(() => super.getSingleAuctionDetails(auction));
+  }
+
+  late final _$sortAUctionAsyncAction =
+      AsyncAction('_AuctionViewModel.sortAUction', context: context);
+
+  @override
+  Future<HttpResponse> sortAUction(String auction, String filterType) {
+    return _$sortAUctionAsyncAction
+        .run(() => super.sortAUction(auction, filterType));
+  }
+
+  late final _$logoutAsyncAction =
+      AsyncAction('_AuctionViewModel.logout', context: context);
+
+  @override
+  Future<void> logout() {
+    return _$logoutAsyncAction.run(() => super.logout());
+  }
+
+  late final _$_AuctionViewModelActionController =
+      ActionController(name: '_AuctionViewModel', context: context);
+
+  @override
+  List<String> getSortingItem() {
+    final _$actionInfo = _$_AuctionViewModelActionController.startAction(
+        name: '_AuctionViewModel.getSortingItem');
+    try {
+      return super.getSortingItem();
+    } finally {
+      _$_AuctionViewModelActionController.endAction(_$actionInfo);
+    }
   }
 
   @override
@@ -325,6 +545,8 @@ isGrid: ${isGrid},
 selectedProxyBid: ${selectedProxyBid},
 count: ${count},
 selectedAuction: ${selectedAuction},
+autionResultResponse: ${autionResultResponse},
+searchResponse: ${searchResponse},
 upcomingAuctionResponse: ${upcomingAuctionResponse},
 bidInfoResponse: ${bidInfoResponse},
 getProxyBidAmountResponse: ${getProxyBidAmountResponse},
@@ -333,7 +555,9 @@ proxyBidResponse: ${proxyBidResponse},
 singleAuctionDetsilaResponse: ${singleAuctionDetsilaResponse},
 upComingLotsResponse: ${upComingLotsResponse},
 myAuctionGalleryResponse: ${myAuctionGalleryResponse},
-getliveauctionsResponse: ${getliveauctionsResponse}
+getliveauctionsResponse: ${getliveauctionsResponse},
+getsingleResponse: ${getsingleResponse},
+sort: ${sort}
     ''';
   }
 }

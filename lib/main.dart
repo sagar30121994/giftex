@@ -1,4 +1,3 @@
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:giftex/data/local/client/prefs.dart';
@@ -10,12 +9,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 SharedPreferences? myGlobalPreference;
 
-void main()  async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  //  (!Firebase.apps.length) ? Firebase.initializeApp( options: DefaultFirebaseOptions.currentPlatform,)
+  //     : Firebase.app()
   myGlobalPreference = await SharedPreferences.getInstance();
   runApp(MyApp());
 }
@@ -26,27 +24,28 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  LocalSharedPrefrence?  localSharedPrefrence;
+  LocalSharedPrefrence? localSharedPrefrence;
   // This widget is the root of your application.
   // late LocalSharedPrefrence localSharedPrefrence;
 
   @override
   void initState() {
     // TODO: implement initState
-     localSharedPrefrence=LocalSharedPrefrence();
+    localSharedPrefrence = LocalSharedPrefrence();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Giftex',
-      theme: kDarkTheme,
-      home: localSharedPrefrence!
-          .getLoginStatus()?DashboardUi(0):Loginpage()
+        debugShowCheckedModeBanner: false,
+        title: 'Giftex',
+        theme: kDarkTheme,
+        home: localSharedPrefrence!.getLoginStatus()
+            ? DashboardUi(0)
+            : Loginpage()
 
-      // home: KYCPage(),
-    );
+        // home: KYCPage(),
+        );
   }
 }

@@ -25,6 +25,22 @@ mixin _$HomeViewModel on _HomeViewModel, Store {
     });
   }
 
+  late final _$searchAtom =
+      Atom(name: '_HomeViewModel.search', context: context);
+
+  @override
+  bool get search {
+    _$searchAtom.reportRead();
+    return super.search;
+  }
+
+  @override
+  set search(bool value) {
+    _$searchAtom.reportWrite(value, super.search, () {
+      super.search = value;
+    });
+  }
+
   late final _$homeUpcommingAuctionResponseAtom = Atom(
       name: '_HomeViewModel.homeUpcommingAuctionResponse', context: context);
 
@@ -177,6 +193,7 @@ mixin _$HomeViewModel on _HomeViewModel, Store {
   String toString() {
     return '''
 homeBanerResponse: ${homeBanerResponse},
+search: ${search},
 homeUpcommingAuctionResponse: ${homeUpcommingAuctionResponse},
 recordPriceLots: ${recordPriceLots},
 homeNewsVideosBlogsResponse: ${homeNewsVideosBlogsResponse},

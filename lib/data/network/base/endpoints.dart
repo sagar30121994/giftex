@@ -1,4 +1,3 @@
-
 class User {
   final String userLogin = 'UserLogin';
   final String signup = 'signup';
@@ -14,8 +13,11 @@ class User {
   final String savesetting = 'User/savesettings';
   final String getsetting = 'User/getsettings';
   final String deleteaccount = 'User/deleteMyAccount';
+  final String verifyEmail = 'verifyEmail';
+  final String getLast5Bids = 'User/getLast5Bids';
 }
-class Auction{
+
+class Auction {
   final String analysis = 'Auction/analysis';
   final String upcommingAuction = 'UpcomingAuction';
   final String upcommingAuctionLots = 'UpcomingLots';
@@ -24,86 +26,104 @@ class Auction{
   final String getLotById = 'Lot/GetByLotId';
   final String myAuctionGallery = 'User/myauctiongallary';
   final String getReviewauctions = 'live/reviewlots';
+  final String sortReviewauctions = 'live/reviewlots';
+  final String ShowInterestInAuction = 'ShowInterestInAuction';
 }
-class LiveAuction{
-    final String liveaction = 'Live/getliveauctions';
-    final String reviewLots = 'Live/reviewlots';
-    final String closing = 'Live/closing';
+
+class Search {
+  final String global = 'Search/Global';
 }
-class Lots{
-    final String highlightsPDP = 'Lot/highlightsPDP';
-    final String lotbyid = 'Lot/getbyLotId';
-    final String proxyBidAmount = 'GetProxyBidAmount';
-    final String addremoveToWishlist = 'AddRemoveLotToWishList';
-    final String placeBid = 'InsertProxyBidAmount';
+
+class LiveAuction {
+  final String liveaction = 'Live/getliveauctions';
+  final String reviewLots = 'Live/reviewlots';
+  final String closing = 'Live/closing';
+  final String acutionAnalysis = 'Auction/analysis';
 }
-class MyCollection{
-    final String create = 'MyCollection/Create';
-    final String createart = 'MyCollection/CreateArt';
-    final String getcollection = 'MyCollection/Get';
-    final String getarts = 'MyCollection/GetArts';
-    final String assign = 'MyCollection/Assign';
+
+class Lots {
+  final String highlightsPDP = 'Lot/highlightsPDP';
+  // final String lotbyid = 'Lot/getbyLotId';
+  final String proxyBidAmount = 'GetProxyBidAmount';
+  final String additionalcharges = 'AdditionalCharges';
+  final String addremoveToWishlist = 'AddRemoveLotToWishList';
+  final String placeBid = 'InsertProxyBidAmount';
+  final String getMyPurchases = 'User/mypurchases';
 }
-class Notification{
-    final String send = 'Notification/send/';
-    final String profileupdate = 'Notification/profileupdate/';
-    final String paymentnotification = 'Notification/paymentNotification';
-    final String proxymail = 'Notification/sendproxyARemail/';
-    final String sendemail = 'Notification/sendwonemail/';
-    final String sendperforma = 'Notification/sendperforma/';
+
+class MyCollection {
+  final String create = 'MyCollection/Create';
+  final String createart = 'MyCollection/CreateArt';
+  final String getcollection = 'MyCollection/Get';
+  final String getarts = 'MyCollection/GetArts';
+  final String assign = 'MyCollection/Assign';
 }
-class Payment{
-    final String payment = 'Notification/send/';
-    final String success = 'Notification/profileupdate/';
-    final String failure = 'Notification/paymentNotification';
-    final String cancel = 'Notification/sendproxyARemail/';
+
+class Notification {
+  final String send = 'Notification/send/';
+  final String profileupdate = 'Notification/profileupdate/';
+  final String paymentnotification = 'Notification/paymentNotification';
+  final String proxymail = 'Notification/sendproxyARemail/';
+  final String sendemail = 'Notification/sendwonemail/';
+  final String sendperforma = 'Notification/sendperforma/';
 }
-class Upload{
-    final String upload = 'Upload/';
+
+class Payment {
+  final String payment = 'Notification/send/';
+  final String success = 'Notification/profileupdate/';
+  final String failure = 'Notification/paymentNotification';
+  final String cancel = 'Notification/sendproxyARemail/';
 }
-class WebApiModel{
-    final String get = 'Get';
-    final String verifymobile = 'verifyMobile';
-    final String verifyemail = 'verifyEmail';
-    final String forgetpassword = 'ForgotPassword';
-    final String insertreg = 'InsertReg';
-    final String updateregpersonaldetails = 'UpdateRegPersonalDetails';
-    final String updateregmyaddress = 'UpdateRegMyAddress';
-    final String updateregbankingdetails = 'UpdateRegBankingDetails';
-    final String reginfo = 'RegInfo';
-    final String getcity = 'GetCity';
-    final String userlogout = 'UserLogout';
-    final String userlogin = 'UserLogin';
-    final String userloginotp = 'UserLoginOTPConfirm';
-    final String prechecklogin = 'PreCheckLogin';
-    final String updateprofiledetails = 'UpdateProfilePersonalDetails';
-    final String updatemyaddress = 'UpdateMyAddress';
-    final String deletemyaddress = 'deleteMyAddress';
-    final String setdefaultmyaddress = 'setDefaultMyAddress';
-    final String updatebankingdetails = 'UpdateBankingDetails';
-    final String getuserdetails = 'GetUserAllDetails';
-    final String changepassword = 'ChangePassword';
-    final String forgettochangepassword = 'ForgetToChangePassword';
-    final String upcomingauction = 'UpcomingAuction';
-    final String addremovetowishlist = 'AddRemoveLotToWishList';
-    final String showintrestinauction = 'ShowInterestInAuction';
-    final String auctionclosingschedule = 'AuctionClosingSchedule';
-    final String upcomingauctioninfo = 'UpcomingAuctionInformation';
-    final String upcominglots = 'UpcomingLots';
-    final String getproxybidamount = 'GetProxyBidAmount';
-    final String insertproxybidamount = 'InsertProxyBidAmount';
-    final String getlotdetails = 'GetLotDetails';
-    final String additionalcharges = 'AdditionalCharges';
-    final String insertreachusform = 'InsertReachUsForm';
-    final String insertcareerform = 'InsertCareerForm';
-    final String getbidhistory = 'GetBidHistory';
-    final String insertgetestimateform = 'InsertGetEstimateForm';
-    final String insertsubscribeform = 'InsertsubscribeForm';
-    final String gethashstr = 'getHashStr';
-    final String getpaymentgrid = 'GetPaymentGrid';
-    final String artistdata = 'artistdata';
+
+class Upload {
+  final String upload = 'Upload/';
 }
-class WebCMSApiModel{
+
+class WebApiModel {
+  final String get = 'Get';
+  final String verifymobile = 'verifyMobile';
+  final String verifyemail = 'verifyEmail';
+  final String forgetpassword = 'ForgotPassword';
+  final String insertreg = 'InsertReg';
+  final String updateregpersonaldetails = 'UpdateRegPersonalDetails';
+  final String updateregmyaddress = 'UpdateRegMyAddress';
+  final String updateregbankingdetails = 'UpdateRegBankingDetails';
+  final String reginfo = 'RegInfo';
+  final String getcity = 'GetCity';
+  final String userlogout = 'UserLogout';
+  final String userlogin = 'UserLogin';
+  final String userloginotp = 'UserLoginOTPConfirm';
+  final String insertsubscribeForm = 'InsertsubscribeForm';
+  final String prechecklogin = 'PreCheckLogin';
+  final String updateprofiledetails = 'UpdateProfilePersonalDetails';
+  final String updatemyaddress = 'UpdateMyAddress';
+  final String deletemyaddress = 'deleteMyAddress';
+  final String setdefaultmyaddress = 'setDefaultMyAddress';
+  final String updatebankingdetails = 'UpdateBankingDetails';
+  final String getuserdetails = 'GetUserAllDetails';
+  final String changepassword = 'ChangePassword';
+  final String forgettochangepassword = 'ForgetToChangePassword';
+  final String upcomingauction = 'UpcomingAuction';
+  final String addremovetowishlist = 'AddRemoveLotToWishList';
+  final String showintrestinauction = 'ShowInterestInAuction';
+  final String auctionclosingschedule = 'AuctionClosingSchedule';
+  final String upcomingauctioninfo = 'UpcomingAuctionInformation';
+  final String upcominglots = 'UpcomingLots';
+  final String getproxybidamount = 'GetProxyBidAmount';
+  final String insertproxybidamount = 'InsertProxyBidAmount';
+  final String getlotdetails = 'GetLotDetails';
+  final String additionalcharges = 'AdditionalCharges';
+  final String insertreachusform = 'InsertReachUsForm';
+  final String insertcareerform = 'InsertCareerForm';
+  final String getbidhistory = 'GetBidHistory';
+  final String insertgetestimateform = 'InsertGetEstimateForm';
+  final String insertsubscribeform = 'InsertsubscribeForm';
+  final String gethashstr = 'getHashStr';
+  final String getpaymentgrid = 'GetPaymentGrid';
+  final String artistdata = 'artistdata';
+}
+
+class WebCMSApiModel {
   final String get = 'InsertsubscribeForm';
   final String getbuydetails = 'getHashStr';
   final String getselldetails = 'GetPaymentGrid';
@@ -145,13 +165,14 @@ class WebCMSApiModel{
   final String getusernotification = 'getHashStr';
   final String getauctionpage = 'GetPaymentGrid';
   final String loadtest = 'artistdata';
-
 }
 
-class Profile{
+class Profile {
   final String getUserAllDetails = 'GetUserAllDetails';
+  final String getDashboardOverview = 'DashboardOverview';
 }
-class KYC{
+
+class KYC {
   final String UpdateRegPersonalDetails = 'UpdateRegPersonalDetails';
   final String UpdateRegMyAddress = 'UpdateRegMyAddress';
   final String UpdateRegBankingDetails = 'UpdateRegBankingDetails';

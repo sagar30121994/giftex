@@ -103,6 +103,39 @@ mixin _$LoginViewModel on _LoginViewModel, Store {
     });
   }
 
+  late final _$verifyEmailResponseAtom =
+      Atom(name: '_LoginViewModel.verifyEmailResponse', context: context);
+
+  @override
+  VerifyEmailResponse? get verifyEmailResponse {
+    _$verifyEmailResponseAtom.reportRead();
+    return super.verifyEmailResponse;
+  }
+
+  @override
+  set verifyEmailResponse(VerifyEmailResponse? value) {
+    _$verifyEmailResponseAtom.reportWrite(value, super.verifyEmailResponse, () {
+      super.verifyEmailResponse = value;
+    });
+  }
+
+  late final _$verifyMobileResponseAtom =
+      Atom(name: '_LoginViewModel.verifyMobileResponse', context: context);
+
+  @override
+  VerifyEmailResponse? get verifyMobileResponse {
+    _$verifyMobileResponseAtom.reportRead();
+    return super.verifyMobileResponse;
+  }
+
+  @override
+  set verifyMobileResponse(VerifyEmailResponse? value) {
+    _$verifyMobileResponseAtom.reportWrite(value, super.verifyMobileResponse,
+        () {
+      super.verifyMobileResponse = value;
+    });
+  }
+
   late final _$_LoginViewModelActionController =
       ActionController(name: '_LoginViewModel', context: context);
 
@@ -202,7 +235,9 @@ loginResponse: ${loginResponse},
 email: ${email},
 pass: ${pass},
 otp: ${otp},
-mobile: ${mobile}
+mobile: ${mobile},
+verifyEmailResponse: ${verifyEmailResponse},
+verifyMobileResponse: ${verifyMobileResponse}
     ''';
   }
 }
@@ -253,6 +288,41 @@ mixin _$LoginViewModelErrorState on _LoginViewModelErrorState, Store {
     return '''
 email: ${email},
 pass: ${pass},
+hasErrors: ${hasErrors}
+    ''';
+  }
+}
+
+mixin _$LoginViewModelMobileErrorState
+    on _LoginViewModelMobileErrorState, Store {
+  Computed<bool>? _$hasErrorsComputed;
+
+  @override
+  bool get hasErrors =>
+      (_$hasErrorsComputed ??= Computed<bool>(() => super.hasErrors,
+              name: '_LoginViewModelMobileErrorState.hasErrors'))
+          .value;
+
+  late final _$mobileAtom =
+      Atom(name: '_LoginViewModelMobileErrorState.mobile', context: context);
+
+  @override
+  String? get mobile {
+    _$mobileAtom.reportRead();
+    return super.mobile;
+  }
+
+  @override
+  set mobile(String? value) {
+    _$mobileAtom.reportWrite(value, super.mobile, () {
+      super.mobile = value;
+    });
+  }
+
+  @override
+  String toString() {
+    return '''
+mobile: ${mobile},
 hasErrors: ${hasErrors}
     ''';
   }

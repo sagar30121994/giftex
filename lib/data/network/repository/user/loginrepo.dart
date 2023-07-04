@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:giftex/data/network/models/responce/user/verifyemailresponse.dart';
 
 import '../../base/base.dart' as BaseUrl;
 import '../../base/endpoints.dart' as endPoints;
@@ -18,13 +19,9 @@ class LoginRepo {
 
   Future<HttpResponse> login(LoginReqestModel model) async {
     HttpResponse httpResponse = HttpResponse();
-    String userlogin=json.encode(LoginReqestModel);
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.formUrlEncodedContentType);
-    await httpClient!
-        .post(BaseUrl.baseUrl + endPoints.User().userLogin,
-        body: userlogin)
-        .then((responce) async {
+    String userlogin = json.encode(LoginReqestModel);
+    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    await httpClient!.post(BaseUrl.baseUrl + endPoints.User().userLogin, body: userlogin).then((responce) async {
       print(responce);
 
       if (responce.statusCode == 200) {
@@ -48,17 +45,77 @@ class LoginRepo {
     return httpResponse;
   }
 
+  Future<HttpResponse> verifyEmail(String email, String firstName, String lastName) async {
+    HttpResponse httpResponse = HttpResponse();
+    await httpClient!.post(BaseUrl.baseUrl + endPoints.User().verifyEmail, body: {
+      "authkey_web": "",
+      "authkey_mobile": "",
+      "userid": "",
+      "CRMClientID": "",
+      "email": email,
+      "first_name": firstName,
+      "last_name": lastName
+    }).then((responce) async {
+      if (responce.statusCode == 200) {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = 'Successful';
+        httpResponse.data = VerifyEmailResponse.fromJson(responce.data);
+      } else {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = responce.data['message'];
+        httpResponse.data = null;
+      }
+      return httpResponse;
+    }).catchError((err) {
+      print(err);
+      httpResponse.status = 400;
+      httpResponse.message = err.toString();
+      httpResponse.data = err.toString();
+      return httpResponse;
+    });
 
+    return httpResponse;
+  }
+
+  Future<HttpResponse> verifyMobile(String mobilr, String firstName, String lastName) async {
+    HttpResponse httpResponse = HttpResponse();
+    await httpClient!.post(BaseUrl.baseUrl + endPoints.User().verifyEmail, body: {
+      "authkey_web": "",
+      "authkey_mobile": "",
+      "userid": "",
+      "CRMClientID": "",
+      "mobile": mobilr,
+      "country_code": "91",
+      "first_name": firstName,
+      "last_name": lastName
+    }).then((responce) async {
+      if (responce.statusCode == 200) {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = 'Successful';
+        httpResponse.data = VerifyEmailResponse.fromJson(responce.data);
+      } else {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = responce.data['message'];
+        httpResponse.data = null;
+      }
+      return httpResponse;
+    }).catchError((err) {
+      print(err);
+      httpResponse.status = 400;
+      httpResponse.message = err.toString();
+      httpResponse.data = err.toString();
+      return httpResponse;
+    });
+
+    return httpResponse;
+  }
 
   Future<HttpResponse> loginMobile(LoginReqestModel model) async {
     HttpResponse httpResponse = HttpResponse();
     // String userlogin=json.encode(LoginReqestModel);
     // httpClient!.client!.options =
     //     BaseOptions(contentType: Headers.formUrlEncodedContentType);
-    await httpClient!
-        .post(BaseUrl.baseUrl + endPoints.User().userLogin,
-        body: model.toJson())
-        .then((responce) async {
+    await httpClient!.post(BaseUrl.baseUrl + endPoints.User().userLogin, body: model.toJson()).then((responce) async {
       print(responce);
 
       if (responce.statusCode == 200) {
@@ -82,7 +139,34 @@ class LoginRepo {
     return httpResponse;
   }
 
+  Future<HttpResponse> loginEmailPass(LoginReqestModel model) async {
+    HttpResponse httpResponse = HttpResponse();
+    // String userlogin=json.encode(LoginReqestModel);
+    // httpClient!.client!.options =
+    //     BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    await httpClient!.post(BaseUrl.baseUrl + endPoints.User().userLogin, body: model.toJson()).then((responce) async {
+      print(responce);
 
+      if (responce.statusCode == 200) {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = 'Successful';
+        httpResponse.data = LoginResponse.fromJson(responce.data);
+      } else {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = responce.data['message'];
+        httpResponse.data = null;
+      }
+      return httpResponse;
+    }).catchError((err) {
+      print(err);
+      httpResponse.status = 400;
+      httpResponse.message = err.toString();
+      httpResponse.data = err.toString();
+      return httpResponse;
+    });
+
+    return httpResponse;
+  }
 
   Future<HttpResponse> loginMobileConfirm(LoginReqestModel model) async {
     HttpResponse httpResponse = HttpResponse();
@@ -90,8 +174,7 @@ class LoginRepo {
     // httpClient!.client!.options =
     //     BaseOptions(contentType: Headers.formUrlEncodedContentType);
     await httpClient!
-        .post(BaseUrl.baseUrl + endPoints.WebApiModel().userloginotp,
-        body: model.toJson())
+        .post(BaseUrl.baseUrl + endPoints.WebApiModel().userloginotp, body: model.toJson())
         .then((responce) async {
       print(responce);
 
@@ -116,4 +199,39 @@ class LoginRepo {
     return httpResponse;
   }
 
+  Future<HttpResponse> insertsubscribeForm(String firstName, String email) async {
+    HttpResponse httpResponse = HttpResponse();
+    // String userlogin=json.encode(LoginReqestModel);
+    // httpClient!.client!.options =
+    //     BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    await httpClient!.post(BaseUrl.baseUrl + endPoints.WebApiModel().insertsubscribeForm, body: {
+      "authkey_web": "",
+      "authkey_mobile": "",
+      "userid": "",
+      "CRMClientID": "",
+      "emailid": email,
+      "fullname": firstName,
+    }).then((responce) async {
+      print(responce);
+
+      if (responce.statusCode == 200) {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = 'Success';
+        // httpResponse.data = LoginResponse.fromJson(responce.data);
+      } else {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = responce.data['message'];
+        httpResponse.data = null;
+      }
+      return httpResponse;
+    }).catchError((err) {
+      print(err);
+      httpResponse.status = 400;
+      httpResponse.message = err.toString();
+      httpResponse.data = err.toString();
+      return httpResponse;
+    });
+
+    return httpResponse;
+  }
 }

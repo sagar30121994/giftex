@@ -8,14 +8,13 @@ class DioClientNew {
   DioClientNew() {
     // print('token ${globalSharePrefs!.getString(USERToken)}');
     //
-    Map<String, dynamic> headers = {
-    };
+    Map<String, dynamic> headers = {};
     headers['Content-Type'] = 'application/json';
     // headers['x-access-token'] = globalSharePrefs!.getString(USERToken);
     BaseOptions options = BaseOptions(
       baseUrl: BaseUrl.baseUrl,
-      connectTimeout: Duration(seconds: 20),
-      receiveTimeout: Duration(seconds: 20),
+      connectTimeout: Duration(seconds: 60),
+      receiveTimeout: Duration(seconds: 60),
       headers: headers,
     );
 
@@ -35,41 +34,32 @@ class DioClientNew {
   }
 
   Future<Response> get(String endpoint, {dynamic body}) async {
-
-    return client!.request(endpoint,
-        data: body,
-        options: Options(method: "GET"));
+    return client!
+        .request(endpoint, data: body, options: Options(method: "GET"));
   }
 
   Future<Response> post(String endpoint, {dynamic body}) async {
-
     Response response;
     try {
       response = await client!
-          .request(endpoint, data: body, options: Options(
-          method: "POST"));
+          .request(endpoint, data: body, options: Options(method: "POST"));
     } on DioError catch (e) {
-
       response = e.response!;
     }
     return response;
   }
 
   Future<Response> put(String endpoint, {dynamic body}) async {
-
-
     return client!
         .request(endpoint, data: body, options: Options(method: "PUT"));
   }
 
   Future<Response> delete(String endpoint, {dynamic body}) async {
-
     return client!
         .request(endpoint, data: body, options: Options(method: "DELETE"));
   }
 
-  Future<Response> download(String endpoint,String fileName) async {
-
-    return client!.download(endpoint,fileName);
+  Future<Response> download(String endpoint, String fileName) async {
+    return client!.download(endpoint, fileName);
   }
 }

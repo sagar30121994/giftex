@@ -53,11 +53,11 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCFRRwiqjxFf_3oYgclJ0Ln9iYwRqt9GmA',
-    appId: '1:696737965101:android:a8b1c8f5a79dcd9d8504a4',
-    messagingSenderId: '696737965101',
-    projectId: 'astaguru-prod',
-    databaseURL: 'https://astaguru-prod-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'astaguru-prod.appspot.com',
+    apiKey: 'AIzaSyDjlx7G0PMhhIpzWRJQ_yB53ZzQwx7o0JA',
+    appId: '1:389151760156:android:d1c3e0bac789d4724f64d9',
+    messagingSenderId: '389151760156',
+    projectId: 'astaguru-uat',
+    databaseURL: 'https://astaguru-uat-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'astaguru-uat.appspot.com',
   );
 }
