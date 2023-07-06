@@ -1,11 +1,11 @@
 class AutionResultResponse {
-  dynamic? totalWinning;
-  dynamic? totalWinningUS;
-  dynamic? totalLots;
-  dynamic? totalSoldLots;
-  double? totalSoldLotsPerCentage;
-  dynamic? lotsSoldAboveEstimate;
-  double? lotsSoldAboveEstimatePerCentage;
+  dynamic totalWinning;
+  dynamic totalWinningUS;
+  dynamic totalLots;
+  dynamic totalSoldLots;
+  dynamic totalSoldLotsPerCentage;
+  dynamic lotsSoldAboveEstimate;
+  dynamic lotsSoldAboveEstimatePerCentage;
   List<LotsResult>? lots;
 
   AutionResultResponse(
@@ -42,8 +42,7 @@ class AutionResultResponse {
     data['TotalSoldLots'] = this.totalSoldLots;
     data['TotalSoldLotsPerCentage'] = this.totalSoldLotsPerCentage;
     data['LotsSoldAboveEstimate'] = this.lotsSoldAboveEstimate;
-    data['LotsSoldAboveEstimatePerCentage'] =
-        this.lotsSoldAboveEstimatePerCentage;
+    data['LotsSoldAboveEstimatePerCentage'] = this.lotsSoldAboveEstimatePerCentage;
     if (this.lots != null) {
       data['Lots'] = this.lots!.map((v) => v.toJson()).toList();
     }

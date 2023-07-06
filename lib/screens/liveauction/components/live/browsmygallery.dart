@@ -909,7 +909,7 @@ class _BrowseMyGallryListItemState extends State<BrowseMyGallryListItem> with Au
                                       : Colors.red,
                                   borderRadius: BorderRadius.circular(16)),
                               child: Text(
-                                  "${(widget.lots.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId()) ? "YOU WON" : widget.lots.bidCount != "0" ? "BOUGHT IN" : "THIS BID IS CLOSED"}",
+                                  "${(widget.lots.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId()) ? "YOU WON" : widget.lots.bidCount == "0" ? "BOUGHT IN" : "THIS BID IS CLOSED"}",
                                   style: Theme.of(context).textTheme.subtitle2!.copyWith(color: Colors.white)),
                             ),
                           )
@@ -1390,7 +1390,7 @@ class _BrowseMyGallryListItemState extends State<BrowseMyGallryListItem> with Au
                                                     : Colors.red,
                                                 borderRadius: BorderRadius.circular(16)),
                                             child: Text(
-                                                "${(widget.lots.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId()) ? "YOU ARE LEADING" : widget.lots.bidCount != "0" ? "BOUGHT IN" : "THIS BID IS CLOSED"}",
+                                                "${(widget.lots.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId()) ? "YOU ARE LEADING" : widget.lots.bidCount == "0" ? "BOUGHT IN" : "THIS BID IS CLOSED"}",
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .subtitle2!

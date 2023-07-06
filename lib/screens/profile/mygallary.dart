@@ -1,18 +1,12 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:giftex/screens/components/bottomnavigationbar/dashborard2.dart';
-import 'package:giftex/screens/productdetailspage/productdetailpage.dart';
 import 'package:giftex/screens/profile/components/browsgalleryitem.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
 import 'package:giftex/viewmodel/profile/profileviewmodel.dart';
 import 'package:intl/intl.dart';
 
-import '../components/bottomnavigationbar/bottomnavigationbar.dart';
 import '../components/footer/footer.dart';
 import '../components/header.dart';
-import '../customepaint.dart';
 
 class MyGallarypage extends StatefulWidget {
   MyGallarypage(this.profileViewModel);
@@ -140,10 +134,7 @@ class _MyGallarypageState extends State<MyGallarypage> {
                                     children: <TextSpan>[
                                       TextSpan(
                                         text: 'Hello ',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline6!
-                                            .copyWith(
+                                        style: Theme.of(context).textTheme.headline6!.copyWith(
                                               color: Color(0xffE74B52),
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -151,10 +142,7 @@ class _MyGallarypageState extends State<MyGallarypage> {
                                       TextSpan(
                                         text:
                                             '${widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.basicDetails!.firstName ?? ''}',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline6!
-                                            .copyWith(
+                                        style: Theme.of(context).textTheme.headline6!.copyWith(
                                               color: Colors.black,
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -178,10 +166,7 @@ class _MyGallarypageState extends State<MyGallarypage> {
                                     Text(
                                       '${widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.address!.first.city ?? ''},${widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.address!.first.country ?? ''}',
                                       textAlign: TextAlign.center,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyText1!
-                                          .copyWith(
+                                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                             color: Color(0xff2D2D2D),
                                             fontWeight: FontWeight.w400,
                                           ),
@@ -195,33 +180,21 @@ class _MyGallarypageState extends State<MyGallarypage> {
                             ),
                             ElevatedButton(
                               style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(
-                                      Color(0XFFFFFFFF)),
-                                  shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                          side: BorderSide(
-                                              color: Color(0xff747474),
-                                              width: 0.38)))),
+                                  backgroundColor: MaterialStateProperty.all(Color(0XFFFFFFFF)),
+                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      side: BorderSide(color: Color(0xff747474), width: 0.38)))),
                               onPressed: () {},
                               child: Padding(
-                                padding: const EdgeInsets.only(
-                                    right: 8.0, left: 8, top: 12, bottom: 12),
+                                padding: const EdgeInsets.only(right: 8.0, left: 8, top: 12, bottom: 12),
                                 child: Row(
                                   children: [
                                     Text(
                                       'EDIT',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyText1!
-                                          .copyWith(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .primary,
-                                              fontWeight: FontWeight.bold,
-                                              letterSpacing: 2),
+                                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                          color: Theme.of(context).colorScheme.primary,
+                                          fontWeight: FontWeight.bold,
+                                          letterSpacing: 2),
                                     ),
                                     SizedBox(
                                       width: 5,
@@ -240,18 +213,18 @@ class _MyGallarypageState extends State<MyGallarypage> {
                         SizedBox(
                           height: 3,
                         ),
-                        Container(
-                          width: MediaQuery.of(context).size.width * .6,
-                          child: Text(
-                            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry",
-                            textAlign: TextAlign.left,
-                            style:
-                                Theme.of(context).textTheme.bodyText1!.copyWith(
-                                      color: Color(0xff959595),
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                          ),
-                        ),
+                        // Container(
+                        //   width: MediaQuery.of(context).size.width * .6,
+                        //   child: Text(
+                        //     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry",
+                        //     textAlign: TextAlign.left,
+                        //     style:
+                        //         Theme.of(context).textTheme.bodyText1!.copyWith(
+                        //               color: Color(0xff959595),
+                        //               fontWeight: FontWeight.w400,
+                        //             ),
+                        //   ),
+                        // ),
                       ],
                     )
                   ],
@@ -308,19 +281,16 @@ class _MyGallarypageState extends State<MyGallarypage> {
                       //     color: tabColor
                       // ),
                       indicator: UnderlineTabIndicator(
-                        borderSide: BorderSide(
-                            color: Theme.of(context).colorScheme.primary,
-                            width: 2.0),
+                        borderSide: BorderSide(color: Theme.of(context).colorScheme.primary, width: 2.0),
                       ),
                       isScrollable: true,
                       padding: EdgeInsets.all(0),
                       unselectedLabelColor: Color(0xff2D2D2D).withOpacity(0.6),
                       labelColor: const Color(0xFF000000),
-                      labelStyle:
-                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w400,
-                              ),
+                      labelStyle: Theme.of(context).textTheme.subtitle1!.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400,
+                          ),
                       tabs: [
                         Tab(text: "AUCTION GALLERY"),
                         Tab(text: "STORE GALLERY"),
@@ -362,11 +332,9 @@ class _MyGallarypageState extends State<MyGallarypage> {
                           widget.profileViewModel.isloading
                               ? LinearProgressIndicator()
                               : Column(
-                                  children: widget.profileViewModel
-                                      .myAuctionGalleryResponce!.result!.lots!
+                                  children: widget.profileViewModel.myAuctionGalleryResponce!.result!.lots!
                                       .map(
-                                        (e) => BrowseGalleryListItem(
-                                            e, false, auctionViewModel),
+                                        (e) => BrowseGalleryListItem(e, false, auctionViewModel),
                                       )
                                       .toList(),
                                 ),
@@ -417,8 +385,7 @@ class _MyGallarypageState extends State<MyGallarypage> {
                                 // itemExtent: 150,
                                 scrollDirection: Axis.vertical,
                                 itemBuilder: (context, index) => Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 0.0, right: 0.0, top: 16),
+                                      padding: const EdgeInsets.only(left: 0.0, right: 0.0, top: 16),
                                       child: Container(
                                           padding: EdgeInsets.all(10),
                                           height: 210,
@@ -429,19 +396,14 @@ class _MyGallarypageState extends State<MyGallarypage> {
                                               // ),
                                               color: Color(0xffF9F9F9)),
                                           // alignment: Alignment.center,
-                                          width:
-                                              MediaQuery.of(context).size.width,
+                                          width: MediaQuery.of(context).size.width,
                                           child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Image.asset(
                                                     "image/Bitmap1.png",
@@ -453,28 +415,18 @@ class _MyGallarypageState extends State<MyGallarypage> {
                                                     width: 20,
                                                   ),
                                                   Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
                                                     children: [
                                                       SizedBox(
                                                         height: 10,
                                                       ),
                                                       Text(
                                                         "Jamini Roy",
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .subtitle1!
-                                                            .copyWith(
-                                                              color:
-                                                                  Colors.black,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
+                                                        textAlign: TextAlign.center,
+                                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                              color: Colors.black,
+                                                              fontWeight: FontWeight.w600,
                                                             ),
                                                       ),
                                                       SizedBox(
@@ -482,17 +434,10 @@ class _MyGallarypageState extends State<MyGallarypage> {
                                                       ),
                                                       Text(
                                                         "Mother & Child",
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .subtitle1!
-                                                            .copyWith(
-                                                              color: Color(
-                                                                  0xff747474),
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400,
+                                                        textAlign: TextAlign.center,
+                                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                              color: Color(0xff747474),
+                                                              fontWeight: FontWeight.w400,
                                                             ),
                                                       ),
                                                     ],
@@ -501,9 +446,7 @@ class _MyGallarypageState extends State<MyGallarypage> {
                                                   Image.asset(
                                                     "image/Vector (15).png",
                                                     height: 30,
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .secondary,
+                                                    color: Theme.of(context).colorScheme.secondary,
                                                   )
                                                 ],
                                               ),
@@ -511,31 +454,19 @@ class _MyGallarypageState extends State<MyGallarypage> {
                                                 height: 10,
                                               ),
                                               Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
                                                     children: [
                                                       Text(
                                                         "Category Name",
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .bodyText1!
-                                                            .copyWith(
-                                                              color: Color(
-                                                                  0xff747580),
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400,
+                                                        textAlign: TextAlign.center,
+                                                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                              color: Color(0xff747580),
+                                                              fontWeight: FontWeight.w400,
                                                             ),
                                                       ),
                                                       SizedBox(
@@ -543,42 +474,25 @@ class _MyGallarypageState extends State<MyGallarypage> {
                                                       ),
                                                       Text(
                                                         "20cm X 25cm",
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .bodyText1!
-                                                            .copyWith(
-                                                              color: Color(
-                                                                  0xff202232),
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
+                                                        textAlign: TextAlign.center,
+                                                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                              color: Color(0xff202232),
+                                                              fontWeight: FontWeight.w600,
                                                             ),
                                                       ),
                                                     ],
                                                   ),
                                                   Spacer(),
                                                   Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
                                                     children: [
                                                       Text(
                                                         "MRP.",
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .bodyText1!
-                                                            .copyWith(
-                                                              color: Color(
-                                                                  0xff747580),
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400,
+                                                        textAlign: TextAlign.center,
+                                                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                              color: Color(0xff747580),
+                                                              fontWeight: FontWeight.w400,
                                                             ),
                                                       ),
                                                       SizedBox(
@@ -586,19 +500,10 @@ class _MyGallarypageState extends State<MyGallarypage> {
                                                       ),
                                                       Text(
                                                         "₹50,000",
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .bodyText1!
-                                                            .copyWith(
-                                                              color: Theme.of(
-                                                                      context)
-                                                                  .colorScheme
-                                                                  .secondary,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
+                                                        textAlign: TextAlign.center,
+                                                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                              color: Theme.of(context).colorScheme.secondary,
+                                                              fontWeight: FontWeight.w600,
                                                             ),
                                                       ),
                                                     ],
@@ -606,40 +511,21 @@ class _MyGallarypageState extends State<MyGallarypage> {
                                                   Spacer(),
                                                   ElevatedButton(
                                                     style: ButtonStyle(
-                                                        backgroundColor:
-                                                            MaterialStateProperty.all(
-                                                                Color(
-                                                                    0XFFF9F9F9)),
-                                                        shape: MaterialStateProperty.all<
-                                                                RoundedRectangleBorder>(
+                                                        backgroundColor: MaterialStateProperty.all(Color(0XFFF9F9F9)),
+                                                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                                             RoundedRectangleBorder(
-                                                                borderRadius:
-                                                                    BorderRadius.circular(
-                                                                        16.0),
+                                                                borderRadius: BorderRadius.circular(16.0),
                                                                 side: BorderSide(
-                                                                    color: Color(
-                                                                        0xff747474),
-                                                                    width:
-                                                                        0.38)))),
+                                                                    color: Color(0xff747474), width: 0.38)))),
                                                     onPressed: () {},
                                                     child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              right: 0.0,
-                                                              left: 0,
-                                                              top: 12,
-                                                              bottom: 12),
+                                                      padding: const EdgeInsets.only(
+                                                          right: 0.0, left: 0, top: 12, bottom: 12),
                                                       child: Text(
                                                         'ADD TO CART',
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .caption!
-                                                            .copyWith(
-                                                              color: Color(
-                                                                  0XFF2D2D2D),
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
+                                                        style: Theme.of(context).textTheme.caption!.copyWith(
+                                                              color: Color(0XFF2D2D2D),
+                                                              fontWeight: FontWeight.bold,
                                                             ),
                                                       ),
                                                     ),
@@ -658,8 +544,7 @@ class _MyGallarypageState extends State<MyGallarypage> {
               const SizedBox(
                 height: 16,
               ),
-              SizedBox(
-                  width: MediaQuery.of(context).size.width, child: Footer()),
+              SizedBox(width: MediaQuery.of(context).size.width, child: Footer()),
               SizedBox(
                 height: 60,
                 width: MediaQuery.of(context).size.width,

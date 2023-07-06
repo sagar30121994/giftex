@@ -169,17 +169,17 @@ class _ProfilepageState extends State<Profilepage> {
                               SizedBox(
                                 height: 3,
                               ),
-                              Container(
-                                width: MediaQuery.of(context).size.width * .6,
-                                child: Text(
-                                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry",
-                                  textAlign: TextAlign.left,
-                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                        color: Color(0xff959595),
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                ),
-                              ),
+                              // Container(
+                              //   width: MediaQuery.of(context).size.width * .6,
+                              //   child: Text(
+                              //     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry",
+                              //     textAlign: TextAlign.left,
+                              //     style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                              //           color: Color(0xff959595),
+                              //           fontWeight: FontWeight.w400,
+                              //         ),
+                              //   ),
+                              // ),
                             ],
                           )
                         ],

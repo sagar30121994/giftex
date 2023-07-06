@@ -15,7 +15,9 @@ AuctionViewModel auctionViewModel = AuctionViewModel();
 
 class LiveAuctionUi extends StatefulWidget {
   String auction;
+
   LiveAuctionUi(this.auction);
+
   @override
   _LiveAuctionUiState createState() => _LiveAuctionUiState();
 }
@@ -533,12 +535,16 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                         onTap: () {
                                                           // Navigator.push(context, MaterialPageRoute(builder: (context) => LiveAuctionUiDetails(widget.auction)));
 
-                                                          setState(() {
-                                                            auctionViewModel.selectedAuction = auctionViewModel
-                                                                .upcomingAuctionResponse!.result!.auctions![0];
+                                                          if ((auctionViewModel.upcomingAuctionResponse!.result!
+                                                                  .auctions![0].auctionDate!) !=
+                                                              "TBA") {
+                                                            setState(() {
+                                                              auctionViewModel.selectedAuction = auctionViewModel
+                                                                  .upcomingAuctionResponse!.result!.auctions![0];
 
-                                                            bottomViewModel.setIndex(8);
-                                                          });
+                                                              bottomViewModel.setIndex(8);
+                                                            });
+                                                          }
                                                         },
                                                         child: Container(
                                                           padding: EdgeInsets.all(8),
@@ -636,14 +642,16 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                           ),
                                                           InkWell(
                                                             onTap: () {
-                                                              // Navigator.push(context, MaterialPageRoute(builder: (context) => LiveAuctionUiDetails(widget.auction)));
+                                                              if ((auctionViewModel.upcomingAuctionResponse!.result!
+                                                                      .auctions![1].auctionDate!) !=
+                                                                  "TBA") {
+                                                                setState(() {
+                                                                  auctionViewModel.selectedAuction = auctionViewModel
+                                                                      .upcomingAuctionResponse!.result!.auctions![1];
 
-                                                              setState(() {
-                                                                // auctionViewModel.selectedAuction = auctionViewModel
-                                                                //     .upcomingAuctionResponse!.result!.auctions![1];
-                                                                //
-                                                                // bottomViewModel.setIndex(8);
-                                                              });
+                                                                  bottomViewModel.setIndex(8);
+                                                                });
+                                                              }
                                                             },
                                                             child: Container(
                                                               padding: EdgeInsets.all(8),
@@ -724,14 +732,16 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                           ),
                                                           InkWell(
                                                             onTap: () {
-                                                              // Navigator.push(context, MaterialPageRoute(builder: (context) => LiveAuctionUiDetails(widget.auction)));
+                                                              if ((auctionViewModel.upcomingAuctionResponse!.result!
+                                                                      .auctions![2].auctionDate!) !=
+                                                                  "TBA") {
+                                                                setState(() {
+                                                                  auctionViewModel.selectedAuction = auctionViewModel
+                                                                      .upcomingAuctionResponse!.result!.auctions![3];
 
-                                                              setState(() {
-                                                                // auctionViewModel.selectedAuction = auctionViewModel
-                                                                //     .upcomingAuctionResponse!.result!.auctions![1];
-                                                                //
-                                                                // bottomViewModel.setIndex(8);
-                                                              });
+                                                                  bottomViewModel.setIndex(8);
+                                                                });
+                                                              }
                                                             },
                                                             child: Container(
                                                               padding: EdgeInsets.all(8),
@@ -808,14 +818,16 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                           ),
                                                           InkWell(
                                                             onTap: () {
-                                                              // Navigator.push(context, MaterialPageRoute(builder: (context) => LiveAuctionUiDetails(widget.auction)));
+                                                              if ((auctionViewModel.upcomingAuctionResponse!.result!
+                                                                      .auctions![3].auctionDate!) !=
+                                                                  "TBA") {
+                                                                setState(() {
+                                                                  auctionViewModel.selectedAuction = auctionViewModel
+                                                                      .upcomingAuctionResponse!.result!.auctions![3];
 
-                                                              setState(() {
-                                                                // auctionViewModel.selectedAuction = auctionViewModel
-                                                                //     .upcomingAuctionResponse!.result!.auctions![1];
-                                                                //
-                                                                // bottomViewModel.setIndex(8);
-                                                              });
+                                                                  bottomViewModel.setIndex(8);
+                                                                });
+                                                              }
                                                             },
                                                             child: Container(
                                                               padding: EdgeInsets.all(8),

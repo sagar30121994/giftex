@@ -83,10 +83,6 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
       print("*********" + data.toString());
       // initiateTimer();
 
-      setState(() {
-        myDuration = Duration(seconds: int.parse(widget.lots.liveStatus!.remainingSeconds ?? "0"));
-      });
-
       if (data.toString() != "null") {
         if (!isFirst) {
           isFirst = true;
@@ -97,6 +93,9 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
           setState(() {
             widget.lots = l1;
             widget.auctionViewModel.replaceLots(l1);
+          });
+          setState(() {
+            myDuration = Duration(seconds: int.parse(widget.lots.liveStatus!.remainingSeconds ?? "0"));
           });
         }
       }
@@ -929,7 +928,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                       : Colors.red,
                                   borderRadius: BorderRadius.circular(16)),
                               child: Text(
-                                  "${(widget.lots.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId()) ? "YOU WON" : widget.lots.bidCount != "0" ? "BOUGHT IN" : "THIS BID IS CLOSED"}",
+                                  "${(widget.lots.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId()) ? "YOU WON" : widget.lots.bidCount == "0" ? "BOUGHT IN" : "THIS BID IS CLOSED"}",
                                   style: Theme.of(context).textTheme.subtitle2!.copyWith(color: Colors.white)),
                             ),
                           )
@@ -1410,7 +1409,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                     : Colors.red,
                                                 borderRadius: BorderRadius.circular(16)),
                                             child: Text(
-                                                "${(widget.lots.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId()) ? "YOU ARE LEADING" : widget.lots.bidCount != "0" ? "BOUGHT IN" : "THIS BID IS CLOSED"}",
+                                                "${(widget.lots.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId()) ? "CURRENTLY LEADING" : widget.lots.bidCount != "0" ? "BOUGHT IN" : "BID CLOSED"}",
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .subtitle2!
