@@ -1,6 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
-import 'package:giftex/screens/kyc/kycpage.dart';
 import 'package:giftex/viewmodel/user/loginviewmodel.dart';
 
 class GetOtpEmailMobilepage extends StatefulWidget {
@@ -13,12 +14,33 @@ class GetOtpEmailMobilepage extends StatefulWidget {
   _GetOtpEmailMobilepageState createState() => _GetOtpEmailMobilepageState();
 }
 
-class _GetOtpEmailMobilepageState extends State<GetOtpEmailMobilepage> {
+class _GetOtpEmailMobilepageState extends State<GetOtpEmailMobilepage> with TickerProviderStateMixin {
   String loginType = "signup";
+
+  Timer? timer;
+  Duration myDuration = Duration(seconds: 90);
+  startTimer() {
+    final reduceSecondsBy = 1;
+    timer = Timer.periodic(Duration(seconds: 1), (_) async {
+      final secondss = myDuration.inSeconds - reduceSecondsBy;
+
+      if (secondss < 0) {
+        timer!.cancel();
+      } else {
+        myDuration = Duration(seconds: secondss);
+      }
+    });
+  }
 
   @override
   void initState() {
     // TODO: implement initState
+    if (widget.isMobile) {
+      widget.loginViewModel.verifyMobile();
+    } else {
+      widget.loginViewModel.verifyEmail();
+    }
+
     super.initState();
   }
 
@@ -237,7 +259,7 @@ class _GetOtpEmailMobilepageState extends State<GetOtpEmailMobilepage> {
                                     SizedBox(
                                       width: 8,
                                     ),
-                                    Text("1:35")
+                                    Text("${myDuration.inMinutes}:${myDuration.inSeconds.remainder(60)}")
                                   ],
                                 ),
                               ],
@@ -279,36 +301,31 @@ class _GetOtpEmailMobilepageState extends State<GetOtpEmailMobilepage> {
                 ),
                 InkWell(
                   onTap: () {
-                    widget.loginViewModel.getLoginWithOTPConfirm().then((value) => {
-                          if (value.status == 200)
-                            {
-                              if (widget.loginViewModel.loginResponse!.status == "true")
-                                {
-                                  Navigator.pushReplacement(
-                                      context, MaterialPageRoute(builder: (BuildContext context) => KYCPage())),
-                                }
-                              else
-                                {
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                    content: Text(
-                                      '${widget.loginViewModel.loginResponse!.message}',
-                                      style: Theme.of(context).textTheme.headline6,
-                                    ),
-                                    backgroundColor: Colors.red,
-                                  )),
-                                }
-                            }
-                          else
-                            {
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                content: Text(
-                                  'Enter Valid Credentials ${value.message}',
-                                  style: Theme.of(context).textTheme.headline6,
-                                ),
-                                backgroundColor: Colors.red,
-                              )),
-                            }
-                        });
+                    if (widget.isMobile) {
+                      if (widget.loginViewModel.verifyMobileResponse!.result!.sOtp == widget.loginViewModel.otp) {
+                        Navigator.of(context).pop(true);
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(
+                            'Please Enter Valid OTP',
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                          backgroundColor: Colors.red,
+                        ));
+                      }
+                    } else {
+                      if (widget.loginViewModel.verifyEmailResponse!.result!.sOtp == widget.loginViewModel.otp) {
+                        Navigator.of(context).pop(true);
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(
+                            'Please Enter Valid OTP',
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                          backgroundColor: Colors.red,
+                        ));
+                      }
+                    }
 
                     // Navigator.push(context, MaterialPageRoute(builder: (context) => KYCPage()));
                   },

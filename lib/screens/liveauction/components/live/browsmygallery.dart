@@ -664,7 +664,7 @@ class _BrowseMyGallryListItemState extends State<BrowseMyGallryListItem> with Au
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Container(
                 color: Color(0xffF9F9F9),
-                height: (hours == "00" && minutes == "00" && seconds == "00") ? 290 : 350,
+                height: (hours == "00" && minutes == "00" && seconds == "00") ? 320 : 350,
                 alignment: Alignment.center,
                 child: Column(
                   children: [
@@ -909,7 +909,7 @@ class _BrowseMyGallryListItemState extends State<BrowseMyGallryListItem> with Au
                                       : Colors.red,
                                   borderRadius: BorderRadius.circular(16)),
                               child: Text(
-                                  "${(widget.lots.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId()) ? "YOU WON" : widget.lots.bidCount == "0" ? "BOUGHT IN" : "THIS BID IS CLOSED"}",
+                                  "${(widget.lots.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId()) ? "YOU WON" : widget.lots.bidCount == "0" ? "BOUGHT IN" : "BID CLOSED"}",
                                   style: Theme.of(context).textTheme.subtitle2!.copyWith(color: Colors.white)),
                             ),
                           )
@@ -1390,7 +1390,7 @@ class _BrowseMyGallryListItemState extends State<BrowseMyGallryListItem> with Au
                                                     : Colors.red,
                                                 borderRadius: BorderRadius.circular(16)),
                                             child: Text(
-                                                "${(widget.lots.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId()) ? "YOU ARE LEADING" : widget.lots.bidCount == "0" ? "BOUGHT IN" : "THIS BID IS CLOSED"}",
+                                                "${(widget.lots.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId()) ? "CURRENLTY LEADING" : widget.lots.bidCount == "0" ? "BOUGHT IN" : "BID CLOSED"}",
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .subtitle2!

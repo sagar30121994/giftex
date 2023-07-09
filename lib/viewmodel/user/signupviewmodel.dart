@@ -1,4 +1,3 @@
-import 'package:giftex/data/network/models/responce/user/signupres.dart';
 import 'package:giftex/data/network/models/responce/user/verifyemailresponse.dart';
 import 'package:mobx/mobx.dart';
 import 'package:validators/validators.dart';
@@ -10,7 +9,7 @@ import '../../data/network/models/request/webapimodel/userloginrequestmodel.dart
 import '../../data/network/models/responce/user/loginrespose.dart';
 import '../../data/network/repository/user/loginrepo.dart';
 
-part 'loginviewmodel.g.dart';
+part 'signupviewmodel.g.dart';
 
 class LoginViewModel = _LoginViewModel with _$LoginViewModel;
 
@@ -19,8 +18,6 @@ abstract class _LoginViewModel with Store {
   LoginViewModelErrorState loginViewModelErrorState = LoginViewModelErrorState();
 
   LoginViewModelMobileErrorState loginViewModelMobileErrorState = LoginViewModelMobileErrorState();
-
-  Login1ViewModelErrorState login1ViewModelErrorState = Login1ViewModelErrorState();
   late LocalSharedPrefrence localSharedPrefrence;
 
   _LoginViewModel() {
@@ -35,16 +32,10 @@ abstract class _LoginViewModel with Store {
   LoginResponse? loginResponse;
 
   @observable
-  SignUpResponse? signUpResponse;
-
-  @observable
   String email = '';
 
   @observable
   String pass = '';
-
-  @observable
-  String name = '';
 
   @observable
   String otp = '';
@@ -72,11 +63,6 @@ abstract class _LoginViewModel with Store {
   }
 
   @action
-  setName(String value) {
-    name = value;
-  }
-
-  @action
   setPass(String value) {
     pass = value;
   }
@@ -92,7 +78,6 @@ abstract class _LoginViewModel with Store {
       reaction((_) => email, validateEmail),
       reaction((_) => pass, validatePassowrd),
       reaction((_) => mobile, validateMobile),
-      reaction((_) => name, validateName),
     ];
   }
 
@@ -105,20 +90,8 @@ abstract class _LoginViewModel with Store {
   validateMobile(String email) {
     if (isNumeric(email) && email.length == 10) {
       loginViewModelMobileErrorState.mobile = null;
-      login1ViewModelErrorState.mobile = null;
     } else {
       loginViewModelMobileErrorState.mobile = 'Enter A Valid Mobile Number';
-      login1ViewModelErrorState.mobile = 'Enter A Valid Mobile Number';
-    }
-  }
-
-  @action
-  validateName(String email) {
-    if (email.length > 3) {
-      login1ViewModelErrorState.name = null;
-    } else {
-      login1ViewModelErrorState.name = 'Enter A Valid Name';
-      // loginViewModelMobileErrorState.mobile = 'Enter A Valid Mobile Number';
     }
   }
 
@@ -126,10 +99,8 @@ abstract class _LoginViewModel with Store {
   validateEmail(String email) {
     if (isEmail(email)) {
       loginViewModelErrorState.email = null;
-      login1ViewModelErrorState.email = null;
     } else {
       loginViewModelErrorState.email = 'Enter A Valid Mail';
-      login1ViewModelErrorState.email = 'Enter A Valid Mail';
     }
   }
 
@@ -137,22 +108,15 @@ abstract class _LoginViewModel with Store {
   validatePassowrd(String pass) {
     if (pass.length >= 6) {
       loginViewModelErrorState.pass = null;
-      login1ViewModelErrorState.pass = null;
     } else {
       loginViewModelErrorState.pass = 'Enter At-lest 6 digits';
-      login1ViewModelErrorState.pass = 'Enter At-lest 6 digits';
     }
   }
 
   Future<HttpResponse> getLogin() async {
     isLoading = true;
 
-    HttpResponse httpResponse = await orderRepo!.login(LoginReqestModel(
-      email: email,
-      password: pass,
-      mobile: mobile,
-      countryCode: "91",
-    ));
+    HttpResponse httpResponse = await orderRepo!.login(LoginReqestModel(email: email, password: pass));
 
     if (httpResponse.status == 200) {
       loginResponse = httpResponse.data;
@@ -166,10 +130,10 @@ abstract class _LoginViewModel with Store {
     return httpResponse;
   }
 
-  Future<HttpResponse> verifyEmail() async {
+  Future<HttpResponse> verifyEmail(String email, String f_name, String l_name) async {
     isLoading = true;
 
-    HttpResponse httpResponse = await orderRepo!.verifyEmail(email, name, "");
+    HttpResponse httpResponse = await orderRepo!.verifyEmail(email, f_name, l_name);
 
     if (httpResponse.status == 200) {
       verifyEmailResponse = httpResponse.data;
@@ -178,10 +142,10 @@ abstract class _LoginViewModel with Store {
     return httpResponse;
   }
 
-  Future<HttpResponse> verifyMobile() async {
+  Future<HttpResponse> verifyMobile(String mobile, String f_name, String l_name) async {
     isLoading = true;
 
-    HttpResponse httpResponse = await orderRepo!.verifyMobile(mobile, name, "");
+    HttpResponse httpResponse = await orderRepo!.verifyMobile(mobile, f_name, l_name);
 
     if (httpResponse.status == 200) {
       verifyMobileResponse = httpResponse.data;
@@ -213,23 +177,6 @@ abstract class _LoginViewModel with Store {
       // await localSharedPrefrence.setToken(loginResponse!.!);
       await localSharedPrefrence.setUserId(loginResponse!.result!.userid!);
       await localSharedPrefrence.setCrmClinetId(loginResponse!.result!.cRMClientID!);
-      //await localSharedPrefrence.setRole(loginResponse!.user!.role!);
-    }
-    isLoading = false;
-    return httpResponse;
-  }
-
-  Future<HttpResponse> gesignUp() async {
-    isLoading = true;
-
-    HttpResponse httpResponse = await orderRepo!.signUp(mobile, name, email, pass);
-
-    if (httpResponse.status == 200) {
-      signUpResponse = httpResponse.data;
-      localSharedPrefrence.setLoginStatus(true);
-      // await localSharedPrefrence.setToken(loginResponse!.!);
-      // await localSharedPrefrence.setUserId(loginResponse!.result!.userid!);
-      await localSharedPrefrence.setCrmClinetId(signUpResponse!.clientID!);
       //await localSharedPrefrence.setRole(loginResponse!.user!.role!);
     }
     isLoading = false;
@@ -334,23 +281,4 @@ abstract class _LoginViewModelMobileErrorState with Store {
 
   @computed
   bool get hasErrors => mobile != null;
-}
-
-class Login1ViewModelErrorState = _Login1ViewModelErrorState with _$Login1ViewModelErrorState;
-
-abstract class _Login1ViewModelErrorState with Store {
-  @observable
-  String? email;
-
-  @observable
-  String? name;
-
-  @observable
-  String? mobile;
-
-  @observable
-  String? pass;
-
-  @computed
-  bool get hasErrors => email != null || pass != null || name != null || mobile != null;
 }

@@ -139,13 +139,48 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                   SizedBox(
                                     width: 3,
                                   ),
-                                  Text(
-                                    '${(widget.getUserAllDetailsResponse!.result!.profile!.address!.first!.city ?? '')}',
-                                    textAlign: TextAlign.center,
-                                    style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                          color: Color(0xff2D2D2D),
-                                          fontWeight: FontWeight.w400,
+                                  widget.getUserAllDetailsResponse!.result!.profile!.address!.isEmpty
+                                      ? Container()
+                                      : Text(
+                                          '${(widget.getUserAllDetailsResponse!.result!.profile!.address!.first!.city ?? '')}',
+                                          textAlign: TextAlign.center,
+                                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                color: Color(0xff2D2D2D),
+                                                fontWeight: FontWeight.w400,
+                                              ),
                                         ),
+                                  SizedBox(
+                                    width: 16,
+                                  ),
+                                  ElevatedButton(
+                                    style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all(Color(0XFFFFFFFF)),
+                                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(20.0),
+                                            side: BorderSide(color: Color(0xff747474), width: 0.38)))),
+                                    onPressed: () {},
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(right: 8.0, left: 8, top: 12, bottom: 12),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            'EDIT',
+                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                color: Theme.of(context).colorScheme.primary,
+                                                fontWeight: FontWeight.bold,
+                                                letterSpacing: 2),
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Icon(
+                                            Icons.edit_outlined,
+                                            color: Color(0XFF2D2D2D),
+                                            size: 15,
+                                          )
+                                        ],
+                                      ),
+                                    ),
                                   ),
                                 ],
                               )
@@ -153,36 +188,6 @@ class _MyProfilepageState extends State<MyProfilepage> {
                           ),
                           SizedBox(
                             width: 16,
-                          ),
-                          ElevatedButton(
-                            style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(Color(0XFFFFFFFF)),
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    side: BorderSide(color: Color(0xff747474), width: 0.38)))),
-                            onPressed: () {},
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 8.0, left: 8, top: 12, bottom: 12),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    'EDIT',
-                                    style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                        color: Theme.of(context).colorScheme.primary,
-                                        fontWeight: FontWeight.bold,
-                                        letterSpacing: 2),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Icon(
-                                    Icons.edit_outlined,
-                                    color: Color(0XFF2D2D2D),
-                                    size: 15,
-                                  )
-                                ],
-                              ),
-                            ),
                           ),
                         ],
                       ),

@@ -680,7 +680,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                 )),
           )
         : Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
             child: Container(
                 color: Color(0xffF9F9F9),
                 // height: (hours == "00" && minutes == "00" && seconds == "00") ? 310 : 370,
@@ -928,7 +928,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                       : Colors.red,
                                   borderRadius: BorderRadius.circular(16)),
                               child: Text(
-                                  "${(widget.lots.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId()) ? "YOU WON" : widget.lots.bidCount == "0" ? "BOUGHT IN" : "THIS BID IS CLOSED"}",
+                                  "${(widget.lots.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId()) ? "YOU WON" : widget.lots.bidCount == "0" ? "BOUGHT IN" : "BID CLOSED"}",
                                   style: Theme.of(context).textTheme.subtitle2!.copyWith(color: Colors.white)),
                             ),
                           )
@@ -1409,7 +1409,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                     : Colors.red,
                                                 borderRadius: BorderRadius.circular(16)),
                                             child: Text(
-                                                "${(widget.lots.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId()) ? "CURRENTLY LEADING" : widget.lots.bidCount != "0" ? "BOUGHT IN" : "BID CLOSED"}",
+                                                "${(widget.lots.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId()) ? "CURRENTLY LEADING" : widget.lots.bidCount == "0" ? "BOUGHT IN" : "BID CLOSED"}",
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .subtitle2!

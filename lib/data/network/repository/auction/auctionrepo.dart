@@ -93,7 +93,7 @@ class AuctionRepo {
     return httpResponse;
   }
 
-  Future<HttpResponse> getUpcommingAuction(String auctionType) async {
+  Future<HttpResponse> getUpcommingAuction(String auctionType, int page) async {
     HttpResponse httpResponse = HttpResponse();
     String userid = localSharedPrefrence!.getUserId();
     String authKey = localSharedPrefrence!.getAuthKeyWeb();
@@ -105,6 +105,8 @@ class AuctionRepo {
       "authkey_mobile": "",
       "authkey_web": authKey,
       "CRMClientID": crmClientId,
+      "PageIndex": page,
+      "PageSize": 0,
       "AuctionStatus": auctionType
     }).then((responce) async {
       print(responce);
@@ -242,7 +244,7 @@ class AuctionRepo {
     return httpResponse;
   }
 
-  Future<HttpResponse> getUpcommingAuctionLots(String ids) async {
+  Future<HttpResponse> getUpcommingAuctionLots(String ids, int page) async {
     HttpResponse httpResponse = HttpResponse();
     String userid = localSharedPrefrence!.getUserId();
     String authKey = localSharedPrefrence!.getAuthKeyWeb();
@@ -254,6 +256,8 @@ class AuctionRepo {
       "authkey_mobile": "",
       "authkey_web": authKey,
       "CRMClientID": crmClientId,
+      "PageIndex": page,
+      "PageSize": 0,
       "AuctionId": ids
     }).then((responce) async {
       print(responce);

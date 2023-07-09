@@ -59,6 +59,8 @@ class _LiveTabsState extends State<LiveTabs> {
                                 tabColor = Color(0xffE74B52);
                                 setState(() {
                                   widget.auctionViewModel.liveAuctionType = "mygallery";
+
+                                  widget.auctionViewModel.page = 1;
                                   widget.auctionViewModel.myAuctionGallery();
                                 });
                               }
@@ -66,6 +68,7 @@ class _LiveTabsState extends State<LiveTabs> {
                                 tabColor = Color(0xffE74B52);
                                 setState(() {
                                   widget.auctionViewModel.liveAuctionType = "review";
+                                  widget.auctionViewModel.page = 1;
                                   widget.auctionViewModel
                                       .getReviewauctions(lot: widget.auctionViewModel.selectedAuction!);
                                 });

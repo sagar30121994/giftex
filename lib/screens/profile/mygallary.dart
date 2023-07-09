@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:giftex/data/network/base/base.dart';
 import 'package:giftex/screens/profile/components/browsgalleryitem.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
 import 'package:giftex/viewmodel/profile/profileviewmodel.dart';
@@ -108,7 +109,7 @@ class _MyGallarypageState extends State<MyGallarypage> {
                         CircleAvatar(
                           radius: 37,
                           backgroundImage: NetworkImage(
-                              '${(widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.basicDetails!.profilePicUrl ?? '')}'),
+                              '${baseUrl + (widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.basicDetails!.profilePicUrl ?? '')}'),
                           // child: Image.asset("image/image 40.png",fit: BoxFit.fill,),
                         ),
                       ],
@@ -141,7 +142,7 @@ class _MyGallarypageState extends State<MyGallarypage> {
                                       ),
                                       TextSpan(
                                         text:
-                                            '${widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.basicDetails!.firstName ?? ''}',
+                                            '${(widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.basicDetails!.firstName ?? '')}',
                                         style: Theme.of(context).textTheme.headline6!.copyWith(
                                               color: Colors.black,
                                               fontWeight: FontWeight.bold,
@@ -163,13 +164,49 @@ class _MyGallarypageState extends State<MyGallarypage> {
                                     SizedBox(
                                       width: 3,
                                     ),
-                                    Text(
-                                      '${widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.address!.first.city ?? ''},${widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.address!.first.country ?? ''}',
-                                      textAlign: TextAlign.center,
-                                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                            color: Color(0xff2D2D2D),
-                                            fontWeight: FontWeight.w400,
+                                    widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.address!.isEmpty
+                                        ? Container()
+                                        : Text(
+                                            '${(widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.address!.first!.city ?? '')}',
+                                            textAlign: TextAlign.center,
+                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                  color: Color(0xff2D2D2D),
+                                                  fontWeight: FontWeight.w400,
+                                                ),
                                           ),
+                                    SizedBox(
+                                      width: 16,
+                                    ),
+                                    ElevatedButton(
+                                      style: ButtonStyle(
+                                          backgroundColor: MaterialStateProperty.all(Color(0XFFFFFFFF)),
+                                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                              RoundedRectangleBorder(
+                                                  borderRadius: BorderRadius.circular(20.0),
+                                                  side: BorderSide(color: Color(0xff747474), width: 0.38)))),
+                                      onPressed: () {},
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(right: 8.0, left: 8, top: 12, bottom: 12),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              'EDIT',
+                                              style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                  color: Theme.of(context).colorScheme.primary,
+                                                  fontWeight: FontWeight.bold,
+                                                  letterSpacing: 2),
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Icon(
+                                              Icons.edit_outlined,
+                                              color: Color(0XFF2D2D2D),
+                                              size: 15,
+                                            )
+                                          ],
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 )
@@ -177,36 +214,6 @@ class _MyGallarypageState extends State<MyGallarypage> {
                             ),
                             SizedBox(
                               width: 16,
-                            ),
-                            ElevatedButton(
-                              style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(Color(0XFFFFFFFF)),
-                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20.0),
-                                      side: BorderSide(color: Color(0xff747474), width: 0.38)))),
-                              onPressed: () {},
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 8.0, left: 8, top: 12, bottom: 12),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      'EDIT',
-                                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                          color: Theme.of(context).colorScheme.primary,
-                                          fontWeight: FontWeight.bold,
-                                          letterSpacing: 2),
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Icon(
-                                      Icons.edit_outlined,
-                                      color: Color(0XFF2D2D2D),
-                                      size: 15,
-                                    )
-                                  ],
-                                ),
-                              ),
                             ),
                           ],
                         ),
@@ -218,11 +225,10 @@ class _MyGallarypageState extends State<MyGallarypage> {
                         //   child: Text(
                         //     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry",
                         //     textAlign: TextAlign.left,
-                        //     style:
-                        //         Theme.of(context).textTheme.bodyText1!.copyWith(
-                        //               color: Color(0xff959595),
-                        //               fontWeight: FontWeight.w400,
-                        //             ),
+                        //     style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        //           color: Color(0xff959595),
+                        //           fontWeight: FontWeight.w400,
+                        //         ),
                         //   ),
                         // ),
                       ],

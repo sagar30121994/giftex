@@ -470,10 +470,15 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                     InkWell(
                                                       onTap: () {
                                                         setState(() {
-                                                          auctionViewModel.selectedAuction = auctionViewModel
-                                                              .upcomingAuctionResponse!.result!.auctions![0];
+                                                          auctionViewModel.upComingLotsResponse = null;
+                                                          setState(() {
+                                                            auctionViewModel.selectedAuction = auctionViewModel
+                                                                .upcomingAuctionResponse!.result!.auctions![0];
 
-                                                          bottomViewModel.setIndex(8);
+                                                            bottomViewModel.setIndex(8);
+                                                          });
+                                                          auctionViewModel.liveAuctionType = "lots";
+                                                          auctionViewModel.auctionType = "upcoming";
                                                         });
                                                       },
                                                       child: Container(
@@ -573,6 +578,8 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                         InkWell(
                                                           onTap: () {
                                                             setState(() {
+                                                              auctionViewModel.liveAuctionType = "lots";
+                                                              auctionViewModel.auctionType = "upcoming";
                                                               auctionViewModel.selectedAuction = auctionViewModel
                                                                   .upcomingAuctionResponse!.result!.auctions![1];
 

@@ -286,7 +286,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
         auctionViewModel.auctionType == "live"
             ? auctionViewModel.upcomingAuctionResponse == null
                 ? SliverToBoxAdapter(child: Container())
-                : auctionViewModel.upcomingAuctionResponse!.result == null
+                : (auctionViewModel.upcomingAuctionResponse!.result!.auctions ?? []).length == 0
                     ? SliverToBoxAdapter(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -538,6 +538,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                           if ((auctionViewModel.upcomingAuctionResponse!.result!
                                                                   .auctions![0].auctionDate!) !=
                                                               "TBA") {
+                                                            auctionViewModel.upComingLotsResponse = null;
                                                             setState(() {
                                                               auctionViewModel.selectedAuction = auctionViewModel
                                                                   .upcomingAuctionResponse!.result!.auctions![0];
@@ -645,6 +646,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                               if ((auctionViewModel.upcomingAuctionResponse!.result!
                                                                       .auctions![1].auctionDate!) !=
                                                                   "TBA") {
+                                                                auctionViewModel.upComingLotsResponse = null;
                                                                 setState(() {
                                                                   auctionViewModel.selectedAuction = auctionViewModel
                                                                       .upcomingAuctionResponse!.result!.auctions![1];
@@ -735,6 +737,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                               if ((auctionViewModel.upcomingAuctionResponse!.result!
                                                                       .auctions![2].auctionDate!) !=
                                                                   "TBA") {
+                                                                auctionViewModel.upComingLotsResponse = null;
                                                                 setState(() {
                                                                   auctionViewModel.selectedAuction = auctionViewModel
                                                                       .upcomingAuctionResponse!.result!.auctions![3];
@@ -822,6 +825,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                                       .auctions![3].auctionDate!) !=
                                                                   "TBA") {
                                                                 setState(() {
+                                                                  auctionViewModel.upComingLotsResponse = null;
                                                                   auctionViewModel.selectedAuction = auctionViewModel
                                                                       .upcomingAuctionResponse!.result!.auctions![3];
 

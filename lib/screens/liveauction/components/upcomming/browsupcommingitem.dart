@@ -41,6 +41,7 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
 
   bool isFirst = false;
   bool isFirstLike = false;
+  bool isFirstLot = false;
 
   void checkEvent() {
     final lotReference = FirebaseDatabase.instance.ref("Lot/" + widget.lots.lotId!);
@@ -52,11 +53,14 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
 
     userlikeReference.onValue.listen((DatabaseEvent event) {
       print(event);
-      // final data = event.snapshot.value;
-
-      if (widget.auctionViewModel.liveAuctionType == "mygallery") {
-        widget.auctionViewModel.myAuctionGallery();
-        // initiateTimer();
+      final data = event.snapshot.value;
+      if (data.toString() != "null" && !isFirstLike) {
+        isFirstLike = true;
+      } else {
+        if (widget.auctionViewModel.liveAuctionType == "mygallery") {
+          widget.auctionViewModel.myAuctionGallery();
+          // initiateTimer();
+        }
       }
     });
 
@@ -70,9 +74,9 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
       // initiateTimer();
 
       if (data.toString() != "null") {
-        // if (!isFirst) {
-        //   isFirst = true;
-        // } else {
+        if (!isFirstLot) {
+          isFirstLot = true;
+        } else {
           final cleanup = jsonDecode(jsonEncode(data));
           Lots l1 = Lots.fromJson(cleanup as Map<String, dynamic>);
 
@@ -80,6 +84,8 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
             widget.lots = l1;
             widget.auctionViewModel.replaceLots(l1);
           });
+        }
+
         // }
       }
     });
@@ -87,7 +93,9 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
     likeReference.onValue.listen((DatabaseEvent event) {
       if (event.snapshot.value != null && !isFirstLike) {
         final data = event.snapshot.value;
-        if (data.toString() != "null") {
+        if (data.toString() != "null" && !isFirstLike) {
+          isFirstLike = true;
+        } else {
           setState(() {
             widget.lots.isLiked = data.toString();
           });
@@ -665,7 +673,7 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
           })
         : Observer(builder: (context) {
             return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               child: Container(
                   color: Color(0xffF9F9F9),
                   // height: (hours == "00" && minutes == "00" && seconds == "00")

@@ -8,8 +8,7 @@ class UpComingLotsResponse {
   UpComingLotsResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    result =
-        json['result'] != null ? new Result.fromJson(json['result']) : null;
+    result = json['result'] != null ? new Result.fromJson(json['result']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -101,6 +100,7 @@ class Lots {
   String? artistDesc;
   String? auctionDate;
   String? auctionMargin;
+  int? PaginationSize;
 
   Lots(
       {this.auctionId,
@@ -156,6 +156,7 @@ class Lots {
       this.artistImage,
       this.artistDesc,
       this.auctionDate,
+      this.PaginationSize,
       this.auctionMargin});
 
   Lots.fromJson(Map<String, dynamic> json) {
@@ -168,14 +169,11 @@ class Lots {
     category = json['Category'];
     lotDetDesc = json['LotDetDesc'];
     categoryID = json['CategoryID'];
+    PaginationSize = json['PaginationSize'];
     lotURL = json['LotURL'];
     lotNumber = json['LotNumber'];
-    leadingUser = json['LeadingUser'] != null
-        ? new LeadingUser.fromJson(json['LeadingUser'])
-        : null;
-    liveStatus = json['LiveStatus'] != null
-        ? new LiveStatus.fromJson(json['LiveStatus'])
-        : null;
+    leadingUser = json['LeadingUser'] != null ? new LeadingUser.fromJson(json['LeadingUser']) : null;
+    liveStatus = json['LiveStatus'] != null ? new LiveStatus.fromJson(json['LiveStatus']) : null;
     url3D = json['Url3D'];
     if (json['Images'] != null) {
       images = <Images>[];
@@ -185,31 +183,15 @@ class Lots {
     }
     lotTitle = json['LotTitle'];
     isLiked = json['IsLiked'];
-    proxyStatus = json['ProxyStatus'] != null
-        ? new ProxyStatus.fromJson(json['ProxyStatus'])
-        : null;
-    bidAccess = json['BidAccess'] != null
-        ? new BidAccess.fromJson(json['BidAccess'])
-        : null;
+    proxyStatus = json['ProxyStatus'] != null ? new ProxyStatus.fromJson(json['ProxyStatus']) : null;
+    bidAccess = json['BidAccess'] != null ? new BidAccess.fromJson(json['BidAccess']) : null;
     status = json['Status'];
-    estimateFrom = json['EstimateFrom'] != null
-        ? new Bid.fromJson(json['EstimateFrom'])
-        : null;
-    estimateTo = json['EstimateTo'] != null
-        ? new Bid.fromJson(json['EstimateTo'])
-        : null;
-    estimateDisplayText = json['EstimateDisplayText'] != null
-        ? new Bid.fromJson(json['EstimateDisplayText'])
-        : null;
-    openingBid = json['OpeningBid'] != null
-        ? new Bid.fromJson(json['OpeningBid'])
-        : null;
-    detailInfo = json['DetailInfo'] != null
-        ? new DetailInfo.fromJson(json['DetailInfo'])
-        : null;
-    additionalInfo = json['AdditionalInfo'] != null
-        ? new AdditionalInfo.fromJson(json['AdditionalInfo'])
-        : null;
+    estimateFrom = json['EstimateFrom'] != null ? new Bid.fromJson(json['EstimateFrom']) : null;
+    estimateTo = json['EstimateTo'] != null ? new Bid.fromJson(json['EstimateTo']) : null;
+    estimateDisplayText = json['EstimateDisplayText'] != null ? new Bid.fromJson(json['EstimateDisplayText']) : null;
+    openingBid = json['OpeningBid'] != null ? new Bid.fromJson(json['OpeningBid']) : null;
+    detailInfo = json['DetailInfo'] != null ? new DetailInfo.fromJson(json['DetailInfo']) : null;
+    additionalInfo = json['AdditionalInfo'] != null ? new AdditionalInfo.fromJson(json['AdditionalInfo']) : null;
     // remainTimeObj = json['remainTimeObj'];
     remainingSecondsInNumber = json['remainingSecondsInNumber'];
     lastStatus = json['LastStatus'];
@@ -228,9 +210,7 @@ class Lots {
     estimateFromLegacyINR = json['EstimateFrom_Legacy_INR'];
     bidIncrementPercentage = json['BidIncrementPercentage'];
     info = json['Info'] != null ? new Info.fromJson(json['Info']) : null;
-    bidincrement = json['Bidincrement'] != null
-        ? new Bidincrement.fromJson(json['Bidincrement'])
-        : null;
+    bidincrement = json['Bidincrement'] != null ? new Bidincrement.fromJson(json['Bidincrement']) : null;
     auctionType = json['AuctionType'];
     auctionDated = json['AuctionDated'];
     isHistorical = json['isHistorical'];
@@ -250,6 +230,7 @@ class Lots {
     data['ExportType'] = this.exportType;
     data['BidCount'] = this.bidCount;
     data['LotDesc'] = this.lotDesc;
+    data['PaginationSize'] = this.PaginationSize;
     data['Category'] = this.category;
     data['LotDetDesc'] = this.lotDetDesc;
     data['CategoryID'] = this.categoryID;
@@ -380,21 +361,12 @@ class LiveStatus {
   String? isOutBid;
 
   LiveStatus(
-      {this.remainingSeconds,
-      this.currentBid,
-      this.nextValidBid,
-      this.next5ValidBid,
-      this.status,
-      this.isOutBid});
+      {this.remainingSeconds, this.currentBid, this.nextValidBid, this.next5ValidBid, this.status, this.isOutBid});
 
   LiveStatus.fromJson(Map<String, dynamic> json) {
     remainingSeconds = json['remainingSeconds'];
-    currentBid = json['CurrentBid'] != null
-        ? new Bid.fromJson(json['CurrentBid'])
-        : null;
-    nextValidBid = json['NextValidBid'] != null
-        ? new Bid.fromJson(json['NextValidBid'])
-        : null;
+    currentBid = json['CurrentBid'] != null ? new Bid.fromJson(json['CurrentBid']) : null;
+    nextValidBid = json['NextValidBid'] != null ? new Bid.fromJson(json['NextValidBid']) : null;
     if (json['Next5ValidBid'] != null) {
       next5ValidBid = <Next5ValidBid>[];
       json['Next5ValidBid'].forEach((v) {
@@ -415,8 +387,7 @@ class LiveStatus {
       data['NextValidBid'] = this.nextValidBid!.toJson();
     }
     if (this.next5ValidBid != null) {
-      data['Next5ValidBid'] =
-          this.next5ValidBid!.map((v) => v.toJson()).toList();
+      data['Next5ValidBid'] = this.next5ValidBid!.map((v) => v.toJson()).toList();
     }
     data['Status'] = this.status;
     data['IsOutBid'] = this.isOutBid;
@@ -453,9 +424,7 @@ class ProxyStatus {
   ProxyStatus.fromJson(Map<String, dynamic> json) {
     status = json['Status'];
     maxProxyAmount = json['MaxProxyAmount'];
-    proxyAmount = json['ProxyAmount'] != null
-        ? new Bid.fromJson(json['ProxyAmount'])
-        : null;
+    proxyAmount = json['ProxyAmount'] != null ? new Bid.fromJson(json['ProxyAmount']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -529,8 +498,7 @@ class AdditionalInfo {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['Description'] = this.description;
     if (this.conditionReport != null) {
-      data['ConditionReport'] =
-          this.conditionReport!.map((v) => v.toJson()).toList();
+      data['ConditionReport'] = this.conditionReport!.map((v) => v.toJson()).toList();
     }
     data['Provenance'] = this.provenance;
     return data;

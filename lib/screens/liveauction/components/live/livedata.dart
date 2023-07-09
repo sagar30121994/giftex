@@ -4,7 +4,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/screens/liveauction/browsitemlistitem.dart';
-import 'package:giftex/screens/liveauction/components/live/browsmygallery.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
 
 class LiveData extends StatefulWidget {
@@ -32,7 +31,8 @@ class _LiveDataState extends State<LiveData> {
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (context) {
-      return (widget.auctionViewModel.auctionType == "live" && widget.auctionViewModel.liveAuctionType != "closingschedule")
+      return (widget.auctionViewModel.auctionType == "live" &&
+              widget.auctionViewModel.liveAuctionType != "closingschedule")
           ? (widget.auctionViewModel.isLoadingForlots && widget.auctionViewModel.isLoadingForUpCommingAuction)
               ? SliverToBoxAdapter(child: LinearProgressIndicator())
               : widget.auctionViewModel.upcomingAuctionResponse!.result == null
@@ -41,7 +41,8 @@ class _LiveDataState extends State<LiveData> {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Transform.rotate(angle: -pi / 35.13, child: Image.asset("image/auctionhammer.png", width: 266)),
+                            Transform.rotate(
+                                angle: -pi / 35.13, child: Image.asset("image/auctionhammer.png", width: 266)),
                             SizedBox(
                               height: 25,
                             ),
@@ -89,7 +90,10 @@ class _LiveDataState extends State<LiveData> {
                               addAutomaticKeepAlives: true,
                               (BuildContext context, int index) {
                                 // return BrowseItemListItem(auctionViewModel.upcomingAuctionResponse!.result!.auctions![index],index);
-                                return BrowseMyGallryListItem(widget.auctionViewModel.myAuctionGalleryResponse!.result!.lots![index], widget.auctionViewModel.isGrid, widget.auctionViewModel);
+                                return BrowseItemListItem(
+                                    widget.auctionViewModel.myAuctionGalleryResponse!.result!.lots![index],
+                                    widget.auctionViewModel.isGrid,
+                                    widget.auctionViewModel);
                               },
                               // 40 list items
                               childCount: widget.auctionViewModel.myAuctionGalleryResponse == null
@@ -108,7 +112,10 @@ class _LiveDataState extends State<LiveData> {
                                   (BuildContext context, int index) {
                                     // return BrowseItemListItem(auctionViewModel.upcomingAuctionResponse!.result!.auctions![index],index);
 
-                                    return BrowseItemListItem(widget.auctionViewModel.upComingLotsResponse!.result!.lots![index], widget.auctionViewModel.isGrid, widget.auctionViewModel);
+                                    return BrowseItemListItem(
+                                        widget.auctionViewModel.upComingLotsResponse!.result!.lots![index],
+                                        widget.auctionViewModel.isGrid,
+                                        widget.auctionViewModel);
                                   },
                                   // 40 list items
                                   childCount: widget.auctionViewModel.upComingLotsResponse == null
@@ -126,7 +133,10 @@ class _LiveDataState extends State<LiveData> {
                                   (BuildContext contXext, int index) {
                                     // return BrowseItemListItem(auctionViewModel.upcomingAuctionResponse!.result!.auctions![index],index);
                                     return Observer(builder: (context) {
-                                      return BrowseItemListItem(widget.auctionViewModel.getliveauctionsResponse!.result!.lots![index], widget.auctionViewModel.isGrid, widget.auctionViewModel);
+                                      return BrowseItemListItem(
+                                          widget.auctionViewModel.getliveauctionsResponse!.result!.lots![index],
+                                          widget.auctionViewModel.isGrid,
+                                          widget.auctionViewModel);
                                     });
                                   },
                                   // 40 list items

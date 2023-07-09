@@ -98,11 +98,13 @@ abstract class _AuctionViewModel with Store {
   @observable
   String sort = "";
 
+  int page = 1;
+
   @action
   Future<HttpResponse> getUpcommingAuction(String auction) async {
     isLoadingForUpCommingAuction = true;
 
-    HttpResponse httpResponse = await auctionRepo.getUpcommingAuction(auction);
+    HttpResponse httpResponse = await auctionRepo.getUpcommingAuction(auction, page);
 
     if (httpResponse.status == 200) {
       upcomingAuctionResponse = httpResponse.data;
@@ -157,7 +159,7 @@ abstract class _AuctionViewModel with Store {
   Future<HttpResponse> getUpcommingBidAuction(String auction) async {
     isLoadingForUpCommingAuction = true;
 
-    HttpResponse httpResponse = await auctionRepo.getUpcommingAuctionLots(auction);
+    HttpResponse httpResponse = await auctionRepo.getUpcommingAuctionLots(auction, page);
 
     if (httpResponse.status == 200) {
       upComingLotsResponse = httpResponse.data;
@@ -181,6 +183,10 @@ abstract class _AuctionViewModel with Store {
     } else if (liveAuctionType == "review") {
       getliveauctionsResponse = tempResponse;
     } else if (liveAuctionType == "mygallery") {
+      tempResponse.result!.lots!.sort(
+        (a, b) => int.parse(a.lotNumber!).compareTo(int.parse(b.lotNumber!)),
+      );
+
       myAuctionGalleryResponse = tempResponse;
     }
   }
@@ -204,9 +210,18 @@ abstract class _AuctionViewModel with Store {
     isLoadingForlots = true;
 
     HttpResponse httpResponse = await auctionRepo.myAuctionGallery();
-
+    UpComingLotsResponse tempResponse = upComingLotsResponse!;
     if (httpResponse.status == 200) {
-      myAuctionGalleryResponse = httpResponse.data;
+      tempResponse = httpResponse.data;
+      // Map<String, int> tempRespon = {
+      //   for (var x in tempResponse.result!.lots!.toSet())
+      //   :  tempResponse.result!.lots!.where((item) => item == x).length
+      // };
+      tempResponse.result!.lots!.sort(
+        (a, b) => int.parse(b.lotNumber!).compareTo(int.parse(a.lotNumber!)),
+      );
+
+      myAuctionGalleryResponse = tempResponse;
     }
     isLoadingForlots = false;
     return httpResponse;

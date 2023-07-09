@@ -56,10 +56,13 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
     // auctionViewModel.auctionType = "live";
 
     if (auctionViewModel.auctionType == "live") {
+      auctionViewModel.page = 1;
       auctionViewModel.getUpcommingAuction("Live");
     } else if (auctionViewModel.auctionType == "past") {
+      auctionViewModel.page = 1;
       auctionViewModel.getUpcommingAuction("Past");
     } else {
+      auctionViewModel.page = 1;
       auctionViewModel.getUpcommingAuction("UpComing");
     }
 
@@ -333,110 +336,51 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
               ? SliverToBoxAdapter(child: LinearProgressIndicator())
               : SliverToBoxAdapter(
                   child: Observer(builder: (context) {
-                    return auctionViewModel.auctionType == "upcoming"
-                        ? Container(
-                            child: auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length == 0
-                                ? Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      Image.asset("image/Bitmap1.png"),
-                                      SizedBox(
-                                        height: 25,
-                                      ),
-                                      SizedBox(
-                                        width: MediaQuery.of(context).size.width * .70,
-                                        child: RichText(
-                                          textAlign: TextAlign.center,
-                                          text: TextSpan(
-                                            // Note: Styles for TextSpans must be explicitly defined.
-                                            // Child text spans will inherit styles from parent
-                                            children: <TextSpan>[
-                                              TextSpan(
-                                                text: 'There is ',
-                                                style: Theme.of(context).textTheme.headline6!.copyWith(
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.w400,
-                                                    ),
-                                              ),
-                                              TextSpan(
-                                                text: 'No Upcoming Auction',
-                                                style: Theme.of(context).textTheme.headline6!.copyWith(
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.w600,
-                                                    ),
-                                              ),
-                                              TextSpan(
-                                                text: '\n at this moment',
-                                                style: Theme.of(context).textTheme.headline6!.copyWith(
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.w400,
-                                                    ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                : Container())
-                        : Container();
-                  }),
-                ),
-          auctionViewModel.isLoadingForUpCommingAuction
-              ? SliverToBoxAdapter(child: LinearProgressIndicator())
-              : SliverToBoxAdapter(
-                  child: Observer(builder: (context) {
-                    print(auctionViewModel.auctionType);
-                    return auctionViewModel.auctionType == "past"
-                        ? Container(
-                            child: auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length == 0
-                                ? Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      Image.asset("image/Bitmap1.png"),
-                                      SizedBox(
-                                        height: 25,
-                                      ),
-                                      SizedBox(
-                                        width: MediaQuery.of(context).size.width * .70,
-                                        child: RichText(
-                                          textAlign: TextAlign.center,
-                                          text: TextSpan(
-                                            // Note: Styles for TextSpans must be explicitly defined.
-                                            // Child text spans will inherit styles from parent
-                                            children: <TextSpan>[
-                                              TextSpan(
-                                                text: 'There is ',
-                                                style: Theme.of(context).textTheme.headline6!.copyWith(
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.w400,
-                                                    ),
-                                              ),
-                                              TextSpan(
-                                                text: 'No Past Auction',
-                                                style: Theme.of(context).textTheme.headline6!.copyWith(
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.w600,
-                                                    ),
-                                              ),
-                                              TextSpan(
-                                                text: '\n at this moment',
-                                                style: Theme.of(context).textTheme.headline6!.copyWith(
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.w400,
-                                                    ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                : Container(
-                                    padding: EdgeInsets.all(16),
+                    return Container(
+                        child: (auctionViewModel.upComingLotsResponse!.result!.lots ?? []).length == 0
+                            ? Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Image.asset("image/Bitmap1.png"),
+                                  SizedBox(
+                                    height: 25,
                                   ),
-                          )
-                        : Container();
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width * .70,
+                                    child: RichText(
+                                      textAlign: TextAlign.center,
+                                      text: TextSpan(
+                                        // Note: Styles for TextSpans must be explicitly defined.
+                                        // Child text spans will inherit styles from parent
+                                        children: <TextSpan>[
+                                          TextSpan(
+                                            text: 'There is ',
+                                            style: Theme.of(context).textTheme.headline6!.copyWith(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                          ),
+                                          TextSpan(
+                                            text: 'No Lots',
+                                            style: Theme.of(context).textTheme.headline6!.copyWith(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                          ),
+                                          TextSpan(
+                                            text: '\n at this moment',
+                                            style: Theme.of(context).textTheme.headline6!.copyWith(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Container());
                   }),
                 ),
           auctionViewModel.auctionType == "past" && auctionViewModel.liveAuctionType == "browselots"
@@ -886,6 +830,38 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
                     )
                   : Container()),
           SliverToBoxAdapter(
+            child: Container(
+              // color: Color(0xff1F2A52),
+              height: 30,
+              width: MediaQuery.of(context).size.width,
+            ),
+          ),
+          auctionViewModel.auctionType == "upcoming"
+              ? SliverToBoxAdapter()
+              : SliverToBoxAdapter(
+                  child: auctionViewModel.isLoadingForlots
+                      ? Container()
+                      : Center(
+                          child: getPageNavigator(
+                              auctionViewModel.liveAuctionType == "browselist"
+                                  ? auctionViewModel.upComingLotsResponse!.result!.lots!.last.PaginationSize ?? 1
+                                  : auctionViewModel.liveAuctionType == "review"
+                                      ? auctionViewModel.getliveauctionsResponse!.result!.lots!.last.PaginationSize ?? 1
+                                      : auctionViewModel.liveAuctionType == "browselist"
+                                          ? auctionViewModel
+                                                  .myAuctionGalleryResponse!.result!.lots!.last.PaginationSize ??
+                                              1
+                                          : 1,
+                              auctionViewModel.page),
+                        )),
+          SliverToBoxAdapter(
+            child: Container(
+              // color: Color(0xff1F2A52),
+              height: 30,
+              width: MediaQuery.of(context).size.width,
+            ),
+          ),
+          SliverToBoxAdapter(
             child: SizedBox(width: MediaQuery.of(context).size.width, child: Footer()),
           ),
           SliverToBoxAdapter(
@@ -898,6 +874,133 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
         ]),
       );
     });
+  }
+
+  getPageNavigator(int totalPages, int current_Page) {
+    List numList = [];
+    if (current_Page < 4) {
+      if (totalPages < 9) {
+        for (int i = 0; i < totalPages; i++) {
+          numList.add(i);
+        }
+      } else {
+        for (int i = 0; i < 9; i++) {
+          numList.add(i);
+        }
+      }
+    } else {
+      if ((current_Page + 4) < (totalPages)) {
+        for (int i = current_Page - 4; i < current_Page + 5; i++) {
+          numList.add(i);
+        }
+      } else {
+        for (int i = totalPages > 9 ? totalPages - 9 : 0; i < totalPages; i++) {
+          numList.add(i);
+        }
+      }
+    }
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          totalPages < 6
+              ? Container()
+              : InkWell(
+                  child: Image.asset(
+                    'image/arrow-previous-pngrepo-com.png',
+                    width: 20,
+                    height: 30,
+                    color: Color(0xffE74B52),
+                  ),
+                  onTap: () {
+                    // loadData(purchaseViewModel.itemperpage, 0);
+                  },
+                ),
+          totalPages < 6
+              ? Container()
+              : SizedBox(
+                  width: 8,
+                ),
+          totalPages < 6
+              ? Container()
+              : InkWell(
+                  child: Image.asset(
+                    'image/previous-pngrepo-com.png',
+                    width: 20,
+                    height: 30,
+                    color: Color(0xffE74B52),
+                  ),
+                  onTap: () async {
+                    // await loadData(purchaseViewModel.itemperpage ?? 10, current_Page == 0 ? 0 : (current_Page - 1));
+                  },
+                ),
+          SizedBox(
+            width: 8,
+          ),
+          Row(
+            //  children: List.generate(productViewModel.getProductsPagingatedResponse!.totalpage??1, (index) =>
+            children: numList
+                .map((index) => InkWell(
+                      onTap: () async {
+                        auctionViewModel.page = index + 1;
+                        await auctionViewModel.getUpcommingBidAuction(auctionViewModel.selectedAuction!.auctionId!);
+                        setState(() {});
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(color: current_Page == (index + 1) ? Color(0xffE74B52) : Colors.blue),
+                        width: 40,
+                        height: 40,
+                        margin: EdgeInsets.only(right: 8, bottom: 0),
+                        child: Center(
+                          child: Text(
+                            "${(index + 1)}",
+                            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ))
+                .toList(),
+          ),
+          SizedBox(
+            width: 8,
+          ),
+          totalPages < 6
+              ? Container()
+              : InkWell(
+                  child: Image.asset(
+                    'image/next-pngrepo-com.png',
+                    width: 20,
+                    height: 30,
+                    color: Color(0xffE74B52),
+                  ),
+                  onTap: () async {
+                    // await loadData(purchaseViewModel.itemperpage ?? 10,
+                    //     current_Page == (totalPages - 1) ? (current_Page) : (current_Page + 1));
+                  },
+                ),
+          totalPages < 6
+              ? Container()
+              : SizedBox(
+                  width: 8,
+                ),
+          totalPages < 6
+              ? Container()
+              : InkWell(
+                  child: Image.asset(
+                    'image/next-pngrepo-com (1).png',
+                    width: 20,
+                    height: 30,
+                    color: Color(0xffE74B52),
+                  ),
+                  onTap: () {
+                    // loadData(purchaseViewModel.itemperpage, (totalPages ?? 1) - 1);
+                  },
+                ),
+        ],
+      ),
+    );
   }
 }
 

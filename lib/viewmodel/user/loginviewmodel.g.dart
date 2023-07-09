@@ -41,6 +41,22 @@ mixin _$LoginViewModel on _LoginViewModel, Store {
     });
   }
 
+  late final _$signUpResponseAtom =
+      Atom(name: '_LoginViewModel.signUpResponse', context: context);
+
+  @override
+  SignUpResponse? get signUpResponse {
+    _$signUpResponseAtom.reportRead();
+    return super.signUpResponse;
+  }
+
+  @override
+  set signUpResponse(SignUpResponse? value) {
+    _$signUpResponseAtom.reportWrite(value, super.signUpResponse, () {
+      super.signUpResponse = value;
+    });
+  }
+
   late final _$emailAtom =
       Atom(name: '_LoginViewModel.email', context: context);
 
@@ -72,6 +88,21 @@ mixin _$LoginViewModel on _LoginViewModel, Store {
     });
   }
 
+  late final _$nameAtom = Atom(name: '_LoginViewModel.name', context: context);
+
+  @override
+  String get name {
+    _$nameAtom.reportRead();
+    return super.name;
+  }
+
+  @override
+  set name(String value) {
+    _$nameAtom.reportWrite(value, super.name, () {
+      super.name = value;
+    });
+  }
+
   late final _$otpAtom = Atom(name: '_LoginViewModel.otp', context: context);
 
   @override
@@ -100,6 +131,38 @@ mixin _$LoginViewModel on _LoginViewModel, Store {
   set mobile(String value) {
     _$mobileAtom.reportWrite(value, super.mobile, () {
       super.mobile = value;
+    });
+  }
+
+  late final _$isemailAtom =
+      Atom(name: '_LoginViewModel.isemail', context: context);
+
+  @override
+  bool get isemail {
+    _$isemailAtom.reportRead();
+    return super.isemail;
+  }
+
+  @override
+  set isemail(bool value) {
+    _$isemailAtom.reportWrite(value, super.isemail, () {
+      super.isemail = value;
+    });
+  }
+
+  late final _$ismobileAtom =
+      Atom(name: '_LoginViewModel.ismobile', context: context);
+
+  @override
+  bool get ismobile {
+    _$ismobileAtom.reportRead();
+    return super.ismobile;
+  }
+
+  @override
+  set ismobile(bool value) {
+    _$ismobileAtom.reportWrite(value, super.ismobile, () {
+      super.ismobile = value;
     });
   }
 
@@ -145,6 +208,17 @@ mixin _$LoginViewModel on _LoginViewModel, Store {
         name: '_LoginViewModel.setEmail');
     try {
       return super.setEmail(value);
+    } finally {
+      _$_LoginViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setName(String value) {
+    final _$actionInfo = _$_LoginViewModelActionController.startAction(
+        name: '_LoginViewModel.setName');
+    try {
+      return super.setName(value);
     } finally {
       _$_LoginViewModelActionController.endAction(_$actionInfo);
     }
@@ -206,6 +280,17 @@ mixin _$LoginViewModel on _LoginViewModel, Store {
   }
 
   @override
+  dynamic validateName(String email) {
+    final _$actionInfo = _$_LoginViewModelActionController.startAction(
+        name: '_LoginViewModel.validateName');
+    try {
+      return super.validateName(email);
+    } finally {
+      _$_LoginViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic validateEmail(String email) {
     final _$actionInfo = _$_LoginViewModelActionController.startAction(
         name: '_LoginViewModel.validateEmail');
@@ -232,10 +317,14 @@ mixin _$LoginViewModel on _LoginViewModel, Store {
     return '''
 isLoading: ${isLoading},
 loginResponse: ${loginResponse},
+signUpResponse: ${signUpResponse},
 email: ${email},
 pass: ${pass},
+name: ${name},
 otp: ${otp},
 mobile: ${mobile},
+isemail: ${isemail},
+ismobile: ${ismobile},
 verifyEmailResponse: ${verifyEmailResponse},
 verifyMobileResponse: ${verifyMobileResponse}
     ''';
@@ -323,6 +412,91 @@ mixin _$LoginViewModelMobileErrorState
   String toString() {
     return '''
 mobile: ${mobile},
+hasErrors: ${hasErrors}
+    ''';
+  }
+}
+
+mixin _$Login1ViewModelErrorState on _Login1ViewModelErrorState, Store {
+  Computed<bool>? _$hasErrorsComputed;
+
+  @override
+  bool get hasErrors =>
+      (_$hasErrorsComputed ??= Computed<bool>(() => super.hasErrors,
+              name: '_Login1ViewModelErrorState.hasErrors'))
+          .value;
+
+  late final _$emailAtom =
+      Atom(name: '_Login1ViewModelErrorState.email', context: context);
+
+  @override
+  String? get email {
+    _$emailAtom.reportRead();
+    return super.email;
+  }
+
+  @override
+  set email(String? value) {
+    _$emailAtom.reportWrite(value, super.email, () {
+      super.email = value;
+    });
+  }
+
+  late final _$nameAtom =
+      Atom(name: '_Login1ViewModelErrorState.name', context: context);
+
+  @override
+  String? get name {
+    _$nameAtom.reportRead();
+    return super.name;
+  }
+
+  @override
+  set name(String? value) {
+    _$nameAtom.reportWrite(value, super.name, () {
+      super.name = value;
+    });
+  }
+
+  late final _$mobileAtom =
+      Atom(name: '_Login1ViewModelErrorState.mobile', context: context);
+
+  @override
+  String? get mobile {
+    _$mobileAtom.reportRead();
+    return super.mobile;
+  }
+
+  @override
+  set mobile(String? value) {
+    _$mobileAtom.reportWrite(value, super.mobile, () {
+      super.mobile = value;
+    });
+  }
+
+  late final _$passAtom =
+      Atom(name: '_Login1ViewModelErrorState.pass', context: context);
+
+  @override
+  String? get pass {
+    _$passAtom.reportRead();
+    return super.pass;
+  }
+
+  @override
+  set pass(String? value) {
+    _$passAtom.reportWrite(value, super.pass, () {
+      super.pass = value;
+    });
+  }
+
+  @override
+  String toString() {
+    return '''
+email: ${email},
+name: ${name},
+mobile: ${mobile},
+pass: ${pass},
 hasErrors: ${hasErrors}
     ''';
   }

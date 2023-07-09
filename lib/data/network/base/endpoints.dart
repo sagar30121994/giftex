@@ -14,7 +14,9 @@ class User {
   final String getsetting = 'User/getsettings';
   final String deleteaccount = 'User/deleteMyAccount';
   final String verifyEmail = 'verifyEmail';
+  final String verifyMobile = 'verifyMobile';
   final String getLast5Bids = 'User/getLast5Bids';
+  final String insertreg = 'InsertReg';
 }
 
 class Auction {

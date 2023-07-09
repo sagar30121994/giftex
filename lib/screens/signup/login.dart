@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:giftex/screens/signup/emailotp.dart';
 import 'package:giftex/screens/signup/getotp.dart';
 import 'package:giftex/viewmodel/user/loginviewmodel.dart';
+import 'package:validators/validators.dart';
 
 import '../components/bottomnavigationbar/bottomnavigationbar.dart';
 
@@ -15,6 +17,8 @@ class Loginpage extends StatefulWidget {
 class _LoginpageState extends State<Loginpage> {
   String loginType = "signup";
   bool isMobile = true;
+  bool isEmailVerified = false;
+  bool isMobileVerified = false;
 
   @override
   void initState() {
@@ -132,257 +136,359 @@ class _LoginpageState extends State<Loginpage> {
                   ),
                 ),
                 loginType == "signup"
-                    ? Container(
-                        child: Column(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.only(top: 0, left: 16, right: 16),
-                              margin: EdgeInsets.only(top: 0, left: 16, right: 16),
-                              child: Column(
-                                children: [
-                                  SizedBox(
-                                    height: 16,
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                                      BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))
-                                    ]),
-                                    padding: EdgeInsets.only(left: 8),
-                                    child: TextField(
-                                      // controller: nameController,
-                                      textInputAction: TextInputAction.next,
-                                      keyboardType: TextInputType.name,
-                                      enableSuggestions: true,
-
-                                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                      decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        labelText: 'Name',
-
-                                        // prefixIcon:
-                                        // prefixIcon: ,
-                                        icon: Image.asset("image/people.png", height: 32),
-                                        filled: true,
-                                        isDense: false,
-                                        fillColor: Color(0xffFFFFFF),
-                                        // isDense: true
-                                      ),
+                    ? Observer(builder: (context) {
+                        return Container(
+                          child: Column(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.only(top: 0, left: 16, right: 16),
+                                margin: EdgeInsets.only(top: 0, left: 16, right: 16),
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 16,
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 16,
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                                      BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))
-                                    ]),
-                                    padding: EdgeInsets.only(left: 8),
-                                    child: TextField(
-                                      // controller: nameController,
-                                      enableSuggestions: true,
+                                    Container(
+                                      decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                                        BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))
+                                      ]),
+                                      padding: EdgeInsets.only(left: 8),
+                                      child: TextField(
+                                        // controller: nameController,
+                                        onChanged: (str) => loginViewModel.setName(str),
+                                        textInputAction: TextInputAction.next,
+                                        keyboardType: TextInputType.name,
+                                        enableSuggestions: true,
 
-                                      textInputAction: TextInputAction.next,
-                                      keyboardType: TextInputType.emailAddress,
-                                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-
-                                      decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        labelText: 'Email ID',
-
-                                        icon: Image.asset("image/email.png", height: 24),
-                                        // prefixIcon: Icon(Icons.email_outlined,color: Color(0xff779868)),
-                                        filled: true,
-                                        isDense: false,
-                                        fillColor: Color(0xffFFFFFF),
-                                        // isDense: true
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 16,
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                                      BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))
-                                    ]),
-                                    padding: EdgeInsets.only(left: 8),
-                                    child: TextField(
-                                      // controller: nameController,
-                                      enableSuggestions: true,
-                                      // maxLength: 10,
-                                      maxLines: 1,
-
-                                      textInputAction: TextInputAction.next,
-                                      keyboardType: TextInputType.phone,
-                                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                      decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        labelText: 'Mobile No.',
-
-                                        isDense: true,
-                                        icon: Image.asset("image/phone.png", height: 28),
-                                        // prefixIcon: Icon(Icons.call,color: Color(0xff779868),),
-                                        filled: true,
-                                        fillColor: Color(0xffFFFFFF),
-                                        // isDense: true
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 16,
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                                      BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))
-                                    ]),
-                                    padding: EdgeInsets.only(left: 8),
-                                    child: TextField(
-                                      // controller: nameController,
-                                      // enableSuggestions: true,
-
-                                      textInputAction: TextInputAction.done,
-                                      obscureText: true,
-
-                                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-
-                                      decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        labelText: 'Set Password',
-
-                                        icon: Image.asset("image/pass.png", height: 28),
-                                        // prefixIcon: Image.asset("image/pass.png",height: 8),
-                                        filled: true,
-                                        fillColor: Color(0xffFFFFFF),
-                                        // isDense: true
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 8,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Icon(
-                                        Icons.info_outline,
-                                        size: 17,
-                                        color: Color(0xff747474),
-                                      ),
-                                      SizedBox(
-                                        width: 6,
-                                      ),
-                                      Text(
-                                        "Password should be 8 characters long",
-                                        textAlign: TextAlign.center,
-                                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                              color: Color(0xff2D2D2D),
-                                              fontWeight: FontWeight.w400,
+                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w500,
                                             ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 34,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Checkbox(value: true, onChanged: (val) {}),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            "Agreeing to",
-                                            textAlign: TextAlign.center,
-                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                  color: Color(0xff2D2D2D),
-                                                  fontWeight: FontWeight.w400,
-                                                ),
-                                          ),
-                                          SizedBox(
-                                            width: 6,
-                                          ),
-                                          Text(
-                                            "Terms & Conditions",
-                                            textAlign: TextAlign.center,
-                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                  color: Color(0xff2D2D2D),
-                                                  decoration: TextDecoration.underline,
-                                                  decorationStyle: TextDecorationStyle.solid,
-                                                  decorationThickness: 1,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      loginViewModel.getLogin().then((value) => {
-                                            if (value.status == 200)
-                                              {
-                                                // Navigator.pushReplacement(
-                                                //     context,
-                                                //     MaterialPageRoute(
-                                                //         builder: (BuildContext context) => GetOtppage(value.data,))),
-                                              }
-                                            else
-                                              {
-                                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                                  content: Text(
-                                                    'Enter Valid Credentials ${value.message}',
-                                                    style: Theme.of(context).textTheme.headline6,
-                                                  ),
-                                                  backgroundColor: Colors.red,
-                                                )),
-                                              }
-                                          });
+                                        decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          labelText: 'Name',
 
-                                      // Navigator.push(context, MaterialPageRoute(builder: (context) => GetOtppage()));
-                                    },
-                                    child: Container(
-                                      height: 50,
-                                      width: MediaQuery.of(context).size.width * .75,
-                                      decoration: BoxDecoration(
-                                          gradient: LinearGradient(colors: [
-                                            Color(0xffB45156),
-                                            Color(0xffE74B52),
-                                          ]),
-                                          borderRadius: BorderRadius.circular(20)),
-                                      child: Center(
-                                        child: Text(
-                                          "GET OTP",
-                                          textAlign: TextAlign.center,
-                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                color: Color(0xffffffff),
-                                                fontWeight: FontWeight.w400,
-                                              ),
+                                          errorText: loginViewModel.login1ViewModelErrorState.name,
+                                          // prefixIcon:
+                                          // prefixIcon: ,
+                                          icon: Image.asset("image/people.png", height: 32),
+                                          filled: true,
+                                          isDense: false,
+                                          fillColor: Color(0xffFFFFFF),
+                                          // isDense: true
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 50,
-                                  )
-                                ],
+                                    SizedBox(
+                                      height: 16,
+                                    ),
+                                    Container(
+                                      decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                                        BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))
+                                      ]),
+                                      padding: EdgeInsets.only(left: 8),
+                                      child: TextField(
+                                        // controller: nameController,
+                                        onChanged: (str) {
+                                          loginViewModel.setEmail(str);
+
+                                          setState(() {
+                                            isEmailVerified = false;
+                                          });
+                                        },
+                                        enableSuggestions: true,
+
+                                        textInputAction: TextInputAction.next,
+                                        keyboardType: TextInputType.emailAddress,
+                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+
+                                        decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          labelText: 'Email ID',
+
+                                          errorText: loginViewModel.login1ViewModelErrorState.email,
+                                          icon: Image.asset("image/email.png", height: 24),
+                                          // prefixIcon: Icon(Icons.email_outlined,color: Color(0xff779868)),
+                                          filled: true,
+                                          isDense: false,
+                                          fillColor: Color(0xffFFFFFF),
+                                          // isDense: true
+                                        ),
+                                      ),
+                                    ),
+                                    isEmail(loginViewModel.email)
+                                        ? (!isEmailVerified)
+                                            ? Align(
+                                                alignment: Alignment.topRight,
+                                                child: TextButton(
+                                                  child: Text("Verify"),
+                                                  onPressed: () async {
+                                                    bool? result = await Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) => GetOtpEmailMobilepage(
+                                                                loginViewModel.email, loginViewModel, false)));
+
+                                                    setState(() {
+                                                      isEmailVerified = result ?? false;
+                                                    });
+                                                  },
+                                                ),
+                                              )
+                                            : Align(
+                                                alignment: Alignment.topRight,
+                                                child: Container(
+                                                  child: Icon(Icons.verified, color: Colors.green),
+                                                ),
+                                              )
+                                        : Container(),
+                                    SizedBox(
+                                      height: 16,
+                                    ),
+                                    Container(
+                                      decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                                        BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))
+                                      ]),
+                                      padding: EdgeInsets.only(left: 8),
+                                      child: TextField(
+                                        // controller: nameController,
+                                        onChanged: (str) {
+                                          loginViewModel.setMobile(str);
+                                          setState(() {
+                                            isMobileVerified = false;
+                                          });
+                                        },
+                                        enableSuggestions: true,
+                                        // maxLength: 10,
+                                        maxLines: 1,
+
+                                        textInputAction: TextInputAction.next,
+                                        keyboardType: TextInputType.phone,
+                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                        decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          labelText: 'Mobile No.',
+                                          errorText: loginViewModel.login1ViewModelErrorState.mobile,
+                                          isDense: true,
+                                          icon: Image.asset("image/phone.png", height: 28),
+                                          // prefixIcon: Icon(Icons.call,color: Color(0xff779868),),
+                                          filled: true,
+                                          fillColor: Color(0xffFFFFFF),
+                                          // isDense: true
+                                        ),
+                                      ),
+                                    ),
+                                    (loginViewModel.mobile.length == 10)
+                                        ? (!isMobileVerified)
+                                            ? Align(
+                                                alignment: Alignment.topRight,
+                                                child: TextButton(
+                                                  child: Text("Verify"),
+                                                  onPressed: () async {
+                                                    bool? result = await Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) => GetOtpEmailMobilepage(
+                                                                loginViewModel.mobile, loginViewModel, true)));
+
+                                                    setState(() {
+                                                      isMobileVerified = result ?? false;
+                                                    });
+                                                  },
+                                                ),
+                                              )
+                                            : Align(
+                                                alignment: Alignment.topRight,
+                                                child: Container(
+                                                  child: Icon(Icons.verified, color: Colors.green),
+                                                ),
+                                              )
+                                        : Container(),
+                                    SizedBox(
+                                      height: 16,
+                                    ),
+                                    Container(
+                                      decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                                        BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))
+                                      ]),
+                                      padding: EdgeInsets.only(left: 8),
+                                      child: TextField(
+                                        // controller: nameController,
+                                        // enableSuggestions: true,
+                                        onChanged: (str) => loginViewModel.setPass(str),
+
+                                        textInputAction: TextInputAction.done,
+                                        obscureText: true,
+
+                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+
+                                        decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          labelText: 'Set Password',
+                                          errorText: loginViewModel.login1ViewModelErrorState.pass,
+                                          icon: Image.asset("image/pass.png", height: 28),
+                                          // prefixIcon: Image.asset("image/pass.png",height: 8),
+                                          filled: true,
+                                          fillColor: Color(0xffFFFFFF),
+                                          // isDense: true
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 8,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.info_outline,
+                                          size: 17,
+                                          color: Color(0xff747474),
+                                        ),
+                                        SizedBox(
+                                          width: 6,
+                                        ),
+                                        Text(
+                                          "Password should be 8 characters long",
+                                          textAlign: TextAlign.center,
+                                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                color: Color(0xff2D2D2D),
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 34,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Checkbox(value: true, onChanged: (val) {}),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "Agreeing to",
+                                              textAlign: TextAlign.center,
+                                              style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                    color: Color(0xff2D2D2D),
+                                                    fontWeight: FontWeight.w400,
+                                                  ),
+                                            ),
+                                            SizedBox(
+                                              width: 6,
+                                            ),
+                                            Text(
+                                              "Terms & Conditions",
+                                              textAlign: TextAlign.center,
+                                              style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                    color: Color(0xff2D2D2D),
+                                                    decoration: TextDecoration.underline,
+                                                    decorationStyle: TextDecorationStyle.solid,
+                                                    decorationThickness: 1,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        if (loginViewModel.login1ViewModelErrorState.hasErrors) {
+                                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                            content: Text(
+                                              'Enter Valid Details',
+                                              style: Theme.of(context).textTheme.headline6,
+                                            ),
+                                            backgroundColor: Colors.red,
+                                          ));
+                                        } else {
+                                          if (isEmailVerified && isMobileVerified) {
+                                            loginViewModel.gesignUp().then((value) => {
+                                                  if (value.status == 200)
+                                                    {
+                                                      Navigator.pushReplacement(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: (BuildContext context) => DashboardUi(0))),
+                                                    }
+                                                  else
+                                                    {
+                                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                                        content: Text(
+                                                          'Enter Valid Credentials ${value.message}',
+                                                          style: Theme.of(context).textTheme.headline6,
+                                                        ),
+                                                        backgroundColor: Colors.red,
+                                                      )),
+                                                    }
+                                                });
+                                          } else {
+                                            if (!isEmailVerified) {
+                                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                                content: Text(
+                                                  'Please Verify Email',
+                                                  style: Theme.of(context).textTheme.headline6,
+                                                ),
+                                                backgroundColor: Colors.red,
+                                              ));
+                                            }
+                                            if (!isMobileVerified) {
+                                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                                content: Text(
+                                                  'Please Verify Mobile',
+                                                  style: Theme.of(context).textTheme.headline6,
+                                                ),
+                                                backgroundColor: Colors.red,
+                                              ));
+                                            }
+                                          }
+                                        }
+
+                                        // Navigator.push(context, MaterialPageRoute(builder: (context) => GetOtppage()));
+                                      },
+                                      child: Container(
+                                        height: 50,
+                                        width: MediaQuery.of(context).size.width * .75,
+                                        decoration: BoxDecoration(
+                                            gradient: LinearGradient(colors: [
+                                              Color(0xffB45156),
+                                              Color(0xffE74B52),
+                                            ]),
+                                            borderRadius: BorderRadius.circular(20)),
+                                        child: Center(
+                                          child: Text(
+                                            "SIGN UP",
+                                            textAlign: TextAlign.center,
+                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                  color: Color(0xffffffff),
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 50,
+                                    )
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                      )
+                            ],
+                          ),
+                        );
+                      })
                     : isMobile
                         ? Observer(builder: (context) {
                             return Container(

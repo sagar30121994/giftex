@@ -938,7 +938,7 @@ class _AuctionItemListItemState extends State<AuctionItemListItem> with Automati
                                         : Colors.red,
                                     borderRadius: BorderRadius.circular(16)),
                                 child: Text(
-                                    "${(widget.lots.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId()) ? "YOU WON" : widget.lots.bidCount != "0" ? "BOUGHT IN" : "THIS BID IS CLOSED"}",
+                                    "${(widget.lots.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId()) ? "YOU WON" : widget.lots.bidCount == "0" ? "BOUGHT IN" : "BID CLOSED"}",
                                     style: Theme.of(context).textTheme.subtitle2!.copyWith(color: Colors.white)),
                               ),
                             )
@@ -1436,7 +1436,7 @@ class _AuctionItemListItemState extends State<AuctionItemListItem> with Automati
                                                       : Colors.red,
                                                   borderRadius: BorderRadius.circular(16)),
                                               child: Text(
-                                                  "${(widget.lots.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId()) ? "YOU ARE LEADING" : widget.lots.bidCount != "0" ? "BOUGHT IN" : "THIS BID IS CLOSED"}",
+                                                  "${(widget.lots.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId()) ? "CURRENLTY LEADING" : widget.lots.bidCount == "0" ? "BOUGHT IN" : "BID CLOSED"}",
                                                   style: Theme.of(context)
                                                       .textTheme
                                                       .subtitle2!
