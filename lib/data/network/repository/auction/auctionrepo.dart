@@ -93,6 +93,55 @@ class AuctionRepo {
     return httpResponse;
   }
 
+  Future<HttpResponse> showInterestInAuction(
+    String email,
+    String message,
+    String mobile,
+    String name,
+    String AuctionId,
+    String country_code,
+  ) async {
+    HttpResponse httpResponse = HttpResponse();
+    // String userlogin = json.encode(LoginReqestModel);
+    String userid = localSharedPrefrence!.getUserId();
+    String authKey = localSharedPrefrence!.getAuthKeyWeb();
+    String crmClientId = localSharedPrefrence!.getCrmClinetId();
+    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
+    await httpClient!.post(BaseUrl.baseUrl + endPoints.Auction().ShowInterestInAuction, body: {
+      "authkey_web": authKey,
+      "authkey_mobile": "",
+      "userid": userid,
+      "CRMClientID": crmClientId,
+      "AuctionId": AuctionId,
+      "country_code": country_code,
+      "email": email,
+      "message": message,
+      "mobile": mobile,
+      "name": name,
+    }).then((responce) async {
+      print(responce);
+
+      if (responce.statusCode == 200) {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = 'Successful';
+        // httpResponse.data = UpComingLotsResponse.fromJson(responce.data);
+      } else {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = responce.data['message'];
+        httpResponse.data = null;
+      }
+      return httpResponse;
+    }).catchError((err) {
+      print(err);
+      httpResponse.status = 400;
+      httpResponse.message = err.toString();
+      httpResponse.data = err.toString();
+      return httpResponse;
+    });
+
+    return httpResponse;
+  }
+
   Future<HttpResponse> getUpcommingAuction(String auctionType, int page) async {
     HttpResponse httpResponse = HttpResponse();
     String userid = localSharedPrefrence!.getUserId();

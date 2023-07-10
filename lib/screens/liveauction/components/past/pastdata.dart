@@ -19,40 +19,21 @@ class _PastDataState extends State<PastData> {
           ? SliverToBoxAdapter(child: LinearProgressIndicator())
           : widget.auctionViewModel.upcomingAuctionResponse!.result == null
               ? SliverToBoxAdapter(child: Container())
-              : widget.auctionViewModel.upcomingAuctionResponse!.result!
-                          .auctions!.length >
-                      1
-                  ? widget.auctionViewModel.auctionType == "past"
-                      ? SliverList(
-                          delegate: SliverChildBuilderDelegate(
-                            (BuildContext context, int index) {
-                              return BrowseItemListItem(
-                                  widget.auctionViewModel.upComingLotsResponse!
-                                      .result!.lots![index],
-                                  widget.auctionViewModel.isGrid,
-                                  widget.auctionViewModel);
-                            },
-                            // 40 list items
-                            childCount:
-                                widget.auctionViewModel.upComingLotsResponse ==
-                                        null
-                                    ? 0
-                                    : widget
-                                                .auctionViewModel
-                                                .upComingLotsResponse!
-                                                .result!
-                                                .lots ==
-                                            null
-                                        ? 0
-                                        : widget
-                                            .auctionViewModel
-                                            .upComingLotsResponse!
-                                            .result!
-                                            .lots!
-                                            .length,
-                          ),
-                        )
-                      : SliverToBoxAdapter(child: Container())
+              : widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length > 1
+                  ? SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (BuildContext context, int index) {
+                          return BrowseItemListItem(widget.auctionViewModel.upComingLotsResponse!.result!.lots![index],
+                              widget.auctionViewModel.isGrid, widget.auctionViewModel);
+                        },
+                        // 40 list items
+                        childCount: widget.auctionViewModel.upComingLotsResponse == null
+                            ? 0
+                            : widget.auctionViewModel.upComingLotsResponse!.result!.lots == null
+                                ? 0
+                                : widget.auctionViewModel.upComingLotsResponse!.result!.lots!.length,
+                      ),
+                    )
                   : SliverToBoxAdapter(child: Container());
     });
   }

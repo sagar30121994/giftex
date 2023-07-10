@@ -9,6 +9,7 @@ import 'package:giftex/screens/liveauction/liveauction.dart';
 import 'package:giftex/screens/newsandupdates/newsandupdates.dart';
 import 'package:giftex/viewmodel/home/homeviewmodel.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../components/footer/footer.dart';
 import '../components/header.dart';
@@ -181,31 +182,40 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                               SizedBox(
                                                 height: 24,
                                               ),
-                                              SizedBox(
-                                                height: 50,
-                                                child: Center(
-                                                  child: Container(
-                                                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 2),
-                                                    decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.circular(22.0),
-                                                        gradient: LinearGradient(
-                                                          begin: Alignment.bottomLeft,
-                                                          end: Alignment.topRight,
-                                                          colors: [
-                                                            Color(0xffB45156),
-                                                            Color(0xffE74B52),
-                                                            // Color(0xffFFFFFF),
-                                                          ],
-                                                        )),
-                                                    child: Padding(
-                                                      padding: const EdgeInsets.only(
-                                                          right: 8.0, left: 8, top: 12, bottom: 12),
-                                                      child: Text(
-                                                        '${homeViewModel.homeBanerResponse!.pageContent!.banner![pos].button!.text}',
-                                                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                            color: Color(0XFFFFFFFF),
-                                                            fontWeight: FontWeight.w600,
-                                                            letterSpacing: 1),
+                                              InkWell(
+                                                onTap: () {
+                                                  launchUrl(
+                                                    Uri.parse(homeViewModel.homeBanerResponse!.pageContent!.banner![pos]
+                                                        .button!.cta!.link!),
+                                                    mode: LaunchMode.externalApplication,
+                                                  );
+                                                },
+                                                child: SizedBox(
+                                                  height: 50,
+                                                  child: Center(
+                                                    child: Container(
+                                                      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+                                                      decoration: BoxDecoration(
+                                                          borderRadius: BorderRadius.circular(22.0),
+                                                          gradient: LinearGradient(
+                                                            begin: Alignment.bottomLeft,
+                                                            end: Alignment.topRight,
+                                                            colors: [
+                                                              Color(0xffB45156),
+                                                              Color(0xffE74B52),
+                                                              // Color(0xffFFFFFF),
+                                                            ],
+                                                          )),
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.only(
+                                                            right: 8.0, left: 8, top: 12, bottom: 12),
+                                                        child: Text(
+                                                          '${homeViewModel.homeBanerResponse!.pageContent!.banner![pos].button!.text}',
+                                                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                              color: Color(0XFFFFFFFF),
+                                                              fontWeight: FontWeight.w600,
+                                                              letterSpacing: 1),
+                                                        ),
                                                       ),
                                                     ),
                                                   ),

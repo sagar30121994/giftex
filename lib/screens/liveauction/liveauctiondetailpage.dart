@@ -836,10 +836,10 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
               width: MediaQuery.of(context).size.width,
             ),
           ),
-          auctionViewModel.auctionType == "upcoming"
-              ? SliverToBoxAdapter()
-              : SliverToBoxAdapter(
-                  child: auctionViewModel.isLoadingForlots
+          SliverToBoxAdapter(
+              child: auctionViewModel.auctionType == "upcoming"
+                  ? Container()
+                  : auctionViewModel.isLoadingForlots
                       ? Container()
                       : Center(
                           child: getPageNavigator(

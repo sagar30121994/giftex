@@ -545,6 +545,8 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
 
                                                               bottomViewModel.setIndex(8);
                                                             });
+                                                          } else {
+                                                            showinterestPopup();
                                                           }
                                                         },
                                                         child: Container(
@@ -1148,6 +1150,99 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
         ),
       ]);
     });
+  }
+
+  void showinterestPopup() {
+    showDialog(
+        context: context,
+        builder: (BuildContext dialogContext) {
+          return AlertDialog(
+            contentPadding: EdgeInsets.all(0),
+            content: Container(
+              padding: EdgeInsets.all(16),
+              height: 580,
+              width: MediaQuery.of(context).size.width,
+              color: Color(0xffEAEEF2),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        InkWell(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Icon(
+                              Icons.close,
+                              size: 20,
+                              color: Color(0xff979797),
+                            ))
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Image.asset(
+                          "image/Vector (22).png",
+                          color: Color(0XFF202232),
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          'SHOW INTEREST',
+                          style: Theme.of(context)
+                              .textTheme
+                              .subtitle1!
+                              .copyWith(color: Color(0XFF202232), fontWeight: FontWeight.w400, letterSpacing: 2),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    TextField(
+                      decoration: InputDecoration(labelText: "Name*"),
+                    ),
+                    Align(
+                      alignment: Alignment.topCenter,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(Colors.transparent),
+                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                                side: BorderSide(color: Color(0XFFB45156), width: 0.5)))),
+                        onPressed: () {},
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 0.0, left: 0, top: 12, bottom: 12),
+                          child: Text(
+                            'UPDATE YOUR BILLING DETAILS',
+                            style: Theme.of(context).textTheme.caption!.copyWith(
+                                color: Color(0XFFB45156), fontWeight: FontWeight.w700, letterSpacing: 1.33333),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'Note: Crating and shipping charged separately depending on delivery location.',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.caption!.copyWith(
+                            color: Color(0XFF202232).withOpacity(0.61),
+                            fontWeight: FontWeight.w400,
+                          ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        });
   }
 }
 

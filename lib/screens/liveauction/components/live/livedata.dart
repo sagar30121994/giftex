@@ -31,8 +31,7 @@ class _LiveDataState extends State<LiveData> {
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (context) {
-      return (widget.auctionViewModel.auctionType == "live" &&
-              widget.auctionViewModel.liveAuctionType != "closingschedule")
+      return (widget.auctionViewModel.liveAuctionType != "closingschedule")
           ? (widget.auctionViewModel.isLoadingForlots && widget.auctionViewModel.isLoadingForUpCommingAuction)
               ? SliverToBoxAdapter(child: LinearProgressIndicator())
               : widget.auctionViewModel.upcomingAuctionResponse!.result == null

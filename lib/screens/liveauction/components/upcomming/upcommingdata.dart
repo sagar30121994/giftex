@@ -14,36 +14,26 @@ class UpcommingData extends StatefulWidget {
 class _UpcommingDataState extends State<UpcommingData> {
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Observer(builder: (context) {
-        return widget.auctionViewModel.isLoadingForUpCommingAuction
-            ? LinearProgressIndicator()
-            : widget.auctionViewModel.upcomingAuctionResponse!.result == null
-                ? Container()
-                : widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length > 1
-                    ? widget.auctionViewModel.auctionType == "upcoming"
-                        ? widget.auctionViewModel.upComingLotsResponse!.result!.lots == null
-                            ? Container()
-                            : SliverList(
-                                delegate: SliverChildBuilderDelegate(
-                                  addAutomaticKeepAlives: true,
-                                  (BuildContext context, int index) {
-                                    return BrowsUpcommingItem(
-                                        widget.auctionViewModel.upComingLotsResponse!.result!.lots![index],
-                                        widget.auctionViewModel.isGrid,
-                                        widget.auctionViewModel);
-                                  },
-                                  // 40 list items
-                                  childCount: widget.auctionViewModel.upComingLotsResponse == null
-                                      ? 0
-                                      : widget.auctionViewModel.upComingLotsResponse!.result!.lots == null
-                                          ? 0
-                                          : widget.auctionViewModel.upComingLotsResponse!.result!.lots!.length,
-                                ),
-                              )
-                        : Container()
-                    : Container();
-      }),
-    );
+    return Observer(builder: (context) {
+      return widget.auctionViewModel.isLoadingForUpCommingAuction
+          ? SliverToBoxAdapter(child: LinearProgressIndicator())
+          : widget.auctionViewModel.upComingLotsResponse == null
+              ? SliverToBoxAdapter(child: Container())
+              : SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    addAutomaticKeepAlives: true,
+                    (BuildContext context, int index) {
+                      return BrowsUpcommingItem(widget.auctionViewModel.upComingLotsResponse!.result!.lots![index],
+                          widget.auctionViewModel.isGrid, widget.auctionViewModel);
+                    },
+                    // 40 list items
+                    childCount: widget.auctionViewModel.upComingLotsResponse == null
+                        ? 0
+                        : widget.auctionViewModel.upComingLotsResponse!.result!.lots == null
+                            ? 0
+                            : widget.auctionViewModel.upComingLotsResponse!.result!.lots!.length,
+                  ),
+                );
+    });
   }
 }
