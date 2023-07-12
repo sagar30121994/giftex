@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:giftex/data/network/models/responce/liveauction/upcommingauctionresponse.dart';
 import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
 import 'package:giftex/screens/howtobuy/howtobuy.dart';
 import 'package:giftex/screens/howtosell/howtosell.dart';
@@ -9,7 +10,6 @@ import 'package:giftex/screens/liveauction/liveauction.dart';
 import 'package:giftex/screens/newsandupdates/newsandupdates.dart';
 import 'package:giftex/viewmodel/home/homeviewmodel.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../components/footer/footer.dart';
 import '../components/header.dart';
@@ -184,11 +184,27 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                               ),
                                               InkWell(
                                                 onTap: () {
-                                                  launchUrl(
-                                                    Uri.parse(homeViewModel.homeBanerResponse!.pageContent!.banner![pos]
-                                                        .button!.cta!.link!),
-                                                    mode: LaunchMode.externalApplication,
-                                                  );
+                                                  setState(() {
+                                                    auctionViewModel.selectedAuction = Auctions(
+                                                      auctionId: homeViewModel.homeBanerResponse!.pageContent!
+                                                          .banner![pos].button!.result!.auctions!.first.auctionId,
+                                                      image: homeViewModel.homeBanerResponse!.pageContent!.banner![pos]
+                                                          .button!.result!.auctions!.first.image,
+                                                      displayDate: homeViewModel.homeBanerResponse!.pageContent!
+                                                          .banner![pos].button!.result!.auctions!.first.displayDate,
+                                                      // displayDate: homeViewModel.homeBanerResponse!.pageContent!
+                                                      //     .banner![pos].button!.result!.auctions!.first.displayDate,
+                                                    );
+
+                                                    bottomViewModel.setIndex(8);
+                                                  });
+                                                  auctionViewModel.liveAuctionType = "lots";
+                                                  auctionViewModel.auctionType = "upcoming";
+                                                  // launchUrl(
+                                                  //   Uri.parse(homeViewModel.homeBanerResponse!.pageContent!.banner![pos]
+                                                  //       .button!.cta!.link!),
+                                                  //   mode: LaunchMode.externalApplication,
+                                                  // );
                                                 },
                                                 child: SizedBox(
                                                   height: 50,
