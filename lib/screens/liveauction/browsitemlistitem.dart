@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:giftex/screens/liveauction/components/image/imagecomponent.dart';
 import 'package:giftex/screens/liveauction/liveauction.dart';
 import 'package:giftex/screens/productdetailspage/productdetailpage.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
@@ -894,9 +895,17 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                 ),
                               ),
                               SizedBox(height: 12),
-                              Icon(
-                                Icons.open_in_full,
-                                color: Colors.grey,
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ImageConponent(widget.lots.images ?? [])));
+                                },
+                                child: Icon(
+                                  Icons.open_in_full,
+                                  color: Colors.grey,
+                                ),
                               ),
                               SizedBox(height: 12),
                               // Container(
