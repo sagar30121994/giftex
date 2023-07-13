@@ -46,7 +46,8 @@ class _LiveTabsState extends State<PastTabs> {
                       border: Border(bottom: BorderSide(color: Color(0xffDFDFDF), width: 2)),
                     ),
                     child: TabBar(
-                      tabAlignment: TabAlignment.fill,
+
+                 //    tabAlignment: TabAlignment.fill,
                       onTap: (index) {
                         if (index == 0) {
                           tabColor = Color(0xffE74B52);

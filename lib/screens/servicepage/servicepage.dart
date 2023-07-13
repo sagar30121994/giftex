@@ -565,13 +565,13 @@ class _ServicepageState extends State<Servicepage> {
                 height: 16,
               ),
               SizedBox(width: MediaQuery.of(context).size.width, child: Footer()),
-              SliverToBoxAdapter(
+              /*SliverToBoxAdapter(
                 child: Container(
                   color: Color(0xff1F2A52),
                   height: 30,
                   width: MediaQuery.of(context).size.width,
                 ),
-              ),
+              ),*/
             ],
           )),
         ),

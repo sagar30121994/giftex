@@ -1,6 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:giftex/data/local/client/prefs.dart';
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
+import 'package:giftex/data/network/models/request/webapimodel/showintrestinauctionrequestmodel.dart';
 import 'package:giftex/data/network/models/responce/liveauction/auctionresultresponse.dart';
 import 'package:giftex/data/network/models/responce/liveauction/singleauctiondetailsresponse.dart';
 import 'package:giftex/data/network/models/responce/liveauction/upcommingauctionresponse.dart';
@@ -11,6 +12,7 @@ import 'package:giftex/data/network/models/responce/lot/proxybidresponse.dart';
 import 'package:giftex/data/network/models/responce/lot/upcominglotsresponse.dart';
 import 'package:giftex/data/network/repository/auction/auctionrepo.dart';
 import 'package:giftex/data/network/repository/lot/lotrepo.dart';
+import 'package:giftex/data/network/repository/webapimodel/webapimodelrepo.dart';
 import 'package:mobx/mobx.dart';
 
 part 'auctionviewmodel.g.dart';
@@ -23,6 +25,7 @@ abstract class _AuctionViewModel with Store {
 
   late AuctionRepo auctionRepo;
   late LotRepo lotRepo;
+  late WebapimodelRepo webapimodelRepo;
 
   late LocalSharedPrefrence localSharedPrefrence;
 
@@ -59,6 +62,7 @@ abstract class _AuctionViewModel with Store {
   _AuctionViewModel() {
     auctionRepo = AuctionRepo();
     lotRepo = LotRepo();
+    webapimodelRepo = WebapimodelRepo();
 
     localSharedPrefrence = LocalSharedPrefrence();
 
@@ -353,6 +357,33 @@ abstract class _AuctionViewModel with Store {
     return httpResponse;
   }
 
+
+
+  Future<HttpResponse> showIntrestInAuction(String name, String email, String countryCOde,String phone,String messae,String auctionId) async {
+    isLoadingForUpCommingAuction = true;
+    ShowIntrestRequestModel requestModel=ShowIntrestRequestModel();
+    requestModel.message=messae;
+    requestModel.name=name;
+    requestModel.email=email;
+    requestModel.mobile=phone;
+    requestModel.message=messae;
+    requestModel.auctionId=auctionId;
+    requestModel.countryCode='91';
+    requestModel.userid=localSharedPrefrence.getUserId();
+    requestModel.authkeyWeb=localSharedPrefrence.getAuthKeyWeb();
+
+
+
+
+    HttpResponse httpResponse = await webapimodelRepo.showIntrestInAuction(requestModel);
+
+    if (httpResponse.status == 200) {
+     // getliveauctionsResponse = httpResponse.data;
+    }
+    isLoadingForUpCommingAuction = false;
+    return httpResponse;
+  }
+
   @action
   Future<void> logout() async {
     await localSharedPrefrence.setLoginStatus(false);
@@ -375,4 +406,6 @@ abstract class _AuctionViewModel with Store {
       }
     });
   }
+
+
 }

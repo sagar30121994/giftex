@@ -22,7 +22,7 @@ class DioClientNew {
     client = Dio(options);
     // client.interceptors.add(DioCacheManager(CacheConfig(baseUrl: BaseUrl.baseUrl)).interceptor);
     // client.interceptors.add(LogInterceptor());
-    if (kDebugMode) {
+    if (true) {
       client!.interceptors.add(LogInterceptor(
           responseBody: true,
           error: true,

@@ -8,6 +8,7 @@ class ShowIntrestRequestModel {
   String? countryCode;
   String? mobile;
   String? message;
+  String? CRMClientID;
 
   ShowIntrestRequestModel(
       {this.authkeyWeb,
@@ -18,6 +19,7 @@ class ShowIntrestRequestModel {
         this.email,
         this.countryCode,
         this.mobile,
+        this.CRMClientID,
         this.message});
 
   ShowIntrestRequestModel.fromJson(Map<String, dynamic> json) {
@@ -27,6 +29,7 @@ class ShowIntrestRequestModel {
     auctionId = json['AuctionId'];
     name = json['name'];
     email = json['email'];
+    CRMClientID = json['CRMClientID'];
     countryCode = json['country_code'];
     mobile = json['mobile'];
     message = json['message'];
@@ -38,6 +41,7 @@ class ShowIntrestRequestModel {
     data['authkey_mobile'] = this.authkeyMobile;
     data['userid'] = this.userid;
     data['AuctionId'] = this.auctionId;
+    data['CRMClientID'] = this.CRMClientID;
     data['name'] = this.name;
     data['email'] = this.email;
     data['country_code'] = this.countryCode;

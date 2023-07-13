@@ -13,6 +13,7 @@ import 'package:giftex/screens/liveauction/components/past/pasttabs.dart';
 import 'package:giftex/screens/liveauction/components/upcomming/upcommingdata.dart';
 import 'package:giftex/screens/liveauction/components/upcomming/upcommingtabs.dart';
 import 'package:giftex/screens/liveauction/liveauction.dart';
+import 'package:share/share.dart';
 
 // import 'package:signalr_netcore/signalr_client.dart';
 import '../components/bottomnavigationbar/bottomnavigationbar.dart';
@@ -246,18 +247,23 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
                                           ),
                                     ),
                                     Spacer(),
-                                    Image.asset(
-                                      "image/share.png",
-                                      height: 32,
+                                    InkWell(
+                                      onTap: (){
+                                        Share.share('2023/Testing-auction-155/lot-no.-237-a-hardwood-sideboard-with-mirror-8529');
+                                      },
+                                      child: Image.asset(
+                                        "image/share.png",
+                                        height: 32,
+                                      ),
                                     ),
 
                                     SizedBox(
                                       width: 20,
                                     ),
-                                    Image.asset(
+                                 /*   Image.asset(
                                       "image/save.png",
                                       height: 32,
-                                    ),
+                                    ),*/
                                     // SizedBox(width: 10,),
                                   ],
                                 )),

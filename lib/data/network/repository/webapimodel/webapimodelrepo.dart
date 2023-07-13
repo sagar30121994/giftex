@@ -734,10 +734,12 @@ class WebapimodelRepo {
 
   Future<HttpResponse> showIntrestInAuction(ShowIntrestRequestModel model) async {
     HttpResponse httpResponse = HttpResponse();
-    String userlogin = json.encode(LoginReqestModel);
-    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
+
+    model.authkeyMobile='';
+
+    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
     await httpClient!
-        .post(BaseUrl.baseUrl + endPoints.WebApiModel().showintrestinauction, body: userlogin)
+        .post(BaseUrl.baseUrl + endPoints.WebApiModel().showintrestinauction, body: model.toJson())
         .then((responce) async {
       print(responce);
 

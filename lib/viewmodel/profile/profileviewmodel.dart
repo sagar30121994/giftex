@@ -3,6 +3,7 @@ import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/data/network/models/request/kyc/UpdateRegBankingDetailsRequest.dart';
 import 'package:giftex/data/network/models/request/kyc/UpdateRegMyAddressRequest.dart';
 import 'package:giftex/data/network/models/request/kyc/UpdateRegPersonalDetailsRequest.dart';
+import 'package:giftex/data/network/models/responce/profile/GetRegInfoResponse.dart';
 import 'package:giftex/data/network/models/responce/profile/GetUserAllDetailsResponse.dart';
 import 'package:giftex/data/network/models/responce/purchase/mypurchasereponse.dart';
 import 'package:giftex/data/network/models/responce/user/dashboardoverviewreponse.dart';
@@ -196,4 +197,20 @@ abstract class _ProfileViewModel with Store {
     isloading = false;
     return httpResponse;
   }
+
+  @observable
+  GetRegInfoResponse? getRegInfoResponse=GetRegInfoResponse();
+  Future<HttpResponse> getRegInfo() async {
+    isloading = true;
+
+    HttpResponse httpResponse = await profileRepo!.getRegInfo();
+
+    if (httpResponse.status == 200) {
+      getRegInfoResponse = httpResponse.data;
+    }
+    isloading = false;
+    return httpResponse;
+  }
+
+
 }

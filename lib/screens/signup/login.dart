@@ -6,6 +6,7 @@ import 'package:giftex/viewmodel/user/loginviewmodel.dart';
 import 'package:validators/validators.dart';
 
 import '../components/bottomnavigationbar/bottomnavigationbar.dart';
+import '../kyc/kycpage.dart';
 
 LoginViewModel loginViewModel = LoginViewModel();
 
@@ -405,6 +406,8 @@ class _LoginpageState extends State<Loginpage> {
                                     ),
                                     InkWell(
                                       onTap: () {
+
+                                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => KYCPage()));
                                         if (loginViewModel.login1ViewModelErrorState.hasErrors) {
                                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                             content: Text(
@@ -413,7 +416,8 @@ class _LoginpageState extends State<Loginpage> {
                                             ),
                                             backgroundColor: Colors.red,
                                           ));
-                                        } else {
+                                        }
+                                        else {
                                           if (isEmailVerified && isMobileVerified) {
                                             loginViewModel.gesignUp().then((value) => {
                                                   if (value.status == 200)

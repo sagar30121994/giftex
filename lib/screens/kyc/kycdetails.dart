@@ -3,9 +3,11 @@
 // import 'package:country_picker/country_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 // import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
+import 'package:giftex/data/network/models/responce/profile/GetRegInfoResponse.dart';
 import 'package:giftex/data/network/models/responce/user/loginrespose.dart';
 import 'package:giftex/screens/kyc/kycpage.dart';
 import 'package:giftex/screens/kyc/kysacoountdetails.dart';
@@ -23,8 +25,21 @@ class _KYCDetailspageState extends State<KYCDetailspage> {
   TextEditingController dobController=TextEditingController();
   bool male=false;
   bool female=false;
+  CountryList? selectedCountry;
+
+
+  Future laodData() async{
+    await profileViewModel.getRegInfo();
+    setState(() {
+      selectedCountry=profileViewModel.getRegInfoResponse!.countryList!.first;
+    });
+
+  }
   @override
   void initState() {
+
+    laodData();
+
     // TODO: implement initState
     super.initState();
   }
@@ -206,10 +221,11 @@ class _KYCDetailspageState extends State<KYCDetailspage> {
                         children: [
                           InkWell(
                             onTap: (){
-                              male=true;
-                              female=false;
-
-                              profileViewModel.setDOB(male?"MALE":"FEMALE");
+                              setState(() {
+                                male=true;
+                                female=false;
+                              });
+                              profileViewModel.setgendor(male?"MALE":"FEMALE");
                             },
                             child: Container(
                               height: 150,
@@ -217,7 +233,10 @@ class _KYCDetailspageState extends State<KYCDetailspage> {
                               width: MediaQuery.of(context).size.width*.40,
                               decoration: BoxDecoration(
                                 color: Color(0xffFFFFFF),
-                                border: Border.all(color: male?Color(0xff8C9FB1):Color(0xffFFFFFF))
+                                border: Border.all(
+                                    color: male?Color(0xff8C9FB1): Color(0xffFFFFFF),
+                                    width: 2,
+                                )
                               ),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -239,8 +258,13 @@ class _KYCDetailspageState extends State<KYCDetailspage> {
                           Spacer(),
                           InkWell(
                             onTap: (){
-                              male=false;
-                              female=true;
+                              setState(() {
+
+                                male=false;
+                                female=true;
+                                profileViewModel.setgendor(male?"MALE":"FEMALE");
+                              });
+
                             },
                             child: Container(
                               height: 150,
@@ -248,7 +272,10 @@ class _KYCDetailspageState extends State<KYCDetailspage> {
                               width: MediaQuery.of(context).size.width*.40,
                               decoration: BoxDecoration(
                                   color: Color(0xffFFFFFF),
-                                  border: Border.all(color: female?Color(0xff8C9FB1):Color(0xffFFFFFF))
+                                  border: Border.all(color: female?Color(0xff8C9FB1):Color(0xffFFFFFF),
+                                    width: 2,
+                                  ),
+
                               ),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -277,6 +304,43 @@ class _KYCDetailspageState extends State<KYCDetailspage> {
                           color: Color(0xff2D2D2D),
                           fontWeight: FontWeight.w400,
                         ),
+                      ),
+                      Observer(
+                        builder: (context) {
+                          return
+                            profileViewModel.isloading?
+                                LinearProgressIndicator(minHeight: 2,)
+                                :profileViewModel.getRegInfoResponse==null?
+                            Container()
+                                :
+                            SizedBox(
+                           // width: MediaQuery.of(context).size.width*.8,
+                            child: DropdownButton<CountryList?>(
+
+                                value: selectedCountry,isExpanded: true,
+                                items: profileViewModel.getRegInfoResponse!.countryList!.map((e) {
+                                  return DropdownMenuItem(
+                                    alignment: Alignment.centerLeft,
+                                      child: Container(
+                                          child: Text(
+                                            '${e.name??''}',
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          )
+                                      ),
+                                      value: e,
+                                  );
+                                }).toList(),
+                                onChanged: (v){
+                                  setState(() {
+                                    selectedCountry=v;
+                                  });
+
+
+                                }
+                            ),
+                          );
+                        }
                       ),
                       // Container(
                       //   decoration: BoxDecoration(
@@ -324,7 +388,8 @@ class _KYCDetailspageState extends State<KYCDetailspage> {
                 SizedBox(height: 16,),
                 InkWell(
                   onTap: () async {
-                    HttpResponse res= await profileViewModel.updateRegPersonalDetails();
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => KYCAccountDetailspage()));
+                   HttpResponse res= await profileViewModel.updateRegPersonalDetails();
                     if(res.status==200){
                       ScaffoldMessenger.of(context).showSnackBar(  SnackBar(content: Text('Record Updated....'),backgroundColor: Colors.green,),);
                     }else{
