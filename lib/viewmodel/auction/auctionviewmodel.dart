@@ -2,6 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:giftex/data/local/client/prefs.dart';
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/data/network/models/request/webapimodel/showintrestinauctionrequestmodel.dart';
+import 'package:giftex/data/network/models/responce/home/seachRsponse.dart' as search;
 import 'package:giftex/data/network/models/responce/liveauction/auctionresultresponse.dart';
 import 'package:giftex/data/network/models/responce/liveauction/singleauctiondetailsresponse.dart';
 import 'package:giftex/data/network/models/responce/liveauction/upcommingauctionresponse.dart';
@@ -266,14 +267,31 @@ abstract class _AuctionViewModel with Store {
     return 0;
   }
 
+  @observable
+//  search.SearchResponse? newsearchResponse=search.SearchResponse();
+  UpComingLotsResponse? newsearchResponse=UpComingLotsResponse();
+
   @action
   Future<HttpResponse> getGlobalauctions(String search) async {
     isLoadingForlots = true;
-
+    newsearchResponse=null;
     HttpResponse httpResponse = await auctionRepo.getGlobalauctions(search);
 
     if (httpResponse.status == 200) {
+
       searchResponse = httpResponse.data;
+    }
+    isLoadingForlots = false;
+    return httpResponse;
+  }
+  Future<HttpResponse> SearchGlobalauctions(String search) async {
+    isLoadingForlots = true;
+    newsearchResponse=null;
+    HttpResponse httpResponse = await auctionRepo.SearchGlobalauctions(search);
+
+    if (httpResponse.status == 200) {
+      newsearchResponse=httpResponse.data;
+
     }
     isLoadingForlots = false;
     return httpResponse;

@@ -249,7 +249,7 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
                                     Spacer(),
                                     InkWell(
                                       onTap: (){
-                                        Share.share('2023/Testing-auction-155/lot-no.-237-a-hardwood-sideboard-with-mirror-8529');
+
                                       },
                                       child: Image.asset(
                                         "image/share.png",

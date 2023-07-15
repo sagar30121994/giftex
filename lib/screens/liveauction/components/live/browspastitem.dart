@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:giftex/screens/liveauction/components/image/imagecomponent.dart';
 import 'package:giftex/screens/liveauction/liveauction.dart';
 import 'package:giftex/screens/productdetailspage/productdetailpage.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
@@ -64,7 +65,7 @@ class _BrowsePastItemListItemState extends State<BrowsePastItemListItem> {
                                   builder: (context) => ProductDetailPage(widget.lots, auctionViewModel)));
                         },
                         child: Padding(
-                          padding: const EdgeInsets.all(24.0),
+                          padding: const EdgeInsets.all(20.0),
                           child: Image.network(
                             "${widget.lots.thumbImage}",
                             height: 250,
@@ -94,18 +95,20 @@ class _BrowsePastItemListItemState extends State<BrowsePastItemListItem> {
                                     )
                                   : Container(),
                               SizedBox(
-                                height: 10,
+                                height: 8,
                               ),
-                              Text(
-                                "${widget.lots.info!.lotTitle}",
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                      color: Color(0xff747474),
-                                      fontWeight: FontWeight.w400,
-                                    ),
+                              Expanded(
+                                child: Text(
+                                  "${widget.lots.info!.lotTitle}",
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                        color: Color(0xff747474),
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                ),
                               ),
                               SizedBox(
-                                height: 20,
+                                height: 8,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -164,7 +167,7 @@ class _BrowsePastItemListItemState extends State<BrowsePastItemListItem> {
                                 ],
                               ),
                               SizedBox(
-                                height: 20,
+                                height: 12,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -224,7 +227,7 @@ class _BrowsePastItemListItemState extends State<BrowsePastItemListItem> {
                                 ],
                               ),
                               SizedBox(
-                                height: 20,
+                                height: 12,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
@@ -418,7 +421,7 @@ class _BrowsePastItemListItemState extends State<BrowsePastItemListItem> {
                                       }
                                     },
                                     child: Padding(
-                                      padding: const EdgeInsets.only(right: 8.0, left: 8, top: 12, bottom: 12),
+                                      padding: const EdgeInsets.only(right: 8.0, left: 8, top: 8, bottom: 8),
                                       child: Text(
                                         'PROXY BID',
                                         style: Theme.of(context).textTheme.bodyText1!.copyWith(
@@ -447,7 +450,7 @@ class _BrowsePastItemListItemState extends State<BrowsePastItemListItem> {
                                           borderRadius: BorderRadius.circular(24)),
                                       child: Center(
                                         child: Padding(
-                                          padding: const EdgeInsets.only(right: 32.0, left: 32, top: 12, bottom: 12),
+                                          padding: const EdgeInsets.only(right: 32.0, left: 32, top: 8, bottom: 8),
                                           child: Text(
                                             'BID NOW',
                                             style: Theme.of(context).textTheme.bodyText1!.copyWith(
@@ -496,12 +499,20 @@ class _BrowsePastItemListItemState extends State<BrowsePastItemListItem> {
                             //   Icons.favorite,
                             //   color: Colors.pink,
                             // ),
-                            SizedBox(height: 12),
-                            Icon(
-                              Icons.open_in_full,
-                              color: Colors.grey,
+                            SizedBox(height: 8),
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ImageConponent(widget.lots.images!.cast<Images>())));
+                              },
+                              child: Icon(
+                                Icons.open_in_full,
+                                color: Colors.grey,
+                              ),
                             ),
-                            SizedBox(height: 12),
+                            SizedBox(height: 8),
                             // Container(
                             //   padding: EdgeInsets.all(16),
                             //   decoration: BoxDecoration(

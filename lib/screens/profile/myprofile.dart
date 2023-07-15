@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/data/network/base/base.dart';
 import 'package:giftex/data/network/models/responce/profile/GetUserAllDetailsResponse.dart';
 import 'package:giftex/screens/components/bottomnavigationbar/dashborard2.dart';
 
+import '../../utils/bottumNavBar.dart';
 import '../components/footer/footer.dart';
 import '../components/header.dart';
 
@@ -32,6 +34,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
 
   @override
   void initState() {
+
     // TODO: implement initState
     nameController.text =
         "${(widget.getUserAllDetailsResponse!.result!.profile!.basicDetails!.firstName ?? '')} ${(widget.getUserAllDetailsResponse!.result!.profile!.basicDetails!.lastName ?? '')}";
@@ -56,7 +59,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
     return Scaffold(
       appBar: NavBar(),
       backgroundColor: Colors.white,
-      // bottomNavigationBar: BottomNavigationBarUi(),
+
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * .9,
@@ -248,7 +251,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
                     tabs: [
                       Tab(text: "ACCOUNT"),
                       Tab(text: "ADDRESS"),
-                      Tab(text: "BANCKING"),
+                      Tab(text: "BANKING"),
                     ],
                   ),
                 ),
@@ -616,6 +619,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
                               color: Color(0xffF9F9F9),
                               boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
                           child: TextField(
+                            readOnly: true,
                             controller: depositmodeController,
                             style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                   color: Colors.black,
@@ -649,11 +653,15 @@ class _MyProfilepageState extends State<MyProfilepage> {
                               boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
                           child: TextField(
                             controller: bidLimitController,
+                            readOnly: true,
                             style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w500,
                                 ),
-                            decoration: InputDecoration(labelText: 'Bid Limit', hintText: '`10,00,000', isDense: true),
+                            decoration: InputDecoration(
+                                labelText: 'Bid Limit', hintText: '`10,00,000', isDense: true,
+                              prefixText: "\u20b9 "
+                            ),
                           ),
                         ),
                         SizedBox(
@@ -737,10 +745,23 @@ class _MyProfilepageState extends State<MyProfilepage> {
             const SizedBox(
               height: 16,
             ),
-            SizedBox(height: 1270, width: MediaQuery.of(context).size.width, child: Footer()),
+            Container(
+              color: Color(0Xff2D2D2D),
+              child: Column(
+                children: [
+                  Container(width: MediaQuery.of(context).size.width, child: Footer()),
+                  Container(
+                    color: Color(0Xff1F2A52),
+                    height: 50,
+                    width: MediaQuery.of(context).size.width,
+                  ),
+                ],
+              ),
+            ),
+            //SizedBox(height: 1270, width: MediaQuery.of(context).size.width, child: Footer()),
             Container(
               color: Color(0xff1F2A52),
-              height: 30,
+          //    height: 30,
               width: MediaQuery.of(context).size.width,
             ),
             /* SizedBox(
@@ -750,7 +771,10 @@ class _MyProfilepageState extends State<MyProfilepage> {
           ],
         )),
       ),
-      bottomNavigationBar: Dashboard2Ui(),
+
+      bottomNavigationBar: CommonBottumNavBar(3),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton:CommonFloatingActionButton(),
     );
   }
 }

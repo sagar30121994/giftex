@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
+import 'package:giftex/data/network/models/responce/profile/GetRegInfoResponse.dart';
 import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
 import 'package:giftex/screens/homepage/liveitem.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
@@ -210,7 +211,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                   ),
                             ),
                             Spacer(),
-                            InkWell(
+                            /*InkWell(
                               onTap: (){
 
                               },
@@ -218,15 +219,15 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                 "image/share.png",
                                 height: 32,
                               ),
-                            ),
+                            ),*/
 
                             SizedBox(
                               width: 20,
                             ),
-                            Image.asset(
+                          /*  Image.asset(
                               "image/save.png",
                               height: 32,
-                            ),
+                            ),*/
                             // SizedBox(width: 10,),
                           ],
                         )),
@@ -1258,6 +1259,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                     ),
                     TextFormField(
                       controller: email,
+                      keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         labelText: "Email ID",
                         border: getInputBorder(),
@@ -1282,11 +1284,13 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                             enabledBorder: getInputBorder(),
                             contentPadding: EdgeInsets.all(0),
                           ),
-                          child: DropdownMenu(textStyle: TextStyle(color: Colors.black),
-                              controller: countrycode,menuStyle: MenuStyle(
+                          child: DropdownMenu<CountryList>(textStyle: TextStyle(color: Colors.black),
+                              controller: countrycode,
+                              onSelected: (item){
+                                countrycode.text=item!.code??'';
+                              },
+                              menuStyle: MenuStyle(
                                   backgroundColor: MaterialStatePropertyAll(Colors.white),
-
-
                               ),
                               inputDecorationTheme:   InputDecorationTheme(
                                 filled: true,
@@ -1295,7 +1299,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                               ),
                             dropdownMenuEntries: profileViewModel.getRegInfoResponse!.countryList!.map((e) =>
                                 DropdownMenuEntry(
-                                    value: e.code,
+                                    value: e,
                                     label: "${e.name ?? ''} (${e.code ?? ''})",
                                     style: ButtonStyle(
                                       foregroundColor: MaterialStatePropertyAll(Colors.black),
@@ -1319,9 +1323,15 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                     ),
                     TextFormField(
                       controller: phone,
+                      inputFormatters: [
+
+                      ],
+                      keyboardType: TextInputType.phone,
+                      maxLength: 10,
                       decoration: InputDecoration(
                         labelText: "Phone Number",
                         border: getInputBorder(),
+                        counter: Container(),
                         enabledBorder: getInputBorder(),
                           errorText: err_phone
                       ),
@@ -1357,22 +1367,22 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                               err_name='Please enter Name';
                             }
                             if(email.text==''){
-                              err_name='Please enter Email';
+                              err_email='Please enter Email';
                             }
 
                             if(countrycode.text==''){
-                              err_name='Please enter Country Code';
+                              err_counrtyCode='Please enter Country Code';
                             }
 
 
                           }else{
                             HttpResponse res=await auctionViewModel.showIntrestInAuction(name.text, email.text,countrycode.text,phone.text,message.text,auctionId);
                             if(res.status==200){
+                              ScaffoldMessenger.maybeOf(context)!.showSnackBar(SnackBar(content: Text("Thank you for your interest.",style: TextStyle(color: Colors.black)),backgroundColor: Colors.green,));
                               Navigator.maybeOf(context)!.pop();
-                              ScaffoldMessenger.maybeOf(context)!.showSnackBar(SnackBar(content: Text("Thank you for your interest.")));
                             }else{
 
-                              ScaffoldMessenger.maybeOf(context)!.showSnackBar(SnackBar(content: Text(res.message??'')));
+                              ScaffoldMessenger.maybeOf(context)!.showSnackBar(SnackBar(content: Text(res.message??'',style: TextStyle(color: Colors.black)),backgroundColor: Colors.orange,));
                             }
 
                           }

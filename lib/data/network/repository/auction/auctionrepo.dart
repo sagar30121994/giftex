@@ -18,6 +18,7 @@ import '../../base/endpoints.dart' as endPoints;
 import '../../client/dioclient.dart';
 import '../../models/httpreponsehandler.dart';
 import '../../models/request/webapimodel/userloginrequestmodel.dart';
+import '../../models/responce/home/seachRsponse.dart' as New;
 
 class AuctionRepo {
   DioClientNew? httpClient;
@@ -427,7 +428,48 @@ class AuctionRepo {
       if (responce.statusCode == 200) {
         httpResponse.status = responce.statusCode;
         httpResponse.message = 'Successful';
+
         httpResponse.data = UpcomingAuctionResponse.fromJson(responce.data);
+      } else {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = responce.data['message'];
+        httpResponse.data = null;
+      }
+      return httpResponse;
+    }).catchError((err) {
+      print(err);
+      httpResponse.status = 400;
+      httpResponse.message = err.toString();
+      httpResponse.data = err.toString();
+      return httpResponse;
+    });
+
+    return httpResponse;
+  }
+  Future<HttpResponse> SearchGlobalauctions(String search) async {
+    HttpResponse httpResponse = HttpResponse();
+    String userid = localSharedPrefrence!.getUserId();
+    String authKey = localSharedPrefrence!.getAuthKeyWeb();
+    String crmClientId = localSharedPrefrence!.getCrmClinetId();
+    // String userlogin=json.encode(LoginReqestModel);
+    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
+    await httpClient!.post(BaseUrl.baseUrl + endPoints.Search().global, body: {
+      "userId": userid,
+      "authkey_mobile": "",
+      "authkey_web": authKey,
+      "filterType": "LatestLots",
+      "CRMClientID": crmClientId,
+      "filterLots": {"ArtistName": [], "Category": [], "SearchKey": null},
+      "searchKey": search
+    }).then((responce) async {
+      print(responce);
+
+      if (responce.statusCode == 200) {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = 'Successful';
+
+        httpResponse.data = UpComingLotsResponse.fromJson(responce.data);
+        //httpResponse.data = New.SearchResponse.fromJson(responce.data);
       } else {
         httpResponse.status = responce.statusCode;
         httpResponse.message = responce.data['message'];

@@ -6,6 +6,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
 import 'package:intl/intl.dart';
+import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../data/network/models/responce/lot/upcominglotsresponse.dart';
@@ -287,18 +288,23 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                     SizedBox(
                                       width: 100,
                                     ),
-                                    Image.asset(
-                                      "image/share.png",
-                                      height: 32,
+                                    InkWell(
+                                      onTap: (){
+                                        Share.share('${widget.lots==null?'':widget.lots.lotURL??''}');
+                                      },
+                                      child: Image.asset(
+                                        "image/share.png",
+                                        height: 32,
+                                      ),
                                     ),
 
                                     SizedBox(
                                       width: 20,
                                     ),
-                                    Image.asset(
+                                  /*  Image.asset(
                                       "image/save.png",
                                       height: 32,
-                                    ),
+                                    ),*/
                                     // Icon(Icons.bookmark_border,size: 24,color: Theme.of(context).colorScheme.primary,),
                                   ],
                                 )
@@ -588,7 +594,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                   ],
                                 )
                               : widget.lots.status!.toLowerCase() == "upcoming"
-                                  ? widget.lots.proxyStatus!.proxyAmount!.iNR == "0"
+                                  ? (widget.lots.proxyStatus==null?'0':widget.lots.proxyStatus!.proxyAmount!.iNR) == "0"
                                       ? Container()
                                       : Container(
                                           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -610,7 +616,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                               ),
                                               Spacer(),
                                               Text(
-                                                "₹${formateNumber(widget.lots.proxyStatus!.proxyAmount!.iNR ?? "0")}",
+                                                "₹${formateNumber((widget.lots.proxyStatus==null?'0':widget.lots.proxyStatus!.proxyAmount!.iNR ?? "0"))}",
                                                 textAlign: TextAlign.center,
                                                 style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                       color: Color(0xff202232),
@@ -627,7 +633,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                           height: 16,
                         ),
 
-                        (widget.lots.proxyStatus!.status != "CanBid" && widget.lots.status!.toLowerCase() == "upcoming")
+                        ((widget.lots.proxyStatus==null?'': widget.lots.proxyStatus!.status) != "CanBid" && widget.lots.status!.toLowerCase() == "upcoming")
                             ? InkWell(
                                 onTap: () {
                                   launchUrl(
@@ -1262,7 +1268,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                             Spacer(),
                             (widget.lots.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId())
                                 ? Container()
-                                : (widget.lots.proxyStatus!.status == "CanBid" &&
+                                : ((widget.lots.proxyStatus==null?'':widget.lots.proxyStatus!.status) == "CanBid" &&
                                         widget.lots.status!.toLowerCase() == "upcoming")
                                     ? ElevatedButton(
                                         style: ButtonStyle(

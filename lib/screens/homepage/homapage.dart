@@ -1548,7 +1548,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                 )
               ],
             ),
-            Positioned(
+          /*  Positioned(
               top: 0,
               right: 0,
               child: AnimatedContainer(
@@ -1587,7 +1587,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                   ],
                 ),
               ),
-            ),
+            ),*/
           ],
         ),
       ),

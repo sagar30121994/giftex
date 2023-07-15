@@ -11,6 +11,7 @@ import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../data/network/models/responce/lot/upcominglotsresponse.dart';
+import '../image/imagecomponent.dart';
 
 class BrowsUpcommingItem extends StatefulWidget {
   BrowsUpcommingItem(this.lots, this.grid, this.auctionViewModel);
@@ -164,7 +165,7 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                                   builder: (context) => ProductDetailPage(widget.lots, auctionViewModel)));
                         },
                         child: Padding(
-                          padding: const EdgeInsets.all(24.0),
+                          padding: const EdgeInsets.all(20.0),
                           child: Image.network(
                             "${widget.lots.thumbImage}",
                             height: 250,
@@ -180,7 +181,7 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SizedBox(
-                                height: 24,
+                                height: 20,
                               ),
                               widget.lots.auctionType == "1"
                                   ? Text(
@@ -194,18 +195,20 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                                     )
                                   : Container(),
                               SizedBox(
-                                height: 10,
+                                height: 8,
                               ),
-                              Text(
-                                "${widget.lots.info!.lotTitle}",
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                      color: Color(0xff747474),
-                                      fontWeight: FontWeight.w400,
-                                    ),
+                              Expanded(
+                                child: Text(
+                                  "${widget.lots.info!.lotTitle}",
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                        color: Color(0xff747474),
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                ),
                               ),
                               SizedBox(
-                                height: 20,
+                                height: 8,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -314,7 +317,7 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                                 ],
                               ),
                               SizedBox(
-                                height: 20,
+                                height: 12,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -374,7 +377,7 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                                 ],
                               ),
                               SizedBox(
-                                height: 20,
+                                height: 12,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
@@ -647,9 +650,17 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                             //   color: Colors.pink,
                             // ),
                             SizedBox(height: 12),
-                            Icon(
-                              Icons.open_in_full,
-                              color: Colors.grey,
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ImageConponent(widget.lots.images!.cast<Images>())));
+                              },
+                              child: Icon(
+                                Icons.open_in_full,
+                                color: Colors.grey,
+                              ),
                             ),
                             SizedBox(height: 12),
                             // Container(

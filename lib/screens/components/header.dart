@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:giftex/screens/ecommercecard/card.dart';
 import 'package:giftex/screens/homepage/homapage.dart';
+import 'package:giftex/screens/homepage/searchpage.dart';
 
 class NavBar extends StatelessWidget implements PreferredSizeWidget {
   // NavBar();
@@ -28,6 +29,8 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
         InkWell(
             onTap: () {
               homeViewModel.search = (!homeViewModel.search);
+              Navigator.push(context, MaterialPageRoute(builder: (context) => SearchBarUi()));
+
             },
             child: Image.asset(
               "image/app3.png",
