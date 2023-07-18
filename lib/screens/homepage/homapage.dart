@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/data/network/models/responce/liveauction/upcommingauctionresponse.dart';
 import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
-import 'package:giftex/screens/howtobuy/howtobuy.dart';
-import 'package:giftex/screens/howtosell/howtosell.dart';
 import 'package:giftex/screens/liveauction/liveauction.dart';
 import 'package:giftex/screens/newsandupdates/newsandupdates.dart';
 import 'package:giftex/viewmodel/home/homeviewmodel.dart';
@@ -750,7 +748,8 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                   children: [
                     InkWell(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => HowToSellPage()));
+                        bottomViewModel.selectedIndex = 10;
+                        // Navigator.push(context, MaterialPageRoute(builder: (context) => HowToSellPage()));
                       },
                       child: Container(
                         width: MediaQuery.of(context).size.width / 2,
@@ -781,7 +780,8 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => HowToBuyPage()));
+                        bottomViewModel.selectedIndex = 11;
+                        // Navigator.push(context, MaterialPageRoute(builder: (context) => HowToBuyPage()));
                       },
                       child: Container(
                         width: MediaQuery.of(context).size.width / 2,

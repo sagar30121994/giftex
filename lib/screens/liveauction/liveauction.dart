@@ -3,14 +3,12 @@ import 'dart:math';
 
 import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/data/network/models/responce/profile/GetRegInfoResponse.dart';
 import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
 import 'package:giftex/screens/homepage/liveitem.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
-import 'package:share/share.dart';
 
 import '../../viewmodel/profile/profileviewmodel.dart';
 import '../components/footer/footer.dart';
@@ -38,13 +36,11 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
   Timer? timer;
 
   bool countDown = true, selected = false;
-  Future laodData() async{
+  Future laodData() async {
     await profileViewModel.getRegInfo();
-    setState(() {
-
-    });
-
+    setState(() {});
   }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -224,7 +220,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                             SizedBox(
                               width: 20,
                             ),
-                          /*  Image.asset(
+                            /*  Image.asset(
                               "image/save.png",
                               height: 32,
                             ),*/
@@ -563,8 +559,9 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                               bottomViewModel.setIndex(8);
                                                             });
                                                           } else {
-                                                            showinterestPopup(auctionViewModel.upcomingAuctionResponse!.result!
-                                                                .auctions![0].auctionId.toString());
+                                                            showinterestPopup(auctionViewModel
+                                                                .upcomingAuctionResponse!.result!.auctions![0].auctionId
+                                                                .toString());
                                                           }
                                                         },
                                                         child: Container(
@@ -574,7 +571,8 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                               borderRadius: BorderRadius.all(Radius.circular(10))),
                                                           child: Text(
                                                             (auctionViewModel.upcomingAuctionResponse!.result!
-                                                                        .auctions![0].auctionDate??'') ==
+                                                                            .auctions![0].auctionDate ??
+                                                                        '') ==
                                                                     "TBA"
                                                                 ? "SHOW INTEREST"
                                                                 : "EXPLORE",
@@ -675,10 +673,13 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
 
                                                                   bottomViewModel.setIndex(8);
                                                                 });
-                                                              }
-                                                              else {
-                                                                showinterestPopup(auctionViewModel.upcomingAuctionResponse!.result!
-                                                                    .auctions![1].auctionId.toString());
+                                                              } else {
+                                                                showinterestPopup(auctionViewModel
+                                                                    .upcomingAuctionResponse!
+                                                                    .result!
+                                                                    .auctions![1]
+                                                                    .auctionId
+                                                                    .toString());
                                                               }
                                                             },
                                                             child: Container(
@@ -770,10 +771,13 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
 
                                                                   bottomViewModel.setIndex(8);
                                                                 });
-                                                              }
-                                                              else {
-                                                                showinterestPopup(auctionViewModel.upcomingAuctionResponse!.result!
-                                                                    .auctions![2].auctionId.toString());
+                                                              } else {
+                                                                showinterestPopup(auctionViewModel
+                                                                    .upcomingAuctionResponse!
+                                                                    .result!
+                                                                    .auctions![2]
+                                                                    .auctionId
+                                                                    .toString());
                                                               }
                                                             },
                                                             child: Container(
@@ -861,11 +865,14 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
 
                                                                   bottomViewModel.setIndex(8);
                                                                 });
-                                                              }else{
-                                                                showinterestPopup(auctionViewModel.upcomingAuctionResponse!.result!
-                                                                    .auctions![3].auctionId.toString());
+                                                              } else {
+                                                                showinterestPopup(auctionViewModel
+                                                                    .upcomingAuctionResponse!
+                                                                    .result!
+                                                                    .auctions![3]
+                                                                    .auctionId
+                                                                    .toString());
                                                               }
-
                                                             },
                                                             child: Container(
                                                               padding: EdgeInsets.all(8),
@@ -1185,13 +1192,13 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
   }
 
   void showinterestPopup(String auctionId) {
-   TextEditingController name=TextEditingController();
-   TextEditingController email=TextEditingController();
-   TextEditingController countrycode=TextEditingController();
-   TextEditingController phone=TextEditingController();
-   TextEditingController message=TextEditingController();
+    TextEditingController name = TextEditingController();
+    TextEditingController email = TextEditingController();
+    TextEditingController countrycode = TextEditingController();
+    TextEditingController phone = TextEditingController();
+    TextEditingController message = TextEditingController();
 
-   String? err_name,err_email,err_counrtyCode,err_phone,err_message;
+    String? err_name, err_email, err_counrtyCode, err_phone, err_message;
 
     showDialog(
         context: context,
@@ -1247,12 +1254,10 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                     TextFormField(
                       controller: name,
                       decoration: InputDecoration(
-                        labelText: "Name*",
-                        border: getInputBorder(),
-                        enabledBorder: getInputBorder(),
-                          errorText: err_name
-                      ),
-
+                          labelText: "Name*",
+                          border: getInputBorder(),
+                          enabledBorder: getInputBorder(),
+                          errorText: err_name),
                     ),
                     SizedBox(
                       height: 16,
@@ -1261,81 +1266,68 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                       controller: email,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
-                        labelText: "Email ID",
-                        border: getInputBorder(),
-                        enabledBorder: getInputBorder(),
-                          errorText: err_email
-                      ),
-
+                          labelText: "Email ID",
+                          border: getInputBorder(),
+                          enabledBorder: getInputBorder(),
+                          errorText: err_email),
                     ),
                     SizedBox(
                       height: 16,
                     ),
-                    Observer(
-                      builder: (context) {
-                        return
-                          profileViewModel.isloading?
-                              LinearProgressIndicator(minHeight: 2,):
-                          InputDecorator(
-
-                          decoration: InputDecoration(
-
-                            border: getInputBorder(),
-                            enabledBorder: getInputBorder(),
-                            contentPadding: EdgeInsets.all(0),
-                          ),
-                          child: DropdownMenu<CountryList>(textStyle: TextStyle(color: Colors.black),
-                              controller: countrycode,
-                              onSelected: (item){
-                                countrycode.text=item!.code??'';
-                              },
-                              menuStyle: MenuStyle(
-                                  backgroundColor: MaterialStatePropertyAll(Colors.white),
+                    Observer(builder: (context) {
+                      return profileViewModel.isloading
+                          ? LinearProgressIndicator(
+                              minHeight: 2,
+                            )
+                          : InputDecorator(
+                              decoration: InputDecoration(
+                                border: getInputBorder(),
+                                enabledBorder: getInputBorder(),
+                                contentPadding: EdgeInsets.all(0),
                               ),
-                              inputDecorationTheme:   InputDecorationTheme(
-                                filled: true,
-                                contentPadding: EdgeInsets.symmetric(vertical: 5.0,horizontal: 8),
-                              //  fillColor: Colors.blue.shade100
-                              ),
-                            dropdownMenuEntries: profileViewModel.getRegInfoResponse!.countryList!.map((e) =>
-                                DropdownMenuEntry(
-                                    value: e,
-                                    label: "${e.name ?? ''} (${e.code ?? ''})",
-                                    style: ButtonStyle(
-                                      foregroundColor: MaterialStatePropertyAll(Colors.black),
-                                      padding: MaterialStatePropertyAll(EdgeInsets.symmetric(horizontal: 8)),
-                                      backgroundColor: MaterialStatePropertyAll(Colors.white),
-
-
-                                    )
-                                )
-                            ).toList(),
-                            width: MediaQuery.of(dialogContext).size.width*.70,
-
-                            hintText: "Country Code",
-                              errorText: err_counrtyCode
-                          ),
-                        );
-                      }
-                    ),
+                              child: DropdownMenu<CountryList>(
+                                  textStyle: TextStyle(color: Colors.black),
+                                  controller: countrycode,
+                                  onSelected: (item) {
+                                    countrycode.text = item!.code ?? '';
+                                  },
+                                  menuStyle: MenuStyle(
+                                    backgroundColor: MaterialStatePropertyAll(Colors.white),
+                                  ),
+                                  inputDecorationTheme: InputDecorationTheme(
+                                    filled: true,
+                                    contentPadding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 8),
+                                    //  fillColor: Colors.blue.shade100
+                                  ),
+                                  dropdownMenuEntries: profileViewModel.getRegInfoResponse!.countryList!
+                                      .map((e) => DropdownMenuEntry(
+                                          value: e,
+                                          label: "${e.name ?? ''} (${e.code ?? ''})",
+                                          style: ButtonStyle(
+                                            foregroundColor: MaterialStatePropertyAll(Colors.black),
+                                            padding: MaterialStatePropertyAll(EdgeInsets.symmetric(horizontal: 8)),
+                                            backgroundColor: MaterialStatePropertyAll(Colors.white),
+                                          )))
+                                      .toList(),
+                                  width: MediaQuery.of(dialogContext).size.width * .70,
+                                  hintText: "Country Code",
+                                  errorText: err_counrtyCode),
+                            );
+                    }),
                     SizedBox(
                       height: 16,
                     ),
                     TextFormField(
                       controller: phone,
-                      inputFormatters: [
-
-                      ],
+                      inputFormatters: [],
                       keyboardType: TextInputType.phone,
                       maxLength: 10,
                       decoration: InputDecoration(
-                        labelText: "Phone Number",
-                        border: getInputBorder(),
-                        counter: Container(),
-                        enabledBorder: getInputBorder(),
-                          errorText: err_phone
-                      ),
-
+                          labelText: "Phone Number",
+                          border: getInputBorder(),
+                          counter: Container(),
+                          enabledBorder: getInputBorder(),
+                          errorText: err_phone),
                     ),
                     SizedBox(
                       height: 16,
@@ -1343,12 +1335,10 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                     TextFormField(
                       controller: message,
                       decoration: InputDecoration(
-                        labelText: "Message",
-                        border: getInputBorder(),
-                        enabledBorder: getInputBorder(),
-                        errorText: err_message
-                      ),
-
+                          labelText: "Message",
+                          border: getInputBorder(),
+                          enabledBorder: getInputBorder(),
+                          errorText: err_message),
                     ),
                     SizedBox(
                       height: 16,
@@ -1362,45 +1352,46 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                 borderRadius: BorderRadius.circular(20.0),
                                 side: BorderSide(color: Color(0XFFB45156), width: 0.5)))),
                         onPressed: () async {
-                          if(name.text==''|| email.text==''||countrycode.text=='' ){
-                            if(name.text==''){
-                              err_name='Please enter Name';
+                          if (name.text == '' || email.text == '' || countrycode.text == '') {
+                            if (name.text == '') {
+                              err_name = 'Please enter Name';
                             }
-                            if(email.text==''){
-                              err_email='Please enter Email';
-                            }
-
-                            if(countrycode.text==''){
-                              err_counrtyCode='Please enter Country Code';
+                            if (email.text == '') {
+                              err_email = 'Please enter Email';
                             }
 
-
-                          }else{
-                            HttpResponse res=await auctionViewModel.showIntrestInAuction(name.text, email.text,countrycode.text,phone.text,message.text,auctionId);
-                            if(res.status==200){
-                              ScaffoldMessenger.maybeOf(context)!.showSnackBar(SnackBar(content: Text("Thank you for your interest.",style: TextStyle(color: Colors.black)),backgroundColor: Colors.green,));
+                            if (countrycode.text == '') {
+                              err_counrtyCode = 'Please enter Country Code';
+                            }
+                          } else {
+                            HttpResponse res = await auctionViewModel.showIntrestInAuction(
+                                name.text, email.text, countrycode.text, phone.text, message.text, auctionId);
+                            if (res.status == 200) {
+                              ScaffoldMessenger.maybeOf(context)!.showSnackBar(SnackBar(
+                                content: Text("Thank you for your interest.", style: TextStyle(color: Colors.black)),
+                                backgroundColor: Colors.green,
+                              ));
                               Navigator.maybeOf(context)!.pop();
-                            }else{
-
-                              ScaffoldMessenger.maybeOf(context)!.showSnackBar(SnackBar(content: Text(res.message??'',style: TextStyle(color: Colors.black)),backgroundColor: Colors.orange,));
+                            } else {
+                              ScaffoldMessenger.maybeOf(context)!.showSnackBar(SnackBar(
+                                content: Text(res.message ?? '', style: TextStyle(color: Colors.black)),
+                                backgroundColor: Colors.orange,
+                              ));
                             }
-
                           }
-
-
                         },
                         child: Padding(
                           padding: const EdgeInsets.only(right: 0.0, left: 0, top: 12, bottom: 12),
                           child: Text(
                             'Submit',
-                            style: Theme.of(context).textTheme.caption!.copyWith(
-                                color: Colors.white, fontWeight: FontWeight.w700, letterSpacing: 1.33333),
+                            style: Theme.of(context)
+                                .textTheme
+                                .caption!
+                                .copyWith(color: Colors.white, fontWeight: FontWeight.w700, letterSpacing: 1.33333),
                           ),
                         ),
                       ),
                     ),
-
-
                   ],
                 ),
               ),
@@ -1411,7 +1402,10 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
 
   getInputBorder() {
     return OutlineInputBorder(
-      borderSide: BorderSide(color: Colors.grey,width: 1,),
+      borderSide: BorderSide(
+        color: Colors.grey,
+        width: 1,
+      ),
       borderRadius: BorderRadius.circular(8),
     );
   }

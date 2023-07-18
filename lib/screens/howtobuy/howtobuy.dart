@@ -11,7 +11,7 @@ class HowToBuyPage extends StatefulWidget {
 
 class _HowToBuyPageState extends State<HowToBuyPage> {
   int _pageIndex = 0;
-  List<Menu> data = [];
+
   bool countDown = true, selected = false;
   final GlobalKey<ExpansionTileCardState> cardA = new GlobalKey();
   final GlobalKey<ExpansionTileCardState> cardB = new GlobalKey();
@@ -23,40 +23,9 @@ class _HowToBuyPageState extends State<HowToBuyPage> {
   @override
   void initState() {
     // TODO: implement initState
-    dataList.forEach((element) {
-      data.add(Menu.fromJson(element));
-    });
+
     // nameController.text="Aryan Raj";
     super.initState();
-  }
-
-  Widget _buildList(Menu list) {
-    if (list.subMenu!.isEmpty)
-      return Builder(builder: (context) {
-        return ListTile(
-            // onTap:() => Navigator.push(context, MaterialPageRoute(builder: (context) => SubCategory(list.name))),
-            leading: Checkbox(
-              value: selected,
-              onChanged: (bool? value) {},
-            ),
-            title: Text(
-              list.name!,
-              style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w400,
-                  ),
-            ));
-      });
-    return ExpansionTile(
-      title: Text(
-        list.name!,
-        style: Theme.of(context).textTheme.subtitle1!.copyWith(
-              color: Colors.black,
-              fontWeight: FontWeight.w600,
-            ),
-      ),
-      children: list.subMenu!.map(_buildList).toList(),
-    );
   }
 
   @override
@@ -64,12 +33,11 @@ class _HowToBuyPageState extends State<HowToBuyPage> {
     return Scaffold(
       appBar: NavBar(),
       // bottomNavigationBar: BottomNavigationBarUi(),
-      body: SingleChildScrollView(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * .90,
-          child: SingleChildScrollView(
-              child: Column(
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: SingleChildScrollView(
+          child: Column(
             children: [
               const SizedBox(
                 height: 16,
@@ -457,75 +425,19 @@ class _HowToBuyPageState extends State<HowToBuyPage> {
                 ),
               ),
               const SizedBox(
-                height: 30,
-              ),
-              const SizedBox(
-                height: 16,
+                height: 48,
               ),
               SizedBox(width: MediaQuery.of(context).size.width, child: Footer()),
-              SliverToBoxAdapter(
-                child: Container(
-                  color: Color(0xff1F2A52),
-                  height: 30,
-                  width: MediaQuery.of(context).size.width,
-                ),
-              ),
+              Container(
+                height: 100,
+                color: Color(0xff1F2A52),
+                width: MediaQuery.of(context).size.width,
+              )
             ],
-          )),
+          ),
         ),
       ),
       // bottomNavigationBar: Dashboard2Ui(),
     );
   }
 }
-
-class Menu {
-  String? name;
-  IconData? icon;
-  List<Menu>? subMenu = [];
-
-  Menu({this.name, this.subMenu, this.icon});
-
-  Menu.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    icon = json['icon'];
-    if (json['subMenu'] != null) {
-      subMenu!.clear();
-      json['subMenu'].forEach((v) {
-        subMenu?.add(new Menu.fromJson(v));
-      });
-    }
-  }
-}
-
-List dataList = [
-  {
-    "name": "Category",
-    "icon": Icons.payment,
-    "subMenu": [
-      {"name": "Contemporary Art"},
-      {"name": "Paintings"},
-      {"name": "Antique Furniture"},
-      {"name": "Antique"}
-    ]
-  },
-  {
-    "name": "Artist Name",
-    "icon": Icons.volume_up,
-    "subMenu": [
-      {"name": "Jamini Roy"},
-      {"name": "M. F. Hussain"},
-      {"name": "Horace Van Ruth"},
-      {"name": "Sailoz Mookherhea"}
-    ]
-  },
-  {
-    "name": "Price",
-    "subMenu": [
-      {"name": "0-500"},
-      {"name": "500-1000"},
-      {"name": "1000-2000"},
-      {"name": "above 2000"}
-    ]
-  },
-];

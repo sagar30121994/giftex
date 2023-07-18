@@ -1,6 +1,8 @@
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:giftex/screens/howtobuy/howtobuy.dart';
+import 'package:giftex/screens/howtosell/howtosell.dart';
 import 'package:giftex/screens/liveauction/liveauction.dart';
 import 'package:giftex/screens/liveauction/liveauctiondetailpage.dart';
 import 'package:giftex/screens/profile/profile.dart';
@@ -55,6 +57,10 @@ class _DashboardUiState extends State<DashboardUi> {
                   bottomViewModel.selectedIndex = 7;
                 });
               }
+            } else {
+              setState(() {
+                bottomViewModel.selectedIndex = 0;
+              });
             }
 
             return false;
@@ -85,14 +91,19 @@ class _DashboardUiState extends State<DashboardUi> {
                                   "image/home.png",
                                   width: 24,
                                   height: 24,
-                                  color: bottomViewModel.selectedIndex == 0 ? Theme.of(context).colorScheme.primary : Color(0xff2D2D2D),
+                                  color: bottomViewModel.selectedIndex == 0
+                                      ? Theme.of(context).colorScheme.primary
+                                      : Color(0xff2D2D2D),
                                 )),
                             Text(
                               "HOME",
                               style: Theme.of(context).textTheme.caption!.copyWith(
                                     letterSpacing: 1,
-                                    fontWeight: bottomViewModel.selectedIndex == 0 ? FontWeight.bold : FontWeight.normal,
-                                    color: bottomViewModel.selectedIndex == 0 ? Theme.of(context).colorScheme.primary : Color(0xff2D2D2D),
+                                    fontWeight:
+                                        bottomViewModel.selectedIndex == 0 ? FontWeight.bold : FontWeight.normal,
+                                    color: bottomViewModel.selectedIndex == 0
+                                        ? Theme.of(context).colorScheme.primary
+                                        : Color(0xff2D2D2D),
                                   ),
                             )
                           ],
@@ -110,7 +121,9 @@ class _DashboardUiState extends State<DashboardUi> {
                                   "image/service.png",
                                   width: 24,
                                   height: 24,
-                                  color: bottomViewModel.selectedIndex == 1 ? Theme.of(context).colorScheme.primary : Color(0xff2D2D2D),
+                                  color: bottomViewModel.selectedIndex == 1
+                                      ? Theme.of(context).colorScheme.primary
+                                      : Color(0xff2D2D2D),
                                 )),
                             // Icon(
                             //   Icons.dashboard_outlined,size: 32,
@@ -120,8 +133,11 @@ class _DashboardUiState extends State<DashboardUi> {
                               "SERVICE",
                               style: Theme.of(context).textTheme.caption!.copyWith(
                                     letterSpacing: 1,
-                                    fontWeight: bottomViewModel.selectedIndex == 1 ? FontWeight.bold : FontWeight.normal,
-                                    color: bottomViewModel.selectedIndex == 1 ? Theme.of(context).colorScheme.primary : Color(0xff2D2D2D),
+                                    fontWeight:
+                                        bottomViewModel.selectedIndex == 1 ? FontWeight.bold : FontWeight.normal,
+                                    color: bottomViewModel.selectedIndex == 1
+                                        ? Theme.of(context).colorScheme.primary
+                                        : Color(0xff2D2D2D),
                                   ),
                             )
                           ],
@@ -137,7 +153,10 @@ class _DashboardUiState extends State<DashboardUi> {
                               builder: (context) {
                                 return Container(
                                   height: MediaQuery.of(context).size.height * .7,
-                                  decoration: BoxDecoration(borderRadius: BorderRadius.only(topRight: Radius.circular(30), topLeft: Radius.circular(30)), color: Colors.white),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.only(
+                                          topRight: Radius.circular(30), topLeft: Radius.circular(30)),
+                                      color: Colors.white),
                                   child: SingleChildScrollView(
                                     child: Padding(
                                       padding: const EdgeInsets.all(16.0),
@@ -196,7 +215,13 @@ class _DashboardUiState extends State<DashboardUi> {
                                                                   Text(
                                                                     "ART",
                                                                     textAlign: TextAlign.start,
-                                                                    style: Theme.of(context).textTheme.headline6!.copyWith(color: Color(0XFF5D7E4D), fontWeight: FontWeight.w700, letterSpacing: 1),
+                                                                    style: Theme.of(context)
+                                                                        .textTheme
+                                                                        .headline6!
+                                                                        .copyWith(
+                                                                            color: Color(0XFF5D7E4D),
+                                                                            fontWeight: FontWeight.w700,
+                                                                            letterSpacing: 1),
                                                                   ),
                                                                 ],
                                                               ),
@@ -217,7 +242,10 @@ class _DashboardUiState extends State<DashboardUi> {
                                                               Text(
                                                                 "Painting",
                                                                 textAlign: TextAlign.start,
-                                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Color(0XFF171515), fontWeight: FontWeight.w500, letterSpacing: 1),
+                                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                    color: Color(0XFF171515),
+                                                                    fontWeight: FontWeight.w500,
+                                                                    letterSpacing: 1),
                                                               ),
                                                             ],
                                                           ),
@@ -240,7 +268,10 @@ class _DashboardUiState extends State<DashboardUi> {
                                                               Text(
                                                                 "Sculpture",
                                                                 textAlign: TextAlign.start,
-                                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Color(0XFF171515), fontWeight: FontWeight.w500, letterSpacing: 1),
+                                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                    color: Color(0XFF171515),
+                                                                    fontWeight: FontWeight.w500,
+                                                                    letterSpacing: 1),
                                                               ),
                                                             ],
                                                           ),
@@ -255,14 +286,20 @@ class _DashboardUiState extends State<DashboardUi> {
                                                             Text(
                                                               "Photography",
                                                               textAlign: TextAlign.start,
-                                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Color(0XFF171515), fontWeight: FontWeight.w500, letterSpacing: 1),
+                                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                  color: Color(0XFF171515),
+                                                                  fontWeight: FontWeight.w500,
+                                                                  letterSpacing: 1),
                                                             ),
                                                           ],
                                                         ),
                                                       ),
                                                       InkWell(
                                                         onTap: () {
-                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => ArtMovementPage()));
+                                                          Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder: (context) => ArtMovementPage()));
                                                         },
                                                         child: Padding(
                                                           padding: const EdgeInsets.only(left: 20.0, top: 16),
@@ -273,7 +310,10 @@ class _DashboardUiState extends State<DashboardUi> {
                                                               Text(
                                                                 "Modern Art",
                                                                 textAlign: TextAlign.start,
-                                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Color(0XFF171515), fontWeight: FontWeight.w500, letterSpacing: 1),
+                                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                    color: Color(0XFF171515),
+                                                                    fontWeight: FontWeight.w500,
+                                                                    letterSpacing: 1),
                                                               ),
                                                             ],
                                                           ),
@@ -289,7 +329,9 @@ class _DashboardUiState extends State<DashboardUi> {
                                             ),
                                           ),
                                           Container(
-                                            decoration: BoxDecoration(color: Color(0xffEAEEF2), image: DecorationImage(image: AssetImage("image/maskbg.png"))),
+                                            decoration: BoxDecoration(
+                                                color: Color(0xffEAEEF2),
+                                                image: DecorationImage(image: AssetImage("image/maskbg.png"))),
                                             child: ExpansionTileCard(
                                               finalPadding: EdgeInsets.all(0),
                                               baseColor: Color(0xffFFFFFF),
@@ -332,7 +374,10 @@ class _DashboardUiState extends State<DashboardUi> {
                                                               Text(
                                                                 "Painting",
                                                                 textAlign: TextAlign.start,
-                                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Color(0XFF171515), fontWeight: FontWeight.w500, letterSpacing: 1),
+                                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                    color: Color(0XFF171515),
+                                                                    fontWeight: FontWeight.w500,
+                                                                    letterSpacing: 1),
                                                               ),
                                                             ],
                                                           ),
@@ -355,7 +400,10 @@ class _DashboardUiState extends State<DashboardUi> {
                                                               Text(
                                                                 "Sculpture",
                                                                 textAlign: TextAlign.start,
-                                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Color(0XFF171515), fontWeight: FontWeight.w500, letterSpacing: 1),
+                                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                    color: Color(0XFF171515),
+                                                                    fontWeight: FontWeight.w500,
+                                                                    letterSpacing: 1),
                                                               ),
                                                             ],
                                                           ),
@@ -370,14 +418,20 @@ class _DashboardUiState extends State<DashboardUi> {
                                                             Text(
                                                               "Photography",
                                                               textAlign: TextAlign.start,
-                                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Color(0XFF171515), fontWeight: FontWeight.w500, letterSpacing: 1),
+                                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                  color: Color(0XFF171515),
+                                                                  fontWeight: FontWeight.w500,
+                                                                  letterSpacing: 1),
                                                             ),
                                                           ],
                                                         ),
                                                       ),
                                                       InkWell(
                                                         onTap: () {
-                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => ArtMovementPage()));
+                                                          Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder: (context) => ArtMovementPage()));
                                                         },
                                                         child: Padding(
                                                           padding: const EdgeInsets.only(left: 20.0, top: 16),
@@ -388,7 +442,10 @@ class _DashboardUiState extends State<DashboardUi> {
                                                               Text(
                                                                 "Modern Art",
                                                                 textAlign: TextAlign.start,
-                                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Color(0XFF171515), fontWeight: FontWeight.w500, letterSpacing: 1),
+                                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                    color: Color(0XFF171515),
+                                                                    fontWeight: FontWeight.w500,
+                                                                    letterSpacing: 1),
                                                               ),
                                                             ],
                                                           ),
@@ -526,7 +583,10 @@ class _DashboardUiState extends State<DashboardUi> {
                                               leading: Container(
                                                 height: 40,
                                                 width: 40,
-                                                child: SizedBox(width: 8, height: 8, child: Image.asset("image/print.png", width: 8, height: 8)),
+                                                child: SizedBox(
+                                                    width: 8,
+                                                    height: 8,
+                                                    child: Image.asset("image/print.png", width: 8, height: 8)),
                                               ),
                                               title: Text(
                                                 "PRINT",
@@ -554,7 +614,9 @@ class _DashboardUiState extends State<DashboardUi> {
                                   "image/bag.png",
                                   width: 24,
                                   height: 24,
-                                  color: bottomViewModel.selectedIndex == 2 ? Theme.of(context).colorScheme.primary : Color(0xff2D2D2D),
+                                  color: bottomViewModel.selectedIndex == 2
+                                      ? Theme.of(context).colorScheme.primary
+                                      : Color(0xff2D2D2D),
                                 )),
 
                             // Icon(
@@ -563,8 +625,11 @@ class _DashboardUiState extends State<DashboardUi> {
                               "STORE",
                               style: Theme.of(context).textTheme.caption!.copyWith(
                                     letterSpacing: 1,
-                                    fontWeight: bottomViewModel.selectedIndex == 2 ? FontWeight.bold : FontWeight.normal,
-                                    color: bottomViewModel.selectedIndex == 2 ? Theme.of(context).colorScheme.primary : Color(0xff2D2D2D),
+                                    fontWeight:
+                                        bottomViewModel.selectedIndex == 2 ? FontWeight.bold : FontWeight.normal,
+                                    color: bottomViewModel.selectedIndex == 2
+                                        ? Theme.of(context).colorScheme.primary
+                                        : Color(0xff2D2D2D),
                                   ),
                             )
                           ],
@@ -582,7 +647,9 @@ class _DashboardUiState extends State<DashboardUi> {
                                   "image/profile.png",
                                   width: 24,
                                   height: 24,
-                                  color: bottomViewModel.selectedIndex == 3 ? Theme.of(context).colorScheme.primary : Color(0xff2D2D2D),
+                                  color: bottomViewModel.selectedIndex == 3
+                                      ? Theme.of(context).colorScheme.primary
+                                      : Color(0xff2D2D2D),
                                 )),
                             // Icon(
                             //   Icons.person_outline,size: 32),
@@ -591,8 +658,11 @@ class _DashboardUiState extends State<DashboardUi> {
                               "PROFILE",
                               style: Theme.of(context).textTheme.caption!.copyWith(
                                     letterSpacing: 1,
-                                    fontWeight: bottomViewModel.selectedIndex == 3 ? FontWeight.bold : FontWeight.normal,
-                                    color: bottomViewModel.selectedIndex == 3 ? Theme.of(context).colorScheme.primary : Color(0xff2D2D2D),
+                                    fontWeight:
+                                        bottomViewModel.selectedIndex == 3 ? FontWeight.bold : FontWeight.normal,
+                                    color: bottomViewModel.selectedIndex == 3
+                                        ? Theme.of(context).colorScheme.primary
+                                        : Color(0xff2D2D2D),
                                   ),
                             )
                           ],
@@ -614,7 +684,10 @@ class _DashboardUiState extends State<DashboardUi> {
                     context: context,
                     builder: (context) {
                       return Container(
-                        decoration: BoxDecoration(borderRadius: BorderRadius.only(topRight: Radius.circular(30), topLeft: Radius.circular(30)), color: Colors.white),
+                        decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.only(topRight: Radius.circular(30), topLeft: Radius.circular(30)),
+                            color: Colors.white),
                         padding: const EdgeInsets.all(16.0),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -777,6 +850,12 @@ class _DashboardUiState extends State<DashboardUi> {
       return LiveAuctionUi("past");
     } else if (bottomViewModel.selectedIndex == 8) {
       return LiveAuctionUiDetails();
+    } else if (bottomViewModel.selectedIndex == 9) {
+      return Servicepage();
+    } else if (bottomViewModel.selectedIndex == 10) {
+      return HowToSellPage();
+    } else if (bottomViewModel.selectedIndex == 11) {
+      return HowToBuyPage();
     }
     return Container();
   }
