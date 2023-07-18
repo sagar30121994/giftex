@@ -20,6 +20,7 @@ class _LoginpageState extends State<Loginpage> {
   bool isMobile = true;
   bool isEmailVerified = false;
   bool isMobileVerified = false;
+  TextEditingController nameController=TextEditingController();
 
   @override
   void initState() {
@@ -514,7 +515,7 @@ class _LoginpageState extends State<Loginpage> {
                                     margin: EdgeInsets.all(28),
                                     padding: EdgeInsets.all(8),
                                     child: TextField(
-                                      // controller: nameController,
+                                       controller: nameController,
                                       // maxLength: 10,
                                       onChanged: (str) {
                                         loginViewModel.setMobile(str);
@@ -657,7 +658,7 @@ class _LoginpageState extends State<Loginpage> {
                                     margin: EdgeInsets.symmetric(horizontal: 28, vertical: 8),
                                     padding: EdgeInsets.all(8),
                                     child: TextField(
-                                      // controller: nameController,
+                                       controller: nameController,
                                       // maxLength: 10,
                                       onChanged: (str) {
                                         loginViewModel.setEmail(str);

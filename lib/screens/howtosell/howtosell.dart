@@ -39,14 +39,23 @@ class _HowToSellPageState extends State<HowToSellPage> {
               child: Column(
                 children: [
                   const SizedBox(height: 16,),
-                  Text("HOW TO SELL",
-                    textAlign: TextAlign.left,
-                    style:
-                    Theme.of(context).textTheme.headline5!.copyWith(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing:  0.888889
-                    ),
+                  Row(
+                    children: [
+                      IconButton(onPressed: (){
+                        Navigator.of(context).pop();
+                      }, icon: Icon(Icons.arrow_back_ios_new)),
+                      Expanded(
+                        child: Text("HOW TO SELL",
+                          textAlign: TextAlign.center,
+                          style:
+                          Theme.of(context).textTheme.headline5!.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing:  0.888889
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 10,),
                   Text("FIND YOUR SERVICES THAT FITS YOUR NEEDS",
