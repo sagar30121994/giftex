@@ -339,55 +339,57 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
           auctionViewModel.auctionType == "past" ? PastTabs(auctionViewModel) : SliverToBoxAdapter(),
           auctionViewModel.isLoadingForUpCommingAuction
               ? SliverToBoxAdapter(child: LinearProgressIndicator())
-              : SliverToBoxAdapter(
-                  child: Observer(builder: (context) {
-                    return Container(
-                        child: (auctionViewModel.upComingLotsResponse!.result!.lots ?? []).length == 0
-                            ? Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Image.asset("image/Bitmap1.png"),
-                                  SizedBox(
-                                    height: 25,
-                                  ),
-                                  SizedBox(
-                                    width: MediaQuery.of(context).size.width * .70,
-                                    child: RichText(
-                                      textAlign: TextAlign.center,
-                                      text: TextSpan(
-                                        // Note: Styles for TextSpans must be explicitly defined.
-                                        // Child text spans will inherit styles from parent
-                                        children: <TextSpan>[
-                                          TextSpan(
-                                            text: 'There is ',
-                                            style: Theme.of(context).textTheme.headline6!.copyWith(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.w400,
-                                                ),
-                                          ),
-                                          TextSpan(
-                                            text: 'No Lots',
-                                            style: Theme.of(context).textTheme.headline6!.copyWith(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                          ),
-                                          TextSpan(
-                                            text: '\n at this moment',
-                                            style: Theme.of(context).textTheme.headline6!.copyWith(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.w400,
-                                                ),
-                                          ),
-                                        ],
+              : auctionViewModel.upComingLotsResponse == null
+                  ? SliverToBoxAdapter()
+                  : SliverToBoxAdapter(
+                      child: Observer(builder: (context) {
+                        return Container(
+                            child: (auctionViewModel.upComingLotsResponse!.result!.lots ?? []).length == 0
+                                ? Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Image.asset("image/Bitmap1.png"),
+                                      SizedBox(
+                                        height: 25,
                                       ),
-                                    ),
-                                  ),
-                                ],
-                              )
-                            : Container());
-                  }),
-                ),
+                                      SizedBox(
+                                        width: MediaQuery.of(context).size.width * .70,
+                                        child: RichText(
+                                          textAlign: TextAlign.center,
+                                          text: TextSpan(
+                                            // Note: Styles for TextSpans must be explicitly defined.
+                                            // Child text spans will inherit styles from parent
+                                            children: <TextSpan>[
+                                              TextSpan(
+                                                text: 'There is ',
+                                                style: Theme.of(context).textTheme.headline6!.copyWith(
+                                                      color: Colors.black,
+                                                      fontWeight: FontWeight.w400,
+                                                    ),
+                                              ),
+                                              TextSpan(
+                                                text: 'No Lots',
+                                                style: Theme.of(context).textTheme.headline6!.copyWith(
+                                                      color: Colors.black,
+                                                      fontWeight: FontWeight.w600,
+                                                    ),
+                                              ),
+                                              TextSpan(
+                                                text: '\n at this moment',
+                                                style: Theme.of(context).textTheme.headline6!.copyWith(
+                                                      color: Colors.black,
+                                                      fontWeight: FontWeight.w400,
+                                                    ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                : Container());
+                      }),
+                    ),
           auctionViewModel.auctionType == "past" && auctionViewModel.liveAuctionType == "browselots"
               ? PastData(auctionViewModel)
               : SliverToBoxAdapter(),
