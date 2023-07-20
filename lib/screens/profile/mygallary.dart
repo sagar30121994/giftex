@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:giftex/data/network/base/base.dart';
-import 'package:giftex/screens/profile/components/browsgalleryitem.dart';
+import 'package:giftex/screens/liveauction/browsitemlistitem.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
 import 'package:giftex/viewmodel/profile/profileviewmodel.dart';
 import 'package:intl/intl.dart';
@@ -21,42 +20,6 @@ class _MyGallarypageState extends State<MyGallarypage> {
   String type = "auction";
 
   AuctionViewModel auctionViewModel = AuctionViewModel();
-
-  TextEditingController nameController = TextEditingController();
-  List<Menu> data = [];
-  static const countdownDuration = Duration(minutes: 10);
-  Duration duration = Duration();
-  // Timer? timer;
-  String auctionType = "";
-  bool countDown = true, selected = false;
-  Widget _buildList(Menu list) {
-    if (list.subMenu!.isEmpty)
-      return Builder(builder: (context) {
-        return ListTile(
-            // onTap:() => Navigator.push(context, MaterialPageRoute(builder: (context) => SubCategory(list.name))),
-            leading: Checkbox(
-              value: selected,
-              onChanged: (bool? value) {},
-            ),
-            title: Text(
-              list.name!,
-              style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w400,
-                  ),
-            ));
-      });
-    return ExpansionTile(
-      title: Text(
-        list.name!,
-        style: Theme.of(context).textTheme.subtitle1!.copyWith(
-              color: Colors.black,
-              fontWeight: FontWeight.w600,
-            ),
-      ),
-      children: list.subMenu!.map(_buildList).toList(),
-    );
-  }
 
   @override
   void initState() {
@@ -109,7 +72,7 @@ class _MyGallarypageState extends State<MyGallarypage> {
                         CircleAvatar(
                           radius: 37,
                           backgroundImage: NetworkImage(
-                              '${baseUrl + (widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.basicDetails!.profilePicUrl ?? '')}'),
+                              '${(widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.basicDetails!.profilePicUrl ?? '')}'),
                           // child: Image.asset("image/image 40.png",fit: BoxFit.fill,),
                         ),
                       ],
@@ -340,7 +303,7 @@ class _MyGallarypageState extends State<MyGallarypage> {
                               : Column(
                                   children: widget.profileViewModel.myAuctionGalleryResponce!.result!.lots!
                                       .map(
-                                        (e) => BrowseGalleryListItem(e, false, auctionViewModel),
+                                        (e) => BrowseItemListItem(e, false, auctionViewModel),
                                       )
                                       .toList(),
                                 ),

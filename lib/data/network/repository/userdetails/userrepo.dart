@@ -5,13 +5,13 @@ import 'package:giftex/data/local/client/prefs.dart';
 import 'package:giftex/data/network/models/request/userdeails/getliveauctionreviewrequestmodel.dart';
 import 'package:giftex/data/network/models/request/userdeails/userrequestmodel.dart';
 import 'package:giftex/data/network/models/request/userdeails/usersavesettingrequestmodel.dart';
+import 'package:giftex/data/network/models/responce/lot/upcominglotsresponse.dart';
 import 'package:giftex/data/network/models/responce/user/dashboardauctioncalenderresponce.dart';
 import 'package:giftex/data/network/models/responce/user/dashboardoverviewreponse.dart';
 import 'package:giftex/data/network/models/responce/user/getlastbidresponce.dart';
 import 'package:giftex/data/network/models/responce/user/getlastpurchaseresponce.dart';
 import 'package:giftex/data/network/models/responce/user/highligtsresponce.dart';
 import 'package:giftex/data/network/models/responce/user/liveauctionreviewresponce.dart';
-import 'package:giftex/data/network/models/responce/user/myauctiongalleryresponce.dart';
 
 import '../../base/base.dart' as BaseUrl;
 import '../../base/endpoints.dart' as endPoints;
@@ -102,7 +102,7 @@ class UserRepo {
       if (responce.statusCode == 200) {
         httpResponse.status = responce.statusCode;
         httpResponse.message = 'Successful';
-        httpResponse.data = MyAuctionGalleryResponce.fromJson(responce.data);
+        httpResponse.data = UpComingLotsResponse.fromJson(responce.data);
       } else {
         httpResponse.status = responce.statusCode;
         httpResponse.message = responce.data['message'];

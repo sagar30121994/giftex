@@ -5,6 +5,11 @@ import 'package:giftex/screens/howtobuy/howtobuy.dart';
 import 'package:giftex/screens/howtosell/howtosell.dart';
 import 'package:giftex/screens/liveauction/liveauction.dart';
 import 'package:giftex/screens/liveauction/liveauctiondetailpage.dart';
+import 'package:giftex/screens/profile/dashboardoverview.dart';
+import 'package:giftex/screens/profile/myauctionreview.dart';
+import 'package:giftex/screens/profile/mygallary.dart';
+import 'package:giftex/screens/profile/myprofile.dart';
+import 'package:giftex/screens/profile/orderhistory.dart';
 import 'package:giftex/screens/profile/profile.dart';
 import 'package:giftex/screens/servicepage/servicepage.dart';
 import 'package:giftex/viewmodel/bottomviewmodel.dart';
@@ -57,6 +62,14 @@ class _DashboardUiState extends State<DashboardUi> {
                   bottomViewModel.selectedIndex = 7;
                 });
               }
+            } else if (bottomViewModel.selectedIndex == 12 ||
+                bottomViewModel.selectedIndex == 13 ||
+                bottomViewModel.selectedIndex == 14 ||
+                bottomViewModel.selectedIndex == 15 ||
+                bottomViewModel.selectedIndex == 16) {
+              setState(() {
+                bottomViewModel.selectedIndex = 3;
+              });
             } else {
               setState(() {
                 bottomViewModel.selectedIndex = 0;
@@ -834,29 +847,82 @@ class _DashboardUiState extends State<DashboardUi> {
   }
 
   Widget getPage() {
-    if (bottomViewModel.selectedIndex == 0) {
-      return Homepage();
-    } else if (bottomViewModel.selectedIndex == 1) {
-      return Servicepage();
-    } else if (bottomViewModel.selectedIndex == 2) {
-      return Servicepage();
-    } else if (bottomViewModel.selectedIndex == 3) {
-      return Profilepage();
-    } else if (bottomViewModel.selectedIndex == 5) {
-      return LiveAuctionUi("live");
-    } else if (bottomViewModel.selectedIndex == 6) {
-      return LiveAuctionUi("upcoming");
-    } else if (bottomViewModel.selectedIndex == 7) {
-      return LiveAuctionUi("past");
-    } else if (bottomViewModel.selectedIndex == 8) {
-      return LiveAuctionUiDetails();
-    } else if (bottomViewModel.selectedIndex == 9) {
-      return Servicepage();
-    } else if (bottomViewModel.selectedIndex == 10) {
-      return HowToSellPage();
-    } else if (bottomViewModel.selectedIndex == 11) {
-      return HowToBuyPage();
+    switch (bottomViewModel.selectedIndex) {
+      case 0:
+        return Homepage();
+
+      case 1:
+        return Servicepage();
+      case 2:
+        return Servicepage();
+      case 3:
+        return Profilepage();
+      case 5:
+        return LiveAuctionUi("live");
+      case 6:
+        return LiveAuctionUi("upcoming");
+      case 7:
+        return LiveAuctionUi("past");
+      case 8:
+        return LiveAuctionUiDetails();
+      case 9:
+        return Servicepage();
+      case 10:
+        return HowToSellPage();
+      case 11:
+        return HowToBuyPage();
+      case 12:
+        return MyProfilepage(bottomViewModel);
+      case 13:
+        return MyOrderHistorypage(bottomViewModel.profileViewModel!);
+      case 14:
+        return MyGallarypage(bottomViewModel.profileViewModel!);
+      case 15:
+        return MyAuctionReviewpage(bottomViewModel.profileViewModel!);
+      case 16:
+        return MyAuctionDashboard(bottomViewModel.profileViewModel!);
+
+      default:
+        {
+          //statements;
+          Container();
+        }
+        break;
     }
     return Container();
   }
 }
+//   if (bottomViewModel.selectedIndex == 0) {
+//   } else if (bottomViewModel.selectedIndex == 1) {
+//     return Servicepage();
+//   } else if (bottomViewModel.selectedIndex == 2) {
+//     return Servicepage();
+//   } else if (bottomViewModel.selectedIndex == 3) {
+//     return Profilepage();
+//   } else if (bottomViewModel.selectedIndex == 5) {
+//     return LiveAuctionUi("live");
+//   } else if (bottomViewModel.selectedIndex == 6) {
+//     return LiveAuctionUi("upcoming");
+//   } else if (bottomViewModel.selectedIndex == 7) {
+//     return LiveAuctionUi("past");
+//   } else if (bottomViewModel.selectedIndex == 8) {
+//     return LiveAuctionUiDetails();
+//   } else if (bottomViewModel.selectedIndex == 9) {
+//     return Servicepage();
+//   } else if (bottomViewModel.selectedIndex == 10) {
+//     return HowToSellPage();
+//   } else if (bottomViewModel.selectedIndex == 11) {
+//     return HowToBuyPage();
+//   } else if (bottomViewModel.selectedIndex == 12) {
+//     return MyProfilepage(bottomViewModel);
+//   } else if (bottomViewModel.selectedIndex == 13) {
+//     return MyOrderHistorypage(bottomViewModel.profileViewModel!);
+//   } else if (bottomViewModel.selectedIndex == 14) {
+//     return MyGallarypage(bottomViewModel.profileViewModel!);
+//   } else if (bottomViewModel.selectedIndex == 15) {
+//     return MyAuctionReviewpage(bottomViewModel.profileViewModel!);
+//   } else if (bottomViewModel.selectedIndex == 16) {
+//     return MyAuctionDashboard(bottomViewModel.profileViewModel!);
+//   }
+//
+// }

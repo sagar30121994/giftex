@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:giftex/data/network/base/base.dart';
-import 'package:giftex/screens/components/bottomnavigationbar/dashborard2.dart';
-import 'package:giftex/screens/profile/orderproductdetails.dart';
 import 'package:giftex/viewmodel/profile/profileviewmodel.dart';
 
 import '../components/footer/footer.dart';
@@ -101,7 +98,7 @@ class _MyOrderHistorypageState extends State<MyOrderHistorypage> {
                           CircleAvatar(
                             radius: 37,
                             backgroundImage: NetworkImage(
-                                '${baseUrl + (widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.basicDetails!.profilePicUrl ?? '')}'),
+                                '${(widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.basicDetails!.profilePicUrl ?? '')}'),
                             // child: Image.asset("image/image 40.png",fit: BoxFit.fill,),
                           ),
                         ],
@@ -300,7 +297,6 @@ class _MyOrderHistorypageState extends State<MyOrderHistorypage> {
                 type == "auction"
                     ? Container(
                         padding: EdgeInsets.only(top: 0, left: 16, right: 16),
-                        height: 600,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -444,11 +440,11 @@ class _MyOrderHistorypageState extends State<MyOrderHistorypage> {
                                                                   Spacer(),
                                                                   InkWell(
                                                                       onTap: () {
-                                                                        Navigator.push(
-                                                                            context,
-                                                                            MaterialPageRoute(
-                                                                                builder: (context) =>
-                                                                                    MyOrderProductpage()));
+                                                                        // Navigator.push(
+                                                                        //     context,
+                                                                        //     MaterialPageRoute(
+                                                                        //         builder: (context) =>
+                                                                        //             MyOrderProductpage()));
                                                                       },
                                                                       child: Icon(
                                                                         Icons.arrow_forward_ios_rounded,
@@ -482,10 +478,10 @@ class _MyOrderHistorypageState extends State<MyOrderHistorypage> {
                                                                         textAlign: TextAlign.center,
                                                                         style: Theme.of(context)
                                                                             .textTheme
-                                                                            .subtitle1!
+                                                                            .bodySmall!
                                                                             .copyWith(
                                                                               color: Color(0xff202232),
-                                                                              fontWeight: FontWeight.normal,
+                                                                              fontWeight: FontWeight.bold,
                                                                             ),
                                                                       ),
                                                                     ],
@@ -1026,7 +1022,6 @@ class _MyOrderHistorypageState extends State<MyOrderHistorypage> {
           }),
         ),
       ),
-      bottomNavigationBar: Dashboard2Ui(),
     );
   }
 }

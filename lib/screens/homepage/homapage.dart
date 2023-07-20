@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:giftex/data/network/models/responce/liveauction/upcommingauctionresponse.dart';
 import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
 import 'package:giftex/screens/liveauction/liveauction.dart';
@@ -1370,74 +1371,53 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                           ),
                                           homeViewModel.selectedNewsTabIndex == 0
                                               ? Container(
-                                                  child: Text(
+                                                  height: 70,
+                                                  child: HtmlWidget(
+                                                    textStyle: TextStyle(overflow: TextOverflow.ellipsis),
                                                     "${homeViewModel.homeNewsVideosBlogsResponse!.news![pos].title}",
-                                                    textAlign: TextAlign.left,
-                                                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                          color: Color(0xff2D2D2D),
-                                                          overflow: TextOverflow.ellipsis,
-                                                          fontWeight: FontWeight.bold,
-                                                        ),
                                                   ),
                                                 )
                                               : homeViewModel.selectedNewsTabIndex == 1
                                                   ? Container(
-                                                      child: Text(
+                                                      height: 70,
+                                                      child: HtmlWidget(
+                                                        textStyle: TextStyle(overflow: TextOverflow.ellipsis),
                                                         "${homeViewModel.homeNewsVideosBlogsResponse!.videos![pos].title}",
-                                                        textAlign: TextAlign.left,
-                                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                              color: Color(0xff2D2D2D),
-                                                              overflow: TextOverflow.ellipsis,
-                                                              fontWeight: FontWeight.bold,
-                                                            ),
                                                       ),
                                                     )
                                                   : Container(
-                                                      child: Text(
+                                                      height: 70,
+                                                      child: HtmlWidget(
+                                                        textStyle: TextStyle(overflow: TextOverflow.ellipsis),
                                                         "${homeViewModel.homeNewsVideosBlogsResponse!.blogs![pos].title}",
-                                                        textAlign: TextAlign.left,
-                                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                              color: Color(0xff2D2D2D),
-                                                              overflow: TextOverflow.ellipsis,
-                                                              fontWeight: FontWeight.bold,
-                                                            ),
                                                       ),
                                                     ),
                                           const SizedBox(
                                             height: 10,
                                           ),
-                                          homeViewModel.selectedNewsTabIndex == 0
-                                              ? Text(
-                                                  "${homeViewModel.homeNewsVideosBlogsResponse!.news![pos].desc}",
-                                                  textAlign: TextAlign.left,
-                                                  overflow: TextOverflow.ellipsis,
-                                                  maxLines: 2,
-                                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                        color: Color(0xff747474),
-                                                        fontWeight: FontWeight.w400,
-                                                      ),
-                                                )
-                                              : homeViewModel.selectedNewsTabIndex == 1
-                                                  ? Text(
-                                                      "${homeViewModel.homeNewsVideosBlogsResponse!.videos![pos].desc}",
-                                                      textAlign: TextAlign.left,
-                                                      overflow: TextOverflow.ellipsis,
-                                                      maxLines: 2,
-                                                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                            color: Color(0xff747474),
-                                                            fontWeight: FontWeight.w400,
-                                                          ),
-                                                    )
-                                                  : Text(
-                                                      "${homeViewModel.homeNewsVideosBlogsResponse!.blogs![pos].desc}",
-                                                      textAlign: TextAlign.left,
-                                                      overflow: TextOverflow.ellipsis,
-                                                      maxLines: 2,
-                                                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                            color: Color(0xff747474),
-                                                            fontWeight: FontWeight.w400,
-                                                          ),
-                                                    ),
+                                          // homeViewModel.selectedNewsTabIndex == 0
+                                          //     ? SizedBox(
+                                          //         height: 40,
+                                          //         child: HtmlWidget(
+                                          //           textStyle: TextStyle(overflow: TextOverflow.ellipsis),
+                                          //           "${homeViewModel.homeNewsVideosBlogsResponse!.news![pos].desc!.length > 200 ? homeViewModel.homeNewsVideosBlogsResponse!.news![pos].desc!.substring(0, 150) : homeViewModel.homeNewsVideosBlogsResponse!.news![pos].desc}",
+                                          //         ),
+                                          //       )
+                                          //     : homeViewModel.selectedNewsTabIndex == 1
+                                          //         ? SizedBox(
+                                          //             height: 40,
+                                          //             child: HtmlWidget(
+                                          //               textStyle: TextStyle(overflow: TextOverflow.ellipsis),
+                                          //               "${homeViewModel.homeNewsVideosBlogsResponse!.videos![pos].desc!.length > 200 ? homeViewModel.homeNewsVideosBlogsResponse!.videos![pos].desc!.substring(0, 150) : homeViewModel.homeNewsVideosBlogsResponse!.videos![pos].desc}",
+                                          //             ),
+                                          //           )
+                                          //         : SizedBox(
+                                          //             height: 40,
+                                          //             child: HtmlWidget(
+                                          //               textStyle: TextStyle(overflow: TextOverflow.ellipsis),
+                                          //               "${homeViewModel.homeNewsVideosBlogsResponse!.blogs![pos].desc!.length > 200 ? homeViewModel.homeNewsVideosBlogsResponse!.blogs![pos].desc!.substring(0, 150) : homeViewModel.homeNewsVideosBlogsResponse!.blogs![pos].desc}",
+                                          //             ),
+                                          //           ),
                                           const SizedBox(
                                             height: 10,
                                           ),
@@ -1548,7 +1528,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                 )
               ],
             ),
-          /*  Positioned(
+            /*  Positioned(
               top: 0,
               right: 0,
               child: AnimatedContainer(

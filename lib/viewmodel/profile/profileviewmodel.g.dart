@@ -62,13 +62,13 @@ mixin _$ProfileViewModel on _ProfileViewModel, Store {
       name: '_ProfileViewModel.myAuctionGalleryResponce', context: context);
 
   @override
-  MyAuctionGalleryResponce? get myAuctionGalleryResponce {
+  UpComingLotsResponse? get myAuctionGalleryResponce {
     _$myAuctionGalleryResponceAtom.reportRead();
     return super.myAuctionGalleryResponce;
   }
 
   @override
-  set myAuctionGalleryResponce(MyAuctionGalleryResponce? value) {
+  set myAuctionGalleryResponce(UpComingLotsResponse? value) {
     _$myAuctionGalleryResponceAtom
         .reportWrite(value, super.myAuctionGalleryResponce, () {
       super.myAuctionGalleryResponce = value;
@@ -187,6 +187,22 @@ mixin _$ProfileViewModel on _ProfileViewModel, Store {
     });
   }
 
+  late final _$getRegInfoResponseAtom =
+      Atom(name: '_ProfileViewModel.getRegInfoResponse', context: context);
+
+  @override
+  GetRegInfoResponse? get getRegInfoResponse {
+    _$getRegInfoResponseAtom.reportRead();
+    return super.getRegInfoResponse;
+  }
+
+  @override
+  set getRegInfoResponse(GetRegInfoResponse? value) {
+    _$getRegInfoResponseAtom.reportWrite(value, super.getRegInfoResponse, () {
+      super.getRegInfoResponse = value;
+    });
+  }
+
   late final _$_ProfileViewModelActionController =
       ActionController(name: '_ProfileViewModel', context: context);
 
@@ -258,7 +274,8 @@ dob: ${dob},
 gendor: ${gendor},
 panNo: ${panNo},
 aadharNo: ${aadharNo},
-address: ${address}
+address: ${address},
+getRegInfoResponse: ${getRegInfoResponse}
     ''';
   }
 }

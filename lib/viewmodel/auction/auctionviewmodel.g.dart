@@ -370,6 +370,22 @@ mixin _$AuctionViewModel on _AuctionViewModel, Store {
     });
   }
 
+  late final _$newsearchResponseAtom =
+      Atom(name: '_AuctionViewModel.newsearchResponse', context: context);
+
+  @override
+  UpComingLotsResponse? get newsearchResponse {
+    _$newsearchResponseAtom.reportRead();
+    return super.newsearchResponse;
+  }
+
+  @override
+  set newsearchResponse(UpComingLotsResponse? value) {
+    _$newsearchResponseAtom.reportWrite(value, super.newsearchResponse, () {
+      super.newsearchResponse = value;
+    });
+  }
+
   late final _$getUpcommingAuctionAsyncAction =
       AsyncAction('_AuctionViewModel.getUpcommingAuction', context: context);
 
@@ -557,7 +573,8 @@ upComingLotsResponse: ${upComingLotsResponse},
 myAuctionGalleryResponse: ${myAuctionGalleryResponse},
 getliveauctionsResponse: ${getliveauctionsResponse},
 getsingleResponse: ${getsingleResponse},
-sort: ${sort}
+sort: ${sort},
+newsearchResponse: ${newsearchResponse}
     ''';
   }
 }

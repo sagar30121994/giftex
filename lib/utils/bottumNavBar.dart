@@ -2,21 +2,21 @@ import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/screens/artmovement/artmovement.dart';
+import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
 
-import '../screens/homepage/homapage.dart';
-import '../screens/servicepage/servicepage.dart';
 import '../viewmodel/bottomviewmodel.dart';
+
 BottomViewModel bottomViewModel = BottomViewModel();
+
 class CommonBottumNavBar extends StatefulWidget {
   final int? selectedIndex;
-    CommonBottumNavBar( this.selectedIndex, {Key? key}) : super(key: key);
+  CommonBottumNavBar(this.selectedIndex, {Key? key}) : super(key: key);
 
   @override
   State<CommonBottumNavBar> createState() => _CommonBottumNavBarState();
 }
 
 class _CommonBottumNavBarState extends State<CommonBottumNavBar> {
-
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<ExpansionTileCardState> cardA = new GlobalKey();
   final GlobalKey<ExpansionTileCardState> cardB = new GlobalKey();
@@ -27,10 +27,11 @@ class _CommonBottumNavBarState extends State<CommonBottumNavBar> {
 
   @override
   void initState() {
-    bottomViewModel.selectedIndex = widget.selectedIndex??0;
+    bottomViewModel.selectedIndex = widget.selectedIndex ?? 0;
     // TODO: implement initState
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
@@ -48,7 +49,11 @@ class _CommonBottumNavBarState extends State<CommonBottumNavBar> {
               InkWell(
                 onTap: () {
                   bottomViewModel.selectedIndex = 0;
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()));
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => DashboardUi(0)),
+                    (route) => false,
+                  );
                 },
                 child: Column(
                   children: [
@@ -58,27 +63,19 @@ class _CommonBottumNavBarState extends State<CommonBottumNavBar> {
                           "image/home.png",
                           width: 24,
                           height: 24,
-                          color: bottomViewModel.selectedIndex == 0 ? Theme
-                              .of(context)
-                              .colorScheme
-                              .primary : Color(0xff2D2D2D),
+                          color: bottomViewModel.selectedIndex == 0
+                              ? Theme.of(context).colorScheme.primary
+                              : Color(0xff2D2D2D),
                         )),
                     Text(
                       "HOME",
-                      style: Theme
-                          .of(context)
-                          .textTheme
-                          .caption!
-                          .copyWith(
-                        letterSpacing: 1,
-                        fontWeight: bottomViewModel.selectedIndex == 0
-                            ? FontWeight.bold
-                            : FontWeight.normal,
-                        color: bottomViewModel.selectedIndex == 0 ? Theme
-                            .of(context)
-                            .colorScheme
-                            .primary : Color(0xff2D2D2D),
-                      ),
+                      style: Theme.of(context).textTheme.caption!.copyWith(
+                            letterSpacing: 1,
+                            fontWeight: bottomViewModel.selectedIndex == 0 ? FontWeight.bold : FontWeight.normal,
+                            color: bottomViewModel.selectedIndex == 0
+                                ? Theme.of(context).colorScheme.primary
+                                : Color(0xff2D2D2D),
+                          ),
                     )
                   ],
                 ),
@@ -86,7 +83,11 @@ class _CommonBottumNavBarState extends State<CommonBottumNavBar> {
               InkWell(
                 onTap: () {
                   bottomViewModel.selectedIndex = 1;
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Servicepage()));
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => DashboardUi(1)),
+                    (route) => false,
+                  );
                 },
                 child: Column(
                   children: [
@@ -96,10 +97,9 @@ class _CommonBottumNavBarState extends State<CommonBottumNavBar> {
                           "image/service.png",
                           width: 24,
                           height: 24,
-                          color: bottomViewModel.selectedIndex == 1 ? Theme
-                              .of(context)
-                              .colorScheme
-                              .primary : Color(0xff2D2D2D),
+                          color: bottomViewModel.selectedIndex == 1
+                              ? Theme.of(context).colorScheme.primary
+                              : Color(0xff2D2D2D),
                         )),
                     // Icon(
                     //   Icons.dashboard_outlined,size: 32,
@@ -107,20 +107,13 @@ class _CommonBottumNavBarState extends State<CommonBottumNavBar> {
                     // ),
                     Text(
                       "SERVICE",
-                      style: Theme
-                          .of(context)
-                          .textTheme
-                          .caption!
-                          .copyWith(
-                        letterSpacing: 1,
-                        fontWeight: bottomViewModel.selectedIndex == 1
-                            ? FontWeight.bold
-                            : FontWeight.normal,
-                        color: bottomViewModel.selectedIndex == 1 ? Theme
-                            .of(context)
-                            .colorScheme
-                            .primary : Color(0xff2D2D2D),
-                      ),
+                      style: Theme.of(context).textTheme.caption!.copyWith(
+                            letterSpacing: 1,
+                            fontWeight: bottomViewModel.selectedIndex == 1 ? FontWeight.bold : FontWeight.normal,
+                            color: bottomViewModel.selectedIndex == 1
+                                ? Theme.of(context).colorScheme.primary
+                                : Color(0xff2D2D2D),
+                          ),
                     )
                   ],
                 ),
@@ -134,14 +127,10 @@ class _CommonBottumNavBarState extends State<CommonBottumNavBar> {
                       backgroundColor: Colors.transparent,
                       builder: (context) {
                         return Container(
-                          height: MediaQuery
-                              .of(context)
-                              .size
-                              .height * .7,
+                          height: MediaQuery.of(context).size.height * .7,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(30),
-                                  topLeft: Radius.circular(30)),
+                              borderRadius:
+                                  BorderRadius.only(topRight: Radius.circular(30), topLeft: Radius.circular(30)),
                               color: Colors.white),
                           child: SingleChildScrollView(
                             child: Padding(
@@ -169,14 +158,10 @@ class _CommonBottumNavBarState extends State<CommonBottumNavBar> {
                                       title: Text(
                                         "JEWELLERY",
                                         textAlign: TextAlign.start,
-                                        style: Theme
-                                            .of(context)
-                                            .textTheme
-                                            .subtitle1!
-                                            .copyWith(
-                                          color: Color(0XFF8C9FB1),
-                                          fontWeight: FontWeight.w700,
-                                        ),
+                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF8C9FB1),
+                                              fontWeight: FontWeight.w700,
+                                            ),
                                       ),
                                       children: <Widget>[
                                         Container(
@@ -184,10 +169,8 @@ class _CommonBottumNavBarState extends State<CommonBottumNavBar> {
                                           child: Column(
                                             children: [
                                               Row(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .start,
-                                                crossAxisAlignment: CrossAxisAlignment
-                                                    .center,
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.center,
                                                 children: [
                                                   Image.asset(
                                                     "image/Group (21).png",
@@ -199,28 +182,17 @@ class _CommonBottumNavBarState extends State<CommonBottumNavBar> {
                                                       // Navigator.push(context, MaterialPageRoute(builder: (context) =>HowToBuyPage()));
                                                     },
                                                     child: Padding(
-                                                      padding: const EdgeInsets
-                                                          .only(
-                                                          left: 10.0, top: 0),
+                                                      padding: const EdgeInsets.only(left: 10.0, top: 0),
                                                       child: Row(
-                                                        mainAxisAlignment: MainAxisAlignment
-                                                            .start,
-                                                        crossAxisAlignment: CrossAxisAlignment
-                                                            .start,
+                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
                                                         children: [
                                                           Text(
                                                             "ART",
-                                                            textAlign: TextAlign
-                                                                .start,
-                                                            style: Theme
-                                                                .of(context)
-                                                                .textTheme
-                                                                .headline6!
-                                                                .copyWith(
-                                                                color: Color(
-                                                                    0XFF5D7E4D),
-                                                                fontWeight: FontWeight
-                                                                    .w700,
+                                                            textAlign: TextAlign.start,
+                                                            style: Theme.of(context).textTheme.headline6!.copyWith(
+                                                                color: Color(0XFF5D7E4D),
+                                                                fontWeight: FontWeight.w700,
                                                                 letterSpacing: 1),
                                                           ),
                                                         ],
@@ -234,28 +206,17 @@ class _CommonBottumNavBarState extends State<CommonBottumNavBar> {
                                                   // Navigator.push(context, MaterialPageRoute(builder: (context) =>HowToBuyPage()));
                                                 },
                                                 child: Padding(
-                                                  padding: const EdgeInsets
-                                                      .only(
-                                                      left: 20.0, top: 10),
+                                                  padding: const EdgeInsets.only(left: 20.0, top: 10),
                                                   child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment
-                                                        .start,
-                                                    crossAxisAlignment: CrossAxisAlignment
-                                                        .start,
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
                                                     children: [
                                                       Text(
                                                         "Painting",
-                                                        textAlign: TextAlign
-                                                            .start,
-                                                        style: Theme
-                                                            .of(context)
-                                                            .textTheme
-                                                            .subtitle1!
-                                                            .copyWith(
-                                                            color: Color(
-                                                                0XFF171515),
-                                                            fontWeight: FontWeight
-                                                                .w500,
+                                                        textAlign: TextAlign.start,
+                                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                            color: Color(0XFF171515),
+                                                            fontWeight: FontWeight.w500,
                                                             letterSpacing: 1),
                                                       ),
                                                     ],
@@ -271,28 +232,17 @@ class _CommonBottumNavBarState extends State<CommonBottumNavBar> {
                                                   // Navigator.push(context, MaterialPageRoute(builder: (context) => HowToSellPage()));
                                                 },
                                                 child: Padding(
-                                                  padding: const EdgeInsets
-                                                      .only(
-                                                      left: 20.0, top: 16),
+                                                  padding: const EdgeInsets.only(left: 20.0, top: 16),
                                                   child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment
-                                                        .start,
-                                                    crossAxisAlignment: CrossAxisAlignment
-                                                        .start,
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
                                                     children: [
                                                       Text(
                                                         "Sculpture",
-                                                        textAlign: TextAlign
-                                                            .start,
-                                                        style: Theme
-                                                            .of(context)
-                                                            .textTheme
-                                                            .subtitle1!
-                                                            .copyWith(
-                                                            color: Color(
-                                                                0XFF171515),
-                                                            fontWeight: FontWeight
-                                                                .w500,
+                                                        textAlign: TextAlign.start,
+                                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                            color: Color(0XFF171515),
+                                                            fontWeight: FontWeight.w500,
                                                             letterSpacing: 1),
                                                       ),
                                                     ],
@@ -300,27 +250,17 @@ class _CommonBottumNavBarState extends State<CommonBottumNavBar> {
                                                 ),
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 20.0, top: 16),
+                                                padding: const EdgeInsets.only(left: 20.0, top: 16),
                                                 child: Row(
-                                                  mainAxisAlignment: MainAxisAlignment
-                                                      .start,
-                                                  crossAxisAlignment: CrossAxisAlignment
-                                                      .start,
+                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
                                                       "Photography",
-                                                      textAlign: TextAlign
-                                                          .start,
-                                                      style: Theme
-                                                          .of(context)
-                                                          .textTheme
-                                                          .subtitle1!
-                                                          .copyWith(
-                                                          color: Color(
-                                                              0XFF171515),
-                                                          fontWeight: FontWeight
-                                                              .w500,
+                                                      textAlign: TextAlign.start,
+                                                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                          color: Color(0XFF171515),
+                                                          fontWeight: FontWeight.w500,
                                                           letterSpacing: 1),
                                                     ),
                                                   ],
@@ -329,33 +269,20 @@ class _CommonBottumNavBarState extends State<CommonBottumNavBar> {
                                               InkWell(
                                                 onTap: () {
                                                   Navigator.push(context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              ArtMovementPage()));
+                                                      MaterialPageRoute(builder: (context) => ArtMovementPage()));
                                                 },
                                                 child: Padding(
-                                                  padding: const EdgeInsets
-                                                      .only(
-                                                      left: 20.0, top: 16),
+                                                  padding: const EdgeInsets.only(left: 20.0, top: 16),
                                                   child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment
-                                                        .start,
-                                                    crossAxisAlignment: CrossAxisAlignment
-                                                        .start,
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
                                                     children: [
                                                       Text(
                                                         "Modern Art",
-                                                        textAlign: TextAlign
-                                                            .start,
-                                                        style: Theme
-                                                            .of(context)
-                                                            .textTheme
-                                                            .subtitle1!
-                                                            .copyWith(
-                                                            color: Color(
-                                                                0XFF171515),
-                                                            fontWeight: FontWeight
-                                                                .w500,
+                                                        textAlign: TextAlign.start,
+                                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                            color: Color(0XFF171515),
+                                                            fontWeight: FontWeight.w500,
                                                             letterSpacing: 1),
                                                       ),
                                                     ],
@@ -374,14 +301,11 @@ class _CommonBottumNavBarState extends State<CommonBottumNavBar> {
                                   Container(
                                     decoration: BoxDecoration(
                                         color: Color(0xffEAEEF2),
-                                        image: DecorationImage(
-                                            image: AssetImage(
-                                                "image/maskbg.png"))),
+                                        image: DecorationImage(image: AssetImage("image/maskbg.png"))),
                                     child: ExpansionTileCard(
                                       finalPadding: EdgeInsets.all(0),
                                       baseColor: Color(0xffFFFFFF),
-                                      expandedColor: Colors.lightBlueAccent
-                                          .withOpacity(.1),
+                                      expandedColor: Colors.lightBlueAccent.withOpacity(.1),
                                       key: cardA,
 
                                       // trailing: Icon(Icons.add,size: 18,color: Colors.black,),
@@ -397,14 +321,10 @@ class _CommonBottumNavBarState extends State<CommonBottumNavBar> {
                                       title: Text(
                                         "ART",
                                         textAlign: TextAlign.start,
-                                        style: Theme
-                                            .of(context)
-                                            .textTheme
-                                            .subtitle1!
-                                            .copyWith(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w700,
-                                        ),
+                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w700,
+                                            ),
                                       ),
                                       children: <Widget>[
                                         Container(
@@ -416,28 +336,17 @@ class _CommonBottumNavBarState extends State<CommonBottumNavBar> {
                                                   // Navigator.push(context, MaterialPageRoute(builder: (context) =>HowToBuyPage()));
                                                 },
                                                 child: Padding(
-                                                  padding: const EdgeInsets
-                                                      .only(
-                                                      left: 20.0, top: 10),
+                                                  padding: const EdgeInsets.only(left: 20.0, top: 10),
                                                   child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment
-                                                        .start,
-                                                    crossAxisAlignment: CrossAxisAlignment
-                                                        .start,
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
                                                     children: [
                                                       Text(
                                                         "Painting",
-                                                        textAlign: TextAlign
-                                                            .start,
-                                                        style: Theme
-                                                            .of(context)
-                                                            .textTheme
-                                                            .subtitle1!
-                                                            .copyWith(
-                                                            color: Color(
-                                                                0XFF171515),
-                                                            fontWeight: FontWeight
-                                                                .w500,
+                                                        textAlign: TextAlign.start,
+                                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                            color: Color(0XFF171515),
+                                                            fontWeight: FontWeight.w500,
                                                             letterSpacing: 1),
                                                       ),
                                                     ],
@@ -453,28 +362,17 @@ class _CommonBottumNavBarState extends State<CommonBottumNavBar> {
                                                   // Navigator.push(context, MaterialPageRoute(builder: (context) => HowToSellPage()));
                                                 },
                                                 child: Padding(
-                                                  padding: const EdgeInsets
-                                                      .only(
-                                                      left: 20.0, top: 16),
+                                                  padding: const EdgeInsets.only(left: 20.0, top: 16),
                                                   child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment
-                                                        .start,
-                                                    crossAxisAlignment: CrossAxisAlignment
-                                                        .start,
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
                                                     children: [
                                                       Text(
                                                         "Sculpture",
-                                                        textAlign: TextAlign
-                                                            .start,
-                                                        style: Theme
-                                                            .of(context)
-                                                            .textTheme
-                                                            .subtitle1!
-                                                            .copyWith(
-                                                            color: Color(
-                                                                0XFF171515),
-                                                            fontWeight: FontWeight
-                                                                .w500,
+                                                        textAlign: TextAlign.start,
+                                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                            color: Color(0XFF171515),
+                                                            fontWeight: FontWeight.w500,
                                                             letterSpacing: 1),
                                                       ),
                                                     ],
@@ -482,27 +380,17 @@ class _CommonBottumNavBarState extends State<CommonBottumNavBar> {
                                                 ),
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 20.0, top: 16),
+                                                padding: const EdgeInsets.only(left: 20.0, top: 16),
                                                 child: Row(
-                                                  mainAxisAlignment: MainAxisAlignment
-                                                      .start,
-                                                  crossAxisAlignment: CrossAxisAlignment
-                                                      .start,
+                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
                                                       "Photography",
-                                                      textAlign: TextAlign
-                                                          .start,
-                                                      style: Theme
-                                                          .of(context)
-                                                          .textTheme
-                                                          .subtitle1!
-                                                          .copyWith(
-                                                          color: Color(
-                                                              0XFF171515),
-                                                          fontWeight: FontWeight
-                                                              .w500,
+                                                      textAlign: TextAlign.start,
+                                                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                          color: Color(0XFF171515),
+                                                          fontWeight: FontWeight.w500,
                                                           letterSpacing: 1),
                                                     ),
                                                   ],
@@ -511,33 +399,20 @@ class _CommonBottumNavBarState extends State<CommonBottumNavBar> {
                                               InkWell(
                                                 onTap: () {
                                                   Navigator.push(context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              ArtMovementPage()));
+                                                      MaterialPageRoute(builder: (context) => ArtMovementPage()));
                                                 },
                                                 child: Padding(
-                                                  padding: const EdgeInsets
-                                                      .only(
-                                                      left: 20.0, top: 16),
+                                                  padding: const EdgeInsets.only(left: 20.0, top: 16),
                                                   child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment
-                                                        .start,
-                                                    crossAxisAlignment: CrossAxisAlignment
-                                                        .start,
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
                                                     children: [
                                                       Text(
                                                         "Modern Art",
-                                                        textAlign: TextAlign
-                                                            .start,
-                                                        style: Theme
-                                                            .of(context)
-                                                            .textTheme
-                                                            .subtitle1!
-                                                            .copyWith(
-                                                            color: Color(
-                                                                0XFF171515),
-                                                            fontWeight: FontWeight
-                                                                .w500,
+                                                        textAlign: TextAlign.start,
+                                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                            color: Color(0XFF171515),
+                                                            fontWeight: FontWeight.w500,
                                                             letterSpacing: 1),
                                                       ),
                                                     ],
@@ -573,14 +448,10 @@ class _CommonBottumNavBarState extends State<CommonBottumNavBar> {
                                       title: Text(
                                         "FURNITURE",
                                         textAlign: TextAlign.start,
-                                        style: Theme
-                                            .of(context)
-                                            .textTheme
-                                            .subtitle1!
-                                            .copyWith(
-                                          color: Color(0XFF8C9FB1),
-                                          fontWeight: FontWeight.w700,
-                                        ),
+                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF8C9FB1),
+                                              fontWeight: FontWeight.w700,
+                                            ),
                                       ),
                                       children: <Widget>[],
                                     ),
@@ -605,14 +476,10 @@ class _CommonBottumNavBarState extends State<CommonBottumNavBar> {
                                       title: Text(
                                         "WATCHES",
                                         textAlign: TextAlign.start,
-                                        style: Theme
-                                            .of(context)
-                                            .textTheme
-                                            .subtitle1!
-                                            .copyWith(
-                                          color: Color(0XFF8C9FB1),
-                                          fontWeight: FontWeight.w700,
-                                        ),
+                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF8C9FB1),
+                                              fontWeight: FontWeight.w700,
+                                            ),
                                       ),
                                       children: <Widget>[],
                                     ),
@@ -637,14 +504,10 @@ class _CommonBottumNavBarState extends State<CommonBottumNavBar> {
                                       title: Text(
                                         "BOOKS",
                                         textAlign: TextAlign.start,
-                                        style: Theme
-                                            .of(context)
-                                            .textTheme
-                                            .subtitle1!
-                                            .copyWith(
-                                          color: Color(0XFF8C9FB1),
-                                          fontWeight: FontWeight.w700,
-                                        ),
+                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF8C9FB1),
+                                              fontWeight: FontWeight.w700,
+                                            ),
                                       ),
                                       children: <Widget>[],
                                     ),
@@ -669,14 +532,10 @@ class _CommonBottumNavBarState extends State<CommonBottumNavBar> {
                                       title: Text(
                                         "MERCENDISE",
                                         textAlign: TextAlign.start,
-                                        style: Theme
-                                            .of(context)
-                                            .textTheme
-                                            .subtitle1!
-                                            .copyWith(
-                                          color: Color(0XFF8C9FB1),
-                                          fontWeight: FontWeight.w700,
-                                        ),
+                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF8C9FB1),
+                                              fontWeight: FontWeight.w700,
+                                            ),
                                       ),
                                       children: <Widget>[],
                                     ),
@@ -692,23 +551,18 @@ class _CommonBottumNavBarState extends State<CommonBottumNavBar> {
                                       leading: Container(
                                         height: 40,
                                         width: 40,
-                                        child: SizedBox(width: 8,
+                                        child: SizedBox(
+                                            width: 8,
                                             height: 8,
-                                            child: Image.asset(
-                                                "image/print.png", width: 8,
-                                                height: 8)),
+                                            child: Image.asset("image/print.png", width: 8, height: 8)),
                                       ),
                                       title: Text(
                                         "PRINT",
                                         textAlign: TextAlign.start,
-                                        style: Theme
-                                            .of(context)
-                                            .textTheme
-                                            .subtitle1!
-                                            .copyWith(
-                                          color: Color(0XFF8C9FB1),
-                                          fontWeight: FontWeight.w700,
-                                        ),
+                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Color(0XFF8C9FB1),
+                                              fontWeight: FontWeight.w700,
+                                            ),
                                       ),
                                       children: <Widget>[],
                                     ),
@@ -728,30 +582,22 @@ class _CommonBottumNavBarState extends State<CommonBottumNavBar> {
                           "image/bag.png",
                           width: 24,
                           height: 24,
-                          color: bottomViewModel.selectedIndex == 2 ? Theme
-                              .of(context)
-                              .colorScheme
-                              .primary : Color(0xff2D2D2D),
+                          color: bottomViewModel.selectedIndex == 2
+                              ? Theme.of(context).colorScheme.primary
+                              : Color(0xff2D2D2D),
                         )),
 
                     // Icon(
                     //   Icons.shopping_bag_outlined,size: 32),
                     Text(
                       "STORE",
-                      style: Theme
-                          .of(context)
-                          .textTheme
-                          .caption!
-                          .copyWith(
-                        letterSpacing: 1,
-                        fontWeight: bottomViewModel.selectedIndex == 2
-                            ? FontWeight.bold
-                            : FontWeight.normal,
-                        color: bottomViewModel.selectedIndex == 2 ? Theme
-                            .of(context)
-                            .colorScheme
-                            .primary : Color(0xff2D2D2D),
-                      ),
+                      style: Theme.of(context).textTheme.caption!.copyWith(
+                            letterSpacing: 1,
+                            fontWeight: bottomViewModel.selectedIndex == 2 ? FontWeight.bold : FontWeight.normal,
+                            color: bottomViewModel.selectedIndex == 2
+                                ? Theme.of(context).colorScheme.primary
+                                : Color(0xff2D2D2D),
+                          ),
                     )
                   ],
                 ),
@@ -759,6 +605,12 @@ class _CommonBottumNavBarState extends State<CommonBottumNavBar> {
               InkWell(
                 onTap: () {
                   bottomViewModel.selectedIndex = 3;
+
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => DashboardUi(3)),
+                    (route) => false,
+                  );
                 },
                 child: Column(
                   children: [
@@ -768,30 +620,22 @@ class _CommonBottumNavBarState extends State<CommonBottumNavBar> {
                           "image/profile.png",
                           width: 24,
                           height: 24,
-                          color: bottomViewModel.selectedIndex == 3 ? Theme
-                              .of(context)
-                              .colorScheme
-                              .primary : Color(0xff2D2D2D),
+                          color: bottomViewModel.selectedIndex == 3
+                              ? Theme.of(context).colorScheme.primary
+                              : Color(0xff2D2D2D),
                         )),
                     // Icon(
                     //   Icons.person_outline,size: 32),
 
                     Text(
                       "PROFILE",
-                      style: Theme
-                          .of(context)
-                          .textTheme
-                          .caption!
-                          .copyWith(
-                        letterSpacing: 1,
-                        fontWeight: bottomViewModel.selectedIndex == 3
-                            ? FontWeight.bold
-                            : FontWeight.normal,
-                        color: bottomViewModel.selectedIndex == 3 ? Theme
-                            .of(context)
-                            .colorScheme
-                            .primary : Color(0xff2D2D2D),
-                      ),
+                      style: Theme.of(context).textTheme.caption!.copyWith(
+                            letterSpacing: 1,
+                            fontWeight: bottomViewModel.selectedIndex == 3 ? FontWeight.bold : FontWeight.normal,
+                            color: bottomViewModel.selectedIndex == 3
+                                ? Theme.of(context).colorScheme.primary
+                                : Color(0xff2D2D2D),
+                          ),
                     )
                   ],
                 ),
@@ -804,7 +648,6 @@ class _CommonBottumNavBarState extends State<CommonBottumNavBar> {
   }
 }
 
-
 class CommonFloatingActionButton extends StatefulWidget {
   const CommonFloatingActionButton({Key? key}) : super(key: key);
 
@@ -815,7 +658,7 @@ class CommonFloatingActionButton extends StatefulWidget {
 class _CommonFloatingActionButtonState extends State<CommonFloatingActionButton> {
   @override
   Widget build(BuildContext context) {
-    return  FloatingActionButton(
+    return FloatingActionButton(
       backgroundColor: Color(0xffE74B52),
       onPressed: () {
         showModalBottomSheet(
@@ -823,7 +666,9 @@ class _CommonFloatingActionButtonState extends State<CommonFloatingActionButton>
             context: context,
             builder: (context) {
               return Container(
-                decoration: BoxDecoration(borderRadius: BorderRadius.only(topRight: Radius.circular(30), topLeft: Radius.circular(30)), color: Colors.white),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(topRight: Radius.circular(30), topLeft: Radius.circular(30)),
+                    color: Colors.white),
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -839,9 +684,9 @@ class _CommonFloatingActionButtonState extends State<CommonFloatingActionButton>
                           "AUCTION",
                           textAlign: TextAlign.center,
                           style: Theme.of(context).textTheme.headline6!.copyWith(
-                            color: Color(0xff000000),
-                            fontWeight: FontWeight.bold,
-                          ),
+                                color: Color(0xff000000),
+                                fontWeight: FontWeight.bold,
+                              ),
                         ),
                         Spacer(),
                         IconButton(
@@ -881,9 +726,9 @@ class _CommonFloatingActionButtonState extends State<CommonFloatingActionButton>
                             "LIVE",
                             textAlign: TextAlign.center,
                             style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                              color: Color(0Xff8C9FB1),
-                              fontWeight: FontWeight.bold,
-                            ),
+                                  color: Color(0Xff8C9FB1),
+                                  fontWeight: FontWeight.bold,
+                                ),
                           ),
                         ],
                       ),
@@ -911,9 +756,9 @@ class _CommonFloatingActionButtonState extends State<CommonFloatingActionButton>
                             "UPCOMING",
                             textAlign: TextAlign.center,
                             style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                              color: Color(0Xff8C9FB1),
-                              fontWeight: FontWeight.bold,
-                            ),
+                                  color: Color(0Xff8C9FB1),
+                                  fontWeight: FontWeight.bold,
+                                ),
                           ),
                         ],
                       ),
@@ -941,9 +786,9 @@ class _CommonFloatingActionButtonState extends State<CommonFloatingActionButton>
                             "PAST",
                             textAlign: TextAlign.center,
                             style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                              color: Color(0Xff8C9FB1),
-                              fontWeight: FontWeight.bold,
-                            ),
+                                  color: Color(0Xff8C9FB1),
+                                  fontWeight: FontWeight.bold,
+                                ),
                           ),
                         ],
                       ),
@@ -959,5 +804,4 @@ class _CommonFloatingActionButtonState extends State<CommonFloatingActionButton>
       child: Image.asset("image/hammer.png", color: Colors.white),
     );
   }
-
 }

@@ -13,7 +13,6 @@ import 'package:giftex/screens/liveauction/components/past/pasttabs.dart';
 import 'package:giftex/screens/liveauction/components/upcomming/upcommingdata.dart';
 import 'package:giftex/screens/liveauction/components/upcomming/upcommingtabs.dart';
 import 'package:giftex/screens/liveauction/liveauction.dart';
-import 'package:share/share.dart';
 
 // import 'package:signalr_netcore/signalr_client.dart';
 import '../components/bottomnavigationbar/bottomnavigationbar.dart';
@@ -167,18 +166,20 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
           ),
           auctionViewModel.isLoadingForUpCommingAuction
               ? SliverToBoxAdapter(child: LinearProgressIndicator())
-              : SliverToBoxAdapter(
-                  child: Align(
-                    child: Text(
-                      "${auctionViewModel.singleAuctionDetsilaResponse!.result!.auctionTitle!}",
-                      textAlign: TextAlign.left,
-                      style: Theme.of(context).textTheme.headline6!.copyWith(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
+              : auctionViewModel.singleAuctionDetsilaResponse == null
+                  ? SliverToBoxAdapter()
+                  : SliverToBoxAdapter(
+                      child: Align(
+                        child: Text(
+                          "${auctionViewModel.singleAuctionDetsilaResponse!.result!.auctionTitle!}",
+                          textAlign: TextAlign.left,
+                          style: Theme.of(context).textTheme.headline6!.copyWith(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
           auctionViewModel.isLoadingForUpCommingAuction
               ? SliverToBoxAdapter(child: LinearProgressIndicator())
               : SliverToBoxAdapter(
@@ -248,9 +249,7 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
                                     ),
                                     Spacer(),
                                     InkWell(
-                                      onTap: (){
-
-                                      },
+                                      onTap: () {},
                                       child: Image.asset(
                                         "image/share.png",
                                         height: 32,
@@ -260,7 +259,7 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
                                     SizedBox(
                                       width: 20,
                                     ),
-                                 /*   Image.asset(
+                                    /*   Image.asset(
                                       "image/save.png",
                                       height: 32,
                                     ),*/
@@ -850,7 +849,9 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
                       : Center(
                           child: getPageNavigator(
                               auctionViewModel.liveAuctionType == "browselist"
-                                  ? auctionViewModel.upComingLotsResponse!.result!.lots!.last.PaginationSize ?? 1
+                                  ? auctionViewModel.upComingLotsResponse == null
+                                      ? 0
+                                      : auctionViewModel.upComingLotsResponse!.result!.lots!.last.PaginationSize ?? 1
                                   : auctionViewModel.liveAuctionType == "review"
                                       ? auctionViewModel.getliveauctionsResponse!.result!.lots!.last.PaginationSize ?? 1
                                       : auctionViewModel.liveAuctionType == "browselist"

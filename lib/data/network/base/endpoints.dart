@@ -1,5 +1,6 @@
 class User {
   final String userLogin = 'UserLogin';
+  final String termsandconditions = 'GetTermsAndConditions';
   final String signup = 'signup';
   final String lastbids = 'User/GetLast5bids';
   final String lastpurchases = 'User/GetLast5purchases';

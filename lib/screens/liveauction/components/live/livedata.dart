@@ -89,10 +89,12 @@ class _LiveDataState extends State<LiveData> {
                               addAutomaticKeepAlives: true,
                               (BuildContext context, int index) {
                                 // return BrowseItemListItem(auctionViewModel.upcomingAuctionResponse!.result!.auctions![index],index);
-                                return BrowseItemListItem(
-                                    widget.auctionViewModel.myAuctionGalleryResponse!.result!.lots![index],
-                                    widget.auctionViewModel.isGrid,
-                                    widget.auctionViewModel);
+                                return Observer(builder: (context) {
+                                  return BrowseItemListItem(
+                                      widget.auctionViewModel.myAuctionGalleryResponse!.result!.lots![index],
+                                      widget.auctionViewModel.isGrid,
+                                      widget.auctionViewModel);
+                                });
                               },
                               // 40 list items
                               childCount: widget.auctionViewModel.myAuctionGalleryResponse == null
@@ -111,10 +113,12 @@ class _LiveDataState extends State<LiveData> {
                                   (BuildContext context, int index) {
                                     // return BrowseItemListItem(auctionViewModel.upcomingAuctionResponse!.result!.auctions![index],index);
 
-                                    return BrowseItemListItem(
-                                        widget.auctionViewModel.upComingLotsResponse!.result!.lots![index],
-                                        widget.auctionViewModel.isGrid,
-                                        widget.auctionViewModel);
+                                    return Observer(builder: (context) {
+                                      return BrowseItemListItem(
+                                          widget.auctionViewModel.upComingLotsResponse!.result!.lots![index],
+                                          widget.auctionViewModel.isGrid,
+                                          widget.auctionViewModel);
+                                    });
                                   },
                                   // 40 list items
                                   childCount: widget.auctionViewModel.upComingLotsResponse == null

@@ -1,3 +1,4 @@
+import 'package:giftex/data/network/models/responce/termsresponse.dart';
 import 'package:giftex/data/network/models/responce/user/signupres.dart';
 import 'package:giftex/data/network/models/responce/user/verifyemailresponse.dart';
 import 'package:mobx/mobx.dart';
@@ -15,7 +16,7 @@ part 'loginviewmodel.g.dart';
 class LoginViewModel = _LoginViewModel with _$LoginViewModel;
 
 abstract class _LoginViewModel with Store {
-  LoginRepo? orderRepo;
+  LoginRepo? loginRepo;
   LoginViewModelErrorState loginViewModelErrorState = LoginViewModelErrorState();
 
   LoginViewModelMobileErrorState loginViewModelMobileErrorState = LoginViewModelMobileErrorState();
@@ -24,7 +25,7 @@ abstract class _LoginViewModel with Store {
   late LocalSharedPrefrence localSharedPrefrence;
 
   _LoginViewModel() {
-    orderRepo = LoginRepo();
+    loginRepo = LoginRepo();
     localSharedPrefrence = LocalSharedPrefrence();
   }
 
@@ -63,6 +64,9 @@ abstract class _LoginViewModel with Store {
 
   @observable
   VerifyEmailResponse? verifyMobileResponse;
+
+  @observable
+  TermsAndConditionsResponse? termsAndConditionsResponse;
 
   List<ReactionDisposer>? _disposers;
 
@@ -147,7 +151,7 @@ abstract class _LoginViewModel with Store {
   Future<HttpResponse> getLogin() async {
     isLoading = true;
 
-    HttpResponse httpResponse = await orderRepo!.login(LoginReqestModel(
+    HttpResponse httpResponse = await loginRepo!.login(LoginReqestModel(
       email: email,
       password: pass,
       mobile: mobile,
@@ -169,7 +173,7 @@ abstract class _LoginViewModel with Store {
   Future<HttpResponse> verifyEmail() async {
     isLoading = true;
 
-    HttpResponse httpResponse = await orderRepo!.verifyEmail(email, name, "");
+    HttpResponse httpResponse = await loginRepo!.verifyEmail(email, name, "");
 
     if (httpResponse.status == 200) {
       verifyEmailResponse = httpResponse.data;
@@ -181,7 +185,7 @@ abstract class _LoginViewModel with Store {
   Future<HttpResponse> verifyMobile() async {
     isLoading = true;
 
-    HttpResponse httpResponse = await orderRepo!.verifyMobile(mobile, name, "");
+    HttpResponse httpResponse = await loginRepo!.verifyMobile(mobile, name, "");
 
     if (httpResponse.status == 200) {
       verifyMobileResponse = httpResponse.data;
@@ -190,10 +194,22 @@ abstract class _LoginViewModel with Store {
     return httpResponse;
   }
 
+  Future<HttpResponse> termsAndConditions() async {
+    isLoading = true;
+
+    HttpResponse httpResponse = await loginRepo!.termsAndCondiations();
+
+    if (httpResponse.status == 200) {
+      termsAndConditionsResponse = httpResponse.data;
+    }
+    isLoading = false;
+    return httpResponse;
+  }
+
   Future<HttpResponse> getLoginWithMobile() async {
     isLoading = true;
 
-    HttpResponse httpResponse = await orderRepo!.loginMobile(LoginReqestModel(
+    HttpResponse httpResponse = await loginRepo!.loginMobile(LoginReqestModel(
         countryCode: "91",
         mobile: mobile,
         authkeyMobile: "",
@@ -222,7 +238,7 @@ abstract class _LoginViewModel with Store {
   Future<HttpResponse> gesignUp() async {
     isLoading = true;
 
-    HttpResponse httpResponse = await orderRepo!.signUp(mobile, name, email, pass);
+    HttpResponse httpResponse = await loginRepo!.signUp(mobile, name, email, pass);
 
     if (httpResponse.status == 200) {
       signUpResponse = httpResponse.data;
@@ -239,7 +255,7 @@ abstract class _LoginViewModel with Store {
   Future<HttpResponse> getLoginWithEmailPass() async {
     isLoading = true;
 
-    HttpResponse httpResponse = await orderRepo!.loginMobile(LoginReqestModel(
+    HttpResponse httpResponse = await loginRepo!.loginMobile(LoginReqestModel(
         countryCode: "",
         mobile: "",
         authkeyMobile: "",
@@ -260,6 +276,7 @@ abstract class _LoginViewModel with Store {
       await localSharedPrefrence.setUserId(loginResponse!.result!.userid!);
       await localSharedPrefrence.setLoginStatus(true);
       await localSharedPrefrence.setCrmClinetId(loginResponse!.result!.cRMClientID!);
+
       //await localSharedPrefrence.setRole(loginResponse!.user!.role!);
     }
     isLoading = false;
@@ -269,7 +286,7 @@ abstract class _LoginViewModel with Store {
   Future<HttpResponse> getLoginWithOTPConfirm() async {
     isLoading = true;
 
-    HttpResponse httpResponse = await orderRepo!.loginMobileConfirm(LoginReqestModel(
+    HttpResponse httpResponse = await loginRepo!.loginMobileConfirm(LoginReqestModel(
         countryCode: "91",
         mobile: mobile,
         authkeyMobile: "",

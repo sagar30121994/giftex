@@ -199,6 +199,23 @@ mixin _$LoginViewModel on _LoginViewModel, Store {
     });
   }
 
+  late final _$termsAndConditionsResponseAtom = Atom(
+      name: '_LoginViewModel.termsAndConditionsResponse', context: context);
+
+  @override
+  TermsAndConditionsResponse? get termsAndConditionsResponse {
+    _$termsAndConditionsResponseAtom.reportRead();
+    return super.termsAndConditionsResponse;
+  }
+
+  @override
+  set termsAndConditionsResponse(TermsAndConditionsResponse? value) {
+    _$termsAndConditionsResponseAtom
+        .reportWrite(value, super.termsAndConditionsResponse, () {
+      super.termsAndConditionsResponse = value;
+    });
+  }
+
   late final _$_LoginViewModelActionController =
       ActionController(name: '_LoginViewModel', context: context);
 
@@ -326,7 +343,8 @@ mobile: ${mobile},
 isemail: ${isemail},
 ismobile: ${ismobile},
 verifyEmailResponse: ${verifyEmailResponse},
-verifyMobileResponse: ${verifyMobileResponse}
+verifyMobileResponse: ${verifyMobileResponse},
+termsAndConditionsResponse: ${termsAndConditionsResponse}
     ''';
   }
 }

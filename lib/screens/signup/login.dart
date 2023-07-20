@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:giftex/screens/signup/emailotp.dart';
 import 'package:giftex/screens/signup/getotp.dart';
 import 'package:giftex/viewmodel/user/loginviewmodel.dart';
@@ -20,14 +21,19 @@ class _LoginpageState extends State<Loginpage> {
   bool isMobile = true;
   bool isEmailVerified = false;
   bool isMobileVerified = false;
-  TextEditingController nameController=TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController EMAILController = TextEditingController();
+  TextEditingController MOBILEController = TextEditingController();
 
   @override
   void initState() {
     // TODO: implement initStat
     loginViewModel.setupValidations();
+    loginViewModel.termsAndConditions();
     super.initState();
   }
+
+  bool isCheked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -371,44 +377,189 @@ class _LoginpageState extends State<Loginpage> {
                                     SizedBox(
                                       height: 34,
                                     ),
-                                    Row(
-                                      children: [
-                                        Checkbox(value: true, onChanged: (val) {}),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              "Agreeing to",
-                                              textAlign: TextAlign.center,
-                                              style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                    color: Color(0xff2D2D2D),
-                                                    fontWeight: FontWeight.w400,
+                                    InkWell(
+                                      onTap: () async {
+                                        await showDialog(
+                                            context: context,
+                                            builder: (BuildContext dialogContext) {
+                                              return AlertDialog(
+                                                contentPadding: EdgeInsets.all(0),
+                                                content: Container(
+                                                  height: 580,
+                                                  child: Stack(
+                                                    children: [
+                                                      Container(
+                                                        padding: EdgeInsets.all(16),
+                                                        width: MediaQuery.of(context).size.width,
+                                                        color: Color(0xffEAEEF2),
+                                                        child: SingleChildScrollView(
+                                                          child: Column(
+                                                            mainAxisAlignment: MainAxisAlignment.start,
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            children: [
+                                                              Row(
+                                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                                crossAxisAlignment: CrossAxisAlignment.end,
+                                                                children: [
+                                                                  InkWell(
+                                                                      onTap: () {
+                                                                        Navigator.of(context).pop();
+                                                                      },
+                                                                      child: Icon(
+                                                                        Icons.close,
+                                                                        size: 20,
+                                                                        color: Color(0xff979797),
+                                                                      ))
+                                                                ],
+                                                              ),
+                                                              Row(
+                                                                children: [
+                                                                  Image.asset(
+                                                                    "image/Vector (22).png",
+                                                                    color: Color(0XFF202232),
+                                                                  ),
+                                                                  SizedBox(
+                                                                    width: 5,
+                                                                  ),
+                                                                  Text(
+                                                                    'TERMS & CONDITIONS',
+                                                                    style: Theme.of(context)
+                                                                        .textTheme
+                                                                        .subtitle1!
+                                                                        .copyWith(
+                                                                            color: Color(0XFF202232),
+                                                                            fontWeight: FontWeight.w400,
+                                                                            letterSpacing: 2),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              SizedBox(
+                                                                height: 16,
+                                                              ),
+                                                              SizedBox(
+                                                                height: 20,
+                                                              ),
+                                                              SizedBox(
+                                                                height: 420,
+                                                                child: SingleChildScrollView(
+                                                                  child: HtmlWidget(
+                                                                    // the first parameter (`html`) is required
+
+                                                                    // all other parameters are optional, a few notable params:
+
+                                                                    // specify custom styling for an element
+                                                                    '${loginViewModel.termsAndConditionsResponse!.pageContent!.accordion![0].desc}',
+
+                                                                    // render a custom widget
+
+                                                                    // these callbacks are called when a complicated element is loading
+                                                                    // or failed to render allowing the app to render progress indicator
+                                                                    // and fallback widget
+
+                                                                    // select the render mode for HTML body
+                                                                    // by default, a simple `Column` is rendered
+                                                                    // consider using `ListView` or `SliverList` for better performance
+
+                                                                    // set the default styling for text
+                                                                    textStyle: TextStyle(fontSize: 14),
+
+                                                                    // turn on `webView` if you need IFRAME support (it's disabled by default)
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              // Text(
+                                                              //   '${loginViewModel.termsAndConditionsResponse!.pageContent!.accordion![0].desc}',
+                                                              //   textAlign: TextAlign.center,
+                                                              //   style: Theme.of(context).textTheme.caption!.copyWith(
+                                                              //         color: Color(0XFF202232).withOpacity(0.61),
+                                                              //         fontWeight: FontWeight.w400,
+                                                              //       ),
+                                                              // ),
+                                                              Row(
+                                                                children: [
+                                                                  Spacer(),
+                                                                  TextButton(
+                                                                      onPressed: () {
+                                                                        setState(() {
+                                                                          isCheked = false;
+                                                                        });
+                                                                        Navigator.of(context).pop();
+                                                                      },
+                                                                      child: Text(
+                                                                        "DISAGREE",
+                                                                        style: Theme.of(context).textTheme.button,
+                                                                      )),
+                                                                  SizedBox(
+                                                                    width: 24,
+                                                                  ),
+                                                                  ElevatedButton(
+                                                                      onPressed: () {
+                                                                        setState(() {
+                                                                          isCheked = true;
+                                                                        });
+                                                                        Navigator.of(context).pop();
+                                                                      },
+                                                                      child: Text(
+                                                                        "AGREE",
+                                                                        style: Theme.of(context)
+                                                                            .textTheme
+                                                                            .button!
+                                                                            .copyWith(color: Colors.white),
+                                                                      ))
+                                                                ],
+                                                              ),
+                                                              SizedBox(
+                                                                height: 10,
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
-                                            ),
-                                            SizedBox(
-                                              width: 6,
-                                            ),
-                                            Text(
-                                              "Terms & Conditions",
-                                              textAlign: TextAlign.center,
-                                              style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                    color: Color(0xff2D2D2D),
-                                                    decoration: TextDecoration.underline,
-                                                    decorationStyle: TextDecorationStyle.solid,
-                                                    decorationThickness: 1,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
+                                                ),
+                                              );
+                                            });
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Checkbox(value: isCheked, onChanged: (val) async {}),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "Agreeing to",
+                                                textAlign: TextAlign.center,
+                                                style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                      color: Color(0xff2D2D2D),
+                                                      fontWeight: FontWeight.w400,
+                                                    ),
+                                              ),
+                                              SizedBox(
+                                                width: 6,
+                                              ),
+                                              Text(
+                                                "Terms & Conditions",
+                                                textAlign: TextAlign.center,
+                                                style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                      color: Color(0xff2D2D2D),
+                                                      decoration: TextDecoration.underline,
+                                                      decorationStyle: TextDecorationStyle.solid,
+                                                      decorationThickness: 1,
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                     SizedBox(
                                       height: 20,
                                     ),
                                     InkWell(
                                       onTap: () {
-
-                                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => KYCPage()));
+                                        // Navigator.pushReplacement(
+                                        //     context, MaterialPageRoute(builder: (BuildContext context) => KYCPage()));
                                         if (loginViewModel.login1ViewModelErrorState.hasErrors) {
                                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                             content: Text(
@@ -417,8 +568,7 @@ class _LoginpageState extends State<Loginpage> {
                                             ),
                                             backgroundColor: Colors.red,
                                           ));
-                                        }
-                                        else {
+                                        } else {
                                           if (isEmailVerified && isMobileVerified) {
                                             loginViewModel.gesignUp().then((value) => {
                                                   if (value.status == 200)
@@ -426,7 +576,7 @@ class _LoginpageState extends State<Loginpage> {
                                                       Navigator.pushReplacement(
                                                           context,
                                                           MaterialPageRoute(
-                                                              builder: (BuildContext context) => DashboardUi(0))),
+                                                              builder: (BuildContext context) => KYCPage())),
                                                     }
                                                   else
                                                     {
@@ -515,7 +665,7 @@ class _LoginpageState extends State<Loginpage> {
                                     margin: EdgeInsets.all(28),
                                     padding: EdgeInsets.all(8),
                                     child: TextField(
-                                       controller: nameController,
+                                      controller: MOBILEController,
                                       // maxLength: 10,
                                       onChanged: (str) {
                                         loginViewModel.setMobile(str);
@@ -568,8 +718,11 @@ class _LoginpageState extends State<Loginpage> {
                                                   {
                                                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                                       content: Text(
-                                                        'Enter Valid Credentials ${value.message}',
-                                                        style: Theme.of(context).textTheme.headline6,
+                                                        '${value.message}',
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .labelMedium!
+                                                            .copyWith(color: Colors.white),
                                                       ),
                                                       backgroundColor: Colors.red,
                                                     )),
@@ -606,6 +759,7 @@ class _LoginpageState extends State<Loginpage> {
                                   ),
                                   InkWell(
                                     onTap: () {
+                                      FocusScope.of(context).unfocus();
                                       setState(() {
                                         isMobile = false;
                                       });
@@ -658,7 +812,7 @@ class _LoginpageState extends State<Loginpage> {
                                     margin: EdgeInsets.symmetric(horizontal: 28, vertical: 8),
                                     padding: EdgeInsets.all(8),
                                     child: TextField(
-                                       controller: nameController,
+                                      controller: EMAILController,
                                       // maxLength: 10,
                                       onChanged: (str) {
                                         loginViewModel.setEmail(str);
@@ -797,6 +951,7 @@ class _LoginpageState extends State<Loginpage> {
                                   ),
                                   InkWell(
                                     onTap: () {
+                                      FocusScope.of(context).unfocus();
                                       setState(() {
                                         isMobile = true;
                                       });

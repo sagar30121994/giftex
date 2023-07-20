@@ -185,7 +185,8 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailPage(widget.lots, auctionViewModel)));
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => ProductDetailPage(widget.lots, auctionViewModel)));
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(20.0),
@@ -391,236 +392,765 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                               height: 12,
                             ),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                ElevatedButton(
-                                  style: ButtonStyle(
-                                      backgroundColor: MaterialStateProperty.all(Color(0XFFF9F9F9)),
-                                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(20.0),
-                                          side: BorderSide(color: Color(0xff747474), width: 0.38)))),
-                                  onPressed: () async {
-                                    await auctionViewModel.getProxyAmountByLot(widget.lots);
+                                Spacer(),
+                                (widget.lots.leadingUser!.id ==
+                                        widget.auctionViewModel.localSharedPrefrence.getUserId())
+                                    ? Container()
+                                    : ElevatedButton(
+                                        style: ButtonStyle(
+                                            backgroundColor: MaterialStateProperty.all(Color(0XFFF9F9F9)),
+                                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.circular(20.0),
+                                                    side: BorderSide(color: Color(0xff747474), width: 0.38)))),
+                                        onPressed: () async {
+                                          bool checked = false;
+                                          final textEditingController = TextEditingController();
+                                          await auctionViewModel.getProxyAmountByLot(widget.lots);
 
-                                    if (auctionViewModel.getProxyBidAmountResponse!.status == "true") {
-                                      showModalBottomSheet<void>(
-                                        // context and builder are
-                                        // required properties in this widget
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          // we set up a container inside which
-                                          // we create center column and display text
+                                          if (auctionViewModel.getProxyBidAmountResponse!.status == "true") {
+                                            showModalBottomSheet<void>(
+                                              // context and builder are
+                                              // required properties in this widget
+                                              context: context,
+                                              isScrollControlled: true,
+                                              enableDrag: true,
+                                              isDismissible: true,
+                                              builder: (BuildContext context) {
+                                                // we set up a container inside which
+                                                // we create center column and display text
 
-                                          // Returning SizedBox instead of a Container
-                                          return StatefulBuilder(builder: (_, builder) {
-                                            return SizedBox(
-                                              height: MediaQuery.of(context).size.height,
-                                              child: Observer(builder: (context) {
-                                                return Container(
-                                                  height: MediaQuery.of(context).size.height,
-                                                  width: MediaQuery.of(context).size.width,
-                                                  color: Color(0xffEAEEF2),
-                                                  child: Column(
-                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                    children: <Widget>[
-                                                      Align(
-                                                        alignment: Alignment.topRight,
-                                                        child: IconButton(
-                                                            onPressed: () {
-                                                              Navigator.of(context).pop();
-                                                            },
-                                                            icon: Icon(Icons.close)),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 16,
-                                                      ),
-                                                      Text(
-                                                        "ENTER YOUR PROXY BID",
-                                                        style: Theme.of(context).textTheme.headline5!.copyWith(
-                                                            letterSpacing: 2,
-                                                            fontWeight: FontWeight.bold,
-                                                            color: Colors.black),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 16,
-                                                      ),
-                                                      Text(
-                                                        "My Maximum Proxy Bid",
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .subtitle1!
-                                                            .copyWith(letterSpacing: 2, fontWeight: FontWeight.bold),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 16,
-                                                      ),
-                                                      Text(
-                                                        "Select Next Valid Bid",
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .subtitle1!
-                                                            .copyWith(letterSpacing: 2, fontWeight: FontWeight.bold),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 16,
-                                                      ),
-                                                      Padding(
-                                                        padding: const EdgeInsets.all(8.0),
-                                                        child: Observer(builder: (context) {
-                                                          return Row(
-                                                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                            children: auctionViewModel
-                                                                .getProxyBidAmountResponse!.result!.nextValidBid!
-                                                                .map((e) => InkWell(
-                                                                      onTap: () {
-                                                                        auctionViewModel.selectedProxyBid =
-                                                                            e.iNR ?? "0";
-                                                                      },
-                                                                      child: Column(
-                                                                        children: [
-                                                                          Container(
-                                                                            padding: EdgeInsets.symmetric(
-                                                                                horizontal: 8, vertical: 4),
-                                                                            decoration: BoxDecoration(
-                                                                                color: (auctionViewModel
-                                                                                            .selectedProxyBid ==
-                                                                                        (e.iNR ?? "0"))
-                                                                                    ? Color(0xffB45156)
-                                                                                    : Color(0xffF7FAFD),
-                                                                                borderRadius: BorderRadius.circular(8)),
-                                                                            child: Text(
-                                                                                "₹${formateNumber(e.iNR ?? "0")}",
-                                                                                style: Theme.of(context)
-                                                                                    .textTheme
-                                                                                    .button!
-                                                                                    .copyWith(
-                                                                                        color: (auctionViewModel
-                                                                                                    .selectedProxyBid ==
-                                                                                                (e.iNR ?? "0"))
-                                                                                            ? Colors.white
-                                                                                            : Colors.grey)),
-                                                                          ),
-                                                                          SizedBox(
-                                                                            height: 24,
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                    ))
-                                                                .toList(),
-                                                          );
-                                                        }),
-                                                      ),
-                                                      (auctionViewModel.selectedProxyBid.trim() == "")
-                                                          ? Container()
-                                                          : Stack(
-                                                              children: [
-                                                                Positioned(
-                                                                    top: 0,
-                                                                    left: auctionViewModel.getIndex(
-                                                                                auctionViewModel.selectedProxyBid) ==
-                                                                            0
-                                                                        ? 42
-                                                                        : auctionViewModel.getIndex(auctionViewModel
-                                                                                    .selectedProxyBid) ==
-                                                                                1
-                                                                            ? MediaQuery.of(context).size.width / 4 + 42
+                                                // Returning SizedBox instead of a Container
+                                                return StatefulBuilder(builder: (_, builder) {
+                                                  return SizedBox(
+                                                    height: MediaQuery.of(context).size.height - 150,
+                                                    child: Observer(builder: (context) {
+                                                      return Container(
+                                                        height: MediaQuery.of(context).size.height,
+                                                        width: MediaQuery.of(context).size.width,
+                                                        color: Color(0xffEAEEF2),
+                                                        child: Column(
+                                                          mainAxisAlignment: MainAxisAlignment.start,
+                                                          children: <Widget>[
+                                                            Align(
+                                                              alignment: Alignment.topRight,
+                                                              child: IconButton(
+                                                                  onPressed: () {
+                                                                    widget.auctionViewModel.selectedProxyBid = "";
+                                                                    Navigator.of(context).pop();
+                                                                  },
+                                                                  icon: Icon(Icons.close)),
+                                                            ),
+                                                            SizedBox(
+                                                              height: 16,
+                                                            ),
+                                                            Text(
+                                                              "ENTER YOUR PROXY BID",
+                                                              style: Theme.of(context).textTheme.headline5!.copyWith(
+                                                                  letterSpacing: 2,
+                                                                  fontWeight: FontWeight.bold,
+                                                                  color: Colors.black),
+                                                            ),
+                                                            SizedBox(
+                                                              height: 16,
+                                                            ),
+                                                            Text(
+                                                              "My Maximum Proxy Bid",
+                                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                  letterSpacing: 2, fontWeight: FontWeight.bold),
+                                                            ),
+                                                            SizedBox(
+                                                              height: 16,
+                                                            ),
+                                                            SizedBox(
+                                                              width: 350,
+                                                              child: Column(
+                                                                children: [
+                                                                  TextField(
+                                                                    controller: textEditingController,
+                                                                    keyboardType: TextInputType.number,
+                                                                    decoration: InputDecoration(
+                                                                        icon: Image.asset(
+                                                                      "image/rs.png",
+                                                                      height: 16,
+                                                                    )),
+                                                                  ),
+                                                                  SizedBox(
+                                                                      width: 350,
+                                                                      child: Image.asset(
+                                                                        "image/dottedline.png",
+                                                                        height: 2,
+                                                                        fit: BoxFit.fitWidth,
+                                                                      ))
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                              height: 16,
+                                                            ),
+                                                            Text(
+                                                              "Select Next Valid Bid",
+                                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                  letterSpacing: 2, fontWeight: FontWeight.bold),
+                                                            ),
+                                                            SizedBox(
+                                                              height: 16,
+                                                            ),
+                                                            Padding(
+                                                              padding: const EdgeInsets.all(2.0),
+                                                              child: Observer(builder: (context) {
+                                                                return Row(
+                                                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                                  children: auctionViewModel
+                                                                      .getProxyBidAmountResponse!.result!.nextValidBid!
+                                                                      .map((e) => InkWell(
+                                                                            onTap: () {
+                                                                              auctionViewModel.selectedProxyBid =
+                                                                                  e.iNR ?? "0";
+                                                                              textEditingController.text = e.iNR!;
+                                                                            },
+                                                                            child: Column(
+                                                                              children: [
+                                                                                Container(
+                                                                                  padding: EdgeInsets.symmetric(
+                                                                                      horizontal: 8, vertical: 4),
+                                                                                  decoration: BoxDecoration(
+                                                                                      color: (auctionViewModel
+                                                                                                  .selectedProxyBid ==
+                                                                                              (e.iNR ?? "0"))
+                                                                                          ? Color(0xffB45156)
+                                                                                          : Color(0xffF7FAFD),
+                                                                                      borderRadius:
+                                                                                          BorderRadius.circular(8)),
+                                                                                  child: Text(
+                                                                                      "₹${formateNumber(e.iNR ?? "0")}",
+                                                                                      style: Theme.of(context)
+                                                                                          .textTheme
+                                                                                          .caption!
+                                                                                          .copyWith(
+                                                                                              color: (auctionViewModel
+                                                                                                          .selectedProxyBid ==
+                                                                                                      (e.iNR ?? "0"))
+                                                                                                  ? Colors.white
+                                                                                                  : Colors.grey)),
+                                                                                ),
+                                                                                SizedBox(
+                                                                                  height: 24,
+                                                                                ),
+                                                                              ],
+                                                                            ),
+                                                                          ))
+                                                                      .toList(),
+                                                                );
+                                                              }),
+                                                            ),
+                                                            (auctionViewModel.selectedProxyBid == "")
+                                                                ? Container()
+                                                                : Stack(
+                                                                    children: [
+                                                                      Positioned(
+                                                                          top: 0,
+                                                                          left: auctionViewModel.getIndex(
+                                                                                      auctionViewModel
+                                                                                          .selectedProxyBid) ==
+                                                                                  0
+                                                                              ? 42
+                                                                              : auctionViewModel.getIndex(
+                                                                                          auctionViewModel
+                                                                                              .selectedProxyBid) ==
+                                                                                      1
+                                                                                  ? MediaQuery.of(context).size.width /
+                                                                                          4 +
+                                                                                      42
+                                                                                  : auctionViewModel.getIndex(
+                                                                                              auctionViewModel
+                                                                                                  .selectedProxyBid) ==
+                                                                                          2
+                                                                                      ? MediaQuery.of(context)
+                                                                                                  .size
+                                                                                                  .width /
+                                                                                              2 +
+                                                                                          42
+                                                                                      : MediaQuery.of(context)
+                                                                                              .size
+                                                                                              .width -
+                                                                                          42,
+                                                                          child: Image.asset(
+                                                                            "image/top.png",
+                                                                            width: 16,
+                                                                            height: 7.5,
+                                                                          )),
+                                                                      Align(
+                                                                        alignment: auctionViewModel.getIndex(
+                                                                                    auctionViewModel
+                                                                                        .selectedProxyBid) ==
+                                                                                0
+                                                                            ? Alignment.topLeft
                                                                             : auctionViewModel.getIndex(auctionViewModel
                                                                                         .selectedProxyBid) ==
-                                                                                    2
-                                                                                ? MediaQuery.of(context).size.width /
-                                                                                        2 +
-                                                                                    42
-                                                                                : MediaQuery.of(context).size.width -
-                                                                                    42,
-                                                                    child: Image.asset(
-                                                                      "image/top.png",
-                                                                      width: 16,
-                                                                      height: 7.5,
-                                                                    )),
-                                                                Align(
-                                                                  alignment: auctionViewModel.getIndex(
-                                                                              auctionViewModel.selectedProxyBid) ==
-                                                                          0
-                                                                      ? Alignment.topLeft
-                                                                      : auctionViewModel.getIndex(
-                                                                                  auctionViewModel.selectedProxyBid) ==
-                                                                              1
-                                                                          ? Alignment.topCenter
-                                                                          : auctionViewModel.getIndex(auctionViewModel
-                                                                                      .selectedProxyBid) ==
-                                                                                  2
-                                                                              ? Alignment.topCenter
-                                                                              : Alignment.topRight,
-                                                                  child: Container(
-                                                                    margin: EdgeInsets.only(top: 7.5),
-                                                                    padding: EdgeInsets.symmetric(
-                                                                        horizontal: 8, vertical: 4),
-                                                                    decoration: BoxDecoration(
-                                                                        color: Color(0xffB45156),
-                                                                        borderRadius: BorderRadius.circular(8)),
-                                                                    child: Text(
-                                                                        "Your Next Valid Bid ₹${formateNumber(auctionViewModel.selectedProxyBid)}",
-                                                                        style: Theme.of(context)
-                                                                            .textTheme
-                                                                            .subtitle1!
-                                                                            .copyWith(color: Colors.white)),
+                                                                                    1
+                                                                                ? Alignment.topCenter
+                                                                                : auctionViewModel.getIndex(
+                                                                                            auctionViewModel
+                                                                                                .selectedProxyBid) ==
+                                                                                        2
+                                                                                    ? Alignment.topCenter
+                                                                                    : Alignment.topRight,
+                                                                        child: Container(
+                                                                          margin: EdgeInsets.only(top: 7.5),
+                                                                          padding: EdgeInsets.symmetric(
+                                                                              horizontal: 8, vertical: 4),
+                                                                          decoration: BoxDecoration(
+                                                                              color: Color(0xffB45156),
+                                                                              borderRadius: BorderRadius.circular(8)),
+                                                                          child: Text(
+                                                                              "Your Next Valid Bid ₹${formateNumber(auctionViewModel.selectedProxyBid == "" ? "0" : auctionViewModel.selectedProxyBid)}",
+                                                                              style: Theme.of(context)
+                                                                                  .textTheme
+                                                                                  .subtitle1!
+                                                                                  .copyWith(color: Colors.white)),
+                                                                        ),
+                                                                      ),
+                                                                    ],
                                                                   ),
+                                                            Row(
+                                                              children: [
+                                                                Checkbox(
+                                                                    value: checked,
+                                                                    onChanged: (check) {
+                                                                      builder(() {
+                                                                        checked = check ?? false;
+                                                                      });
+                                                                    }),
+                                                                Text(
+                                                                  "I agree to",
+                                                                  style: Theme.of(context)
+                                                                      .textTheme
+                                                                      .subtitle2!
+                                                                      .copyWith(color: Colors.grey),
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 2,
+                                                                ),
+                                                                Text(
+                                                                  "Terms & Conditions",
+                                                                  style: Theme.of(context)
+                                                                      .textTheme
+                                                                      .subtitle2!
+                                                                      .copyWith(
+                                                                          decoration: TextDecoration.underline,
+                                                                          fontWeight: FontWeight.bold),
                                                                 ),
                                                               ],
-                                                            )
-                                                    ],
-                                                  ),
-                                                );
-                                              }),
+                                                            ),
+                                                            SizedBox(
+                                                              height: 4,
+                                                            ),
+                                                            Padding(
+                                                              padding: const EdgeInsets.all(8.0),
+                                                              child: Text(
+                                                                "If placing a proxy bid, enter the max amount you would be writing to bid upto. My Profile Page - To set your Bidding Nickname, you may submit a bid ₹25,000 (next incremental value)",
+                                                                textAlign: TextAlign.justify,
+                                                                style: Theme.of(context)
+                                                                    .textTheme
+                                                                    .subtitle2!
+                                                                    .copyWith(color: Colors.grey),
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                              height: 12,
+                                                            ),
+                                                            InkWell(
+                                                              onTap: () async {
+                                                                if (checked) {
+                                                                  if (widget.auctionViewModel.selectedProxyBid == "") {
+                                                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                                                      content: Text(
+                                                                        "Please Select/Enter Valid Bid",
+                                                                        style: Theme.of(context)
+                                                                            .textTheme
+                                                                            .subtitle2!
+                                                                            .copyWith(color: Colors.white),
+                                                                      ),
+                                                                      backgroundColor: Colors.red,
+                                                                      elevation: 42,
+                                                                    ));
+                                                                  } else {
+                                                                    await widget.auctionViewModel.placeBid(widget.lots,
+                                                                        widget.auctionViewModel.selectedProxyBid, "0");
+
+                                                                    if (widget.auctionViewModel.proxyBidResponse!
+                                                                            .status ==
+                                                                        "true") {
+                                                                      if (widget.auctionViewModel.proxyBidResponse!
+                                                                              .bidStatus ==
+                                                                          "true") {
+                                                                        widget.auctionViewModel.selectedProxyBid = "";
+                                                                        Navigator.of(context).pop();
+
+                                                                        ScaffoldMessenger.of(context)
+                                                                            .showSnackBar(SnackBar(
+                                                                          content: Text(
+                                                                            "${widget.auctionViewModel.proxyBidResponse!.bidMessage}",
+                                                                            style: Theme.of(context)
+                                                                                .textTheme
+                                                                                .subtitle2!
+                                                                                .copyWith(color: Colors.white),
+                                                                          ),
+                                                                          backgroundColor: Colors.green,
+                                                                          elevation: 42,
+                                                                        ));
+                                                                      } else {
+                                                                        widget.auctionViewModel.selectedProxyBid = "";
+                                                                        Navigator.of(context).pop();
+
+                                                                        ScaffoldMessenger.of(context)
+                                                                            .showSnackBar(SnackBar(
+                                                                          content: Text(
+                                                                            "${widget.auctionViewModel.proxyBidResponse!.bidMessage}",
+                                                                            style: Theme.of(context)
+                                                                                .textTheme
+                                                                                .subtitle2!
+                                                                                .copyWith(color: Colors.white),
+                                                                          ),
+                                                                          backgroundColor: Colors.red,
+                                                                          elevation: 42,
+                                                                        ));
+                                                                      }
+                                                                    } else {}
+                                                                  }
+                                                                } else {
+                                                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                                                    content: Text(
+                                                                      "Please accept Terms & Conditions",
+                                                                      style: Theme.of(context)
+                                                                          .textTheme
+                                                                          .subtitle2!
+                                                                          .copyWith(color: Colors.white),
+                                                                    ),
+                                                                    backgroundColor: Colors.red,
+                                                                    elevation: 42,
+                                                                  ));
+                                                                }
+                                                              },
+                                                              child: SizedBox(
+                                                                height: 50,
+                                                                width: 250,
+                                                                child: Stack(
+                                                                  children: [
+                                                                    Container(
+                                                                        height: 50,
+                                                                        width: 250,
+                                                                        decoration: BoxDecoration(
+                                                                            gradient: LinearGradient(colors: [
+                                                                              Color(0xffE74B52),
+                                                                              Color(0xffE74B52),
+                                                                            ]),
+                                                                            // color: Color(0xff466D33),
+                                                                            borderRadius: BorderRadius.circular(24)),
+                                                                        child: Center(
+                                                                          child: Padding(
+                                                                            padding: const EdgeInsets.only(
+                                                                                right: 24.0, left: 24),
+                                                                            child: Text(
+                                                                              "Submit",
+                                                                              style: Theme.of(context)
+                                                                                  .textTheme
+                                                                                  .bodyText1!
+                                                                                  .copyWith(
+                                                                                    color: Color(0XFFFFFFFF),
+                                                                                    fontWeight: FontWeight.bold,
+                                                                                  ),
+                                                                            ),
+                                                                          ),
+                                                                        )),
+                                                                    widget.auctionViewModel.isLoadingForProxy
+                                                                        ? SizedBox(
+                                                                            width: 240,
+                                                                            child: LinearProgressIndicator())
+                                                                        : Container(),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                              height: 24,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      );
+                                                    }),
+                                                  );
+                                                });
+                                              },
                                             );
-                                          });
+                                          }
                                         },
-                                      );
-                                    }
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(right: 8.0, left: 8, top: 12, bottom: 12),
-                                    child: Text(
-                                      'PROXY BID',
-                                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                            color: Color(0XFF2D2D2D),
-                                            fontWeight: FontWeight.bold,
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(right: 8.0, left: 8, top: 12, bottom: 12),
+                                          child: Text(
+                                            'PROXY BID',
+                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                  color: Color(0XFF2D2D2D),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                           ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    // Navigator.push(context, MaterialPageRoute(builder: (context) => GetOtppage()));
-                                  },
-                                  child: Container(
-                                    height: 50,
-                                    // width: 150,
-                                    decoration: BoxDecoration(
-                                        gradient: LinearGradient(colors: [
-                                          Color(0xffE74B52),
-                                          Color(0xffE74B52),
-                                        ]),
-                                        // color: Color(0xff466D33),
-                                        borderRadius: BorderRadius.circular(24)),
-                                    child: Center(
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(right: 32.0, left: 32, top: 12, bottom: 12),
-                                        child: Text(
-                                          'BID NOW',
-                                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                color: Color(0XFFFFFFFF),
-                                                fontWeight: FontWeight.bold,
-                                              ),
                                         ),
                                       ),
-                                    ),
-                                  ),
+                                SizedBox(
+                                  width: 24,
                                 ),
+                                (widget.lots.leadingUser!.id ==
+                                        widget.auctionViewModel.localSharedPrefrence.getUserId())
+                                    ? myDuration.inSeconds > 0
+                                        ? Align(
+                                            alignment: Alignment.topRight,
+                                            child: Container(
+                                              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                                              decoration: BoxDecoration(
+                                                  color: (widget.lots.leadingUser!.id ==
+                                                          widget.auctionViewModel.localSharedPrefrence.getUserId())
+                                                      ? Colors.blue
+                                                      : Colors.red,
+                                                  borderRadius: BorderRadius.circular(16)),
+                                              child: Text(
+                                                  "${(widget.lots.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId()) ? "CURRENTLY LEADING" : widget.lots.bidCount == "0" ? "BOUGHT IN" : "BID CLOSED"}",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .subtitle2!
+                                                      .copyWith(color: Colors.white)),
+                                            ),
+                                          )
+                                        : Container()
+                                    : InkWell(
+                                        onTap: () {
+                                          bool checked = false;
+                                          showModalBottomSheet<void>(
+                                            // context and builder are
+                                            // required properties in this widget
+                                            context: context,
+                                            isScrollControlled: true,
+                                            enableDrag: true,
+                                            isDismissible: true,
+                                            builder: (BuildContext ctx) {
+                                              // we set up a container inside which
+                                              // we create center column and display text
+
+                                              // Returning SizedBox instead of a Container
+                                              return StatefulBuilder(builder: (_, builder) {
+                                                return SizedBox(
+                                                  height: MediaQuery.of(ctx).size.height - 150,
+                                                  child: Observer(builder: (ctx) {
+                                                    return Container(
+                                                      height: MediaQuery.of(ctx).size.height,
+                                                      width: MediaQuery.of(ctx).size.width,
+                                                      color: Color(0xffEAEEF2),
+                                                      child: Column(
+                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                        children: <Widget>[
+                                                          Align(
+                                                            alignment: Alignment.topRight,
+                                                            child: IconButton(
+                                                                onPressed: () {
+                                                                  widget.auctionViewModel.selectedProxyBid = "";
+                                                                  Navigator.of(ctx).pop();
+                                                                },
+                                                                icon: Icon(Icons.close)),
+                                                          ),
+                                                          SizedBox(
+                                                            height: 16,
+                                                          ),
+                                                          Text(
+                                                            "PLACE YOUR BID NOW",
+                                                            style: Theme.of(ctx).textTheme.headline5!.copyWith(
+                                                                letterSpacing: 2,
+                                                                fontWeight: FontWeight.bold,
+                                                                color: Colors.black),
+                                                          ),
+                                                          SizedBox(
+                                                            height: 16,
+                                                          ),
+                                                          // Text("My Maximum Proxy Bid",style: Theme.of(context).textTheme.subtitle1!.copyWith(letterSpacing: 2,fontWeight: FontWeight.bold),),
+                                                          // SizedBox(height: 16,),
+
+                                                          // SizedBox(
+                                                          //   width: 350,
+                                                          //   child: Column(
+                                                          //
+                                                          //     children: [
+                                                          //       TextField(
+                                                          //         controller: textEditingController,
+                                                          //         decoration: InputDecoration(
+                                                          //             icon: Image.asset("image/rs.png",height: 16,)
+                                                          //         ),
+                                                          //
+                                                          //
+                                                          //       ),
+                                                          //       SizedBox(
+                                                          //           width: 350,
+                                                          //           child: Image.asset("image/dottedline.png",height: 2,fit: BoxFit.fitWidth,))
+                                                          //     ],
+                                                          //   ),
+                                                          // ),
+
+                                                          SizedBox(
+                                                            height: 16,
+                                                          ),
+                                                          Text(
+                                                            "Select Next Valid Bid",
+                                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                letterSpacing: 2, fontWeight: FontWeight.bold),
+                                                          ),
+                                                          SizedBox(
+                                                            height: 16,
+                                                          ),
+
+                                                          // Padding(
+                                                          //   padding: const EdgeInsets.all(2.0),
+                                                          //   child: Observer(
+                                                          //       builder: (context) {
+                                                          //         return Row(
+                                                          //           mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                          //           children: auctionViewModel.getProxyBidAmountResponse!.result!.nextValidBid!.map((e) =>
+                                                          //               InkWell(
+                                                          //                 onTap: (){
+                                                          //
+                                                          //                   auctionViewModel.selectedProxyBid=e.iNR??"0";
+                                                          //                   textEditingController.text=e.iNR!;
+                                                          //
+                                                          //                 },
+                                                          //                 child: Column(
+                                                          //                   children: [
+                                                          //                     Container(
+                                                          //                       padding: EdgeInsets.symmetric(horizontal: 8,vertical: 4),
+                                                          //                       decoration: BoxDecoration(
+                                                          //                           color:(auctionViewModel.selectedProxyBid==(e.iNR??"0"))?Color(0xffB45156):Color(0xffF7FAFD) ,
+                                                          //                           borderRadius: BorderRadius.circular(8)
+                                                          //                       ),
+                                                          //                       child: Text("₹${formateNumber(e.iNR??"0")}",style: Theme.of(context).textTheme.caption!.copyWith(color:(auctionViewModel.selectedProxyBid==(e.iNR??"0"))?Colors.white: Colors.grey)),
+                                                          //                     ),
+                                                          //                     SizedBox(height: 24,),
+                                                          //
+                                                          //                   ],
+                                                          //                 ),
+                                                          //               ) ).toList(),
+                                                          //         );
+                                                          //       }
+                                                          //   ),
+                                                          // ),
+                                                          // (auctionViewModel.selectedProxyBid == "")?Container():
+                                                          // Stack(
+                                                          //   children: [
+
+                                                          // Positioned(
+                                                          //     top:0,
+                                                          //     left:auctionViewModel.getIndex(auctionViewModel.selectedProxyBid)==0?42:
+                                                          //     auctionViewModel.getIndex(auctionViewModel.selectedProxyBid)==1?MediaQuery.of(context).size.width/4+42:
+                                                          //     auctionViewModel.getIndex(auctionViewModel.selectedProxyBid)==2?MediaQuery.of(context).size.width/2+42:
+                                                          //     MediaQuery.of(context).size.width-42,
+                                                          //     child: Image.asset("image/top.png",width: 16,height: 7.5,)),
+                                                          Align(
+                                                            alignment: Alignment.topCenter,
+                                                            child: Container(
+                                                              margin: EdgeInsets.only(top: 7.5),
+                                                              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                                              decoration: BoxDecoration(
+                                                                  color: Color(0xffB45156),
+                                                                  borderRadius: BorderRadius.circular(8)),
+                                                              child: Text(
+                                                                  "Your Next Valid Bid ₹${formateNumber(widget.lots.liveStatus!.nextValidBid!.iNR!)}",
+                                                                  style: Theme.of(context)
+                                                                      .textTheme
+                                                                      .subtitle1!
+                                                                      .copyWith(color: Colors.white)),
+                                                            ),
+                                                          ),
+
+                                                          //   ],
+                                                          // ),
+
+                                                          Row(
+                                                            children: [
+                                                              Checkbox(
+                                                                  value: checked,
+                                                                  onChanged: (check) {
+                                                                    builder(() {
+                                                                      checked = check ?? false;
+                                                                    });
+                                                                  }),
+                                                              Text(
+                                                                "I agree to",
+                                                                style: Theme.of(ctx)
+                                                                    .textTheme
+                                                                    .subtitle2!
+                                                                    .copyWith(color: Colors.grey),
+                                                              ),
+                                                              SizedBox(
+                                                                width: 2,
+                                                              ),
+                                                              Text(
+                                                                "Terms & Conditions",
+                                                                style: Theme.of(ctx).textTheme.subtitle2!.copyWith(
+                                                                    decoration: TextDecoration.underline,
+                                                                    fontWeight: FontWeight.bold),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          SizedBox(
+                                                            height: 4,
+                                                          ),
+                                                          Padding(
+                                                            padding: const EdgeInsets.all(8.0),
+                                                            child: Text(
+                                                              "If placing a proxy bid, enter the max amount you would be writing to bid upto. My Profile Page - To set your Bidding Nickname, you may submit a bid ₹25,000 (next incremental value)",
+                                                              textAlign: TextAlign.justify,
+                                                              style: Theme.of(ctx)
+                                                                  .textTheme
+                                                                  .subtitle2!
+                                                                  .copyWith(color: Colors.grey),
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            height: 12,
+                                                          ),
+                                                          InkWell(
+                                                            onTap: () {
+                                                              if (checked) {
+                                                                widget.auctionViewModel.placeBid(widget.lots, "0",
+                                                                    widget.lots.liveStatus!.nextValidBid!.iNR!);
+
+                                                                if (widget.auctionViewModel.proxyBidResponse!.status ==
+                                                                    "true") {
+                                                                  if (widget.auctionViewModel.proxyBidResponse!
+                                                                          .bidStatus ==
+                                                                      "true") {
+                                                                    widget.auctionViewModel.selectedProxyBid = "";
+                                                                    Navigator.of(ctx).pop();
+
+                                                                    ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(
+                                                                      content: Text(
+                                                                        "${widget.auctionViewModel.proxyBidResponse!.bidMessage}",
+                                                                        style: Theme.of(ctx)
+                                                                            .textTheme
+                                                                            .subtitle2!
+                                                                            .copyWith(color: Colors.white),
+                                                                      ),
+                                                                      backgroundColor: Colors.green,
+                                                                      elevation: 42,
+                                                                    ));
+                                                                  } else {
+                                                                    widget.auctionViewModel.selectedProxyBid = "";
+                                                                    Navigator.of(ctx).pop();
+
+                                                                    ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(
+                                                                      content: Text(
+                                                                        "${widget.auctionViewModel.proxyBidResponse!.bidMessage}",
+                                                                        style: Theme.of(ctx)
+                                                                            .textTheme
+                                                                            .subtitle2!
+                                                                            .copyWith(color: Colors.white),
+                                                                      ),
+                                                                      backgroundColor: Colors.red,
+                                                                      elevation: 42,
+                                                                    ));
+                                                                  }
+                                                                }
+                                                              } else {
+                                                                ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(
+                                                                  content: Text(
+                                                                    "Please accept Terms & Conditions",
+                                                                    style: Theme.of(ctx)
+                                                                        .textTheme
+                                                                        .subtitle2!
+                                                                        .copyWith(color: Colors.white),
+                                                                  ),
+                                                                  backgroundColor: Colors.red,
+                                                                  elevation: 42,
+                                                                ));
+                                                              }
+                                                            },
+                                                            child: SizedBox(
+                                                              height: 50,
+                                                              width: 250,
+                                                              child: Stack(
+                                                                children: [
+                                                                  Container(
+                                                                      height: 50,
+                                                                      width: 250,
+                                                                      decoration: BoxDecoration(
+                                                                          gradient: LinearGradient(colors: [
+                                                                            Color(0xffE74B52),
+                                                                            Color(0xffE74B52),
+                                                                          ]),
+                                                                          // color: Color(0xff466D33),
+                                                                          borderRadius: BorderRadius.circular(24)),
+                                                                      child: Center(
+                                                                        child: Padding(
+                                                                          padding: const EdgeInsets.only(
+                                                                              right: 24.0, left: 24),
+                                                                          child: Text(
+                                                                            "Submit",
+                                                                            style: Theme.of(context)
+                                                                                .textTheme
+                                                                                .bodyText1!
+                                                                                .copyWith(
+                                                                                  color: Color(0XFFFFFFFF),
+                                                                                  fontWeight: FontWeight.bold,
+                                                                                ),
+                                                                          ),
+                                                                        ),
+                                                                      )),
+                                                                  widget.auctionViewModel.isLoadingForProxy
+                                                                      ? const SizedBox(
+                                                                          width: 240, child: LinearProgressIndicator())
+                                                                      : Container(),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                            height: 24,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    );
+                                                  }),
+                                                );
+                                              });
+                                            },
+                                          );
+                                          // Navigator.push(context, MaterialPageRoute(builder: (context) => GetOtppage()));
+                                        },
+                                        child: Container(
+                                          height: 50,
+                                          // width: 150,
+                                          decoration: BoxDecoration(
+                                              gradient: const LinearGradient(colors: [
+                                                Color(0xffE74B52),
+                                                Color(0xffE74B52),
+                                              ]),
+                                              // color: Color(0xff466D33),
+                                              borderRadius: BorderRadius.circular(24)),
+                                          child: Center(
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.only(right: 32.0, left: 32, top: 12, bottom: 12),
+                                              child: Text(
+                                                'BID NOW',
+                                                style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                      color: const Color(0XFFFFFFFF),
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
                               ],
+                            ),
+                            SizedBox(
+                              width: 16,
                             ),
                             SizedBox(
                               height: 8,
@@ -1445,18 +1975,18 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                           isScrollControlled: true,
                                           enableDrag: true,
                                           isDismissible: true,
-                                          builder: (BuildContext context) {
+                                          builder: (BuildContext ctx) {
                                             // we set up a container inside which
                                             // we create center column and display text
 
                                             // Returning SizedBox instead of a Container
                                             return StatefulBuilder(builder: (_, builder) {
                                               return SizedBox(
-                                                height: MediaQuery.of(context).size.height - 150,
-                                                child: Observer(builder: (context) {
+                                                height: MediaQuery.of(ctx).size.height - 150,
+                                                child: Observer(builder: (ctx) {
                                                   return Container(
-                                                    height: MediaQuery.of(context).size.height,
-                                                    width: MediaQuery.of(context).size.width,
+                                                    height: MediaQuery.of(ctx).size.height,
+                                                    width: MediaQuery.of(ctx).size.width,
                                                     color: Color(0xffEAEEF2),
                                                     child: Column(
                                                       mainAxisAlignment: MainAxisAlignment.start,
@@ -1466,7 +1996,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                           child: IconButton(
                                                               onPressed: () {
                                                                 widget.auctionViewModel.selectedProxyBid = "";
-                                                                Navigator.of(context).pop();
+                                                                Navigator.of(ctx).pop();
                                                               },
                                                               icon: Icon(Icons.close)),
                                                         ),
@@ -1475,7 +2005,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                         ),
                                                         Text(
                                                           "PLACE YOUR BID NOW",
-                                                          style: Theme.of(context).textTheme.headline5!.copyWith(
+                                                          style: Theme.of(ctx).textTheme.headline5!.copyWith(
                                                               letterSpacing: 2,
                                                               fontWeight: FontWeight.bold,
                                                               color: Colors.black),
@@ -1595,7 +2125,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                                 }),
                                                             Text(
                                                               "I agree to",
-                                                              style: Theme.of(context)
+                                                              style: Theme.of(ctx)
                                                                   .textTheme
                                                                   .subtitle2!
                                                                   .copyWith(color: Colors.grey),
@@ -1605,7 +2135,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                             ),
                                                             Text(
                                                               "Terms & Conditions",
-                                                              style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                                                              style: Theme.of(ctx).textTheme.subtitle2!.copyWith(
                                                                   decoration: TextDecoration.underline,
                                                                   fontWeight: FontWeight.bold),
                                                             ),
@@ -1619,7 +2149,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                           child: Text(
                                                             "If placing a proxy bid, enter the max amount you would be writing to bid upto. My Profile Page - To set your Bidding Nickname, you may submit a bid ₹25,000 (next incremental value)",
                                                             textAlign: TextAlign.justify,
-                                                            style: Theme.of(context)
+                                                            style: Theme.of(ctx)
                                                                 .textTheme
                                                                 .subtitle2!
                                                                 .copyWith(color: Colors.grey),
@@ -1640,12 +2170,12 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                                         .auctionViewModel.proxyBidResponse!.bidStatus ==
                                                                     "true") {
                                                                   widget.auctionViewModel.selectedProxyBid = "";
-                                                                  Navigator.of(context).pop();
+                                                                  Navigator.of(ctx).pop();
 
-                                                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                                                  ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(
                                                                     content: Text(
                                                                       "${widget.auctionViewModel.proxyBidResponse!.bidMessage}",
-                                                                      style: Theme.of(context)
+                                                                      style: Theme.of(ctx)
                                                                           .textTheme
                                                                           .subtitle2!
                                                                           .copyWith(color: Colors.white),
@@ -1655,12 +2185,12 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                                   ));
                                                                 } else {
                                                                   widget.auctionViewModel.selectedProxyBid = "";
-                                                                  Navigator.of(context).pop();
+                                                                  Navigator.of(ctx).pop();
 
-                                                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                                                  ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(
                                                                     content: Text(
                                                                       "${widget.auctionViewModel.proxyBidResponse!.bidMessage}",
-                                                                      style: Theme.of(context)
+                                                                      style: Theme.of(ctx)
                                                                           .textTheme
                                                                           .subtitle2!
                                                                           .copyWith(color: Colors.white),
@@ -1671,10 +2201,10 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                                 }
                                                               }
                                                             } else {
-                                                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                                              ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(
                                                                 content: Text(
                                                                   "Please accept Terms & Conditions",
-                                                                  style: Theme.of(context)
+                                                                  style: Theme.of(ctx)
                                                                       .textTheme
                                                                       .subtitle2!
                                                                       .copyWith(color: Colors.white),

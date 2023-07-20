@@ -3,12 +3,13 @@ import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/data/network/models/request/kyc/UpdateRegBankingDetailsRequest.dart';
 import 'package:giftex/data/network/models/request/kyc/UpdateRegMyAddressRequest.dart';
 import 'package:giftex/data/network/models/request/kyc/UpdateRegPersonalDetailsRequest.dart';
+import 'package:giftex/data/network/models/responce/liveauction/upcommingauctionresponse.dart';
+import 'package:giftex/data/network/models/responce/lot/upcominglotsresponse.dart';
 import 'package:giftex/data/network/models/responce/profile/GetRegInfoResponse.dart';
 import 'package:giftex/data/network/models/responce/profile/GetUserAllDetailsResponse.dart';
 import 'package:giftex/data/network/models/responce/purchase/mypurchasereponse.dart';
 import 'package:giftex/data/network/models/responce/user/dashboardoverviewreponse.dart';
 import 'package:giftex/data/network/models/responce/user/getlastbidresponce.dart';
-import 'package:giftex/data/network/models/responce/user/myauctiongalleryresponce.dart';
 import 'package:giftex/data/network/repository/auction/auctionrepo.dart';
 import 'package:giftex/data/network/repository/profile/profileRopo.dart';
 import 'package:giftex/data/network/repository/userdetails/userrepo.dart';
@@ -38,7 +39,7 @@ abstract class _ProfileViewModel with Store {
   MyPurchaseReponse? myPurchaseReponse;
 
   @observable
-  MyAuctionGalleryResponce? myAuctionGalleryResponce;
+  UpComingLotsResponse? myAuctionGalleryResponce;
 
   @observable
   DashboradOverviewResponse? dashboradOverviewResponse;
@@ -199,7 +200,7 @@ abstract class _ProfileViewModel with Store {
   }
 
   @observable
-  GetRegInfoResponse? getRegInfoResponse=GetRegInfoResponse();
+  GetRegInfoResponse? getRegInfoResponse = GetRegInfoResponse();
   Future<HttpResponse> getRegInfo() async {
     isloading = true;
 
@@ -211,6 +212,4 @@ abstract class _ProfileViewModel with Store {
     isloading = false;
     return httpResponse;
   }
-
-
 }

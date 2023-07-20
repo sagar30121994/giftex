@@ -17,19 +17,10 @@ class GetOtpEmailMobilepage extends StatefulWidget {
 class _GetOtpEmailMobilepageState extends State<GetOtpEmailMobilepage> with TickerProviderStateMixin {
   String loginType = "signup";
 
-  Timer? timer;
-  Duration myDuration = Duration(seconds: 90);
+  Duration myDuration = Duration(seconds: 95);
+  Timer? countdownTimer;
   startTimer() {
-    final reduceSecondsBy = 1;
-    timer = Timer.periodic(Duration(seconds: 1), (_) async {
-      final secondss = myDuration.inSeconds - reduceSecondsBy;
-
-      if (secondss < 0) {
-        timer!.cancel();
-      } else {
-        myDuration = Duration(seconds: secondss);
-      }
-    });
+    countdownTimer = Timer.periodic(Duration(seconds: 1), (_) => setCountDown());
   }
 
   @override
@@ -40,8 +31,33 @@ class _GetOtpEmailMobilepageState extends State<GetOtpEmailMobilepage> with Tick
     } else {
       widget.loginViewModel.verifyEmail();
     }
+    startTimer();
 
     super.initState();
+  }
+
+  String hours = "00";
+  String minutes = "00";
+  String seconds = "00";
+
+  void setCountDown() {
+    final reduceSecondsBy = 1;
+
+    final secondss = myDuration.inSeconds - reduceSecondsBy;
+    if (secondss < 0) {
+      countdownTimer!.cancel();
+    } else {
+      myDuration = Duration(seconds: secondss);
+    }
+    String strDigits(int n) => n.toString().padLeft(2, '0');
+    final days = strDigits(myDuration.inHours);
+    // Step 7
+
+    setState(() {
+      hours = strDigits(myDuration.inHours);
+      minutes = strDigits(myDuration.inMinutes.remainder(60));
+      seconds = strDigits(myDuration.inSeconds.remainder(60));
+    });
   }
 
   @override
@@ -239,13 +255,24 @@ class _GetOtpEmailMobilepageState extends State<GetOtpEmailMobilepage> with Tick
                               crossAxisAlignment: CrossAxisAlignment.end,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Text(
-                                  "RESEND NOW",
-                                  textAlign: TextAlign.center,
-                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                      color: Theme.of(context).colorScheme.secondary,
-                                      fontWeight: FontWeight.w600,
-                                      decoration: TextDecoration.underline),
+                                InkWell(
+                                  onTap: () async {
+                                    if (widget.isMobile) {
+                                      widget.loginViewModel.verifyMobile();
+                                    } else {
+                                      widget.loginViewModel.verifyEmail();
+                                    }
+                                  },
+                                  child: Text(
+                                    "RESEND NOW",
+                                    textAlign: TextAlign.center,
+                                    style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                        color: myDuration.inSeconds == 0
+                                            ? Theme.of(context).colorScheme.secondary
+                                            : Colors.grey,
+                                        fontWeight: FontWeight.w600,
+                                        decoration: TextDecoration.underline),
+                                  ),
                                 ),
                                 SizedBox(
                                   height: 4,
@@ -259,7 +286,7 @@ class _GetOtpEmailMobilepageState extends State<GetOtpEmailMobilepage> with Tick
                                     SizedBox(
                                       width: 8,
                                     ),
-                                    Text("${myDuration.inMinutes}:${myDuration.inSeconds.remainder(60)}")
+                                    Text("${minutes}:${seconds}")
                                   ],
                                 ),
                               ],

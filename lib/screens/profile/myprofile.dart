@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:giftex/data/network/base/base.dart';
-import 'package:giftex/data/network/models/responce/profile/GetUserAllDetailsResponse.dart';
-import 'package:giftex/screens/components/bottomnavigationbar/dashborard2.dart';
+import 'package:giftex/viewmodel/bottomviewmodel.dart';
+import 'package:intl/intl.dart';
 
-import '../../utils/bottumNavBar.dart';
 import '../components/footer/footer.dart';
 import '../components/header.dart';
 
 class MyProfilepage extends StatefulWidget {
-  GetUserAllDetailsResponse? getUserAllDetailsResponse;
-  MyProfilepage(this.getUserAllDetailsResponse);
+  BottomViewModel bottomViewModel;
+  MyProfilepage(this.bottomViewModel);
 
   @override
   _MyProfilepageState createState() => _MyProfilepageState();
@@ -34,24 +31,40 @@ class _MyProfilepageState extends State<MyProfilepage> {
 
   @override
   void initState() {
-
     // TODO: implement initState
     nameController.text =
-        "${(widget.getUserAllDetailsResponse!.result!.profile!.basicDetails!.firstName ?? '')} ${(widget.getUserAllDetailsResponse!.result!.profile!.basicDetails!.lastName ?? '')}";
-    adharController.text = "${(widget.getUserAllDetailsResponse!.result!.profile!.bankDetails!.adhaarCardNum ?? '')}";
-    panController.text = "${(widget.getUserAllDetailsResponse!.result!.profile!.bankDetails!.panCardNum ?? '')}";
-    emailController.text = "${(widget.getUserAllDetailsResponse!.result!.profile!.basicDetails!.email ?? '')}";
-    contactController.text = "${(widget.getUserAllDetailsResponse!.result!.profile!.basicDetails!.mobile ?? '')}";
-    dobController.text = "${(widget.getUserAllDetailsResponse!.result!.profile!.basicDetails!.dob ?? '')}";
-    genderController.text = "${(widget.getUserAllDetailsResponse!.result!.profile!.basicDetails!.gender ?? '')}";
+        "${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.basicDetails!.firstName ?? '')} ${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.basicDetails!.lastName ?? '')}";
+    adharController.text =
+        "${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.bankDetails!.adhaarCardNum ?? '')}";
+    panController.text =
+        "${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.bankDetails!.panCardNum ?? '')}";
+    emailController.text =
+        "${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.basicDetails!.email ?? '')}";
+    contactController.text =
+        "${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.basicDetails!.mobile ?? '')}";
+    dobController.text =
+        "${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.basicDetails!.dob ?? '')}";
+    genderController.text =
+        "${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.basicDetails!.gender ?? '')}";
     nationalityController.text =
-        "${(widget.getUserAllDetailsResponse!.result!.profile!.basicDetails!.nationality ?? '')}";
+        "${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.basicDetails!.nationality ?? '')}";
 
-    depositAmountController.text = "${(widget.getUserAllDetailsResponse!.result!.profile!.dipositedAmount ?? '0')}";
+    depositAmountController.text =
+        "${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.dipositedAmount ?? '0')}";
     depositmodeController.text = "";
     bidLimitController.text = "";
-
+    widget.bottomViewModel.profileViewModel!.getDashboardOverview().then((value) {
+      bidLimitController.text =
+          " ₹${formateNumber('${widget.bottomViewModel.profileViewModel!.dashboradOverviewResponse!.totalSpent}')}";
+      depositmodeController.text = "";
+    });
     super.initState();
+  }
+
+  String formateNumber(String number) {
+    var f = NumberFormat('##,##,##,##,###.##', 'HI');
+
+    return f.format(double.parse(number));
   }
 
   @override
@@ -59,7 +72,6 @@ class _MyProfilepageState extends State<MyProfilepage> {
     return Scaffold(
       appBar: NavBar(),
       backgroundColor: Colors.white,
-
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * .9,
@@ -87,7 +99,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
                       CircleAvatar(
                         radius: 37,
                         backgroundImage: NetworkImage(
-                            '${baseUrl + (widget.getUserAllDetailsResponse!.result!.profile!.basicDetails!.profilePicUrl ?? '')}'),
+                            '${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.basicDetails!.profilePicUrl ?? '')}'),
                         // child: Image.asset("image/image 40.png",fit: BoxFit.fill,),
                       ),
                     ],
@@ -120,7 +132,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                     ),
                                     TextSpan(
                                       text:
-                                          '${(widget.getUserAllDetailsResponse!.result!.profile!.basicDetails!.firstName ?? '')}',
+                                          '${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.basicDetails!.firstName ?? '')}',
                                       style: Theme.of(context).textTheme.headline6!.copyWith(
                                             color: Colors.black,
                                             fontWeight: FontWeight.bold,
@@ -142,10 +154,11 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                   SizedBox(
                                     width: 3,
                                   ),
-                                  widget.getUserAllDetailsResponse!.result!.profile!.address!.isEmpty
+                                  widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!
+                                          .address!.isEmpty
                                       ? Container()
                                       : Text(
-                                          '${(widget.getUserAllDetailsResponse!.result!.profile!.address!.first!.city ?? '')}',
+                                          '${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address!.first!.city ?? '')}',
                                           textAlign: TextAlign.center,
                                           style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                 color: Color(0xff2D2D2D),
@@ -421,7 +434,8 @@ class _MyProfilepageState extends State<MyProfilepage> {
                           width: MediaQuery.of(context).size.width * .9,
                           child: ListView.builder(
                             // itemExtent: 150,
-                            itemCount: widget.getUserAllDetailsResponse!.result!.profile!.address!.length,
+                            itemCount: widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!
+                                .profile!.address!.length,
                             scrollDirection: Axis.vertical,
                             itemBuilder: (context, index) => Padding(
                               padding: const EdgeInsets.only(left: 0.0, right: 0.0, top: 8),
@@ -445,7 +459,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                             Expanded(
                                               flex: 3,
                                               child: Text(
-                                                "${widget.getUserAllDetailsResponse!.result!.profile!.address?[index].type ?? ''}",
+                                                "${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].type ?? ''}",
                                                 textAlign: TextAlign.start,
                                                 style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                       color: Color(0xff2D2D2D),
@@ -506,7 +520,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                       ),
                                       Flexible(
                                         child: Text(
-                                          "${widget.getUserAllDetailsResponse!.result!.profile!.address?[index].addLine1 ?? ''} ${widget.getUserAllDetailsResponse!.result!.profile!.address?[index].addLine2 ?? ''}, ${widget.getUserAllDetailsResponse!.result!.profile!.address?[index].city ?? ''}, ${widget.getUserAllDetailsResponse!.result!.profile!.address?[index].state ?? ''}, ${widget.getUserAllDetailsResponse!.result!.profile!.address?[index].country ?? ''} - ${widget.getUserAllDetailsResponse!.result!.profile!.address?[index].pinCode ?? ''}.",
+                                          "${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].addLine1 ?? ''} ${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].addLine2 ?? ''}, ${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].city ?? ''}, ${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].state ?? ''}, ${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].country ?? ''} - ${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].pinCode ?? ''}.",
                                           textAlign: TextAlign.left,
                                           style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                 color: Color(0xff959595),
@@ -659,9 +673,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                   fontWeight: FontWeight.w500,
                                 ),
                             decoration: InputDecoration(
-                                labelText: 'Bid Limit', hintText: '`10,00,000', isDense: true,
-                              prefixText: "\u20b9 "
-                            ),
+                                labelText: 'Bid Limit', hintText: '`10,00,000', isDense: true, prefixText: "\u20b9 "),
                           ),
                         ),
                         SizedBox(
@@ -761,7 +773,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
             //SizedBox(height: 1270, width: MediaQuery.of(context).size.width, child: Footer()),
             Container(
               color: Color(0xff1F2A52),
-          //    height: 30,
+              //    height: 30,
               width: MediaQuery.of(context).size.width,
             ),
             /* SizedBox(
@@ -771,10 +783,9 @@ class _MyProfilepageState extends State<MyProfilepage> {
           ],
         )),
       ),
-
-      bottomNavigationBar: CommonBottumNavBar(3),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton:CommonFloatingActionButton(),
+      // bottomNavigationBar: CommonBottumNavBar(3),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // floatingActionButton: CommonFloatingActionButton(),
     );
   }
 }

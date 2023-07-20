@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:giftex/data/network/models/responce/termsresponse.dart';
 import 'package:giftex/data/network/models/responce/user/signupres.dart';
 import 'package:giftex/data/network/models/responce/user/verifyemailresponse.dart';
 
@@ -154,9 +155,45 @@ class LoginRepo {
       print(responce);
 
       if (responce.statusCode == 200) {
+        if (responce.data['status'] == "true") {
+          httpResponse.status = responce.statusCode;
+          httpResponse.message = 'Successful';
+          httpResponse.data = LoginResponse.fromJson(responce.data);
+        } else {
+          httpResponse.status = 401;
+          httpResponse.message = responce.data['message'];
+          // httpResponse.data = LoginResponse.fromJson(responce.data);
+        }
+      } else {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = responce.data['message'];
+        httpResponse.data = null;
+      }
+      return httpResponse;
+    }).catchError((err) {
+      print(err);
+      httpResponse.status = 400;
+      httpResponse.message = err.toString();
+      httpResponse.data = err.toString();
+      return httpResponse;
+    });
+
+    return httpResponse;
+  }
+
+  Future<HttpResponse> termsAndCondiations() async {
+    HttpResponse httpResponse = HttpResponse();
+    // String userlogin=json.encode(LoginReqestModel);
+    // httpClient!.client!.options =
+    //     BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    await httpClient!.post(BaseUrl.CMSBaseurl + endPoints.User().termsandconditions,
+        body: {"authkey_web": "", "authkey_mobile": "", "userid": "", "CRMClientID": ""}).then((responce) async {
+      print(responce);
+
+      if (responce.statusCode == 200) {
         httpResponse.status = responce.statusCode;
         httpResponse.message = 'Successful';
-        httpResponse.data = LoginResponse.fromJson(responce.data);
+        httpResponse.data = TermsAndConditionsResponse.fromJson(responce.data);
       } else {
         httpResponse.status = responce.statusCode;
         httpResponse.message = responce.data['message'];
