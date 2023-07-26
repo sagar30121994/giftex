@@ -55,7 +55,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
     bidLimitController.text = "";
     widget.bottomViewModel.profileViewModel!.getDashboardOverview().then((value) {
       bidLimitController.text =
-          " ₹${formateNumber('${widget.bottomViewModel.profileViewModel!.dashboradOverviewResponse!.totalSpent}')}";
+          "${formateNumber('${widget.bottomViewModel.profileViewModel!.dashboradOverviewResponse!.totalSpent}')}";
       depositmodeController.text = "";
     });
     super.initState();

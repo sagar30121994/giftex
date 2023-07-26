@@ -54,7 +54,7 @@ dependencies:
   syncfusion_flutter_charts: ^22.1.37
   page_transition: "^2.0.4"
   autocomplete_textfield: ^2.0.1
-  flutter_hooks: ^0.18.5+1
+  flutter_hooks: ^0.20.0
   floating_bottom_navigation_bar: ^1.5.2
   sliver_tools: ^0.2.8
   curved_navigation_bar: ^1.0.3

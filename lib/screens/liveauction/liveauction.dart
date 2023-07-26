@@ -299,7 +299,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
         auctionViewModel.auctionType == "live"
             ? auctionViewModel.upcomingAuctionResponse == null
                 ? SliverToBoxAdapter(child: Container())
-                : (auctionViewModel.upcomingAuctionResponse!.result!.auctions ?? []).length == 0
+                : (auctionViewModel.upcomingAuctionResponse!.result?.auctions ?? []).length == 0
                     ? SliverToBoxAdapter(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,

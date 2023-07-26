@@ -25,7 +25,7 @@ class BrowsUpcommingItem extends StatefulWidget {
 
 class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
   Timer? countdownTimer;
-  Duration myDuration = Duration(days: 5);
+  Duration myDuration = Duration(seconds: 0);
 
   FirebaseDatabase database = FirebaseDatabase.instance;
   DatabaseReference? lotReference;
@@ -105,12 +105,12 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
     });
   }
 
-  // @override
-  // void dispose() {
-  //   // TODO: implement dispose
-  //   resetTimer();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    // setState(() => myDuration = Duration());
+    super.dispose();
+  }
 
   // void setCountDown() {
   //   final reduceSecondsBy = 1;

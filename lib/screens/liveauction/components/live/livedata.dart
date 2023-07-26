@@ -109,7 +109,7 @@ class _LiveDataState extends State<LiveData> {
                           ? Observer(builder: (context) {
                               return SliverList(
                                 delegate: SliverChildBuilderDelegate(
-                                  addAutomaticKeepAlives: true,
+                                  addAutomaticKeepAlives: false,
                                   (BuildContext context, int index) {
                                     // return BrowseItemListItem(auctionViewModel.upcomingAuctionResponse!.result!.auctions![index],index);
 

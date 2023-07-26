@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:giftex/data/network/base/base.dart';
 import 'package:giftex/screens/liveauction/browsitemlistitem.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
 import 'package:giftex/viewmodel/profile/profileviewmodel.dart';
@@ -75,7 +74,7 @@ class _MyAuctionReviewpageState extends State<MyAuctionReviewpage> {
                           CircleAvatar(
                             radius: 37,
                             backgroundImage: NetworkImage(
-                                '${baseUrl + (widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.basicDetails!.profilePicUrl ?? '')}'),
+                                '${(widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.basicDetails!.profilePicUrl ?? '')}'),
                             // child: Image.asset("image/image 40.png",fit: BoxFit.fill,),
                           ),
                         ],

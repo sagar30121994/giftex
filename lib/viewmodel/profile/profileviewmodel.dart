@@ -3,7 +3,6 @@ import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/data/network/models/request/kyc/UpdateRegBankingDetailsRequest.dart';
 import 'package:giftex/data/network/models/request/kyc/UpdateRegMyAddressRequest.dart';
 import 'package:giftex/data/network/models/request/kyc/UpdateRegPersonalDetailsRequest.dart';
-import 'package:giftex/data/network/models/responce/liveauction/upcommingauctionresponse.dart';
 import 'package:giftex/data/network/models/responce/lot/upcominglotsresponse.dart';
 import 'package:giftex/data/network/models/responce/profile/GetRegInfoResponse.dart';
 import 'package:giftex/data/network/models/responce/profile/GetUserAllDetailsResponse.dart';
@@ -165,7 +164,7 @@ abstract class _ProfileViewModel with Store {
 
   Future<HttpResponse> getAuctionGallery() async {
     isloading = true;
-
+    myAuctionGalleryResponce = null;
     HttpResponse httpResponse = await userRepo!.getAuctionGallery();
 
     if (httpResponse.status == 200) {

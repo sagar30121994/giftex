@@ -1,45 +1,27 @@
 {
   "project_info": {
-    "project_number": "389151760156",
-    "firebase_url": "https://astaguru-uat-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "astaguru-uat",
-    "storage_bucket": "astaguru-uat.appspot.com"
+    "project_number": "773979056230",
+    "firebase_url": "https://giftex-uat-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "giftex-uat",
+    "storage_bucket": "giftex-uat.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:389151760156:android:d1c3e0bac789d4724f64d9",
+        "mobilesdk_app_id": "1:773979056230:android:718479a2546ace6b4f25a7",
         "android_client_info": {
-          "package_name": "com.astaguru"
+          "package_name": "com.giftex"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "389151760156-qjjt0f5lpr6gdh1j8jg62g57csi5v9h1.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDjlx7G0PMhhIpzWRJQ_yB53ZzQwx7o0JA"
+          "current_key": "AIzaSyB39Z0NQ0fr57PsWFFrKCJQA1jaqmSHy74"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "389151760156-qjjt0f5lpr6gdh1j8jg62g57csi5v9h1.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "389151760156-kqruqhjrqieh1qg6dd06vg6uhnf96t17.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.astaguru",
-                "app_store_id": "1483891832"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

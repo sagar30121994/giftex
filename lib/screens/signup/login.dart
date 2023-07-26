@@ -696,8 +696,8 @@ class _LoginpageState extends State<Loginpage> {
                                     alignment: Alignment.bottomCenter,
                                     child: InkWell(
                                       onTap: () {
-                                        if (loginViewModel.loginViewModelMobileErrorState.hasErrors &&
-                                            MOBILEController.text.length >= 5) {
+                                        if (loginViewModel.loginViewModelMobileErrorState.hasErrors ||
+                                            MOBILEController.text.length <= 5) {
                                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                             content: Text(
                                               'Enter A Valid Mobile Number',

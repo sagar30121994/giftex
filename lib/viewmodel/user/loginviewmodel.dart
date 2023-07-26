@@ -298,7 +298,7 @@ abstract class _LoginViewModel with Store {
         fcmTockenWebsite: "",
         loginFrom: "Website",
         password: "",
-        userid: loginResponse!.result!.userid ?? ""));
+        userid: ""));
 
     if (httpResponse.status == 200) {
       loginResponse = httpResponse.data;

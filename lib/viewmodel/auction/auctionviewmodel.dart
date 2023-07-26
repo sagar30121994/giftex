@@ -2,7 +2,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:giftex/data/local/client/prefs.dart';
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/data/network/models/request/webapimodel/showintrestinauctionrequestmodel.dart';
-import 'package:giftex/data/network/models/responce/home/seachRsponse.dart' as search;
 import 'package:giftex/data/network/models/responce/liveauction/auctionresultresponse.dart';
 import 'package:giftex/data/network/models/responce/liveauction/singleauctiondetailsresponse.dart';
 import 'package:giftex/data/network/models/responce/liveauction/upcommingauctionresponse.dart';
@@ -108,6 +107,11 @@ abstract class _AuctionViewModel with Store {
   @action
   Future<HttpResponse> getUpcommingAuction(String auction) async {
     isLoadingForUpCommingAuction = true;
+
+    upComingLotsResponse = null;
+    myAuctionGalleryResponse = null;
+    getsingleResponse = null;
+    getliveauctionsResponse = null;
 
     HttpResponse httpResponse = await auctionRepo.getUpcommingAuction(auction, page);
 
@@ -269,29 +273,28 @@ abstract class _AuctionViewModel with Store {
 
   @observable
 //  search.SearchResponse? newsearchResponse=search.SearchResponse();
-  UpComingLotsResponse? newsearchResponse=UpComingLotsResponse();
+  UpComingLotsResponse? newsearchResponse = UpComingLotsResponse();
 
   @action
   Future<HttpResponse> getGlobalauctions(String search) async {
     isLoadingForlots = true;
-    newsearchResponse=null;
+    newsearchResponse = null;
     HttpResponse httpResponse = await auctionRepo.getGlobalauctions(search);
 
     if (httpResponse.status == 200) {
-
       searchResponse = httpResponse.data;
     }
     isLoadingForlots = false;
     return httpResponse;
   }
+
   Future<HttpResponse> SearchGlobalauctions(String search) async {
     isLoadingForlots = true;
-    newsearchResponse=null;
+    newsearchResponse = null;
     HttpResponse httpResponse = await auctionRepo.SearchGlobalauctions(search);
 
     if (httpResponse.status == 200) {
-      newsearchResponse=httpResponse.data;
-
+      newsearchResponse = httpResponse.data;
     }
     isLoadingForlots = false;
     return httpResponse;
@@ -375,28 +378,24 @@ abstract class _AuctionViewModel with Store {
     return httpResponse;
   }
 
-
-
-  Future<HttpResponse> showIntrestInAuction(String name, String email, String countryCOde,String phone,String messae,String auctionId) async {
+  Future<HttpResponse> showIntrestInAuction(
+      String name, String email, String countryCOde, String phone, String messae, String auctionId) async {
     isLoadingForUpCommingAuction = true;
-    ShowIntrestRequestModel requestModel=ShowIntrestRequestModel();
-    requestModel.message=messae;
-    requestModel.name=name;
-    requestModel.email=email;
-    requestModel.mobile=phone;
-    requestModel.message=messae;
-    requestModel.auctionId=auctionId;
-    requestModel.countryCode='91';
-    requestModel.userid=localSharedPrefrence.getUserId();
-    requestModel.authkeyWeb=localSharedPrefrence.getAuthKeyWeb();
-
-
-
+    ShowIntrestRequestModel requestModel = ShowIntrestRequestModel();
+    requestModel.message = messae;
+    requestModel.name = name;
+    requestModel.email = email;
+    requestModel.mobile = phone;
+    requestModel.message = messae;
+    requestModel.auctionId = auctionId;
+    requestModel.countryCode = '91';
+    requestModel.userid = localSharedPrefrence.getUserId();
+    requestModel.authkeyWeb = localSharedPrefrence.getAuthKeyWeb();
 
     HttpResponse httpResponse = await webapimodelRepo.showIntrestInAuction(requestModel);
 
     if (httpResponse.status == 200) {
-     // getliveauctionsResponse = httpResponse.data;
+      // getliveauctionsResponse = httpResponse.data;
     }
     isLoadingForUpCommingAuction = false;
     return httpResponse;
@@ -424,6 +423,4 @@ abstract class _AuctionViewModel with Store {
       }
     });
   }
-
-
 }
