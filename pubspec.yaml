@@ -78,6 +78,7 @@ dependencies:
 #  validators: ^3.0.0
   share: ^2.0.4
   image_picker: ^1.0.1
+  firebase_crashlytics: ^3.3.4
 
 
 
