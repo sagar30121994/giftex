@@ -25,16 +25,17 @@ class DefaultFirebaseOptions {
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
+
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
+
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
+              'you can reconfigure this by running the FlutterFire CLI again.',
         );
+
+
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -53,11 +54,23 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDjlx7G0PMhhIpzWRJQ_yB53ZzQwx7o0JA',
-    appId: '1:389151760156:android:d1c3e0bac789d4724f64d9',
-    messagingSenderId: '389151760156',
-    projectId: 'astaguru-uat',
-    databaseURL: 'https://astaguru-uat-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'astaguru-uat.appspot.com',
+    apiKey: 'AIzaSyB39Z0NQ0fr57PsWFFrKCJQA1jaqmSHy74',
+    appId: '1:773979056230:android:718479a2546ace6b4f25a7',
+    messagingSenderId: '773979056230',
+    projectId: 'giftex-uat',
+    databaseURL: 'https://giftex-uat-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'giftex-uat.appspot.com',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyAzPSPP_o7YV43kZP5dp07RBOHeXLgiXPA',
+    appId: '1:773979056230:ios:298275f83d6b442c4f25a7',
+    messagingSenderId: '773979056230',
+    projectId: 'giftex-uat',
+    storageBucket: 'giftex-uat.appspot.com',
+    databaseURL: 'https://giftex-uat-default-rtdb.asia-southeast1.firebasedatabase.app',
+    // androidClientId: '654489104519-6nm9sdroh4ashtqvololvu0meqr1sl8u.apps.googleusercontent.com',
+    // iosClientId: '654489104519-o9jc47c1015ogqlv8p55ke4fqmop4feb.apps.googleusercontent.com',
+    iosBundleId: 'com.giftex',
   );
 }

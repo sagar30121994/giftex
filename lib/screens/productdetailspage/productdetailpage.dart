@@ -424,14 +424,17 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                         widget.lots.auctionType == "1"
                             ? Row(
                                 children: [
-                                  Text(
-                                    "${widget.lots.lotTitle}",
-                                    textAlign: TextAlign.start,
-                                    style: Theme.of(context).textTheme.headline6!.copyWith(
-                                          color: Colors.black,
-                                          letterSpacing: 2,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                  SizedBox(
+                                    width:MediaQuery.of(context).size.width*.5,
+                                    child: Text(
+                                      "${widget.lots.lotTitle}",
+                                      textAlign: TextAlign.start,
+                                      style: Theme.of(context).textTheme.headline6!.copyWith(
+                                            color: Colors.black,
+                                            letterSpacing: 2,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                    ),
                                   ),
                                   Spacer(),
                                   IconButton(
@@ -477,12 +480,15 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                             ? Container()
                             : Row(
                                 children: [
-                                  Text(
-                                    '${widget.lots.info!.title}',
-                                    style: Theme.of(context).textTheme.headline6!.copyWith(
-                                          color: Color(0xffE74B52),
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                  SizedBox(
+                                    width:MediaQuery.of(context).size.width*.5,
+                                    child: Text(
+                                      '${widget.lots.info!.title}',
+                                      style: Theme.of(context).textTheme.headline6!.copyWith(
+                                            color: Color(0xffE74B52),
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                    ),
                                   ),
                                   Spacer(),
                                   ElevatedButton(

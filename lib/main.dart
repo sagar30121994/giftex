@@ -12,8 +12,8 @@ SharedPreferences? myGlobalPreference;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  //  (!Firebase.apps.length) ? Firebase.initializeApp( options: DefaultFirebaseOptions.currentPlatform,)
-  //     : Firebase.app()
+   // (!Firebase.apps.length) ? Firebase.initializeApp( options: DefaultFirebaseOptions.currentPlatform,)
+   //    : Firebase.app()
   myGlobalPreference = await SharedPreferences.getInstance();
   runApp(MyApp());
 }
