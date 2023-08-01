@@ -112,6 +112,7 @@ abstract class _AuctionViewModel with Store {
     myAuctionGalleryResponse = null;
     getsingleResponse = null;
     getliveauctionsResponse = null;
+    upcomingAuctionResponse = null;
 
     HttpResponse httpResponse = await auctionRepo.getUpcommingAuction(auction, page);
 

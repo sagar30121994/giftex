@@ -1357,9 +1357,9 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                               ),
                               (hours == "" && minutes == "" && seconds == "")
                                   ? Container(
-                                height: 80,
-
-                              )
+                                      height: 80,
+                                      width: MediaQuery.of(context).size.width,
+                                    )
                                   : (hours == "00" && minutes == "00" && seconds == "00")
                                       ? Container(
                                           child: (widget.lots.leadingUser!.id ==
