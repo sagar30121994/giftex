@@ -101,14 +101,12 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
           Lots l1 = Lots.fromJson(cleanup as Map<String, dynamic>);
 
           setState(() {
-
             String isLike = widget.lots.isLiked!;
-
 
             widget.lots = l1;
 
-            if(widget.lots.leadingUser!.id! != widget.auctionViewModel.localSharedPrefrence.getUserId()){
-              widget.lots.isLiked=isLike;
+            if (widget.lots.leadingUser!.id! != widget.auctionViewModel.localSharedPrefrence.getUserId()) {
+              widget.lots.isLiked = isLike;
             }
 
             widget.auctionViewModel.replaceLots(l1);
