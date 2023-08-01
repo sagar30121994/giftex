@@ -101,7 +101,16 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
           Lots l1 = Lots.fromJson(cleanup as Map<String, dynamic>);
 
           setState(() {
+
+            String isLike = widget.lots.isLiked!;
+
+
             widget.lots = l1;
+
+            if(widget.lots.leadingUser!.id! != widget.auctionViewModel.localSharedPrefrence.getUserId()){
+              widget.lots.isLiked=isLike;
+            }
+
             widget.auctionViewModel.replaceLots(l1);
           });
           setState(() {
@@ -1347,7 +1356,10 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                 height: 8,
                               ),
                               (hours == "" && minutes == "" && seconds == "")
-                                  ? Container()
+                                  ? Container(
+                                height: 80,
+
+                              )
                                   : (hours == "00" && minutes == "00" && seconds == "00")
                                       ? Container(
                                           child: (widget.lots.leadingUser!.id ==
