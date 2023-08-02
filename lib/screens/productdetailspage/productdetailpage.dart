@@ -106,6 +106,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
     });
 
     likeReference.onValue.listen((DatabaseEvent event) {
+      print("*********" + event.toString());
       final data = event.snapshot.value;
       if (data.toString() != "null") {
         setState(() {

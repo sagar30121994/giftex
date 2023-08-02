@@ -32,7 +32,7 @@ class _LiveDataState extends State<LiveData> {
   Widget build(BuildContext context) {
     return Observer(builder: (context) {
       return (widget.auctionViewModel.liveAuctionType != "closingschedule")
-          ? (widget.auctionViewModel.isLoadingForlots && widget.auctionViewModel.isLoadingForUpCommingAuction)
+          ? (widget.auctionViewModel.isLoadingForlots || widget.auctionViewModel.isLoadingForUpCommingAuction)
               ? SliverToBoxAdapter(child: LinearProgressIndicator())
               : widget.auctionViewModel.upcomingAuctionResponse!.result == null
                   ? SliverToBoxAdapter(
@@ -83,74 +83,68 @@ class _LiveDataState extends State<LiveData> {
                       }),
                     )
                   : widget.auctionViewModel.liveAuctionType == "mygallery"
-                      ? Observer(builder: (context) {
-                          return SliverList(
-                            delegate: SliverChildBuilderDelegate(
-                              addAutomaticKeepAlives: true,
-                              (BuildContext context, int index) {
-                                // return BrowseItemListItem(auctionViewModel.upcomingAuctionResponse!.result!.auctions![index],index);
-                                return Observer(builder: (context) {
-                                  return BrowseItemListItem(
-                                      widget.auctionViewModel.myAuctionGalleryResponse!.result!.lots![index],
-                                      widget.auctionViewModel.isGrid,
-                                      widget.auctionViewModel);
-                                });
-                              },
-                              // 40 list items
-                              childCount: widget.auctionViewModel.myAuctionGalleryResponse == null
-                                  ? 0
-                                  : widget.auctionViewModel.myAuctionGalleryResponse!.result!.lots == null
-                                      ? 0
-                                      : widget.auctionViewModel.myAuctionGalleryResponse!.result!.lots!.length,
-                            ),
-                          );
-                        })
+                      ? SliverList(
+                          delegate: SliverChildBuilderDelegate(
+                            // addAutomaticKeepAlives: true,
+                            (BuildContext context, int index) {
+                              // return BrowseItemListItem(auctionViewModel.upcomingAuctionResponse!.result!.auctions![index],index);
+                              return Observer(builder: (context) {
+                                return BrowseItemListItem(
+                                    widget.auctionViewModel.myAuctionGalleryResponse!.result!.lots![index],
+                                    widget.auctionViewModel.isGrid,
+                                    widget.auctionViewModel);
+                              });
+                            },
+                            // 40 list items
+                            childCount: widget.auctionViewModel.myAuctionGalleryResponse == null
+                                ? 0
+                                : widget.auctionViewModel.myAuctionGalleryResponse!.result!.lots == null
+                                    ? 0
+                                    : widget.auctionViewModel.myAuctionGalleryResponse!.result!.lots!.length,
+                          ),
+                        )
                       : widget.auctionViewModel.liveAuctionType == "browselist"
-                          ? Observer(builder: (context) {
-                              return SliverList(
-                                delegate: SliverChildBuilderDelegate(
-                                  addAutomaticKeepAlives: false,
-                                  (BuildContext context, int index) {
-                                    // return BrowseItemListItem(auctionViewModel.upcomingAuctionResponse!.result!.auctions![index],index);
+                          ? SliverList(
+                              delegate: SliverChildBuilderDelegate(
+                                // addAutomaticKeepAlives: true,
+                                (BuildContext context, int index) {
+                                  // return BrowseItemListItem(auctionViewModel.upcomingAuctionResponse!.result!.auctions![index],index);
 
-                                    return Observer(builder: (context) {
-                                      return BrowseItemListItem(
-                                          widget.auctionViewModel.upComingLotsResponse!.result!.lots![index],
-                                          widget.auctionViewModel.isGrid,
-                                          widget.auctionViewModel);
-                                    });
-                                  },
-                                  // 40 list items
-                                  childCount: widget.auctionViewModel.upComingLotsResponse == null
-                                      ? 0
-                                      : widget.auctionViewModel.upComingLotsResponse!.result!.lots == null
-                                          ? 0
-                                          : widget.auctionViewModel.upComingLotsResponse!.result!.lots!.length,
-                                ),
-                              );
-                            })
-                          : Observer(builder: (context) {
-                              return SliverList(
-                                delegate: SliverChildBuilderDelegate(
-                                  addAutomaticKeepAlives: true,
-                                  (BuildContext contXext, int index) {
-                                    // return BrowseItemListItem(auctionViewModel.upcomingAuctionResponse!.result!.auctions![index],index);
-                                    return Observer(builder: (context) {
-                                      return BrowseItemListItem(
-                                          widget.auctionViewModel.getliveauctionsResponse!.result!.lots![index],
-                                          widget.auctionViewModel.isGrid,
-                                          widget.auctionViewModel);
-                                    });
-                                  },
-                                  // 40 list items
-                                  childCount: widget.auctionViewModel.getliveauctionsResponse == null
-                                      ? 0
-                                      : widget.auctionViewModel.getliveauctionsResponse!.result!.lots == null
-                                          ? 0
-                                          : widget.auctionViewModel.getliveauctionsResponse!.result!.lots!.length,
-                                ),
-                              );
-                            })
+                                  return Observer(builder: (context) {
+                                    return BrowseItemListItem(
+                                        widget.auctionViewModel.upComingLotsResponse!.result!.lots![index],
+                                        widget.auctionViewModel.isGrid,
+                                        widget.auctionViewModel);
+                                  });
+                                },
+                                // 40 list items
+                                childCount: widget.auctionViewModel.upComingLotsResponse == null
+                                    ? 0
+                                    : widget.auctionViewModel.upComingLotsResponse!.result!.lots == null
+                                        ? 0
+                                        : widget.auctionViewModel.upComingLotsResponse!.result!.lots!.length,
+                              ),
+                            )
+                          : SliverList(
+                              delegate: SliverChildBuilderDelegate(
+                                // addAutomaticKeepAlives: true,
+                                (BuildContext contXext, int index) {
+                                  // return BrowseItemListItem(auctionViewModel.upcomingAuctionResponse!.result!.auctions![index],index);
+                                  return Observer(builder: (context) {
+                                    return BrowseItemListItem(
+                                        widget.auctionViewModel.getliveauctionsResponse!.result!.lots![index],
+                                        widget.auctionViewModel.isGrid,
+                                        widget.auctionViewModel);
+                                  });
+                                },
+                                // 40 list items
+                                childCount: widget.auctionViewModel.getliveauctionsResponse == null
+                                    ? 0
+                                    : widget.auctionViewModel.getliveauctionsResponse!.result!.lots == null
+                                        ? 0
+                                        : widget.auctionViewModel.getliveauctionsResponse!.result!.lots!.length,
+                              ),
+                            )
           : SliverToBoxAdapter(child: Container());
     });
   }
