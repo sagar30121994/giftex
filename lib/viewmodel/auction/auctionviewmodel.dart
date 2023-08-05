@@ -194,7 +194,7 @@ abstract class _AuctionViewModel with Store {
       getliveauctionsResponse = tempResponse;
     } else if (liveAuctionType == "mygallery") {
       tempResponse.result!.lots!.sort(
-        (a, b) => int.parse(a.lotNumber!).compareTo(int.parse(b.lotNumber!)),
+        (a, b) => int.parse(b.lotNumber!).compareTo(int.parse(a.lotNumber!)),
       );
 
       myAuctionGalleryResponse = tempResponse;
@@ -228,7 +228,7 @@ abstract class _AuctionViewModel with Store {
       //   :  tempResponse.result!.lots!.where((item) => item == x).length
       // };
       tempResponse.result!.lots!.sort(
-        (a, b) => int.parse(b.lotNumber!).compareTo(int.parse(a.lotNumber!)),
+        (a, b) => int.parse(a.lotNumber!).compareTo(int.parse(b.lotNumber!)),
       );
 
       myAuctionGalleryResponse = tempResponse;

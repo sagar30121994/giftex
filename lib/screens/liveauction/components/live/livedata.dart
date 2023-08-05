@@ -85,7 +85,8 @@ class _LiveDataState extends State<LiveData> {
                   : widget.auctionViewModel.liveAuctionType == "mygallery"
                       ? SliverList(
                           delegate: SliverChildBuilderDelegate(
-                            // addAutomaticKeepAlives: true,
+                            addAutomaticKeepAlives: true,
+
                             (BuildContext context, int index) {
                               // return BrowseItemListItem(auctionViewModel.upcomingAuctionResponse!.result!.auctions![index],index);
                               return Observer(builder: (context) {
@@ -106,7 +107,7 @@ class _LiveDataState extends State<LiveData> {
                       : widget.auctionViewModel.liveAuctionType == "browselist"
                           ? SliverList(
                               delegate: SliverChildBuilderDelegate(
-                                // addAutomaticKeepAlives: true,
+                                addAutomaticKeepAlives: true,
                                 (BuildContext context, int index) {
                                   // return BrowseItemListItem(auctionViewModel.upcomingAuctionResponse!.result!.auctions![index],index);
 
@@ -127,7 +128,7 @@ class _LiveDataState extends State<LiveData> {
                             )
                           : SliverList(
                               delegate: SliverChildBuilderDelegate(
-                                // addAutomaticKeepAlives: true,
+                                addAutomaticKeepAlives: true,
                                 (BuildContext contXext, int index) {
                                   // return BrowseItemListItem(auctionViewModel.upcomingAuctionResponse!.result!.auctions![index],index);
                                   return Observer(builder: (context) {
