@@ -35,23 +35,27 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
 
   initiateTimer() {
     // stopTimer();
-    setState(() {
-      myDuration = Duration(seconds: int.parse(widget.lots.liveStatus!.remainingSeconds ?? "0"));
-    });
 
     // if(countdownTimer != null){
     //   countdownTimer!.cancel();
     // }
-    countdownTimer = Timer.periodic(Duration(seconds: 1), (_) => setCountDown());
+    if ((widget.lots.status ?? "") != "UpComing") {
+      setState(() {
+        myDuration = Duration(seconds: int.parse(widget.lots.liveStatus!.remainingSeconds ?? "0"));
+      });
+      countdownTimer = Timer.periodic(Duration(seconds: 1), (_) => setCountDown());
+    }
   }
 
   @override
   void initState() {
-    print("remaining time ${widget.lots.liveStatus!.remainingSeconds}");
+    print("remaining time ${widget.lots.status!}");
 
-    initiateTimer();
+    if ((widget.lots.status ?? "") != "UpComing") {
+      initiateTimer();
 
-    startTimer();
+      startTimer();
+    }
 
     checkEvent();
 
@@ -101,33 +105,37 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
           Lots l1 = Lots.fromJson(cleanup as Map<String, dynamic>);
 
           setState(() {
-
             String isLike = widget.lots.isLiked!;
-
 
             widget.lots = l1;
 
-            if(widget.lots.leadingUser!.id! != widget.auctionViewModel.localSharedPrefrence.getUserId()){
-              widget.lots.isLiked=isLike;
+            if (widget.lots.leadingUser!.id! != widget.auctionViewModel.localSharedPrefrence.getUserId()) {
+              widget.lots.isLiked = isLike;
             }
 
             widget.auctionViewModel.replaceLots(l1);
           });
-          setState(() {
-            myDuration = Duration(seconds: int.parse(widget.lots.liveStatus!.remainingSeconds ?? "0"));
-          });
+          if (widget.lots.status != "UpComing") {
+            setState(() {
+              myDuration = Duration(seconds: int.parse(widget.lots.liveStatus!.remainingSeconds ?? "0"));
+            });
+          }
         }
       }
     });
 
     likeReference.onValue.listen((DatabaseEvent event) {
+      print("*********" + event.toString());
       if (event.snapshot.value != null && !isFirstLike) {
         final data = event.snapshot.value;
-        if (data.toString() != "null") {
-          setState(() {
-            widget.lots.isLiked = data.toString();
-          });
-        }
+        // if (data.toString() != "null") {
+        //   setState(() {
+        //     widget.lots.isLiked = data.toString();
+        //   });
+        // }
+        setState(() {
+          widget.lots.isLiked = data.toString();
+        });
       }
     });
   }
@@ -157,23 +165,25 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
   String seconds = "";
 
   void setCountDown() {
-    final reduceSecondsBy = 1;
+    if (widget.lots.status != "UpComing") {
+      final reduceSecondsBy = 1;
 
-    final secondss = myDuration.inSeconds - reduceSecondsBy;
-    if (secondss < 0) {
-      countdownTimer!.cancel();
-    } else {
-      myDuration = Duration(seconds: secondss);
+      final secondss = myDuration.inSeconds - reduceSecondsBy;
+      if (secondss < 0) {
+        countdownTimer!.cancel();
+      } else {
+        myDuration = Duration(seconds: secondss);
+      }
+      String strDigits(int n) => n.toString().padLeft(2, '0');
+      final days = strDigits(myDuration.inHours);
+      // Step 7
+
+      setState(() {
+        hours = strDigits(myDuration.inHours);
+        minutes = strDigits(myDuration.inMinutes.remainder(60));
+        seconds = strDigits(myDuration.inSeconds.remainder(60));
+      });
     }
-    String strDigits(int n) => n.toString().padLeft(2, '0');
-    final days = strDigits(myDuration.inHours);
-    // Step 7
-
-    setState(() {
-      hours = strDigits(myDuration.inHours);
-      minutes = strDigits(myDuration.inMinutes.remainder(60));
-      seconds = strDigits(myDuration.inSeconds.remainder(60));
-    });
   }
 
   String formateNumber(String number) {
@@ -360,7 +370,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                     Text(
                                       "Current Bid",
                                       textAlign: TextAlign.center,
-                                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                                             color: Color(0xff747474),
                                             fontWeight: FontWeight.w400,
                                           ),
@@ -1357,9 +1367,9 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                               ),
                               (hours == "" && minutes == "" && seconds == "")
                                   ? Container(
-                                height: 80,
-
-                              )
+                                      height: 80,
+                                      width: MediaQuery.of(context).size.width,
+                                    )
                                   : (hours == "00" && minutes == "00" && seconds == "00")
                                       ? Container(
                                           child: (widget.lots.leadingUser!.id ==
@@ -1388,7 +1398,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                 Text(
                                                   "Current Bid",
                                                   textAlign: TextAlign.center,
-                                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                                                         color: Color(0xff747474),
                                                         fontWeight: FontWeight.w400,
                                                       ),
@@ -1414,7 +1424,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                 Text(
                                                   "Next Valid Bid",
                                                   textAlign: TextAlign.center,
-                                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                                                         color: Color(0xff747474),
                                                         fontWeight: FontWeight.w400,
                                                       ),
@@ -1449,7 +1459,15 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                               InkWell(
                                 onTap: () {
                                   widget.auctionViewModel.addRemoveLotToWishlist(
-                                      widget.lots, (widget.lots.isLiked ?? "false") == "true" ? "false" : "true");
+                                      widget.lots, (widget.lots.isLiked ?? "false") == "true" ? "false" : "true").then((value) => {
+                                        setState((){
+                                          if((widget.lots.isLiked ?? "false") == "true"){
+                                            widget.lots.isLiked="false";
+                                          }else{
+                                            widget.lots.isLiked="true";
+                                          }
+                                        })
+                                  });
                                   if (bottom.bottomViewModel.selectedIndex == 14) {
                                     bottom.bottomViewModel.profileViewModel!.getAuctionGallery();
                                   }
@@ -1996,7 +2014,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                           ),
                                         ),
                                   SizedBox(
-                                    width: 16,
+                                    width: 8,
                                   ),
                                   (widget.lots.leadingUser!.id ==
                                           widget.auctionViewModel.localSharedPrefrence.getUserId())
@@ -2335,7 +2353,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                             child: Center(
                                               child: Padding(
                                                 padding:
-                                                    const EdgeInsets.only(right: 32.0, left: 32, top: 12, bottom: 12),
+                                                    const EdgeInsets.only(right: 24.0, left: 24, top: 12, bottom: 12),
                                                 child: Text(
                                                   'BID NOW',
                                                   style: Theme.of(context).textTheme.bodyText1!.copyWith(

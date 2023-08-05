@@ -53,7 +53,6 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
         FirebaseDatabase.instance.ref("userlike/" + widget.auctionViewModel.localSharedPrefrence.getUserId());
 
     userlikeReference.onValue.listen((DatabaseEvent event) {
-      print(event);
       final data = event.snapshot.value;
       if (data.toString() != "null" && !isFirstLike) {
         isFirstLike = true;
@@ -92,15 +91,14 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
     });
 
     likeReference.onValue.listen((DatabaseEvent event) {
-      if (event.snapshot.value != null && !isFirstLike) {
-        final data = event.snapshot.value;
-        if (data.toString() != "null" && !isFirstLike) {
-          isFirstLike = true;
-        } else {
-          setState(() {
-            widget.lots.isLiked = data.toString();
-          });
-        }
+      final data = event.snapshot.value;
+      print(event);
+      if (data.toString() != "null" && !isFirstLike) {
+        isFirstLike = true;
+      } else {
+        setState(() {
+          widget.lots.isLiked = data.toString();
+        });
       }
     });
   }
