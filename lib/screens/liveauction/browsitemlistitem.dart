@@ -2356,5 +2356,5 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
 
   @override
   // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => true;
+  bool get wantKeepAlive => false;
 }
