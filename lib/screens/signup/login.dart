@@ -576,7 +576,8 @@ class _LoginpageState extends State<Loginpage> {
                                                       Navigator.pushReplacement(
                                                           context,
                                                           MaterialPageRoute(
-                                                              builder: (BuildContext context) => KYCPage())),
+                                                              builder: (BuildContext context) =>
+                                                                  KYCPage(loginViewModel.name))),
                                                     }
                                                   else
                                                     {

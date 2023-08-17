@@ -418,18 +418,21 @@ class ProxyStatus {
   String? status;
   dynamic maxProxyAmount;
   Bid? proxyAmount;
+  String? Id;
 
-  ProxyStatus({this.status, this.maxProxyAmount, this.proxyAmount});
+  ProxyStatus({this.status, this.maxProxyAmount, this.proxyAmount, this.Id});
 
   ProxyStatus.fromJson(Map<String, dynamic> json) {
     status = json['Status'];
     maxProxyAmount = json['MaxProxyAmount'];
     proxyAmount = json['ProxyAmount'] != null ? new Bid.fromJson(json['ProxyAmount']) : null;
+    Id = json['Id'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['Status'] = this.status;
+    data['Id'] = this.Id;
     data['MaxProxyAmount'] = this.maxProxyAmount;
     if (this.proxyAmount != null) {
       data['ProxyAmount'] = this.proxyAmount!.toJson();

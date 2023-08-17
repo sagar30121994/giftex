@@ -783,7 +783,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                                     width: 16,
                                                   ),
                                                   SizedBox(
-                                                    width: MediaQuery.of(context).size.width * .4,
+                                                    width: MediaQuery.of(context).size.width * .35,
                                                     child: Text(
                                                       'Medium: ${widget.lots.info!.medium}',
                                                       style: Theme.of(context).textTheme.subtitle1!.copyWith(

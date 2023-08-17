@@ -27,7 +27,17 @@ class _GetOtpEmailMobilepageState extends State<GetOtpEmailMobilepage> with Tick
   void initState() {
     // TODO: implement initState
     if (widget.isMobile) {
-      widget.loginViewModel.verifyMobile();
+      widget.loginViewModel.verifyMobile().then((value) {
+        if (widget.loginViewModel.verifyMobileResponse!.status == "false") {
+          Navigator.of(context).pop();
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(
+              widget.loginViewModel.verifyMobileResponse!.message ?? "",
+            ),
+            backgroundColor: Colors.red,
+          ));
+        }
+      });
     } else {
       widget.loginViewModel.verifyEmail();
     }
