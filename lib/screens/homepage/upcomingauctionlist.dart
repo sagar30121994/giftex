@@ -99,7 +99,7 @@ class _UpcomingAuctionItemState extends State<UpcomingAuctionItem> with Automati
                           setState(() {
                             auctionViewModel.upComingLotsResponse = null;
                             auctionViewModel.selectedAuction =
-                                auctionViewModel.upcomingAuctionResponse!.result!.auctions![3];
+                                auctionViewModel.upcomingAuctionResponse!.result!.auctions![widget.index];
 
                             widget.bottomViewModel.setIndex(8);
                           });
