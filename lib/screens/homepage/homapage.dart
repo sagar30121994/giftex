@@ -665,6 +665,328 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                           ),
                                         )
                                       : Container(),
+                                  auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length > 2
+                                      ? Container(
+                                          width: MediaQuery.of(context).size.width,
+                                          height: 220,
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                              image: NetworkImage(
+                                                  "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![2].image}"),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                          child: Column(children: [
+                                            // homeViewModel.homeUpcommingAuctionResponse!.auctionArray!.map((e) =>
+                                            Container(
+                                              width: MediaQuery.of(context).size.width,
+                                              height: 220,
+                                              color: Color(0xffEAEEF2).withOpacity(.4),
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(20.0),
+                                                child: Column(
+                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    const SizedBox(
+                                                      height: 0,
+                                                    ),
+                                                    SizedBox(
+                                                      width: MediaQuery.of(context).size.width * .70,
+                                                      child: Text(
+                                                        "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![2].auctionName}",
+                                                        textAlign: TextAlign.start,
+                                                        style: Theme.of(context).textTheme.headline6!.copyWith(
+                                                              color: Colors.black,
+                                                              overflow: TextOverflow.ellipsis,
+                                                              fontWeight: FontWeight.bold,
+                                                            ),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 8,
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          auctionViewModel.upComingLotsResponse = null;
+                                                          setState(() {
+                                                            auctionViewModel.selectedAuction = auctionViewModel
+                                                                .upcomingAuctionResponse!.result!.auctions![2];
+
+                                                            bottomViewModel.setIndex(8);
+                                                          });
+                                                          auctionViewModel.liveAuctionType = "lots";
+                                                          auctionViewModel.auctionType = "upcoming";
+                                                        });
+                                                      },
+                                                      child: Container(
+                                                        padding: EdgeInsets.all(8),
+                                                        decoration: BoxDecoration(
+                                                            color: Color(0xffEAEEF2),
+                                                            borderRadius: BorderRadius.all(Radius.circular(10))),
+                                                        child: Text(
+                                                          "EXPLORE",
+                                                          textAlign: TextAlign.start,
+                                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                color: Colors.black,
+                                                                fontWeight: FontWeight.bold,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 8,
+                                                    ),
+                                                    SizedBox(
+                                                      width: MediaQuery.of(context).size.width * .70,
+                                                      child: Text(
+                                                        "${homeViewModel.homeUpcommingAuctionResponse!.auctionArray![2].displayDate}",
+                                                        textAlign: TextAlign.start,
+                                                        style: Theme.of(context).textTheme.headline6!.copyWith(
+                                                              color: Colors.black87,
+                                                              fontWeight: FontWeight.w400,
+                                                            ),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 8,
+                                                    ),
+                                                    SizedBox(
+                                                      width: MediaQuery.of(context).size.width * .70,
+                                                      child: Text(
+                                                        "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![2].displayDate}",
+                                                        textAlign: TextAlign.start,
+                                                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                            color: Colors.black87,
+                                                            fontWeight: FontWeight.bold,
+                                                            letterSpacing: 0.772727),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 14,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ]),
+                                        )
+                                      : Container(),
+                                  auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length > 3
+                                      ? Container(
+                                          width: MediaQuery.of(context).size.width,
+                                          height: 220,
+                                          decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                image: NetworkImage(
+                                                    "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![3].image}"),
+                                                fit: BoxFit.cover,
+                                              ),
+                                              color: Color(0xff495E93).withOpacity(1)),
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.end,
+                                            crossAxisAlignment: CrossAxisAlignment.end,
+                                            children: [
+                                              Container(
+                                                  width: MediaQuery.of(context).size.width,
+                                                  height: 220,
+                                                  color: Color(0xffEAEEF2).withOpacity(.4),
+                                                  child: Padding(
+                                                    padding: EdgeInsets.only(right: 12.0),
+                                                    child: Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                                      children: [
+                                                        SizedBox(
+                                                          height: 12,
+                                                        ),
+                                                        SizedBox(
+                                                          width: MediaQuery.of(context).size.width * .70,
+                                                          child: Text(
+                                                            "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![3].auctionName}",
+                                                            textAlign: TextAlign.end,
+                                                            style: Theme.of(context).textTheme.headline6!.copyWith(
+                                                                  color: Colors.white,
+                                                                  fontWeight: FontWeight.bold,
+                                                                ),
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 16,
+                                                        ),
+                                                        InkWell(
+                                                          onTap: () {
+                                                            setState(() {
+                                                              auctionViewModel.liveAuctionType = "lots";
+                                                              auctionViewModel.auctionType = "upcoming";
+                                                              auctionViewModel.selectedAuction = auctionViewModel
+                                                                  .upcomingAuctionResponse!.result!.auctions![3];
+
+                                                              bottomViewModel.setIndex(8);
+                                                            });
+                                                          },
+                                                          child: Container(
+                                                            padding: EdgeInsets.only(
+                                                                left: 30, right: 10, top: 10, bottom: 10),
+                                                            decoration: BoxDecoration(
+                                                                color: Color(0xffEAEEF2),
+                                                                borderRadius: BorderRadius.all(Radius.circular(10))),
+                                                            child: Text(
+                                                              "EXPLORE",
+                                                              textAlign: TextAlign.start,
+                                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                  color: Color(0xff2D2D2D),
+                                                                  fontWeight: FontWeight.bold,
+                                                                  letterSpacing: 1),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 5,
+                                                        ),
+                                                        SizedBox(
+                                                          width: MediaQuery.of(context).size.width * .70,
+                                                          child: Text(
+                                                            "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![3].displayDate}",
+                                                            textAlign: TextAlign.end,
+                                                            style: Theme.of(context).textTheme.headline6!.copyWith(
+                                                                  color: Colors.white,
+                                                                  fontWeight: FontWeight.w300,
+                                                                ),
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 5,
+                                                        ),
+                                                        SizedBox(
+                                                          width: MediaQuery.of(context).size.width * .70,
+                                                          child: Text(
+                                                            "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![3].displayDate}",
+                                                            textAlign: TextAlign.end,
+                                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                                  color: Colors.white,
+                                                                  fontWeight: FontWeight.bold,
+                                                                ),
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  )),
+                                            ],
+                                          ),
+                                        )
+                                      : Container(),
+                                  auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length > 4
+                                      ? Container(
+                                          width: MediaQuery.of(context).size.width,
+                                          height: 220,
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                              image: NetworkImage(
+                                                  "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![4].image}"),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                          child: Column(children: [
+                                            // homeViewModel.homeUpcommingAuctionResponse!.auctionArray!.map((e) =>
+                                            Container(
+                                              width: MediaQuery.of(context).size.width,
+                                              height: 220,
+                                              color: Color(0xffEAEEF2).withOpacity(.4),
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(20.0),
+                                                child: Column(
+                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    const SizedBox(
+                                                      height: 0,
+                                                    ),
+                                                    SizedBox(
+                                                      width: MediaQuery.of(context).size.width * .70,
+                                                      child: Text(
+                                                        "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![4].auctionName}",
+                                                        textAlign: TextAlign.start,
+                                                        style: Theme.of(context).textTheme.headline6!.copyWith(
+                                                              color: Colors.black,
+                                                              overflow: TextOverflow.ellipsis,
+                                                              fontWeight: FontWeight.bold,
+                                                            ),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 8,
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          auctionViewModel.upComingLotsResponse = null;
+                                                          setState(() {
+                                                            auctionViewModel.selectedAuction = auctionViewModel
+                                                                .upcomingAuctionResponse!.result!.auctions![4];
+
+                                                            bottomViewModel.setIndex(8);
+                                                          });
+                                                          auctionViewModel.liveAuctionType = "lots";
+                                                          auctionViewModel.auctionType = "upcoming";
+                                                        });
+                                                      },
+                                                      child: Container(
+                                                        padding: EdgeInsets.all(8),
+                                                        decoration: BoxDecoration(
+                                                            color: Color(0xffEAEEF2),
+                                                            borderRadius: BorderRadius.all(Radius.circular(10))),
+                                                        child: Text(
+                                                          "EXPLORE",
+                                                          textAlign: TextAlign.start,
+                                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                color: Colors.black,
+                                                                fontWeight: FontWeight.bold,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 8,
+                                                    ),
+                                                    SizedBox(
+                                                      width: MediaQuery.of(context).size.width * .70,
+                                                      child: Text(
+                                                        "${homeViewModel.homeUpcommingAuctionResponse!.auctionArray![4].displayDate}",
+                                                        textAlign: TextAlign.start,
+                                                        style: Theme.of(context).textTheme.headline6!.copyWith(
+                                                              color: Colors.black87,
+                                                              fontWeight: FontWeight.w400,
+                                                            ),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 8,
+                                                    ),
+                                                    SizedBox(
+                                                      width: MediaQuery.of(context).size.width * .70,
+                                                      child: Text(
+                                                        "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![4].displayDate}",
+                                                        textAlign: TextAlign.start,
+                                                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                            color: Colors.black87,
+                                                            fontWeight: FontWeight.bold,
+                                                            letterSpacing: 0.772727),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 14,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ]),
+                                        )
+                                      : Container(),
                                 ],
                               );
 

@@ -8,6 +8,7 @@ import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/data/network/models/responce/profile/GetRegInfoResponse.dart';
 import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
 import 'package:giftex/screens/homepage/liveitem.dart';
+import 'package:giftex/screens/homepage/upcomingauctionlist.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
 
 import '../../viewmodel/profile/profileviewmodel.dart';
@@ -610,295 +611,299 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                           ),
 
                                           // ListView.builder(itemBuilder: ()P),
-                                          auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length > 2
-                                              ? Container(
-                                                  decoration: BoxDecoration(color: Color(0xffEAEEF2)),
-                                                  padding: EdgeInsets.symmetric(vertical: 32, horizontal: 4),
-                                                  margin: EdgeInsets.only(top: 32),
-                                                  width: MediaQuery.of(context).size.width,
-                                                  child: Row(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                    children: [
-                                                      Image.network(
-                                                        "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![1].image}",
-                                                        fit: BoxFit.contain,
-                                                        height: 120,
-                                                      ),
-                                                      Column(
-                                                        crossAxisAlignment: CrossAxisAlignment.end,
-                                                        children: [
-                                                          SizedBox(
-                                                            height: 16,
-                                                          ),
-                                                          SizedBox(
-                                                            width: MediaQuery.of(context).size.width * .5,
-                                                            child: Text(
-                                                              "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![1].auctionName!}",
-                                                              style: Theme.of(context).textTheme.headline6!.copyWith(
-                                                                  color: Colors.black, fontWeight: FontWeight.bold),
-                                                              textAlign: TextAlign.justify,
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            height: 32,
-                                                          ),
-                                                          Text(
-                                                            "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![1].displayDate!.split(",")[0].trim()}",
-                                                            style: Theme.of(context).textTheme.headline5!.copyWith(
-                                                                fontWeight: FontWeight.normal,
-                                                                color: Colors.black,
-                                                                letterSpacing: 2),
-                                                          ),
-                                                          SizedBox(
-                                                            height: 8,
-                                                          ),
-                                                          Text(
-                                                              "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![1].displayDate!.split(",")[1].trim()}",
-                                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                    color: Colors.black,
-                                                                  )),
-                                                          SizedBox(
-                                                            height: 8,
-                                                          ),
-                                                          InkWell(
-                                                            onTap: () {
-                                                              if ((auctionViewModel.upcomingAuctionResponse!.result!
-                                                                      .auctions![1].auctionDate!) !=
-                                                                  "TBA") {
-                                                                auctionViewModel.upComingLotsResponse = null;
-                                                                setState(() {
-                                                                  auctionViewModel.selectedAuction = auctionViewModel
-                                                                      .upcomingAuctionResponse!.result!.auctions![1];
-
-                                                                  bottomViewModel.setIndex(8);
-                                                                });
-                                                              } else {
-                                                                showinterestPopup(auctionViewModel
-                                                                    .upcomingAuctionResponse!
-                                                                    .result!
-                                                                    .auctions![1]
-                                                                    .auctionId
-                                                                    .toString());
-                                                              }
-                                                            },
-                                                            child: Container(
-                                                              padding: EdgeInsets.all(8),
-                                                              decoration: BoxDecoration(
-                                                                  color: Color(0xffEAEEF2),
-                                                                  borderRadius: BorderRadius.all(Radius.circular(10))),
-                                                              child: Text(
-                                                                (auctionViewModel.upcomingAuctionResponse!.result!
-                                                                            .auctions![1].auctionDate!) ==
-                                                                        "TBA"
-                                                                    ? "SHOW INTEREST"
-                                                                    : "EXPLORE",
-                                                                textAlign: TextAlign.start,
-                                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                    color: Colors.black,
-                                                                    fontWeight: FontWeight.bold,
-                                                                    letterSpacing: 2),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                )
-                                              : Container(),
-                                          auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length > 3
-                                              ? Container(
-                                                  decoration: BoxDecoration(
-                                                      color: Colors.red,
-                                                      image: DecorationImage(
-                                                          image: NetworkImage(
-                                                              "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![2].image}"),
-                                                          fit: BoxFit.fill,
-                                                          opacity: .2)),
-                                                  padding: EdgeInsets.symmetric(vertical: 32, horizontal: 4),
-                                                  // margin: EdgeInsets.symmetric(vertical: 32),
-                                                  width: MediaQuery.of(context).size.width,
-                                                  child: Row(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                    children: [
-                                                      // Image.network("${auctionViewModel.upcomingAuctionResponse!.result!.auctions![2].image}",height: 120,),
-                                                      Column(
-                                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                                        children: [
-                                                          SizedBox(
-                                                            height: 16,
-                                                          ),
-                                                          SizedBox(
-                                                            width: MediaQuery.of(context).size.width * .8,
-                                                            child: Text(
-                                                              "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![2].auctionName!}",
-                                                              style: Theme.of(context).textTheme.headline6!.copyWith(
-                                                                  color: Colors.white, fontWeight: FontWeight.bold),
-                                                              textAlign: TextAlign.justify,
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            height: 32,
-                                                          ),
-                                                          Text(
-                                                              "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![2].displayDate!.split(",")[0].trim()}",
-                                                              style: Theme.of(context).textTheme.headline5!.copyWith(
-                                                                  fontWeight: FontWeight.normal,
-                                                                  color: Colors.white,
-                                                                  letterSpacing: 2)),
-                                                          SizedBox(
-                                                            height: 8,
-                                                          ),
-                                                          Text(
-                                                              "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![2].displayDate!.split(",")[1].trim()}",
-                                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                    color: Colors.white,
-                                                                  )),
-                                                          SizedBox(
-                                                            height: 8,
-                                                          ),
-                                                          InkWell(
-                                                            onTap: () {
-                                                              if ((auctionViewModel.upcomingAuctionResponse!.result!
-                                                                      .auctions![2].auctionDate!) !=
-                                                                  "TBA") {
-                                                                auctionViewModel.upComingLotsResponse = null;
-                                                                setState(() {
-                                                                  auctionViewModel.selectedAuction = auctionViewModel
-                                                                      .upcomingAuctionResponse!.result!.auctions![3];
-
-                                                                  bottomViewModel.setIndex(8);
-                                                                });
-                                                              } else {
-                                                                showinterestPopup(auctionViewModel
-                                                                    .upcomingAuctionResponse!
-                                                                    .result!
-                                                                    .auctions![2]
-                                                                    .auctionId
-                                                                    .toString());
-                                                              }
-                                                            },
-                                                            child: Container(
-                                                              padding: EdgeInsets.all(8),
-                                                              decoration: BoxDecoration(
-                                                                  color: Color(0xffEAEEF2),
-                                                                  borderRadius: BorderRadius.all(Radius.circular(10))),
-                                                              child: Text(
-                                                                (auctionViewModel.upcomingAuctionResponse!.result!
-                                                                            .auctions![2].auctionDate!) ==
-                                                                        "TBA"
-                                                                    ? "SHOW INTEREST"
-                                                                    : "EXPLORE",
-                                                                textAlign: TextAlign.start,
-                                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                    color: Colors.black,
-                                                                    fontWeight: FontWeight.bold,
-                                                                    letterSpacing: 2),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                )
-                                              : Container(),
-                                          auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length > 4
-                                              ? Container(
-                                                  decoration: BoxDecoration(color: Color(0xffF8F8F8)),
-                                                  padding: EdgeInsets.symmetric(vertical: 32, horizontal: 4),
-                                                  // margin: EdgeInsets.symmetric(vertical: 32),
-                                                  width: MediaQuery.of(context).size.width,
-                                                  child: Row(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                    children: [
-                                                      Image.network(
-                                                        "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![3].image}",
-                                                        height: 120,
-                                                        fit: BoxFit.contain,
-                                                      ),
-                                                      Column(
-                                                        crossAxisAlignment: CrossAxisAlignment.end,
-                                                        children: [
-                                                          SizedBox(
-                                                            height: 16,
-                                                          ),
-                                                          SizedBox(
-                                                            width: MediaQuery.of(context).size.width * .5,
-                                                            child: Text(
-                                                                "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![3].auctionName!}",
-                                                                style: Theme.of(context).textTheme.headline6!.copyWith(
-                                                                    color: Colors.black, fontWeight: FontWeight.bold)),
-                                                          ),
-                                                          SizedBox(
-                                                            height: 32,
-                                                          ),
-                                                          Text(
-                                                              "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![3].displayDate!.split(",")[0].trim()}",
-                                                              style: Theme.of(context).textTheme.headline5!.copyWith(
-                                                                  fontWeight: FontWeight.normal,
-                                                                  color: Colors.black,
-                                                                  letterSpacing: 2)),
-                                                          SizedBox(
-                                                            height: 8,
-                                                          ),
-                                                          Text(
-                                                              "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![3].displayDate!.split(",")[1].trim()}",
-                                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                    color: Colors.black,
-                                                                  )),
-                                                          SizedBox(
-                                                            height: 8,
-                                                          ),
-                                                          InkWell(
-                                                            onTap: () {
-                                                              if ((auctionViewModel.upcomingAuctionResponse!.result!
-                                                                      .auctions![3].auctionDate!) !=
-                                                                  "TBA") {
-                                                                setState(() {
-                                                                  auctionViewModel.upComingLotsResponse = null;
-                                                                  auctionViewModel.selectedAuction = auctionViewModel
-                                                                      .upcomingAuctionResponse!.result!.auctions![3];
-
-                                                                  bottomViewModel.setIndex(8);
-                                                                });
-                                                              } else {
-                                                                showinterestPopup(auctionViewModel
-                                                                    .upcomingAuctionResponse!
-                                                                    .result!
-                                                                    .auctions![3]
-                                                                    .auctionId
-                                                                    .toString());
-                                                              }
-                                                            },
-                                                            child: Container(
-                                                              padding: EdgeInsets.all(8),
-                                                              decoration: BoxDecoration(
-                                                                  color: Color(0xffEAEEF2),
-                                                                  borderRadius: BorderRadius.all(Radius.circular(10))),
-                                                              child: Text(
-                                                                (auctionViewModel.upcomingAuctionResponse!.result!
-                                                                            .auctions![3].auctionDate!) ==
-                                                                        "TBA"
-                                                                    ? "SHOW INTEREST"
-                                                                    : "EXPLORE",
-                                                                textAlign: TextAlign.start,
-                                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                    color: Colors.black,
-                                                                    fontWeight: FontWeight.bold,
-                                                                    letterSpacing: 2),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                )
-                                              : Container(),
+                                          // auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length > 2
+                                          //     ? Container(
+                                          //         decoration: BoxDecoration(color: Color(0xffEAEEF2)),
+                                          //         padding: EdgeInsets.symmetric(vertical: 32, horizontal: 4),
+                                          //         margin: EdgeInsets.only(top: 32),
+                                          //         width: MediaQuery.of(context).size.width,
+                                          //         child: Row(
+                                          //           crossAxisAlignment: CrossAxisAlignment.start,
+                                          //           mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                          //           children: [
+                                          //             Image.network(
+                                          //               "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![1].image}",
+                                          //               fit: BoxFit.contain,
+                                          //               height: 120,
+                                          //               width: MediaQuery.of(context).size.width * .35,
+                                          //             ),
+                                          //             SizedBox(
+                                          //               width: 16,
+                                          //             ),
+                                          //             Column(
+                                          //               crossAxisAlignment: CrossAxisAlignment.end,
+                                          //               children: [
+                                          //                 SizedBox(
+                                          //                   height: 16,
+                                          //                 ),
+                                          //                 SizedBox(
+                                          //                   width: MediaQuery.of(context).size.width * .5,
+                                          //                   child: Text(
+                                          //                     "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![1].auctionName!}",
+                                          //                     style: Theme.of(context).textTheme.headline6!.copyWith(
+                                          //                         color: Colors.black, fontWeight: FontWeight.bold),
+                                          //                     textAlign: TextAlign.justify,
+                                          //                   ),
+                                          //                 ),
+                                          //                 SizedBox(
+                                          //                   height: 8,
+                                          //                 ),
+                                          //                 Text(
+                                          //                   "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![1].displayDate!.split(",")[0].trim()}",
+                                          //                   style: Theme.of(context).textTheme.headline5!.copyWith(
+                                          //                       fontWeight: FontWeight.normal,
+                                          //                       color: Colors.black,
+                                          //                       letterSpacing: 2),
+                                          //                 ),
+                                          //                 SizedBox(
+                                          //                   height: 8,
+                                          //                 ),
+                                          //                 Text(
+                                          //                     "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![1].displayDate!.split(",")[1].trim()}",
+                                          //                     style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                          //                           color: Colors.black,
+                                          //                         )),
+                                          //                 SizedBox(
+                                          //                   height: 8,
+                                          //                 ),
+                                          //                 InkWell(
+                                          //                   onTap: () {
+                                          //                     if ((auctionViewModel.upcomingAuctionResponse!.result!
+                                          //                             .auctions![1].auctionDate!) !=
+                                          //                         "TBA") {
+                                          //                       auctionViewModel.upComingLotsResponse = null;
+                                          //                       setState(() {
+                                          //                         auctionViewModel.selectedAuction = auctionViewModel
+                                          //                             .upcomingAuctionResponse!.result!.auctions![1];
+                                          //
+                                          //                         bottomViewModel.setIndex(8);
+                                          //                       });
+                                          //                     } else {
+                                          //                       showinterestPopup(auctionViewModel
+                                          //                           .upcomingAuctionResponse!
+                                          //                           .result!
+                                          //                           .auctions![1]
+                                          //                           .auctionId
+                                          //                           .toString());
+                                          //                     }
+                                          //                   },
+                                          //                   child: Container(
+                                          //                     padding: EdgeInsets.all(8),
+                                          //                     decoration: BoxDecoration(
+                                          //                         color: Color(0xffEAEEF2),
+                                          //                         borderRadius: BorderRadius.all(Radius.circular(10))),
+                                          //                     child: Text(
+                                          //                       (auctionViewModel.upcomingAuctionResponse!.result!
+                                          //                                   .auctions![1].auctionDate!) ==
+                                          //                               "TBA"
+                                          //                           ? "SHOW INTEREST"
+                                          //                           : "EXPLORE",
+                                          //                       textAlign: TextAlign.start,
+                                          //                       style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                          //                           color: Colors.black,
+                                          //                           fontWeight: FontWeight.bold,
+                                          //                           letterSpacing: 2),
+                                          //                     ),
+                                          //                   ),
+                                          //                 ),
+                                          //               ],
+                                          //             ),
+                                          //           ],
+                                          //         ),
+                                          //       )
+                                          //     : Container(),
+                                          // auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length > 3
+                                          //     ? Container(
+                                          //         decoration: BoxDecoration(
+                                          //             color: Colors.red,
+                                          //             image: DecorationImage(
+                                          //                 image: NetworkImage(
+                                          //                     "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![2].image}"),
+                                          //                 fit: BoxFit.fill,
+                                          //                 opacity: .2)),
+                                          //         padding: EdgeInsets.symmetric(vertical: 32, horizontal: 4),
+                                          //         // margin: EdgeInsets.symmetric(vertical: 32),
+                                          //         width: MediaQuery.of(context).size.width,
+                                          //         child: Row(
+                                          //           crossAxisAlignment: CrossAxisAlignment.start,
+                                          //           // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                          //           children: [
+                                          //             // Image.network("${auctionViewModel.upcomingAuctionResponse!.result!.auctions![2].image}",height: 120,),
+                                          //             Column(
+                                          //               crossAxisAlignment: CrossAxisAlignment.start,
+                                          //               children: [
+                                          //                 SizedBox(
+                                          //                   height: 16,
+                                          //                 ),
+                                          //                 SizedBox(
+                                          //                   width: MediaQuery.of(context).size.width * .8,
+                                          //                   child: Text(
+                                          //                     "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![2].auctionName!}",
+                                          //                     style: Theme.of(context).textTheme.headline6!.copyWith(
+                                          //                         color: Colors.white, fontWeight: FontWeight.bold),
+                                          //                     textAlign: TextAlign.justify,
+                                          //                   ),
+                                          //                 ),
+                                          //                 SizedBox(
+                                          //                   height: 32,
+                                          //                 ),
+                                          //                 Text(
+                                          //                     "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![2].displayDate!.split(",")[0].trim()}",
+                                          //                     style: Theme.of(context).textTheme.headline5!.copyWith(
+                                          //                         fontWeight: FontWeight.normal,
+                                          //                         color: Colors.white,
+                                          //                         letterSpacing: 2)),
+                                          //                 SizedBox(
+                                          //                   height: 8,
+                                          //                 ),
+                                          //                 Text(
+                                          //                     "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![2].displayDate!.split(",")[1].trim()}",
+                                          //                     style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                          //                           color: Colors.white,
+                                          //                         )),
+                                          //                 SizedBox(
+                                          //                   height: 8,
+                                          //                 ),
+                                          //                 InkWell(
+                                          //                   onTap: () {
+                                          //                     if ((auctionViewModel.upcomingAuctionResponse!.result!
+                                          //                             .auctions![2].auctionDate!) !=
+                                          //                         "TBA") {
+                                          //                       auctionViewModel.upComingLotsResponse = null;
+                                          //                       setState(() {
+                                          //                         auctionViewModel.selectedAuction = auctionViewModel
+                                          //                             .upcomingAuctionResponse!.result!.auctions![3];
+                                          //
+                                          //                         bottomViewModel.setIndex(8);
+                                          //                       });
+                                          //                     } else {
+                                          //                       showinterestPopup(auctionViewModel
+                                          //                           .upcomingAuctionResponse!
+                                          //                           .result!
+                                          //                           .auctions![2]
+                                          //                           .auctionId
+                                          //                           .toString());
+                                          //                     }
+                                          //                   },
+                                          //                   child: Container(
+                                          //                     padding: EdgeInsets.all(8),
+                                          //                     decoration: BoxDecoration(
+                                          //                         color: Color(0xffEAEEF2),
+                                          //                         borderRadius: BorderRadius.all(Radius.circular(10))),
+                                          //                     child: Text(
+                                          //                       (auctionViewModel.upcomingAuctionResponse!.result!
+                                          //                                   .auctions![2].auctionDate!) ==
+                                          //                               "TBA"
+                                          //                           ? "SHOW INTEREST"
+                                          //                           : "EXPLORE",
+                                          //                       textAlign: TextAlign.start,
+                                          //                       style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                          //                           color: Colors.black,
+                                          //                           fontWeight: FontWeight.bold,
+                                          //                           letterSpacing: 2),
+                                          //                     ),
+                                          //                   ),
+                                          //                 ),
+                                          //               ],
+                                          //             ),
+                                          //           ],
+                                          //         ),
+                                          //       )
+                                          //     : Container(),
+                                          // auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length > 4
+                                          //     ? Container(
+                                          //         decoration: BoxDecoration(color: Color(0xffF8F8F8)),
+                                          //         padding: EdgeInsets.symmetric(vertical: 32, horizontal: 4),
+                                          //         // margin: EdgeInsets.symmetric(vertical: 32),
+                                          //         width: MediaQuery.of(context).size.width,
+                                          //         child: Row(
+                                          //           crossAxisAlignment: CrossAxisAlignment.start,
+                                          //           mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                          //           children: [
+                                          //             Image.network(
+                                          //               "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![3].image}",
+                                          //               height: 120,
+                                          //               fit: BoxFit.contain,
+                                          //             ),
+                                          //             Column(
+                                          //               crossAxisAlignment: CrossAxisAlignment.end,
+                                          //               children: [
+                                          //                 SizedBox(
+                                          //                   height: 16,
+                                          //                 ),
+                                          //                 SizedBox(
+                                          //                   width: MediaQuery.of(context).size.width * .5,
+                                          //                   child: Text(
+                                          //                       "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![3].auctionName!}",
+                                          //                       style: Theme.of(context).textTheme.headline6!.copyWith(
+                                          //                           color: Colors.black, fontWeight: FontWeight.bold)),
+                                          //                 ),
+                                          //                 SizedBox(
+                                          //                   height: 32,
+                                          //                 ),
+                                          //                 Text(
+                                          //                     "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![3].displayDate!.split(",")[0].trim()}",
+                                          //                     style: Theme.of(context).textTheme.headline5!.copyWith(
+                                          //                         fontWeight: FontWeight.normal,
+                                          //                         color: Colors.black,
+                                          //                         letterSpacing: 2)),
+                                          //                 SizedBox(
+                                          //                   height: 8,
+                                          //                 ),
+                                          //                 Text(
+                                          //                     "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![3].displayDate!.split(",")[1].trim()}",
+                                          //                     style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                          //                           color: Colors.black,
+                                          //                         )),
+                                          //                 SizedBox(
+                                          //                   height: 8,
+                                          //                 ),
+                                          //                 InkWell(
+                                          //                   onTap: () {
+                                          //                     if ((auctionViewModel.upcomingAuctionResponse!.result!
+                                          //                             .auctions![3].auctionDate!) !=
+                                          //                         "TBA") {
+                                          //                       setState(() {
+                                          //                         auctionViewModel.upComingLotsResponse = null;
+                                          //                         auctionViewModel.selectedAuction = auctionViewModel
+                                          //                             .upcomingAuctionResponse!.result!.auctions![3];
+                                          //
+                                          //                         bottomViewModel.setIndex(8);
+                                          //                       });
+                                          //                     } else {
+                                          //                       showinterestPopup(auctionViewModel
+                                          //                           .upcomingAuctionResponse!
+                                          //                           .result!
+                                          //                           .auctions![3]
+                                          //                           .auctionId
+                                          //                           .toString());
+                                          //                     }
+                                          //                   },
+                                          //                   child: Container(
+                                          //                     padding: EdgeInsets.all(8),
+                                          //                     decoration: BoxDecoration(
+                                          //                         color: Color(0xffEAEEF2),
+                                          //                         borderRadius: BorderRadius.all(Radius.circular(10))),
+                                          //                     child: Text(
+                                          //                       (auctionViewModel.upcomingAuctionResponse!.result!
+                                          //                                   .auctions![3].auctionDate!) ==
+                                          //                               "TBA"
+                                          //                           ? "SHOW INTEREST"
+                                          //                           : "EXPLORE",
+                                          //                       textAlign: TextAlign.start,
+                                          //                       style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                          //                           color: Colors.black,
+                                          //                           fontWeight: FontWeight.bold,
+                                          //                           letterSpacing: 2),
+                                          //                     ),
+                                          //                   ),
+                                          //                 ),
+                                          //               ],
+                                          //             ),
+                                          //           ],
+                                          //         ),
+                                          //       )
+                                          //     : Container(),
                                         ],
                                       ),
                                     )
@@ -907,6 +912,16 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                       : Container();
                 }),
               ),
+        auctionViewModel.isLoadingForUpCommingAuction
+            ? SliverToBoxAdapter(child: LinearProgressIndicator())
+            : SliverList(
+                delegate: SliverChildBuilderDelegate(
+                addAutomaticKeepAlives: true,
+                childCount: (auctionViewModel.upcomingAuctionResponse!.result!.auctions ?? []).length - 1,
+                (BuildContext context, int index) {
+                  return UpcomingAuctionItem(index + 1, auctionViewModel, bottomViewModel);
+                },
+              )),
         auctionViewModel.isLoadingForUpCommingAuction
             ? SliverToBoxAdapter(child: LinearProgressIndicator())
             : SliverToBoxAdapter(

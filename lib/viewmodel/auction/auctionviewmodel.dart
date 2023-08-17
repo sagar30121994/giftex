@@ -188,6 +188,8 @@ abstract class _AuctionViewModel with Store {
         tempResponse.result!.lots!.insert(i, lot);
       }
     }
+
+    upComingLotsResponse = tempResponse;
     if (liveAuctionType == "browselist") {
       upComingLotsResponse = tempResponse;
     } else if (liveAuctionType == "review") {

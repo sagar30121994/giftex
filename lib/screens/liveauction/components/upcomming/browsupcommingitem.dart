@@ -54,9 +54,9 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
 
     userlikeReference.onValue.listen((DatabaseEvent event) {
       final data = event.snapshot.value;
-      if (data.toString() != "null" && !isFirstLike) {
-        isFirstLike = true;
-      } else {
+      if (data.toString() != "null") {
+        //   isFirstLike = true;
+        // } else {
         if (widget.auctionViewModel.liveAuctionType == "mygallery") {
           widget.auctionViewModel.myAuctionGallery();
           // initiateTimer();
@@ -74,28 +74,26 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
       // initiateTimer();
 
       if (data.toString() != "null") {
-        if (!isFirstLot) {
-          isFirstLot = true;
-        } else {
-          final cleanup = jsonDecode(jsonEncode(data));
-          Lots l1 = Lots.fromJson(cleanup as Map<String, dynamic>);
+        // isFirstLot = true;
+        // } else {
+        final cleanup = jsonDecode(jsonEncode(data));
+        Lots l1 = Lots.fromJson(cleanup as Map<String, dynamic>);
 
-          setState(() {
-            widget.lots = l1;
-            widget.auctionViewModel.replaceLots(l1);
-          });
-        }
-
-        // }
+        setState(() {
+          widget.lots = l1;
+          // widget.auctionViewModel.replaceLots(l1);
+        });
       }
+
+      // }
     });
 
     likeReference.onValue.listen((DatabaseEvent event) {
       final data = event.snapshot.value;
-      print(event);
-      if (data.toString() != "null" && !isFirstLike) {
-        isFirstLike = true;
-      } else {
+      print("******like event${event}");
+      if (data.toString() != "null") {
+        //   isFirstLike = true;
+        // } else {
         setState(() {
           widget.lots.isLiked = data.toString();
         });
@@ -688,7 +686,7 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                   // height: (hours == "00" && minutes == "00" && seconds == "00")
                   //     ? 290
                   //     : 350,
-                  height: 320,
+                  height: 340,
                   alignment: Alignment.center,
                   child: Column(
                     children: [
@@ -703,11 +701,13 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                             ),
                           ),
                           InkWell(
-                            onTap: () {
-                              Navigator.push(
+                            onTap: () async {
+                              await Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => ProductDetailPage(widget.lots, widget.auctionViewModel)));
+
+                              await widget.auctionViewModel.getUpcommingBidAuction(widget.lots.auctionId!);
                             },
                             child: Padding(
                               padding: EdgeInsets.all(8.0),
@@ -754,6 +754,7 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                                     textAlign: TextAlign.start,
                                     style: Theme.of(context).textTheme.headline6!.copyWith(
                                           color: Colors.black,
+                                          overflow: TextOverflow.ellipsis,
                                           letterSpacing: 2,
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -846,7 +847,7 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                                 //         seconds == "00")
                                 //     ?
                                 Container(
-                                    child: (widget.lots.leadingUser!.id ==
+                                    child: (widget.lots.proxyStatus!.Id ==
                                             widget.auctionViewModel.localSharedPrefrence.getUserId())
                                         ? Align(
                                             alignment: Alignment.topRight,

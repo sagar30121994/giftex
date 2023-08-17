@@ -126,7 +126,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
 
     likeReference.onValue.listen((DatabaseEvent event) {
       print("*********" + event.toString());
-      if (event.snapshot.value != null && !isFirstLike) {
+      if (event.snapshot.value != null) {
         final data = event.snapshot.value;
         // if (data.toString() != "null") {
         //   setState(() {
@@ -831,7 +831,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                 ),
                                 (widget.lots.leadingUser!.id ==
                                         widget.auctionViewModel.localSharedPrefrence.getUserId())
-                                    ? myDuration.inSeconds > 0
+                                    ? (myDuration.inSeconds > 0)
                                         ? Align(
                                             alignment: Alignment.topRight,
                                             child: Container(
@@ -853,7 +853,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                         : Container()
                                     : InkWell(
                                         onTap: () {
-                                          bool checked = false;
+                                          bool checked = widget.auctionViewModel.localSharedPrefrence.getTermstatus();
                                           showModalBottomSheet<void>(
                                             // context and builder are
                                             // required properties in this widget
@@ -1006,6 +1006,9 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                                     builder(() {
                                                                       checked = check ?? false;
                                                                     });
+
+                                                                    widget.auctionViewModel.localSharedPrefrence
+                                                                        .setLoginStatus(checked);
                                                                   }),
                                                               Text(
                                                                 "I agree to",
@@ -1458,16 +1461,18 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                               SizedBox(height: 12),
                               InkWell(
                                 onTap: () {
-                                  widget.auctionViewModel.addRemoveLotToWishlist(
-                                      widget.lots, (widget.lots.isLiked ?? "false") == "true" ? "false" : "true").then((value) => {
-                                        setState((){
-                                          if((widget.lots.isLiked ?? "false") == "true"){
-                                            widget.lots.isLiked="false";
-                                          }else{
-                                            widget.lots.isLiked="true";
-                                          }
-                                        })
-                                  });
+                                  widget.auctionViewModel
+                                      .addRemoveLotToWishlist(
+                                          widget.lots, (widget.lots.isLiked ?? "false") == "true" ? "false" : "true")
+                                      .then((value) => {
+                                            setState(() {
+                                              if ((widget.lots.isLiked ?? "false") == "true") {
+                                                widget.lots.isLiked = "false";
+                                              } else {
+                                                widget.lots.isLiked = "true";
+                                              }
+                                            })
+                                          });
                                   if (bottom.bottomViewModel.selectedIndex == 14) {
                                     bottom.bottomViewModel.profileViewModel!.getAuctionGallery();
                                   }
