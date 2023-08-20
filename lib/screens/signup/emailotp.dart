@@ -24,6 +24,13 @@ class _GetOtpEmailMobilepageState extends State<GetOtpEmailMobilepage> with Tick
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    countdownTimer!.cancel();
+    super.dispose();
+  }
+
+  @override
   void initState() {
     // TODO: implement initState
     if (widget.isMobile) {

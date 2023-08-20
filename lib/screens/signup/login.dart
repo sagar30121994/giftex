@@ -33,6 +33,8 @@ class _LoginpageState extends State<Loginpage> {
     super.initState();
   }
 
+  bool isShow = false;
+
   bool isCheked = false;
 
   @override
@@ -55,49 +57,62 @@ class _LoginpageState extends State<Loginpage> {
                 child: Column(
               children: [
                 // SizedBox(height: 12,),
-                Container(
-                    height: 280,
-                    color: Color(0xffF7FAFD),
-                    child: Stack(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(top: 0, bottom: 0, right: 0, left: 0),
-                          child: Image.asset(
-                            "image/Shapebh.png",
-                            height: 200.0,
-                            width: MediaQuery.of(context).size.width,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 0, bottom: 0, right: 0, left: 0),
-                          child: Image.asset(
-                            "image/Shapebgup.png",
-                            height: 130.0,
-                            width: MediaQuery.of(context).size.width,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 60, bottom: 0, right: 0, left: 130),
-                          child: Image.asset(
-                            "image/login.png",
-                            height: 165.0,
-                            width: 153,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        Positioned(
-                          top: 0,
-                          right: 0,
-                          left: 0,
-                          child: Image.asset(
-                            "image/ouplogo.png",
-                            height: 77.0,
-                          ),
-                        ),
-                      ],
-                    )),
+                Stack(
+                  children: [
+                    Container(
+                        height: 280,
+                        color: Color(0xffF7FAFD),
+                        child: Stack(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(top: 0, bottom: 0, right: 0, left: 0),
+                              child: Image.asset(
+                                "image/Shapebh.png",
+                                height: 200.0,
+                                width: MediaQuery.of(context).size.width,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(top: 0, bottom: 0, right: 0, left: 0),
+                              child: Image.asset(
+                                "image/Shapebgup.png",
+                                height: 130.0,
+                                width: MediaQuery.of(context).size.width,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(top: 60, bottom: 0, right: 0, left: 130),
+                              child: Image.asset(
+                                "image/login.png",
+                                height: 165.0,
+                                width: 153,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Positioned(
+                              top: 0,
+                              right: 0,
+                              left: 0,
+                              child: Image.asset(
+                                "image/ouplogo.png",
+                                height: 77.0,
+                              ),
+                            ),
+                          ],
+                        )),
+                    Positioned(
+                        right: 16,
+                        top: 16,
+                        child: InkWell(
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                  context, MaterialPageRoute(builder: (BuildContext context) => DashboardUi(0)));
+                            },
+                            child: Text("Skip")))
+                  ],
+                ),
                 Padding(
                   padding: EdgeInsets.only(top: 0, bottom: 16, right: 0, left: 0),
                   child: Text(
@@ -332,7 +347,7 @@ class _LoginpageState extends State<Loginpage> {
                                         onChanged: (str) => loginViewModel.setPass(str),
 
                                         textInputAction: TextInputAction.done,
-                                        obscureText: true,
+                                        obscureText: isShow ? false : true,
 
                                         style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                               color: Colors.black,
@@ -341,6 +356,26 @@ class _LoginpageState extends State<Loginpage> {
 
                                         decoration: InputDecoration(
                                           border: InputBorder.none,
+                                          // suffixIcon:
+                                          suffix: isShow
+                                              ? InkWell(
+                                                  onTap: () {
+                                                    setState(() {
+                                                      isShow = !isShow;
+                                                    });
+                                                  },
+                                                  child: Icon(Icons.remove_red_eye))
+                                              : InkWell(
+                                                  onTap: () {
+                                                    setState(() {
+                                                      isShow = !isShow;
+                                                    });
+                                                  },
+                                                  child: Image.asset(
+                                                    "image/hidden.png",
+                                                    height: 24,
+                                                  ),
+                                                ),
                                           labelText: 'Set Password',
                                           errorText: loginViewModel.login1ViewModelErrorState.pass,
                                           icon: Image.asset("image/pass.png", height: 28),
@@ -852,12 +887,31 @@ class _LoginpageState extends State<Loginpage> {
                                         loginViewModel.setPass(str);
                                       },
                                       keyboardType: TextInputType.text,
-                                      obscureText: true,
+                                      obscureText: isShow ? false : true,
                                       style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                             color: Colors.black,
                                             fontWeight: FontWeight.w500,
                                           ),
                                       decoration: InputDecoration(
+                                        suffix: isShow
+                                            ? InkWell(
+                                                onTap: () {
+                                                  setState(() {
+                                                    isShow = !isShow;
+                                                  });
+                                                },
+                                                child: Icon(Icons.remove_red_eye))
+                                            : InkWell(
+                                                onTap: () {
+                                                  setState(() {
+                                                    isShow = !isShow;
+                                                  });
+                                                },
+                                                child: Image.asset(
+                                                  "image/hidden.png",
+                                                  height: 24,
+                                                ),
+                                              ),
                                         border: InputBorder.none,
                                         // labelText: 'Name',
                                         hintText: 'Enter Password',
