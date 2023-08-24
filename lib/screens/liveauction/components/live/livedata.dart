@@ -34,7 +34,7 @@ class _LiveDataState extends State<LiveData> {
       return (widget.auctionViewModel.liveAuctionType != "closingschedule")
           ? (widget.auctionViewModel.isLoadingForlots || widget.auctionViewModel.isLoadingForUpCommingAuction)
               ? SliverToBoxAdapter(child: LinearProgressIndicator())
-              : widget.auctionViewModel.upcomingAuctionResponse!.result == null
+              : widget.auctionViewModel.upcomingAuctionResponse == null
                   ? SliverToBoxAdapter(
                       child: Observer(builder: (context) {
                         return Column(
