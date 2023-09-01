@@ -21,12 +21,10 @@ class _FaqPageState extends State<FaqPage> {
     return Scaffold(
       appBar: NavBar(),
       // bottomNavigationBar: BottomNavigationBarUi(),
-      body: SingleChildScrollView(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * .90,
-          child: SingleChildScrollView(
-              child: Column(
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        child: SingleChildScrollView(
+          child: Column(
             children: [
               const SizedBox(
                 height: 16,
@@ -55,7 +53,6 @@ class _FaqPageState extends State<FaqPage> {
                 height: 16,
               ),
               Container(
-                width: MediaQuery.of(context).size.width * .80,
                 child: Text(
                   "we host over 200 auctions annually and offer a cross-category selection of items available for immediate purchase via both digital and physical shopping experiences as well as private sales.",
                   textAlign: TextAlign.center,
@@ -397,15 +394,13 @@ class _FaqPageState extends State<FaqPage> {
               ),
               SizedBox(width: MediaQuery.of(context).size.width, child: Footer()),
 
-              SliverToBoxAdapter(
-                child: Container(
-                  color: Color(0xff1F2A52),
-                  height: 30,
-                  width: MediaQuery.of(context).size.width,
-                ),
+              Container(
+                color: Color(0xff1F2A52),
+                height: 30,
+                width: MediaQuery.of(context).size.width,
               ),
             ],
-          )),
+          ),
         ),
       ),
     );

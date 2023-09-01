@@ -1,6 +1,7 @@
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:giftex/screens/faq/faq.dart';
 import 'package:giftex/screens/howtobuy/howtobuy.dart';
 import 'package:giftex/screens/howtosell/howtosell.dart';
 import 'package:giftex/screens/liveauction/liveauction.dart';
@@ -12,6 +13,7 @@ import 'package:giftex/screens/profile/myprofile.dart';
 import 'package:giftex/screens/profile/orderhistory.dart';
 import 'package:giftex/screens/profile/profile.dart';
 import 'package:giftex/screens/servicepage/servicepage.dart';
+import 'package:giftex/screens/services/mainservices.dart';
 import 'package:giftex/viewmodel/bottomviewmodel.dart';
 
 import '../../artmovement/artmovement.dart';
@@ -881,6 +883,30 @@ class _DashboardUiState extends State<DashboardUi> {
         return MyAuctionReviewpage(bottomViewModel.profileViewModel!);
       case 16:
         return MyAuctionDashboard(bottomViewModel.profileViewModel!);
+
+      case 17:
+        return FaqPage();
+
+      case 18:
+        return ServiceAll("client-advisory", "Client Advisory");
+
+      case 19:
+        return ServiceAll("restoration", "Restoration");
+
+      case 20:
+        return ServiceAll("collection-services", "Collection Services");
+
+      case 21:
+        return ServiceAll("museum-services", "Museum Services");
+
+      case 22:
+        return ServiceAll("post-sale-services", "Post Sale Services");
+
+      case 23:
+        return ServiceAll("private-services", "Private Sales");
+
+      case 24:
+        return ServiceAll("storage", "Storage");
 
       default:
         {

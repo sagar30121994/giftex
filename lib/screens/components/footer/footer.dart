@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/screens/aboutus/aboutus.dart';
 import 'package:giftex/screens/contactus/contactus.dart';
-import 'package:giftex/screens/faq/faq.dart';
-import 'package:giftex/screens/howtobuy/howtobuy.dart';
-import 'package:giftex/screens/howtosell/howtosell.dart';
-import 'package:giftex/screens/servicepage/servicepage.dart';
 import 'package:giftex/screens/termsandconditions/termsandconditions.dart';
 import 'package:giftex/viewmodel/user/footerviewmodel.dart';
+
+import '../bottomnavigationbar/bottomnavigationbar.dart';
 
 FooterViewModel footerViewModel = FooterViewModel();
 
@@ -302,7 +300,8 @@ class _FooterState extends State<Footer> {
                               children: <Widget>[
                                 InkWell(
                                   onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => HowToBuyPage()));
+                                    bottomViewModel.selectedIndex = 11;
+                                    // Navigator.push(context, MaterialPageRoute(builder: (context) => HowToBuyPage()));
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 20.0, top: 10),
@@ -324,7 +323,8 @@ class _FooterState extends State<Footer> {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => HowToSellPage()));
+                                    bottomViewModel.selectedIndex = 10;
+                                    // Navigator.push(context, MaterialPageRoute(builder: (context) => HowToSellPage()));
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 20.0, top: 16),
@@ -363,7 +363,8 @@ class _FooterState extends State<Footer> {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => FaqPage()));
+                                    bottomViewModel.selectedIndex = 17;
+                                    // Navigator.push(context, MaterialPageRoute(builder: (context) => FaqPage()));
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 20.0, top: 16),
@@ -473,26 +474,33 @@ class _FooterState extends State<Footer> {
                                     ),
                               ),
                               children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 20.0, top: 10),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Client Advisory",
-                                        textAlign: TextAlign.start,
-                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                              color: Color(0XFFFFFFFF),
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                      ),
-                                    ],
+                                InkWell(
+                                  onTap: () {
+                                    bottomViewModel.selectedIndex = 18;
+                                    // Navigator.push(context, MaterialPageRoute(builder: (context) => FaqPage()));
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 20.0, top: 10),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Client Advisory",
+                                          textAlign: TextAlign.start,
+                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                color: Color(0XFFFFFFFF),
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => Servicepage()));
+                                    bottomViewModel.selectedIndex = 19;
+                                    // Navigator.push(context, MaterialPageRoute(builder: (context) => Servicepage()));
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 20.0, top: 16),
@@ -512,89 +520,119 @@ class _FooterState extends State<Footer> {
                                     ),
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 20.0, top: 16),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Collection Services",
-                                        textAlign: TextAlign.start,
-                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                              color: Color(0XFFFFFFFF),
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                      ),
-                                    ],
+                                InkWell(
+                                  onTap: () {
+                                    bottomViewModel.selectedIndex = 20;
+                                    // Navigator.push(context, MaterialPageRoute(builder: (context) => Servicepage()));
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 20.0, top: 16),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Collection Services",
+                                          textAlign: TextAlign.start,
+                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                color: Color(0XFFFFFFFF),
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 20.0, top: 16),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Museum Services",
-                                        textAlign: TextAlign.start,
-                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                              color: Color(0XFFFFFFFF),
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                      ),
-                                    ],
+                                InkWell(
+                                  onTap: () {
+                                    bottomViewModel.selectedIndex = 21;
+                                    // Navigator.push(context, MaterialPageRoute(builder: (context) => Servicepage()));
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 20.0, top: 16),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Museum Services",
+                                          textAlign: TextAlign.start,
+                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                color: Color(0XFFFFFFFF),
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 20.0, top: 16),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Post Sale Services",
-                                        textAlign: TextAlign.start,
-                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                              color: Color(0XFFFFFFFF),
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                      ),
-                                    ],
+                                InkWell(
+                                  onTap: () {
+                                    bottomViewModel.selectedIndex = 22;
+                                    // Navigator.push(context, MaterialPageRoute(builder: (context) => Servicepage()));
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 20.0, top: 16),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Post Sale Services",
+                                          textAlign: TextAlign.start,
+                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                color: Color(0XFFFFFFFF),
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 20.0, top: 16),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Private Sales",
-                                        textAlign: TextAlign.start,
-                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                              color: Color(0XFFFFFFFF),
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                      ),
-                                    ],
+                                InkWell(
+                                  onTap: () {
+                                    bottomViewModel.selectedIndex = 23;
+                                    // Navigator.push(context, MaterialPageRoute(builder: (context) => Servicepage()));
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 20.0, top: 16),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Private Sales",
+                                          textAlign: TextAlign.start,
+                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                color: Color(0XFFFFFFFF),
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 20.0, top: 16),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Storage",
-                                        textAlign: TextAlign.start,
-                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                              color: Color(0XFFFFFFFF),
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                      ),
-                                    ],
+                                InkWell(
+                                  onTap: () {
+                                    bottomViewModel.selectedIndex = 24;
+                                    // Navigator.push(context, MaterialPageRoute(builder: (context) => Servicepage()));
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 20.0, top: 16),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Storage",
+                                          textAlign: TextAlign.start,
+                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                color: Color(0XFFFFFFFF),
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ],

@@ -175,6 +175,11 @@ class Profile {
   final String getDashboardOverview = 'DashboardOverview';
 }
 
+class Service {
+  final String getServiceDetails = 'GetServicesDetails';
+  final String getDashboardOverview = 'DashboardOverview';
+}
+
 class KYC {
   final String UpdateRegPersonalDetails = 'UpdateRegPersonalDetails';
   final String UpdateRegMyAddress = 'UpdateRegMyAddress';
