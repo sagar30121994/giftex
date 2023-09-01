@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:giftex/viewmodel/profile/profileviewmodel.dart';
 import 'package:mobx/mobx.dart';
 
@@ -14,6 +15,9 @@ abstract class _BottomViewModel with Store {
 
   @observable
   int selectedIndex = 0;
+
+  @observable
+  GlobalKey<ScaffoldState> key = GlobalKey();
 
   @action
   void setIndex(int index) {

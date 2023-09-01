@@ -25,6 +25,21 @@ mixin _$BottomViewModel on _BottomViewModel, Store {
     });
   }
 
+  late final _$keyAtom = Atom(name: '_BottomViewModel.key', context: context);
+
+  @override
+  GlobalKey<ScaffoldState> get key {
+    _$keyAtom.reportRead();
+    return super.key;
+  }
+
+  @override
+  set key(GlobalKey<ScaffoldState> value) {
+    _$keyAtom.reportWrite(value, super.key, () {
+      super.key = value;
+    });
+  }
+
   late final _$_BottomViewModelActionController =
       ActionController(name: '_BottomViewModel', context: context);
 
@@ -42,7 +57,8 @@ mixin _$BottomViewModel on _BottomViewModel, Store {
   @override
   String toString() {
     return '''
-selectedIndex: ${selectedIndex}
+selectedIndex: ${selectedIndex},
+key: ${key}
     ''';
   }
 }

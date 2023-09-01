@@ -189,6 +189,73 @@ mixin _$HomeViewModel on _HomeViewModel, Store {
     });
   }
 
+  late final _$getBuyDetailsResponseAtom =
+      Atom(name: '_HomeViewModel.getBuyDetailsResponse', context: context);
+
+  @override
+  GetBuyDetailsResponse? get getBuyDetailsResponse {
+    _$getBuyDetailsResponseAtom.reportRead();
+    return super.getBuyDetailsResponse;
+  }
+
+  @override
+  set getBuyDetailsResponse(GetBuyDetailsResponse? value) {
+    _$getBuyDetailsResponseAtom.reportWrite(value, super.getBuyDetailsResponse,
+        () {
+      super.getBuyDetailsResponse = value;
+    });
+  }
+
+  late final _$isloadingbuyDetailsAtom =
+      Atom(name: '_HomeViewModel.isloadingbuyDetails', context: context);
+
+  @override
+  bool get isloadingbuyDetails {
+    _$isloadingbuyDetailsAtom.reportRead();
+    return super.isloadingbuyDetails;
+  }
+
+  @override
+  set isloadingbuyDetails(bool value) {
+    _$isloadingbuyDetailsAtom.reportWrite(value, super.isloadingbuyDetails, () {
+      super.isloadingbuyDetails = value;
+    });
+  }
+
+  late final _$getSellDetailsResponseAtom =
+      Atom(name: '_HomeViewModel.getSellDetailsResponse', context: context);
+
+  @override
+  GetSellDetailsResponse? get getSellDetailsResponse {
+    _$getSellDetailsResponseAtom.reportRead();
+    return super.getSellDetailsResponse;
+  }
+
+  @override
+  set getSellDetailsResponse(GetSellDetailsResponse? value) {
+    _$getSellDetailsResponseAtom
+        .reportWrite(value, super.getSellDetailsResponse, () {
+      super.getSellDetailsResponse = value;
+    });
+  }
+
+  late final _$isloadingsellDetailsAtom =
+      Atom(name: '_HomeViewModel.isloadingsellDetails', context: context);
+
+  @override
+  bool get isloadingsellDetails {
+    _$isloadingsellDetailsAtom.reportRead();
+    return super.isloadingsellDetails;
+  }
+
+  @override
+  set isloadingsellDetails(bool value) {
+    _$isloadingsellDetailsAtom.reportWrite(value, super.isloadingsellDetails,
+        () {
+      super.isloadingsellDetails = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
@@ -202,7 +269,11 @@ selectedTabIndex: ${selectedTabIndex},
 selectedNewsTabIndex: ${selectedNewsTabIndex},
 isLoadingForUpCommingAuction: ${isLoadingForUpCommingAuction},
 isLoadingForLots: ${isLoadingForLots},
-isLoadingForNews: ${isLoadingForNews}
+isLoadingForNews: ${isLoadingForNews},
+getBuyDetailsResponse: ${getBuyDetailsResponse},
+isloadingbuyDetails: ${isloadingbuyDetails},
+getSellDetailsResponse: ${getSellDetailsResponse},
+isloadingsellDetails: ${isloadingsellDetails}
     ''';
   }
 }

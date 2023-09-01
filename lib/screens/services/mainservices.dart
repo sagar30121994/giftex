@@ -59,7 +59,7 @@ class _ServiceAllState extends State<ServiceAll> {
                         height: 10,
                       ),
                       Text(
-                        "FIND YOUR SERVICES THAT FITS YOUR NEEDS",
+                        serviceViewModel.serviceResponse!.pageContent!.banner!.title2 ?? "",
                         textAlign: TextAlign.left,
                         style: Theme.of(context).textTheme.bodyText1!.copyWith(
                               color: Theme.of(context).colorScheme.primary,
@@ -72,7 +72,7 @@ class _ServiceAllState extends State<ServiceAll> {
                       Container(
                         width: MediaQuery.of(context).size.width * .80,
                         child: Text(
-                          "We feature premium artworks including modern, contemporary, and street art",
+                          serviceViewModel.serviceResponse!.pageContent!.banner!.title3 ?? "",
                           textAlign: TextAlign.center,
                           style: Theme.of(context)
                               .textTheme
@@ -114,8 +114,8 @@ class _ServiceAllState extends State<ServiceAll> {
                             Positioned(
                                 left: 0,
                                 right: 0,
-                                child: Image.asset(
-                                  "image/services.png",
+                                child: Image.network(
+                                  serviceViewModel.serviceResponse!.pageContent!.banner!.image!.mobile!,
                                   height: 180,
                                 )),
                           ],

@@ -1,0 +1,182 @@
+import 'package:flutter/material.dart';
+
+class MainDrawer extends StatefulWidget {
+  const MainDrawer({Key? key}) : super(key: key);
+
+  @override
+  State<MainDrawer> createState() => _MainDrawerState();
+}
+
+class _MainDrawerState extends State<MainDrawer> {
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      // Add a ListView to the drawer. This ensures the user can scroll
+      // through the options in the drawer if there isn't enough vertical
+      // space to fit everything.
+      backgroundColor: Color(0xffEAEEF2),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            // const DrawerHeader(
+            //   decoration: BoxDecoration(
+            //     color: Colors.blue,
+            //   ),
+            //   child: Text('Drawer Header'),
+            // ),
+
+            Row(
+              children: [
+                Image.asset("image/aboutus.png", width: 36, height: 36),
+                SizedBox(width: 16),
+                Text(
+                  "About US".toUpperCase(),
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: Colors.red),
+                ),
+              ],
+            ),
+
+            ListTile(
+              title: const Text('About Giftex'),
+              onTap: () {
+                Navigator.of(context).pop();
+
+                // Update the state of the app.
+
+                // ...
+              },
+            ),
+            ListTile(
+              title: const Text('Our Collectors'),
+              onTap: () {
+                Navigator.of(context).pop();
+                // Update the state of the app.
+                // ...
+              },
+            ),
+
+            ListTile(
+              title: const Text('Record Price Artwork'),
+              onTap: () {
+                Navigator.of(context).pop();
+                // Update the state of the app.
+                // ...
+              },
+            ),
+
+            ListTile(
+              title: const Text('Art Movement'),
+              onTap: () {
+                Navigator.of(context).pop();
+                // Update the state of the app.
+                // ...
+              },
+            ),
+
+            Row(
+              children: [
+                Image.asset("image/insights.png", width: 36, height: 36),
+                SizedBox(width: 16),
+                Text(
+                  "Insights".toUpperCase(),
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: Colors.red),
+                ),
+              ],
+            ),
+
+            ListTile(
+              title: const Text('News & Updates'),
+              onTap: () {
+                Navigator.of(context).pop();
+                // Update the state of the app.
+                // ...
+              },
+            ),
+
+            ListTile(
+              title: const Text('Our Services'),
+              onTap: () {
+                Navigator.of(context).pop();
+                // Update the state of the app.
+                // ...
+              },
+            ),
+
+            ListTile(
+              title: const Text('Blogs'),
+              onTap: () {
+                Navigator.of(context).pop();
+                // Update the state of the app.
+                // ...
+              },
+            ),
+
+            ListTile(
+              title: const Text('Departments'),
+              onTap: () {
+                Navigator.of(context).pop();
+                // Update the state of the app.
+                // ...
+              },
+            ),
+
+            Row(
+              children: [
+                Image.asset("image/contactus.png", width: 36, height: 36),
+                SizedBox(width: 16),
+                Text(
+                  "Contact us".toUpperCase(),
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: Colors.red),
+                ),
+              ],
+            ),
+
+            ListTile(
+              title: const Text('Contact Us'),
+              onTap: () {
+                Navigator.of(context).pop();
+                // Update the state of the app.
+                // ...
+              },
+            ),
+
+            ListTile(
+              title: const Text('How To Buy'),
+              onTap: () {
+                Navigator.of(context).pop();
+                // Update the state of the app.
+                // ...
+              },
+            ),
+
+            ListTile(
+              title: const Text('How To Sell'),
+              onTap: () {
+                Navigator.of(context).pop();
+                // Update the state of the app.
+                // ...
+              },
+            ),
+
+            ListTile(
+              title: const Text('Career'),
+              onTap: () {
+                Navigator.of(context).pop();
+                // Update the state of the app.
+                // ...
+              },
+            ),
+
+            // Text(
+            //   "Contact us".toUpperCase(),
+            //   style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: Colors.red),
+            // ),
+          ],
+        ),
+      ),
+    );
+  }
+}

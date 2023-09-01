@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:giftex/screens/ecommercecard/card.dart';
+import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
 import 'package:giftex/screens/homepage/homapage.dart';
 import 'package:giftex/screens/homepage/searchpage.dart';
 
 class NavBar extends StatelessWidget implements PreferredSizeWidget {
-  // NavBar();
+  // NavBar(this.key);
+  // GlobalKey key;
   // HomeViewModel? homeViewModel;
 
   Icon customIcon = const Icon(Icons.search);
@@ -21,16 +22,17 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
           padding: EdgeInsets.all(8),
           child: Image.asset("image/giftlogo.png", height: 28, width: 96, fit: BoxFit.fitWidth)),
       actions: [
-        Image.asset(
-          "image/app2.png",
-          height: 20,
+        InkWell(
+          child: Image.asset(
+            "image/app2.png",
+            height: 20,
+          ),
         ),
         // SizedBox(width: 3,),
         InkWell(
             onTap: () {
               homeViewModel.search = (!homeViewModel.search);
               Navigator.push(context, MaterialPageRoute(builder: (context) => SearchBarUi()));
-
             },
             child: Image.asset(
               "image/app3.png",
@@ -39,7 +41,8 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
         // SizedBox(width: 3,),
         InkWell(
           onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Cardpage()));
+            // Navigator.push(context, MaterialPageRoute(builder: (context) => Cardpage()));
+            bottomViewModel.key.currentState!.openEndDrawer();
           },
           child: Container(width: 45, color: Color(0xff1F2A52), child: Image.asset("image/app4.png")),
         ),
