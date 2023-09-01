@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/data/local/client/prefs.dart';
+import 'package:giftex/screens/components/drawer/drawermain.dart';
 import 'package:giftex/screens/carrerpage/careerpage.dart';
 import 'package:giftex/screens/components/drawer/drawermain.dart';
 import 'package:giftex/screens/faq/faq.dart';
@@ -17,6 +18,7 @@ import 'package:giftex/screens/profile/mygallary.dart';
 import 'package:giftex/screens/profile/myprofile.dart';
 import 'package:giftex/screens/profile/orderhistory.dart';
 import 'package:giftex/screens/profile/profile.dart';
+import 'package:giftex/screens/record_price_artwork/record_price_artwork.dart';
 import 'package:giftex/screens/servicepage/servicepage.dart';
 import 'package:giftex/screens/services/mainservices.dart';
 import 'package:giftex/screens/signup/login.dart';
@@ -30,7 +32,9 @@ BottomViewModel bottomViewModel = BottomViewModel();
 
 class DashboardUi extends StatefulWidget {
   int selectedIndex;
+
   DashboardUi(this.selectedIndex);
+
   @override
   _DashboardUiState createState() => _DashboardUiState();
 }
@@ -1201,6 +1205,9 @@ class _DashboardUiState extends State<DashboardUi> {
         return CareerPage();
       case 27:
         return Departments();
+
+      case 28:
+        return Record_price_artwork();
 
       default:
         {

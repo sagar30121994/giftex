@@ -88,7 +88,7 @@ abstract class _AuctionViewModel with Store {
   SingleAuctionDetsilaResponse? singleAuctionDetsilaResponse;
 
   @observable
-  UpComingLotsResponse? upComingLotsResponse;
+    UpComingLotsResponse? upComingLotsResponse;
 
   @observable
   UpComingLotsResponse? myAuctionGalleryResponse;

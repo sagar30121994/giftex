@@ -345,7 +345,8 @@ class _UpcomingAuctionItemState extends State<UpcomingAuctionItem> with Automati
                                       .toList(),
                                   width: MediaQuery.of(dialogContext).size.width * .70,
                                   hintText: "Country Code",
-                                  errorText: err_counrtyCode),
+                                  // errorText: err_counrtyCode
+                              ),
                             );
                     }),
                     SizedBox(

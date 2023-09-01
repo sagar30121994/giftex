@@ -1,10 +1,13 @@
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
+import 'package:giftex/data/network/models/responce/home/GetSellDetailsResponse.dart';
+import 'package:giftex/data/network/models/responce/home/getrecordpriceartworkresponse.dart';
 import 'package:giftex/data/network/models/responce/home/getDepartmentsResponse.dart';
 import 'package:giftex/data/network/models/responce/home/getSellDetailsResponse.dart';
 import 'package:giftex/data/network/models/responce/home/homeresponse.dart';
 import 'package:giftex/data/network/models/responce/home/newsblogsvideoresponse.dart';
 import 'package:giftex/data/network/models/responce/home/recordpricelots.dart';
 import 'package:giftex/data/network/models/responce/home/upcommingauctionresponse.dart';
+import 'package:giftex/data/network/models/responce/lot/upcominglotsresponse.dart';
 import 'package:giftex/data/network/repository/webcmsapimodel/webcmsapimodelrepo.dart';
 import 'package:mobx/mobx.dart';
 
@@ -107,8 +110,7 @@ abstract class _HomeViewModel with Store {
   Future<HttpResponse> gethomeRecordPriceLots() async {
     isLoadingForNews = true;
 
-    HttpResponse httpResponse =
-        await webCmsApiModelRepo!.gethomeRecordPriceLots();
+    HttpResponse httpResponse = await webCmsApiModelRepo!.gethomeRecordPriceLots();
 
     if (httpResponse.status == 200) {
       recordPriceLots = httpResponse.data;
@@ -159,6 +161,21 @@ abstract class _HomeViewModel with Store {
       getDepartmentsResponse = httpResponse.data;
     }
     isloadingdepartments = false;
+    return httpResponse;
+  }
+
+  @observable
+  UpComingLotsResponse? getRecordPriceArtworkResponse = UpComingLotsResponse();
+  @observable
+  bool isloadinggetpriceartwork = false;
+  Future<HttpResponse> getRecordpriceartwork() async {
+    isloadinggetpriceartwork = true;
+    getRecordPriceArtworkResponse = null;
+    HttpResponse httpResponse = await webCmsApiModelRepo!.getRecordpriceartwork();
+    if (httpResponse.status == 200) {
+      getRecordPriceArtworkResponse = httpResponse.data;
+    }
+    isloadinggetpriceartwork = false;
     return httpResponse;
   }
 }

@@ -2,12 +2,16 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:giftex/data/local/client/prefs.dart';
+import 'package:giftex/data/network/models/responce/home/GetSellDetailsResponse.dart';
+import 'package:giftex/data/network/models/responce/home/getrecordpriceartworkresponse.dart';
 import 'package:giftex/data/network/models/responce/home/getDepartmentsResponse.dart';
 import 'package:giftex/data/network/models/responce/home/getSellDetailsResponse.dart';
 import 'package:giftex/data/network/models/responce/home/homeresponse.dart';
 import 'package:giftex/data/network/models/responce/home/newsblogsvideoresponse.dart';
 import 'package:giftex/data/network/models/responce/home/recordpricelots.dart';
+import 'package:giftex/data/network/models/responce/home/recordpricelots.dart';
 import 'package:giftex/data/network/models/responce/home/upcommingauctionresponse.dart';
+import 'package:giftex/data/network/models/responce/lot/upcominglotsresponse.dart';
 
 import '../../base/base.dart' as BaseUrl;
 import '../../base/endpoints.dart' as endPoints;

@@ -256,37 +256,37 @@ mixin _$HomeViewModel on _HomeViewModel, Store {
     });
   }
 
-  late final _$getDepartmentsResponseAtom =
-      Atom(name: '_HomeViewModel.getDepartmentsResponse', context: context);
+  late final _$getRecordPriceArtworkResponseAtom = Atom(
+      name: '_HomeViewModel.getRecordPriceArtworkResponse', context: context);
 
   @override
-  GetDepartmentsResponse? get getDepartmentsResponse {
-    _$getDepartmentsResponseAtom.reportRead();
-    return super.getDepartmentsResponse;
+  UpComingLotsResponse? get getRecordPriceArtworkResponse {
+    _$getRecordPriceArtworkResponseAtom.reportRead();
+    return super.getRecordPriceArtworkResponse;
   }
 
   @override
-  set getDepartmentsResponse(GetDepartmentsResponse? value) {
-    _$getDepartmentsResponseAtom
-        .reportWrite(value, super.getDepartmentsResponse, () {
-      super.getDepartmentsResponse = value;
+  set getRecordPriceArtworkResponse(UpComingLotsResponse? value) {
+    _$getRecordPriceArtworkResponseAtom
+        .reportWrite(value, super.getRecordPriceArtworkResponse, () {
+      super.getRecordPriceArtworkResponse = value;
     });
   }
 
-  late final _$isloadingdepartmentsAtom =
-      Atom(name: '_HomeViewModel.isloadingdepartments', context: context);
+  late final _$isloadinggetpriceartworkAtom =
+      Atom(name: '_HomeViewModel.isloadinggetpriceartwork', context: context);
 
   @override
-  bool get isloadingdepartments {
-    _$isloadingdepartmentsAtom.reportRead();
-    return super.isloadingdepartments;
+  bool get isloadinggetpriceartwork {
+    _$isloadinggetpriceartworkAtom.reportRead();
+    return super.isloadinggetpriceartwork;
   }
 
   @override
-  set isloadingdepartments(bool value) {
-    _$isloadingdepartmentsAtom.reportWrite(value, super.isloadingdepartments,
-        () {
-      super.isloadingdepartments = value;
+  set isloadinggetpriceartwork(bool value) {
+    _$isloadinggetpriceartworkAtom
+        .reportWrite(value, super.isloadinggetpriceartwork, () {
+      super.isloadinggetpriceartwork = value;
     });
   }
 
@@ -308,8 +308,8 @@ getBuyDetailsResponse: ${getBuyDetailsResponse},
 isloadingbuyDetails: ${isloadingbuyDetails},
 getSellDetailsResponse: ${getSellDetailsResponse},
 isloadingsellDetails: ${isloadingsellDetails},
-getDepartmentsResponse: ${getDepartmentsResponse},
-isloadingdepartments: ${isloadingdepartments}
+getRecordPriceArtworkResponse: ${getRecordPriceArtworkResponse},
+isloadinggetpriceartwork: ${isloadinggetpriceartwork}
     ''';
   }
 }

@@ -1573,7 +1573,8 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                       MediaQuery.of(dialogContext).size.width *
                                           .70,
                                   hintText: "Country Code",
-                                  errorText: err_counrtyCode),
+                                  // errorText: err_counrtyCode
+                              ),
                             );
                     }),
                     SizedBox(
