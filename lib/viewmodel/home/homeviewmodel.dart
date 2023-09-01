@@ -1,10 +1,13 @@
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
+import 'package:giftex/data/network/models/responce/home/GetSellDetailsResponse.dart';
 import 'package:giftex/data/network/models/responce/home/homeresponse.dart';
 import 'package:giftex/data/network/models/responce/home/newsblogsvideoresponse.dart';
 import 'package:giftex/data/network/models/responce/home/recordpricelots.dart';
 import 'package:giftex/data/network/models/responce/home/upcommingauctionresponse.dart';
 import 'package:giftex/data/network/repository/webcmsapimodel/webcmsapimodelrepo.dart';
 import 'package:mobx/mobx.dart';
+
+import '../../data/network/models/responce/home/GetBuyDetailsResponse.dart';
 
 part 'homeviewmodel.g.dart';
 
@@ -65,7 +68,8 @@ abstract class _HomeViewModel with Store {
   Future<HttpResponse> getHomeUpcommingAuctionBaner() async {
     isLoadingForUpCommingAuction = true;
 
-    HttpResponse httpResponse = await webCmsApiModelRepo!.getHomeUpcomingAuction();
+    HttpResponse httpResponse =
+        await webCmsApiModelRepo!.getHomeUpcomingAuction();
 
     if (httpResponse.status == 200) {
       homeUpcommingAuctionResponse = httpResponse.data;
@@ -89,12 +93,43 @@ abstract class _HomeViewModel with Store {
   Future<HttpResponse> gethomeRecordPriceLots() async {
     isLoadingForNews = true;
 
-    HttpResponse httpResponse = await webCmsApiModelRepo!.gethomeRecordPriceLots();
+    HttpResponse httpResponse =
+        await webCmsApiModelRepo!.gethomeRecordPriceLots();
 
     if (httpResponse.status == 200) {
       recordPriceLots = httpResponse.data;
     }
     isLoadingForNews = false;
+    return httpResponse;
+  }
+
+  @observable
+  GetBuyDetailsResponse? getBuyDetailsResponse = GetBuyDetailsResponse();
+  @observable
+  bool isloadingbuyDetails = false;
+  Future<HttpResponse> getBuyDetails() async {
+    isloadingbuyDetails = true;
+    getBuyDetailsResponse = null;
+    HttpResponse httpResponse = await webCmsApiModelRepo!.getBuyDetails();
+    if (httpResponse.status == 200) {
+      getBuyDetailsResponse = httpResponse.data;
+    }
+    isloadingbuyDetails = false;
+    return httpResponse;
+  }
+
+  @observable
+  GetSellDetailsResponse? getSellDetailsResponse = GetSellDetailsResponse();
+  @observable
+  bool isloadingsellDetails = false;
+  Future<HttpResponse> getSellDetails() async {
+    isloadingsellDetails = true;
+    getSellDetailsResponse = null;
+    HttpResponse httpResponse = await webCmsApiModelRepo!.getSellDetails();
+    if (httpResponse.status == 200) {
+      getSellDetailsResponse = httpResponse.data;
+    }
+    isloadingsellDetails = false;
     return httpResponse;
   }
 }

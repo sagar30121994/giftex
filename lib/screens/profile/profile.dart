@@ -75,7 +75,8 @@ class _ProfilepageState extends State<Profilepage> {
                                 children: [
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       RichText(
                                         // textAlign: TextAlign.center,
@@ -85,7 +86,10 @@ class _ProfilepageState extends State<Profilepage> {
                                           children: <TextSpan>[
                                             TextSpan(
                                               text: 'Hello ',
-                                              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleLarge!
+                                                  .copyWith(
                                                     color: Color(0xffE74B52),
                                                     fontWeight: FontWeight.bold,
                                                   ),
@@ -93,7 +97,10 @@ class _ProfilepageState extends State<Profilepage> {
                                             TextSpan(
                                               text:
                                                   '${bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.basicDetails!.firstName ?? ''}',
-                                              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleLarge!
+                                                  .copyWith(
                                                     color: Colors.black,
                                                     fontWeight: FontWeight.bold,
                                                   ),
@@ -114,15 +121,25 @@ class _ProfilepageState extends State<Profilepage> {
                                           SizedBox(
                                             width: 3,
                                           ),
-                                          bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!
-                                                  .address!.isEmpty
+                                          bottomViewModel
+                                                  .profileViewModel!
+                                                  .getUserAllDetailsResponse!
+                                                  .result!
+                                                  .profile!
+                                                  .address!
+                                                  .isEmpty
                                               ? Container()
                                               : Text(
                                                   '${bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address!.first.city ?? ''},${bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address!.first.country ?? ''}',
                                                   textAlign: TextAlign.center,
-                                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                        color: Color(0xff2D2D2D),
-                                                        fontWeight: FontWeight.w400,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText1!
+                                                      .copyWith(
+                                                        color:
+                                                            Color(0xff2D2D2D),
+                                                        fontWeight:
+                                                            FontWeight.w400,
                                                       ),
                                                 ),
                                           SizedBox(
@@ -130,22 +147,41 @@ class _ProfilepageState extends State<Profilepage> {
                                           ),
                                           ElevatedButton(
                                             style: ButtonStyle(
-                                                backgroundColor: MaterialStateProperty.all(Color(0XFFFFFFFF)),
-                                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                backgroundColor:
+                                                    MaterialStateProperty.all(
+                                                        Color(0XFFFFFFFF)),
+                                                shape: MaterialStateProperty.all<
+                                                        RoundedRectangleBorder>(
                                                     RoundedRectangleBorder(
-                                                        borderRadius: BorderRadius.circular(20.0),
-                                                        side: BorderSide(color: Color(0xff747474), width: 0.38)))),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(20.0),
+                                                        side: BorderSide(
+                                                            color: Color(
+                                                                0xff747474),
+                                                            width: 0.38)))),
                                             onPressed: () {},
                                             child: Padding(
-                                              padding: const EdgeInsets.only(right: 8.0, left: 8, top: 12, bottom: 12),
+                                              padding: const EdgeInsets.only(
+                                                  right: 8.0,
+                                                  left: 8,
+                                                  top: 12,
+                                                  bottom: 12),
                                               child: Row(
                                                 children: [
                                                   Text(
                                                     'EDIT',
-                                                    style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                        color: Theme.of(context).colorScheme.primary,
-                                                        fontWeight: FontWeight.bold,
-                                                        letterSpacing: 2),
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodyText1!
+                                                        .copyWith(
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .colorScheme
+                                                                .primary,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            letterSpacing: 2),
                                                   ),
                                                   SizedBox(
                                                     width: 5,
@@ -203,10 +239,11 @@ class _ProfilepageState extends State<Profilepage> {
                           Text(
                             "MY ACCOUNT",
                             textAlign: TextAlign.left,
-                            style: Theme.of(context).textTheme.headline6!.copyWith(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                            style:
+                                Theme.of(context).textTheme.headline6!.copyWith(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                           ),
                           const SizedBox(
                             height: 16,
@@ -237,7 +274,10 @@ class _ProfilepageState extends State<Profilepage> {
                                       Text(
                                         "MY PROFILE",
                                         textAlign: TextAlign.left,
-                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .subtitle1!
+                                            .copyWith(
                                               color: Color(0xff1F2A52),
                                               fontWeight: FontWeight.w900,
                                             ),
@@ -278,7 +318,10 @@ class _ProfilepageState extends State<Profilepage> {
                                       Text(
                                         "MY ORDER HISTORY",
                                         textAlign: TextAlign.left,
-                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .subtitle1!
+                                            .copyWith(
                                               color: Color(0xff1F2A52),
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -317,7 +360,10 @@ class _ProfilepageState extends State<Profilepage> {
                                       Text(
                                         "MY GALLERY",
                                         textAlign: TextAlign.left,
-                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .subtitle1!
+                                            .copyWith(
                                               color: Color(0xff1F2A52),
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -357,7 +403,10 @@ class _ProfilepageState extends State<Profilepage> {
                                       Text(
                                         "MY AUCTION REVIEW",
                                         textAlign: TextAlign.left,
-                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .subtitle1!
+                                            .copyWith(
                                               color: Color(0xff1F2A52),
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -397,7 +446,10 @@ class _ProfilepageState extends State<Profilepage> {
                                       Text(
                                         "AUCTION DASHBOARD",
                                         textAlign: TextAlign.left,
-                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .subtitle1!
+                                            .copyWith(
                                               color: Color(0xff1F2A52),
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -421,21 +473,29 @@ class _ProfilepageState extends State<Profilepage> {
                                     await auctionViewModel.logout();
 
                                     Navigator.pushReplacement(
-                                        context, MaterialPageRoute(builder: (BuildContext context) => Loginpage()));
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                Loginpage()));
                                   },
                                   child: Container(
                                     color: Color(0xffE6EEF0),
-                                    padding: EdgeInsets.only(top: 16, bottom: 16, left: 10),
+                                    padding: EdgeInsets.only(
+                                        top: 16, bottom: 12, left: 10),
                                     child: Row(
                                       children: [
-                                        Image.asset("image/logout.png", height: 24),
+                                        Image.asset("image/logout.png",
+                                            height: 24),
                                         SizedBox(
                                           width: 10,
                                         ),
                                         Text(
                                           "Log Out",
                                           textAlign: TextAlign.left,
-                                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1!
+                                              .copyWith(
                                                 color: Color(0xff3A3C38),
                                                 fontWeight: FontWeight.w600,
                                               ),

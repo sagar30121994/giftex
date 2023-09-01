@@ -30,8 +30,11 @@ class UserRepo {
   Future<HttpResponse> getLastPurchases(UserRequestModel model) async {
     HttpResponse httpResponse = HttpResponse();
     String userlogin = json.encode(LoginReqestModel);
-    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
-    await httpClient!.post(BaseUrl.baseUrl + endPoints.User().lastbids, body: userlogin).then((responce) async {
+    httpClient!.client!.options =
+        BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    await httpClient!
+        .post(BaseUrl.baseUrl + endPoints.User().lastbids, body: userlogin)
+        .then((responce) async {
       print(responce);
 
       if (responce.statusCode == 200) {
@@ -55,12 +58,15 @@ class UserRepo {
     return httpResponse;
   }
 
-  Future<HttpResponse> getLiveAuctionReview(GetLiveAuctionReviewRequestModel model) async {
+  Future<HttpResponse> getLiveAuctionReview(
+      GetLiveAuctionReviewRequestModel model) async {
     HttpResponse httpResponse = HttpResponse();
     String userlogin = json.encode(LoginReqestModel);
-    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    httpClient!.client!.options =
+        BaseOptions(contentType: Headers.formUrlEncodedContentType);
     await httpClient!
-        .post(BaseUrl.baseUrl + endPoints.User().liveauctionreview, body: userlogin)
+        .post(BaseUrl.baseUrl + endPoints.User().liveauctionreview,
+            body: userlogin)
         .then((responce) async {
       print(responce);
 
@@ -90,8 +96,10 @@ class UserRepo {
     String userid = localSharedPrefrence!.getUserId();
     String authKey = localSharedPrefrence!.getAuthKeyWeb();
     String crmClientId = localSharedPrefrence!.getCrmClinetId();
-    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
-    await httpClient!.post(BaseUrl.baseUrl + endPoints.User().auctiongallery, body: {
+    httpClient!.client!.options =
+        BaseOptions(contentType: Headers.jsonContentType);
+    await httpClient!
+        .post(BaseUrl.baseUrl + endPoints.User().auctiongallery, body: {
       "userId": userid,
       "authkey_mobile": "",
       "authkey_web": authKey,
@@ -125,8 +133,10 @@ class UserRepo {
     String userid = localSharedPrefrence!.getUserId();
     String authKey = localSharedPrefrence!.getAuthKeyWeb();
     String crmClientId = localSharedPrefrence!.getCrmClinetId();
-    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
-    await httpClient!.post(BaseUrl.baseUrl + endPoints.User().getLast5Bids, body: {
+    httpClient!.client!.options =
+        BaseOptions(contentType: Headers.jsonContentType);
+    await httpClient!
+        .post(BaseUrl.baseUrl + endPoints.User().getLast5Bids, body: {
       "userId": userid,
       "authkey_mobile": "",
       "authkey_web": authKey,
@@ -160,8 +170,10 @@ class UserRepo {
     String userid = localSharedPrefrence!.getUserId();
     String authKey = localSharedPrefrence!.getAuthKeyWeb();
     String crmClientId = localSharedPrefrence!.getCrmClinetId();
-    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
-    await httpClient!.post(BaseUrl.baseUrl + endPoints.User().dashboardoverview, body: {
+    httpClient!.client!.options =
+        BaseOptions(contentType: Headers.jsonContentType);
+    await httpClient!
+        .post(BaseUrl.baseUrl + endPoints.User().dashboardoverview, body: {
       "userId": userid,
       "authkey_mobile": "",
       "authkey_web": authKey,
@@ -190,12 +202,15 @@ class UserRepo {
     return httpResponse;
   }
 
-  Future<HttpResponse> getDashboardAuctionCalender(UserRequestModel model) async {
+  Future<HttpResponse> getDashboardAuctionCalender(
+      UserRequestModel model) async {
     HttpResponse httpResponse = HttpResponse();
     String userlogin = json.encode(LoginReqestModel);
-    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    httpClient!.client!.options =
+        BaseOptions(contentType: Headers.formUrlEncodedContentType);
     await httpClient!
-        .post(BaseUrl.baseUrl + endPoints.User().dashboardoverview, body: userlogin)
+        .post(BaseUrl.baseUrl + endPoints.User().dashboardoverview,
+            body: userlogin)
         .then((responce) async {
       print(responce);
 
@@ -223,8 +238,11 @@ class UserRepo {
   Future<HttpResponse> getHighlighs(UserRequestModel model) async {
     HttpResponse httpResponse = HttpResponse();
     String userlogin = json.encode(LoginReqestModel);
-    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
-    await httpClient!.post(BaseUrl.baseUrl + endPoints.User().highlights, body: userlogin).then((responce) async {
+    httpClient!.client!.options =
+        BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    await httpClient!
+        .post(BaseUrl.baseUrl + endPoints.User().highlights, body: userlogin)
+        .then((responce) async {
       print(responce);
 
       if (responce.statusCode == 200) {
@@ -251,8 +269,11 @@ class UserRepo {
   Future<HttpResponse> getMyPurchases(UserRequestModel model) async {
     HttpResponse httpResponse = HttpResponse();
     String userlogin = json.encode(LoginReqestModel);
-    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
-    await httpClient!.post(BaseUrl.baseUrl + endPoints.User().mypurchses, body: userlogin).then((responce) async {
+    httpClient!.client!.options =
+        BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    await httpClient!
+        .post(BaseUrl.baseUrl + endPoints.User().mypurchses, body: userlogin)
+        .then((responce) async {
       print(responce);
 
       if (responce.statusCode == 200) {
@@ -279,8 +300,12 @@ class UserRepo {
   Future<HttpResponse> getDahboardChart(UserRequestModel model) async {
     HttpResponse httpResponse = HttpResponse();
     String userlogin = json.encode(LoginReqestModel);
-    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
-    await httpClient!.post(BaseUrl.baseUrl + endPoints.User().dashboardchart, body: userlogin).then((responce) async {
+    httpClient!.client!.options =
+        BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    await httpClient!
+        .post(BaseUrl.baseUrl + endPoints.User().dashboardchart,
+            body: userlogin)
+        .then((responce) async {
       print(responce);
 
       if (responce.statusCode == 200) {
@@ -307,8 +332,11 @@ class UserRepo {
   Future<HttpResponse> saveSetting(SaveSettingRequestModel model) async {
     HttpResponse httpResponse = HttpResponse();
     String userlogin = json.encode(LoginReqestModel);
-    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
-    await httpClient!.post(BaseUrl.baseUrl + endPoints.User().savesetting, body: userlogin).then((responce) async {
+    httpClient!.client!.options =
+        BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    await httpClient!
+        .post(BaseUrl.baseUrl + endPoints.User().savesetting, body: userlogin)
+        .then((responce) async {
       print(responce);
 
       if (responce.statusCode == 200) {
@@ -335,8 +363,11 @@ class UserRepo {
   Future<HttpResponse> getSetting(UserRequestModel model) async {
     HttpResponse httpResponse = HttpResponse();
     String userlogin = json.encode(LoginReqestModel);
-    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
-    await httpClient!.post(BaseUrl.baseUrl + endPoints.User().getsetting, body: userlogin).then((responce) async {
+    httpClient!.client!.options =
+        BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    await httpClient!
+        .post(BaseUrl.baseUrl + endPoints.User().getsetting, body: userlogin)
+        .then((responce) async {
       print(responce);
 
       if (responce.statusCode == 200) {
@@ -363,8 +394,73 @@ class UserRepo {
   Future<HttpResponse> deleteAccount(UserRequestModel model) async {
     HttpResponse httpResponse = HttpResponse();
     String userlogin = json.encode(LoginReqestModel);
-    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
-    await httpClient!.post(BaseUrl.baseUrl + endPoints.User().deleteaccount, body: userlogin).then((responce) async {
+    httpClient!.client!.options =
+        BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    await httpClient!
+        .post(BaseUrl.baseUrl + endPoints.User().deleteaccount, body: userlogin)
+        .then((responce) async {
+      print(responce);
+
+      if (responce.statusCode == 200) {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = 'Successful';
+        // httpResponse.data = HighlightsResponce.fromJson(responce.data);
+      } else {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = responce.data['message'];
+        httpResponse.data = null;
+      }
+      return httpResponse;
+    }).catchError((err) {
+      print(err);
+      httpResponse.status = 400;
+      httpResponse.message = err.toString();
+      httpResponse.data = err.toString();
+      return httpResponse;
+    });
+
+    return httpResponse;
+  }
+
+  Future<HttpResponse> getBuyDetails() async {
+    HttpResponse httpResponse = HttpResponse();
+    String userlogin = json.encode(LoginReqestModel);
+    httpClient!.client!.options =
+        BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    await httpClient!
+        .post(BaseUrl.baseUrl + endPoints.User().mypurchses, body: userlogin)
+        .then((responce) async {
+      print(responce);
+
+      if (responce.statusCode == 200) {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = 'Successful';
+        // httpResponse.data = HighlightsResponce.fromJson(responce.data);
+      } else {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = responce.data['message'];
+        httpResponse.data = null;
+      }
+      return httpResponse;
+    }).catchError((err) {
+      print(err);
+      httpResponse.status = 400;
+      httpResponse.message = err.toString();
+      httpResponse.data = err.toString();
+      return httpResponse;
+    });
+
+    return httpResponse;
+  }
+
+  Future<HttpResponse> getSellDetails() async {
+    HttpResponse httpResponse = HttpResponse();
+    String userlogin = json.encode(LoginReqestModel);
+    httpClient!.client!.options =
+        BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    await httpClient!
+        .post(BaseUrl.baseUrl + endPoints.User().mypurchses, body: userlogin)
+        .then((responce) async {
       print(responce);
 
       if (responce.statusCode == 200) {

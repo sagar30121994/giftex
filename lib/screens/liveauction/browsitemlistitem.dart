@@ -4,7 +4,8 @@ import 'dart:convert';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart' as bottom;
+import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart'
+    as bottom;
 import 'package:giftex/screens/liveauction/components/image/imagecomponent.dart';
 import 'package:giftex/screens/liveauction/liveauction.dart';
 import 'package:giftex/screens/productdetailspage/productdetailpage.dart';
@@ -25,7 +26,8 @@ class BrowseItemListItem extends StatefulWidget {
   State<BrowseItemListItem> createState() => _BrowseItemListItemState();
 }
 
-class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticKeepAliveClientMixin {
+class _BrowseItemListItemState extends State<BrowseItemListItem>
+    with AutomaticKeepAliveClientMixin {
   Timer? countdownTimer;
   Duration myDuration = Duration(seconds: 0);
 
@@ -41,9 +43,12 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
     // }
     if ((widget.lots.status ?? "") != "UpComing") {
       setState(() {
-        myDuration = Duration(seconds: int.parse(widget.lots.liveStatus!.remainingSeconds ?? "0"));
+        myDuration = Duration(
+            seconds:
+                int.parse(widget.lots.liveStatus!.remainingSeconds ?? "0"));
       });
-      countdownTimer = Timer.periodic(Duration(seconds: 1), (_) => setCountDown());
+      countdownTimer =
+          Timer.periodic(Duration(seconds: 1), (_) => setCountDown());
     }
   }
 
@@ -65,12 +70,15 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
   }
 
   void checkEvent() {
-    final lotReference = FirebaseDatabase.instance.ref("Lot/" + widget.lots.lotId!);
-    final likeReference = FirebaseDatabase.instance
-        .ref("like/" + widget.auctionViewModel.localSharedPrefrence.getUserId() + "/" + widget.lots.lotId!);
+    final lotReference =
+        FirebaseDatabase.instance.ref("Lot/" + widget.lots.lotId!);
+    final likeReference = FirebaseDatabase.instance.ref("like/" +
+        widget.auctionViewModel.localSharedPrefrence.getUserId() +
+        "/" +
+        widget.lots.lotId!);
 
-    final userlikeReference =
-        FirebaseDatabase.instance.ref("userlike/" + widget.auctionViewModel.localSharedPrefrence.getUserId());
+    final userlikeReference = FirebaseDatabase.instance.ref(
+        "userlike/" + widget.auctionViewModel.localSharedPrefrence.getUserId());
 
     userlikeReference.onValue.listen((DatabaseEvent event) {
       print(event);
@@ -109,7 +117,8 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
 
             widget.lots = l1;
 
-            if (widget.lots.leadingUser!.id! != widget.auctionViewModel.localSharedPrefrence.getUserId()) {
+            if (widget.lots.leadingUser!.id! !=
+                widget.auctionViewModel.localSharedPrefrence.getUserId()) {
               widget.lots.isLiked = isLike;
             }
 
@@ -117,7 +126,9 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
           });
           if (widget.lots.status != "UpComing") {
             setState(() {
-              myDuration = Duration(seconds: int.parse(widget.lots.liveStatus!.remainingSeconds ?? "0"));
+              myDuration = Duration(
+                  seconds: int.parse(
+                      widget.lots.liveStatus!.remainingSeconds ?? "0"));
             });
           }
         }
@@ -204,17 +215,20 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                 child: Stack(
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(top: 150 / 2.0, bottom: 0),
+                      padding: EdgeInsets.only(top: 8, bottom: 0),
                       child: Container(
                         //replace this Container with your Card
                         color: Color(0xffF9F9F9),
-                        height: 500.0,
+                        height: 600.0,
                       ),
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => ProductDetailPage(widget.lots, auctionViewModel)));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProductDetailPage(
+                                    widget.lots, auctionViewModel)));
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(20.0),
@@ -227,7 +241,8 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                       ),
                     ),
                     Padding(
-                        padding: EdgeInsets.only(top: 250, bottom: 0, left: 25.0, right: 25),
+                        padding: EdgeInsets.only(
+                            top: 250, bottom: 0, left: 25.0, right: 25),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -239,7 +254,10 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                 ? Text(
                                     "${widget.lots.info!.title}",
                                     textAlign: TextAlign.center,
-                                    style: Theme.of(context).textTheme.headline6!.copyWith(
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline6!
+                                        .copyWith(
                                           color: Colors.black,
                                           letterSpacing: 2,
                                           fontWeight: FontWeight.bold,
@@ -253,7 +271,10 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                               child: Text(
                                 "${widget.lots.info!.lotTitle}",
                                 textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .subtitle1!
+                                    .copyWith(
                                       color: Color(0xff747474),
                                       fontWeight: FontWeight.w400,
                                     ),
@@ -273,7 +294,10 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                     Text(
                                       "Estimate Value ",
                                       textAlign: TextAlign.center,
-                                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .subtitle1!
+                                          .copyWith(
                                             color: Color(0xff747474),
                                             fontWeight: FontWeight.w400,
                                           ),
@@ -284,7 +308,10 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                     Text(
                                       "₹${formateNumber(widget.lots.estimateFrom!.iNR ?? "0")} - ${formateNumber(widget.lots.estimateTo!.iNR ?? "")}",
                                       textAlign: TextAlign.center,
-                                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1!
+                                          .copyWith(
                                             color: Color(0xff202232),
                                             fontWeight: FontWeight.bold,
                                           ),
@@ -299,7 +326,10 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                     Text(
                                       "Bid Closing in",
                                       textAlign: TextAlign.center,
-                                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .subtitle1!
+                                          .copyWith(
                                             color: Color(0xff747474),
                                             fontWeight: FontWeight.w400,
                                           ),
@@ -311,14 +341,18 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                       children: [
                                         Container(
                                             decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(8),
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
                                               color: Color(0xff8C9FB1),
                                             ),
                                             padding: EdgeInsets.all(4),
                                             child: Text(
                                               "${hours}",
-                                              style:
-                                                  Theme.of(context).textTheme.subtitle2!.copyWith(color: Colors.white),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .subtitle2!
+                                                  .copyWith(
+                                                      color: Colors.white),
                                             )),
                                         Container(
                                             // color: Colors.black,
@@ -326,14 +360,18 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                             child: Text(":")),
                                         Container(
                                             decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(8),
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
                                               color: Color(0xff8C9FB1),
                                             ),
                                             padding: EdgeInsets.all(4),
                                             child: Text(
                                               "${minutes}",
-                                              style:
-                                                  Theme.of(context).textTheme.subtitle2!.copyWith(color: Colors.white),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .subtitle2!
+                                                  .copyWith(
+                                                      color: Colors.white),
                                             )),
                                         Container(
                                             // color: Colors.black,
@@ -341,14 +379,18 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                             child: Text(":")),
                                         Container(
                                             decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(8),
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
                                               color: Color(0xff8C9FB1),
                                             ),
                                             padding: EdgeInsets.all(4),
                                             child: Text(
                                               "${seconds}",
-                                              style:
-                                                  Theme.of(context).textTheme.subtitle2!.copyWith(color: Colors.white),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .subtitle2!
+                                                  .copyWith(
+                                                      color: Colors.white),
                                             )),
                                       ],
                                     ),
@@ -370,7 +412,10 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                     Text(
                                       "Current Bid",
                                       textAlign: TextAlign.center,
-                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .copyWith(
                                             color: Color(0xff747474),
                                             fontWeight: FontWeight.w400,
                                           ),
@@ -381,7 +426,10 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                     Text(
                                       "₹${formateNumber(widget.lots.liveStatus!.currentBid!.iNR ?? "0")}",
                                       textAlign: TextAlign.center,
-                                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1!
+                                          .copyWith(
                                             color: Color(0xff202232),
                                             fontWeight: FontWeight.w600,
                                           ),
@@ -396,7 +444,10 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                     Text(
                                       "Next Valid Bid",
                                       textAlign: TextAlign.center,
-                                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .subtitle1!
+                                          .copyWith(
                                             color: Color(0xff747474),
                                             fontWeight: FontWeight.w400,
                                           ),
@@ -407,8 +458,13 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                     Text(
                                       "₹${formateNumber(widget.lots.liveStatus!.nextValidBid!.iNR ?? "0")}",
                                       textAlign: TextAlign.center,
-                                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                            color: Theme.of(context).colorScheme.primary,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1!
+                                          .copyWith(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .primary,
                                             fontWeight: FontWeight.w600,
                                           ),
                                     ),
@@ -423,21 +479,36 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                               children: [
                                 Spacer(),
                                 (widget.lots.leadingUser!.id ==
-                                        widget.auctionViewModel.localSharedPrefrence.getUserId())
+                                        widget.auctionViewModel
+                                            .localSharedPrefrence
+                                            .getUserId())
                                     ? Container()
                                     : ElevatedButton(
                                         style: ButtonStyle(
-                                            backgroundColor: MaterialStateProperty.all(Color(0XFFF9F9F9)),
-                                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                            backgroundColor:
+                                                MaterialStateProperty.all(
+                                                    Color(0XFFF9F9F9)),
+                                            shape: MaterialStateProperty.all<
+                                                    RoundedRectangleBorder>(
                                                 RoundedRectangleBorder(
-                                                    borderRadius: BorderRadius.circular(20.0),
-                                                    side: BorderSide(color: Color(0xff747474), width: 0.38)))),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20.0),
+                                                    side: BorderSide(
+                                                        color:
+                                                            Color(0xff747474),
+                                                        width: 0.38)))),
                                         onPressed: () async {
                                           bool checked = false;
-                                          final textEditingController = TextEditingController();
-                                          await auctionViewModel.getProxyAmountByLot(widget.lots);
+                                          final textEditingController =
+                                              TextEditingController();
+                                          await auctionViewModel
+                                              .getProxyAmountByLot(widget.lots);
 
-                                          if (auctionViewModel.getProxyBidAmountResponse!.status == "true") {
+                                          if (auctionViewModel
+                                                  .getProxyBidAmountResponse!
+                                                  .status ==
+                                              "true") {
                                             showModalBottomSheet<void>(
                                               // context and builder are
                                               // required properties in this widget
@@ -450,43 +521,82 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                 // we create center column and display text
 
                                                 // Returning SizedBox instead of a Container
-                                                return StatefulBuilder(builder: (_, builder) {
+                                                return StatefulBuilder(
+                                                    builder: (_, builder) {
                                                   return SizedBox(
-                                                    height: MediaQuery.of(context).size.height - 150,
-                                                    child: Observer(builder: (context) {
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height -
+                                                            150,
+                                                    child: Observer(
+                                                        builder: (context) {
                                                       return Container(
-                                                        height: MediaQuery.of(context).size.height,
-                                                        width: MediaQuery.of(context).size.width,
-                                                        color: Color(0xffEAEEF2),
+                                                        height: MediaQuery.of(
+                                                                context)
+                                                            .size
+                                                            .height,
+                                                        width: MediaQuery.of(
+                                                                context)
+                                                            .size
+                                                            .width,
+                                                        color:
+                                                            Color(0xffEAEEF2),
                                                         child: Column(
-                                                          mainAxisAlignment: MainAxisAlignment.start,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
                                                           children: <Widget>[
                                                             Align(
-                                                              alignment: Alignment.topRight,
+                                                              alignment:
+                                                                  Alignment
+                                                                      .topRight,
                                                               child: IconButton(
-                                                                  onPressed: () {
-                                                                    widget.auctionViewModel.selectedProxyBid = "";
-                                                                    Navigator.of(context).pop();
+                                                                  onPressed:
+                                                                      () {
+                                                                    widget
+                                                                        .auctionViewModel
+                                                                        .selectedProxyBid = "";
+                                                                    Navigator.of(
+                                                                            context)
+                                                                        .pop();
                                                                   },
-                                                                  icon: Icon(Icons.close)),
+                                                                  icon: Icon(Icons
+                                                                      .close)),
                                                             ),
                                                             SizedBox(
                                                               height: 16,
                                                             ),
                                                             Text(
                                                               "ENTER YOUR PROXY BID",
-                                                              style: Theme.of(context).textTheme.headline5!.copyWith(
-                                                                  letterSpacing: 2,
-                                                                  fontWeight: FontWeight.bold,
-                                                                  color: Colors.black),
+                                                              style: Theme.of(
+                                                                      context)
+                                                                  .textTheme
+                                                                  .headline5!
+                                                                  .copyWith(
+                                                                      letterSpacing:
+                                                                          2,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      color: Colors
+                                                                          .black),
                                                             ),
                                                             SizedBox(
                                                               height: 16,
                                                             ),
                                                             Text(
                                                               "My Maximum Proxy Bid",
-                                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                  letterSpacing: 2, fontWeight: FontWeight.bold),
+                                                              style: Theme.of(
+                                                                      context)
+                                                                  .textTheme
+                                                                  .subtitle1!
+                                                                  .copyWith(
+                                                                      letterSpacing:
+                                                                          2,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
                                                             ),
                                                             SizedBox(
                                                               height: 16,
@@ -496,20 +606,30 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                               child: Column(
                                                                 children: [
                                                                   TextField(
-                                                                    controller: textEditingController,
-                                                                    keyboardType: TextInputType.number,
-                                                                    decoration: InputDecoration(
-                                                                        icon: Image.asset(
+                                                                    controller:
+                                                                        textEditingController,
+                                                                    keyboardType:
+                                                                        TextInputType
+                                                                            .number,
+                                                                    decoration:
+                                                                        InputDecoration(
+                                                                            icon:
+                                                                                Image.asset(
                                                                       "image/rs.png",
-                                                                      height: 16,
+                                                                      height:
+                                                                          16,
                                                                     )),
                                                                   ),
                                                                   SizedBox(
-                                                                      width: 350,
-                                                                      child: Image.asset(
+                                                                      width:
+                                                                          350,
+                                                                      child: Image
+                                                                          .asset(
                                                                         "image/dottedline.png",
-                                                                        height: 2,
-                                                                        fit: BoxFit.fitWidth,
+                                                                        height:
+                                                                            2,
+                                                                        fit: BoxFit
+                                                                            .fitWidth,
                                                                       ))
                                                                 ],
                                                               ),
@@ -519,49 +639,49 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                             ),
                                                             Text(
                                                               "Select Next Valid Bid",
-                                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                  letterSpacing: 2, fontWeight: FontWeight.bold),
+                                                              style: Theme.of(
+                                                                      context)
+                                                                  .textTheme
+                                                                  .subtitle1!
+                                                                  .copyWith(
+                                                                      letterSpacing:
+                                                                          2,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
                                                             ),
                                                             SizedBox(
                                                               height: 16,
                                                             ),
                                                             Padding(
-                                                              padding: const EdgeInsets.all(2.0),
-                                                              child: Observer(builder: (context) {
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(2.0),
+                                                              child: Observer(
+                                                                  builder:
+                                                                      (context) {
                                                                 return Row(
-                                                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceAround,
                                                                   children: auctionViewModel
-                                                                      .getProxyBidAmountResponse!.result!.nextValidBid!
-                                                                      .map((e) => InkWell(
-                                                                            onTap: () {
-                                                                              auctionViewModel.selectedProxyBid =
-                                                                                  e.iNR ?? "0";
+                                                                      .getProxyBidAmountResponse!
+                                                                      .result!
+                                                                      .nextValidBid!
+                                                                      .map((e) =>
+                                                                          InkWell(
+                                                                            onTap:
+                                                                                () {
+                                                                              auctionViewModel.selectedProxyBid = e.iNR ?? "0";
                                                                               textEditingController.text = e.iNR!;
                                                                             },
-                                                                            child: Column(
+                                                                            child:
+                                                                                Column(
                                                                               children: [
                                                                                 Container(
-                                                                                  padding: EdgeInsets.symmetric(
-                                                                                      horizontal: 8, vertical: 4),
-                                                                                  decoration: BoxDecoration(
-                                                                                      color: (auctionViewModel
-                                                                                                  .selectedProxyBid ==
-                                                                                              (e.iNR ?? "0"))
-                                                                                          ? Color(0xffB45156)
-                                                                                          : Color(0xffF7FAFD),
-                                                                                      borderRadius:
-                                                                                          BorderRadius.circular(8)),
-                                                                                  child: Text(
-                                                                                      "₹${formateNumber(e.iNR ?? "0")}",
-                                                                                      style: Theme.of(context)
-                                                                                          .textTheme
-                                                                                          .caption!
-                                                                                          .copyWith(
-                                                                                              color: (auctionViewModel
-                                                                                                          .selectedProxyBid ==
-                                                                                                      (e.iNR ?? "0"))
-                                                                                                  ? Colors.white
-                                                                                                  : Colors.grey)),
+                                                                                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                                                                  decoration: BoxDecoration(color: (auctionViewModel.selectedProxyBid == (e.iNR ?? "0")) ? Color(0xffB45156) : Color(0xffF7FAFD), borderRadius: BorderRadius.circular(8)),
+                                                                                  child: Text("₹${formateNumber(e.iNR ?? "0")}", style: Theme.of(context).textTheme.caption!.copyWith(color: (auctionViewModel.selectedProxyBid == (e.iNR ?? "0")) ? Colors.white : Colors.grey)),
                                                                                 ),
                                                                                 SizedBox(
                                                                                   height: 24,
@@ -573,71 +693,51 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                                 );
                                                               }),
                                                             ),
-                                                            (auctionViewModel.selectedProxyBid == "")
+                                                            (auctionViewModel
+                                                                        .selectedProxyBid ==
+                                                                    "")
                                                                 ? Container()
                                                                 : Stack(
                                                                     children: [
                                                                       Positioned(
-                                                                          top: 0,
-                                                                          left: auctionViewModel.getIndex(
-                                                                                      auctionViewModel
-                                                                                          .selectedProxyBid) ==
-                                                                                  0
+                                                                          top:
+                                                                              0,
+                                                                          left: auctionViewModel.getIndex(auctionViewModel.selectedProxyBid) == 0
                                                                               ? 42
-                                                                              : auctionViewModel.getIndex(
-                                                                                          auctionViewModel
-                                                                                              .selectedProxyBid) ==
-                                                                                      1
-                                                                                  ? MediaQuery.of(context).size.width /
-                                                                                          4 +
-                                                                                      42
-                                                                                  : auctionViewModel.getIndex(
-                                                                                              auctionViewModel
-                                                                                                  .selectedProxyBid) ==
-                                                                                          2
-                                                                                      ? MediaQuery.of(context)
-                                                                                                  .size
-                                                                                                  .width /
-                                                                                              2 +
-                                                                                          42
-                                                                                      : MediaQuery.of(context)
-                                                                                              .size
-                                                                                              .width -
-                                                                                          42,
+                                                                              : auctionViewModel.getIndex(auctionViewModel.selectedProxyBid) == 1
+                                                                                  ? MediaQuery.of(context).size.width / 4 + 42
+                                                                                  : auctionViewModel.getIndex(auctionViewModel.selectedProxyBid) == 2
+                                                                                      ? MediaQuery.of(context).size.width / 2 + 42
+                                                                                      : MediaQuery.of(context).size.width - 42,
                                                                           child: Image.asset(
                                                                             "image/top.png",
-                                                                            width: 16,
-                                                                            height: 7.5,
+                                                                            width:
+                                                                                16,
+                                                                            height:
+                                                                                7.5,
                                                                           )),
                                                                       Align(
-                                                                        alignment: auctionViewModel.getIndex(
-                                                                                    auctionViewModel
-                                                                                        .selectedProxyBid) ==
+                                                                        alignment: auctionViewModel.getIndex(auctionViewModel.selectedProxyBid) ==
                                                                                 0
                                                                             ? Alignment.topLeft
-                                                                            : auctionViewModel.getIndex(auctionViewModel
-                                                                                        .selectedProxyBid) ==
-                                                                                    1
+                                                                            : auctionViewModel.getIndex(auctionViewModel.selectedProxyBid) == 1
                                                                                 ? Alignment.topCenter
-                                                                                : auctionViewModel.getIndex(
-                                                                                            auctionViewModel
-                                                                                                .selectedProxyBid) ==
-                                                                                        2
+                                                                                : auctionViewModel.getIndex(auctionViewModel.selectedProxyBid) == 2
                                                                                     ? Alignment.topCenter
                                                                                     : Alignment.topRight,
-                                                                        child: Container(
-                                                                          margin: EdgeInsets.only(top: 7.5),
+                                                                        child:
+                                                                            Container(
+                                                                          margin:
+                                                                              EdgeInsets.only(top: 7.5),
                                                                           padding: EdgeInsets.symmetric(
-                                                                              horizontal: 8, vertical: 4),
+                                                                              horizontal: 8,
+                                                                              vertical: 4),
                                                                           decoration: BoxDecoration(
                                                                               color: Color(0xffB45156),
                                                                               borderRadius: BorderRadius.circular(8)),
                                                                           child: Text(
                                                                               "Your Next Valid Bid ₹${formateNumber(auctionViewModel.selectedProxyBid == "" ? "0" : auctionViewModel.selectedProxyBid)}",
-                                                                              style: Theme.of(context)
-                                                                                  .textTheme
-                                                                                  .subtitle1!
-                                                                                  .copyWith(color: Colors.white)),
+                                                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Colors.white)),
                                                                         ),
                                                                       ),
                                                                     ],
@@ -645,30 +745,41 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                             Row(
                                                               children: [
                                                                 Checkbox(
-                                                                    value: checked,
-                                                                    onChanged: (check) {
-                                                                      builder(() {
-                                                                        checked = check ?? false;
+                                                                    value:
+                                                                        checked,
+                                                                    onChanged:
+                                                                        (check) {
+                                                                      builder(
+                                                                          () {
+                                                                        checked =
+                                                                            check ??
+                                                                                false;
                                                                       });
                                                                     }),
                                                                 Text(
                                                                   "I agree to",
-                                                                  style: Theme.of(context)
+                                                                  style: Theme.of(
+                                                                          context)
                                                                       .textTheme
                                                                       .subtitle2!
-                                                                      .copyWith(color: Colors.grey),
+                                                                      .copyWith(
+                                                                          color:
+                                                                              Colors.grey),
                                                                 ),
                                                                 SizedBox(
                                                                   width: 2,
                                                                 ),
                                                                 Text(
                                                                   "Terms & Conditions",
-                                                                  style: Theme.of(context)
+                                                                  style: Theme.of(
+                                                                          context)
                                                                       .textTheme
                                                                       .subtitle2!
                                                                       .copyWith(
-                                                                          decoration: TextDecoration.underline,
-                                                                          fontWeight: FontWeight.bold),
+                                                                          decoration: TextDecoration
+                                                                              .underline,
+                                                                          fontWeight:
+                                                                              FontWeight.bold),
                                                                 ),
                                                               ],
                                                             ),
@@ -676,14 +787,21 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                               height: 4,
                                                             ),
                                                             Padding(
-                                                              padding: const EdgeInsets.all(8.0),
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(8.0),
                                                               child: Text(
                                                                 "If placing a proxy bid, enter the max amount you would be writing to bid upto. My Profile Page - To set your Bidding Nickname, you may submit a bid ₹25,000 (next incremental value)",
-                                                                textAlign: TextAlign.justify,
-                                                                style: Theme.of(context)
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .justify,
+                                                                style: Theme.of(
+                                                                        context)
                                                                     .textTheme
                                                                     .subtitle2!
-                                                                    .copyWith(color: Colors.grey),
+                                                                    .copyWith(
+                                                                        color: Colors
+                                                                            .grey),
                                                               ),
                                                             ),
                                                             SizedBox(
@@ -692,73 +810,109 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                             InkWell(
                                                               onTap: () async {
                                                                 if (checked) {
-                                                                  if (widget.auctionViewModel.selectedProxyBid == "") {
-                                                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                                                      content: Text(
+                                                                  if (widget
+                                                                          .auctionViewModel
+                                                                          .selectedProxyBid ==
+                                                                      "") {
+                                                                    ScaffoldMessenger.of(
+                                                                            context)
+                                                                        .showSnackBar(
+                                                                            SnackBar(
+                                                                      content:
+                                                                          Text(
                                                                         "Please Select/Enter Valid Bid",
                                                                         style: Theme.of(context)
                                                                             .textTheme
                                                                             .subtitle2!
                                                                             .copyWith(color: Colors.white),
                                                                       ),
-                                                                      backgroundColor: Colors.red,
-                                                                      elevation: 42,
+                                                                      backgroundColor:
+                                                                          Colors
+                                                                              .red,
+                                                                      elevation:
+                                                                          42,
                                                                     ));
                                                                   } else {
-                                                                    await widget.auctionViewModel.placeBid(widget.lots,
-                                                                        widget.auctionViewModel.selectedProxyBid, "0");
+                                                                    await widget.auctionViewModel.placeBid(
+                                                                        widget
+                                                                            .lots,
+                                                                        widget
+                                                                            .auctionViewModel
+                                                                            .selectedProxyBid,
+                                                                        "0");
 
-                                                                    if (widget.auctionViewModel.proxyBidResponse!
+                                                                    if (widget
+                                                                            .auctionViewModel
+                                                                            .proxyBidResponse!
                                                                             .status ==
                                                                         "true") {
-                                                                      if (widget.auctionViewModel.proxyBidResponse!
+                                                                      if (widget
+                                                                              .auctionViewModel
+                                                                              .proxyBidResponse!
                                                                               .bidStatus ==
                                                                           "true") {
-                                                                        widget.auctionViewModel.selectedProxyBid = "";
-                                                                        Navigator.of(context).pop();
+                                                                        widget
+                                                                            .auctionViewModel
+                                                                            .selectedProxyBid = "";
+                                                                        Navigator.of(context)
+                                                                            .pop();
 
                                                                         ScaffoldMessenger.of(context)
                                                                             .showSnackBar(SnackBar(
-                                                                          content: Text(
+                                                                          content:
+                                                                              Text(
                                                                             "${widget.auctionViewModel.proxyBidResponse!.bidMessage}",
-                                                                            style: Theme.of(context)
-                                                                                .textTheme
-                                                                                .subtitle2!
-                                                                                .copyWith(color: Colors.white),
+                                                                            style:
+                                                                                Theme.of(context).textTheme.subtitle2!.copyWith(color: Colors.white),
                                                                           ),
-                                                                          backgroundColor: Colors.green,
-                                                                          elevation: 42,
+                                                                          backgroundColor:
+                                                                              Colors.green,
+                                                                          elevation:
+                                                                              42,
                                                                         ));
                                                                       } else {
-                                                                        widget.auctionViewModel.selectedProxyBid = "";
-                                                                        Navigator.of(context).pop();
+                                                                        widget
+                                                                            .auctionViewModel
+                                                                            .selectedProxyBid = "";
+                                                                        Navigator.of(context)
+                                                                            .pop();
 
                                                                         ScaffoldMessenger.of(context)
                                                                             .showSnackBar(SnackBar(
-                                                                          content: Text(
+                                                                          content:
+                                                                              Text(
                                                                             "${widget.auctionViewModel.proxyBidResponse!.bidMessage}",
-                                                                            style: Theme.of(context)
-                                                                                .textTheme
-                                                                                .subtitle2!
-                                                                                .copyWith(color: Colors.white),
+                                                                            style:
+                                                                                Theme.of(context).textTheme.subtitle2!.copyWith(color: Colors.white),
                                                                           ),
-                                                                          backgroundColor: Colors.red,
-                                                                          elevation: 42,
+                                                                          backgroundColor:
+                                                                              Colors.red,
+                                                                          elevation:
+                                                                              42,
                                                                         ));
                                                                       }
                                                                     } else {}
                                                                   }
                                                                 } else {
-                                                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                                                    content: Text(
+                                                                  ScaffoldMessenger.of(
+                                                                          context)
+                                                                      .showSnackBar(
+                                                                          SnackBar(
+                                                                    content:
+                                                                        Text(
                                                                       "Please accept Terms & Conditions",
-                                                                      style: Theme.of(context)
+                                                                      style: Theme.of(
+                                                                              context)
                                                                           .textTheme
                                                                           .subtitle2!
-                                                                          .copyWith(color: Colors.white),
+                                                                          .copyWith(
+                                                                              color: Colors.white),
                                                                     ),
-                                                                    backgroundColor: Colors.red,
-                                                                    elevation: 42,
+                                                                    backgroundColor:
+                                                                        Colors
+                                                                            .red,
+                                                                    elevation:
+                                                                        42,
                                                                   ));
                                                                 }
                                                               },
@@ -768,8 +922,10 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                                 child: Stack(
                                                                   children: [
                                                                     Container(
-                                                                        height: 50,
-                                                                        width: 250,
+                                                                        height:
+                                                                            50,
+                                                                        width:
+                                                                            250,
                                                                         decoration: BoxDecoration(
                                                                             gradient: LinearGradient(colors: [
                                                                               Color(0xffE74B52),
@@ -778,25 +934,27 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                                             // color: Color(0xff466D33),
                                                                             borderRadius: BorderRadius.circular(24)),
                                                                         child: Center(
-                                                                          child: Padding(
-                                                                            padding: const EdgeInsets.only(
-                                                                                right: 24.0, left: 24),
-                                                                            child: Text(
+                                                                          child:
+                                                                              Padding(
+                                                                            padding:
+                                                                                const EdgeInsets.only(right: 24.0, left: 24),
+                                                                            child:
+                                                                                Text(
                                                                               "Submit",
-                                                                              style: Theme.of(context)
-                                                                                  .textTheme
-                                                                                  .bodyText1!
-                                                                                  .copyWith(
+                                                                              style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                                                     color: Color(0XFFFFFFFF),
                                                                                     fontWeight: FontWeight.bold,
                                                                                   ),
                                                                             ),
                                                                           ),
                                                                         )),
-                                                                    widget.auctionViewModel.isLoadingForProxy
+                                                                    widget.auctionViewModel
+                                                                            .isLoadingForProxy
                                                                         ? SizedBox(
-                                                                            width: 240,
-                                                                            child: LinearProgressIndicator())
+                                                                            width:
+                                                                                240,
+                                                                            child:
+                                                                                LinearProgressIndicator())
                                                                         : Container(),
                                                                   ],
                                                                 ),
@@ -816,10 +974,17 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                           }
                                         },
                                         child: Padding(
-                                          padding: const EdgeInsets.only(right: 8.0, left: 8, top: 12, bottom: 12),
+                                          padding: const EdgeInsets.only(
+                                              right: 8.0,
+                                              left: 8,
+                                              top: 12,
+                                              bottom: 12),
                                           child: Text(
                                             'PROXY BID',
-                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1!
+                                                .copyWith(
                                                   color: Color(0XFF2D2D2D),
                                                   fontWeight: FontWeight.bold,
                                                 ),
@@ -830,30 +995,44 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                   width: 24,
                                 ),
                                 (widget.lots.leadingUser!.id ==
-                                        widget.auctionViewModel.localSharedPrefrence.getUserId())
+                                        widget.auctionViewModel
+                                            .localSharedPrefrence
+                                            .getUserId())
                                     ? (myDuration.inSeconds > 0)
                                         ? Align(
                                             alignment: Alignment.topRight,
                                             child: Container(
-                                              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 24, vertical: 8),
                                               decoration: BoxDecoration(
-                                                  color: (widget.lots.leadingUser!.id ==
-                                                          widget.auctionViewModel.localSharedPrefrence.getUserId())
+                                                  color: (widget
+                                                              .lots
+                                                              .leadingUser!
+                                                              .id ==
+                                                          widget
+                                                              .auctionViewModel
+                                                              .localSharedPrefrence
+                                                              .getUserId())
                                                       ? Colors.blue
                                                       : Colors.red,
-                                                  borderRadius: BorderRadius.circular(16)),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          16)),
                                               child: Text(
                                                   "${(widget.lots.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId()) ? "CURRENTLY LEADING" : widget.lots.bidCount == "0" ? "BOUGHT IN" : "BID CLOSED"}",
                                                   style: Theme.of(context)
                                                       .textTheme
                                                       .subtitle2!
-                                                      .copyWith(color: Colors.white)),
+                                                      .copyWith(
+                                                          color: Colors.white)),
                                             ),
                                           )
                                         : Container()
                                     : InkWell(
                                         onTap: () {
-                                          bool checked = widget.auctionViewModel.localSharedPrefrence.getTermstatus();
+                                          bool checked = widget.auctionViewModel
+                                              .localSharedPrefrence
+                                              .getTermstatus();
                                           showModalBottomSheet<void>(
                                             // context and builder are
                                             // required properties in this widget
@@ -866,35 +1045,59 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                               // we create center column and display text
 
                                               // Returning SizedBox instead of a Container
-                                              return StatefulBuilder(builder: (_, builder) {
+                                              return StatefulBuilder(
+                                                  builder: (_, builder) {
                                                 return SizedBox(
-                                                  height: MediaQuery.of(ctx).size.height - 150,
-                                                  child: Observer(builder: (ctx) {
+                                                  height: MediaQuery.of(ctx)
+                                                          .size
+                                                          .height -
+                                                      150,
+                                                  child:
+                                                      Observer(builder: (ctx) {
                                                     return Container(
-                                                      height: MediaQuery.of(ctx).size.height,
-                                                      width: MediaQuery.of(ctx).size.width,
+                                                      height: MediaQuery.of(ctx)
+                                                          .size
+                                                          .height,
+                                                      width: MediaQuery.of(ctx)
+                                                          .size
+                                                          .width,
                                                       color: Color(0xffEAEEF2),
                                                       child: Column(
-                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
                                                         children: <Widget>[
                                                           Align(
-                                                            alignment: Alignment.topRight,
+                                                            alignment: Alignment
+                                                                .topRight,
                                                             child: IconButton(
                                                                 onPressed: () {
-                                                                  widget.auctionViewModel.selectedProxyBid = "";
-                                                                  Navigator.of(ctx).pop();
+                                                                  widget
+                                                                      .auctionViewModel
+                                                                      .selectedProxyBid = "";
+                                                                  Navigator.of(
+                                                                          ctx)
+                                                                      .pop();
                                                                 },
-                                                                icon: Icon(Icons.close)),
+                                                                icon: Icon(Icons
+                                                                    .close)),
                                                           ),
                                                           SizedBox(
                                                             height: 16,
                                                           ),
                                                           Text(
                                                             "PLACE YOUR BID NOW",
-                                                            style: Theme.of(ctx).textTheme.headline5!.copyWith(
-                                                                letterSpacing: 2,
-                                                                fontWeight: FontWeight.bold,
-                                                                color: Colors.black),
+                                                            style: Theme.of(ctx)
+                                                                .textTheme
+                                                                .headline5!
+                                                                .copyWith(
+                                                                    letterSpacing:
+                                                                        2,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    color: Colors
+                                                                        .black),
                                                           ),
                                                           SizedBox(
                                                             height: 16,
@@ -927,8 +1130,16 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                           ),
                                                           Text(
                                                             "Select Next Valid Bid",
-                                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                letterSpacing: 2, fontWeight: FontWeight.bold),
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .subtitle1!
+                                                                .copyWith(
+                                                                    letterSpacing:
+                                                                        2,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
                                                           ),
                                                           SizedBox(
                                                             height: 16,
@@ -979,19 +1190,34 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                           //     MediaQuery.of(context).size.width-42,
                                                           //     child: Image.asset("image/top.png",width: 16,height: 7.5,)),
                                                           Align(
-                                                            alignment: Alignment.topCenter,
+                                                            alignment: Alignment
+                                                                .topCenter,
                                                             child: Container(
-                                                              margin: EdgeInsets.only(top: 7.5),
-                                                              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                                              margin: EdgeInsets
+                                                                  .only(
+                                                                      top: 7.5),
+                                                              padding: EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          8,
+                                                                      vertical:
+                                                                          4),
                                                               decoration: BoxDecoration(
-                                                                  color: Color(0xffB45156),
-                                                                  borderRadius: BorderRadius.circular(8)),
+                                                                  color: Color(
+                                                                      0xffB45156),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8)),
                                                               child: Text(
                                                                   "Your Next Valid Bid ₹${formateNumber(widget.lots.liveStatus!.nextValidBid!.iNR!)}",
-                                                                  style: Theme.of(context)
+                                                                  style: Theme.of(
+                                                                          context)
                                                                       .textTheme
                                                                       .subtitle1!
-                                                                      .copyWith(color: Colors.white)),
+                                                                      .copyWith(
+                                                                          color:
+                                                                              Colors.white)),
                                                             ),
                                                           ),
 
@@ -1001,30 +1227,47 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                           Row(
                                                             children: [
                                                               Checkbox(
-                                                                  value: checked,
-                                                                  onChanged: (check) {
+                                                                  value:
+                                                                      checked,
+                                                                  onChanged:
+                                                                      (check) {
                                                                     builder(() {
-                                                                      checked = check ?? false;
+                                                                      checked =
+                                                                          check ??
+                                                                              false;
                                                                     });
 
-                                                                    widget.auctionViewModel.localSharedPrefrence
-                                                                        .setLoginStatus(checked);
+                                                                    widget
+                                                                        .auctionViewModel
+                                                                        .localSharedPrefrence
+                                                                        .setLoginStatus(
+                                                                            checked);
                                                                   }),
                                                               Text(
                                                                 "I agree to",
-                                                                style: Theme.of(ctx)
+                                                                style: Theme.of(
+                                                                        ctx)
                                                                     .textTheme
                                                                     .subtitle2!
-                                                                    .copyWith(color: Colors.grey),
+                                                                    .copyWith(
+                                                                        color: Colors
+                                                                            .grey),
                                                               ),
                                                               SizedBox(
                                                                 width: 2,
                                                               ),
                                                               Text(
                                                                 "Terms & Conditions",
-                                                                style: Theme.of(ctx).textTheme.subtitle2!.copyWith(
-                                                                    decoration: TextDecoration.underline,
-                                                                    fontWeight: FontWeight.bold),
+                                                                style: Theme.of(
+                                                                        ctx)
+                                                                    .textTheme
+                                                                    .subtitle2!
+                                                                    .copyWith(
+                                                                        decoration:
+                                                                            TextDecoration
+                                                                                .underline,
+                                                                        fontWeight:
+                                                                            FontWeight.bold),
                                                               ),
                                                             ],
                                                           ),
@@ -1032,14 +1275,21 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                             height: 4,
                                                           ),
                                                           Padding(
-                                                            padding: const EdgeInsets.all(8.0),
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(8.0),
                                                             child: Text(
                                                               "If placing a proxy bid, enter the max amount you would be writing to bid upto. My Profile Page - To set your Bidding Nickname, you may submit a bid ₹25,000 (next incremental value)",
-                                                              textAlign: TextAlign.justify,
-                                                              style: Theme.of(ctx)
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .justify,
+                                                              style: Theme.of(
+                                                                      ctx)
                                                                   .textTheme
                                                                   .subtitle2!
-                                                                  .copyWith(color: Colors.grey),
+                                                                  .copyWith(
+                                                                      color: Colors
+                                                                          .grey),
                                                             ),
                                                           ),
                                                           SizedBox(
@@ -1048,55 +1298,96 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                           InkWell(
                                                             onTap: () {
                                                               if (checked) {
-                                                                widget.auctionViewModel.placeBid(widget.lots, "0",
-                                                                    widget.lots.liveStatus!.nextValidBid!.iNR!);
+                                                                widget.auctionViewModel.placeBid(
+                                                                    widget.lots,
+                                                                    "0",
+                                                                    widget
+                                                                        .lots
+                                                                        .liveStatus!
+                                                                        .nextValidBid!
+                                                                        .iNR!);
 
-                                                                if (widget.auctionViewModel.proxyBidResponse!.status ==
+                                                                if (widget
+                                                                        .auctionViewModel
+                                                                        .proxyBidResponse!
+                                                                        .status ==
                                                                     "true") {
-                                                                  if (widget.auctionViewModel.proxyBidResponse!
+                                                                  if (widget
+                                                                          .auctionViewModel
+                                                                          .proxyBidResponse!
                                                                           .bidStatus ==
                                                                       "true") {
-                                                                    widget.auctionViewModel.selectedProxyBid = "";
-                                                                    Navigator.of(ctx).pop();
+                                                                    widget
+                                                                        .auctionViewModel
+                                                                        .selectedProxyBid = "";
+                                                                    Navigator.of(
+                                                                            ctx)
+                                                                        .pop();
 
-                                                                    ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(
-                                                                      content: Text(
+                                                                    ScaffoldMessenger.of(
+                                                                            ctx)
+                                                                        .showSnackBar(
+                                                                            SnackBar(
+                                                                      content:
+                                                                          Text(
                                                                         "${widget.auctionViewModel.proxyBidResponse!.bidMessage}",
                                                                         style: Theme.of(ctx)
                                                                             .textTheme
                                                                             .subtitle2!
                                                                             .copyWith(color: Colors.white),
                                                                       ),
-                                                                      backgroundColor: Colors.green,
-                                                                      elevation: 42,
+                                                                      backgroundColor:
+                                                                          Colors
+                                                                              .green,
+                                                                      elevation:
+                                                                          42,
                                                                     ));
                                                                   } else {
-                                                                    widget.auctionViewModel.selectedProxyBid = "";
-                                                                    Navigator.of(ctx).pop();
+                                                                    widget
+                                                                        .auctionViewModel
+                                                                        .selectedProxyBid = "";
+                                                                    Navigator.of(
+                                                                            ctx)
+                                                                        .pop();
 
-                                                                    ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(
-                                                                      content: Text(
+                                                                    ScaffoldMessenger.of(
+                                                                            ctx)
+                                                                        .showSnackBar(
+                                                                            SnackBar(
+                                                                      content:
+                                                                          Text(
                                                                         "${widget.auctionViewModel.proxyBidResponse!.bidMessage}",
                                                                         style: Theme.of(ctx)
                                                                             .textTheme
                                                                             .subtitle2!
                                                                             .copyWith(color: Colors.white),
                                                                       ),
-                                                                      backgroundColor: Colors.red,
-                                                                      elevation: 42,
+                                                                      backgroundColor:
+                                                                          Colors
+                                                                              .red,
+                                                                      elevation:
+                                                                          42,
                                                                     ));
                                                                   }
                                                                 }
                                                               } else {
-                                                                ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(
+                                                                ScaffoldMessenger
+                                                                        .of(ctx)
+                                                                    .showSnackBar(
+                                                                        SnackBar(
                                                                   content: Text(
                                                                     "Please accept Terms & Conditions",
-                                                                    style: Theme.of(ctx)
+                                                                    style: Theme.of(
+                                                                            ctx)
                                                                         .textTheme
                                                                         .subtitle2!
-                                                                        .copyWith(color: Colors.white),
+                                                                        .copyWith(
+                                                                            color:
+                                                                                Colors.white),
                                                                   ),
-                                                                  backgroundColor: Colors.red,
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .red,
                                                                   elevation: 42,
                                                                 ));
                                                               }
@@ -1107,8 +1398,10 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                               child: Stack(
                                                                 children: [
                                                                   Container(
-                                                                      height: 50,
-                                                                      width: 250,
+                                                                      height:
+                                                                          50,
+                                                                      width:
+                                                                          250,
                                                                       decoration: BoxDecoration(
                                                                           gradient: LinearGradient(colors: [
                                                                             Color(0xffE74B52),
@@ -1117,24 +1410,28 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                                           // color: Color(0xff466D33),
                                                                           borderRadius: BorderRadius.circular(24)),
                                                                       child: Center(
-                                                                        child: Padding(
+                                                                        child:
+                                                                            Padding(
                                                                           padding: const EdgeInsets.only(
-                                                                              right: 24.0, left: 24),
-                                                                          child: Text(
+                                                                              right: 24.0,
+                                                                              left: 24),
+                                                                          child:
+                                                                              Text(
                                                                             "Submit",
-                                                                            style: Theme.of(context)
-                                                                                .textTheme
-                                                                                .bodyText1!
-                                                                                .copyWith(
+                                                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                                                   color: Color(0XFFFFFFFF),
                                                                                   fontWeight: FontWeight.bold,
                                                                                 ),
                                                                           ),
                                                                         ),
                                                                       )),
-                                                                  widget.auctionViewModel.isLoadingForProxy
+                                                                  widget.auctionViewModel
+                                                                          .isLoadingForProxy
                                                                       ? const SizedBox(
-                                                                          width: 240, child: LinearProgressIndicator())
+                                                                          width:
+                                                                              240,
+                                                                          child:
+                                                                              LinearProgressIndicator())
                                                                       : Container(),
                                                                 ],
                                                               ),
@@ -1157,21 +1454,31 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                           height: 50,
                                           // width: 150,
                                           decoration: BoxDecoration(
-                                              gradient: const LinearGradient(colors: [
+                                              gradient:
+                                                  const LinearGradient(colors: [
                                                 Color(0xffE74B52),
                                                 Color(0xffE74B52),
                                               ]),
                                               // color: Color(0xff466D33),
-                                              borderRadius: BorderRadius.circular(24)),
+                                              borderRadius:
+                                                  BorderRadius.circular(24)),
                                           child: Center(
                                             child: Padding(
-                                              padding:
-                                                  const EdgeInsets.only(right: 32.0, left: 32, top: 12, bottom: 12),
+                                              padding: const EdgeInsets.only(
+                                                  right: 32.0,
+                                                  left: 32,
+                                                  top: 12,
+                                                  bottom: 12),
                                               child: Text(
                                                 'BID NOW',
-                                                style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                      color: const Color(0XFFFFFFFF),
-                                                      fontWeight: FontWeight.bold,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText1!
+                                                    .copyWith(
+                                                      color: const Color(
+                                                          0XFFFFFFFF),
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                     ),
                                               ),
                                             ),
@@ -1199,20 +1506,27 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                               borderRadius: BorderRadius.circular(16),
                               color: Color(0xffEAEEF2),
                             ),
-                            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 4),
                           ),
 
                           SizedBox(height: 12),
                           Container(
-                            decoration:
-                                BoxDecoration(borderRadius: BorderRadius.circular(16), color: Color(0xffF3E8E9)),
-                            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(16),
+                                color: Color(0xffF3E8E9)),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 4),
                             child: Text("${widget.lots.bidCount} BIDS"),
                           ),
                           SizedBox(height: 12),
                           Icon(
-                            (widget.lots.isLiked ?? "false") == "true" ? Icons.favorite : Icons.favorite_border,
-                            color: (widget.lots.isLiked ?? "false") == "true" ? Colors.pink : Colors.grey,
+                            (widget.lots.isLiked ?? "false") == "true"
+                                ? Icons.favorite
+                                : Icons.favorite_border,
+                            color: (widget.lots.isLiked ?? "false") == "true"
+                                ? Colors.pink
+                                : Colors.grey,
                           ),
                           //     :Icon(
                           //   Icons.favorite,
@@ -1224,7 +1538,8 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => ImageConponent(widget.lots.images!.cast<Images>())));
+                                      builder: (context) => ImageConponent(
+                                          widget.lots.images!.cast<Images>())));
                             },
                             child: Icon(
                               Icons.open_in_full,
@@ -1273,7 +1588,8 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => ProductDetailPage(widget.lots, widget.auctionViewModel)));
+                                    builder: (context) => ProductDetailPage(
+                                        widget.lots, widget.auctionViewModel)));
                           },
                           child: Padding(
                             padding: EdgeInsets.all(16.0),
@@ -1298,18 +1614,22 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                               Row(
                                 children: [
                                   Container(
-                                    child: Text("Lot  ${widget.lots.lotNumber}"),
+                                    child:
+                                        Text("Lot  ${widget.lots.lotNumber}"),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(16),
                                       color: Color(0xffEAEEF2),
                                     ),
-                                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 10, vertical: 4),
                                   ),
                                   SizedBox(width: 12),
                                   Container(
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(16), color: Color(0xffF3E8E9)),
-                                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                        borderRadius: BorderRadius.circular(16),
+                                        color: Color(0xffF3E8E9)),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 10, vertical: 4),
                                     child: Text("${widget.lots.bidCount} BIDS"),
                                   ),
                                 ],
@@ -1319,7 +1639,10 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                 child: Text(
                                   "${widget.lots.info!.title}",
                                   textAlign: TextAlign.start,
-                                  style: Theme.of(context).textTheme.headline6!.copyWith(
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline6!
+                                      .copyWith(
                                         color: Colors.black,
                                         letterSpacing: 2,
                                         fontWeight: FontWeight.bold,
@@ -1332,7 +1655,10 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                               Text(
                                 "${widget.lots.category}",
                                 textAlign: TextAlign.start,
-                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .subtitle1!
+                                    .copyWith(
                                       color: Color(0xff747474),
                                       fontWeight: FontWeight.w400,
                                     ),
@@ -1347,7 +1673,10 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                   Text(
                                     "Estimate Value ",
                                     textAlign: TextAlign.center,
-                                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .subtitle1!
+                                        .copyWith(
                                           color: Color(0xff747474),
                                           fontWeight: FontWeight.w400,
                                         ),
@@ -1358,7 +1687,10 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                   Text(
                                     "₹${formateNumber(widget.lots.estimateFrom!.iNR ?? "0")} - ${formateNumber(widget.lots.estimateTo!.iNR ?? "")}",
                                     textAlign: TextAlign.center,
-                                    style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyText1!
+                                        .copyWith(
                                           color: Color(0xff202232),
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -1373,37 +1705,53 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                       height: 80,
                                       width: MediaQuery.of(context).size.width,
                                     )
-                                  : (hours == "00" && minutes == "00" && seconds == "00")
+                                  : (hours == "00" &&
+                                          minutes == "00" &&
+                                          seconds == "00")
                                       ? Container(
                                           child: (widget.lots.leadingUser!.id ==
-                                                  widget.auctionViewModel.localSharedPrefrence.getUserId())
+                                                  widget.auctionViewModel
+                                                      .localSharedPrefrence
+                                                      .getUserId())
                                               ? Align(
                                                   alignment: Alignment.topRight,
                                                   child: Column(
                                                     children: [
                                                       Text(
                                                         "₹${widget.lots.leadingUser!.bid!.iNR}",
-                                                        style: Theme.of(context).textTheme.subtitle2,
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .subtitle2,
                                                       ),
-                                                      Text("${widget.lots.leadingUser!.notes}"),
+                                                      Text(
+                                                          "${widget.lots.leadingUser!.notes}"),
                                                     ],
                                                   ),
                                                 )
                                               : Container())
                                       : Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Column(
-                                              mainAxisAlignment: MainAxisAlignment.start,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
                                                 Text(
                                                   "Current Bid",
                                                   textAlign: TextAlign.center,
-                                                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                                        color: Color(0xff747474),
-                                                        fontWeight: FontWeight.w400,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyMedium!
+                                                      .copyWith(
+                                                        color:
+                                                            Color(0xff747474),
+                                                        fontWeight:
+                                                            FontWeight.w400,
                                                       ),
                                                 ),
                                                 SizedBox(
@@ -1412,24 +1760,36 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                 Text(
                                                   "₹${formateNumber(widget.lots.liveStatus!.currentBid!.iNR ?? "0")}",
                                                   textAlign: TextAlign.center,
-                                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                        color: Color(0xff202232),
-                                                        fontWeight: FontWeight.w600,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText1!
+                                                      .copyWith(
+                                                        color:
+                                                            Color(0xff202232),
+                                                        fontWeight:
+                                                            FontWeight.w600,
                                                       ),
                                                 ),
                                               ],
                                             ),
                                             Spacer(),
                                             Column(
-                                              mainAxisAlignment: MainAxisAlignment.start,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
                                                 Text(
                                                   "Next Valid Bid",
                                                   textAlign: TextAlign.center,
-                                                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                                        color: Color(0xff747474),
-                                                        fontWeight: FontWeight.w400,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyMedium!
+                                                      .copyWith(
+                                                        color:
+                                                            Color(0xff747474),
+                                                        fontWeight:
+                                                            FontWeight.w400,
                                                       ),
                                                 ),
                                                 SizedBox(
@@ -1438,9 +1798,15 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                 Text(
                                                   "₹${formateNumber(widget.lots.liveStatus!.nextValidBid!.iNR ?? "0")}",
                                                   textAlign: TextAlign.center,
-                                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                        color: Theme.of(context).colorScheme.primary,
-                                                        fontWeight: FontWeight.w600,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText1!
+                                                      .copyWith(
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .primary,
+                                                        fontWeight:
+                                                            FontWeight.w600,
                                                       ),
                                                 ),
                                               ],
@@ -1463,23 +1829,36 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                 onTap: () {
                                   widget.auctionViewModel
                                       .addRemoveLotToWishlist(
-                                          widget.lots, (widget.lots.isLiked ?? "false") == "true" ? "false" : "true")
+                                          widget.lots,
+                                          (widget.lots.isLiked ?? "false") ==
+                                                  "true"
+                                              ? "false"
+                                              : "true")
                                       .then((value) => {
                                             setState(() {
-                                              if ((widget.lots.isLiked ?? "false") == "true") {
+                                              if ((widget.lots.isLiked ??
+                                                      "false") ==
+                                                  "true") {
                                                 widget.lots.isLiked = "false";
                                               } else {
                                                 widget.lots.isLiked = "true";
                                               }
                                             })
                                           });
-                                  if (bottom.bottomViewModel.selectedIndex == 14) {
-                                    bottom.bottomViewModel.profileViewModel!.getAuctionGallery();
+                                  if (bottom.bottomViewModel.selectedIndex ==
+                                      14) {
+                                    bottom.bottomViewModel.profileViewModel!
+                                        .getAuctionGallery();
                                   }
                                 },
                                 child: Icon(
-                                  (widget.lots.isLiked ?? "false") == "true" ? Icons.favorite : Icons.favorite_border,
-                                  color: (widget.lots.isLiked ?? "false") == "true" ? Colors.pink : Colors.grey,
+                                  (widget.lots.isLiked ?? "false") == "true"
+                                      ? Icons.favorite
+                                      : Icons.favorite_border,
+                                  color:
+                                      (widget.lots.isLiked ?? "false") == "true"
+                                          ? Colors.pink
+                                          : Colors.grey,
                                 ),
                               ),
                               SizedBox(height: 12),
@@ -1488,7 +1867,8 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => ImageConponent(widget.lots.images ?? [])));
+                                          builder: (context) => ImageConponent(
+                                              widget.lots.images ?? [])));
                                 },
                                 child: Icon(
                                   Icons.open_in_full,
@@ -1522,13 +1902,18 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                   padding: EdgeInsets.all(8),
                                   decoration: BoxDecoration(
                                       color: (widget.lots.leadingUser!.id ==
-                                              widget.auctionViewModel.localSharedPrefrence.getUserId())
+                                              widget.auctionViewModel
+                                                  .localSharedPrefrence
+                                                  .getUserId())
                                           ? Colors.blue
                                           : Colors.red,
                                       borderRadius: BorderRadius.circular(16)),
                                   child: Text(
                                       "${(widget.lots.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId()) ? "YOU WON" : widget.lots.bidCount == "0" ? "BOUGHT IN" : "BID CLOSED"}",
-                                      style: Theme.of(context).textTheme.subtitle2!.copyWith(color: Colors.white)),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .subtitle2!
+                                          .copyWith(color: Colors.white)),
                                 ),
                               )
                             : Row(
@@ -1538,12 +1923,16 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                 children: [
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         "Bid Closing in",
                                         textAlign: TextAlign.center,
-                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .subtitle1!
+                                            .copyWith(
                                               color: Color(0xff747474),
                                               fontWeight: FontWeight.w400,
                                             ),
@@ -1555,7 +1944,8 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                         children: [
                                           Container(
                                               decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(8),
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
                                                 color: Color(0xff8C9FB1),
                                               ),
                                               padding: EdgeInsets.all(4),
@@ -1564,7 +1954,8 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .subtitle2!
-                                                    .copyWith(color: Colors.white),
+                                                    .copyWith(
+                                                        color: Colors.white),
                                               )),
                                           Container(
                                               // color: Colors.black,
@@ -1572,7 +1963,8 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                               child: Text(":")),
                                           Container(
                                               decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(8),
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
                                                 color: Color(0xff8C9FB1),
                                               ),
                                               padding: EdgeInsets.all(4),
@@ -1581,7 +1973,8 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .subtitle2!
-                                                    .copyWith(color: Colors.white),
+                                                    .copyWith(
+                                                        color: Colors.white),
                                               )),
                                           Container(
                                               // color: Colors.black,
@@ -1589,7 +1982,8 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                               child: Text(":")),
                                           Container(
                                               decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(8),
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
                                                 color: Color(0xff8C9FB1),
                                               ),
                                               padding: EdgeInsets.all(4),
@@ -1598,7 +1992,8 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .subtitle2!
-                                                    .copyWith(color: Colors.white),
+                                                    .copyWith(
+                                                        color: Colors.white),
                                               )),
                                         ],
                                       ),
@@ -1606,21 +2001,37 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                   ),
                                   Spacer(),
                                   (widget.lots.leadingUser!.id ==
-                                          widget.auctionViewModel.localSharedPrefrence.getUserId())
+                                          widget.auctionViewModel
+                                              .localSharedPrefrence
+                                              .getUserId())
                                       ? Container()
                                       : ElevatedButton(
                                           style: ButtonStyle(
-                                              backgroundColor: MaterialStateProperty.all(Color(0XFFF9F9F9)),
-                                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                              backgroundColor:
+                                                  MaterialStateProperty.all(
+                                                      Color(0XFFF9F9F9)),
+                                              shape: MaterialStateProperty.all<
+                                                      RoundedRectangleBorder>(
                                                   RoundedRectangleBorder(
-                                                      borderRadius: BorderRadius.circular(20.0),
-                                                      side: BorderSide(color: Color(0xff747474), width: 0.38)))),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20.0),
+                                                      side: BorderSide(
+                                                          color:
+                                                              Color(0xff747474),
+                                                          width: 0.38)))),
                                           onPressed: () async {
                                             bool checked = false;
-                                            final textEditingController = TextEditingController();
-                                            await auctionViewModel.getProxyAmountByLot(widget.lots);
+                                            final textEditingController =
+                                                TextEditingController();
+                                            await auctionViewModel
+                                                .getProxyAmountByLot(
+                                                    widget.lots);
 
-                                            if (auctionViewModel.getProxyBidAmountResponse!.status == "true") {
+                                            if (auctionViewModel
+                                                    .getProxyBidAmountResponse!
+                                                    .status ==
+                                                "true") {
                                               showModalBottomSheet<void>(
                                                 // context and builder are
                                                 // required properties in this widget
@@ -1628,48 +2039,87 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                 isScrollControlled: true,
                                                 enableDrag: true,
                                                 isDismissible: true,
-                                                builder: (BuildContext context) {
+                                                builder:
+                                                    (BuildContext context) {
                                                   // we set up a container inside which
                                                   // we create center column and display text
 
                                                   // Returning SizedBox instead of a Container
-                                                  return StatefulBuilder(builder: (_, builder) {
+                                                  return StatefulBuilder(
+                                                      builder: (_, builder) {
                                                     return SizedBox(
-                                                      height: MediaQuery.of(context).size.height - 150,
-                                                      child: Observer(builder: (context) {
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height -
+                                                              150,
+                                                      child: Observer(
+                                                          builder: (context) {
                                                         return Container(
-                                                          height: MediaQuery.of(context).size.height,
-                                                          width: MediaQuery.of(context).size.width,
-                                                          color: Color(0xffEAEEF2),
+                                                          height: MediaQuery.of(
+                                                                  context)
+                                                              .size
+                                                              .height,
+                                                          width: MediaQuery.of(
+                                                                  context)
+                                                              .size
+                                                              .width,
+                                                          color:
+                                                              Color(0xffEAEEF2),
                                                           child: Column(
-                                                            mainAxisAlignment: MainAxisAlignment.start,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
                                                             children: <Widget>[
                                                               Align(
-                                                                alignment: Alignment.topRight,
-                                                                child: IconButton(
-                                                                    onPressed: () {
-                                                                      widget.auctionViewModel.selectedProxyBid = "";
-                                                                      Navigator.of(context).pop();
-                                                                    },
-                                                                    icon: Icon(Icons.close)),
+                                                                alignment:
+                                                                    Alignment
+                                                                        .topRight,
+                                                                child:
+                                                                    IconButton(
+                                                                        onPressed:
+                                                                            () {
+                                                                          widget
+                                                                              .auctionViewModel
+                                                                              .selectedProxyBid = "";
+                                                                          Navigator.of(context)
+                                                                              .pop();
+                                                                        },
+                                                                        icon: Icon(
+                                                                            Icons.close)),
                                                               ),
                                                               SizedBox(
                                                                 height: 16,
                                                               ),
                                                               Text(
                                                                 "ENTER YOUR PROXY BID",
-                                                                style: Theme.of(context).textTheme.headline5!.copyWith(
-                                                                    letterSpacing: 2,
-                                                                    fontWeight: FontWeight.bold,
-                                                                    color: Colors.black),
+                                                                style: Theme.of(
+                                                                        context)
+                                                                    .textTheme
+                                                                    .headline5!
+                                                                    .copyWith(
+                                                                        letterSpacing:
+                                                                            2,
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        color: Colors
+                                                                            .black),
                                                               ),
                                                               SizedBox(
                                                                 height: 16,
                                                               ),
                                                               Text(
                                                                 "My Maximum Proxy Bid",
-                                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                    letterSpacing: 2, fontWeight: FontWeight.bold),
+                                                                style: Theme.of(
+                                                                        context)
+                                                                    .textTheme
+                                                                    .subtitle1!
+                                                                    .copyWith(
+                                                                        letterSpacing:
+                                                                            2,
+                                                                        fontWeight:
+                                                                            FontWeight.bold),
                                                               ),
                                                               SizedBox(
                                                                 height: 16,
@@ -1679,20 +2129,29 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                                 child: Column(
                                                                   children: [
                                                                     TextField(
-                                                                      controller: textEditingController,
-                                                                      keyboardType: TextInputType.number,
-                                                                      decoration: InputDecoration(
-                                                                          icon: Image.asset(
+                                                                      controller:
+                                                                          textEditingController,
+                                                                      keyboardType:
+                                                                          TextInputType
+                                                                              .number,
+                                                                      decoration:
+                                                                          InputDecoration(
+                                                                              icon: Image.asset(
                                                                         "image/rs.png",
-                                                                        height: 16,
+                                                                        height:
+                                                                            16,
                                                                       )),
                                                                     ),
                                                                     SizedBox(
-                                                                        width: 350,
-                                                                        child: Image.asset(
+                                                                        width:
+                                                                            350,
+                                                                        child: Image
+                                                                            .asset(
                                                                           "image/dottedline.png",
-                                                                          height: 2,
-                                                                          fit: BoxFit.fitWidth,
+                                                                          height:
+                                                                              2,
+                                                                          fit: BoxFit
+                                                                              .fitWidth,
                                                                         ))
                                                                   ],
                                                                 ),
@@ -1702,51 +2161,47 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                               ),
                                                               Text(
                                                                 "Select Next Valid Bid",
-                                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                    letterSpacing: 2, fontWeight: FontWeight.bold),
+                                                                style: Theme.of(
+                                                                        context)
+                                                                    .textTheme
+                                                                    .subtitle1!
+                                                                    .copyWith(
+                                                                        letterSpacing:
+                                                                            2,
+                                                                        fontWeight:
+                                                                            FontWeight.bold),
                                                               ),
                                                               SizedBox(
                                                                 height: 16,
                                                               ),
                                                               Padding(
-                                                                padding: const EdgeInsets.all(2.0),
-                                                                child: Observer(builder: (context) {
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        2.0),
+                                                                child: Observer(
+                                                                    builder:
+                                                                        (context) {
                                                                   return Row(
-                                                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .spaceAround,
                                                                     children: auctionViewModel
                                                                         .getProxyBidAmountResponse!
                                                                         .result!
                                                                         .nextValidBid!
-                                                                        .map((e) => InkWell(
+                                                                        .map((e) =>
+                                                                            InkWell(
                                                                               onTap: () {
-                                                                                auctionViewModel.selectedProxyBid =
-                                                                                    e.iNR ?? "0";
+                                                                                auctionViewModel.selectedProxyBid = e.iNR ?? "0";
                                                                                 textEditingController.text = e.iNR!;
                                                                               },
                                                                               child: Column(
                                                                                 children: [
                                                                                   Container(
-                                                                                    padding: EdgeInsets.symmetric(
-                                                                                        horizontal: 8, vertical: 4),
-                                                                                    decoration: BoxDecoration(
-                                                                                        color: (auctionViewModel
-                                                                                                    .selectedProxyBid ==
-                                                                                                (e.iNR ?? "0"))
-                                                                                            ? Color(0xffB45156)
-                                                                                            : Color(0xffF7FAFD),
-                                                                                        borderRadius:
-                                                                                            BorderRadius.circular(8)),
-                                                                                    child: Text(
-                                                                                        "₹${formateNumber(e.iNR ?? "0")}",
-                                                                                        style: Theme.of(context)
-                                                                                            .textTheme
-                                                                                            .caption!
-                                                                                            .copyWith(
-                                                                                                color: (auctionViewModel
-                                                                                                            .selectedProxyBid ==
-                                                                                                        (e.iNR ?? "0"))
-                                                                                                    ? Colors.white
-                                                                                                    : Colors.grey)),
+                                                                                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                                                                    decoration: BoxDecoration(color: (auctionViewModel.selectedProxyBid == (e.iNR ?? "0")) ? Color(0xffB45156) : Color(0xffF7FAFD), borderRadius: BorderRadius.circular(8)),
+                                                                                    child: Text("₹${formateNumber(e.iNR ?? "0")}", style: Theme.of(context).textTheme.caption!.copyWith(color: (auctionViewModel.selectedProxyBid == (e.iNR ?? "0")) ? Colors.white : Colors.grey)),
                                                                                   ),
                                                                                   SizedBox(
                                                                                     height: 24,
@@ -1758,74 +2213,45 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                                   );
                                                                 }),
                                                               ),
-                                                              (auctionViewModel.selectedProxyBid == "")
+                                                              (auctionViewModel
+                                                                          .selectedProxyBid ==
+                                                                      "")
                                                                   ? Container()
                                                                   : Stack(
                                                                       children: [
                                                                         Positioned(
-                                                                            top: 0,
-                                                                            left: auctionViewModel.getIndex(
-                                                                                        auctionViewModel
-                                                                                            .selectedProxyBid) ==
-                                                                                    0
+                                                                            top:
+                                                                                0,
+                                                                            left: auctionViewModel.getIndex(auctionViewModel.selectedProxyBid) == 0
                                                                                 ? 42
-                                                                                : auctionViewModel.getIndex(
-                                                                                            auctionViewModel
-                                                                                                .selectedProxyBid) ==
-                                                                                        1
-                                                                                    ? MediaQuery.of(context)
-                                                                                                .size
-                                                                                                .width /
-                                                                                            4 +
-                                                                                        42
-                                                                                    : auctionViewModel.getIndex(
-                                                                                                auctionViewModel
-                                                                                                    .selectedProxyBid) ==
-                                                                                            2
-                                                                                        ? MediaQuery.of(context)
-                                                                                                    .size
-                                                                                                    .width /
-                                                                                                2 +
-                                                                                            42
-                                                                                        : MediaQuery.of(context)
-                                                                                                .size
-                                                                                                .width -
-                                                                                            42,
+                                                                                : auctionViewModel.getIndex(auctionViewModel.selectedProxyBid) == 1
+                                                                                    ? MediaQuery.of(context).size.width / 4 + 42
+                                                                                    : auctionViewModel.getIndex(auctionViewModel.selectedProxyBid) == 2
+                                                                                        ? MediaQuery.of(context).size.width / 2 + 42
+                                                                                        : MediaQuery.of(context).size.width - 42,
                                                                             child: Image.asset(
                                                                               "image/top.png",
                                                                               width: 16,
                                                                               height: 7.5,
                                                                             )),
                                                                         Align(
-                                                                          alignment: auctionViewModel.getIndex(
-                                                                                      auctionViewModel
-                                                                                          .selectedProxyBid) ==
-                                                                                  0
+                                                                          alignment: auctionViewModel.getIndex(auctionViewModel.selectedProxyBid) == 0
                                                                               ? Alignment.topLeft
-                                                                              : auctionViewModel.getIndex(
-                                                                                          auctionViewModel
-                                                                                              .selectedProxyBid) ==
-                                                                                      1
+                                                                              : auctionViewModel.getIndex(auctionViewModel.selectedProxyBid) == 1
                                                                                   ? Alignment.topCenter
-                                                                                  : auctionViewModel.getIndex(
-                                                                                              auctionViewModel
-                                                                                                  .selectedProxyBid) ==
-                                                                                          2
+                                                                                  : auctionViewModel.getIndex(auctionViewModel.selectedProxyBid) == 2
                                                                                       ? Alignment.topCenter
                                                                                       : Alignment.topRight,
-                                                                          child: Container(
-                                                                            margin: EdgeInsets.only(top: 7.5),
-                                                                            padding: EdgeInsets.symmetric(
-                                                                                horizontal: 8, vertical: 4),
-                                                                            decoration: BoxDecoration(
-                                                                                color: Color(0xffB45156),
-                                                                                borderRadius: BorderRadius.circular(8)),
-                                                                            child: Text(
-                                                                                "Your Next Valid Bid ₹${formateNumber(auctionViewModel.selectedProxyBid == "" ? "0" : auctionViewModel.selectedProxyBid)}",
-                                                                                style: Theme.of(context)
-                                                                                    .textTheme
-                                                                                    .subtitle1!
-                                                                                    .copyWith(color: Colors.white)),
+                                                                          child:
+                                                                              Container(
+                                                                            margin:
+                                                                                EdgeInsets.only(top: 7.5),
+                                                                            padding:
+                                                                                EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                                                            decoration:
+                                                                                BoxDecoration(color: Color(0xffB45156), borderRadius: BorderRadius.circular(8)),
+                                                                            child:
+                                                                                Text("Your Next Valid Bid ₹${formateNumber(auctionViewModel.selectedProxyBid == "" ? "0" : auctionViewModel.selectedProxyBid)}", style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Colors.white)),
                                                                           ),
                                                                         ),
                                                                       ],
@@ -1833,29 +2259,38 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                               Row(
                                                                 children: [
                                                                   Checkbox(
-                                                                      value: checked,
-                                                                      onChanged: (check) {
-                                                                        builder(() {
-                                                                          checked = check ?? false;
+                                                                      value:
+                                                                          checked,
+                                                                      onChanged:
+                                                                          (check) {
+                                                                        builder(
+                                                                            () {
+                                                                          checked =
+                                                                              check ?? false;
                                                                         });
                                                                       }),
                                                                   Text(
                                                                     "I agree to",
-                                                                    style: Theme.of(context)
+                                                                    style: Theme.of(
+                                                                            context)
                                                                         .textTheme
                                                                         .subtitle2!
-                                                                        .copyWith(color: Colors.grey),
+                                                                        .copyWith(
+                                                                            color:
+                                                                                Colors.grey),
                                                                   ),
                                                                   SizedBox(
                                                                     width: 2,
                                                                   ),
                                                                   Text(
                                                                     "Terms & Conditions",
-                                                                    style: Theme.of(context)
+                                                                    style: Theme.of(
+                                                                            context)
                                                                         .textTheme
                                                                         .subtitle2!
                                                                         .copyWith(
-                                                                            decoration: TextDecoration.underline,
+                                                                            decoration:
+                                                                                TextDecoration.underline,
                                                                             fontWeight: FontWeight.bold),
                                                                   ),
                                                                 ],
@@ -1864,93 +2299,126 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                                 height: 4,
                                                               ),
                                                               Padding(
-                                                                padding: const EdgeInsets.all(8.0),
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        8.0),
                                                                 child: Text(
                                                                   "If placing a proxy bid, enter the max amount you would be writing to bid upto. My Profile Page - To set your Bidding Nickname, you may submit a bid ₹25,000 (next incremental value)",
-                                                                  textAlign: TextAlign.justify,
-                                                                  style: Theme.of(context)
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .justify,
+                                                                  style: Theme.of(
+                                                                          context)
                                                                       .textTheme
                                                                       .subtitle2!
-                                                                      .copyWith(color: Colors.grey),
+                                                                      .copyWith(
+                                                                          color:
+                                                                              Colors.grey),
                                                                 ),
                                                               ),
                                                               SizedBox(
                                                                 height: 12,
                                                               ),
                                                               InkWell(
-                                                                onTap: () async {
+                                                                onTap:
+                                                                    () async {
                                                                   if (checked) {
-                                                                    if (widget.auctionViewModel.selectedProxyBid ==
+                                                                    if (widget
+                                                                            .auctionViewModel
+                                                                            .selectedProxyBid ==
                                                                         "") {
-                                                                      ScaffoldMessenger.of(context)
-                                                                          .showSnackBar(SnackBar(
-                                                                        content: Text(
+                                                                      ScaffoldMessenger.of(
+                                                                              context)
+                                                                          .showSnackBar(
+                                                                              SnackBar(
+                                                                        content:
+                                                                            Text(
                                                                           "Please Select/Enter Valid Bid",
                                                                           style: Theme.of(context)
                                                                               .textTheme
                                                                               .subtitle2!
                                                                               .copyWith(color: Colors.white),
                                                                         ),
-                                                                        backgroundColor: Colors.red,
-                                                                        elevation: 42,
+                                                                        backgroundColor:
+                                                                            Colors.red,
+                                                                        elevation:
+                                                                            42,
                                                                       ));
                                                                     } else {
                                                                       await widget.auctionViewModel.placeBid(
-                                                                          widget.lots,
-                                                                          widget.auctionViewModel.selectedProxyBid,
+                                                                          widget
+                                                                              .lots,
+                                                                          widget
+                                                                              .auctionViewModel
+                                                                              .selectedProxyBid,
                                                                           "0");
 
-                                                                      if (widget.auctionViewModel.proxyBidResponse!
+                                                                      if (widget
+                                                                              .auctionViewModel
+                                                                              .proxyBidResponse!
                                                                               .status ==
                                                                           "true") {
-                                                                        if (widget.auctionViewModel.proxyBidResponse!
-                                                                                .bidStatus ==
+                                                                        if (widget.auctionViewModel.proxyBidResponse!.bidStatus ==
                                                                             "true") {
-                                                                          widget.auctionViewModel.selectedProxyBid = "";
-                                                                          Navigator.of(context).pop();
+                                                                          widget
+                                                                              .auctionViewModel
+                                                                              .selectedProxyBid = "";
+                                                                          Navigator.of(context)
+                                                                              .pop();
 
                                                                           ScaffoldMessenger.of(context)
                                                                               .showSnackBar(SnackBar(
-                                                                            content: Text(
+                                                                            content:
+                                                                                Text(
                                                                               "${widget.auctionViewModel.proxyBidResponse!.bidMessage}",
-                                                                              style: Theme.of(context)
-                                                                                  .textTheme
-                                                                                  .subtitle2!
-                                                                                  .copyWith(color: Colors.white),
+                                                                              style: Theme.of(context).textTheme.subtitle2!.copyWith(color: Colors.white),
                                                                             ),
-                                                                            backgroundColor: Colors.green,
-                                                                            elevation: 42,
+                                                                            backgroundColor:
+                                                                                Colors.green,
+                                                                            elevation:
+                                                                                42,
                                                                           ));
                                                                         } else {
-                                                                          widget.auctionViewModel.selectedProxyBid = "";
-                                                                          Navigator.of(context).pop();
+                                                                          widget
+                                                                              .auctionViewModel
+                                                                              .selectedProxyBid = "";
+                                                                          Navigator.of(context)
+                                                                              .pop();
 
                                                                           ScaffoldMessenger.of(context)
                                                                               .showSnackBar(SnackBar(
-                                                                            content: Text(
+                                                                            content:
+                                                                                Text(
                                                                               "${widget.auctionViewModel.proxyBidResponse!.bidMessage}",
-                                                                              style: Theme.of(context)
-                                                                                  .textTheme
-                                                                                  .subtitle2!
-                                                                                  .copyWith(color: Colors.white),
+                                                                              style: Theme.of(context).textTheme.subtitle2!.copyWith(color: Colors.white),
                                                                             ),
-                                                                            backgroundColor: Colors.red,
-                                                                            elevation: 42,
+                                                                            backgroundColor:
+                                                                                Colors.red,
+                                                                            elevation:
+                                                                                42,
                                                                           ));
                                                                         }
                                                                       } else {}
                                                                     }
                                                                   } else {
-                                                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                                                      content: Text(
+                                                                    ScaffoldMessenger.of(
+                                                                            context)
+                                                                        .showSnackBar(
+                                                                            SnackBar(
+                                                                      content:
+                                                                          Text(
                                                                         "Please accept Terms & Conditions",
                                                                         style: Theme.of(context)
                                                                             .textTheme
                                                                             .subtitle2!
                                                                             .copyWith(color: Colors.white),
                                                                       ),
-                                                                      backgroundColor: Colors.red,
-                                                                      elevation: 42,
+                                                                      backgroundColor:
+                                                                          Colors
+                                                                              .red,
+                                                                      elevation:
+                                                                          42,
                                                                     ));
                                                                   }
                                                                 },
@@ -1960,8 +2428,10 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                                   child: Stack(
                                                                     children: [
                                                                       Container(
-                                                                          height: 50,
-                                                                          width: 250,
+                                                                          height:
+                                                                              50,
+                                                                          width:
+                                                                              250,
                                                                           decoration: BoxDecoration(
                                                                               gradient: LinearGradient(colors: [
                                                                                 Color(0xffE74B52),
@@ -1970,22 +2440,20 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                                               // color: Color(0xff466D33),
                                                                               borderRadius: BorderRadius.circular(24)),
                                                                           child: Center(
-                                                                            child: Padding(
-                                                                              padding: const EdgeInsets.only(
-                                                                                  right: 24.0, left: 24),
+                                                                            child:
+                                                                                Padding(
+                                                                              padding: const EdgeInsets.only(right: 24.0, left: 24),
                                                                               child: Text(
                                                                                 "Submit",
-                                                                                style: Theme.of(context)
-                                                                                    .textTheme
-                                                                                    .bodyText1!
-                                                                                    .copyWith(
+                                                                                style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                                                       color: Color(0XFFFFFFFF),
                                                                                       fontWeight: FontWeight.bold,
                                                                                     ),
                                                                               ),
                                                                             ),
                                                                           )),
-                                                                      widget.auctionViewModel.isLoadingForProxy
+                                                                      widget.auctionViewModel
+                                                                              .isLoadingForProxy
                                                                           ? SizedBox(
                                                                               width: 240,
                                                                               child: LinearProgressIndicator())
@@ -2008,10 +2476,17 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                             }
                                           },
                                           child: Padding(
-                                            padding: const EdgeInsets.only(right: 8.0, left: 8, top: 12, bottom: 12),
+                                            padding: const EdgeInsets.only(
+                                                right: 8.0,
+                                                left: 8,
+                                                top: 12,
+                                                bottom: 12),
                                             child: Text(
                                               'PROXY BID',
-                                              style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyText1!
+                                                  .copyWith(
                                                     color: Color(0XFF2D2D2D),
                                                     fontWeight: FontWeight.bold,
                                                   ),
@@ -2022,24 +2497,38 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                     width: 8,
                                   ),
                                   (widget.lots.leadingUser!.id ==
-                                          widget.auctionViewModel.localSharedPrefrence.getUserId())
+                                          widget.auctionViewModel
+                                              .localSharedPrefrence
+                                              .getUserId())
                                       ? myDuration.inSeconds > 0
                                           ? Align(
                                               alignment: Alignment.topRight,
                                               child: Container(
-                                                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 24,
+                                                    vertical: 8),
                                                 decoration: BoxDecoration(
-                                                    color: (widget.lots.leadingUser!.id ==
-                                                            widget.auctionViewModel.localSharedPrefrence.getUserId())
+                                                    color: (widget
+                                                                .lots
+                                                                .leadingUser!
+                                                                .id ==
+                                                            widget
+                                                                .auctionViewModel
+                                                                .localSharedPrefrence
+                                                                .getUserId())
                                                         ? Colors.blue
                                                         : Colors.red,
-                                                    borderRadius: BorderRadius.circular(16)),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            16)),
                                                 child: Text(
                                                     "${(widget.lots.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId()) ? "CURRENTLY LEADING" : widget.lots.bidCount == "0" ? "BOUGHT IN" : "BID CLOSED"}",
                                                     style: Theme.of(context)
                                                         .textTheme
                                                         .subtitle2!
-                                                        .copyWith(color: Colors.white)),
+                                                        .copyWith(
+                                                            color:
+                                                                Colors.white)),
                                               ),
                                             )
                                           : Container()
@@ -2058,35 +2547,65 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                 // we create center column and display text
 
                                                 // Returning SizedBox instead of a Container
-                                                return StatefulBuilder(builder: (_, builder) {
+                                                return StatefulBuilder(
+                                                    builder: (_, builder) {
                                                   return SizedBox(
-                                                    height: MediaQuery.of(ctx).size.height - 150,
-                                                    child: Observer(builder: (ctx) {
+                                                    height: MediaQuery.of(ctx)
+                                                            .size
+                                                            .height -
+                                                        150,
+                                                    child: Observer(
+                                                        builder: (ctx) {
                                                       return Container(
-                                                        height: MediaQuery.of(ctx).size.height,
-                                                        width: MediaQuery.of(ctx).size.width,
-                                                        color: Color(0xffEAEEF2),
+                                                        height:
+                                                            MediaQuery.of(ctx)
+                                                                .size
+                                                                .height,
+                                                        width:
+                                                            MediaQuery.of(ctx)
+                                                                .size
+                                                                .width,
+                                                        color:
+                                                            Color(0xffEAEEF2),
                                                         child: Column(
-                                                          mainAxisAlignment: MainAxisAlignment.start,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
                                                           children: <Widget>[
                                                             Align(
-                                                              alignment: Alignment.topRight,
+                                                              alignment:
+                                                                  Alignment
+                                                                      .topRight,
                                                               child: IconButton(
-                                                                  onPressed: () {
-                                                                    widget.auctionViewModel.selectedProxyBid = "";
-                                                                    Navigator.of(ctx).pop();
+                                                                  onPressed:
+                                                                      () {
+                                                                    widget
+                                                                        .auctionViewModel
+                                                                        .selectedProxyBid = "";
+                                                                    Navigator.of(
+                                                                            ctx)
+                                                                        .pop();
                                                                   },
-                                                                  icon: Icon(Icons.close)),
+                                                                  icon: Icon(Icons
+                                                                      .close)),
                                                             ),
                                                             SizedBox(
                                                               height: 16,
                                                             ),
                                                             Text(
                                                               "PLACE YOUR BID NOW",
-                                                              style: Theme.of(ctx).textTheme.headline5!.copyWith(
-                                                                  letterSpacing: 2,
-                                                                  fontWeight: FontWeight.bold,
-                                                                  color: Colors.black),
+                                                              style: Theme.of(
+                                                                      ctx)
+                                                                  .textTheme
+                                                                  .headline5!
+                                                                  .copyWith(
+                                                                      letterSpacing:
+                                                                          2,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      color: Colors
+                                                                          .black),
                                                             ),
                                                             SizedBox(
                                                               height: 16,
@@ -2119,8 +2638,16 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                             ),
                                                             Text(
                                                               "Select Next Valid Bid",
-                                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                  letterSpacing: 2, fontWeight: FontWeight.bold),
+                                                              style: Theme.of(
+                                                                      context)
+                                                                  .textTheme
+                                                                  .subtitle1!
+                                                                  .copyWith(
+                                                                      letterSpacing:
+                                                                          2,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
                                                             ),
                                                             SizedBox(
                                                               height: 16,
@@ -2171,20 +2698,35 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                             //     MediaQuery.of(context).size.width-42,
                                                             //     child: Image.asset("image/top.png",width: 16,height: 7.5,)),
                                                             Align(
-                                                              alignment: Alignment.topCenter,
+                                                              alignment:
+                                                                  Alignment
+                                                                      .topCenter,
                                                               child: Container(
-                                                                margin: EdgeInsets.only(top: 7.5),
-                                                                padding:
-                                                                    EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                                                margin: EdgeInsets
+                                                                    .only(
+                                                                        top:
+                                                                            7.5),
+                                                                padding: EdgeInsets
+                                                                    .symmetric(
+                                                                        horizontal:
+                                                                            8,
+                                                                        vertical:
+                                                                            4),
                                                                 decoration: BoxDecoration(
-                                                                    color: Color(0xffB45156),
-                                                                    borderRadius: BorderRadius.circular(8)),
+                                                                    color: Color(
+                                                                        0xffB45156),
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            8)),
                                                                 child: Text(
                                                                     "Your Next Valid Bid ₹${formateNumber(widget.lots.liveStatus!.nextValidBid!.iNR!)}",
-                                                                    style: Theme.of(context)
+                                                                    style: Theme.of(
+                                                                            context)
                                                                         .textTheme
                                                                         .subtitle1!
-                                                                        .copyWith(color: Colors.white)),
+                                                                        .copyWith(
+                                                                            color:
+                                                                                Colors.white)),
                                                               ),
                                                             ),
 
@@ -2194,27 +2736,41 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                             Row(
                                                               children: [
                                                                 Checkbox(
-                                                                    value: checked,
-                                                                    onChanged: (check) {
-                                                                      builder(() {
-                                                                        checked = check ?? false;
+                                                                    value:
+                                                                        checked,
+                                                                    onChanged:
+                                                                        (check) {
+                                                                      builder(
+                                                                          () {
+                                                                        checked =
+                                                                            check ??
+                                                                                false;
                                                                       });
                                                                     }),
                                                                 Text(
                                                                   "I agree to",
-                                                                  style: Theme.of(ctx)
+                                                                  style: Theme.of(
+                                                                          ctx)
                                                                       .textTheme
                                                                       .subtitle2!
-                                                                      .copyWith(color: Colors.grey),
+                                                                      .copyWith(
+                                                                          color:
+                                                                              Colors.grey),
                                                                 ),
                                                                 SizedBox(
                                                                   width: 2,
                                                                 ),
                                                                 Text(
                                                                   "Terms & Conditions",
-                                                                  style: Theme.of(ctx).textTheme.subtitle2!.copyWith(
-                                                                      decoration: TextDecoration.underline,
-                                                                      fontWeight: FontWeight.bold),
+                                                                  style: Theme.of(
+                                                                          ctx)
+                                                                      .textTheme
+                                                                      .subtitle2!
+                                                                      .copyWith(
+                                                                          decoration: TextDecoration
+                                                                              .underline,
+                                                                          fontWeight:
+                                                                              FontWeight.bold),
                                                                 ),
                                                               ],
                                                             ),
@@ -2222,14 +2778,21 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                               height: 4,
                                                             ),
                                                             Padding(
-                                                              padding: const EdgeInsets.all(8.0),
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(8.0),
                                                               child: Text(
                                                                 "If placing a proxy bid, enter the max amount you would be writing to bid upto. My Profile Page - To set your Bidding Nickname, you may submit a bid ₹25,000 (next incremental value)",
-                                                                textAlign: TextAlign.justify,
-                                                                style: Theme.of(ctx)
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .justify,
+                                                                style: Theme.of(
+                                                                        ctx)
                                                                     .textTheme
                                                                     .subtitle2!
-                                                                    .copyWith(color: Colors.grey),
+                                                                    .copyWith(
+                                                                        color: Colors
+                                                                            .grey),
                                                               ),
                                                             ),
                                                             SizedBox(
@@ -2238,57 +2801,98 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                             InkWell(
                                                               onTap: () {
                                                                 if (checked) {
-                                                                  widget.auctionViewModel.placeBid(widget.lots, "0",
-                                                                      widget.lots.liveStatus!.nextValidBid!.iNR!);
+                                                                  widget.auctionViewModel.placeBid(
+                                                                      widget
+                                                                          .lots,
+                                                                      "0",
+                                                                      widget
+                                                                          .lots
+                                                                          .liveStatus!
+                                                                          .nextValidBid!
+                                                                          .iNR!);
 
                                                                   if (widget
-                                                                          .auctionViewModel.proxyBidResponse!.status ==
+                                                                          .auctionViewModel
+                                                                          .proxyBidResponse!
+                                                                          .status ==
                                                                       "true") {
-                                                                    if (widget.auctionViewModel.proxyBidResponse!
+                                                                    if (widget
+                                                                            .auctionViewModel
+                                                                            .proxyBidResponse!
                                                                             .bidStatus ==
                                                                         "true") {
-                                                                      widget.auctionViewModel.selectedProxyBid = "";
-                                                                      Navigator.of(ctx).pop();
+                                                                      widget
+                                                                          .auctionViewModel
+                                                                          .selectedProxyBid = "";
+                                                                      Navigator.of(
+                                                                              ctx)
+                                                                          .pop();
 
-                                                                      ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(
-                                                                        content: Text(
+                                                                      ScaffoldMessenger.of(
+                                                                              ctx)
+                                                                          .showSnackBar(
+                                                                              SnackBar(
+                                                                        content:
+                                                                            Text(
                                                                           "${widget.auctionViewModel.proxyBidResponse!.bidMessage}",
                                                                           style: Theme.of(ctx)
                                                                               .textTheme
                                                                               .subtitle2!
                                                                               .copyWith(color: Colors.white),
                                                                         ),
-                                                                        backgroundColor: Colors.green,
-                                                                        elevation: 42,
+                                                                        backgroundColor:
+                                                                            Colors.green,
+                                                                        elevation:
+                                                                            42,
                                                                       ));
                                                                     } else {
-                                                                      widget.auctionViewModel.selectedProxyBid = "";
-                                                                      Navigator.of(ctx).pop();
+                                                                      widget
+                                                                          .auctionViewModel
+                                                                          .selectedProxyBid = "";
+                                                                      Navigator.of(
+                                                                              ctx)
+                                                                          .pop();
 
-                                                                      ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(
-                                                                        content: Text(
+                                                                      ScaffoldMessenger.of(
+                                                                              ctx)
+                                                                          .showSnackBar(
+                                                                              SnackBar(
+                                                                        content:
+                                                                            Text(
                                                                           "${widget.auctionViewModel.proxyBidResponse!.bidMessage}",
                                                                           style: Theme.of(ctx)
                                                                               .textTheme
                                                                               .subtitle2!
                                                                               .copyWith(color: Colors.white),
                                                                         ),
-                                                                        backgroundColor: Colors.red,
-                                                                        elevation: 42,
+                                                                        backgroundColor:
+                                                                            Colors.red,
+                                                                        elevation:
+                                                                            42,
                                                                       ));
                                                                     }
                                                                   }
                                                                 } else {
-                                                                  ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(
-                                                                    content: Text(
+                                                                  ScaffoldMessenger
+                                                                          .of(
+                                                                              ctx)
+                                                                      .showSnackBar(
+                                                                          SnackBar(
+                                                                    content:
+                                                                        Text(
                                                                       "Please accept Terms & Conditions",
-                                                                      style: Theme.of(ctx)
+                                                                      style: Theme.of(
+                                                                              ctx)
                                                                           .textTheme
                                                                           .subtitle2!
-                                                                          .copyWith(color: Colors.white),
+                                                                          .copyWith(
+                                                                              color: Colors.white),
                                                                     ),
-                                                                    backgroundColor: Colors.red,
-                                                                    elevation: 42,
+                                                                    backgroundColor:
+                                                                        Colors
+                                                                            .red,
+                                                                    elevation:
+                                                                        42,
                                                                   ));
                                                                 }
                                                               },
@@ -2298,8 +2902,10 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                                 child: Stack(
                                                                   children: [
                                                                     Container(
-                                                                        height: 50,
-                                                                        width: 250,
+                                                                        height:
+                                                                            50,
+                                                                        width:
+                                                                            250,
                                                                         decoration: BoxDecoration(
                                                                             gradient: LinearGradient(colors: [
                                                                               Color(0xffE74B52),
@@ -2308,25 +2914,27 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                                             // color: Color(0xff466D33),
                                                                             borderRadius: BorderRadius.circular(24)),
                                                                         child: Center(
-                                                                          child: Padding(
-                                                                            padding: const EdgeInsets.only(
-                                                                                right: 24.0, left: 24),
-                                                                            child: Text(
+                                                                          child:
+                                                                              Padding(
+                                                                            padding:
+                                                                                const EdgeInsets.only(right: 24.0, left: 24),
+                                                                            child:
+                                                                                Text(
                                                                               "Submit",
-                                                                              style: Theme.of(context)
-                                                                                  .textTheme
-                                                                                  .bodyText1!
-                                                                                  .copyWith(
+                                                                              style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                                                     color: Color(0XFFFFFFFF),
                                                                                     fontWeight: FontWeight.bold,
                                                                                   ),
                                                                             ),
                                                                           ),
                                                                         )),
-                                                                    widget.auctionViewModel.isLoadingForProxy
+                                                                    widget.auctionViewModel
+                                                                            .isLoadingForProxy
                                                                         ? const SizedBox(
-                                                                            width: 240,
-                                                                            child: LinearProgressIndicator())
+                                                                            width:
+                                                                                240,
+                                                                            child:
+                                                                                LinearProgressIndicator())
                                                                         : Container(),
                                                                   ],
                                                                 ),
@@ -2349,21 +2957,31 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                             height: 50,
                                             // width: 150,
                                             decoration: BoxDecoration(
-                                                gradient: const LinearGradient(colors: [
-                                                  Color(0xffE74B52),
-                                                  Color(0xffE74B52),
-                                                ]),
+                                                gradient: const LinearGradient(
+                                                    colors: [
+                                                      Color(0xffE74B52),
+                                                      Color(0xffE74B52),
+                                                    ]),
                                                 // color: Color(0xff466D33),
-                                                borderRadius: BorderRadius.circular(24)),
+                                                borderRadius:
+                                                    BorderRadius.circular(24)),
                                             child: Center(
                                               child: Padding(
-                                                padding:
-                                                    const EdgeInsets.only(right: 24.0, left: 24, top: 12, bottom: 12),
+                                                padding: const EdgeInsets.only(
+                                                    right: 24.0,
+                                                    left: 24,
+                                                    top: 12,
+                                                    bottom: 12),
                                                 child: Text(
                                                   'BID NOW',
-                                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                        color: const Color(0XFFFFFFFF),
-                                                        fontWeight: FontWeight.bold,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText1!
+                                                      .copyWith(
+                                                        color: const Color(
+                                                            0XFFFFFFFF),
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                                 ),
                                               ),

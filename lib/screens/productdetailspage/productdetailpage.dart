@@ -4,6 +4,8 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import 'package:giftex/data/local/client/prefs.dart';
+import 'package:giftex/screens/signup/login.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
 import 'package:intl/intl.dart';
 import 'package:share/share.dart';
@@ -25,6 +27,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
   bool countDown = true, selected = false;
   Color tabColor = Color(0xff6D905D);
   bool onClick = false;
+  LocalSharedPrefrence? preference;
 
   _showPopupMenu(Offset offset) async {
     double left = offset.dx;
@@ -61,7 +64,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
   void initState() {
     // TODO: implement initState
     // print("skjnxkasjsk"+widget.lots.auctionType!);
-
+    preference = new LocalSharedPrefrence();
     initData();
     checkEvent();
     super.initState();
@@ -440,8 +443,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                   Spacer(),
                                   IconButton(
                                     onPressed: () {
-                                      widget.auctionViewModel.addRemoveLotToWishlist(
-                                          widget.lots, (widget.lots.isLiked ?? "false") == "true" ? "false" : "true");
+                                      if (preference!.getLoginStatus()) {widget.auctionViewModel.addRemoveLotToWishlist(
+                                              widget.lots, (widget.lots.isLiked ?? "false") == "true" ? "false" : "true");
+                                      } else {
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Loginpage()));
+                                      }
+
                                     },
                                     icon: Icon(
                                       (widget.lots.isLiked ?? "false") == "true"
@@ -610,36 +617,40 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                               : widget.lots.proxyStatus!.proxyAmount!.iNR) ==
                                           "0"
                                       ? Container()
-                                      : Container(
-                                          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                                          decoration: BoxDecoration(
-                                              color: Colors.yellowAccent.withOpacity(.1),
-                                              borderRadius: BorderRadius.circular(16)),
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.start,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "Proxy Bid",
-                                                textAlign: TextAlign.center,
-                                                style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                      color: Color(0xff202232),
-                                                      // fontWeight: FontWeight.w400,
-                                                      fontWeight: FontWeight.bold,
-                                                    ),
-                                              ),
-                                              Spacer(),
-                                              Text(
-                                                "₹${formateNumber((widget.lots.proxyStatus == null ? '0' : widget.lots.proxyStatus!.proxyAmount!.iNR ?? "0"))}",
-                                                textAlign: TextAlign.center,
-                                                style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                      color: Color(0xff202232),
-                                                      fontWeight: FontWeight.bold,
-                                                    ),
-                                              ),
-                                            ],
+                                      : InkWell(
+                            onTap: (){
+                                             },
+                                        child: Container(
+                                            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                                            decoration: BoxDecoration(
+                                                color: Colors.yellowAccent.withOpacity(.1),
+                                                borderRadius: BorderRadius.circular(16)),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  "Proxy Bid",
+                                                  textAlign: TextAlign.center,
+                                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                        color: Color(0xff202232),
+                                                        // fontWeight: FontWeight.w400,
+                                                        fontWeight: FontWeight.bold,
+                                                      ),
+                                                ),
+                                                Spacer(),
+                                                Text(
+                                                  "₹${formateNumber((widget.lots.proxyStatus == null ? '0' : widget.lots.proxyStatus!.proxyAmount!.iNR ?? "0"))}",
+                                                  textAlign: TextAlign.center,
+                                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                        color: Color(0xff202232),
+                                                        fontWeight: FontWeight.bold,
+                                                      ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        )
+                                      )
                                   : Container();
                         }),
 
@@ -651,13 +662,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                 widget.lots.status!.toLowerCase() == "upcoming")
                             ? InkWell(
                                 onTap: () {
-                                  launchUrl(
-                                    Uri(
-                                        scheme: 'https',
-                                        host: 'astagurubucket.s3.ap-south-1.amazonaws.com',
-                                        path: '/pdf/WrittenBid_Form.pdf'),
-                                    mode: LaunchMode.externalApplication,
-                                  );
+
                                 },
                                 child: Container(
                                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
