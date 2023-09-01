@@ -5,11 +5,8 @@ import 'package:giftex/screens/aboutus/aboutus.dart';
 import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
 import 'package:giftex/screens/contactus/contactus.dart';
 import 'package:giftex/screens/faq/faq.dart';
-import 'package:giftex/screens/servicepage/servicepage.dart';
 import 'package:giftex/screens/termsandconditions/termsandconditions.dart';
 import 'package:giftex/viewmodel/user/footerviewmodel.dart';
-
-import '../bottomnavigationbar/bottomnavigationbar.dart';
 
 FooterViewModel footerViewModel = FooterViewModel();
 
@@ -546,47 +543,36 @@ class _FooterState extends State<Footer> {
                               title: Text(
                                 "SERVICES",
                                 textAlign: TextAlign.start,
-                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .subtitle1!
+                                    .copyWith(
                                       color: Color(0XFFFFFFFF),
                                       fontWeight: FontWeight.bold,
                                     ),
                               ),
                               children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 20.0, top: 10),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Client Advisory",
-                                        textAlign: TextAlign.start,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .subtitle1!
-                                            .copyWith(
-                                              color: Color(0XFFFFFFFF),
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                      ),
-                                    ],
                                 InkWell(
                                   onTap: () {
                                     bottomViewModel.selectedIndex = 18;
                                     // Navigator.push(context, MaterialPageRoute(builder: (context) => FaqPage()));
                                   },
                                   child: Padding(
-                                    padding: const EdgeInsets.only(left: 20.0, top: 10),
+                                    padding: const EdgeInsets.only(
+                                        left: 20.0, top: 10),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           "Client Advisory",
                                           textAlign: TextAlign.start,
-                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle1!
+                                              .copyWith(
                                                 color: Color(0XFFFFFFFF),
                                                 fontWeight: FontWeight.w500,
                                               ),
@@ -635,15 +621,21 @@ class _FooterState extends State<Footer> {
                                     // Navigator.push(context, MaterialPageRoute(builder: (context) => Servicepage()));
                                   },
                                   child: Padding(
-                                    padding: const EdgeInsets.only(left: 20.0, top: 16),
+                                    padding: const EdgeInsets.only(
+                                        left: 20.0, top: 16),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           "Collection Services",
                                           textAlign: TextAlign.start,
-                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle1!
+                                              .copyWith(
                                                 color: Color(0XFFFFFFFF),
                                                 fontWeight: FontWeight.w400,
                                               ),
@@ -658,15 +650,21 @@ class _FooterState extends State<Footer> {
                                     // Navigator.push(context, MaterialPageRoute(builder: (context) => Servicepage()));
                                   },
                                   child: Padding(
-                                    padding: const EdgeInsets.only(left: 20.0, top: 16),
+                                    padding: const EdgeInsets.only(
+                                        left: 20.0, top: 16),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           "Museum Services",
                                           textAlign: TextAlign.start,
-                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle1!
+                                              .copyWith(
                                                 color: Color(0XFFFFFFFF),
                                                 fontWeight: FontWeight.w400,
                                               ),
@@ -681,15 +679,21 @@ class _FooterState extends State<Footer> {
                                     // Navigator.push(context, MaterialPageRoute(builder: (context) => Servicepage()));
                                   },
                                   child: Padding(
-                                    padding: const EdgeInsets.only(left: 20.0, top: 16),
+                                    padding: const EdgeInsets.only(
+                                        left: 20.0, top: 16),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           "Post Sale Services",
                                           textAlign: TextAlign.start,
-                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle1!
+                                              .copyWith(
                                                 color: Color(0XFFFFFFFF),
                                                 fontWeight: FontWeight.w400,
                                               ),
@@ -704,15 +708,21 @@ class _FooterState extends State<Footer> {
                                     // Navigator.push(context, MaterialPageRoute(builder: (context) => Servicepage()));
                                   },
                                   child: Padding(
-                                    padding: const EdgeInsets.only(left: 20.0, top: 16),
+                                    padding: const EdgeInsets.only(
+                                        left: 20.0, top: 16),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           "Private Sales",
                                           textAlign: TextAlign.start,
-                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle1!
+                                              .copyWith(
                                                 color: Color(0XFFFFFFFF),
                                                 fontWeight: FontWeight.w400,
                                               ),
@@ -727,15 +737,21 @@ class _FooterState extends State<Footer> {
                                     // Navigator.push(context, MaterialPageRoute(builder: (context) => Servicepage()));
                                   },
                                   child: Padding(
-                                    padding: const EdgeInsets.only(left: 20.0, top: 16),
+                                    padding: const EdgeInsets.only(
+                                        left: 20.0, top: 16),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           "Storage",
                                           textAlign: TextAlign.start,
-                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle1!
+                                              .copyWith(
                                                 color: Color(0XFFFFFFFF),
                                                 fontWeight: FontWeight.w400,
                                               ),
@@ -777,7 +793,10 @@ class _FooterState extends State<Footer> {
                               title: Text(
                                 "ABOUT",
                                 textAlign: TextAlign.start,
-                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .subtitle1!
+                                    .copyWith(
                                       color: Color(0XFFFFFFFF),
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -785,18 +804,28 @@ class _FooterState extends State<Footer> {
                               children: <Widget>[
                                 InkWell(
                                   onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => Aboutuspage()));
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                Aboutuspage()));
                                   },
                                   child: Padding(
-                                    padding: const EdgeInsets.only(left: 20.0, top: 10),
+                                    padding: const EdgeInsets.only(
+                                        left: 20.0, top: 10),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           "Who We Are",
                                           textAlign: TextAlign.start,
-                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle1!
+                                              .copyWith(
                                                 color: Color(0XFFFFFFFF),
                                                 fontWeight: FontWeight.w500,
                                               ),
@@ -806,15 +835,20 @@ class _FooterState extends State<Footer> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 20.0, top: 16),
+                                  padding: const EdgeInsets.only(
+                                      left: 20.0, top: 16),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         "Our Management",
                                         textAlign: TextAlign.start,
-                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .subtitle1!
+                                            .copyWith(
                                               color: Color(0XFFFFFFFF),
                                               fontWeight: FontWeight.w400,
                                             ),
@@ -823,15 +857,20 @@ class _FooterState extends State<Footer> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 20.0, top: 16),
+                                  padding: const EdgeInsets.only(
+                                      left: 20.0, top: 16),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         "Press",
                                         textAlign: TextAlign.start,
-                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .subtitle1!
+                                            .copyWith(
                                               color: Color(0XFFFFFFFF),
                                               fontWeight: FontWeight.w400,
                                             ),
@@ -840,15 +879,20 @@ class _FooterState extends State<Footer> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 20.0, top: 16),
+                                  padding: const EdgeInsets.only(
+                                      left: 20.0, top: 16),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         "Careers",
                                         textAlign: TextAlign.start,
-                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .subtitle1!
+                                            .copyWith(
                                               color: Color(0XFFFFFFFF),
                                               fontWeight: FontWeight.w400,
                                             ),
@@ -858,18 +902,28 @@ class _FooterState extends State<Footer> {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => ContactusPage()));
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ContactusPage()));
                                   },
                                   child: Padding(
-                                    padding: const EdgeInsets.only(left: 20.0, top: 16),
+                                    padding: const EdgeInsets.only(
+                                        left: 20.0, top: 16),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           "Contact Us",
                                           textAlign: TextAlign.start,
-                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle1!
+                                              .copyWith(
                                                 color: Color(0XFFFFFFFF),
                                                 fontWeight: FontWeight.w400,
                                               ),
@@ -963,10 +1017,10 @@ class _FooterState extends State<Footer> {
                       Text(
                         "Apple Store",
                         textAlign: TextAlign.center,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText1!
-                            .copyWith(color: Color(0xffFFFFFF), fontWeight: FontWeight.w200, letterSpacing: 1.14286),
+                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            color: Color(0xffFFFFFF),
+                            fontWeight: FontWeight.w200,
+                            letterSpacing: 1.14286),
                       ),
                       SizedBox(
                         width: 16,
@@ -989,10 +1043,10 @@ class _FooterState extends State<Footer> {
                       Text(
                         "Play Store",
                         textAlign: TextAlign.center,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText1!
-                            .copyWith(color: Color(0xffFFFFFF), fontWeight: FontWeight.w200, letterSpacing: 1.14286),
+                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            color: Color(0xffFFFFFF),
+                            fontWeight: FontWeight.w200,
+                            letterSpacing: 1.14286),
                       ),
                     ],
                   ),
@@ -1007,7 +1061,10 @@ class _FooterState extends State<Footer> {
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => TermsAndConditions()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => TermsAndConditions()));
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),

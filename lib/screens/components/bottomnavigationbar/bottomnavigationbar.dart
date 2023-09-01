@@ -287,24 +287,17 @@ class _DashboardUiState extends State<DashboardUi> {
                                                                     textAlign:
                                                                         TextAlign
                                                                             .start,
-                                                                    style: Theme.of(
-                                                                            context)
-                                                                        .textTheme
-                                                                        .headline6!
-                                                                        .copyWith(
-                                                                            color:
-                                                                                Color(0XFF5D7E4D),
-                                        bottomViewModel.selectedIndex == 0
-                                            ? FontWeight.bold
-                                            : FontWeight.normal,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .caption!
-                                  .copyWith(
-                                                                            color:
-                                                                                Color(0XFF5D7E4D),
-                                                                            fontWeight: FontWeight.w700,
-                                                                            letterSpacing: 1),
+                                                                    style: Theme.of(context).textTheme.headline6!.copyWith(
+                                                                        color: Color(
+                                                                            0XFF5D7E4D),
+                                                                        fontWeight: bottomViewModel.selectedIndex ==
+                                                                                0
+                                                                            ? FontWeight
+                                                                                .bold
+                                                                            : FontWeight
+                                                                                .normal,
+                                                                        letterSpacing:
+                                                                            1),
                                                                   ),
                                                                 ],
                                                               ),
@@ -906,10 +899,10 @@ class _DashboardUiState extends State<DashboardUi> {
                         onTap: () {
                           if (preference!.getLoginStatus()) {
                             bottomViewModel.selectedIndex = 3;
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Profilepage()));
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) => Profilepage()));
                           } else {
                             WidgetsBinding.instance?.addPostFrameCallback((_) {
                               showDialog(
