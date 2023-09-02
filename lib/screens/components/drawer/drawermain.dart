@@ -3,8 +3,6 @@ import 'package:giftex/screens/aboutus/aboutus.dart';
 import 'package:giftex/screens/carrerpage/careerpage.dart';
 import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
 import 'package:giftex/screens/contactus/contactus.dart';
-import 'package:giftex/screens/components/bottomappbar.dart';
-import 'package:giftex/screens/record_price_artwork/record_price_artwork.dart';
 
 class MainDrawer extends StatefulWidget {
   const MainDrawer({Key? key}) : super(key: key);
