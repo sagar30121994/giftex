@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:giftex/screens/aboutus/aboutus.dart';
+import 'package:giftex/screens/carrerpage/careerpage.dart';
+import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
+import 'package:giftex/screens/contactus/contactus.dart';
 
 class MainDrawer extends StatefulWidget {
   const MainDrawer({Key? key}) : super(key: key);
@@ -8,6 +12,12 @@ class MainDrawer extends StatefulWidget {
 }
 
 class _MainDrawerState extends State<MainDrawer> {
+  void _onItemTapped(int index) {
+    setState(() {
+      bottomViewModel.selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -34,7 +44,10 @@ class _MainDrawerState extends State<MainDrawer> {
                 SizedBox(width: 16),
                 Text(
                   "About US".toUpperCase(),
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: Colors.red),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge!
+                      .copyWith(color: Colors.red),
                 ),
               ],
             ),
@@ -42,7 +55,9 @@ class _MainDrawerState extends State<MainDrawer> {
             ListTile(
               title: const Text('About Giftex'),
               onTap: () {
-                Navigator.of(context).pop();
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => Aboutuspage()));
+                // Update the state of the app.
 
                 // Update the state of the app.
 
@@ -82,26 +97,36 @@ class _MainDrawerState extends State<MainDrawer> {
                 SizedBox(width: 16),
                 Text(
                   "Insights".toUpperCase(),
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: Colors.red),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge!
+                      .copyWith(color: Colors.red),
                 ),
               ],
             ),
 
             ListTile(
-              title: const Text('News & Updates'),
-              onTap: () {
-                Navigator.of(context).pop();
-                // Update the state of the app.
-                // ...
-              },
-            ),
+                title: const Text('News & Updates'),
+                selected: bottomViewModel.selectedIndex == 25,
+                onTap: () {
+                  _onItemTapped(25);
+                  Navigator.pop(context);
+                  // Navigator.pushReplacement(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => NewsAndUpdatesPage()));
+                  // Update the state of the app.
+
+                  // ...
+                }),
 
             ListTile(
               title: const Text('Our Services'),
+              selected: bottomViewModel.selectedIndex == 9,
               onTap: () {
-                Navigator.of(context).pop();
-                // Update the state of the app.
-                // ...
+                _onItemTapped(9);
+
+                Navigator.pop(context);
               },
             ),
 
@@ -115,13 +140,18 @@ class _MainDrawerState extends State<MainDrawer> {
             ),
 
             ListTile(
-              title: const Text('Departments'),
-              onTap: () {
-                Navigator.of(context).pop();
-                // Update the state of the app.
-                // ...
-              },
-            ),
+                title: const Text('Departments'),
+                selected: bottomViewModel.selectedIndex == 27,
+                onTap: () {
+                  _onItemTapped(27);
+
+                  Navigator.pop(context);
+
+                  // Navigator.pushReplacement(context,
+                  //     MaterialPageRoute(builder: (context) => Departments()));
+                  // Update the state of the app.
+                  // ...
+                }),
 
             Row(
               children: [
@@ -129,7 +159,10 @@ class _MainDrawerState extends State<MainDrawer> {
                 SizedBox(width: 16),
                 Text(
                   "Contact us".toUpperCase(),
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: Colors.red),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge!
+                      .copyWith(color: Colors.red),
                 ),
               ],
             ),
@@ -137,7 +170,8 @@ class _MainDrawerState extends State<MainDrawer> {
             ListTile(
               title: const Text('Contact Us'),
               onTap: () {
-                Navigator.of(context).pop();
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => ContactusPage()));
                 // Update the state of the app.
                 // ...
               },
@@ -145,8 +179,10 @@ class _MainDrawerState extends State<MainDrawer> {
 
             ListTile(
               title: const Text('How To Buy'),
+              selected: bottomViewModel.selectedIndex == 11,
               onTap: () {
-                Navigator.of(context).pop();
+                _onItemTapped(11);
+                Navigator.pop(context);
                 // Update the state of the app.
                 // ...
               },
@@ -154,8 +190,10 @@ class _MainDrawerState extends State<MainDrawer> {
 
             ListTile(
               title: const Text('How To Sell'),
+              selected: bottomViewModel.selectedIndex == 10,
               onTap: () {
-                Navigator.of(context).pop();
+                _onItemTapped(10);
+                Navigator.pop(context);
                 // Update the state of the app.
                 // ...
               },
@@ -164,7 +202,9 @@ class _MainDrawerState extends State<MainDrawer> {
             ListTile(
               title: const Text('Career'),
               onTap: () {
-                Navigator.of(context).pop();
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => CareerPage()));
+                //Navigator.push(context, MaterialPageRoute(builder: (context) => ));
                 // Update the state of the app.
                 // ...
               },

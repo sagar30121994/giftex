@@ -75,7 +75,10 @@ class _HowToSellPageState extends State<HowToSellPage> {
                     ),
                     Container(
                       width: MediaQuery.of(context).size.width * .9,
-                      child: Text(
+                      child:
+                          // HtmlWidget(
+                          //     '${homeViewModel.getSellDetailsResponse!.pageContent!.banner!.desc ?? ''}'),
+                          Text(
                         "We feature premium artworks including modern, contemporary, and street art",
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodyText1!.copyWith(
@@ -194,6 +197,7 @@ class _HowToSellPageState extends State<HowToSellPage> {
                             textAlign: TextAlign.center,
                             text: TextSpan(
                               // Note: Styles for TextSpans must be explicitly defined.
+
                               // Child text spans will inherit styles from parent
                               children: <TextSpan>[
                                 TextSpan(

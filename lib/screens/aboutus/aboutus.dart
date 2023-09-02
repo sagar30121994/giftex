@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:giftex/screens/components/bottomnavigationbar/dashborard2.dart';
 import 'package:giftex/screens/components/header.dart';
 
 import '../components/footer/footer.dart';
@@ -116,7 +115,7 @@ class _AboutuspageState extends State<Aboutuspage> {
                 height: 16,
               ),
               Container(
-                height: 545,
+                height: 565,
                 padding: EdgeInsets.all(16),
                 child: Stack(
                   children: [
@@ -149,7 +148,10 @@ class _AboutuspageState extends State<Aboutuspage> {
                               Text(
                                 "01",
                                 textAlign: TextAlign.start,
-                                style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .subtitle2!
+                                    .copyWith(
                                       color: Color(0XFF000000),
                                       fontWeight: FontWeight.w600,
                                     ),
@@ -166,11 +168,12 @@ class _AboutuspageState extends State<Aboutuspage> {
                           Text(
                             "WHO WE ARE",
                             textAlign: TextAlign.center,
-                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                  color: Color(0XFF000000),
-                                  letterSpacing: 1,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                            style:
+                                Theme.of(context).textTheme.subtitle1!.copyWith(
+                                      color: Color(0XFF000000),
+                                      letterSpacing: 1,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                           ),
                           SizedBox(
                             height: 15,
@@ -178,10 +181,11 @@ class _AboutuspageState extends State<Aboutuspage> {
                           Text(
                             "Secure platform to conduct online auctions for Modern Indian and Contemporary art. ",
                             textAlign: TextAlign.start,
-                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                  color: Color(0XFF000000),
-                                  fontWeight: FontWeight.w500,
-                                ),
+                            style:
+                                Theme.of(context).textTheme.bodyText1!.copyWith(
+                                      color: Color(0XFF000000),
+                                      fontWeight: FontWeight.w500,
+                                    ),
                           ),
                           SizedBox(
                             height: 10,
@@ -189,10 +193,11 @@ class _AboutuspageState extends State<Aboutuspage> {
                           Text(
                             "AstaGuru was conceptualised in the year 2008 with the sole purpose of creating a safe . ",
                             textAlign: TextAlign.start,
-                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                  color: Color(0XFF000000),
-                                  fontWeight: FontWeight.w500,
-                                ),
+                            style:
+                                Theme.of(context).textTheme.bodyText1!.copyWith(
+                                      color: Color(0XFF000000),
+                                      fontWeight: FontWeight.w500,
+                                    ),
                           ),
                           SizedBox(
                             height: 16,
@@ -222,7 +227,10 @@ class _AboutuspageState extends State<Aboutuspage> {
                                     Text(
                                       "02",
                                       textAlign: TextAlign.end,
-                                      style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .subtitle2!
+                                          .copyWith(
                                             color: Color(0XFF000000),
                                             fontWeight: FontWeight.w600,
                                           ),
@@ -235,7 +243,10 @@ class _AboutuspageState extends State<Aboutuspage> {
                                 Text(
                                   "CULTURE AT ASTA GURU",
                                   textAlign: TextAlign.end,
-                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .subtitle1!
+                                      .copyWith(
                                         color: Color(0XFF000000),
                                         letterSpacing: 1,
                                         fontWeight: FontWeight.bold,
@@ -247,7 +258,10 @@ class _AboutuspageState extends State<Aboutuspage> {
                                 Text(
                                   "Secure platform to conduct online auctions for Modern Indian and Contemporary art. ",
                                   textAlign: TextAlign.end,
-                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1!
+                                      .copyWith(
                                         color: Color(0XFF000000),
                                         fontWeight: FontWeight.w500,
                                       ),
@@ -258,7 +272,10 @@ class _AboutuspageState extends State<Aboutuspage> {
                                 Text(
                                   "AstaGuru was conceptualised in the year 2008 with the sole purpose of creating a safe . ",
                                   textAlign: TextAlign.end,
-                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1!
+                                      .copyWith(
                                         color: Color(0XFF000000),
                                         fontWeight: FontWeight.w500,
                                       ),
@@ -276,7 +293,7 @@ class _AboutuspageState extends State<Aboutuspage> {
                 height: 16,
               ),
               Container(
-                height: 410,
+                height: 451,
                 padding: EdgeInsets.all(16),
                 child: Stack(
                   children: [
@@ -328,7 +345,10 @@ class _AboutuspageState extends State<Aboutuspage> {
                               Text(
                                 "03",
                                 textAlign: TextAlign.start,
-                                style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .subtitle2!
+                                    .copyWith(
                                       color: Color(0XFF000000),
                                       fontWeight: FontWeight.w600,
                                     ),
@@ -346,10 +366,11 @@ class _AboutuspageState extends State<Aboutuspage> {
                           Text(
                             "OUR VALUES",
                             textAlign: TextAlign.start,
-                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                  color: Color(0XFF000000),
-                                  fontWeight: FontWeight.w600,
-                                ),
+                            style:
+                                Theme.of(context).textTheme.subtitle1!.copyWith(
+                                      color: Color(0XFF000000),
+                                      fontWeight: FontWeight.w600,
+                                    ),
                           ),
                           SizedBox(
                             height: 15,
@@ -366,7 +387,10 @@ class _AboutuspageState extends State<Aboutuspage> {
                                 Text(
                                   "LOREM IPSUM",
                                   textAlign: TextAlign.start,
-                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .subtitle1!
+                                      .copyWith(
                                         color: Color(0XFF000000),
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -377,7 +401,10 @@ class _AboutuspageState extends State<Aboutuspage> {
                                 Text(
                                   "ea commodo consequat. Duis aute irure dolor in ",
                                   textAlign: TextAlign.start,
-                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1!
+                                      .copyWith(
                                         color: Color(0XFF000000),
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -388,7 +415,10 @@ class _AboutuspageState extends State<Aboutuspage> {
                                 Text(
                                   "LOREM IPSUM",
                                   textAlign: TextAlign.start,
-                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .subtitle1!
+                                      .copyWith(
                                         color: Color(0XFF000000),
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -399,7 +429,10 @@ class _AboutuspageState extends State<Aboutuspage> {
                                 Text(
                                   "ea commodo consequat. Duis aute irure dolor in ",
                                   textAlign: TextAlign.start,
-                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1!
+                                      .copyWith(
                                         color: Color(0XFF000000),
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -410,7 +443,10 @@ class _AboutuspageState extends State<Aboutuspage> {
                                 Text(
                                   "LOREM IPSUM",
                                   textAlign: TextAlign.start,
-                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .subtitle1!
+                                      .copyWith(
                                         color: Color(0XFF000000),
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -421,7 +457,10 @@ class _AboutuspageState extends State<Aboutuspage> {
                                 Text(
                                   "ea commodo consequat. Duis aute irure dolor in ",
                                   textAlign: TextAlign.start,
-                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1!
+                                      .copyWith(
                                         color: Color(0XFF000000),
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -526,7 +565,10 @@ class _AboutuspageState extends State<Aboutuspage> {
                             Text(
                               "SEEMA VOHRA",
                               textAlign: TextAlign.end,
-                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .subtitle1!
+                                  .copyWith(
                                     color: Color(0XFF000000),
                                     fontWeight: FontWeight.w400,
                                   ),
@@ -537,7 +579,10 @@ class _AboutuspageState extends State<Aboutuspage> {
                             Text(
                               "Senior Manager",
                               textAlign: TextAlign.end,
-                              style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText1!
+                                  .copyWith(
                                     color: Color(0XFF000000),
                                     fontWeight: FontWeight.w400,
                                   ),
@@ -556,7 +601,10 @@ class _AboutuspageState extends State<Aboutuspage> {
                             Text(
                               "seemavohra@astaguru.com",
                               textAlign: TextAlign.end,
-                              style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText1!
+                                  .copyWith(
                                     color: Color(0XFF000000),
                                     fontWeight: FontWeight.w400,
                                   ),
@@ -569,19 +617,17 @@ class _AboutuspageState extends State<Aboutuspage> {
               const SizedBox(
                 height: 16,
               ),
-              SizedBox(width: MediaQuery.of(context).size.width, child: Footer()),
-              SliverToBoxAdapter(
-                child: Container(
-                  color: Color(0xff1F2A52),
-                  height: 30,
-                  width: MediaQuery.of(context).size.width,
-                ),
+              SizedBox(
+                  width: MediaQuery.of(context).size.width, child: Footer()),
+              Container(
+                color: Color(0xff1F2A52),
+                height: 30,
+                width: MediaQuery.of(context).size.width,
               ),
             ],
           )),
         ),
       ),
-      bottomNavigationBar: Dashboard2Ui(),
     );
   }
 }

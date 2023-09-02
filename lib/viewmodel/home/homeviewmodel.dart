@@ -1,5 +1,6 @@
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
-import 'package:giftex/data/network/models/responce/home/GetSellDetailsResponse.dart';
+import 'package:giftex/data/network/models/responce/home/getDepartmentsResponse.dart';
+import 'package:giftex/data/network/models/responce/home/getSellDetailsResponse.dart';
 import 'package:giftex/data/network/models/responce/home/homeresponse.dart';
 import 'package:giftex/data/network/models/responce/home/newsblogsvideoresponse.dart';
 import 'package:giftex/data/network/models/responce/home/recordpricelots.dart';
@@ -7,7 +8,7 @@ import 'package:giftex/data/network/models/responce/home/upcommingauctionrespons
 import 'package:giftex/data/network/repository/webcmsapimodel/webcmsapimodelrepo.dart';
 import 'package:mobx/mobx.dart';
 
-import '../../data/network/models/responce/home/GetBuyDetailsResponse.dart';
+import '../../data/network/models/responce/home/getBuyDetailsResponse.dart';
 
 part 'homeviewmodel.g.dart';
 
@@ -68,7 +69,8 @@ abstract class _HomeViewModel with Store {
   Future<HttpResponse> getHomeUpcommingAuctionBaner() async {
     isLoadingForUpCommingAuction = true;
 
-    HttpResponse httpResponse = await webCmsApiModelRepo!.getHomeUpcomingAuction();
+    HttpResponse httpResponse =
+        await webCmsApiModelRepo!.getHomeUpcomingAuction();
 
     if (httpResponse.status == 200) {
       recordPriceLots = httpResponse.data;
@@ -80,7 +82,8 @@ abstract class _HomeViewModel with Store {
   Future<HttpResponse> getRecordPrizeLots() async {
     isLoadingForUpCommingAuction = true;
 
-    HttpResponse httpResponse = await webCmsApiModelRepo!.gethomeRecordPriceLots();
+    HttpResponse httpResponse =
+        await webCmsApiModelRepo!.gethomeRecordPriceLots();
 
     if (httpResponse.status == 200) {
       recordPriceLots = httpResponse.data;
@@ -104,7 +107,8 @@ abstract class _HomeViewModel with Store {
   Future<HttpResponse> gethomeRecordPriceLots() async {
     isLoadingForNews = true;
 
-    HttpResponse httpResponse = await webCmsApiModelRepo!.gethomeRecordPriceLots();
+    HttpResponse httpResponse =
+        await webCmsApiModelRepo!.gethomeRecordPriceLots();
 
     if (httpResponse.status == 200) {
       recordPriceLots = httpResponse.data;
@@ -140,6 +144,21 @@ abstract class _HomeViewModel with Store {
       getSellDetailsResponse = httpResponse.data;
     }
     isloadingsellDetails = false;
+    return httpResponse;
+  }
+
+  @observable
+  GetDepartmentsResponse? getDepartmentsResponse = GetDepartmentsResponse();
+  @observable
+  bool isloadingdepartments = false;
+  Future<HttpResponse> getDepartments() async {
+    isloadingdepartments = true;
+    getDepartmentsResponse = null;
+    HttpResponse httpResponse = await webCmsApiModelRepo!.getDepartments();
+    if (httpResponse.status == 200) {
+      getDepartmentsResponse = httpResponse.data;
+    }
+    isloadingdepartments = false;
     return httpResponse;
   }
 }

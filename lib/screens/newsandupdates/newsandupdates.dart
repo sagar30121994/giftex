@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:giftex/screens/components/bottomnavigationbar/dashborard2.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
 import '../components/header.dart';
@@ -28,11 +27,11 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
           SliverToBoxAdapter(
             child: Text(
               "NEWS AND UPDATES",
-              textAlign: TextAlign.left,
-              style: Theme.of(context)
-                  .textTheme
-                  .headline6!
-                  .copyWith(color: Colors.black, fontWeight: FontWeight.w600, letterSpacing: 0.888889),
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.headline6!.copyWith(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 0.888889),
             ),
           ),
           SliverToBoxAdapter(
@@ -43,10 +42,13 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
           SliverToBoxAdapter(
             child: Text(
               "FIND YOUR SERVICES THAT FITS YOUR NEEDS",
-              textAlign: TextAlign.left,
+              textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                    color: Color(0xff466D33),
-                    fontWeight: FontWeight.w600,
+                    color: Theme.of(context).colorScheme.primary,
+                    fontWeight: FontWeight.bold,
+                    // style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                    //       color: Color(0xff466D33),
+                    //       fontWeight: FontWeight.w600,
                   ),
             ),
           ),
@@ -61,10 +63,10 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
               child: Text(
                 "We feature premium artworks including modern, contemporary, and street art",
                 textAlign: TextAlign.center,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1!
-                    .copyWith(color: Color(0XFF000000), fontWeight: FontWeight.w500, letterSpacing: 1),
+                style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                    color: Color(0XFF000000),
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 1),
               ),
             ),
           ),
@@ -103,14 +105,16 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 90.0, right: 80, top: 0, bottom: 0),
+                    padding: const EdgeInsets.only(
+                        left: 90.0, right: 80, top: 0, bottom: 0),
                     child: Image.asset(
                       "image/4 1.png",
                       height: 150,
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 160.0, right: 80, top: 10, bottom: 0),
+                    padding: const EdgeInsets.only(
+                        left: 160.0, right: 80, top: 10, bottom: 0),
                     child: Image.asset(
                       "image/5 1.png",
                       height: 150,
@@ -136,7 +140,8 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                     color: Colors.white.withOpacity(0.0),
 
                     //This is for bottom border that is needed
-                    border: Border(bottom: BorderSide(color: Color(0xffDFDFDF), width: 2)),
+                    border: Border(
+                        bottom: BorderSide(color: Color(0xffDFDFDF), width: 2)),
                   ),
                   child: TabBar(
                     onTap: (index) {
@@ -157,18 +162,24 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                       print(index);
                     },
                     indicator: UnderlineTabIndicator(
-                      borderSide: BorderSide(color: Color(0xff8DAB7F), width: 2.0),
+                      borderSide:
+                          BorderSide(color: Color(0xff8DAB7F), width: 2.0),
                     ),
                     padding: EdgeInsets.all(0),
                     labelPadding: EdgeInsets.all(0),
                     unselectedLabelColor: Color(0xff2D2D2D).withOpacity(0.59),
                     labelColor: const Color(0xFF2D2D2D),
-                    labelStyle: Theme.of(context)
+                    labelStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        color: Color(0xff2D2D2D),
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 1),
+                    unselectedLabelStyle: Theme.of(context)
                         .textTheme
                         .bodyText1!
-                        .copyWith(color: Color(0xff2D2D2D), fontWeight: FontWeight.w600, letterSpacing: 1),
-                    unselectedLabelStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
-                        color: Color(0xff2D2D2D).withOpacity(0.4), fontWeight: FontWeight.w600, letterSpacing: 1),
+                        .copyWith(
+                            color: Color(0xff2D2D2D).withOpacity(0.4),
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 1),
                     tabs: [
                       Tab(text: "LATEST NEWS"),
                       Tab(text: "VIDEOS"),
@@ -223,13 +234,18 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                                       height: 16,
                                     ),
                                     Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Text(
                                           "Jamini Roy",
                                           textAlign: TextAlign.center,
-                                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1!
+                                              .copyWith(
                                                 color: Color(0XFF747474),
                                                 fontWeight: FontWeight.w400,
                                               ),
@@ -250,7 +266,10 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                                         Text(
                                           "January 10, 2022",
                                           textAlign: TextAlign.center,
-                                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1!
+                                              .copyWith(
                                                 color: Color(0XFF747474),
                                                 fontWeight: FontWeight.w400,
                                               ),
@@ -263,7 +282,10 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                                     Text(
                                       "News and updates \njamini roy auction",
                                       textAlign: TextAlign.center,
-                                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .subtitle1!
+                                          .copyWith(
                                             color: Color(0xff2D2D2D),
                                             fontWeight: FontWeight.w600,
                                           ),
@@ -274,7 +296,10 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                                     Text(
                                       "Lorem ipsum dolor sit amet, consecte tur adipiscing elit,",
                                       textAlign: TextAlign.center,
-                                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1!
+                                          .copyWith(
                                             color: Color(0xff747474),
                                             fontWeight: FontWeight.w400,
                                           ),
@@ -297,7 +322,8 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                     delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
                         return Padding(
-                          padding: const EdgeInsets.only(left: 32.0, right: 32.0),
+                          padding:
+                              const EdgeInsets.only(left: 32.0, right: 32.0),
                           child: Container(
                             color: Color(0xffFFFFFF),
                             height: 350,
@@ -316,7 +342,10 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                                     Text(
                                       "Jamini Roy",
                                       textAlign: TextAlign.center,
-                                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1!
+                                          .copyWith(
                                             color: Color(0XFF747474),
                                             fontWeight: FontWeight.w400,
                                           ),
@@ -337,7 +366,10 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                                     Text(
                                       "January 10, 2022",
                                       textAlign: TextAlign.center,
-                                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1!
+                                          .copyWith(
                                             color: Color(0XFF747474),
                                             fontWeight: FontWeight.w400,
                                           ),
@@ -350,7 +382,10 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                                 Text(
                                   "Lorem ipsum dolor sit amet, consecte tur adipiscing elit,",
                                   textAlign: TextAlign.left,
-                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .subtitle1!
+                                      .copyWith(
                                         color: Color(0xff2D2D2D),
                                         fontWeight: FontWeight.w600,
                                       ),
@@ -361,7 +396,10 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                                 Text(
                                   "Lorem ipsum dolor sit amet, consecte tur adipiscing elit,",
                                   textAlign: TextAlign.left,
-                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1!
+                                      .copyWith(
                                         color: Color(0xff747474),
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -391,7 +429,8 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                           delegate: SliverChildBuilderDelegate(
                             (BuildContext context, int index) {
                               return Padding(
-                                padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                                padding: const EdgeInsets.only(
+                                    left: 16.0, right: 16.0),
                                 child: Container(
                                   color: Color(0xffFFFFFF),
                                   height: 420,
@@ -399,17 +438,22 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                                   child: Stack(
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.only(top: 90, bottom: 30),
+                                        padding: const EdgeInsets.only(
+                                            top: 90, bottom: 30),
                                         child: Container(
                                           child: Image.asset(
                                             "image/Rectangle (3).png",
                                             fit: BoxFit.cover,
-                                            width: MediaQuery.of(context).size.width * .90,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                .90,
                                           ),
                                         ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                                        padding: const EdgeInsets.only(
+                                            left: 16.0, right: 16.0),
                                         child: Column(
                                           children: [
                                             Image.asset(
@@ -424,9 +468,14 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                                                 Text(
                                                   "Jan 10, 2022",
                                                   textAlign: TextAlign.center,
-                                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                        color: Color(0XFF3C5233),
-                                                        fontWeight: FontWeight.w500,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .subtitle1!
+                                                      .copyWith(
+                                                        color:
+                                                            Color(0XFF3C5233),
+                                                        fontWeight:
+                                                            FontWeight.w500,
                                                       ),
                                                 ),
                                               ],
@@ -437,7 +486,10 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                                             Text(
                                               "Lorem ipsum dolor sit amet, consecte tur adipiscing elit,",
                                               textAlign: TextAlign.left,
-                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .subtitle1!
+                                                  .copyWith(
                                                     color: Color(0xff2D2D2D),
                                                     fontWeight: FontWeight.w600,
                                                   ),
@@ -448,7 +500,10 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                                             Text(
                                               "Lorem ipsum dolor sit amet, consecte tur adipiscing elit, Lore ipsum dolor sit Lorem ipsum dolor sit amet.",
                                               textAlign: TextAlign.left,
-                                              style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyText1!
+                                                  .copyWith(
                                                     color: Color(0xff747474),
                                                     fontWeight: FontWeight.w400,
                                                   ),
@@ -457,15 +512,23 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                                               height: 10,
                                             ),
                                             Row(
-                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
                                               children: [
                                                 Text(
                                                   "Read More",
                                                   textAlign: TextAlign.center,
-                                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                        color: Color(0XFF5D7E4D),
-                                                        fontWeight: FontWeight.w700,
-                                                        decoration: TextDecoration.underline,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText1!
+                                                      .copyWith(
+                                                        color:
+                                                            Color(0XFF5D7E4D),
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        decoration:
+                                                            TextDecoration
+                                                                .underline,
                                                       ),
                                                 ),
                                               ],
@@ -499,8 +562,13 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                             child: Text(
                               "MOST WATCHED",
                               textAlign: TextAlign.start,
-                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                  color: Color(0XFF000000), fontWeight: FontWeight.w600, letterSpacing: 0.888889),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .subtitle1!
+                                  .copyWith(
+                                      color: Color(0XFF000000),
+                                      fontWeight: FontWeight.w600,
+                                      letterSpacing: 0.888889),
                             ),
                           ),
                         ],
@@ -518,7 +586,11 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                                 delegate: SliverChildBuilderDelegate(
                                   (BuildContext context, int index) {
                                     return Padding(
-                                      padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 16, bottom: 10),
+                                      padding: const EdgeInsets.only(
+                                          left: 8.0,
+                                          right: 8.0,
+                                          top: 16,
+                                          bottom: 10),
                                       child: Container(
                                         height: 140,
 
@@ -527,7 +599,10 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                                         child: Row(
                                           children: [
                                             Container(
-                                              width: MediaQuery.of(context).size.width * .25,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  .25,
                                               height: 140,
                                               decoration: BoxDecoration(
                                                 image: DecorationImage(
@@ -555,7 +630,8 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                                                   Center(
                                                     child: CircleAvatar(
                                                       radius: 15,
-                                                      backgroundColor: Color(0xff526D46),
+                                                      backgroundColor:
+                                                          Color(0xff526D46),
                                                     ),
                                                   ),
                                                   Center(
@@ -570,19 +646,31 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                                               width: 10,
                                             ),
                                             Container(
-                                              width: MediaQuery.of(context).size.width * .67,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  .67,
                                               child: Column(
-                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
                                                   Row(
                                                     children: [
                                                       Text(
                                                         "Jan 10, 2022",
-                                                        textAlign: TextAlign.start,
-                                                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                              color: Color(0XFF3C5233),
-                                                              fontWeight: FontWeight.w500,
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .bodyText1!
+                                                            .copyWith(
+                                                              color: Color(
+                                                                  0XFF3C5233),
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
                                                             ),
                                                       ),
                                                     ],
@@ -593,22 +681,35 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                                                   Text(
                                                     "Lorem ipsum dolor sit",
                                                     textAlign: TextAlign.left,
-                                                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                          color: Color(0xff2D2D2D),
-                                                          fontWeight: FontWeight.w600,
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .subtitle1!
+                                                        .copyWith(
+                                                          color:
+                                                              Color(0xff2D2D2D),
+                                                          fontWeight:
+                                                              FontWeight.w600,
                                                         ),
                                                   ),
                                                   const SizedBox(
                                                     height: 8,
                                                   ),
                                                   Container(
-                                                    width: MediaQuery.of(context).size.width,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .width,
                                                     child: Text(
                                                       "Lorem ipsum dolor sit amet, consecte tur adipiscing elit,",
                                                       textAlign: TextAlign.left,
-                                                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                            color: Color(0xff747474),
-                                                            fontWeight: FontWeight.w400,
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .bodyText1!
+                                                          .copyWith(
+                                                            color: Color(
+                                                                0xff747474),
+                                                            fontWeight:
+                                                                FontWeight.w400,
                                                           ),
                                                     ),
                                                   ),
@@ -616,15 +717,25 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                                                     height: 8,
                                                   ),
                                                   Row(
-                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
                                                     children: [
                                                       Text(
                                                         "watch More",
-                                                        textAlign: TextAlign.center,
-                                                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                              color: Color(0XFF5D7E4D),
-                                                              fontWeight: FontWeight.w600,
-                                                              decoration: TextDecoration.underline,
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .bodyText1!
+                                                            .copyWith(
+                                                              color: Color(
+                                                                  0XFF5D7E4D),
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                              decoration:
+                                                                  TextDecoration
+                                                                      .underline,
                                                             ),
                                                       ),
                                                     ],
@@ -655,7 +766,8 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                                 delegate: SliverChildBuilderDelegate(
                                   (BuildContext context, int index) {
                                     return Padding(
-                                      padding: const EdgeInsets.only(left: 32.0, right: 32.0),
+                                      padding: const EdgeInsets.only(
+                                          left: 32.0, right: 32.0),
                                       child: Container(
                                         color: Color(0xffFFFFFF),
                                         height: 370,
@@ -664,7 +776,10 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                                           children: [
                                             SizedBox(
                                               height: 200,
-                                              width: MediaQuery.of(context).size.width * .8,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  .8,
                                               child: Stack(
                                                 children: [
                                                   Image.asset(
@@ -680,7 +795,8 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                                                   Center(
                                                     child: CircleAvatar(
                                                       radius: 15,
-                                                      backgroundColor: Color(0xff526D46),
+                                                      backgroundColor:
+                                                          Color(0xff526D46),
                                                     ),
                                                   ),
                                                   Center(
@@ -699,9 +815,14 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                                                 Text(
                                                   "Jamini Roy",
                                                   textAlign: TextAlign.center,
-                                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                        color: Color(0XFF747474),
-                                                        fontWeight: FontWeight.w400,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText1!
+                                                      .copyWith(
+                                                        color:
+                                                            Color(0XFF747474),
+                                                        fontWeight:
+                                                            FontWeight.w400,
                                                       ),
                                                 ),
                                                 SizedBox(
@@ -720,9 +841,14 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                                                 Text(
                                                   "January 10, 2022",
                                                   textAlign: TextAlign.center,
-                                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                        color: Color(0XFF747474),
-                                                        fontWeight: FontWeight.w400,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText1!
+                                                      .copyWith(
+                                                        color:
+                                                            Color(0XFF747474),
+                                                        fontWeight:
+                                                            FontWeight.w400,
                                                       ),
                                                 ),
                                               ],
@@ -733,7 +859,10 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                                             Text(
                                               "Lorem ipsum dolor sit amet, consecte tur adipiscing elit,",
                                               textAlign: TextAlign.left,
-                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .subtitle1!
+                                                  .copyWith(
                                                     color: Color(0xff2D2D2D),
                                                     fontWeight: FontWeight.w600,
                                                   ),
@@ -744,7 +873,10 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                                             Text(
                                               "Lorem ipsum dolor sit amet, consecte tur adipiscing elit,",
                                               textAlign: TextAlign.left,
-                                              style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyText1!
+                                                  .copyWith(
                                                     color: Color(0xff747474),
                                                     fontWeight: FontWeight.w400,
                                                   ),
@@ -871,7 +1003,6 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
         //   ),
         // ],
       ),
-      bottomNavigationBar: Dashboard2Ui(),
     );
   }
 }

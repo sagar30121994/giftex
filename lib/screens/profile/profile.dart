@@ -119,7 +119,7 @@ class _ProfilepageState extends State<Profilepage> {
                                             color: Colors.red,
                                           ),
                                           SizedBox(
-                                            width: 3,
+                                            width: 1,
                                           ),
                                           bottomViewModel
                                                   .profileViewModel!
@@ -143,7 +143,7 @@ class _ProfilepageState extends State<Profilepage> {
                                                       ),
                                                 ),
                                           SizedBox(
-                                            width: 16,
+                                            width: 8,
                                           ),
                                           ElevatedButton(
                                             style: ButtonStyle(
@@ -163,7 +163,7 @@ class _ProfilepageState extends State<Profilepage> {
                                             onPressed: () {},
                                             child: Padding(
                                               padding: const EdgeInsets.only(
-                                                  right: 8.0,
+                                                  right: 0.0,
                                                   left: 8,
                                                   top: 12,
                                                   bottom: 12),
@@ -200,7 +200,7 @@ class _ProfilepageState extends State<Profilepage> {
                                     ],
                                   ),
                                   SizedBox(
-                                    width: 16,
+                                    width: 4,
                                   ),
                                 ],
                               ),

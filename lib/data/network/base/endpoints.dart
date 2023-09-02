@@ -165,6 +165,7 @@ class WebCMSApiModel {
   final String homerecordpricelot = 'HomeRecordPriceLots';
   final String recordpricelots = 'RecordPriceLots';
   final String getdepartments = 'GetPaymentGrid';
+  final String GetDepartments = 'GetDepartments';
   final String getdepartmentdetails = 'artistdata';
   final String getpurchasefaq = 'InsertsubscribeForm';
   final String getusernotification = 'getHashStr';

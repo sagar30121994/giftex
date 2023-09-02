@@ -26,7 +26,6 @@ class _HowToBuyPageState extends State<HowToBuyPage> {
   final GlobalKey<ExpansionTileCardState> cardG = new GlobalKey();
   @override
   void initState() {
-    // TODO: implement initState
     homeViewModel.getBuyDetails();
     // nameController.text="Aryan Raj";
     super.initState();
@@ -75,7 +74,10 @@ class _HowToBuyPageState extends State<HowToBuyPage> {
                       ),
                       Container(
                         width: MediaQuery.of(context).size.width * .90,
-                        child: Text(
+                        child:
+                            // HtmlWidget(
+                            //     '${homeViewModel.getBuyDetailsResponse!.pageContent!.banner!.desc ?? ''}'),
+                            Text(
                           "We feature premium artworks including modern, contemporary, and street art",
                           textAlign: TextAlign.center,
                           style: Theme.of(context)

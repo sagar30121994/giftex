@@ -2,7 +2,8 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:giftex/data/local/client/prefs.dart';
-import 'package:giftex/data/network/models/responce/home/GetSellDetailsResponse.dart';
+import 'package:giftex/data/network/models/responce/home/getDepartmentsResponse.dart';
+import 'package:giftex/data/network/models/responce/home/getSellDetailsResponse.dart';
 import 'package:giftex/data/network/models/responce/home/homeresponse.dart';
 import 'package:giftex/data/network/models/responce/home/newsblogsvideoresponse.dart';
 import 'package:giftex/data/network/models/responce/home/recordpricelots.dart';
@@ -13,7 +14,7 @@ import '../../base/endpoints.dart' as endPoints;
 import '../../client/dioclient.dart';
 import '../../models/httpreponsehandler.dart';
 import '../../models/request/webapimodel/userloginrequestmodel.dart';
-import '../../models/responce/home/GetBuyDetailsResponse.dart';
+import '../../models/responce/home/getBuyDetailsResponse.dart';
 
 class WebCmsApiModelRepo {
   DioClientNew? httpClient;
@@ -1198,21 +1199,23 @@ class WebCmsApiModelRepo {
 
   Future<HttpResponse> getDepartments() async {
     HttpResponse httpResponse = HttpResponse();
-    String userlogin = json.encode(LoginReqestModel);
+    // String userlogin = json.encode(LoginReqestModel);
     httpClient!.client!.options =
         BaseOptions(contentType: Headers.formUrlEncodedContentType);
-    await httpClient!
-        .post(
-            BaseUrl.notificationbaseUrl +
-                endPoints.WebCMSApiModel().getdepartments,
-            body: userlogin)
-        .then((responce) async {
+    await httpClient!.post(
+        BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().GetDepartments,
+        body: {
+          "authkey_web": "${localSharedPrefrence!.authkey ?? ''}",
+          "authkey_mobile": "",
+          "userid": "${localSharedPrefrence!.userId ?? ''}",
+          "CRMClientID": "${localSharedPrefrence!.crmId ?? ''}",
+        }).then((responce) async {
       print(responce);
 
       if (responce.statusCode == 200) {
         httpResponse.status = responce.statusCode;
         httpResponse.message = 'Successful';
-        // httpResponse.data = LoginResponse.fromJson(responce.data);
+        httpResponse.data = GetDepartmentsResponse.fromJson(responce.data);
       } else {
         httpResponse.status = responce.statusCode;
         httpResponse.message = responce.data['message'];
