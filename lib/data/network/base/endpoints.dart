@@ -137,11 +137,11 @@ class WebCMSApiModel {
   final String getfaqdetails = 'getHashStr';
   final String gettermsandconditions = 'GetPaymentGrid';
   final String getreachus = 'artistdata';
-  final String getwhoweare = 'InsertsubscribeForm';
+  final String getwhoweare = 'GetWhoWeAre';
   final String getpress = 'getHashStr';
   final String getpressdetails = 'GetPaymentGrid';
   final String getcommoninfo = 'artistdata';
-  final String getcareers = 'InsertsubscribeForm';
+  final String getcareers = 'GetCareers';
   final String getblogs = 'getHashStr';
   final String getblogdetails = 'GetPaymentGrid';
   final String getourcollections = 'artistdata';

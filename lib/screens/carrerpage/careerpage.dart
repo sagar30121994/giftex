@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:giftex/screens/components/footer/footer.dart';
+import 'package:giftex/screens/components/header.dart';
+import 'package:giftex/viewmodel/service/serviceviewmodel.dart';
 
-import '../components/bottomnavigationbar/dashborard2.dart';
+ServiceViewModel serviceViewModel = ServiceViewModel();
 
 class CareerPage extends StatefulWidget {
   @override
@@ -10,196 +14,197 @@ class CareerPage extends StatefulWidget {
 
 class _CareerPageState extends State<CareerPage> {
   int _pageIndex = 0;
-  Color tabColor = Color(0xff6D905D);
-  String newsType = "LATEST NEWS";
-  // final GlobalKey<ExpansionTileCardState> cardA = new GlobalKey();
-  // final GlobalKey<ExpansionTileCardState> cardB= new GlobalKey();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    serviceViewModel.getCareeres();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        bottomOpacity: 0,
-        elevation: 0,
-        backgroundColor: Colors.white,
-        leading: Image.asset("image/app1.png"),
-        actions: [
-          Image.asset("image/app2.png"),
-          SizedBox(
-            width: 3,
-          ),
-          Image.asset("image/app3.png"),
-          SizedBox(
-            width: 3,
-          ),
-          Container(width: 45, color: Color(0XFF8DAB7F), child: Image.asset("image/app4.png")),
-          // SizedBox(width: 3,),
-        ],
-      ),
+      appBar: NavBar(),
       // bottomNavigationBar: BottomNavigationBarUi(),
       body: SingleChildScrollView(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * .90,
-          child: SingleChildScrollView(
-              child: Column(
-            children: [
-              const SizedBox(
-                height: 16,
-              ),
-              Text(
-                "CAREER",
-                textAlign: TextAlign.left,
-                style: Theme.of(context).textTheme.headline6!.copyWith(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w600,
-                    ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
-                "start Doing work that matters",
-                textAlign: TextAlign.left,
-                style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                      color: Color(0xff466D33),
-                      fontWeight: FontWeight.w600,
-                    ),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width * .80,
-                child: Text(
-                  "we host over 200 auctions annually and offer a cross-category selection of items available for immediate purchase via both digital and physical shopping experiences as well as private sales.",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                        color: Color(0XFF000000),
-                        fontWeight: FontWeight.w400,
+        child: Observer(builder: (context) {
+          return serviceViewModel.isloading
+              ? LinearProgressIndicator()
+              : Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * .90,
+                  child: SingleChildScrollView(
+                      child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 16,
                       ),
-                ),
-              ),
-              // const SizedBox(height: 16,),
-              Container(
-                height: 290,
-                child: Stack(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: 70, bottom: 0),
-                      child: Container(
-                        //replace this Container with your Card
-                        color: Color(0Xff3C5233),
-                        height: 200.0,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 70, bottom: 0),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 50.0),
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            color: Color.fromRGBO(109, 144, 93, 0.44),
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(200),
-                              bottomRight: Radius.circular(200),
+                      Text(
+                        "${serviceViewModel.careersResponse!.pageContent!.title}",
+                        textAlign: TextAlign.left,
+                        style: Theme.of(context).textTheme.headline6!.copyWith(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w600,
                             ),
-                          ),
-                          height: 130.0,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "${serviceViewModel.careersResponse!.pageContent!.bannerItem!.title}",
+                        textAlign: TextAlign.left,
+                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                              color: Theme.of(context).colorScheme.primary,
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+
+                      Padding(
+                        padding: EdgeInsets.all(16),
+                        child: HtmlWidget(
+                          "${serviceViewModel.careersResponse!.pageContent!.bannerItem!.desc}",
+                          // textStyle: TextStyle(fontSize: 14),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 20, bottom: 0, left: 170),
-                      child: Image.asset(
-                        "image/10.png",
-                        height: 230,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 110, bottom: 0, left: 100),
-                      child: Image.asset(
-                        "image/9.png",
-                        height: 140,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              const SizedBox(
-                height: 30,
-              ),
-              Container(
-                color: Color(0xffFFFFFF),
-                child: DefaultTabController(
-                  length: 3,
-                  child: SingleChildScrollView(
-                    child: TabBar(
-                      onTap: (index) {
-                        setState(() {
-                          // if(index==0) { tabColor = Color(0xff6D905D);}
-                          // if(index==1) {tabColor =  Color(0xff6D905D);}
-                          // if(index==2) {tabColor =  Color(0xff6D905D);}
-                        });
-                        print(index);
-                      },
-                      // indicator: BoxDecoration(
-                      //     color: tabColor
+                      // Container(
+                      //   width: MediaQuery.of(context).size.width * .80,
+                      //   child: Text(
+                      //     "${serviceViewModel.careersResponse!.pageContent!.bannerItem!.desc}",
+                      //     textAlign: TextAlign.center,
+                      //     style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                      //           color: Color(0XFF000000),
+                      //           fontWeight: FontWeight.w400,
+                      //         ),
+                      //   ),
                       // ),
-                      isScrollable: true,
-                      padding: EdgeInsets.all(0),
-                      unselectedLabelColor: Color(0xff2D2D2D).withOpacity(0.6),
-                      labelColor: const Color(0xFF000000),
-                      labelStyle: Theme.of(context).textTheme.subtitle1!.copyWith(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w400,
+                      // const SizedBox(height: 16,),
+                      Container(
+                        height: 260,
+                        child: Stack(
+                          children: [
+                            Positioned(
+                              top: 54,
+                              left: 0,
+                              right: 0,
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 30, bottom: 0),
+                                child: Container(
+                                  //replace this Container with your Card
+                                  color: Color(0xff1F2A52),
+                                  height: 160.0,
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: 54,
+                              left: 0,
+                              right: 0,
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 30, bottom: 0),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                                  child: Container(
+                                    decoration: const BoxDecoration(
+                                      color: Color(0xff8C9FB1),
+                                      borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(265),
+                                        bottomRight: Radius.circular(265),
+                                      ),
+                                    ),
+                                    height: 140.0,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                                left: 0,
+                                right: 0,
+                                bottom: 54,
+                                child: Image.network(
+                                  "${serviceViewModel.careersResponse!.pageContent!.bannerItem!.image!.mobile}",
+                                  // "",
+                                  height: 220,
+                                )),
+                          ],
+                        ),
+                      ),
+
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      Container(
+                        color: Color(0xffFFFFFF),
+                        child: DefaultTabController(
+                          length: 3,
+                          child: SingleChildScrollView(
+                            child: TabBar(
+                              onTap: (index) {
+                                setState(() {
+                                  // if(index==0) { tabColor = Color(0xff6D905D);}
+                                  // if(index==1) {tabColor =  Color(0xff6D905D);}
+                                  // if(index==2) {tabColor =  Color(0xff6D905D);}
+                                });
+                                print(index);
+                              },
+                              // indicator: BoxDecoration(
+                              //     color: tabColor
+                              // ),
+                              isScrollable: true,
+                              padding: EdgeInsets.all(0),
+                              unselectedLabelColor: Color(0xff2D2D2D).withOpacity(0.6),
+                              labelColor: const Color(0xFF000000),
+                              labelStyle: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                              tabs: [
+                                Tab(text: "Show All"),
+                                Tab(text: "Full time opportunities "),
+                                Tab(text: "internship opportunities"),
+                              ],
+                            ),
                           ),
-                      tabs: [
-                        Tab(text: "Show All"),
-                        Tab(text: "Full time opportunities "),
-                        Tab(text: "internship opportunities"),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 0.0),
-                child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  physics: BouncingScrollPhysics(),
-                  itemCount: 10,
-                  itemBuilder: (BuildContext context, int index) {
-                    return _buildPlayerModelList();
-                  },
-                ),
-              ),
-              SizedBox(width: MediaQuery.of(context).size.width, child: Footer()),
-              SliverToBoxAdapter(
-                child: Container(
-                  color: Color(0xff1F2A52),
-                  height: 30,
-                  width: MediaQuery.of(context).size.width,
-                ),
-              ),
-            ],
-          )),
-        ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                        child: ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          physics: BouncingScrollPhysics(),
+                          itemCount: serviceViewModel.careersResponse!.pageContent!.vacancies!.array!.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return _buildPlayerModelList(index);
+                          },
+                        ),
+                      ),
+                      SizedBox(width: MediaQuery.of(context).size.width, child: Footer()),
+                      Container(
+                        color: Color(0xff1F2A52),
+                        height: 30,
+                        width: MediaQuery.of(context).size.width,
+                      ),
+                    ],
+                  )),
+                );
+        }),
       ),
-      bottomNavigationBar: Dashboard2Ui(),
     );
   }
 
-  Widget _buildPlayerModelList() {
+  Widget _buildPlayerModelList(int index) {
     return Card(
       margin: EdgeInsets.all(16),
       elevation: 0,
       child: ExpansionTile(
         backgroundColor: Color(0xffF9F9F9),
-        leading: Image.asset("image/Group.png"),
+        leading: Image.asset("image/Group.png", color: Color(0XffB45156)),
         title: Text(
-          "Sales Representative ",
+          serviceViewModel.careersResponse!.pageContent!.vacancies!.array![index].title ?? "",
           style: Theme.of(context).textTheme.subtitle1!.copyWith(
                 color: Color(0XFF000000),
                 fontWeight: FontWeight.w600,
@@ -207,7 +212,10 @@ class _CareerPageState extends State<CareerPage> {
         ),
         subtitle: Row(
           children: [
-            Image.asset("image/Vector (11).png"),
+            Image.asset(
+              "image/Vector (11).png",
+              color: Color(0XffB45156),
+            ),
             SizedBox(
               width: 5,
             ),
@@ -237,155 +245,24 @@ class _CareerPageState extends State<CareerPage> {
                 SizedBox(
                   height: 16,
                 ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.circle,
-                      size: 15,
-                      color: Color(0xff8DAB7F),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      "Generating leads.",
-                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                            color: Color(0XFF000000),
-                            fontWeight: FontWeight.w400,
-                          ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.circle,
-                      size: 15,
-                      color: Color(0xff8DAB7F),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      "Meeting or exceeding sales goals.",
-                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                            color: Color(0XFF000000),
-                            fontWeight: FontWeight.w400,
-                          ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.circle,
-                      size: 15,
-                      color: Color(0xff8DAB7F),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * .7,
-                      child: Text(
-                        "Negotiating all contracts with prospective clients.",
-                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                              color: Color(0XFF000000),
-                              fontWeight: FontWeight.w400,
-                            ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.circle,
-                      size: 15,
-                      color: Color(0xff8DAB7F),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * .7,
-                      child: Text(
-                        "Helping determine pricing schedules for quotes, promotions, and negotiations.",
-                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                              color: Color(0XFF000000),
-                              fontWeight: FontWeight.w400,
-                            ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.circle,
-                      size: 15,
-                      color: Color(0xff8DAB7F),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      "Preparing weekly and monthly reports.",
-                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                            color: Color(0XFF000000),
-                            fontWeight: FontWeight.w400,
-                          ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.circle,
-                      size: 15,
-                      color: Color(0xff8DAB7F),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * .7,
-                      child: Text(
-                        "Giving sales presentations to a range of prospective clients.",
-                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                              color: Color(0XFF000000),
-                              fontWeight: FontWeight.w400,
-                            ),
-                      ),
-                    ),
-                  ],
+                Padding(
+                  padding: EdgeInsets.all(16),
+                  child: HtmlWidget(
+                    serviceViewModel.careersResponse!.pageContent!.vacancies!.array![index].desc ?? "",
+                    // textStyle: TextStyle(fontSize: 14),
+                  ),
                 ),
                 SizedBox(
                   height: 16,
                 ),
                 Container(
-                  height: 380,
+                  height: 410,
                   child: Stack(
                     children: [
                       Container(
-                        height: 360,
+                        height: 380,
                         width: 410,
-                        color: Color(0xffEAF1DB).withOpacity(0.7),
+                        color: Color(0xffF9F9F9).withOpacity(0.7),
                         padding: EdgeInsets.all(16),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -467,7 +344,7 @@ class _CareerPageState extends State<CareerPage> {
                         child: Center(
                           child: ElevatedButton(
                             style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(Color(0XFF8DAB7F)),
+                                backgroundColor: MaterialStateProperty.all(Color(0XffB45156)),
                                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20.0),
                                   // side: BorderSide(color: Colors.red)

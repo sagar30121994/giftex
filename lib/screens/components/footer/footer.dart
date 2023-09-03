@@ -1,9 +1,7 @@
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:giftex/screens/aboutus/aboutus.dart';
 import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
-import 'package:giftex/screens/contactus/contactus.dart';
 import 'package:giftex/screens/faq/faq.dart';
 import 'package:giftex/screens/termsandconditions/termsandconditions.dart';
 import 'package:giftex/viewmodel/user/footerviewmodel.dart';
@@ -691,7 +689,8 @@ class _FooterState extends State<Footer> {
                               children: <Widget>[
                                 InkWell(
                                   onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => Aboutuspage()));
+                                    bottomViewModel.selectedIndex = 25;
+                                    // Navigator.push(context, MaterialPageRoute(builder: (context) => Aboutuspage()));
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 20.0, top: 10),
@@ -745,26 +744,10 @@ class _FooterState extends State<Footer> {
                                     ],
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 20.0, top: 16),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Careers",
-                                        textAlign: TextAlign.start,
-                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                              color: Color(0XFFFFFFFF),
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
                                 InkWell(
                                   onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => ContactusPage()));
+                                    bottomViewModel.selectedIndex = 26;
+                                    // Navigator.push(context, MaterialPageRoute(builder: (context) => Aboutuspage()));
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 20.0, top: 16),
@@ -773,7 +756,7 @@ class _FooterState extends State<Footer> {
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "Contact Us",
+                                          "Careers",
                                           textAlign: TextAlign.start,
                                           style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                 color: Color(0XFFFFFFFF),
@@ -784,6 +767,29 @@ class _FooterState extends State<Footer> {
                                     ),
                                   ),
                                 ),
+                                // InkWell(
+                                //   onTap: () {
+                                //     bottomViewModel.selectedIndex = 29;
+                                //     // Navigator.push(context, MaterialPageRoute(builder: (context) => ContactusPage()));
+                                //   },
+                                //   child: Padding(
+                                //     padding: const EdgeInsets.only(left: 20.0, top: 16),
+                                //     child: Row(
+                                //       mainAxisAlignment: MainAxisAlignment.start,
+                                //       crossAxisAlignment: CrossAxisAlignment.start,
+                                //       children: [
+                                //         Text(
+                                //           "Contact Us",
+                                //           textAlign: TextAlign.start,
+                                //           style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                //                 color: Color(0XFFFFFFFF),
+                                //                 fontWeight: FontWeight.w400,
+                                //               ),
+                                //         ),
+                                //       ],
+                                //     ),
+                                //   ),
+                                // ),
                               ],
                             ),
                           ),

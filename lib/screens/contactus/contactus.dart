@@ -1,4 +1,3 @@
-import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:giftex/screens/components/footer/footer.dart';
 import 'package:giftex/screens/components/header.dart';
@@ -9,12 +8,6 @@ class ContactusPage extends StatefulWidget {
 }
 
 class _ContactusPageState extends State<ContactusPage> {
-  int _pageIndex = 0;
-  Color tabColor = Color(0xff6D905D);
-  String newsType = "LATEST NEWS";
-  final GlobalKey<ExpansionTileCardState> cardA = new GlobalKey();
-  final GlobalKey<ExpansionTileCardState> cardB = new GlobalKey();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -485,12 +478,10 @@ class _ContactusPageState extends State<ContactusPage> {
                 height: 30,
               ),
               SizedBox(width: MediaQuery.of(context).size.width, child: Footer()),
-              SliverToBoxAdapter(
-                child: Container(
-                  color: Color(0xff1F2A52),
-                  height: 30,
-                  width: MediaQuery.of(context).size.width,
-                ),
+              Container(
+                color: Color(0xff1F2A52),
+                height: 30,
+                width: MediaQuery.of(context).size.width,
               ),
             ],
           )),

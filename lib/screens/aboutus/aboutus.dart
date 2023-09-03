@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:giftex/screens/components/header.dart';
+import 'package:giftex/viewmodel/service/serviceviewmodel.dart';
 
 import '../components/footer/footer.dart';
+
+ServiceViewModel serviceViewModel = ServiceViewModel();
 
 class Aboutuspage extends StatefulWidget {
   const Aboutuspage({Key? key}) : super(key: key);
@@ -12,6 +16,14 @@ class Aboutuspage extends StatefulWidget {
 
 class _AboutuspageState extends State<Aboutuspage> {
   int _pageIndex = 0;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    serviceViewModel.getWhoWeAre();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,9 +32,7 @@ class _AboutuspageState extends State<Aboutuspage> {
       body: SingleChildScrollView(
         child: Container(
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * .90,
-          child: SingleChildScrollView(
-              child: Column(
+          child: Column(
             children: [
               const SizedBox(
                 height: 16,
@@ -40,7 +50,7 @@ class _AboutuspageState extends State<Aboutuspage> {
                 height: 10,
               ),
               Text(
-                "LOREM IPSUM",
+                "${serviceViewModel.whoWeAreResponse.pageContent!.bannerItem!.title}",
                 textAlign: TextAlign.left,
                 style: Theme.of(context).textTheme.bodyText1!.copyWith(
                       color: Theme.of(context).colorScheme.primary,
@@ -50,17 +60,18 @@ class _AboutuspageState extends State<Aboutuspage> {
               const SizedBox(
                 height: 16,
               ),
-              Container(
-                width: MediaQuery.of(context).size.width * .80,
-                child: Text(
-                  "We feature premium artworks including modern, contemporary, and street art",
-                  textAlign: TextAlign.justify,
-                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                        color: Color(0XFF000000),
-                        fontWeight: FontWeight.w400,
-                      ),
-                ),
-              ),
+
+              // Container(
+              //   width: MediaQuery.of(context).size.width * .80,
+              //   child: Text(
+              //     "${serviceViewModel.whoWeAreResponse.pageContent!.bannerItem!.desc}",
+              //     textAlign: TextAlign.justify,
+              //     style: Theme.of(context).textTheme.bodyText1!.copyWith(
+              //           color: Color(0XFF000000),
+              //           fontWeight: FontWeight.w400,
+              //         ),
+              //   ),
+              // ),
               // const SizedBox(height: 16,),
               Container(
                 height: 260,
@@ -104,8 +115,8 @@ class _AboutuspageState extends State<Aboutuspage> {
                         left: 0,
                         right: 0,
                         bottom: 54,
-                        child: Image.asset(
-                          "image/2.png",
+                        child: Image.network(
+                          "${serviceViewModel.whoWeAreResponse.pageContent!.bannerItem!.image!.mobile}",
                           height: 220,
                         )),
                   ],
@@ -114,175 +125,172 @@ class _AboutuspageState extends State<Aboutuspage> {
               SizedBox(
                 height: 16,
               ),
+              //
+              // Padding(
+              //   padding: EdgeInsets.all(16),
+              //   child: HtmlWidget(
+              //     "${serviceViewModel.whoWeAreResponse.pageContent!.bannerItem!.desc}",
+              //     // textStyle: TextStyle(fontSize: 14),
+              //   ),
+              // ),
+              SizedBox(
+                height: 16,
+              ),
               Container(
-                height: 565,
                 padding: EdgeInsets.all(16),
-                child: Stack(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(left: 260 / 2.0, right: 0),
-                      child: Container(
-                        //replace this Container with your Card
-                        // color: Color(0Xff3C5233),
-                        // height: 260.0,
-                        child: Image.asset(
-                          "image/Rectangle (1).png",
-                          fit: BoxFit.fill,
-                          width: 200,
-                          height: 510,
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "01",
+                          textAlign: TextAlign.start,
+                          style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                                color: Color(0XFF000000),
+                                fontWeight: FontWeight.w600,
+                              ),
                         ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Image.asset("image/Line.png"),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "WHO WE ARE",
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                            color: Color(0XFF000000),
+                            letterSpacing: 1,
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+
+                    Padding(
+                      padding: EdgeInsets.all(16),
+                      child: HtmlWidget(
+                        "${serviceViewModel.whoWeAreResponse.pageContent!.culture!.desc1}",
+                        // textStyle: TextStyle(fontSize: 14),
                       ),
                     ),
+                    // Text(
+                    //   "${serviceViewModel.whoWeAreResponse.pageContent!.culture!.desc1}",
+                    //   textAlign: TextAlign.start,
+                    //   style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                    //         color: Color(0XFF000000),
+                    //         fontWeight: FontWeight.w500,
+                    //       ),
+                    // ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(16),
+                      child: HtmlWidget(
+                        "${serviceViewModel.whoWeAreResponse.pageContent!.culture!.desc2}",
+                        // textStyle: TextStyle(fontSize: 14),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+
+                    Image.network(
+                      "${serviceViewModel.whoWeAreResponse.pageContent!.culture!.image![0].mobile}",
+                    ),
+
+                    SizedBox(
+                      height: 16,
+                    ),
+
                     Container(
+                      padding: EdgeInsets.only(right: 16),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          SizedBox(
-                            height: 20,
-                          ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
+                              Image.asset("image/Line.png"),
+                              SizedBox(
+                                width: 10,
+                              ),
                               Text(
-                                "01",
-                                textAlign: TextAlign.start,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .subtitle2!
-                                    .copyWith(
+                                "02",
+                                textAlign: TextAlign.end,
+                                style: Theme.of(context).textTheme.subtitle2!.copyWith(
                                       color: Color(0XFF000000),
                                       fontWeight: FontWeight.w600,
                                     ),
                               ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Image.asset("image/Line.png"),
                             ],
                           ),
                           SizedBox(
                             height: 10,
                           ),
                           Text(
-                            "WHO WE ARE",
-                            textAlign: TextAlign.center,
-                            style:
-                                Theme.of(context).textTheme.subtitle1!.copyWith(
-                                      color: Color(0XFF000000),
-                                      letterSpacing: 1,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                            "${serviceViewModel.whoWeAreResponse.pageContent!.culture!.title}",
+                            textAlign: TextAlign.end,
+                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                  color: Color(0XFF000000),
+                                  letterSpacing: 1,
+                                  fontWeight: FontWeight.bold,
+                                ),
                           ),
                           SizedBox(
                             height: 15,
                           ),
-                          Text(
-                            "Secure platform to conduct online auctions for Modern Indian and Contemporary art. ",
-                            textAlign: TextAlign.start,
-                            style:
-                                Theme.of(context).textTheme.bodyText1!.copyWith(
-                                      color: Color(0XFF000000),
-                                      fontWeight: FontWeight.w500,
-                                    ),
+                          Padding(
+                            padding: EdgeInsets.all(16),
+                            child: HtmlWidget(
+                              "${serviceViewModel.whoWeAreResponse.pageContent!.culture!.desc1}",
+                              // textStyle: TextStyle(fontSize: 14),
+                            ),
+                          ),
+                          // Text(
+                          //   "${serviceViewModel.whoWeAreResponse.pageContent!.culture!.desc1}",
+                          //   textAlign: TextAlign.start,
+                          //   style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                          //         color: Color(0XFF000000),
+                          //         fontWeight: FontWeight.w500,
+                          //       ),
+                          // ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(16),
+                            child: HtmlWidget(
+                              "${serviceViewModel.whoWeAreResponse.pageContent!.culture!.desc2}",
+                              // textStyle: TextStyle(fontSize: 14),
+                            ),
                           ),
                           SizedBox(
                             height: 10,
                           ),
-                          Text(
-                            "AstaGuru was conceptualised in the year 2008 with the sole purpose of creating a safe . ",
-                            textAlign: TextAlign.start,
-                            style:
-                                Theme.of(context).textTheme.bodyText1!.copyWith(
-                                      color: Color(0XFF000000),
-                                      fontWeight: FontWeight.w500,
-                                    ),
+
+                          Image.network(
+                            "${serviceViewModel.whoWeAreResponse.pageContent!.culture!.image![0].mobile}",
                           ),
+
                           SizedBox(
-                            height: 16,
+                            height: 10,
                           ),
-                          Center(
-                              child: Image.asset(
-                            "image/3.png",
-                            fit: BoxFit.fill,
-                          )),
-                          SizedBox(
-                            height: 16,
-                          ),
-                          Container(
-                            padding: EdgeInsets.only(right: 16),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Image.asset("image/Line.png"),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      "02",
-                                      textAlign: TextAlign.end,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .subtitle2!
-                                          .copyWith(
-                                            color: Color(0XFF000000),
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "CULTURE AT ASTA GURU",
-                                  textAlign: TextAlign.end,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .subtitle1!
-                                      .copyWith(
-                                        color: Color(0XFF000000),
-                                        letterSpacing: 1,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                Text(
-                                  "Secure platform to conduct online auctions for Modern Indian and Contemporary art. ",
-                                  textAlign: TextAlign.end,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText1!
-                                      .copyWith(
-                                        color: Color(0XFF000000),
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "AstaGuru was conceptualised in the year 2008 with the sole purpose of creating a safe . ",
-                                  textAlign: TextAlign.end,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText1!
-                                      .copyWith(
-                                        color: Color(0XFF000000),
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                ),
-                              ],
-                            ),
-                          )
                         ],
                       ),
                     )
@@ -293,186 +301,78 @@ class _AboutuspageState extends State<Aboutuspage> {
                 height: 16,
               ),
               Container(
-                height: 451,
                 padding: EdgeInsets.all(16),
-                child: Stack(
+                child: Container(
+                    //replace this Container with your Card
+                    // color: Color(0Xff3C5233),
+                    // height: 260.0,
+                    child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(left: 80, right: 70),
-                      child: Container(
-                        //replace this Container with your Card
-                        // color: Color(0Xff3C5233),
-                        // height: 260.0,
-                        child: Image.asset(
-                          "image/Rectangle (1).png",
-                          fit: BoxFit.fill,
-                          width: 200,
-                          height: 340,
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "03",
+                          textAlign: TextAlign.start,
+                          style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                                color: Color(0XFF000000),
+                                fontWeight: FontWeight.w600,
+                              ),
                         ),
-                      ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Image.asset("image/Line.png"),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    // SizedBox(height: 16,),
+                    Text(
+                      "${serviceViewModel.whoWeAreResponse.pageContent!.ourValues!.title}",
+                      textAlign: TextAlign.start,
+                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                            color: Color(0XFF000000),
+                            fontWeight: FontWeight.w600,
+                          ),
+                    ),
+                    SizedBox(
+                      height: 15,
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 80, left: 0),
-                      child: Container(
-                        //replace this Container with your Card
-                        // color: Color(0Xff3C5233),
-                        // height: 260.0,
-                        child: Image.asset(
-                          "image/4.png",
-                          fit: BoxFit.fill,
-                          width: 150,
-                          height: 300,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 100, right: 0),
-                      child: Container(
-                          //replace this Container with your Card
-                          // color: Color(0Xff3C5233),
-                          // height: 260.0,
-                          child: Column(
+                      padding: EdgeInsets.all(16),
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "03",
-                                textAlign: TextAlign.start,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .subtitle2!
-                                    .copyWith(
-                                      color: Color(0XFF000000),
-                                      fontWeight: FontWeight.w600,
+                        children: serviceViewModel.whoWeAreResponse.pageContent!.ourValues!.array!
+                            .map(
+                              (e) => Padding(
+                                padding: EdgeInsets.all(16),
+                                child: Column(
+                                  children: [
+                                    HtmlWidget(
+                                      "${e.desc}",
+                                      // textStyle: TextStyle(fontSize: 14),
                                     ),
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Image.asset("image/Line.png"),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          // SizedBox(height: 16,),
-                          Text(
-                            "OUR VALUES",
-                            textAlign: TextAlign.start,
-                            style:
-                                Theme.of(context).textTheme.subtitle1!.copyWith(
-                                      color: Color(0XFF000000),
-                                      fontWeight: FontWeight.w600,
+                                    Image.network(
+                                      "${e.image!.mobile}",
                                     ),
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 55, right: 0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  height: 16,
+                                  ],
                                 ),
-                                Text(
-                                  "LOREM IPSUM",
-                                  textAlign: TextAlign.start,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .subtitle1!
-                                      .copyWith(
-                                        color: Color(0XFF000000),
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "ea commodo consequat. Duis aute irure dolor in ",
-                                  textAlign: TextAlign.start,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText1!
-                                      .copyWith(
-                                        color: Color(0XFF000000),
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                ),
-                                SizedBox(
-                                  height: 16,
-                                ),
-                                Text(
-                                  "LOREM IPSUM",
-                                  textAlign: TextAlign.start,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .subtitle1!
-                                      .copyWith(
-                                        color: Color(0XFF000000),
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "ea commodo consequat. Duis aute irure dolor in ",
-                                  textAlign: TextAlign.start,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText1!
-                                      .copyWith(
-                                        color: Color(0XFF000000),
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                ),
-                                SizedBox(
-                                  height: 16,
-                                ),
-                                Text(
-                                  "LOREM IPSUM",
-                                  textAlign: TextAlign.start,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .subtitle1!
-                                      .copyWith(
-                                        color: Color(0XFF000000),
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "ea commodo consequat. Duis aute irure dolor in ",
-                                  textAlign: TextAlign.start,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText1!
-                                      .copyWith(
-                                        color: Color(0XFF000000),
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      )),
+                              ),
+                            )
+                            .toList(),
+                      ),
                     ),
                   ],
-                ),
+                )),
               ),
               SizedBox(
                 height: 20,
@@ -500,7 +400,7 @@ class _AboutuspageState extends State<Aboutuspage> {
               ),
               // SizedBox(height: 16,),
               Text(
-                "OUR MANAGEMENT",
+                "${serviceViewModel.whoWeAreResponse.pageContent!.management!.title}",
                 textAlign: TextAlign.start,
                 style: Theme.of(context).textTheme.subtitle1!.copyWith(
                       color: Color(0XFF000000),
@@ -511,121 +411,118 @@ class _AboutuspageState extends State<Aboutuspage> {
               SizedBox(
                 height: 15,
               ),
-              Container(
-                padding: EdgeInsets.only(left: 16, right: 16),
-                child: Text(
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                        color: Color(0XFF373737),
-                        fontWeight: FontWeight.w600,
-                      ),
+              Padding(
+                padding: EdgeInsets.all(16),
+                child: HtmlWidget(
+                  "${serviceViewModel.whoWeAreResponse.pageContent!.management!.desc}",
+                  // textStyle: TextStyle(fontSize: 14),
                 ),
               ),
               SizedBox(
                 height: 16,
               ),
-              Container(
-                  height: 400,
-                  padding: EdgeInsets.all(16),
-                  child: Stack(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(top: 90, bottom: 0),
-                        child: Center(
-                          child: Container(
-                            //replace this Container with your Card
-                            // color: Color(0Xff3C5233),
-                            // height: 260.0,
-                            child: Image.asset(
-                              "image/Rectangle (1).png",
-                              fit: BoxFit.fill,
-                              width: 250,
-                              height: 510,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 0, bottom: 10, left: 60),
-                        child: Column(
-                          children: [
-                            Container(
-                              //replace this Container with your Card
-                              // color: Color(0Xff3C5233),
-                              // height: 260.0,
-                              child: Image.asset(
-                                "image/5.png",
-                                fit: BoxFit.fill,
-                                width: 200,
-                                height: 200,
+
+              Column(
+                children: serviceViewModel.whoWeAreResponse.pageContent!.management!.expertProfile!
+                    .map(
+                      (e) => Container(
+                          height: 400,
+                          padding: EdgeInsets.all(16),
+                          child: Stack(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(top: 90, bottom: 0),
+                                child: Center(
+                                  child: Container(
+                                    //replace this Container with your Card
+                                    // color: Color(0Xff3C5233),
+                                    // height: 260.0,
+                                    child: Image.asset(
+                                      "image/Rectangle (1).png",
+                                      fit: BoxFit.fill,
+                                      color: Color(0xffEAEEF2),
+                                      width: 250,
+                                      height: 510,
+                                    ),
+                                  ),
+                                ),
                               ),
-                            ),
-                            // SizedBox(height: 10,),
-                            Text(
-                              "SEEMA VOHRA",
-                              textAlign: TextAlign.end,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .subtitle1!
-                                  .copyWith(
-                                    color: Color(0XFF000000),
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                            ),
-                            SizedBox(
-                              height: 16,
-                            ),
-                            Text(
-                              "Senior Manager",
-                              textAlign: TextAlign.end,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText1!
-                                  .copyWith(
-                                    color: Color(0XFF000000),
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                            ),
-                            SizedBox(
-                              height: 16,
-                            ),
-                            Icon(
-                              Icons.mail_outline_rounded,
-                              color: Color(0XFF000000),
-                              size: 20,
-                            ),
-                            SizedBox(
-                              height: 16,
-                            ),
-                            Text(
-                              "seemavohra@astaguru.com",
-                              textAlign: TextAlign.end,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText1!
-                                  .copyWith(
-                                    color: Color(0XFF000000),
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  )),
+                              Padding(
+                                padding: EdgeInsets.only(top: 0, bottom: 10, left: 60),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      //replace this Container with your Card
+                                      // color: Color(0Xff3C5233),
+                                      // height: 260.0,
+                                      child: Image.network(
+                                        e.image!.mobile ?? "",
+                                        fit: BoxFit.fill,
+                                        width: 200,
+                                        height: 200,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      e!.name ?? "",
+                                      textAlign: TextAlign.end,
+                                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                            color: Color(0XFF000000),
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                    ),
+                                    SizedBox(
+                                      height: 16,
+                                    ),
+                                    Text(
+                                      e!.designation ?? "",
+                                      textAlign: TextAlign.end,
+                                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                            color: Color(0XFF000000),
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                    ),
+                                    SizedBox(
+                                      height: 16,
+                                    ),
+                                    Icon(
+                                      Icons.mail_outline_rounded,
+                                      color: Color(0XFF000000),
+                                      size: 20,
+                                    ),
+                                    SizedBox(
+                                      height: 16,
+                                    ),
+                                    Text(
+                                      e!.mail ?? "",
+                                      textAlign: TextAlign.end,
+                                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                            color: Color(0XFF000000),
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          )),
+                    )
+                    .toList(),
+              ),
+
               const SizedBox(
                 height: 16,
               ),
-              SizedBox(
-                  width: MediaQuery.of(context).size.width, child: Footer()),
+              SizedBox(width: MediaQuery.of(context).size.width, child: Footer()),
               Container(
                 color: Color(0xff1F2A52),
                 height: 30,
                 width: MediaQuery.of(context).size.width,
               ),
             ],
-          )),
+          ),
         ),
       ),
     );

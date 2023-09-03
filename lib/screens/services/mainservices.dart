@@ -25,9 +25,19 @@ class _ServiceAllState extends State<ServiceAll> {
   void initState() {
     // TODO: implement initState
 
-    serviceViewModel.getServices(widget.api);
+    serviceViewModel.getServices(widget.api).then((value) => {controller.jumpTo(0)});
+
     super.initState();
   }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    controller.dispose();
+    super.dispose();
+  }
+
+  ScrollController controller = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +45,7 @@ class _ServiceAllState extends State<ServiceAll> {
       appBar: NavBar(),
       // bottomNavigationBar: BottomNavigationBarUi(),
       body: SingleChildScrollView(
+        controller: controller,
         child: Observer(builder: (context) {
           return Container(
             width: MediaQuery.of(context).size.width,
@@ -127,27 +138,8 @@ class _ServiceAllState extends State<ServiceAll> {
                       Padding(
                         padding: EdgeInsets.all(16),
                         child: HtmlWidget(
-                          // the first parameter (`html`) is required
-
-                          // all other parameters are optional, a few notable params:
-
-                          // specify custom styling for an element
                           '${serviceViewModel.serviceResponse!.pageContent!.banner!.desc}',
-
-                          // render a custom widget
-
-                          // these callbacks are called when a complicated element is loading
-                          // or failed to render allowing the app to render progress indicator
-                          // and fallback widget
-
-                          // select the render mode for HTML body
-                          // by default, a simple `Column` is rendered
-                          // consider using `ListView` or `SliverList` for better performance
-
-                          // set the default styling for text
-                          textStyle: TextStyle(fontSize: 14),
-
-                          // turn on `webView` if you need IFRAME support (it's disabled by default)
+                          // textStyle: TextStyle(fontSize: 14),
                         ),
                       ),
                       const SizedBox(

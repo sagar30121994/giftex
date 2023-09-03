@@ -25,6 +25,22 @@ mixin _$ServiceViewModel on _ServiceViewModel, Store {
     });
   }
 
+  late final _$whoWeAreResponseAtom =
+      Atom(name: '_ServiceViewModel.whoWeAreResponse', context: context);
+
+  @override
+  WhoWeAreResponse get whoWeAreResponse {
+    _$whoWeAreResponseAtom.reportRead();
+    return super.whoWeAreResponse;
+  }
+
+  @override
+  set whoWeAreResponse(WhoWeAreResponse value) {
+    _$whoWeAreResponseAtom.reportWrite(value, super.whoWeAreResponse, () {
+      super.whoWeAreResponse = value;
+    });
+  }
+
   late final _$serviceResponseAtom =
       Atom(name: '_ServiceViewModel.serviceResponse', context: context);
 
@@ -41,11 +57,29 @@ mixin _$ServiceViewModel on _ServiceViewModel, Store {
     });
   }
 
+  late final _$careersResponseAtom =
+      Atom(name: '_ServiceViewModel.careersResponse', context: context);
+
+  @override
+  CareersResponse? get careersResponse {
+    _$careersResponseAtom.reportRead();
+    return super.careersResponse;
+  }
+
+  @override
+  set careersResponse(CareersResponse? value) {
+    _$careersResponseAtom.reportWrite(value, super.careersResponse, () {
+      super.careersResponse = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
 isloading: ${isloading},
-serviceResponse: ${serviceResponse}
+whoWeAreResponse: ${whoWeAreResponse},
+serviceResponse: ${serviceResponse},
+careersResponse: ${careersResponse}
     ''';
   }
 }
