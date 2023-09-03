@@ -70,8 +70,7 @@ abstract class _HomeViewModel with Store {
   Future<HttpResponse> getHomeUpcommingAuctionBaner() async {
     isLoadingForUpCommingAuction = true;
 
-    HttpResponse httpResponse =
-        await webCmsApiModelRepo!.getHomeUpcomingAuction();
+    HttpResponse httpResponse = await webCmsApiModelRepo!.getHomeUpcomingAuction();
 
     if (httpResponse.status == 200) {
       recordPriceLots = httpResponse.data;
@@ -83,8 +82,7 @@ abstract class _HomeViewModel with Store {
   Future<HttpResponse> getRecordPrizeLots() async {
     isLoadingForUpCommingAuction = true;
 
-    HttpResponse httpResponse =
-        await webCmsApiModelRepo!.gethomeRecordPriceLots();
+    HttpResponse httpResponse = await webCmsApiModelRepo!.gethomeRecordPriceLots();
 
     if (httpResponse.status == 200) {
       recordPriceLots = httpResponse.data;
@@ -108,8 +106,7 @@ abstract class _HomeViewModel with Store {
   Future<HttpResponse> gethomeRecordPriceLots() async {
     isLoadingForNews = true;
 
-    HttpResponse httpResponse =
-        await webCmsApiModelRepo!.gethomeRecordPriceLots();
+    HttpResponse httpResponse = await webCmsApiModelRepo!.gethomeRecordPriceLots();
 
     if (httpResponse.status == 200) {
       recordPriceLots = httpResponse.data;
@@ -170,8 +167,7 @@ abstract class _HomeViewModel with Store {
   Future<HttpResponse> getRecordpriceartwork() async {
     isloadinggetpriceartwork = true;
     getRecordPriceArtworkResponse = null;
-    HttpResponse httpResponse =
-        await webCmsApiModelRepo!.getRecordpriceartwork();
+    HttpResponse httpResponse = await webCmsApiModelRepo!.getCareers();
     if (httpResponse.status == 200) {
       getRecordPriceArtworkResponse = httpResponse.data;
     }
