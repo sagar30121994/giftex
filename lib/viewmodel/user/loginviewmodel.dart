@@ -246,6 +246,7 @@ abstract class _LoginViewModel with Store {
       // await localSharedPrefrence.setToken(loginResponse!.!);
       // await localSharedPrefrence.setUserId(loginResponse!.result!.userid!);
       await localSharedPrefrence.setCrmClinetId(signUpResponse!.clientID!);
+      // await localSharedPrefrence.setAuthKeyWeb(signUpResponse!.authkeyWeb!);
       //await localSharedPrefrence.setRole(loginResponse!.user!.role!);
     }
     isLoading = false;
@@ -276,6 +277,7 @@ abstract class _LoginViewModel with Store {
       await localSharedPrefrence.setUserId(loginResponse!.result!.userid!);
       await localSharedPrefrence.setLoginStatus(true);
       await localSharedPrefrence.setCrmClinetId(loginResponse!.result!.cRMClientID!);
+      await localSharedPrefrence.setAuthKeyWeb(loginResponse!.result!.authkeyWeb!);
 
       //await localSharedPrefrence.setRole(loginResponse!.user!.role!);
     }
