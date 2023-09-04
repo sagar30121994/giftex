@@ -46,6 +46,7 @@ class LiveAuction {
 
 class Lots {
   final String highlightsPDP = 'Lot/highlightsPDP';
+
   // final String lotbyid = 'Lot/getbyLotId';
   final String proxyBidAmount = 'GetProxyBidAmount';
   final String additionalcharges = 'AdditionalCharges';
@@ -138,11 +139,14 @@ class WebCMSApiModel {
   final String gettermsandconditions = 'GetPaymentGrid';
   final String getreachus = 'artistdata';
   final String getwhoweare = 'GetWhoWeAre';
+  final String getnews = 'GetPress';
+  final String getblogs = 'GetBlogs';
   final String getpress = 'getHashStr';
   final String getpressdetails = 'GetPaymentGrid';
   final String getcommoninfo = 'artistdata';
   final String getcareers = 'GetCareers';
-  final String getblogs = 'getHashStr';
+
+  // final String getblogs = 'getHashStr';
   final String getblogdetails = 'GetPaymentGrid';
   final String getourcollections = 'artistdata';
   final String getartmovement = 'InsertsubscribeForm';

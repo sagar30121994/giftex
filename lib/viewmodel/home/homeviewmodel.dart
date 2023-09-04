@@ -73,7 +73,7 @@ abstract class _HomeViewModel with Store {
     HttpResponse httpResponse = await webCmsApiModelRepo!.getHomeUpcomingAuction();
 
     if (httpResponse.status == 200) {
-      recordPriceLots = httpResponse.data;
+      homeBanerResponse = httpResponse.data;
     }
     isLoadingForUpCommingAuction = false;
     return httpResponse;

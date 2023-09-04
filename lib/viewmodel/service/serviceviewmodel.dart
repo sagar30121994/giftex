@@ -2,6 +2,8 @@ import 'package:giftex/data/local/client/prefs.dart';
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/data/network/models/responce/cmsweb/careersresponse.dart';
 import 'package:giftex/data/network/models/responce/cmsweb/whoweare.dart';
+import 'package:giftex/data/network/models/responce/news/blogsresponse.dart';
+import 'package:giftex/data/network/models/responce/news/newsreponse.dart';
 import 'package:giftex/data/network/models/responce/service/serviceresponse.dart';
 import 'package:giftex/data/network/repository/service/servicerepo.dart';
 import 'package:giftex/data/network/repository/webcmsapimodel/webcmsapimodelrepo.dart';
@@ -16,6 +18,7 @@ abstract class _ServiceViewModel with Store {
   WebCmsApiModelRepo webCmsApiModelRepo = WebCmsApiModelRepo();
 
   late LocalSharedPrefrence prefrence;
+
   _ServiceViewModel() {
     prefrence = LocalSharedPrefrence();
   }
@@ -31,6 +34,12 @@ abstract class _ServiceViewModel with Store {
 
   @observable
   CareersResponse? careersResponse;
+
+  @observable
+  PressResponse? pressResponse;
+
+  @observable
+  BlogsResponse? blogsResponse;
 
   Future<HttpResponse> getServices(String type) async {
     isloading = true;
@@ -63,6 +72,30 @@ abstract class _ServiceViewModel with Store {
 
     if (httpResponse.status == 200) {
       whoWeAreResponse = httpResponse.data;
+    }
+    isloading = false;
+    return httpResponse;
+  }
+
+  Future<HttpResponse> getNews() async {
+    isloading = true;
+
+    HttpResponse httpResponse = await webCmsApiModelRepo.getNews();
+
+    if (httpResponse.status == 200) {
+      pressResponse = httpResponse.data;
+    }
+    isloading = false;
+    return httpResponse;
+  }
+
+  Future<HttpResponse> getBlogs() async {
+    isloading = true;
+
+    HttpResponse httpResponse = await webCmsApiModelRepo.getBlogs();
+
+    if (httpResponse.status == 200) {
+      blogsResponse = httpResponse.data;
     }
     isloading = false;
     return httpResponse;

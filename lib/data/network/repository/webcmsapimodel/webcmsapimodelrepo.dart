@@ -8,7 +8,10 @@ import 'package:giftex/data/network/models/responce/home/GetSellDetailsResponse.
 import 'package:giftex/data/network/models/responce/home/getDepartmentsResponse.dart';
 import 'package:giftex/data/network/models/responce/home/homeresponse.dart';
 import 'package:giftex/data/network/models/responce/home/newsblogsvideoresponse.dart';
+import 'package:giftex/data/network/models/responce/home/recordpricelots.dart';
 import 'package:giftex/data/network/models/responce/lot/upcominglotsresponse.dart';
+import 'package:giftex/data/network/models/responce/news/blogsresponse.dart';
+import 'package:giftex/data/network/models/responce/news/newsreponse.dart';
 
 import '../../base/base.dart' as BaseUrl;
 import '../../base/endpoints.dart' as endPoints;
@@ -274,6 +277,72 @@ class WebCmsApiModelRepo {
     return httpResponse;
   }
 
+  Future<HttpResponse> getNews() async {
+    HttpResponse httpResponse = HttpResponse();
+    // String userlogin = json.encode(LoginReqestModel);
+    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    await httpClient!.post(BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().getnews, body: {
+      "authkey_web": "${localSharedPrefrence!.authkey ?? ''}",
+      "authkey_mobile": "",
+      "userid": "${localSharedPrefrence!.userId ?? ''}",
+      "CRMClientID": "${localSharedPrefrence!.crmId ?? ''}",
+    }).then((responce) async {
+      print(responce);
+
+      if (responce.statusCode == 200) {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = 'Successful';
+        httpResponse.data = PressResponse.fromJson(responce.data);
+      } else {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = responce.data['message'];
+        httpResponse.data = null;
+      }
+      return httpResponse;
+    }).catchError((err) {
+      print(err);
+      httpResponse.status = 400;
+      httpResponse.message = err.toString();
+      httpResponse.data = err.toString();
+      return httpResponse;
+    });
+
+    return httpResponse;
+  }
+
+  Future<HttpResponse> getBlogs() async {
+    HttpResponse httpResponse = HttpResponse();
+    // String userlogin = json.encode(LoginReqestModel);
+    // httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    await httpClient!.post(BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().getblogs, body: {
+      "authkey_web": "${localSharedPrefrence!.authkey ?? ''}",
+      "authkey_mobile": "",
+      "userid": "${localSharedPrefrence!.userId ?? ''}",
+      "CRMClientID": "${localSharedPrefrence!.crmId ?? ''}",
+    }).then((responce) async {
+      print(responce);
+
+      if (responce.statusCode == 200) {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = 'Successful';
+        httpResponse.data = BlogsResponse.fromJson(responce.data);
+      } else {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = responce.data['message'];
+        httpResponse.data = null;
+      }
+      return httpResponse;
+    }).catchError((err) {
+      print(err);
+      httpResponse.status = 400;
+      httpResponse.message = err.toString();
+      httpResponse.data = err.toString();
+      return httpResponse;
+    });
+
+    return httpResponse;
+  }
+
   Future<HttpResponse> getPress() async {
     HttpResponse httpResponse = HttpResponse();
     String userlogin = json.encode(LoginReqestModel);
@@ -380,36 +449,6 @@ class WebCmsApiModelRepo {
         httpResponse.status = responce.statusCode;
         httpResponse.message = 'Successful';
         httpResponse.data = CareersResponse.fromJson(responce.data);
-      } else {
-        httpResponse.status = responce.statusCode;
-        httpResponse.message = responce.data['message'];
-        httpResponse.data = null;
-      }
-      return httpResponse;
-    }).catchError((err) {
-      print(err);
-      httpResponse.status = 400;
-      httpResponse.message = err.toString();
-      httpResponse.data = err.toString();
-      return httpResponse;
-    });
-
-    return httpResponse;
-  }
-
-  Future<HttpResponse> getBlogs() async {
-    HttpResponse httpResponse = HttpResponse();
-    String userlogin = json.encode(LoginReqestModel);
-    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
-    await httpClient!
-        .post(BaseUrl.notificationbaseUrl + endPoints.WebCMSApiModel().getblogs, body: userlogin)
-        .then((responce) async {
-      print(responce);
-
-      if (responce.statusCode == 200) {
-        httpResponse.status = responce.statusCode;
-        httpResponse.message = 'Successful';
-        // httpResponse.data = LoginResponse.fromJson(responce.data);
       } else {
         httpResponse.status = responce.statusCode;
         httpResponse.message = responce.data['message'];
@@ -775,7 +814,7 @@ class WebCmsApiModelRepo {
     String userid = localSharedPrefrence!.getUserId();
     String authKey = localSharedPrefrence!.getAuthKeyWeb();
     String crmClientId = localSharedPrefrence!.getCrmClinetId();
-    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    // httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
     await httpClient!.post(BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().homeupcomingauction, body: {
       "userId": userid,
       "authkey_mobile": "",
@@ -787,7 +826,7 @@ class WebCmsApiModelRepo {
       if (responce.statusCode == 200) {
         httpResponse.status = responce.statusCode;
         httpResponse.message = 'Successful';
-        // httpResponse.data = HomeUpcommingAuctionResponse.fromJson(responce.data);
+        httpResponse.data = RecordPriceLots.fromJson(responce.data);
       } else {
         httpResponse.status = responce.statusCode;
         httpResponse.message = responce.data['message'];
@@ -1033,7 +1072,7 @@ class WebCmsApiModelRepo {
       if (responce.statusCode == 200) {
         httpResponse.status = responce.statusCode;
         httpResponse.message = 'Successful';
-        httpResponse.data = UpComingLotsResponse.fromJson(responce.data);
+        httpResponse.data = RecordPriceLots.fromJson(responce.data);
       } else {
         httpResponse.status = responce.statusCode;
         httpResponse.message = responce.data['message'];
