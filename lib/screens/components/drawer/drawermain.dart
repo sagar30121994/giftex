@@ -49,7 +49,7 @@ class _MainDrawerState extends State<MainDrawer> {
             ListTile(
               title: const Text('About Giftex'),
               onTap: () {
-                _onItemTapped(19);
+                _onItemTapped(29);
                 Navigator.of(context).pop();
                 // Navigator.pushReplacement(context,
                 //     MaterialPageRoute(builder: (context) => Aboutuspage()));
@@ -63,7 +63,7 @@ class _MainDrawerState extends State<MainDrawer> {
             ListTile(
               title: const Text('Our Collectors'),
               onTap: () {
-                // _onItemTapped(19);
+                _onItemTapped(32);
                 Navigator.of(context).pop();
                 // Update the state of the app.
                 // ...

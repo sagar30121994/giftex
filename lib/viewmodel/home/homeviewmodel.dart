@@ -1,6 +1,6 @@
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
+import 'package:giftex/data/network/models/responce/home/GetSellDetailsResponse.dart';
 import 'package:giftex/data/network/models/responce/home/getDepartmentsResponse.dart';
-import 'package:giftex/data/network/models/responce/home/getSellDetailsResponse.dart';
 import 'package:giftex/data/network/models/responce/home/homeresponse.dart';
 import 'package:giftex/data/network/models/responce/home/newsblogsvideoresponse.dart';
 import 'package:giftex/data/network/models/responce/home/recordpricelots.dart';
@@ -119,6 +119,7 @@ abstract class _HomeViewModel with Store {
   GetBuyDetailsResponse? getBuyDetailsResponse = GetBuyDetailsResponse();
   @observable
   bool isloadingbuyDetails = false;
+
   Future<HttpResponse> getBuyDetails() async {
     isloadingbuyDetails = true;
     getBuyDetailsResponse = null;
@@ -134,6 +135,7 @@ abstract class _HomeViewModel with Store {
   GetSellDetailsResponse? getSellDetailsResponse = GetSellDetailsResponse();
   @observable
   bool isloadingsellDetails = false;
+
   Future<HttpResponse> getSellDetails() async {
     isloadingsellDetails = true;
     getSellDetailsResponse = null;
@@ -149,6 +151,7 @@ abstract class _HomeViewModel with Store {
   GetDepartmentsResponse? getDepartmentsResponse = GetDepartmentsResponse();
   @observable
   bool isloadingdepartments = false;
+
   Future<HttpResponse> getDepartments() async {
     isloadingdepartments = true;
     getDepartmentsResponse = null;
@@ -164,10 +167,11 @@ abstract class _HomeViewModel with Store {
   UpComingLotsResponse? getRecordPriceArtworkResponse = UpComingLotsResponse();
   @observable
   bool isloadinggetpriceartwork = false;
+
   Future<HttpResponse> getRecordpriceartwork() async {
     isloadinggetpriceartwork = true;
     getRecordPriceArtworkResponse = null;
-    HttpResponse httpResponse = await webCmsApiModelRepo!.gethomeRecordPriceLots();
+    HttpResponse httpResponse = await webCmsApiModelRepo!.recordPriceLots();
     if (httpResponse.status == 200) {
       getRecordPriceArtworkResponse = httpResponse.data;
     }

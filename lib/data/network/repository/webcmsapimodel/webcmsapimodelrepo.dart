@@ -2,13 +2,13 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:giftex/data/local/client/prefs.dart';
+import 'package:giftex/data/network/models/responce/cmsweb/careersresponse.dart';
 import 'package:giftex/data/network/models/responce/cmsweb/whoweare.dart';
 import 'package:giftex/data/network/models/responce/home/GetSellDetailsResponse.dart';
 import 'package:giftex/data/network/models/responce/home/getDepartmentsResponse.dart';
 import 'package:giftex/data/network/models/responce/home/homeresponse.dart';
 import 'package:giftex/data/network/models/responce/home/newsblogsvideoresponse.dart';
-import 'package:giftex/data/network/models/responce/home/recordpricelots.dart';
-import 'package:giftex/data/network/models/responce/home/upcommingauctionresponse.dart';
+import 'package:giftex/data/network/models/responce/lot/upcominglotsresponse.dart';
 
 import '../../base/base.dart' as BaseUrl;
 import '../../base/endpoints.dart' as endPoints;
@@ -368,7 +368,7 @@ class WebCmsApiModelRepo {
     HttpResponse httpResponse = HttpResponse();
     // String userlogin = json.encode(LoginReqestModel);/
     // httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
-    await httpClient!.post(BaseUrl.notificationbaseUrl + endPoints.WebCMSApiModel().getcareers, body: {
+    await httpClient!.post(BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().getcareers, body: {
       "authkey_web": "${localSharedPrefrence!.authkey ?? ''}",
       "authkey_mobile": "",
       "userid": "${localSharedPrefrence!.userId ?? ''}",
@@ -379,7 +379,7 @@ class WebCmsApiModelRepo {
       if (responce.statusCode == 200) {
         httpResponse.status = responce.statusCode;
         httpResponse.message = 'Successful';
-        // httpResponse.data = LoginResponse.fromJson(responce.data);
+        httpResponse.data = CareersResponse.fromJson(responce.data);
       } else {
         httpResponse.status = responce.statusCode;
         httpResponse.message = responce.data['message'];
@@ -787,7 +787,7 @@ class WebCmsApiModelRepo {
       if (responce.statusCode == 200) {
         httpResponse.status = responce.statusCode;
         httpResponse.message = 'Successful';
-        httpResponse.data = HomeUpcommingAuctionResponse.fromJson(responce.data);
+        // httpResponse.data = HomeUpcommingAuctionResponse.fromJson(responce.data);
       } else {
         httpResponse.status = responce.statusCode;
         httpResponse.message = responce.data['message'];
@@ -1033,7 +1033,7 @@ class WebCmsApiModelRepo {
       if (responce.statusCode == 200) {
         httpResponse.status = responce.statusCode;
         httpResponse.message = 'Successful';
-        httpResponse.data = RecordPriceLots.fromJson(responce.data);
+        httpResponse.data = UpComingLotsResponse.fromJson(responce.data);
       } else {
         httpResponse.status = responce.statusCode;
         httpResponse.message = responce.data['message'];
@@ -1053,16 +1053,24 @@ class WebCmsApiModelRepo {
 
   Future<HttpResponse> recordPriceLots() async {
     HttpResponse httpResponse = HttpResponse();
-    String userlogin = json.encode(LoginReqestModel);
-    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
-    await httpClient!
-        .post(BaseUrl.notificationbaseUrl + endPoints.WebCMSApiModel().recordpricelots, body: userlogin)
-        .then((responce) async {
+    String userid = localSharedPrefrence!.getUserId();
+    String authKey = localSharedPrefrence!.getAuthKeyWeb();
+    String crmClientId = localSharedPrefrence!.getCrmClinetId();
+
+    // String userlogin = json.encode(LoginReqestModel);
+    // httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    await httpClient!.post(BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().recordpricelots, body: {
+      "userId": userid,
+      "authkey_mobile": "",
+      "authkey_web": authKey,
+      "CRMClientID": crmClientId
+    }).then((responce) async {
       print(responce);
 
       if (responce.statusCode == 200) {
         httpResponse.status = responce.statusCode;
         httpResponse.message = 'Successful';
+        httpResponse.data = UpComingLotsResponse.fromJson(responce.data);
         // httpResponse.data = LoginResponse.fromJson(responce.data);
       } else {
         httpResponse.status = responce.statusCode;
