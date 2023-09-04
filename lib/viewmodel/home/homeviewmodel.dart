@@ -167,7 +167,7 @@ abstract class _HomeViewModel with Store {
   Future<HttpResponse> getRecordpriceartwork() async {
     isloadinggetpriceartwork = true;
     getRecordPriceArtworkResponse = null;
-    HttpResponse httpResponse = await webCmsApiModelRepo!.getCareers();
+    HttpResponse httpResponse = await webCmsApiModelRepo!.gethomeRecordPriceLots();
     if (httpResponse.status == 200) {
       getRecordPriceArtworkResponse = httpResponse.data;
     }

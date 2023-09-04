@@ -124,13 +124,9 @@ class WebCmsApiModelRepo {
   Future<HttpResponse> getServiceDetails() async {
     HttpResponse httpResponse = HttpResponse();
     String userlogin = json.encode(LoginReqestModel);
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
     await httpClient!
-        .post(
-            BaseUrl.notificationbaseUrl +
-                endPoints.WebCMSApiModel().getservisedetails,
-            body: userlogin)
+        .post(BaseUrl.notificationbaseUrl + endPoints.WebCMSApiModel().getservisedetails, body: userlogin)
         .then((responce) async {
       print(responce);
 
@@ -158,13 +154,9 @@ class WebCmsApiModelRepo {
   Future<HttpResponse> getFaqDetails() async {
     HttpResponse httpResponse = HttpResponse();
     String userlogin = json.encode(LoginReqestModel);
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
     await httpClient!
-        .post(
-            BaseUrl.notificationbaseUrl +
-                endPoints.WebCMSApiModel().getfaqdetails,
-            body: userlogin)
+        .post(BaseUrl.notificationbaseUrl + endPoints.WebCMSApiModel().getfaqdetails, body: userlogin)
         .then((responce) async {
       print(responce);
 
@@ -192,13 +184,9 @@ class WebCmsApiModelRepo {
   Future<HttpResponse> getTermsCondition() async {
     HttpResponse httpResponse = HttpResponse();
     String userlogin = json.encode(LoginReqestModel);
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
     await httpClient!
-        .post(
-            BaseUrl.notificationbaseUrl +
-                endPoints.WebCMSApiModel().gettermsandconditions,
-            body: userlogin)
+        .post(BaseUrl.notificationbaseUrl + endPoints.WebCMSApiModel().gettermsandconditions, body: userlogin)
         .then((responce) async {
       print(responce);
 
@@ -226,12 +214,9 @@ class WebCmsApiModelRepo {
   Future<HttpResponse> getReachUS() async {
     HttpResponse httpResponse = HttpResponse();
     String userlogin = json.encode(LoginReqestModel);
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
     await httpClient!
-        .post(
-            BaseUrl.notificationbaseUrl + endPoints.WebCMSApiModel().getreachus,
-            body: userlogin)
+        .post(BaseUrl.notificationbaseUrl + endPoints.WebCMSApiModel().getreachus, body: userlogin)
         .then((responce) async {
       print(responce);
 
@@ -292,11 +277,9 @@ class WebCmsApiModelRepo {
   Future<HttpResponse> getPress() async {
     HttpResponse httpResponse = HttpResponse();
     String userlogin = json.encode(LoginReqestModel);
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
     await httpClient!
-        .post(BaseUrl.notificationbaseUrl + endPoints.WebCMSApiModel().getpress,
-            body: userlogin)
+        .post(BaseUrl.notificationbaseUrl + endPoints.WebCMSApiModel().getpress, body: userlogin)
         .then((responce) async {
       print(responce);
 
@@ -324,13 +307,9 @@ class WebCmsApiModelRepo {
   Future<HttpResponse> getPressDetails() async {
     HttpResponse httpResponse = HttpResponse();
     String userlogin = json.encode(LoginReqestModel);
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
     await httpClient!
-        .post(
-            BaseUrl.notificationbaseUrl +
-                endPoints.WebCMSApiModel().getpressdetails,
-            body: userlogin)
+        .post(BaseUrl.notificationbaseUrl + endPoints.WebCMSApiModel().getpressdetails, body: userlogin)
         .then((responce) async {
       print(responce);
 
@@ -358,13 +337,9 @@ class WebCmsApiModelRepo {
   Future<HttpResponse> getCommonInfo() async {
     HttpResponse httpResponse = HttpResponse();
     String userlogin = json.encode(LoginReqestModel);
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
     await httpClient!
-        .post(
-            BaseUrl.notificationbaseUrl +
-                endPoints.WebCMSApiModel().getcommoninfo,
-            body: userlogin)
+        .post(BaseUrl.notificationbaseUrl + endPoints.WebCMSApiModel().getcommoninfo, body: userlogin)
         .then((responce) async {
       print(responce);
 
@@ -391,14 +366,14 @@ class WebCmsApiModelRepo {
 
   Future<HttpResponse> getCareers() async {
     HttpResponse httpResponse = HttpResponse();
-    String userlogin = json.encode(LoginReqestModel);
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.formUrlEncodedContentType);
-    await httpClient!
-        .post(
-            BaseUrl.notificationbaseUrl + endPoints.WebCMSApiModel().getcareers,
-            body: userlogin)
-        .then((responce) async {
+    // String userlogin = json.encode(LoginReqestModel);/
+    // httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    await httpClient!.post(BaseUrl.notificationbaseUrl + endPoints.WebCMSApiModel().getcareers, body: {
+      "authkey_web": "${localSharedPrefrence!.authkey ?? ''}",
+      "authkey_mobile": "",
+      "userid": "${localSharedPrefrence!.userId ?? ''}",
+      "CRMClientID": "${localSharedPrefrence!.crmId ?? ''}",
+    }).then((responce) async {
       print(responce);
 
       if (responce.statusCode == 200) {
@@ -425,11 +400,9 @@ class WebCmsApiModelRepo {
   Future<HttpResponse> getBlogs() async {
     HttpResponse httpResponse = HttpResponse();
     String userlogin = json.encode(LoginReqestModel);
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
     await httpClient!
-        .post(BaseUrl.notificationbaseUrl + endPoints.WebCMSApiModel().getblogs,
-            body: userlogin)
+        .post(BaseUrl.notificationbaseUrl + endPoints.WebCMSApiModel().getblogs, body: userlogin)
         .then((responce) async {
       print(responce);
 
@@ -617,13 +590,9 @@ class WebCmsApiModelRepo {
   Future<HttpResponse> getArtistListing() async {
     HttpResponse httpResponse = HttpResponse();
     String userlogin = json.encode(LoginReqestModel);
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
     await httpClient!
-        .post(
-            BaseUrl.notificationbaseUrl +
-                endPoints.WebCMSApiModel().getartistlisting,
-            body: userlogin)
+        .post(BaseUrl.notificationbaseUrl + endPoints.WebCMSApiModel().getartistlisting, body: userlogin)
         .then((responce) async {
       print(responce);
 
@@ -711,13 +680,9 @@ class WebCmsApiModelRepo {
   Future<HttpResponse> getNewsDetails() async {
     HttpResponse httpResponse = HttpResponse();
     String userlogin = json.encode(LoginReqestModel);
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
     await httpClient!
-        .post(
-            BaseUrl.notificationbaseUrl +
-                endPoints.WebCMSApiModel().getnewsdetails,
-            body: userlogin)
+        .post(BaseUrl.notificationbaseUrl + endPoints.WebCMSApiModel().getnewsdetails, body: userlogin)
         .then((responce) async {
       print(responce);
 
