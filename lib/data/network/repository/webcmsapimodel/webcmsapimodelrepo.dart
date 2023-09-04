@@ -556,14 +556,12 @@ class WebCmsApiModelRepo {
     String authKey = localSharedPrefrence!.getAuthKeyWeb();
     String crmClientId = localSharedPrefrence!.getCrmClinetId();
 
-    await httpClient!.post(
-        BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().getnewsvideos,
-        body: {
-          "userId": userid,
-          "authkey_mobile": "",
-          "authkey_web": authKey,
-          "CRMClientID": crmClientId
-        }).then((responce) async {
+    await httpClient!.post(BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().getnewsvideos, body: {
+      "userId": userid,
+      "authkey_mobile": "",
+      "authkey_web": authKey,
+      "CRMClientID": crmClientId
+    }).then((responce) async {
       print(responce);
 
       if (responce.statusCode == 200) {
@@ -743,14 +741,12 @@ class WebCmsApiModelRepo {
     String authKey = localSharedPrefrence!.getAuthKeyWeb();
     String crmClientId = localSharedPrefrence!.getCrmClinetId();
 
-    await httpClient!.post(
-        BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().homebanner,
-        body: {
-          "userId": userid,
-          "authkey_mobile": "",
-          "authkey_web": authKey,
-          "CRMClientID": crmClientId
-        }).then((responce) async {
+    await httpClient!.post(BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().homebanner, body: {
+      "userId": userid,
+      "authkey_mobile": "",
+      "authkey_web": authKey,
+      "CRMClientID": crmClientId
+    }).then((responce) async {
       print(responce);
 
       if (responce.statusCode == 200) {
@@ -842,13 +838,9 @@ class WebCmsApiModelRepo {
   Future<HttpResponse> HomeServices() async {
     HttpResponse httpResponse = HttpResponse();
     String userlogin = json.encode(LoginReqestModel);
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
     await httpClient!
-        .post(
-            BaseUrl.notificationbaseUrl +
-                endPoints.WebCMSApiModel().homeourservice,
-            body: userlogin)
+        .post(BaseUrl.notificationbaseUrl + endPoints.WebCMSApiModel().homeourservice, body: userlogin)
         .then((responce) async {
       print(responce);
 
@@ -906,13 +898,9 @@ class WebCmsApiModelRepo {
   Future<HttpResponse> HomeCategoryOfMonth() async {
     HttpResponse httpResponse = HttpResponse();
     String userlogin = json.encode(LoginReqestModel);
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
     await httpClient!
-        .post(
-            BaseUrl.notificationbaseUrl +
-                endPoints.WebCMSApiModel().homecategoryofthemonth,
-            body: userlogin)
+        .post(BaseUrl.notificationbaseUrl + endPoints.WebCMSApiModel().homecategoryofthemonth, body: userlogin)
         .then((responce) async {
       print(responce);
 
@@ -1033,16 +1021,13 @@ class WebCmsApiModelRepo {
     String authKey = localSharedPrefrence!.getAuthKeyWeb();
     String crmClientId = localSharedPrefrence!.getCrmClinetId();
     // String userlogin=json.encode(LoginReqestModel);
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.jsonContentType);
-    await httpClient!.post(
-        BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().homerecordpricelot,
-        body: {
-          "userId": userid,
-          "authkey_mobile": "",
-          "authkey_web": authKey,
-          "CRMClientID": crmClientId
-        }).then((responce) async {
+    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
+    await httpClient!.post(BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().homerecordpricelot, body: {
+      "userId": userid,
+      "authkey_mobile": "",
+      "authkey_web": authKey,
+      "CRMClientID": crmClientId
+    }).then((responce) async {
       print(responce);
 
       if (responce.statusCode == 200) {
@@ -1098,16 +1083,13 @@ class WebCmsApiModelRepo {
 
   Future<HttpResponse> getDepartments() async {
     HttpResponse httpResponse = HttpResponse();
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.formUrlEncodedContentType);
-    await httpClient!.post(
-        BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().GetDepartments,
-        body: {
-          "authkey_web": "${localSharedPrefrence!.authkey ?? ''}",
-          "authkey_mobile": "",
-          "userid": "${localSharedPrefrence!.userId ?? ''}",
-          "CRMClientID": "${localSharedPrefrence!.crmId ?? ''}",
-        }).then((responce) async {
+    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    await httpClient!.post(BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().GetDepartments, body: {
+      "authkey_web": "${localSharedPrefrence!.authkey ?? ''}",
+      "authkey_mobile": "",
+      "userid": "${localSharedPrefrence!.userId ?? ''}",
+      "CRMClientID": "${localSharedPrefrence!.crmId ?? ''}",
+    }).then((responce) async {
       print(responce);
 
       if (responce.statusCode == 200) {
@@ -1135,13 +1117,9 @@ class WebCmsApiModelRepo {
   Future<HttpResponse> getDepartmentsDetails() async {
     HttpResponse httpResponse = HttpResponse();
     String userlogin = json.encode(LoginReqestModel);
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
     await httpClient!
-        .post(
-            BaseUrl.notificationbaseUrl +
-                endPoints.WebCMSApiModel().getdepartmentdetails,
-            body: userlogin)
+        .post(BaseUrl.notificationbaseUrl + endPoints.WebCMSApiModel().getdepartmentdetails, body: userlogin)
         .then((responce) async {
       print(responce);
 
