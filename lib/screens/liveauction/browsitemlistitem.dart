@@ -1527,9 +1527,16 @@ class _BrowseItemListItemState extends State<BrowseItemListItem>
                           InkWell(
                             onTap: () {
                               if (preference!.getLoginStatus()) {
-                                ((widget.lots.isLiked ?? "false") == "true"
-                                    ? "false"
-                                    : "true");
+                                // ((widget.lots.isLiked ?? "false") == "true"
+                                //     ? "false"
+                                //     : "true");
+                                (widget.lots.isLiked ?? "false") == "true"
+                                    ? Icons.favorite
+                                    : Icons.favorite_border;
+                                color:
+                                (widget.lots.isLiked ?? "false") == "true"
+                                    ? Colors.pink
+                                    : Colors.grey;
                               } else {
                                 WidgetsBinding.instance
                                     ?.addPostFrameCallback((_) {
