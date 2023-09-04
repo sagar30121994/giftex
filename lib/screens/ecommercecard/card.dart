@@ -11,6 +11,7 @@ enum AddressLoc { abc, ab, ac }
 class _CardpageState extends State<Cardpage> {
   String shippingType = "CONTACT INFORMATION";
   AddressLoc _loc = AddressLoc.abc;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -61,9 +62,7 @@ class _CardpageState extends State<Cardpage> {
                         color: Colors.white.withOpacity(0.0),
 
                         //This is for bottom border that is needed
-                        border: Border(
-                            bottom:
-                                BorderSide(color: Color(0xffDFDFDF), width: 2)),
+                        border: Border(bottom: BorderSide(color: Color(0xffDFDFDF), width: 2)),
                       ),
                       child: TabBar(
                         onTap: (index) {
@@ -82,22 +81,18 @@ class _CardpageState extends State<Cardpage> {
                         },
                         isScrollable: true,
                         indicator: UnderlineTabIndicator(
-                          borderSide: BorderSide(
-                              color: Theme.of(context).colorScheme.primary,
-                              width: 2.0),
+                          borderSide: BorderSide(color: Theme.of(context).colorScheme.primary, width: 2.0),
                         ),
                         padding: EdgeInsets.all(0),
                         labelPadding: EdgeInsets.all(10),
-                        unselectedLabelColor:
-                            Color(0xff2D2D2D).withOpacity(0.59),
+                        unselectedLabelColor: Color(0xff2D2D2D).withOpacity(0.59),
                         indicatorColor: Theme.of(context).colorScheme.primary,
                         labelColor: Theme.of(context).colorScheme.primary,
                         // unselectedLabelStyle: ,
-                        labelStyle:
-                            Theme.of(context).textTheme.bodyText1!.copyWith(
-                                  color: Color(0xff2D2D2D),
-                                  fontWeight: FontWeight.w400,
-                                ),
+                        labelStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
+                              color: Color(0xff2D2D2D),
+                              fontWeight: FontWeight.w400,
+                            ),
                         tabs: [
                           Tab(text: "CONTACT INFORMATION"),
                           Tab(text: "SHIPPING INFO"),
@@ -119,10 +114,7 @@ class _CardpageState extends State<Cardpage> {
                                 Text(
                                   "Personal Details",
                                   textAlign: TextAlign.start,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText1!
-                                      .copyWith(
+                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w500,
                                       ),
@@ -151,10 +143,7 @@ class _CardpageState extends State<Cardpage> {
                                       Text(
                                         "Aryan Raj Kumar",
                                         textAlign: TextAlign.start,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .subtitle1!
-                                            .copyWith(
+                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                               color: Colors.black,
                                               fontWeight: FontWeight.w600,
                                             ),
@@ -165,10 +154,7 @@ class _CardpageState extends State<Cardpage> {
                                       Text(
                                         "+91 9645674323",
                                         textAlign: TextAlign.start,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .subtitle1!
-                                            .copyWith(
+                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                               color: Colors.black,
                                               fontWeight: FontWeight.w400,
                                             ),
@@ -178,8 +164,7 @@ class _CardpageState extends State<Cardpage> {
                                   Spacer(),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Icon(
                                         Icons.edit_outlined,
@@ -207,10 +192,7 @@ class _CardpageState extends State<Cardpage> {
                                 Text(
                                   "Return to Shop",
                                   textAlign: TextAlign.start,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .subtitle1!
-                                      .copyWith(
+                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                         color: Color(0xff788995),
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -230,28 +212,18 @@ class _CardpageState extends State<Cardpage> {
                                             Color(0xffE74B52),
                                             Color(0xffE74B52),
                                           ]),
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
+                                          borderRadius: BorderRadius.circular(20)),
                                       child: Center(
                                         child: Padding(
-                                          padding: EdgeInsets.only(
-                                              right: 8.0,
-                                              left: 8,
-                                              top: 12,
-                                              bottom: 12),
+                                          padding: EdgeInsets.only(right: 8.0, left: 8, top: 12, bottom: 12),
                                           child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
                                               Text(
                                                 'Next',
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .bodyText1!
-                                                    .copyWith(
+                                                style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                       color: Color(0XFFFFFFFF),
-                                                      fontWeight:
-                                                          FontWeight.w600,
+                                                      fontWeight: FontWeight.w600,
                                                     ),
                                               ),
                                               SizedBox(
@@ -277,8 +249,7 @@ class _CardpageState extends State<Cardpage> {
                               height: 670,
                               width: MediaQuery.of(context).size.width,
                               padding: EdgeInsets.all(16),
-                              decoration:
-                                  BoxDecoration(color: Color(0xffEAEEF2)),
+                              decoration: BoxDecoration(color: Color(0xffEAEEF2)),
                               child: Column(
                                 children: [
                                   Row(
@@ -286,10 +257,7 @@ class _CardpageState extends State<Cardpage> {
                                       Text(
                                         "Shopping Cart",
                                         textAlign: TextAlign.start,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .subtitle1!
-                                            .copyWith(
+                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                               color: Colors.black,
                                               fontWeight: FontWeight.w500,
                                             ),
@@ -301,8 +269,7 @@ class _CardpageState extends State<Cardpage> {
                                   ),
                                   Image.asset(
                                     "image/Line 45.png",
-                                    width:
-                                        MediaQuery.of(context).size.width * .8,
+                                    width: MediaQuery.of(context).size.width * .8,
                                     fit: BoxFit.cover,
                                   ),
                                   SizedBox(
@@ -310,8 +277,7 @@ class _CardpageState extends State<Cardpage> {
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Image.asset(
                                         "image/Bitmap (9).png",
@@ -320,18 +286,13 @@ class _CardpageState extends State<Cardpage> {
                                         width: 10,
                                       ),
                                       Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             "JAMINI ROY",
                                             textAlign: TextAlign.start,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .subtitle1!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.w600,
                                                 ),
@@ -342,10 +303,7 @@ class _CardpageState extends State<Cardpage> {
                                           Text(
                                             "Mother & Child",
                                             textAlign: TextAlign.start,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                   color: Color(0xff747474),
                                                   fontWeight: FontWeight.w400,
                                                 ),
@@ -356,10 +314,7 @@ class _CardpageState extends State<Cardpage> {
                                           Text(
                                             "₹1000",
                                             textAlign: TextAlign.start,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                   color: Color(0xff788995),
                                                   fontWeight: FontWeight.w400,
                                                 ),
@@ -371,18 +326,13 @@ class _CardpageState extends State<Cardpage> {
                                       ),
                                       Spacer(),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             "Remove",
                                             textAlign: TextAlign.start,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                   color: Color(0xffF68C75),
                                                   fontWeight: FontWeight.w400,
                                                 ),
@@ -393,10 +343,8 @@ class _CardpageState extends State<Cardpage> {
                                         width: 5,
                                       ),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Image.asset("image/Line 44.png"),
                                         ],
@@ -405,10 +353,8 @@ class _CardpageState extends State<Cardpage> {
                                         width: 5,
                                       ),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Image.asset("image/Shape (15).png"),
                                         ],
@@ -420,8 +366,7 @@ class _CardpageState extends State<Cardpage> {
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Image.asset(
                                         "image/Bitmap (9).png",
@@ -430,18 +375,13 @@ class _CardpageState extends State<Cardpage> {
                                         width: 10,
                                       ),
                                       Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             "MF. HUSSAIN",
                                             textAlign: TextAlign.start,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .subtitle1!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.w600,
                                                 ),
@@ -452,10 +392,7 @@ class _CardpageState extends State<Cardpage> {
                                           Text(
                                             "Mother & Child",
                                             textAlign: TextAlign.start,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                   color: Color(0xff747474),
                                                   fontWeight: FontWeight.w400,
                                                 ),
@@ -466,10 +403,7 @@ class _CardpageState extends State<Cardpage> {
                                           Text(
                                             "₹1000",
                                             textAlign: TextAlign.start,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                   color: Color(0xff788995),
                                                   fontWeight: FontWeight.w400,
                                                 ),
@@ -481,18 +415,13 @@ class _CardpageState extends State<Cardpage> {
                                       ),
                                       Spacer(),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             "Remove",
                                             textAlign: TextAlign.start,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                   color: Color(0xffF68C75),
                                                   fontWeight: FontWeight.w400,
                                                 ),
@@ -503,10 +432,8 @@ class _CardpageState extends State<Cardpage> {
                                         width: 5,
                                       ),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Image.asset("image/Line 44.png"),
                                         ],
@@ -515,10 +442,8 @@ class _CardpageState extends State<Cardpage> {
                                         width: 5,
                                       ),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Image.asset("image/Shape (15).png"),
                                         ],
@@ -532,8 +457,7 @@ class _CardpageState extends State<Cardpage> {
                                     padding: EdgeInsets.all(16),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(16),
-                                      border:
-                                          Border.all(color: Color(0xff000000)),
+                                      border: Border.all(color: Color(0xff000000)),
                                     ),
                                     child: Row(
                                       children: [
@@ -544,10 +468,7 @@ class _CardpageState extends State<Cardpage> {
                                         Text(
                                           "Add More From Wishlist",
                                           textAlign: TextAlign.start,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1!
-                                              .copyWith(
+                                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                 color: Color(0xff000000),
                                                 fontWeight: FontWeight.w400,
                                               ),
@@ -569,8 +490,7 @@ class _CardpageState extends State<Cardpage> {
                                     padding: EdgeInsets.all(16),
                                     decoration: BoxDecoration(
                                         image: DecorationImage(
-                                          image: AssetImage(
-                                              "image/backgroundsc.png"),
+                                          image: AssetImage("image/backgroundsc.png"),
                                           fit: BoxFit.cover,
                                         ),
                                         color: Colors.transparent),
@@ -581,10 +501,7 @@ class _CardpageState extends State<Cardpage> {
                                             Text(
                                               "Product MRP",
                                               textAlign: TextAlign.center,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .subtitle1!
-                                                  .copyWith(
+                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                     color: Color(0xff2D2D2D),
                                                     fontWeight: FontWeight.w400,
                                                   ),
@@ -593,10 +510,7 @@ class _CardpageState extends State<Cardpage> {
                                             Text(
                                               "₹ 50,000",
                                               textAlign: TextAlign.center,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .subtitle1!
-                                                  .copyWith(
+                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                     color: Color(0xff2D2D2D),
                                                     fontWeight: FontWeight.w400,
                                                   ),
@@ -611,10 +525,7 @@ class _CardpageState extends State<Cardpage> {
                                             Text(
                                               "Shipping",
                                               textAlign: TextAlign.center,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .subtitle1!
-                                                  .copyWith(
+                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                     color: Color(0xff2D2D2D),
                                                     fontWeight: FontWeight.w400,
                                                   ),
@@ -623,10 +534,7 @@ class _CardpageState extends State<Cardpage> {
                                             Text(
                                               "₹ 1,000",
                                               textAlign: TextAlign.center,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .subtitle1!
-                                                  .copyWith(
+                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                     color: Color(0xff2D2D2D),
                                                     fontWeight: FontWeight.w400,
                                                   ),
@@ -641,10 +549,7 @@ class _CardpageState extends State<Cardpage> {
                                             Text(
                                               "GST (18 %)",
                                               textAlign: TextAlign.center,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .subtitle1!
-                                                  .copyWith(
+                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                     color: Color(0xff2D2D2D),
                                                     fontWeight: FontWeight.w400,
                                                   ),
@@ -653,10 +558,7 @@ class _CardpageState extends State<Cardpage> {
                                             Text(
                                               "₹ 4,000",
                                               textAlign: TextAlign.center,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .subtitle1!
-                                                  .copyWith(
+                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                     color: Color(0xff2D2D2D),
                                                     fontWeight: FontWeight.w400,
                                                   ),
@@ -675,10 +577,7 @@ class _CardpageState extends State<Cardpage> {
                                             Text(
                                               "Total",
                                               textAlign: TextAlign.center,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .subtitle1!
-                                                  .copyWith(
+                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                     color: Color(0xff2D2D2D),
                                                     fontWeight: FontWeight.w600,
                                                   ),
@@ -687,10 +586,7 @@ class _CardpageState extends State<Cardpage> {
                                             Text(
                                               "₹ 55,000",
                                               textAlign: TextAlign.center,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .subtitle1!
-                                                  .copyWith(
+                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                     color: Color(0xff2D2D2D),
                                                     fontWeight: FontWeight.w600,
                                                   ),
@@ -713,8 +609,7 @@ class _CardpageState extends State<Cardpage> {
                                         //   fit: BoxFit.cover,
                                         // ),
                                         color: Color(0xffF3E8E9),
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
+                                        borderRadius: BorderRadius.circular(20)),
                                     child: Row(
                                       children: [
                                         Image.asset("image/app2.png"),
@@ -724,10 +619,7 @@ class _CardpageState extends State<Cardpage> {
                                         Text(
                                           "CONTINUE SHOPPING",
                                           textAlign: TextAlign.start,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1!
-                                              .copyWith(
+                                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                 color: Color(0xff000000),
                                                 fontWeight: FontWeight.w400,
                                               ),
@@ -756,10 +648,7 @@ class _CardpageState extends State<Cardpage> {
                                 Text(
                                   "Confirm Shipping Address",
                                   textAlign: TextAlign.start,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .subtitle1!
-                                      .copyWith(
+                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w500,
                                       ),
@@ -773,13 +662,11 @@ class _CardpageState extends State<Cardpage> {
                               children: [
                                 Container(
                                   // margin: EdgeInsets.all(15),
-                                  width:
-                                      MediaQuery.of(context).size.width * .70,
+                                  width: MediaQuery.of(context).size.width * .70,
                                   height: 50,
                                   padding: EdgeInsets.all(10),
                                   decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: Color(0xffDDE3E8), width: 1),
+                                      border: Border.all(color: Color(0xffDDE3E8), width: 1),
                                       // image: DecorationImage(
                                       //   image: AssetImage("image/Rectangle 2 (2).png"),
                                       //   fit: BoxFit.cover,
@@ -789,10 +676,7 @@ class _CardpageState extends State<Cardpage> {
                                     child: TextFormField(
                                       maxLines: 1,
                                       // controller: userInput,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .subtitle1!
-                                          .copyWith(
+                                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                             color: Colors.black,
                                             fontWeight: FontWeight.w500,
                                           ),
@@ -809,10 +693,7 @@ class _CardpageState extends State<Cardpage> {
                                         hintText: "Search Area",
                                         //make hint text
                                         prefixIcon: Icon(Icons.search),
-                                        hintStyle: Theme.of(context)
-                                            .textTheme
-                                            .subtitle1!
-                                            .copyWith(
+                                        hintStyle: Theme.of(context).textTheme.subtitle1!.copyWith(
                                               color: Color(0xff979797),
                                               fontWeight: FontWeight.w500,
                                             ),
@@ -820,10 +701,7 @@ class _CardpageState extends State<Cardpage> {
                                         //create lable
                                         // labelText: 'Email/Mobile',
                                         //lable style
-                                        labelStyle: Theme.of(context)
-                                            .textTheme
-                                            .subtitle1!
-                                            .copyWith(
+                                        labelStyle: Theme.of(context).textTheme.subtitle1!.copyWith(
                                               color: Colors.black,
                                               fontWeight: FontWeight.w500,
                                             ),
@@ -843,27 +721,22 @@ class _CardpageState extends State<Cardpage> {
                                         BoxShadow(
                                           offset: Offset(2, 2),
                                           blurRadius: 6,
-                                          color: Color.fromRGBO(
-                                              226, 223, 202, 0.39),
+                                          color: Color.fromRGBO(226, 223, 202, 0.39),
                                         ),
                                         BoxShadow(
                                           offset: Offset(2, 2),
                                           blurRadius: 8,
-                                          color: Color.fromRGBO(
-                                              226, 223, 202, 0.39),
+                                          color: Color.fromRGBO(226, 223, 202, 0.39),
                                         )
                                       ],
-                                      border: Border.all(
-                                          color: Color(0xffDDE3E8), width: 1),
+                                      border: Border.all(color: Color(0xffDDE3E8), width: 1),
                                       // image: DecorationImage(
                                       //   image: AssetImage("image/Rectangle 2 (2).png"),
                                       //   fit: BoxFit.cover,
                                       // ),
                                       color: Colors.white),
                                   child: Image.asset("image/Vector (11).png",
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .primary),
+                                      color: Theme.of(context).colorScheme.primary),
                                 ),
                               ],
                             ),
@@ -879,10 +752,7 @@ class _CardpageState extends State<Cardpage> {
                                 Text(
                                   "Enter Complete Address",
                                   textAlign: TextAlign.start,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .subtitle1!
-                                      .copyWith(
+                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w500,
                                       ),
@@ -899,18 +769,15 @@ class _CardpageState extends State<Cardpage> {
                                     BoxShadow(
                                       offset: Offset(2, 2),
                                       blurRadius: 6,
-                                      color:
-                                          Color.fromRGBO(226, 223, 202, 0.39),
+                                      color: Color.fromRGBO(226, 223, 202, 0.39),
                                     ),
                                     BoxShadow(
                                       offset: Offset(2, 2),
                                       blurRadius: 8,
-                                      color:
-                                          Color.fromRGBO(226, 223, 202, 0.39),
+                                      color: Color.fromRGBO(226, 223, 202, 0.39),
                                     )
                                   ],
-                                  border: Border.all(
-                                      color: Color(0xffDDE3E8), width: 1),
+                                  border: Border.all(color: Color(0xffDDE3E8), width: 1),
                                   // image: DecorationImage(
                                   //   image: AssetImage("image/Rectangle 2 (2).png"),
                                   //   fit: BoxFit.cover,
@@ -919,10 +786,7 @@ class _CardpageState extends State<Cardpage> {
                               child: TextFormField(
                                 maxLines: 3,
                                 // controller: userInput,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .subtitle1!
-                                    .copyWith(
+                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w500,
                                     ),
@@ -936,26 +800,18 @@ class _CardpageState extends State<Cardpage> {
                                   border: InputBorder.none,
                                   fillColor: Colors.grey,
 
-                                  hintText:
-                                      "Flat No, Floor, Building Name,Street Name, Landmarks,Contact No, etc.",
+                                  hintText: "Flat No, Floor, Building Name,Street Name, Landmarks,Contact No, etc.",
 
                                   //make hint text
-                                  hintStyle: Theme.of(context)
-                                      .textTheme
-                                      .subtitle1!
-                                      .copyWith(
-                                        color:
-                                            Color(0xff788995).withOpacity(0.4),
+                                  hintStyle: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                        color: Color(0xff788995).withOpacity(0.4),
                                         fontWeight: FontWeight.w500,
                                       ),
 
                                   //create lable
                                   // labelText: 'Email/Mobile',
                                   //lable style
-                                  labelStyle: Theme.of(context)
-                                      .textTheme
-                                      .subtitle1!
-                                      .copyWith(
+                                  labelStyle: Theme.of(context).textTheme.subtitle1!.copyWith(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w500,
                                       ),
@@ -974,18 +830,15 @@ class _CardpageState extends State<Cardpage> {
                                     BoxShadow(
                                       offset: Offset(2, 2),
                                       blurRadius: 6,
-                                      color:
-                                          Color.fromRGBO(226, 223, 202, 0.39),
+                                      color: Color.fromRGBO(226, 223, 202, 0.39),
                                     ),
                                     BoxShadow(
                                       offset: Offset(2, 2),
                                       blurRadius: 8,
-                                      color:
-                                          Color.fromRGBO(226, 223, 202, 0.39),
+                                      color: Color.fromRGBO(226, 223, 202, 0.39),
                                     )
                                   ],
-                                  border: Border.all(
-                                      color: Color(0xffDDE3E8), width: 1),
+                                  border: Border.all(color: Color(0xffDDE3E8), width: 1),
                                   // image: DecorationImage(
                                   //   image: AssetImage("image/Rectangle 2 (2).png"),
                                   //   fit: BoxFit.cover,
@@ -1009,16 +862,12 @@ class _CardpageState extends State<Cardpage> {
                                   ),
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         "Standart Delivery",
                                         textAlign: TextAlign.start,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .subtitle1!
-                                            .copyWith(
+                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                               color: Colors.black,
                                               fontWeight: FontWeight.w500,
                                             ),
@@ -1027,16 +876,11 @@ class _CardpageState extends State<Cardpage> {
                                         height: 5,
                                       ),
                                       SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                .55,
+                                        width: MediaQuery.of(context).size.width * .55,
                                         child: Text(
                                           "Estimated 14-20 Day Shipping (Duties and taxes may be due upon delivery)",
                                           textAlign: TextAlign.start,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1!
-                                              .copyWith(
+                                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                 color: Color(0xff788995),
                                                 fontWeight: FontWeight.w400,
                                               ),
@@ -1048,10 +892,7 @@ class _CardpageState extends State<Cardpage> {
                                   Text(
                                     "Free",
                                     textAlign: TextAlign.start,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .subtitle1!
-                                        .copyWith(
+                                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                           color: Colors.black,
                                           fontWeight: FontWeight.w600,
                                         ),
@@ -1069,18 +910,15 @@ class _CardpageState extends State<Cardpage> {
                                     BoxShadow(
                                       offset: Offset(2, 2),
                                       blurRadius: 6,
-                                      color:
-                                          Color.fromRGBO(226, 223, 202, 0.39),
+                                      color: Color.fromRGBO(226, 223, 202, 0.39),
                                     ),
                                     BoxShadow(
                                       offset: Offset(2, 2),
                                       blurRadius: 8,
-                                      color:
-                                          Color.fromRGBO(226, 223, 202, 0.39),
+                                      color: Color.fromRGBO(226, 223, 202, 0.39),
                                     )
                                   ],
-                                  border: Border.all(
-                                      color: Color(0xffDDE3E8), width: 1),
+                                  border: Border.all(color: Color(0xffDDE3E8), width: 1),
                                   // image: DecorationImage(
                                   //   image: AssetImage("image/Rectangle 2 (2).png"),
                                   //   fit: BoxFit.cover,
@@ -1104,16 +942,12 @@ class _CardpageState extends State<Cardpage> {
                                   ),
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         "Fast Delivery",
                                         textAlign: TextAlign.start,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .subtitle1!
-                                            .copyWith(
+                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                               color: Colors.black,
                                               fontWeight: FontWeight.w500,
                                             ),
@@ -1122,16 +956,11 @@ class _CardpageState extends State<Cardpage> {
                                         height: 5,
                                       ),
                                       SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                .5,
+                                        width: MediaQuery.of(context).size.width * .5,
                                         child: Text(
                                           "Estimated 14-20 Day Shipping (Duties and taxes may be due upon delivery)",
                                           textAlign: TextAlign.start,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1!
-                                              .copyWith(
+                                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                 color: Color(0xff788995),
                                                 fontWeight: FontWeight.w400,
                                               ),
@@ -1143,10 +972,7 @@ class _CardpageState extends State<Cardpage> {
                                   Text(
                                     "₹1000",
                                     textAlign: TextAlign.start,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .subtitle1!
-                                        .copyWith(
+                                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                           color: Colors.black,
                                           fontWeight: FontWeight.w600,
                                         ),
@@ -1170,10 +996,7 @@ class _CardpageState extends State<Cardpage> {
                                 Text(
                                   "Back to Customer Info",
                                   textAlign: TextAlign.start,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .subtitle1!
-                                      .copyWith(
+                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                         color: Color(0xff788995),
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -1193,28 +1016,18 @@ class _CardpageState extends State<Cardpage> {
                                             Color(0xffE74B52),
                                             Color(0xffE74B52),
                                           ]),
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
+                                          borderRadius: BorderRadius.circular(20)),
                                       child: Center(
                                         child: Padding(
-                                          padding: EdgeInsets.only(
-                                              right: 8.0,
-                                              left: 8,
-                                              top: 12,
-                                              bottom: 12),
+                                          padding: EdgeInsets.only(right: 8.0, left: 8, top: 12, bottom: 12),
                                           child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
                                               Text(
                                                 'Next',
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .bodyText1!
-                                                    .copyWith(
+                                                style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                       color: Color(0XFFFFFFFF),
-                                                      fontWeight:
-                                                          FontWeight.w600,
+                                                      fontWeight: FontWeight.w600,
                                                     ),
                                               ),
                                               SizedBox(
@@ -1240,8 +1053,7 @@ class _CardpageState extends State<Cardpage> {
                               height: 670,
                               width: MediaQuery.of(context).size.width,
                               padding: EdgeInsets.all(16),
-                              decoration:
-                                  BoxDecoration(color: Color(0xffEAEEF2)),
+                              decoration: BoxDecoration(color: Color(0xffEAEEF2)),
                               child: Column(
                                 children: [
                                   Row(
@@ -1249,10 +1061,7 @@ class _CardpageState extends State<Cardpage> {
                                       Text(
                                         "Shopping Cart",
                                         textAlign: TextAlign.start,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .subtitle1!
-                                            .copyWith(
+                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                               color: Colors.black,
                                               fontWeight: FontWeight.w500,
                                             ),
@@ -1264,8 +1073,7 @@ class _CardpageState extends State<Cardpage> {
                                   ),
                                   Image.asset(
                                     "image/Line 45.png",
-                                    width:
-                                        MediaQuery.of(context).size.width * .8,
+                                    width: MediaQuery.of(context).size.width * .8,
                                     fit: BoxFit.cover,
                                   ),
                                   SizedBox(
@@ -1273,8 +1081,7 @@ class _CardpageState extends State<Cardpage> {
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Image.asset(
                                         "image/Bitmap (9).png",
@@ -1283,18 +1090,13 @@ class _CardpageState extends State<Cardpage> {
                                         width: 10,
                                       ),
                                       Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             "JAMINI ROY",
                                             textAlign: TextAlign.start,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .subtitle1!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.w600,
                                                 ),
@@ -1305,10 +1107,7 @@ class _CardpageState extends State<Cardpage> {
                                           Text(
                                             "Mother & Child",
                                             textAlign: TextAlign.start,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                   color: Color(0xff747474),
                                                   fontWeight: FontWeight.w400,
                                                 ),
@@ -1319,10 +1118,7 @@ class _CardpageState extends State<Cardpage> {
                                           Text(
                                             "₹1000",
                                             textAlign: TextAlign.start,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                   color: Color(0xff788995),
                                                   fontWeight: FontWeight.w400,
                                                 ),
@@ -1334,18 +1130,13 @@ class _CardpageState extends State<Cardpage> {
                                       ),
                                       Spacer(),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             "Remove",
                                             textAlign: TextAlign.start,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                   color: Color(0xffF68C75),
                                                   fontWeight: FontWeight.w400,
                                                 ),
@@ -1356,10 +1147,8 @@ class _CardpageState extends State<Cardpage> {
                                         width: 5,
                                       ),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Image.asset("image/Line 44.png"),
                                         ],
@@ -1368,10 +1157,8 @@ class _CardpageState extends State<Cardpage> {
                                         width: 5,
                                       ),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Image.asset("image/Shape (15).png"),
                                         ],
@@ -1383,8 +1170,7 @@ class _CardpageState extends State<Cardpage> {
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Image.asset(
                                         "image/Bitmap (9).png",
@@ -1393,18 +1179,13 @@ class _CardpageState extends State<Cardpage> {
                                         width: 10,
                                       ),
                                       Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             "MF. HUSSAIN",
                                             textAlign: TextAlign.start,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .subtitle1!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.w600,
                                                 ),
@@ -1415,10 +1196,7 @@ class _CardpageState extends State<Cardpage> {
                                           Text(
                                             "Mother & Child",
                                             textAlign: TextAlign.start,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                   color: Color(0xff747474),
                                                   fontWeight: FontWeight.w400,
                                                 ),
@@ -1429,10 +1207,7 @@ class _CardpageState extends State<Cardpage> {
                                           Text(
                                             "₹1000",
                                             textAlign: TextAlign.start,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                   color: Color(0xff788995),
                                                   fontWeight: FontWeight.w400,
                                                 ),
@@ -1444,18 +1219,13 @@ class _CardpageState extends State<Cardpage> {
                                       ),
                                       Spacer(),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             "Remove",
                                             textAlign: TextAlign.start,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                   color: Color(0xffF68C75),
                                                   fontWeight: FontWeight.w400,
                                                 ),
@@ -1466,10 +1236,8 @@ class _CardpageState extends State<Cardpage> {
                                         width: 5,
                                       ),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Image.asset("image/Line 44.png"),
                                         ],
@@ -1478,10 +1246,8 @@ class _CardpageState extends State<Cardpage> {
                                         width: 5,
                                       ),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Image.asset("image/Shape (15).png"),
                                         ],
@@ -1495,8 +1261,7 @@ class _CardpageState extends State<Cardpage> {
                                     padding: EdgeInsets.all(16),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(16),
-                                      border:
-                                          Border.all(color: Color(0xff000000)),
+                                      border: Border.all(color: Color(0xff000000)),
                                     ),
                                     child: Row(
                                       children: [
@@ -1507,10 +1272,7 @@ class _CardpageState extends State<Cardpage> {
                                         Text(
                                           "Add More From Wishlist",
                                           textAlign: TextAlign.start,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1!
-                                              .copyWith(
+                                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                 color: Color(0xff000000),
                                                 fontWeight: FontWeight.w400,
                                               ),
@@ -1532,8 +1294,7 @@ class _CardpageState extends State<Cardpage> {
                                     padding: EdgeInsets.all(16),
                                     decoration: BoxDecoration(
                                         image: DecorationImage(
-                                          image: AssetImage(
-                                              "image/backgroundsc.png"),
+                                          image: AssetImage("image/backgroundsc.png"),
                                           fit: BoxFit.cover,
                                         ),
                                         color: Colors.transparent),
@@ -1544,10 +1305,7 @@ class _CardpageState extends State<Cardpage> {
                                             Text(
                                               "Product MRP",
                                               textAlign: TextAlign.center,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .subtitle1!
-                                                  .copyWith(
+                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                     color: Color(0xff2D2D2D),
                                                     fontWeight: FontWeight.w400,
                                                   ),
@@ -1556,10 +1314,7 @@ class _CardpageState extends State<Cardpage> {
                                             Text(
                                               "₹ 50,000",
                                               textAlign: TextAlign.center,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .subtitle1!
-                                                  .copyWith(
+                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                     color: Color(0xff2D2D2D),
                                                     fontWeight: FontWeight.w400,
                                                   ),
@@ -1574,10 +1329,7 @@ class _CardpageState extends State<Cardpage> {
                                             Text(
                                               "Shipping",
                                               textAlign: TextAlign.center,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .subtitle1!
-                                                  .copyWith(
+                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                     color: Color(0xff2D2D2D),
                                                     fontWeight: FontWeight.w400,
                                                   ),
@@ -1586,10 +1338,7 @@ class _CardpageState extends State<Cardpage> {
                                             Text(
                                               "₹ 1,000",
                                               textAlign: TextAlign.center,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .subtitle1!
-                                                  .copyWith(
+                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                     color: Color(0xff2D2D2D),
                                                     fontWeight: FontWeight.w400,
                                                   ),
@@ -1604,10 +1353,7 @@ class _CardpageState extends State<Cardpage> {
                                             Text(
                                               "GST (18 %)",
                                               textAlign: TextAlign.center,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .subtitle1!
-                                                  .copyWith(
+                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                     color: Color(0xff2D2D2D),
                                                     fontWeight: FontWeight.w400,
                                                   ),
@@ -1616,10 +1362,7 @@ class _CardpageState extends State<Cardpage> {
                                             Text(
                                               "₹ 4,000",
                                               textAlign: TextAlign.center,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .subtitle1!
-                                                  .copyWith(
+                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                     color: Color(0xff2D2D2D),
                                                     fontWeight: FontWeight.w400,
                                                   ),
@@ -1638,10 +1381,7 @@ class _CardpageState extends State<Cardpage> {
                                             Text(
                                               "Total",
                                               textAlign: TextAlign.center,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .subtitle1!
-                                                  .copyWith(
+                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                     color: Color(0xff2D2D2D),
                                                     fontWeight: FontWeight.w600,
                                                   ),
@@ -1650,10 +1390,7 @@ class _CardpageState extends State<Cardpage> {
                                             Text(
                                               "₹ 55,000",
                                               textAlign: TextAlign.center,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .subtitle1!
-                                                  .copyWith(
+                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                     color: Color(0xff2D2D2D),
                                                     fontWeight: FontWeight.w600,
                                                   ),
@@ -1676,8 +1413,7 @@ class _CardpageState extends State<Cardpage> {
                                         //   fit: BoxFit.cover,
                                         // ),
                                         color: Color(0xffF3E8E9),
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
+                                        borderRadius: BorderRadius.circular(20)),
                                     child: Row(
                                       children: [
                                         Image.asset("image/app2.png"),
@@ -1687,10 +1423,7 @@ class _CardpageState extends State<Cardpage> {
                                         Text(
                                           "CONTINUE SHOPPING",
                                           textAlign: TextAlign.start,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1!
-                                              .copyWith(
+                                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                 color: Color(0xff000000),
                                                 fontWeight: FontWeight.w400,
                                               ),
@@ -1718,10 +1451,7 @@ class _CardpageState extends State<Cardpage> {
                                 Text(
                                   "Payment Selection",
                                   textAlign: TextAlign.start,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .subtitle1!
-                                      .copyWith(
+                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w500,
                                       ),
@@ -1741,18 +1471,15 @@ class _CardpageState extends State<Cardpage> {
                                     BoxShadow(
                                       offset: Offset(2, 2),
                                       blurRadius: 6,
-                                      color:
-                                          Color.fromRGBO(226, 223, 202, 0.39),
+                                      color: Color.fromRGBO(226, 223, 202, 0.39),
                                     ),
                                     BoxShadow(
                                       offset: Offset(2, 2),
                                       blurRadius: 8,
-                                      color:
-                                          Color.fromRGBO(226, 223, 202, 0.39),
+                                      color: Color.fromRGBO(226, 223, 202, 0.39),
                                     )
                                   ],
-                                  border: Border.all(
-                                      color: Color(0xffDDE3E8), width: 1),
+                                  border: Border.all(color: Color(0xffDDE3E8), width: 1),
                                   // image: DecorationImage(
                                   //   image: AssetImage("image/Rectangle 2 (2).png"),
                                   //   fit: BoxFit.cover,
@@ -1762,14 +1489,11 @@ class _CardpageState extends State<Cardpage> {
                                 children: [
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           SizedBox(
                                             width: 30,
@@ -1789,18 +1513,13 @@ class _CardpageState extends State<Cardpage> {
                                         width: 5,
                                       ),
                                       Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             "Credit Card / Debit Card",
                                             textAlign: TextAlign.start,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .subtitle1!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.w600,
                                                 ),
@@ -1809,17 +1528,11 @@ class _CardpageState extends State<Cardpage> {
                                             height: 5,
                                           ),
                                           SizedBox(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                .6,
+                                            width: MediaQuery.of(context).size.width * .6,
                                             child: Text(
                                               "Safe money transfer using your bank account. Visa, Maestro,Discover, Americn Express",
                                               textAlign: TextAlign.start,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyText1!
-                                                  .copyWith(
+                                              style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                     color: Color(0xff788995),
                                                     fontWeight: FontWeight.w400,
                                                   ),
@@ -1829,10 +1542,8 @@ class _CardpageState extends State<Cardpage> {
                                       ),
                                       Spacer(),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Image.asset(
                                             "image/visa (1) 1.png",
@@ -1848,10 +1559,7 @@ class _CardpageState extends State<Cardpage> {
                                     padding: EdgeInsets.only(top: 15),
                                     child: TextField(
                                       // controller: nameController,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .subtitle1!
-                                          .copyWith(
+                                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                             color: Colors.black,
                                             fontWeight: FontWeight.w500,
                                           ),
@@ -1869,8 +1577,7 @@ class _CardpageState extends State<Cardpage> {
                                   ),
                                   Image.asset(
                                     "image/Line 45.png",
-                                    width:
-                                        MediaQuery.of(context).size.width * .8,
+                                    width: MediaQuery.of(context).size.width * .8,
                                     fit: BoxFit.cover,
                                   ),
                                   SizedBox(
@@ -1880,10 +1587,7 @@ class _CardpageState extends State<Cardpage> {
                                     padding: EdgeInsets.only(top: 0),
                                     child: TextField(
                                       // controller: nameController,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .subtitle1!
-                                          .copyWith(
+                                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                             color: Colors.black,
                                             fontWeight: FontWeight.w500,
                                           ),
@@ -1898,8 +1602,7 @@ class _CardpageState extends State<Cardpage> {
                                   ),
                                   Image.asset(
                                     "image/Line 45.png",
-                                    width:
-                                        MediaQuery.of(context).size.width * .8,
+                                    width: MediaQuery.of(context).size.width * .8,
                                     fit: BoxFit.cover,
                                   ),
                                   SizedBox(
@@ -1909,10 +1612,7 @@ class _CardpageState extends State<Cardpage> {
                                     padding: EdgeInsets.only(top: 0),
                                     child: TextField(
                                       // controller: nameController,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .subtitle1!
-                                          .copyWith(
+                                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                             color: Colors.black,
                                             fontWeight: FontWeight.w500,
                                           ),
@@ -1927,8 +1627,7 @@ class _CardpageState extends State<Cardpage> {
                                   ),
                                   Image.asset(
                                     "image/Line 45.png",
-                                    width:
-                                        MediaQuery.of(context).size.width * .8,
+                                    width: MediaQuery.of(context).size.width * .8,
                                     fit: BoxFit.cover,
                                   ),
                                   SizedBox(
@@ -1938,10 +1637,7 @@ class _CardpageState extends State<Cardpage> {
                                     padding: EdgeInsets.only(top: 0),
                                     child: TextField(
                                       // controller: nameController,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .subtitle1!
-                                          .copyWith(
+                                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                             color: Colors.black,
                                             fontWeight: FontWeight.w500,
                                           ),
@@ -1956,8 +1652,7 @@ class _CardpageState extends State<Cardpage> {
                                   ),
                                   Image.asset(
                                     "image/Line 45.png",
-                                    width:
-                                        MediaQuery.of(context).size.width * .8,
+                                    width: MediaQuery.of(context).size.width * .8,
                                     fit: BoxFit.cover,
                                   ),
                                   SizedBox(
@@ -1976,18 +1671,15 @@ class _CardpageState extends State<Cardpage> {
                                     BoxShadow(
                                       offset: Offset(2, 2),
                                       blurRadius: 6,
-                                      color:
-                                          Color.fromRGBO(226, 223, 202, 0.39),
+                                      color: Color.fromRGBO(226, 223, 202, 0.39),
                                     ),
                                     BoxShadow(
                                       offset: Offset(2, 2),
                                       blurRadius: 8,
-                                      color:
-                                          Color.fromRGBO(226, 223, 202, 0.39),
+                                      color: Color.fromRGBO(226, 223, 202, 0.39),
                                     )
                                   ],
-                                  border: Border.all(
-                                      color: Color(0xffDDE3E8), width: 1),
+                                  border: Border.all(color: Color(0xffDDE3E8), width: 1),
                                   // image: DecorationImage(
                                   //   image: AssetImage("image/Rectangle 2 (2).png"),
                                   //   fit: BoxFit.cover,
@@ -1999,8 +1691,7 @@ class _CardpageState extends State<Cardpage> {
                                 children: [
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       SizedBox(
                                         width: 30,
@@ -2021,16 +1712,12 @@ class _CardpageState extends State<Cardpage> {
                                   ),
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         "Paypal",
                                         textAlign: TextAlign.start,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .subtitle1!
-                                            .copyWith(
+                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                               color: Colors.black,
                                               fontWeight: FontWeight.w600,
                                             ),
@@ -2039,16 +1726,11 @@ class _CardpageState extends State<Cardpage> {
                                         height: 5,
                                       ),
                                       SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                .6,
+                                        width: MediaQuery.of(context).size.width * .6,
                                         child: Text(
                                           "Safe money transfer using your bank account. Visa, Maestro,Discover, Americn Express",
                                           textAlign: TextAlign.start,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1!
-                                              .copyWith(
+                                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                 color: Color(0xff788995),
                                                 fontWeight: FontWeight.w400,
                                               ),
@@ -2059,8 +1741,7 @@ class _CardpageState extends State<Cardpage> {
                                   Spacer(),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Image.asset(
                                         "image/paypal 1.png",
@@ -2089,10 +1770,7 @@ class _CardpageState extends State<Cardpage> {
                                 Text(
                                   "Back to Shipping Info",
                                   textAlign: TextAlign.start,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .subtitle1!
-                                      .copyWith(
+                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                         color: Color(0xff788995),
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -2103,10 +1781,7 @@ class _CardpageState extends State<Cardpage> {
                                   child: InkWell(
                                     onTap: () {
                                       Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  OrderPlacedpage()));
+                                          context, MaterialPageRoute(builder: (context) => OrderPlacedpage()));
                                     },
                                     child: Container(
                                       height: 50,
@@ -2116,28 +1791,18 @@ class _CardpageState extends State<Cardpage> {
                                             Color(0xffE74B52),
                                             Color(0xffE74B52),
                                           ]),
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
+                                          borderRadius: BorderRadius.circular(20)),
                                       child: Center(
                                         child: Padding(
-                                          padding: EdgeInsets.only(
-                                              right: 8.0,
-                                              left: 8,
-                                              top: 12,
-                                              bottom: 12),
+                                          padding: EdgeInsets.only(right: 8.0, left: 8, top: 12, bottom: 12),
                                           child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
                                               Text(
                                                 'Next',
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .bodyText1!
-                                                    .copyWith(
+                                                style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                       color: Color(0XFFFFFFFF),
-                                                      fontWeight:
-                                                          FontWeight.w600,
+                                                      fontWeight: FontWeight.w600,
                                                     ),
                                               ),
                                               SizedBox(
@@ -2163,8 +1828,7 @@ class _CardpageState extends State<Cardpage> {
                               height: 670,
                               width: MediaQuery.of(context).size.width,
                               padding: EdgeInsets.all(16),
-                              decoration:
-                                  BoxDecoration(color: Color(0xffEAEEF2)),
+                              decoration: BoxDecoration(color: Color(0xffEAEEF2)),
                               child: Column(
                                 children: [
                                   Row(
@@ -2172,10 +1836,7 @@ class _CardpageState extends State<Cardpage> {
                                       Text(
                                         "Shopping Cart",
                                         textAlign: TextAlign.start,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .subtitle1!
-                                            .copyWith(
+                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                               color: Colors.black,
                                               fontWeight: FontWeight.w500,
                                             ),
@@ -2187,8 +1848,7 @@ class _CardpageState extends State<Cardpage> {
                                   ),
                                   Image.asset(
                                     "image/Line 45.png",
-                                    width:
-                                        MediaQuery.of(context).size.width * .8,
+                                    width: MediaQuery.of(context).size.width * .8,
                                     fit: BoxFit.cover,
                                   ),
                                   SizedBox(
@@ -2196,8 +1856,7 @@ class _CardpageState extends State<Cardpage> {
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Image.asset(
                                         "image/Bitmap (9).png",
@@ -2206,18 +1865,13 @@ class _CardpageState extends State<Cardpage> {
                                         width: 10,
                                       ),
                                       Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             "JAMINI ROY",
                                             textAlign: TextAlign.start,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .subtitle1!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.w600,
                                                 ),
@@ -2228,10 +1882,7 @@ class _CardpageState extends State<Cardpage> {
                                           Text(
                                             "Mother & Child",
                                             textAlign: TextAlign.start,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                   color: Color(0xff747474),
                                                   fontWeight: FontWeight.w400,
                                                 ),
@@ -2242,10 +1893,7 @@ class _CardpageState extends State<Cardpage> {
                                           Text(
                                             "₹1000",
                                             textAlign: TextAlign.start,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                   color: Color(0xff788995),
                                                   fontWeight: FontWeight.w400,
                                                 ),
@@ -2257,18 +1905,13 @@ class _CardpageState extends State<Cardpage> {
                                       ),
                                       Spacer(),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             "Remove",
                                             textAlign: TextAlign.start,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                   color: Color(0xffF68C75),
                                                   fontWeight: FontWeight.w400,
                                                 ),
@@ -2279,10 +1922,8 @@ class _CardpageState extends State<Cardpage> {
                                         width: 5,
                                       ),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Image.asset("image/Line 44.png"),
                                         ],
@@ -2291,10 +1932,8 @@ class _CardpageState extends State<Cardpage> {
                                         width: 5,
                                       ),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Image.asset("image/Shape (15).png"),
                                         ],
@@ -2306,8 +1945,7 @@ class _CardpageState extends State<Cardpage> {
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Image.asset(
                                         "image/Bitmap (9).png",
@@ -2316,18 +1954,13 @@ class _CardpageState extends State<Cardpage> {
                                         width: 10,
                                       ),
                                       Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             "MF. HUSSAIN",
                                             textAlign: TextAlign.start,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .subtitle1!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.w600,
                                                 ),
@@ -2338,10 +1971,7 @@ class _CardpageState extends State<Cardpage> {
                                           Text(
                                             "Mother & Child",
                                             textAlign: TextAlign.start,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                   color: Color(0xff747474),
                                                   fontWeight: FontWeight.w400,
                                                 ),
@@ -2352,10 +1982,7 @@ class _CardpageState extends State<Cardpage> {
                                           Text(
                                             "₹1000",
                                             textAlign: TextAlign.start,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                   color: Color(0xff788995),
                                                   fontWeight: FontWeight.w400,
                                                 ),
@@ -2367,18 +1994,13 @@ class _CardpageState extends State<Cardpage> {
                                       ),
                                       Spacer(),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             "Remove",
                                             textAlign: TextAlign.start,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                   color: Color(0xffF68C75),
                                                   fontWeight: FontWeight.w400,
                                                 ),
@@ -2389,10 +2011,8 @@ class _CardpageState extends State<Cardpage> {
                                         width: 5,
                                       ),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Image.asset("image/Line 44.png"),
                                         ],
@@ -2401,10 +2021,8 @@ class _CardpageState extends State<Cardpage> {
                                         width: 5,
                                       ),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Image.asset("image/Shape (15).png"),
                                         ],
@@ -2418,8 +2036,7 @@ class _CardpageState extends State<Cardpage> {
                                     padding: EdgeInsets.all(16),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(16),
-                                      border:
-                                          Border.all(color: Color(0xff000000)),
+                                      border: Border.all(color: Color(0xff000000)),
                                     ),
                                     child: Row(
                                       children: [
@@ -2430,10 +2047,7 @@ class _CardpageState extends State<Cardpage> {
                                         Text(
                                           "Add More From Wishlist",
                                           textAlign: TextAlign.start,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1!
-                                              .copyWith(
+                                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                 color: Color(0xff000000),
                                                 fontWeight: FontWeight.w400,
                                               ),
@@ -2455,8 +2069,7 @@ class _CardpageState extends State<Cardpage> {
                                     padding: EdgeInsets.all(016),
                                     decoration: BoxDecoration(
                                         image: DecorationImage(
-                                          image: AssetImage(
-                                              "image/backgroundsc.png"),
+                                          image: AssetImage("image/backgroundsc.png"),
                                           fit: BoxFit.cover,
                                         ),
                                         color: Colors.transparent),
@@ -2467,10 +2080,7 @@ class _CardpageState extends State<Cardpage> {
                                             Text(
                                               "Product MRP",
                                               textAlign: TextAlign.center,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .subtitle1!
-                                                  .copyWith(
+                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                     color: Color(0xff2D2D2D),
                                                     fontWeight: FontWeight.w400,
                                                   ),
@@ -2479,10 +2089,7 @@ class _CardpageState extends State<Cardpage> {
                                             Text(
                                               "₹ 50,000",
                                               textAlign: TextAlign.center,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .subtitle1!
-                                                  .copyWith(
+                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                     color: Color(0xff2D2D2D),
                                                     fontWeight: FontWeight.w400,
                                                   ),
@@ -2497,10 +2104,7 @@ class _CardpageState extends State<Cardpage> {
                                             Text(
                                               "Shipping",
                                               textAlign: TextAlign.center,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .subtitle1!
-                                                  .copyWith(
+                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                     color: Color(0xff2D2D2D),
                                                     fontWeight: FontWeight.w400,
                                                   ),
@@ -2509,10 +2113,7 @@ class _CardpageState extends State<Cardpage> {
                                             Text(
                                               "₹ 1,000",
                                               textAlign: TextAlign.center,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .subtitle1!
-                                                  .copyWith(
+                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                     color: Color(0xff2D2D2D),
                                                     fontWeight: FontWeight.w400,
                                                   ),
@@ -2527,10 +2128,7 @@ class _CardpageState extends State<Cardpage> {
                                             Text(
                                               "GST (18 %)",
                                               textAlign: TextAlign.center,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .subtitle1!
-                                                  .copyWith(
+                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                     color: Color(0xff2D2D2D),
                                                     fontWeight: FontWeight.w400,
                                                   ),
@@ -2539,10 +2137,7 @@ class _CardpageState extends State<Cardpage> {
                                             Text(
                                               "₹ 4,000",
                                               textAlign: TextAlign.center,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .subtitle1!
-                                                  .copyWith(
+                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                     color: Color(0xff2D2D2D),
                                                     fontWeight: FontWeight.w400,
                                                   ),
@@ -2561,10 +2156,7 @@ class _CardpageState extends State<Cardpage> {
                                             Text(
                                               "Total",
                                               textAlign: TextAlign.center,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .subtitle1!
-                                                  .copyWith(
+                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                     color: Color(0xff2D2D2D),
                                                     fontWeight: FontWeight.w600,
                                                   ),
@@ -2573,10 +2165,7 @@ class _CardpageState extends State<Cardpage> {
                                             Text(
                                               "₹ 55,000",
                                               textAlign: TextAlign.center,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .subtitle1!
-                                                  .copyWith(
+                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                     color: Color(0xff2D2D2D),
                                                     fontWeight: FontWeight.w600,
                                                   ),
@@ -2599,8 +2188,7 @@ class _CardpageState extends State<Cardpage> {
                                         //   fit: BoxFit.cover,
                                         // ),
                                         color: Color(0xffF3E8E9),
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
+                                        borderRadius: BorderRadius.circular(20)),
                                     child: Row(
                                       children: [
                                         Image.asset("image/app2.png"),
@@ -2610,10 +2198,7 @@ class _CardpageState extends State<Cardpage> {
                                         Text(
                                           "CONTINUE SHOPPING",
                                           textAlign: TextAlign.start,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1!
-                                              .copyWith(
+                                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                 color: Color(0xff000000),
                                                 fontWeight: FontWeight.w400,
                                               ),

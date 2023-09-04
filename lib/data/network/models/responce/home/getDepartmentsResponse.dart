@@ -7,6 +7,7 @@ class GetDepartmentsResponse {
   dynamic? auctionArray;
   dynamic? servicesArray;
   dynamic? collectors;
+
   dynamic? news;
   dynamic? videos;
   dynamic? blogs;
@@ -36,9 +37,7 @@ class GetDepartmentsResponse {
 
   GetDepartmentsResponse.fromJson(Map<String, dynamic> json) {
     seo = json['seo'] != null ? new Seo.fromJson(json['seo']) : null;
-    pageContent = json['pageContent'] != null
-        ? new PageContent.fromJson(json['pageContent'])
-        : null;
+    pageContent = json['pageContent'] != null ? new PageContent.fromJson(json['pageContent']) : null;
     status = json['status'];
     message = json['message'];
     navigation = json['navigation'];
@@ -211,9 +210,7 @@ class PageContent {
     videos = json['videos'];
     newsDetail = json['newsDetail'];
     bannerArray = json['bannerArray'];
-    bannerItem = json['bannerItem'] != null
-        ? new BannerItem.fromJson(json['bannerItem'])
-        : null;
+    bannerItem = json['bannerItem'] != null ? new BannerItem.fromJson(json['bannerItem']) : null;
     blogDetail = json['blogDetail'];
     blogDetailsArray = json['blogDetailsArray'];
     if (json['departments'] != null) {
@@ -279,15 +276,7 @@ class BannerItem {
   String? desc;
   dynamic? innerTitle;
 
-  BannerItem(
-      {this.title1,
-      this.title2,
-      this.title3,
-      this.title,
-      this.button,
-      this.image,
-      this.desc,
-      this.innerTitle});
+  BannerItem({this.title1, this.title2, this.title3, this.title, this.button, this.image, this.desc, this.innerTitle});
 
   BannerItem.fromJson(Map<String, dynamic> json) {
     title1 = json['title_1'];
