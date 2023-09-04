@@ -1204,12 +1204,12 @@ class _DashboardUiState extends State<DashboardUi> {
       case 28:
         return Record_price_artwork();
 
-      case 25:
+      case 29:
         return Aboutuspage();
-      case 26:
+      case 30:
         return CareerPage();
 
-      case 29:
+      case 31:
         return ContactusPage();
 
       default:
