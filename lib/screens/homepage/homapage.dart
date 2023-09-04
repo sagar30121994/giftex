@@ -43,12 +43,18 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
       setState(() {
         if (homeViewModel.homeBanerResponse == null) {
         } else {
-          if (position != homeViewModel.homeBanerResponse!.pageContent!.banner!.length - 1) {
+          if (position !=
+              homeViewModel.homeBanerResponse!.pageContent!.banner!.length -
+                  1) {
             position++;
-            sliderController.nextPage(duration: Duration(milliseconds: 500), curve: Curves.easeInCirc);
+            sliderController.nextPage(
+                duration: Duration(milliseconds: 500),
+                curve: Curves.easeInCirc);
           } else {
             position = 0;
-            sliderController.animateTo(0, duration: Duration(milliseconds: 500), curve: Curves.easeInCirc);
+            sliderController.animateTo(0,
+                duration: Duration(milliseconds: 500),
+                curve: Curves.easeInCirc);
           }
         }
       });
@@ -99,7 +105,8 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                 left: 0,
                                 right: 0,
                                 child: Padding(
-                                  padding: EdgeInsets.only(top: 150 / 2.0, bottom: 0),
+                                  padding: EdgeInsets.only(
+                                      top: 150 / 2.0, bottom: 0),
                                   child: Container(
                                     //replace this Container with your Card
                                     color: Color(0xff1F2A52),
@@ -117,14 +124,18 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                       position = pos % 4;
                                     });
                                   },
-                                  itemCount: homeViewModel.homeBanerResponse == null
-                                      ? 0
-                                      : homeViewModel.homeBanerResponse!.pageContent!.banner!.length,
+                                  itemCount:
+                                      homeViewModel.homeBanerResponse == null
+                                          ? 0
+                                          : homeViewModel.homeBanerResponse!
+                                              .pageContent!.banner!.length,
                                   itemBuilder: (context, pos) => SizedBox(
                                     width: MediaQuery.of(context).size.width,
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
                                       children: [
                                         SizedBox(
                                           height: 10,
@@ -132,10 +143,15 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                         Text(
                                           "${homeViewModel.homeBanerResponse!.pageContent!.banner![pos].title1}",
                                           textAlign: TextAlign.left,
-                                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                              color: Theme.of(context).colorScheme.primary,
-                                              fontWeight: FontWeight.w500,
-                                              letterSpacing: 2.0),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1!
+                                              .copyWith(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .primary,
+                                                  fontWeight: FontWeight.w500,
+                                                  letterSpacing: 2.0),
                                         ),
                                         const SizedBox(
                                           height: 8,
@@ -143,7 +159,10 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                         Text(
                                           "${homeViewModel.homeBanerResponse!.pageContent!.banner![pos].title2}",
                                           textAlign: TextAlign.left,
-                                          style: Theme.of(context).textTheme.headline5!.copyWith(
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline5!
+                                              .copyWith(
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.w700,
                                               ),
@@ -152,14 +171,20 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                           height: 8,
                                         ),
                                         Container(
-                                          width: MediaQuery.of(context).size.width * .80,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              .80,
                                           child: Text(
                                             "${homeViewModel.homeBanerResponse!.pageContent!.banner![pos].title3}",
                                             textAlign: TextAlign.center,
-                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                color: Color(0XFF747474),
-                                                fontWeight: FontWeight.w600,
-                                                letterSpacing: 1),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1!
+                                                .copyWith(
+                                                    color: Color(0XFF747474),
+                                                    fontWeight: FontWeight.w600,
+                                                    letterSpacing: 1),
                                           ),
                                         ),
                                         const SizedBox(
@@ -170,12 +195,16 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                           child: Column(
                                             children: [
                                               Padding(
-                                                padding: const EdgeInsets.only(left: 25.0, right: 25),
+                                                padding: const EdgeInsets.only(
+                                                    left: 25.0, right: 25),
                                                 child: Image.network(
                                                     "${homeViewModel.homeBanerResponse!.pageContent!.banner![pos].image!.mobile}",
                                                     fit: BoxFit.cover,
                                                     height: 220,
-                                                    width: MediaQuery.of(context).size.width),
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .width),
                                               ),
                                               SizedBox(
                                                 height: 24,
@@ -183,21 +212,46 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                               InkWell(
                                                 onTap: () {
                                                   setState(() {
-                                                    auctionViewModel.selectedAuction = Auctions(
-                                                      auctionId: homeViewModel.homeBanerResponse!.pageContent!
-                                                          .banner![pos].button!.result!.auctions!.first.auctionId,
-                                                      image: homeViewModel.homeBanerResponse!.pageContent!.banner![pos]
-                                                          .button!.result!.auctions!.first.image,
-                                                      displayDate: homeViewModel.homeBanerResponse!.pageContent!
-                                                          .banner![pos].button!.result!.auctions!.first.displayDate,
+                                                    auctionViewModel
+                                                            .selectedAuction =
+                                                        Auctions(
+                                                      auctionId: homeViewModel
+                                                          .homeBanerResponse!
+                                                          .pageContent!
+                                                          .banner![pos]
+                                                          .button!
+                                                          .result!
+                                                          .auctions!
+                                                          .first
+                                                          .auctionId,
+                                                      image: homeViewModel
+                                                          .homeBanerResponse!
+                                                          .pageContent!
+                                                          .banner![pos]
+                                                          .button!
+                                                          .result!
+                                                          .auctions!
+                                                          .first
+                                                          .image,
+                                                      displayDate: homeViewModel
+                                                          .homeBanerResponse!
+                                                          .pageContent!
+                                                          .banner![pos]
+                                                          .button!
+                                                          .result!
+                                                          .auctions!
+                                                          .first
+                                                          .displayDate,
                                                       // displayDate: homeViewModel.homeBanerResponse!.pageContent!
                                                       //     .banner![pos].button!.result!.auctions!.first.displayDate,
                                                     );
 
                                                     bottomViewModel.setIndex(8);
                                                   });
-                                                  auctionViewModel.liveAuctionType = "lots";
-                                                  auctionViewModel.auctionType = "upcoming";
+                                                  auctionViewModel
+                                                      .liveAuctionType = "lots";
+                                                  auctionViewModel.auctionType =
+                                                      "upcoming";
                                                   // launchUrl(
                                                   //   Uri.parse(homeViewModel.homeBanerResponse!.pageContent!.banner![pos]
                                                   //       .button!.cta!.link!),
@@ -208,12 +262,21 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                   height: 50,
                                                   child: Center(
                                                     child: Container(
-                                                      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 16,
+                                                              vertical: 2),
                                                       decoration: BoxDecoration(
-                                                          borderRadius: BorderRadius.circular(22.0),
-                                                          gradient: LinearGradient(
-                                                            begin: Alignment.bottomLeft,
-                                                            end: Alignment.topRight,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      22.0),
+                                                          gradient:
+                                                              LinearGradient(
+                                                            begin: Alignment
+                                                                .bottomLeft,
+                                                            end: Alignment
+                                                                .topRight,
                                                             colors: [
                                                               Color(0xffB45156),
                                                               Color(0xffE74B52),
@@ -221,14 +284,27 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                             ],
                                                           )),
                                                       child: Padding(
-                                                        padding: const EdgeInsets.only(
-                                                            right: 8.0, left: 8, top: 12, bottom: 12),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                right: 8.0,
+                                                                left: 8,
+                                                                top: 12,
+                                                                bottom: 12),
                                                         child: Text(
                                                           '${homeViewModel.homeBanerResponse!.pageContent!.banner![pos].button!.text}',
-                                                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                              color: Color(0XFFFFFFFF),
-                                                              fontWeight: FontWeight.w600,
-                                                              letterSpacing: 1),
+                                                          style: Theme
+                                                                  .of(context)
+                                                              .textTheme
+                                                              .bodyText1!
+                                                              .copyWith(
+                                                                  color: Color(
+                                                                      0XFFFFFFFF),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  letterSpacing:
+                                                                      1),
                                                         ),
                                                       ),
                                                     ),
@@ -261,7 +337,10 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                   Text(
                                     "0${position + 1}/0${homeViewModel.homeBanerResponse!.pageContent!.banner!.length}",
                                     textAlign: TextAlign.left,
-                                    style: Theme.of(context).textTheme.headline6!.copyWith(
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline6!
+                                        .copyWith(
                                           color: Colors.black,
                                           fontWeight: FontWeight.w600,
                                         ),
@@ -283,7 +362,8 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                     padding: EdgeInsets.all(20),
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
-                                        image: AssetImage("image/Rectangle Copy.png"),
+                                        image: AssetImage(
+                                            "image/Rectangle Copy.png"),
                                         fit: BoxFit.cover,
                                       ),
                                     ),
@@ -306,10 +386,10 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                   child: Text(
                     "SHOP NOW \nON OUR ONLINE STORE",
                     textAlign: TextAlign.center,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline5!
-                        .copyWith(color: Colors.black, fontWeight: FontWeight.w700, letterSpacing: 0.666667),
+                    style: Theme.of(context).textTheme.headline5!.copyWith(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 0.666667),
                   ),
                 ),
                 const SizedBox(
@@ -351,7 +431,10 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                           style: Theme.of(context)
                               .textTheme
                               .headline6!
-                              .copyWith(color: Color(0xff2D2D2D), fontWeight: FontWeight.w700, letterSpacing: 1.42857),
+                              .copyWith(
+                                  color: Color(0xff2D2D2D),
+                                  fontWeight: FontWeight.w700,
+                                  letterSpacing: 1.42857),
                         ),
                       ),
                       SizedBox(
@@ -369,10 +452,11 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                         child: Text(
                           "Antique Elephant Buddha",
                           textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                color: Color(0xff373737),
-                                fontWeight: FontWeight.w700,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.subtitle1!.copyWith(
+                                    color: Color(0xff373737),
+                                    fontWeight: FontWeight.w700,
+                                  ),
                         ),
                       ),
                       SizedBox(
@@ -383,7 +467,10 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                         child: Text(
                           "₹ 20,000",
                           textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          style: Theme.of(context)
+                              .textTheme
+                              .subtitle1!
+                              .copyWith(
                                 color: Theme.of(context).colorScheme.primary,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -397,10 +484,15 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                         child: Center(
                           child: InkWell(
                             onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => NewsAndUpdatesPage()));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          NewsAndUpdatesPage()));
                             },
                             child: Container(
-                              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 2),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(22.0),
                                   gradient: LinearGradient(
@@ -412,11 +504,17 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                     ],
                                   )),
                               child: Padding(
-                                padding: const EdgeInsets.only(right: 8.0, left: 8, top: 12, bottom: 12),
+                                padding: const EdgeInsets.only(
+                                    right: 8.0, left: 8, top: 12, bottom: 12),
                                 child: Text(
                                   'VIEW ALL',
-                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                      color: Color(0XFFFFFFFF), fontWeight: FontWeight.w600, letterSpacing: 1),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1!
+                                      .copyWith(
+                                          color: Color(0XFFFFFFFF),
+                                          fontWeight: FontWeight.w600,
+                                          letterSpacing: 1),
                                 ),
                               ),
                             ),
@@ -434,10 +532,10 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                   child: Text(
                     "UPCOMING AUCTIONS",
                     textAlign: TextAlign.start,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline6!
-                        .copyWith(color: Colors.black, fontWeight: FontWeight.bold, letterSpacing: 2.14286),
+                    style: Theme.of(context).textTheme.headline6!.copyWith(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 2.14286),
                   ),
                 ),
                 const SizedBox(
@@ -450,9 +548,12 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                             ? LinearProgressIndicator()
                             : Column(
                                 children: [
-                                  auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length > 0
+                                  auctionViewModel.upcomingAuctionResponse!
+                                              .result!.auctions!.length >
+                                          0
                                       ? Container(
-                                          width: MediaQuery.of(context).size.width,
+                                          width:
+                                              MediaQuery.of(context).size.width,
                                           height: 220,
                                           decoration: BoxDecoration(
                                             image: DecorationImage(
@@ -464,27 +565,46 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                           child: Column(children: [
                                             // homeViewModel.homeUpcommingAuctionResponse!.auctionArray!.map((e) =>
                                             Container(
-                                              width: MediaQuery.of(context).size.width,
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
                                               height: 220,
-                                              color: Color(0xffEAEEF2).withOpacity(.4),
+                                              color: Color(0xffEAEEF2)
+                                                  .withOpacity(.4),
                                               child: Padding(
-                                                padding: const EdgeInsets.all(20.0),
+                                                padding:
+                                                    const EdgeInsets.all(20.0),
                                                 child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
                                                     const SizedBox(
                                                       height: 0,
                                                     ),
                                                     SizedBox(
-                                                      width: MediaQuery.of(context).size.width * .70,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              .70,
                                                       child: Text(
                                                         "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![0].auctionName}",
-                                                        textAlign: TextAlign.start,
-                                                        style: Theme.of(context).textTheme.headline6!.copyWith(
-                                                              color: Colors.black,
-                                                              overflow: TextOverflow.ellipsis,
-                                                              fontWeight: FontWeight.bold,
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .headline6!
+                                                            .copyWith(
+                                                              color:
+                                                                  Colors.black,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
                                                             ),
                                                       ),
                                                     ),
@@ -494,29 +614,54 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                     InkWell(
                                                       onTap: () {
                                                         setState(() {
-                                                          auctionViewModel.upComingLotsResponse = null;
+                                                          auctionViewModel
+                                                                  .upComingLotsResponse =
+                                                              null;
                                                           setState(() {
-                                                            auctionViewModel.selectedAuction = auctionViewModel
-                                                                .upcomingAuctionResponse!.result!.auctions![0];
+                                                            auctionViewModel
+                                                                    .selectedAuction =
+                                                                auctionViewModel
+                                                                    .upcomingAuctionResponse!
+                                                                    .result!
+                                                                    .auctions![0];
 
-                                                            bottomViewModel.setIndex(8);
+                                                            bottomViewModel
+                                                                .setIndex(8);
                                                           });
-                                                          auctionViewModel.liveAuctionType = "lots";
-                                                          auctionViewModel.auctionType = "upcoming";
+                                                          auctionViewModel
+                                                                  .liveAuctionType =
+                                                              "lots";
+                                                          auctionViewModel
+                                                                  .auctionType =
+                                                              "upcoming";
                                                         });
                                                       },
                                                       child: Container(
-                                                        padding: EdgeInsets.all(8),
+                                                        padding:
+                                                            EdgeInsets.all(8),
                                                         decoration: BoxDecoration(
-                                                            color: Color(0xffEAEEF2),
-                                                            borderRadius: BorderRadius.all(Radius.circular(10))),
+                                                            color: Color(
+                                                                0xffEAEEF2),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10))),
                                                         child: Text(
                                                           "EXPLORE",
-                                                          textAlign: TextAlign.start,
-                                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                color: Colors.black,
-                                                                fontWeight: FontWeight.bold,
-                                                              ),
+                                                          textAlign:
+                                                              TextAlign.start,
+                                                          style:
+                                                              Theme.of(context)
+                                                                  .textTheme
+                                                                  .subtitle1!
+                                                                  .copyWith(
+                                                                    color: Colors
+                                                                        .black,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                  ),
                                                         ),
                                                       ),
                                                     ),
@@ -524,13 +669,24 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                       height: 8,
                                                     ),
                                                     SizedBox(
-                                                      width: MediaQuery.of(context).size.width * .70,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              .70,
                                                       child: Text(
                                                         "${homeViewModel.homeUpcommingAuctionResponse!.auctionArray![0].displayDate}",
-                                                        textAlign: TextAlign.start,
-                                                        style: Theme.of(context).textTheme.headline6!.copyWith(
-                                                              color: Colors.black87,
-                                                              fontWeight: FontWeight.w400,
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .headline6!
+                                                            .copyWith(
+                                                              color: Colors
+                                                                  .black87,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
                                                             ),
                                                       ),
                                                     ),
@@ -538,14 +694,26 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                       height: 8,
                                                     ),
                                                     SizedBox(
-                                                      width: MediaQuery.of(context).size.width * .70,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              .70,
                                                       child: Text(
                                                         "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![0].displayDate}",
-                                                        textAlign: TextAlign.start,
-                                                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                            color: Colors.black87,
-                                                            fontWeight: FontWeight.bold,
-                                                            letterSpacing: 0.772727),
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .bodyText1!
+                                                            .copyWith(
+                                                                color: Colors
+                                                                    .black87,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                letterSpacing:
+                                                                    0.772727),
                                                       ),
                                                     ),
                                                     const SizedBox(
@@ -558,9 +726,12 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                           ]),
                                         )
                                       : Container(),
-                                  auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length > 1
+                                  auctionViewModel.upcomingAuctionResponse!
+                                              .result!.auctions!.length >
+                                          1
                                       ? Container(
-                                          width: MediaQuery.of(context).size.width,
+                                          width:
+                                              MediaQuery.of(context).size.width,
                                           height: 220,
                                           decoration: BoxDecoration(
                                               image: DecorationImage(
@@ -568,31 +739,52 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                     "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![1].image}"),
                                                 fit: BoxFit.cover,
                                               ),
-                                              color: Color(0xff495E93).withOpacity(1)),
+                                              color: Color(0xff495E93)
+                                                  .withOpacity(1)),
                                           child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.end,
-                                            crossAxisAlignment: CrossAxisAlignment.end,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
                                             children: [
                                               Container(
-                                                  width: MediaQuery.of(context).size.width,
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
                                                   height: 220,
-                                                  color: Color(0xffEAEEF2).withOpacity(.4),
+                                                  color: Color(0xffEAEEF2)
+                                                      .withOpacity(.4),
                                                   child: Padding(
-                                                    padding: EdgeInsets.only(right: 12.0),
+                                                    padding: EdgeInsets.only(
+                                                        right: 12.0),
                                                     child: Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .end,
                                                       children: [
                                                         SizedBox(
                                                           height: 12,
                                                         ),
                                                         SizedBox(
-                                                          width: MediaQuery.of(context).size.width * .70,
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              .70,
                                                           child: Text(
                                                             "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![1].auctionName}",
-                                                            textAlign: TextAlign.end,
-                                                            style: Theme.of(context).textTheme.headline6!.copyWith(
-                                                                  color: Colors.white,
-                                                                  fontWeight: FontWeight.bold,
+                                                            textAlign:
+                                                                TextAlign.end,
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .headline6!
+                                                                .copyWith(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
                                                                 ),
                                                           ),
                                                         ),
@@ -602,27 +794,54 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                         InkWell(
                                                           onTap: () {
                                                             setState(() {
-                                                              auctionViewModel.liveAuctionType = "lots";
-                                                              auctionViewModel.auctionType = "upcoming";
-                                                              auctionViewModel.selectedAuction = auctionViewModel
-                                                                  .upcomingAuctionResponse!.result!.auctions![1];
+                                                              auctionViewModel
+                                                                      .liveAuctionType =
+                                                                  "lots";
+                                                              auctionViewModel
+                                                                      .auctionType =
+                                                                  "upcoming";
+                                                              auctionViewModel
+                                                                      .selectedAuction =
+                                                                  auctionViewModel
+                                                                      .upcomingAuctionResponse!
+                                                                      .result!
+                                                                      .auctions![1];
 
-                                                              bottomViewModel.setIndex(8);
+                                                              bottomViewModel
+                                                                  .setIndex(8);
                                                             });
                                                           },
                                                           child: Container(
-                                                            padding: EdgeInsets.only(
-                                                                left: 30, right: 10, top: 10, bottom: 10),
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    left: 30,
+                                                                    right: 10,
+                                                                    top: 10,
+                                                                    bottom: 10),
                                                             decoration: BoxDecoration(
-                                                                color: Color(0xffEAEEF2),
-                                                                borderRadius: BorderRadius.all(Radius.circular(10))),
+                                                                color: Color(
+                                                                    0xffEAEEF2),
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10))),
                                                             child: Text(
                                                               "EXPLORE",
-                                                              textAlign: TextAlign.start,
-                                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                  color: Color(0xff2D2D2D),
-                                                                  fontWeight: FontWeight.bold,
-                                                                  letterSpacing: 1),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .start,
+                                                              style: Theme.of(
+                                                                      context)
+                                                                  .textTheme
+                                                                  .subtitle1!
+                                                                  .copyWith(
+                                                                      color: Color(
+                                                                          0xff2D2D2D),
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      letterSpacing:
+                                                                          1),
                                                             ),
                                                           ),
                                                         ),
@@ -630,13 +849,25 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                           height: 5,
                                                         ),
                                                         SizedBox(
-                                                          width: MediaQuery.of(context).size.width * .70,
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              .70,
                                                           child: Text(
                                                             "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![1].displayDate}",
-                                                            textAlign: TextAlign.end,
-                                                            style: Theme.of(context).textTheme.headline6!.copyWith(
-                                                                  color: Colors.white,
-                                                                  fontWeight: FontWeight.w300,
+                                                            textAlign:
+                                                                TextAlign.end,
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .headline6!
+                                                                .copyWith(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w300,
                                                                 ),
                                                           ),
                                                         ),
@@ -644,13 +875,25 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                           height: 5,
                                                         ),
                                                         SizedBox(
-                                                          width: MediaQuery.of(context).size.width * .70,
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              .70,
                                                           child: Text(
                                                             "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![1].displayDate}",
-                                                            textAlign: TextAlign.end,
-                                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                                  color: Colors.white,
-                                                                  fontWeight: FontWeight.bold,
+                                                            textAlign:
+                                                                TextAlign.end,
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .bodyText1!
+                                                                .copyWith(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
                                                                 ),
                                                           ),
                                                         ),
@@ -664,9 +907,12 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                           ),
                                         )
                                       : Container(),
-                                  auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length > 2
+                                  auctionViewModel.upcomingAuctionResponse!
+                                              .result!.auctions!.length >
+                                          2
                                       ? Container(
-                                          width: MediaQuery.of(context).size.width,
+                                          width:
+                                              MediaQuery.of(context).size.width,
                                           height: 220,
                                           decoration: BoxDecoration(
                                             image: DecorationImage(
@@ -678,27 +924,46 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                           child: Column(children: [
                                             // homeViewModel.homeUpcommingAuctionResponse!.auctionArray!.map((e) =>
                                             Container(
-                                              width: MediaQuery.of(context).size.width,
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
                                               height: 220,
-                                              color: Color(0xffEAEEF2).withOpacity(.4),
+                                              color: Color(0xffEAEEF2)
+                                                  .withOpacity(.4),
                                               child: Padding(
-                                                padding: const EdgeInsets.all(20.0),
+                                                padding:
+                                                    const EdgeInsets.all(20.0),
                                                 child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
                                                     const SizedBox(
                                                       height: 0,
                                                     ),
                                                     SizedBox(
-                                                      width: MediaQuery.of(context).size.width * .70,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              .70,
                                                       child: Text(
                                                         "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![2].auctionName}",
-                                                        textAlign: TextAlign.start,
-                                                        style: Theme.of(context).textTheme.headline6!.copyWith(
-                                                              color: Colors.black,
-                                                              overflow: TextOverflow.ellipsis,
-                                                              fontWeight: FontWeight.bold,
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .headline6!
+                                                            .copyWith(
+                                                              color:
+                                                                  Colors.black,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
                                                             ),
                                                       ),
                                                     ),
@@ -708,29 +973,54 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                     InkWell(
                                                       onTap: () {
                                                         setState(() {
-                                                          auctionViewModel.upComingLotsResponse = null;
+                                                          auctionViewModel
+                                                                  .upComingLotsResponse =
+                                                              null;
                                                           setState(() {
-                                                            auctionViewModel.selectedAuction = auctionViewModel
-                                                                .upcomingAuctionResponse!.result!.auctions![2];
+                                                            auctionViewModel
+                                                                    .selectedAuction =
+                                                                auctionViewModel
+                                                                    .upcomingAuctionResponse!
+                                                                    .result!
+                                                                    .auctions![2];
 
-                                                            bottomViewModel.setIndex(8);
+                                                            bottomViewModel
+                                                                .setIndex(8);
                                                           });
-                                                          auctionViewModel.liveAuctionType = "lots";
-                                                          auctionViewModel.auctionType = "upcoming";
+                                                          auctionViewModel
+                                                                  .liveAuctionType =
+                                                              "lots";
+                                                          auctionViewModel
+                                                                  .auctionType =
+                                                              "upcoming";
                                                         });
                                                       },
                                                       child: Container(
-                                                        padding: EdgeInsets.all(8),
+                                                        padding:
+                                                            EdgeInsets.all(8),
                                                         decoration: BoxDecoration(
-                                                            color: Color(0xffEAEEF2),
-                                                            borderRadius: BorderRadius.all(Radius.circular(10))),
+                                                            color: Color(
+                                                                0xffEAEEF2),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10))),
                                                         child: Text(
                                                           "EXPLORE",
-                                                          textAlign: TextAlign.start,
-                                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                color: Colors.black,
-                                                                fontWeight: FontWeight.bold,
-                                                              ),
+                                                          textAlign:
+                                                              TextAlign.start,
+                                                          style:
+                                                              Theme.of(context)
+                                                                  .textTheme
+                                                                  .subtitle1!
+                                                                  .copyWith(
+                                                                    color: Colors
+                                                                        .black,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                  ),
                                                         ),
                                                       ),
                                                     ),
@@ -738,13 +1028,24 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                       height: 8,
                                                     ),
                                                     SizedBox(
-                                                      width: MediaQuery.of(context).size.width * .70,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              .70,
                                                       child: Text(
                                                         "${homeViewModel.homeUpcommingAuctionResponse!.auctionArray![2].displayDate}",
-                                                        textAlign: TextAlign.start,
-                                                        style: Theme.of(context).textTheme.headline6!.copyWith(
-                                                              color: Colors.black87,
-                                                              fontWeight: FontWeight.w400,
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .headline6!
+                                                            .copyWith(
+                                                              color: Colors
+                                                                  .black87,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
                                                             ),
                                                       ),
                                                     ),
@@ -752,14 +1053,26 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                       height: 8,
                                                     ),
                                                     SizedBox(
-                                                      width: MediaQuery.of(context).size.width * .70,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              .70,
                                                       child: Text(
                                                         "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![2].displayDate}",
-                                                        textAlign: TextAlign.start,
-                                                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                            color: Colors.black87,
-                                                            fontWeight: FontWeight.bold,
-                                                            letterSpacing: 0.772727),
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .bodyText1!
+                                                            .copyWith(
+                                                                color: Colors
+                                                                    .black87,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                letterSpacing:
+                                                                    0.772727),
                                                       ),
                                                     ),
                                                     const SizedBox(
@@ -772,9 +1085,12 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                           ]),
                                         )
                                       : Container(),
-                                  auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length > 3
+                                  auctionViewModel.upcomingAuctionResponse!
+                                              .result!.auctions!.length >
+                                          3
                                       ? Container(
-                                          width: MediaQuery.of(context).size.width,
+                                          width:
+                                              MediaQuery.of(context).size.width,
                                           height: 220,
                                           decoration: BoxDecoration(
                                               image: DecorationImage(
@@ -782,31 +1098,52 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                     "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![3].image}"),
                                                 fit: BoxFit.cover,
                                               ),
-                                              color: Color(0xff495E93).withOpacity(1)),
+                                              color: Color(0xff495E93)
+                                                  .withOpacity(1)),
                                           child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.end,
-                                            crossAxisAlignment: CrossAxisAlignment.end,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
                                             children: [
                                               Container(
-                                                  width: MediaQuery.of(context).size.width,
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
                                                   height: 220,
-                                                  color: Color(0xffEAEEF2).withOpacity(.4),
+                                                  color: Color(0xffEAEEF2)
+                                                      .withOpacity(.4),
                                                   child: Padding(
-                                                    padding: EdgeInsets.only(right: 12.0),
+                                                    padding: EdgeInsets.only(
+                                                        right: 12.0),
                                                     child: Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .end,
                                                       children: [
                                                         SizedBox(
                                                           height: 12,
                                                         ),
                                                         SizedBox(
-                                                          width: MediaQuery.of(context).size.width * .70,
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              .70,
                                                           child: Text(
                                                             "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![3].auctionName}",
-                                                            textAlign: TextAlign.end,
-                                                            style: Theme.of(context).textTheme.headline6!.copyWith(
-                                                                  color: Colors.white,
-                                                                  fontWeight: FontWeight.bold,
+                                                            textAlign:
+                                                                TextAlign.end,
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .headline6!
+                                                                .copyWith(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
                                                                 ),
                                                           ),
                                                         ),
@@ -816,27 +1153,54 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                         InkWell(
                                                           onTap: () {
                                                             setState(() {
-                                                              auctionViewModel.liveAuctionType = "lots";
-                                                              auctionViewModel.auctionType = "upcoming";
-                                                              auctionViewModel.selectedAuction = auctionViewModel
-                                                                  .upcomingAuctionResponse!.result!.auctions![3];
+                                                              auctionViewModel
+                                                                      .liveAuctionType =
+                                                                  "lots";
+                                                              auctionViewModel
+                                                                      .auctionType =
+                                                                  "upcoming";
+                                                              auctionViewModel
+                                                                      .selectedAuction =
+                                                                  auctionViewModel
+                                                                      .upcomingAuctionResponse!
+                                                                      .result!
+                                                                      .auctions![3];
 
-                                                              bottomViewModel.setIndex(8);
+                                                              bottomViewModel
+                                                                  .setIndex(8);
                                                             });
                                                           },
                                                           child: Container(
-                                                            padding: EdgeInsets.only(
-                                                                left: 30, right: 10, top: 10, bottom: 10),
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    left: 30,
+                                                                    right: 10,
+                                                                    top: 10,
+                                                                    bottom: 10),
                                                             decoration: BoxDecoration(
-                                                                color: Color(0xffEAEEF2),
-                                                                borderRadius: BorderRadius.all(Radius.circular(10))),
+                                                                color: Color(
+                                                                    0xffEAEEF2),
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10))),
                                                             child: Text(
                                                               "EXPLORE",
-                                                              textAlign: TextAlign.start,
-                                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                  color: Color(0xff2D2D2D),
-                                                                  fontWeight: FontWeight.bold,
-                                                                  letterSpacing: 1),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .start,
+                                                              style: Theme.of(
+                                                                      context)
+                                                                  .textTheme
+                                                                  .subtitle1!
+                                                                  .copyWith(
+                                                                      color: Color(
+                                                                          0xff2D2D2D),
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      letterSpacing:
+                                                                          1),
                                                             ),
                                                           ),
                                                         ),
@@ -844,13 +1208,25 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                           height: 5,
                                                         ),
                                                         SizedBox(
-                                                          width: MediaQuery.of(context).size.width * .70,
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              .70,
                                                           child: Text(
                                                             "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![3].displayDate}",
-                                                            textAlign: TextAlign.end,
-                                                            style: Theme.of(context).textTheme.headline6!.copyWith(
-                                                                  color: Colors.white,
-                                                                  fontWeight: FontWeight.w300,
+                                                            textAlign:
+                                                                TextAlign.end,
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .headline6!
+                                                                .copyWith(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w300,
                                                                 ),
                                                           ),
                                                         ),
@@ -858,13 +1234,25 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                           height: 5,
                                                         ),
                                                         SizedBox(
-                                                          width: MediaQuery.of(context).size.width * .70,
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              .70,
                                                           child: Text(
                                                             "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![3].displayDate}",
-                                                            textAlign: TextAlign.end,
-                                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                                  color: Colors.white,
-                                                                  fontWeight: FontWeight.bold,
+                                                            textAlign:
+                                                                TextAlign.end,
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .bodyText1!
+                                                                .copyWith(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
                                                                 ),
                                                           ),
                                                         ),
@@ -878,9 +1266,12 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                           ),
                                         )
                                       : Container(),
-                                  auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length > 4
+                                  auctionViewModel.upcomingAuctionResponse!
+                                              .result!.auctions!.length >
+                                          4
                                       ? Container(
-                                          width: MediaQuery.of(context).size.width,
+                                          width:
+                                              MediaQuery.of(context).size.width,
                                           height: 220,
                                           decoration: BoxDecoration(
                                             image: DecorationImage(
@@ -892,27 +1283,46 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                           child: Column(children: [
                                             // homeViewModel.homeUpcommingAuctionResponse!.auctionArray!.map((e) =>
                                             Container(
-                                              width: MediaQuery.of(context).size.width,
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
                                               height: 220,
-                                              color: Color(0xffEAEEF2).withOpacity(.4),
+                                              color: Color(0xffEAEEF2)
+                                                  .withOpacity(.4),
                                               child: Padding(
-                                                padding: const EdgeInsets.all(20.0),
+                                                padding:
+                                                    const EdgeInsets.all(20.0),
                                                 child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
                                                     const SizedBox(
                                                       height: 0,
                                                     ),
                                                     SizedBox(
-                                                      width: MediaQuery.of(context).size.width * .70,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              .70,
                                                       child: Text(
                                                         "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![4].auctionName}",
-                                                        textAlign: TextAlign.start,
-                                                        style: Theme.of(context).textTheme.headline6!.copyWith(
-                                                              color: Colors.black,
-                                                              overflow: TextOverflow.ellipsis,
-                                                              fontWeight: FontWeight.bold,
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .headline6!
+                                                            .copyWith(
+                                                              color:
+                                                                  Colors.black,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
                                                             ),
                                                       ),
                                                     ),
@@ -922,29 +1332,54 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                     InkWell(
                                                       onTap: () {
                                                         setState(() {
-                                                          auctionViewModel.upComingLotsResponse = null;
+                                                          auctionViewModel
+                                                                  .upComingLotsResponse =
+                                                              null;
                                                           setState(() {
-                                                            auctionViewModel.selectedAuction = auctionViewModel
-                                                                .upcomingAuctionResponse!.result!.auctions![4];
+                                                            auctionViewModel
+                                                                    .selectedAuction =
+                                                                auctionViewModel
+                                                                    .upcomingAuctionResponse!
+                                                                    .result!
+                                                                    .auctions![4];
 
-                                                            bottomViewModel.setIndex(8);
+                                                            bottomViewModel
+                                                                .setIndex(8);
                                                           });
-                                                          auctionViewModel.liveAuctionType = "lots";
-                                                          auctionViewModel.auctionType = "upcoming";
+                                                          auctionViewModel
+                                                                  .liveAuctionType =
+                                                              "lots";
+                                                          auctionViewModel
+                                                                  .auctionType =
+                                                              "upcoming";
                                                         });
                                                       },
                                                       child: Container(
-                                                        padding: EdgeInsets.all(8),
+                                                        padding:
+                                                            EdgeInsets.all(8),
                                                         decoration: BoxDecoration(
-                                                            color: Color(0xffEAEEF2),
-                                                            borderRadius: BorderRadius.all(Radius.circular(10))),
+                                                            color: Color(
+                                                                0xffEAEEF2),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10))),
                                                         child: Text(
                                                           "EXPLORE",
-                                                          textAlign: TextAlign.start,
-                                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                color: Colors.black,
-                                                                fontWeight: FontWeight.bold,
-                                                              ),
+                                                          textAlign:
+                                                              TextAlign.start,
+                                                          style:
+                                                              Theme.of(context)
+                                                                  .textTheme
+                                                                  .subtitle1!
+                                                                  .copyWith(
+                                                                    color: Colors
+                                                                        .black,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                  ),
                                                         ),
                                                       ),
                                                     ),
@@ -952,13 +1387,24 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                       height: 8,
                                                     ),
                                                     SizedBox(
-                                                      width: MediaQuery.of(context).size.width * .70,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              .70,
                                                       child: Text(
                                                         "${homeViewModel.homeUpcommingAuctionResponse!.auctionArray![4].displayDate}",
-                                                        textAlign: TextAlign.start,
-                                                        style: Theme.of(context).textTheme.headline6!.copyWith(
-                                                              color: Colors.black87,
-                                                              fontWeight: FontWeight.w400,
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .headline6!
+                                                            .copyWith(
+                                                              color: Colors
+                                                                  .black87,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
                                                             ),
                                                       ),
                                                     ),
@@ -966,14 +1412,26 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                       height: 8,
                                                     ),
                                                     SizedBox(
-                                                      width: MediaQuery.of(context).size.width * .70,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              .70,
                                                       child: Text(
                                                         "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![4].displayDate}",
-                                                        textAlign: TextAlign.start,
-                                                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                            color: Colors.black87,
-                                                            fontWeight: FontWeight.bold,
-                                                            letterSpacing: 0.772727),
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .bodyText1!
+                                                            .copyWith(
+                                                                color: Colors
+                                                                    .black87,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                letterSpacing:
+                                                                    0.772727),
                                                       ),
                                                     ),
                                                     const SizedBox(
@@ -1093,7 +1551,10 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                 style: Theme.of(context)
                                     .textTheme
                                     .subtitle1!
-                                    .copyWith(color: Color(0xff3A3A3A), fontWeight: FontWeight.w400, letterSpacing: 1),
+                                    .copyWith(
+                                        color: Color(0xff3A3A3A),
+                                        fontWeight: FontWeight.w400,
+                                        letterSpacing: 1),
                               ),
                             ],
                           ),
@@ -1108,7 +1569,8 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                       child: Container(
                         width: MediaQuery.of(context).size.width / 2,
                         height: 160,
-                        color: Theme.of(context).colorScheme.onSecondaryContainer,
+                        color:
+                            Theme.of(context).colorScheme.onSecondaryContainer,
                         child: Padding(
                           padding: EdgeInsets.all(10),
                           child: Column(
@@ -1125,7 +1587,10 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                 style: Theme.of(context)
                                     .textTheme
                                     .subtitle1!
-                                    .copyWith(color: Colors.black, fontWeight: FontWeight.w400, letterSpacing: 1),
+                                    .copyWith(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w400,
+                                        letterSpacing: 1),
                               ),
                             ],
                           ),
@@ -1147,10 +1612,10 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                     Text(
                       "RECORD PRICE ARTWORK",
                       textAlign: TextAlign.center,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline5!
-                          .copyWith(color: Color(0xff373737), fontWeight: FontWeight.w900, letterSpacing: 1),
+                      style: Theme.of(context).textTheme.headline5!.copyWith(
+                          color: Color(0xff373737),
+                          fontWeight: FontWeight.w900,
+                          letterSpacing: 1),
                     ),
                   ],
                 ),
@@ -1166,14 +1631,18 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                               padding: EdgeInsets.all(16),
                               color: Color(0xffFFFFFF),
                               child: DefaultTabController(
-                                length: homeViewModel.recordPriceLots!.tabArray!.length,
+                                length: homeViewModel
+                                    .recordPriceLots!.tabArray!.length,
                                 child: DecoratedBox(
                                   decoration: BoxDecoration(
                                     //This is for background color
                                     color: Colors.white.withOpacity(0.0),
 
                                     //This is for bottom border that is needed
-                                    border: Border(bottom: BorderSide(color: Color(0xffDFDFDF), width: 2)),
+                                    border: Border(
+                                        bottom: BorderSide(
+                                            color: Color(0xffDFDFDF),
+                                            width: 2)),
                                   ),
                                   child: TabBar(
                                       onTap: (index) {
@@ -1181,19 +1650,28 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                         print(index);
                                       },
                                       indicator: UnderlineTabIndicator(
-                                        borderSide:
-                                            BorderSide(color: Theme.of(context).colorScheme.primary, width: 2.0),
+                                        borderSide: BorderSide(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .primary,
+                                            width: 2.0),
                                       ),
                                       padding: EdgeInsets.all(0),
-                                      labelPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                      unselectedLabelColor: Color(0xff2D2D2D).withOpacity(0.59),
+                                      labelPadding: EdgeInsets.symmetric(
+                                          horizontal: 8, vertical: 4),
+                                      unselectedLabelColor:
+                                          Color(0xff2D2D2D).withOpacity(0.59),
                                       labelColor: const Color(0xFF2D2D2D),
-                                      labelStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                      labelStyle: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1!
+                                          .copyWith(
                                             color: Color(0xff2D2D2D),
                                             fontWeight: FontWeight.w600,
                                           ),
                                       isScrollable: true,
-                                      tabs: homeViewModel.recordPriceLots!.tabArray!
+                                      tabs: homeViewModel
+                                          .recordPriceLots!.tabArray!
                                           .map(
                                             (e) => Tab(
                                               text: e.tabName,
@@ -1241,7 +1719,8 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                           ),
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.only(left: 25.0, right: 25),
+                                          padding: const EdgeInsets.only(
+                                              left: 25.0, right: 25),
                                           child: Image.network(
                                             "${homeViewModel.recordPriceLots!.tabArray![homeViewModel.selectedTabIndex].lots![pos].ThumbImage}",
                                             height: 210,
@@ -1250,10 +1729,16 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                           ),
                                         ),
                                         Padding(
-                                            padding: EdgeInsets.only(top: 430 / 2.0, bottom: 0, left: 25.0, right: 25),
+                                            padding: EdgeInsets.only(
+                                                top: 430 / 2.0,
+                                                bottom: 0,
+                                                left: 25.0,
+                                                right: 25),
                                             child: Column(
-                                              mainAxisAlignment: MainAxisAlignment.start,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               mainAxisSize: MainAxisSize.min,
                                               children: [
                                                 SizedBox(
@@ -1262,20 +1747,32 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                 Text(
                                                   "${homeViewModel.recordPriceLots!.tabArray![homeViewModel.selectedTabIndex].lots![pos].info!.title}",
                                                   textAlign: TextAlign.start,
-                                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                      color: Color(0xff2D2D2D),
-                                                      fontWeight: FontWeight.w400,
-                                                      letterSpacing: 1.5,
-                                                      overflow: TextOverflow.ellipsis),
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .subtitle1!
+                                                      .copyWith(
+                                                          color:
+                                                              Color(0xff2D2D2D),
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          letterSpacing: 1.5,
+                                                          overflow: TextOverflow
+                                                              .ellipsis),
                                                 ),
                                                 Text(
                                                   "${homeViewModel.recordPriceLots!.tabArray![homeViewModel.selectedTabIndex].lots![pos].info!.description}",
                                                   textAlign: TextAlign.start,
-                                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                      color: Color(0xff2D2D2D),
-                                                      fontWeight: FontWeight.w400,
-                                                      letterSpacing: 1.5,
-                                                      overflow: TextOverflow.ellipsis),
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .subtitle1!
+                                                      .copyWith(
+                                                          color:
+                                                              Color(0xff2D2D2D),
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          letterSpacing: 1.5,
+                                                          overflow: TextOverflow
+                                                              .ellipsis),
                                                 ),
                                                 SizedBox(
                                                   height: 10,
@@ -1283,9 +1780,15 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                 Text(
                                                   "₹ ${homeViewModel.recordPriceLots!.tabArray![homeViewModel.selectedTabIndex].lots![pos].estimateFrom!.iNR}",
                                                   textAlign: TextAlign.center,
-                                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                        color: Theme.of(context).colorScheme.primary,
-                                                        fontWeight: FontWeight.bold,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .subtitle1!
+                                                      .copyWith(
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .primary,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                                 ),
                                               ],
@@ -1296,7 +1799,11 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                             },
                             itemCount: homeViewModel.recordPriceLots == null
                                 ? 0
-                                : homeViewModel.recordPriceLots!.tabArray![homeViewModel.selectedTabIndex].lots!.length,
+                                : homeViewModel
+                                    .recordPriceLots!
+                                    .tabArray![homeViewModel.selectedTabIndex]
+                                    .lots!
+                                    .length,
                           ),
                         );
                 }),
@@ -1306,7 +1813,10 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => NewsAndUpdatesPage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DashboardUi(28)));
                   },
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 2),
@@ -1324,13 +1834,14 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                     //
                     // },
                     child: Padding(
-                      padding: const EdgeInsets.only(right: 8.0, left: 8, top: 12, bottom: 12),
+                      padding: const EdgeInsets.only(
+                          right: 8.0, left: 8, top: 12, bottom: 12),
                       child: Text(
                         'VIEW ALL',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText1!
-                            .copyWith(color: Colors.white, fontWeight: FontWeight.w600, letterSpacing: 1),
+                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 1),
                       ),
                     ),
                   ),
@@ -1368,10 +1879,8 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                     children: [
                       Text(
                         "WHY ASTA GURU MUSE?",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline5!
-                            .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
+                        style: Theme.of(context).textTheme.headline5!.copyWith(
+                            fontWeight: FontWeight.bold, color: Colors.black),
                       ),
                       SizedBox(
                         height: 16,
@@ -1577,7 +2086,9 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                 color: Colors.white.withOpacity(0.0),
 
                                 //This is for bottom border that is needed
-                                border: Border(bottom: BorderSide(color: Color(0xffDFDFDF), width: 2)),
+                                border: Border(
+                                    bottom: BorderSide(
+                                        color: Color(0xffDFDFDF), width: 2)),
                               ),
                               child: TabBar(
                                 onTap: (index) {
@@ -1585,13 +2096,18 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                   print(index);
                                 },
                                 indicator: UnderlineTabIndicator(
-                                  borderSide: BorderSide(color: Color(0xffB45156), width: 2.0),
+                                  borderSide: BorderSide(
+                                      color: Color(0xffB45156), width: 2.0),
                                 ),
                                 padding: EdgeInsets.all(0),
                                 labelPadding: EdgeInsets.all(0),
-                                unselectedLabelColor: Color(0xff2D2D2D).withOpacity(0.59),
+                                unselectedLabelColor:
+                                    Color(0xff2D2D2D).withOpacity(0.59),
                                 labelColor: const Color(0xFF2D2D2D),
-                                labelStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                labelStyle: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .copyWith(
                                       color: Color(0xff2D2D2D),
                                       letterSpacing: 1,
                                       fontWeight: FontWeight.w600,
@@ -1631,21 +2147,26 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                 child: Stack(
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.only(left: 0, right: 0, top: 50),
+                                      padding: EdgeInsets.only(
+                                          left: 0, right: 0, top: 50),
                                       child: Container(
                                         color: Color(0xffEAEEF2),
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 16, right: 16),
+                                      padding: const EdgeInsets.only(
+                                          left: 16, right: 16),
                                       child: Column(
                                         children: [
-                                          homeViewModel.selectedNewsTabIndex == 0
+                                          homeViewModel.selectedNewsTabIndex ==
+                                                  0
                                               ? Image.network(
                                                   "${homeViewModel.homeNewsVideosBlogsResponse!.news![pos].image!.mobile}",
                                                   fit: BoxFit.cover,
                                                   height: 200)
-                                              : homeViewModel.selectedNewsTabIndex == 1
+                                              : homeViewModel
+                                                          .selectedNewsTabIndex ==
+                                                      1
                                                   ? Image.network(
                                                       "${homeViewModel.homeNewsVideosBlogsResponse!.videos![pos].image!.mobile}",
                                                       fit: BoxFit.cover,
@@ -1657,55 +2178,91 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                           SizedBox(
                                             height: 16,
                                           ),
-                                          homeViewModel.selectedNewsTabIndex == 0
+                                          homeViewModel.selectedNewsTabIndex ==
+                                                  0
                                               ? Text(
                                                   "${homeViewModel.homeNewsVideosBlogsResponse!.news![pos].timestamp}",
                                                   textAlign: TextAlign.center,
-                                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                        color: Theme.of(context).colorScheme.primary,
-                                                        fontWeight: FontWeight.w700,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText1!
+                                                      .copyWith(
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .primary,
+                                                        fontWeight:
+                                                            FontWeight.w700,
                                                       ),
                                                 )
-                                              : homeViewModel.selectedNewsTabIndex == 1
+                                              : homeViewModel
+                                                          .selectedNewsTabIndex ==
+                                                      1
                                                   ? Text(
                                                       "${homeViewModel.homeNewsVideosBlogsResponse!.videos![pos].timestamp}",
-                                                      textAlign: TextAlign.center,
-                                                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                            color: Theme.of(context).colorScheme.primary,
-                                                            fontWeight: FontWeight.w700,
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .bodyText1!
+                                                          .copyWith(
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .colorScheme
+                                                                .primary,
+                                                            fontWeight:
+                                                                FontWeight.w700,
                                                           ),
                                                     )
                                                   : Text(
                                                       "${homeViewModel.homeNewsVideosBlogsResponse!.blogs![pos].timestamp}",
-                                                      textAlign: TextAlign.center,
-                                                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                            color: Theme.of(context).colorScheme.primary,
-                                                            fontWeight: FontWeight.w700,
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .bodyText1!
+                                                          .copyWith(
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .colorScheme
+                                                                .primary,
+                                                            fontWeight:
+                                                                FontWeight.w700,
                                                           ),
                                                     ),
                                           const SizedBox(
                                             height: 10,
                                           ),
-                                          homeViewModel.selectedNewsTabIndex == 0
+                                          homeViewModel.selectedNewsTabIndex ==
+                                                  0
                                               ? Container(
                                                   height: 70,
                                                   child: HtmlWidget(
-                                                    textStyle: TextStyle(overflow: TextOverflow.ellipsis),
+                                                    textStyle: TextStyle(
+                                                        overflow: TextOverflow
+                                                            .ellipsis),
                                                     "${homeViewModel.homeNewsVideosBlogsResponse!.news![pos].title}",
                                                   ),
                                                 )
-                                              : homeViewModel.selectedNewsTabIndex == 1
+                                              : homeViewModel
+                                                          .selectedNewsTabIndex ==
+                                                      1
                                                   ? Container(
                                                       height: 70,
                                                       child: HtmlWidget(
-                                                        textStyle: TextStyle(overflow: TextOverflow.ellipsis),
+                                                        textStyle: TextStyle(
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis),
                                                         "${homeViewModel.homeNewsVideosBlogsResponse!.videos![pos].title}",
                                                       ),
                                                     )
                                                   : Container(
                                                       height: 70,
                                                       child: HtmlWidget(
-                                                        textStyle: TextStyle(overflow: TextOverflow.ellipsis),
+                                                        textStyle: TextStyle(
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis),
                                                         "${homeViewModel.homeNewsVideosBlogsResponse!.blogs![pos].title}",
                                                       ),
                                                     ),
@@ -1746,12 +2303,16 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                               );
                             },
                             itemCount: homeViewModel.selectedNewsTabIndex == 0
-                                ? homeViewModel.homeNewsVideosBlogsResponse == null
+                                ? homeViewModel.homeNewsVideosBlogsResponse ==
+                                        null
                                     ? 0
-                                    : homeViewModel.homeNewsVideosBlogsResponse!.news!.length
+                                    : homeViewModel.homeNewsVideosBlogsResponse!
+                                        .news!.length
                                 : homeViewModel.selectedNewsTabIndex == 1
-                                    ? homeViewModel.homeNewsVideosBlogsResponse!.videos!.length
-                                    : homeViewModel.homeNewsVideosBlogsResponse!.blogs!.length,
+                                    ? homeViewModel.homeNewsVideosBlogsResponse!
+                                        .videos!.length
+                                    : homeViewModel.homeNewsVideosBlogsResponse!
+                                        .blogs!.length,
                           ),
                         );
                 }),
@@ -1767,10 +2328,17 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                               child: SmoothPageIndicator(
                                 controller: controller1,
                                 count: homeViewModel.selectedNewsTabIndex == 0
-                                    ? homeViewModel.homeNewsVideosBlogsResponse!.news!.length
+                                    ? homeViewModel.homeNewsVideosBlogsResponse!
+                                        .news!.length
                                     : homeViewModel.selectedNewsTabIndex == 1
-                                        ? homeViewModel.homeNewsVideosBlogsResponse!.videos!.length
-                                        : homeViewModel.homeNewsVideosBlogsResponse!.blogs!.length,
+                                        ? homeViewModel
+                                            .homeNewsVideosBlogsResponse!
+                                            .videos!
+                                            .length
+                                        : homeViewModel
+                                            .homeNewsVideosBlogsResponse!
+                                            .blogs!
+                                            .length,
                                 effect: WormEffect(
                                     dotHeight: 10,
                                     dotWidth: 10,
@@ -1788,7 +2356,10 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => NewsAndUpdatesPage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => NewsAndUpdatesPage()));
                   },
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 2),
@@ -1816,13 +2387,14 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                     //   Navigator.push(context, MaterialPageRoute(builder: (context) => NewsAndUpdatesPage()));
                     // },
                     child: Padding(
-                      padding: const EdgeInsets.only(right: 8.0, left: 8, top: 12, bottom: 12),
+                      padding: const EdgeInsets.only(
+                          right: 8.0, left: 8, top: 12, bottom: 12),
                       child: Text(
                         'VIEW ALL',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText1!
-                            .copyWith(color: Color(0XFFFFFFFF), fontWeight: FontWeight.w600, letterSpacing: 1),
+                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            color: Color(0XFFFFFFFF),
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 1),
                       ),
                     ),
                   ),
@@ -1834,7 +2406,9 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                   color: Color(0Xff2D2D2D),
                   child: Column(
                     children: [
-                      Container(width: MediaQuery.of(context).size.width, child: Footer()),
+                      Container(
+                          width: MediaQuery.of(context).size.width,
+                          child: Footer()),
                       Container(
                         color: Color(0Xff1F2A52),
                         height: 50,

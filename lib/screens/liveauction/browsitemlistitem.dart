@@ -4,11 +4,13 @@ import 'dart:convert';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:giftex/data/local/client/prefs.dart';
 import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart'
     as bottom;
 import 'package:giftex/screens/liveauction/components/image/imagecomponent.dart';
 import 'package:giftex/screens/liveauction/liveauction.dart';
 import 'package:giftex/screens/productdetailspage/productdetailpage.dart';
+import 'package:giftex/screens/signup/login.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
 import 'package:intl/intl.dart';
 
@@ -34,6 +36,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem>
   bool isFirst = false;
   bool isFirstLike = false;
   bool isRFirstLike = false;
+  LocalSharedPrefrence? preference;
 
   initiateTimer() {
     // stopTimer();
@@ -54,6 +57,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem>
 
   @override
   void initState() {
+    preference = new LocalSharedPrefrence();
     print("remaining time ${widget.lots.status!}");
 
     if ((widget.lots.status ?? "") != "UpComing") {
@@ -1520,13 +1524,32 @@ class _BrowseItemListItemState extends State<BrowseItemListItem>
                             child: Text("${widget.lots.bidCount} BIDS"),
                           ),
                           SizedBox(height: 12),
-                          Icon(
-                            (widget.lots.isLiked ?? "false") == "true"
-                                ? Icons.favorite
-                                : Icons.favorite_border,
-                            color: (widget.lots.isLiked ?? "false") == "true"
-                                ? Colors.pink
-                                : Colors.grey,
+                          InkWell(
+                            onTap: () {
+                              if (preference!.getLoginStatus()) {
+                                ((widget.lots.isLiked ?? "false") == "true"
+                                    ? "false"
+                                    : "true");
+                              } else {
+                                WidgetsBinding.instance
+                                    ?.addPostFrameCallback((_) {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return PopupWidget();
+                                    },
+                                  );
+                                });
+                              }
+                            },
+                            child: Icon(
+                              (widget.lots.isLiked ?? "false") == "true"
+                                  ? Icons.favorite
+                                  : Icons.favorite_border,
+                              color: (widget.lots.isLiked ?? "false") == "true"
+                                  ? Colors.pink
+                                  : Colors.grey,
+                            ),
                           ),
                           //     :Icon(
                           //   Icons.favorite,
@@ -2998,4 +3021,25 @@ class _BrowseItemListItemState extends State<BrowseItemListItem>
   @override
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => false;
+}
+
+class PopupWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) => AlertDialog(
+        title: Text('Sign up / Sign in'),
+        content: Text('You need to sign up or sign in first.'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Loginpage()));
+            },
+            child: Text('Ok'),
+          ),
+        ],
+      );
 }

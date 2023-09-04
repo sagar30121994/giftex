@@ -256,6 +256,40 @@ mixin _$HomeViewModel on _HomeViewModel, Store {
     });
   }
 
+  late final _$getDepartmentsResponseAtom =
+      Atom(name: '_HomeViewModel.getDepartmentsResponse', context: context);
+
+  @override
+  GetDepartmentsResponse? get getDepartmentsResponse {
+    _$getDepartmentsResponseAtom.reportRead();
+    return super.getDepartmentsResponse;
+  }
+
+  @override
+  set getDepartmentsResponse(GetDepartmentsResponse? value) {
+    _$getDepartmentsResponseAtom
+        .reportWrite(value, super.getDepartmentsResponse, () {
+      super.getDepartmentsResponse = value;
+    });
+  }
+
+  late final _$isloadingdepartmentsAtom =
+      Atom(name: '_HomeViewModel.isloadingdepartments', context: context);
+
+  @override
+  bool get isloadingdepartments {
+    _$isloadingdepartmentsAtom.reportRead();
+    return super.isloadingdepartments;
+  }
+
+  @override
+  set isloadingdepartments(bool value) {
+    _$isloadingdepartmentsAtom.reportWrite(value, super.isloadingdepartments,
+        () {
+      super.isloadingdepartments = value;
+    });
+  }
+
   late final _$getRecordPriceArtworkResponseAtom = Atom(
       name: '_HomeViewModel.getRecordPriceArtworkResponse', context: context);
 
@@ -308,6 +342,8 @@ getBuyDetailsResponse: ${getBuyDetailsResponse},
 isloadingbuyDetails: ${isloadingbuyDetails},
 getSellDetailsResponse: ${getSellDetailsResponse},
 isloadingsellDetails: ${isloadingsellDetails},
+getDepartmentsResponse: ${getDepartmentsResponse},
+isloadingdepartments: ${isloadingdepartments},
 getRecordPriceArtworkResponse: ${getRecordPriceArtworkResponse},
 isloadinggetpriceartwork: ${isloadinggetpriceartwork}
     ''';

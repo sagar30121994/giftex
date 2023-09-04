@@ -147,10 +147,15 @@ class _DashboardUiState extends State<DashboardUi> {
                                 )),
                             Text(
                               "HOME",
-                              style: Theme.of(context).textTheme.caption!.copyWith(
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .caption!
+                                  .copyWith(
                                     letterSpacing: 1,
                                     fontWeight:
-                                        bottomViewModel.selectedIndex == 0 ? FontWeight.bold : FontWeight.normal,
+                                        bottomViewModel.selectedIndex == 0
+                                            ? FontWeight.bold
+                                            : FontWeight.normal,
                                     color: bottomViewModel.selectedIndex == 0
                                         ? Theme.of(context).colorScheme.primary
                                         : Color(0xff2D2D2D),
@@ -181,10 +186,15 @@ class _DashboardUiState extends State<DashboardUi> {
                             // ),
                             Text(
                               "SERVICE",
-                              style: Theme.of(context).textTheme.caption!.copyWith(
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .caption!
+                                  .copyWith(
                                     letterSpacing: 1,
                                     fontWeight:
-                                        bottomViewModel.selectedIndex == 1 ? FontWeight.bold : FontWeight.normal,
+                                        bottomViewModel.selectedIndex == 1
+                                            ? FontWeight.bold
+                                            : FontWeight.normal,
                                     color: bottomViewModel.selectedIndex == 1
                                         ? Theme.of(context).colorScheme.primary
                                         : Color(0xff2D2D2D),
@@ -202,10 +212,12 @@ class _DashboardUiState extends State<DashboardUi> {
                               backgroundColor: Colors.transparent,
                               builder: (context) {
                                 return Container(
-                                  height: MediaQuery.of(context).size.height * .7,
+                                  height:
+                                      MediaQuery.of(context).size.height * .7,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(30), topLeft: Radius.circular(30)),
+                                          topRight: Radius.circular(30),
+                                          topLeft: Radius.circular(30)),
                                       color: Colors.white),
                                   child: SingleChildScrollView(
                                     child: Padding(
@@ -233,9 +245,13 @@ class _DashboardUiState extends State<DashboardUi> {
                                               title: Text(
                                                 "JEWELLERY",
                                                 textAlign: TextAlign.start,
-                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .subtitle1!
+                                                    .copyWith(
                                                       color: Color(0XFF8C9FB1),
-                                                      fontWeight: FontWeight.w700,
+                                                      fontWeight:
+                                                          FontWeight.w700,
                                                     ),
                                               ),
                                               children: <Widget>[
@@ -244,8 +260,12 @@ class _DashboardUiState extends State<DashboardUi> {
                                                   child: Column(
                                                     children: [
                                                       Row(
-                                                        mainAxisAlignment: MainAxisAlignment.start,
-                                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
                                                         children: [
                                                           Image.asset(
                                                             "image/Group (21).png",
@@ -257,24 +277,36 @@ class _DashboardUiState extends State<DashboardUi> {
                                                               // Navigator.push(context, MaterialPageRoute(builder: (context) =>HowToBuyPage()));
                                                             },
                                                             child: Padding(
-                                                              padding: const EdgeInsets.only(left: 10.0, top: 0),
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .only(
+                                                                      left:
+                                                                          10.0,
+                                                                      top: 0),
                                                               child: Row(
-                                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .start,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
                                                                 children: [
                                                                   Text(
                                                                     "ART",
-                                                                    textAlign: TextAlign.start,
-                                                                    style: Theme.of(context)
-                                                                        .textTheme
-                                                                        .headline6!
-                                                                        .copyWith(
-                                                                            color: Color(0XFF5D7E4D),
-                                                                            fontWeight:
-                                                                                bottomViewModel.selectedIndex == 0
-                                                                                    ? FontWeight.bold
-                                                                                    : FontWeight.normal,
-                                                                            letterSpacing: 1),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .start,
+                                                                    style: Theme.of(context).textTheme.headline6!.copyWith(
+                                                                        color: Color(
+                                                                            0XFF5D7E4D),
+                                                                        fontWeight: bottomViewModel.selectedIndex ==
+                                                                                0
+                                                                            ? FontWeight
+                                                                                .bold
+                                                                            : FontWeight
+                                                                                .normal,
+                                                                        letterSpacing:
+                                                                            1),
                                                                   ),
                                                                 ],
                                                               ),
@@ -287,18 +319,36 @@ class _DashboardUiState extends State<DashboardUi> {
                                                           // Navigator.push(context, MaterialPageRoute(builder: (context) =>HowToBuyPage()));
                                                         },
                                                         child: Padding(
-                                                          padding: const EdgeInsets.only(left: 20.0, top: 10),
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 20.0,
+                                                                  top: 10),
                                                           child: Row(
-                                                            mainAxisAlignment: MainAxisAlignment.start,
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
                                                             children: [
                                                               Text(
                                                                 "Painting",
-                                                                textAlign: TextAlign.start,
-                                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                    color: Color(0XFF171515),
-                                                                    fontWeight: FontWeight.w500,
-                                                                    letterSpacing: 1),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .start,
+                                                                style: Theme.of(
+                                                                        context)
+                                                                    .textTheme
+                                                                    .subtitle1!
+                                                                    .copyWith(
+                                                                        color: Color(
+                                                                            0XFF171515),
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w500,
+                                                                        letterSpacing:
+                                                                            1),
                                                               ),
                                                             ],
                                                           ),
@@ -313,36 +363,72 @@ class _DashboardUiState extends State<DashboardUi> {
                                                           // Navigator.push(context, MaterialPageRoute(builder: (context) => HowToSellPage()));
                                                         },
                                                         child: Padding(
-                                                          padding: const EdgeInsets.only(left: 20.0, top: 16),
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 20.0,
+                                                                  top: 16),
                                                           child: Row(
-                                                            mainAxisAlignment: MainAxisAlignment.start,
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
                                                             children: [
                                                               Text(
                                                                 "Sculpture",
-                                                                textAlign: TextAlign.start,
-                                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                    color: Color(0XFF171515),
-                                                                    fontWeight: FontWeight.w500,
-                                                                    letterSpacing: 1),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .start,
+                                                                style: Theme.of(
+                                                                        context)
+                                                                    .textTheme
+                                                                    .subtitle1!
+                                                                    .copyWith(
+                                                                        color: Color(
+                                                                            0XFF171515),
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w500,
+                                                                        letterSpacing:
+                                                                            1),
                                                               ),
                                                             ],
                                                           ),
                                                         ),
                                                       ),
                                                       Padding(
-                                                        padding: const EdgeInsets.only(left: 20.0, top: 16),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                left: 20.0,
+                                                                top: 16),
                                                         child: Row(
-                                                          mainAxisAlignment: MainAxisAlignment.start,
-                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
                                                           children: [
                                                             Text(
                                                               "Photography",
-                                                              textAlign: TextAlign.start,
-                                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                  color: Color(0XFF171515),
-                                                                  fontWeight: FontWeight.w500,
-                                                                  letterSpacing: 1),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .start,
+                                                              style: Theme.of(
+                                                                      context)
+                                                                  .textTheme
+                                                                  .subtitle1!
+                                                                  .copyWith(
+                                                                      color: Color(
+                                                                          0XFF171515),
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500,
+                                                                      letterSpacing:
+                                                                          1),
                                                             ),
                                                           ],
                                                         ),
@@ -352,21 +438,41 @@ class _DashboardUiState extends State<DashboardUi> {
                                                           Navigator.push(
                                                               context,
                                                               MaterialPageRoute(
-                                                                  builder: (context) => ArtMovementPage()));
+                                                                  builder:
+                                                                      (context) =>
+                                                                          ArtMovementPage()));
                                                         },
                                                         child: Padding(
-                                                          padding: const EdgeInsets.only(left: 20.0, top: 16),
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 20.0,
+                                                                  top: 16),
                                                           child: Row(
-                                                            mainAxisAlignment: MainAxisAlignment.start,
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
                                                             children: [
                                                               Text(
                                                                 "Modern Art",
-                                                                textAlign: TextAlign.start,
-                                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                    color: Color(0XFF171515),
-                                                                    fontWeight: FontWeight.w500,
-                                                                    letterSpacing: 1),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .start,
+                                                                style: Theme.of(
+                                                                        context)
+                                                                    .textTheme
+                                                                    .subtitle1!
+                                                                    .copyWith(
+                                                                        color: Color(
+                                                                            0XFF171515),
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w500,
+                                                                        letterSpacing:
+                                                                            1),
                                                               ),
                                                             ],
                                                           ),
@@ -384,11 +490,15 @@ class _DashboardUiState extends State<DashboardUi> {
                                           Container(
                                             decoration: BoxDecoration(
                                                 color: Color(0xffEAEEF2),
-                                                image: DecorationImage(image: AssetImage("image/maskbg.png"))),
+                                                image: DecorationImage(
+                                                    image: AssetImage(
+                                                        "image/maskbg.png"))),
                                             child: ExpansionTileCard(
                                               finalPadding: EdgeInsets.all(0),
                                               baseColor: Color(0xffFFFFFF),
-                                              expandedColor: Colors.lightBlueAccent.withOpacity(.1),
+                                              expandedColor: Colors
+                                                  .lightBlueAccent
+                                                  .withOpacity(.1),
                                               key: cardA,
 
                                               // trailing: Icon(Icons.add,size: 18,color: Colors.black,),
@@ -404,9 +514,13 @@ class _DashboardUiState extends State<DashboardUi> {
                                               title: Text(
                                                 "ART",
                                                 textAlign: TextAlign.start,
-                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .subtitle1!
+                                                    .copyWith(
                                                       color: Colors.black,
-                                                      fontWeight: FontWeight.w700,
+                                                      fontWeight:
+                                                          FontWeight.w700,
                                                     ),
                                               ),
                                               children: <Widget>[
@@ -419,18 +533,36 @@ class _DashboardUiState extends State<DashboardUi> {
                                                           // Navigator.push(context, MaterialPageRoute(builder: (context) =>HowToBuyPage()));
                                                         },
                                                         child: Padding(
-                                                          padding: const EdgeInsets.only(left: 20.0, top: 10),
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 20.0,
+                                                                  top: 10),
                                                           child: Row(
-                                                            mainAxisAlignment: MainAxisAlignment.start,
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
                                                             children: [
                                                               Text(
                                                                 "Painting",
-                                                                textAlign: TextAlign.start,
-                                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                    color: Color(0XFF171515),
-                                                                    fontWeight: FontWeight.w500,
-                                                                    letterSpacing: 1),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .start,
+                                                                style: Theme.of(
+                                                                        context)
+                                                                    .textTheme
+                                                                    .subtitle1!
+                                                                    .copyWith(
+                                                                        color: Color(
+                                                                            0XFF171515),
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w500,
+                                                                        letterSpacing:
+                                                                            1),
                                                               ),
                                                             ],
                                                           ),
@@ -445,36 +577,72 @@ class _DashboardUiState extends State<DashboardUi> {
                                                           // Navigator.push(context, MaterialPageRoute(builder: (context) => HowToSellPage()));
                                                         },
                                                         child: Padding(
-                                                          padding: const EdgeInsets.only(left: 20.0, top: 16),
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 20.0,
+                                                                  top: 16),
                                                           child: Row(
-                                                            mainAxisAlignment: MainAxisAlignment.start,
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
                                                             children: [
                                                               Text(
                                                                 "Sculpture",
-                                                                textAlign: TextAlign.start,
-                                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                    color: Color(0XFF171515),
-                                                                    fontWeight: FontWeight.w500,
-                                                                    letterSpacing: 1),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .start,
+                                                                style: Theme.of(
+                                                                        context)
+                                                                    .textTheme
+                                                                    .subtitle1!
+                                                                    .copyWith(
+                                                                        color: Color(
+                                                                            0XFF171515),
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w500,
+                                                                        letterSpacing:
+                                                                            1),
                                                               ),
                                                             ],
                                                           ),
                                                         ),
                                                       ),
                                                       Padding(
-                                                        padding: const EdgeInsets.only(left: 20.0, top: 16),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                left: 20.0,
+                                                                top: 16),
                                                         child: Row(
-                                                          mainAxisAlignment: MainAxisAlignment.start,
-                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
                                                           children: [
                                                             Text(
                                                               "Photography",
-                                                              textAlign: TextAlign.start,
-                                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                  color: Color(0XFF171515),
-                                                                  fontWeight: FontWeight.w500,
-                                                                  letterSpacing: 1),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .start,
+                                                              style: Theme.of(
+                                                                      context)
+                                                                  .textTheme
+                                                                  .subtitle1!
+                                                                  .copyWith(
+                                                                      color: Color(
+                                                                          0XFF171515),
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500,
+                                                                      letterSpacing:
+                                                                          1),
                                                             ),
                                                           ],
                                                         ),
@@ -484,21 +652,41 @@ class _DashboardUiState extends State<DashboardUi> {
                                                           Navigator.push(
                                                               context,
                                                               MaterialPageRoute(
-                                                                  builder: (context) => ArtMovementPage()));
+                                                                  builder:
+                                                                      (context) =>
+                                                                          ArtMovementPage()));
                                                         },
                                                         child: Padding(
-                                                          padding: const EdgeInsets.only(left: 20.0, top: 16),
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 20.0,
+                                                                  top: 16),
                                                           child: Row(
-                                                            mainAxisAlignment: MainAxisAlignment.start,
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
                                                             children: [
                                                               Text(
                                                                 "Modern Art",
-                                                                textAlign: TextAlign.start,
-                                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                    color: Color(0XFF171515),
-                                                                    fontWeight: FontWeight.w500,
-                                                                    letterSpacing: 1),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .start,
+                                                                style: Theme.of(
+                                                                        context)
+                                                                    .textTheme
+                                                                    .subtitle1!
+                                                                    .copyWith(
+                                                                        color: Color(
+                                                                            0XFF171515),
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w500,
+                                                                        letterSpacing:
+                                                                            1),
                                                               ),
                                                             ],
                                                           ),
@@ -533,9 +721,13 @@ class _DashboardUiState extends State<DashboardUi> {
                                               title: Text(
                                                 "FURNITURE",
                                                 textAlign: TextAlign.start,
-                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .subtitle1!
+                                                    .copyWith(
                                                       color: Color(0XFF8C9FB1),
-                                                      fontWeight: FontWeight.w700,
+                                                      fontWeight:
+                                                          FontWeight.w700,
                                                     ),
                                               ),
                                               children: <Widget>[],
@@ -561,9 +753,13 @@ class _DashboardUiState extends State<DashboardUi> {
                                               title: Text(
                                                 "WATCHES",
                                                 textAlign: TextAlign.start,
-                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .subtitle1!
+                                                    .copyWith(
                                                       color: Color(0XFF8C9FB1),
-                                                      fontWeight: FontWeight.w700,
+                                                      fontWeight:
+                                                          FontWeight.w700,
                                                     ),
                                               ),
                                               children: <Widget>[],
@@ -589,9 +785,13 @@ class _DashboardUiState extends State<DashboardUi> {
                                               title: Text(
                                                 "BOOKS",
                                                 textAlign: TextAlign.start,
-                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .subtitle1!
+                                                    .copyWith(
                                                       color: Color(0XFF8C9FB1),
-                                                      fontWeight: FontWeight.w700,
+                                                      fontWeight:
+                                                          FontWeight.w700,
                                                     ),
                                               ),
                                               children: <Widget>[],
@@ -617,9 +817,13 @@ class _DashboardUiState extends State<DashboardUi> {
                                               title: Text(
                                                 "MERCENDISE",
                                                 textAlign: TextAlign.start,
-                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .subtitle1!
+                                                    .copyWith(
                                                       color: Color(0XFF8C9FB1),
-                                                      fontWeight: FontWeight.w700,
+                                                      fontWeight:
+                                                          FontWeight.w700,
                                                     ),
                                               ),
                                               children: <Widget>[],
@@ -639,14 +843,21 @@ class _DashboardUiState extends State<DashboardUi> {
                                                 child: SizedBox(
                                                     width: 8,
                                                     height: 8,
-                                                    child: Image.asset("image/print.png", width: 8, height: 8)),
+                                                    child: Image.asset(
+                                                        "image/print.png",
+                                                        width: 8,
+                                                        height: 8)),
                                               ),
                                               title: Text(
                                                 "PRINT",
                                                 textAlign: TextAlign.start,
-                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .subtitle1!
+                                                    .copyWith(
                                                       color: Color(0XFF8C9FB1),
-                                                      fontWeight: FontWeight.w700,
+                                                      fontWeight:
+                                                          FontWeight.w700,
                                                     ),
                                               ),
                                               children: <Widget>[],
@@ -676,10 +887,15 @@ class _DashboardUiState extends State<DashboardUi> {
                             //   Icons.shopping_bag_outlined,size: 32),
                             Text(
                               "STORE",
-                              style: Theme.of(context).textTheme.caption!.copyWith(
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .caption!
+                                  .copyWith(
                                     letterSpacing: 1,
                                     fontWeight:
-                                        bottomViewModel.selectedIndex == 2 ? FontWeight.bold : FontWeight.normal,
+                                        bottomViewModel.selectedIndex == 2
+                                            ? FontWeight.bold
+                                            : FontWeight.normal,
                                     color: bottomViewModel.selectedIndex == 2
                                         ? Theme.of(context).colorScheme.primary
                                         : Color(0xff2D2D2D),
@@ -692,10 +908,6 @@ class _DashboardUiState extends State<DashboardUi> {
                         onTap: () {
                           if (preference!.getLoginStatus()) {
                             bottomViewModel.selectedIndex = 3;
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (context) => Profilepage()));
                           } else {
                             WidgetsBinding.instance?.addPostFrameCallback((_) {
                               showDialog(
@@ -724,10 +936,15 @@ class _DashboardUiState extends State<DashboardUi> {
 
                             Text(
                               "PROFILE",
-                              style: Theme.of(context).textTheme.caption!.copyWith(
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .caption!
+                                  .copyWith(
                                     letterSpacing: 1,
                                     fontWeight:
-                                        bottomViewModel.selectedIndex == 3 ? FontWeight.bold : FontWeight.normal,
+                                        bottomViewModel.selectedIndex == 3
+                                            ? FontWeight.bold
+                                            : FontWeight.normal,
                                     color: bottomViewModel.selectedIndex == 3
                                         ? Theme.of(context).colorScheme.primary
                                         : Color(0xff2D2D2D),
@@ -742,7 +959,8 @@ class _DashboardUiState extends State<DashboardUi> {
               }),
             ),
 
-            floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
 
             floatingActionButton: FloatingActionButton(
               backgroundColor: Color(0xffE74B52),
@@ -753,8 +971,9 @@ class _DashboardUiState extends State<DashboardUi> {
                     builder: (context) {
                       return Container(
                         decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.only(topRight: Radius.circular(30), topLeft: Radius.circular(30)),
+                            borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(30),
+                                topLeft: Radius.circular(30)),
                             color: Colors.white),
                         padding: const EdgeInsets.all(16.0),
                         child: Column(
@@ -770,7 +989,10 @@ class _DashboardUiState extends State<DashboardUi> {
                                 Text(
                                   "AUCTION",
                                   textAlign: TextAlign.center,
-                                  style: Theme.of(context).textTheme.headline6!.copyWith(
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline6!
+                                      .copyWith(
                                         color: Color(0xff000000),
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -805,14 +1027,18 @@ class _DashboardUiState extends State<DashboardUi> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Image.asset("image/Vector 8.png", width: 30, height: 21),
+                                  Image.asset("image/Vector 8.png",
+                                      width: 30, height: 21),
                                   SizedBox(
                                     width: 16,
                                   ),
                                   Text(
                                     "LIVE",
                                     textAlign: TextAlign.center,
-                                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .subtitle1!
+                                        .copyWith(
                                           color: Color(0Xff8C9FB1),
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -835,14 +1061,18 @@ class _DashboardUiState extends State<DashboardUi> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Image.asset("image/upcomming.png", width: 30, height: 21),
+                                  Image.asset("image/upcomming.png",
+                                      width: 30, height: 21),
                                   SizedBox(
                                     width: 16,
                                   ),
                                   Text(
                                     "UPCOMING",
                                     textAlign: TextAlign.center,
-                                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .subtitle1!
+                                        .copyWith(
                                           color: Color(0Xff8C9FB1),
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -865,14 +1095,18 @@ class _DashboardUiState extends State<DashboardUi> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Image.asset("image/past.png", width: 30, height: 21),
+                                  Image.asset("image/past.png",
+                                      width: 30, height: 21),
                                   SizedBox(
                                     width: 16,
                                   ),
                                   Text(
                                     "PAST",
                                     textAlign: TextAlign.center,
-                                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .subtitle1!
+                                        .copyWith(
                                           color: Color(0Xff8C9FB1),
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -1025,22 +1259,21 @@ class _DashboardUiState extends State<DashboardUi> {
 
 class PopupWidget extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text('Sign up / Sign in'),
-      content: Text('You need to sign up or sign in first.'),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.of(context).pop(false),
-          child: Text('Cancel'),
-        ),
-        TextButton(
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Loginpage()));
-          },
-          child: Text('Ok'),
-        ),
-      ],
-    );
-  }
+  Widget build(BuildContext context) => AlertDialog(
+        title: Text('Sign up / Sign in'),
+        content: Text('You need to sign up or sign in first.'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Loginpage()));
+            },
+            child: Text('Ok'),
+          ),
+        ],
+      );
 }
