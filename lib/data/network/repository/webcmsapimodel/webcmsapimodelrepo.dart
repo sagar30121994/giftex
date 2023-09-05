@@ -5,6 +5,7 @@ import 'package:giftex/data/local/client/prefs.dart';
 import 'package:giftex/data/network/models/responce/cmsweb/careersresponse.dart';
 import 'package:giftex/data/network/models/responce/cmsweb/whoweare.dart';
 import 'package:giftex/data/network/models/responce/home/GetSellDetailsResponse.dart';
+import 'package:giftex/data/network/models/responce/home/getArtMovementResponse.dart';
 import 'package:giftex/data/network/models/responce/home/getDepartmentsResponse.dart';
 import 'package:giftex/data/network/models/responce/home/getOurCollectorResponse.dart';
 import 'package:giftex/data/network/models/responce/home/homeresponse.dart';
@@ -32,7 +33,7 @@ class WebCmsApiModelRepo {
 
   Future<HttpResponse> getBuyDetails() async {
     HttpResponse httpResponse = HttpResponse();
-    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
     await httpClient!.post(BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().GetBuyDetails, body: {
       "authkey_web": "${localSharedPrefrence!.authkey ?? ''}",
       "authkey_mobile": "",
@@ -45,6 +46,38 @@ class WebCmsApiModelRepo {
         httpResponse.status = responce.statusCode;
         httpResponse.message = 'Successful';
         httpResponse.data = GetBuyDetailsResponse.fromJson(responce.data);
+      } else {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = responce.data['message'];
+        httpResponse.data = null;
+      }
+      return httpResponse;
+    }).catchError((err) {
+      print(err);
+      httpResponse.status = 400;
+      httpResponse.message = err.toString();
+      httpResponse.data = err.toString();
+      return httpResponse;
+    });
+
+    return httpResponse;
+  }
+
+  Future<HttpResponse> getArtsMovement() async {
+    HttpResponse httpResponse = HttpResponse();
+    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    await httpClient!.post(BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().GetArtMovement, body: {
+      "authkey_web": "${localSharedPrefrence!.authkey ?? ''}",
+      "authkey_mobile": "",
+      "userid": "${localSharedPrefrence!.userId ?? ''}",
+      "CRMClientID": "${localSharedPrefrence!.crmId ?? ''}",
+    }).then((responce) async {
+      print(responce);
+
+      if (responce.statusCode == 200) {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = 'Successful';
+        httpResponse.data = GetArtMovementResponse.fromJson(responce.data);
       } else {
         httpResponse.status = responce.statusCode;
         httpResponse.message = responce.data['message'];
@@ -1132,6 +1165,44 @@ class WebCmsApiModelRepo {
     // String userlogin = json.encode(LoginReqestModel);
     // httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
     await httpClient!.post(BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().recordpricelots, body: {
+      "userId": userid,
+      "authkey_mobile": "",
+      "authkey_web": authKey,
+      "CRMClientID": crmClientId
+    }).then((responce) async {
+      print(responce);
+
+      if (responce.statusCode == 200) {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = 'Successful';
+        httpResponse.data = UpComingLotsResponse.fromJson(responce.data);
+        // httpResponse.data = LoginResponse.fromJson(responce.data);
+      } else {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = responce.data['message'];
+        httpResponse.data = null;
+      }
+      return httpResponse;
+    }).catchError((err) {
+      print(err);
+      httpResponse.status = 400;
+      httpResponse.message = err.toString();
+      httpResponse.data = err.toString();
+      return httpResponse;
+    });
+
+    return httpResponse;
+  }
+
+  Future<HttpResponse> featureditems() async {
+    HttpResponse httpResponse = HttpResponse();
+    String userid = localSharedPrefrence!.getUserId();
+    String authKey = localSharedPrefrence!.getAuthKeyWeb();
+    String crmClientId = localSharedPrefrence!.getCrmClinetId();
+
+    // String userlogin = json.encode(LoginReqestModel);
+    // httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    await httpClient!.post(BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().HomeHighlightsLots, body: {
       "userId": userid,
       "authkey_mobile": "",
       "authkey_web": authKey,

@@ -62,6 +62,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
     // homeViewModel.getHomeUpcommingAuctionBaner();
     homeViewModel.gethomeRecordPriceLots();
     homeViewModel.getNewsVideos();
+    homeViewModel.getfeatureditems();
     auctionViewModel.getUpcommingAuction("UpComing");
 
     super.initState();
@@ -333,7 +334,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                   height: 16,
                 ),
                 Container(
-                  height: 440,
+                  height: 460,
                   width: MediaQuery.of(context).size.width,
                   color: Theme.of(context).colorScheme.surface,
                   child: Column(
@@ -357,47 +358,125 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                       SizedBox(
                         height: 16,
                       ),
-                      Container(
-                          // width: 45,
-                          color: Color(0XFF8DAB7F),
-                          child: Image.asset("image/Bitmap1.png")),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * .70,
-                        child: Text(
-                          "Antique Elephant Buddha",
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                color: Color(0xff373737),
-                                fontWeight: FontWeight.w700,
-                              ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * .70,
-                        child: Text(
-                          "₹ 20,000",
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                color: Theme.of(context).colorScheme.primary,
-                                fontWeight: FontWeight.w600,
-                              ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 16,
-                      ),
+                      Observer(builder: (context) {
+                        return homeViewModel.isloadingfeatureditems
+                            ? Container()
+                            : Container(
+                                height: 320,
+                                width: MediaQuery.of(context).size.width,
+                                // padding: EdgeInsets.all(12),
+                                child: ListView.builder(
+                                  controller: controller,
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder: (BuildContext context, int pos) {
+                                    return Padding(
+                                      padding: const EdgeInsets.all(0.0),
+                                      child: Stack(
+                                        children: [
+                                          Positioned(
+                                            bottom: 0,
+                                            left: 50,
+                                            right: 50,
+                                            child: Container(
+                                              //replace this Container with your Card
+                                              // height: 385,
+                                              width: 200,
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 25.0, right: 25),
+                                            child: Image.network(
+                                              "${homeViewModel.getFeaturedItemsResponse!.result!.lots![pos].thumbImage}",
+                                              height: 210,
+                                              width: 155,
+                                              fit: BoxFit.fill,
+                                            ),
+                                          ),
+                                          Padding(
+                                              padding:
+                                                  EdgeInsets.only(top: 430 / 2.0, bottom: 0, left: 25.0, right: 25),
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  SizedBox(
+                                                    width: 20,
+                                                  ),
+                                                  Text(
+                                                    "${homeViewModel.getFeaturedItemsResponse!.result!.lots![pos].info!.title ?? ''}",
+                                                    textAlign: TextAlign.start,
+                                                    maxLines: 1,
+                                                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                        color: Color(0xff2D2D2D),
+                                                        fontWeight: FontWeight.w400,
+                                                        letterSpacing: 1.5,
+                                                        overflow: TextOverflow.ellipsis),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 4,
+                                                  ),
+                                                  Text(
+                                                    "₹ ${homeViewModel.getFeaturedItemsResponse!.result!.lots![pos].liveStatus!.currentBid!.iNR}",
+                                                    textAlign: TextAlign.center,
+                                                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                          color: Theme.of(context).colorScheme.primary,
+                                                          fontWeight: FontWeight.bold,
+                                                        ),
+                                                  ),
+                                                ],
+                                              )),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                  itemCount: homeViewModel.getFeaturedItemsResponse == null
+                                      ? 0
+                                      : homeViewModel.getFeaturedItemsResponse!.result!.lots!.length,
+                                ),
+                              );
+                      }),
+                      // Container(
+                      //     // width: 45,
+                      //     color: Color(0XFF8DAB7F),
+                      //     child: Image.asset("image/Bitmap1.png")),
+                      // SizedBox(
+                      //   height: 16,
+                      // ),
+                      // SizedBox(
+                      //   width: MediaQuery.of(context).size.width * .70,
+                      //   child: Text(
+                      //     "Antique Elephant Buddha",
+                      //     textAlign: TextAlign.center,
+                      //     style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                      //           color: Color(0xff373737),
+                      //           fontWeight: FontWeight.w700,
+                      //         ),
+                      //   ),
+                      // ),
+                      // SizedBox(
+                      //   height: 16,
+                      // ),
+                      // SizedBox(
+                      //   width: MediaQuery.of(context).size.width * .70,
+                      //   child: Text(
+                      //     "₹ 20,000",
+                      //     textAlign: TextAlign.center,
+                      //     style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                      //           color: Theme.of(context).colorScheme.primary,
+                      //           fontWeight: FontWeight.w600,
+                      //         ),
+                      //   ),
+                      // ),
+                      // SizedBox(
+                      //   height: 16,
+                      // ),
                       SizedBox(
                         height: 50,
                         child: Center(
                           child: InkWell(
                             onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => NewsAndUpdatesPage()));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => DashboardUi(7)));
                             },
                             child: Container(
                               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 2),
@@ -422,7 +501,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                             ),
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),

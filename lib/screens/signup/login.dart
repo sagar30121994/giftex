@@ -64,8 +64,7 @@ class _LoginpageState extends State<Loginpage> {
                         child: Stack(
                           children: [
                             Padding(
-                              padding: EdgeInsets.only(
-                                  top: 0, bottom: 0, right: 0, left: 0),
+                              padding: EdgeInsets.only(top: 0, bottom: 0, right: 0, left: 0),
                               child: Image.asset(
                                 "image/Shapebh.png",
                                 height: 200.0,
@@ -74,8 +73,7 @@ class _LoginpageState extends State<Loginpage> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(
-                                  top: 0, bottom: 0, right: 0, left: 0),
+                              padding: EdgeInsets.only(top: 0, bottom: 0, right: 0, left: 0),
                               child: Image.asset(
                                 "image/Shapebgup.png",
                                 height: 130.0,
@@ -84,8 +82,7 @@ class _LoginpageState extends State<Loginpage> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(
-                                  top: 60, bottom: 0, right: 0, left: 130),
+                              padding: EdgeInsets.only(top: 60, bottom: 0, right: 0, left: 130),
                               child: Image.asset(
                                 "image/login.png",
                                 height: 165.0,
@@ -110,17 +107,13 @@ class _LoginpageState extends State<Loginpage> {
                         child: InkWell(
                             onTap: () {
                               Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          DashboardUi(0)));
+                                  context, MaterialPageRoute(builder: (BuildContext context) => DashboardUi(0)));
                             },
                             child: Text("Skip")))
                   ],
                 ),
                 Padding(
-                  padding:
-                      EdgeInsets.only(top: 0, bottom: 16, right: 0, left: 0),
+                  padding: EdgeInsets.only(top: 0, bottom: 16, right: 0, left: 0),
                   child: Text(
                     "INDIA'S BEST AUCTION \nMARKETPLACE",
                     textAlign: TextAlign.center,
@@ -147,19 +140,16 @@ class _LoginpageState extends State<Loginpage> {
                         print(index);
                       },
                       indicator: UnderlineTabIndicator(
-                        borderSide: BorderSide(
-                            color: Theme.of(context).colorScheme.primary,
-                            width: 2.0),
+                        borderSide: BorderSide(color: Theme.of(context).colorScheme.primary, width: 2.0),
                       ),
                       isScrollable: true,
                       padding: EdgeInsets.all(0),
                       unselectedLabelColor: Color(0xff2D2D2D).withOpacity(0.6),
                       labelColor: const Color(0xFF000000),
-                      labelStyle:
-                          Theme.of(context).textTheme.subtitle1!.copyWith(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w400,
-                              ),
+                      labelStyle: Theme.of(context).textTheme.subtitle1!.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400,
+                          ),
                       tabs: [
                         Tab(text: "CREATE AN ACCOUNT"),
                         Tab(text: "SIGN IN            "),
@@ -173,37 +163,26 @@ class _LoginpageState extends State<Loginpage> {
                           child: Column(
                             children: [
                               Container(
-                                padding: EdgeInsets.only(
-                                    top: 0, left: 16, right: 16),
-                                margin: EdgeInsets.only(
-                                    top: 0, left: 16, right: 16),
+                                padding: EdgeInsets.only(top: 0, left: 16, right: 16),
+                                margin: EdgeInsets.only(top: 0, left: 16, right: 16),
                                 child: Column(
                                   children: [
                                     SizedBox(
                                       height: 16,
                                     ),
                                     Container(
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color: Color(0xffEAEEF2),
-                                                blurRadius: 2,
-                                                offset: Offset(2, 2))
-                                          ]),
+                                      decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                                        BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))
+                                      ]),
                                       padding: EdgeInsets.only(left: 8),
                                       child: TextField(
                                         // controller: nameController,
-                                        onChanged: (str) =>
-                                            loginViewModel.setName(str),
+                                        onChanged: (str) => loginViewModel.setName(str),
                                         textInputAction: TextInputAction.next,
                                         keyboardType: TextInputType.name,
                                         enableSuggestions: true,
 
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .subtitle1!
-                                            .copyWith(
+                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                               color: Colors.black,
                                               fontWeight: FontWeight.w500,
                                             ),
@@ -211,12 +190,10 @@ class _LoginpageState extends State<Loginpage> {
                                           border: InputBorder.none,
                                           labelText: 'Name',
 
-                                          errorText: loginViewModel
-                                              .login1ViewModelErrorState.name,
+                                          errorText: loginViewModel.login1ViewModelErrorState.name,
                                           // prefixIcon:
                                           // prefixIcon: ,
-                                          icon: Image.asset("image/people.png",
-                                              height: 32),
+                                          icon: Image.asset("image/people.png", height: 32),
                                           filled: true,
                                           isDense: false,
                                           fillColor: Color(0xffFFFFFF),
@@ -228,14 +205,9 @@ class _LoginpageState extends State<Loginpage> {
                                       height: 16,
                                     ),
                                     Container(
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color: Color(0xffEAEEF2),
-                                                blurRadius: 2,
-                                                offset: Offset(2, 2))
-                                          ]),
+                                      decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                                        BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))
+                                      ]),
                                       padding: EdgeInsets.only(left: 8),
                                       child: TextField(
                                         // controller: nameController,
@@ -249,12 +221,8 @@ class _LoginpageState extends State<Loginpage> {
                                         enableSuggestions: true,
 
                                         textInputAction: TextInputAction.next,
-                                        keyboardType:
-                                            TextInputType.emailAddress,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .subtitle1!
-                                            .copyWith(
+                                        keyboardType: TextInputType.emailAddress,
+                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                               color: Colors.black,
                                               fontWeight: FontWeight.w500,
                                             ),
@@ -263,10 +231,8 @@ class _LoginpageState extends State<Loginpage> {
                                           border: InputBorder.none,
                                           labelText: 'Email ID',
 
-                                          errorText: loginViewModel
-                                              .login1ViewModelErrorState.email,
-                                          icon: Image.asset("image/email.png",
-                                              height: 24),
+                                          errorText: loginViewModel.login1ViewModelErrorState.email,
+                                          icon: Image.asset("image/email.png", height: 24),
                                           // prefixIcon: Icon(Icons.email_outlined,color: Color(0xff779868)),
                                           filled: true,
                                           isDense: false,
@@ -285,16 +251,11 @@ class _LoginpageState extends State<Loginpage> {
                                                     bool? result = await Navigator.push(
                                                         context,
                                                         MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                GetOtpEmailMobilepage(
-                                                                    loginViewModel
-                                                                        .email,
-                                                                    loginViewModel,
-                                                                    false)));
+                                                            builder: (context) => GetOtpEmailMobilepage(
+                                                                loginViewModel.email, loginViewModel, false)));
 
                                                     setState(() {
-                                                      isEmailVerified =
-                                                          result ?? false;
+                                                      isEmailVerified = result ?? false;
                                                     });
                                                   },
                                                 ),
@@ -302,8 +263,7 @@ class _LoginpageState extends State<Loginpage> {
                                             : Align(
                                                 alignment: Alignment.topRight,
                                                 child: Container(
-                                                  child: Icon(Icons.verified,
-                                                      color: Colors.green),
+                                                  child: Icon(Icons.verified, color: Colors.green),
                                                 ),
                                               )
                                         : Container(),
@@ -311,14 +271,9 @@ class _LoginpageState extends State<Loginpage> {
                                       height: 16,
                                     ),
                                     Container(
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color: Color(0xffEAEEF2),
-                                                blurRadius: 2,
-                                                offset: Offset(2, 2))
-                                          ]),
+                                      decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                                        BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))
+                                      ]),
                                       padding: EdgeInsets.only(left: 8),
                                       child: TextField(
                                         // controller: nameController,
@@ -334,21 +289,16 @@ class _LoginpageState extends State<Loginpage> {
 
                                         textInputAction: TextInputAction.next,
                                         keyboardType: TextInputType.phone,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .subtitle1!
-                                            .copyWith(
+                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                               color: Colors.black,
                                               fontWeight: FontWeight.w500,
                                             ),
                                         decoration: InputDecoration(
                                           border: InputBorder.none,
                                           labelText: 'Mobile No.',
-                                          errorText: loginViewModel
-                                              .login1ViewModelErrorState.mobile,
+                                          errorText: loginViewModel.login1ViewModelErrorState.mobile,
                                           isDense: true,
-                                          icon: Image.asset("image/phone.png",
-                                              height: 28),
+                                          icon: Image.asset("image/phone.png", height: 28),
                                           // prefixIcon: Icon(Icons.call,color: Color(0xff779868),),
                                           filled: true,
                                           fillColor: Color(0xffFFFFFF),
@@ -366,16 +316,11 @@ class _LoginpageState extends State<Loginpage> {
                                                     bool? result = await Navigator.push(
                                                         context,
                                                         MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                GetOtpEmailMobilepage(
-                                                                    loginViewModel
-                                                                        .mobile,
-                                                                    loginViewModel,
-                                                                    true)));
+                                                            builder: (context) => GetOtpEmailMobilepage(
+                                                                loginViewModel.mobile, loginViewModel, true)));
 
                                                     setState(() {
-                                                      isMobileVerified =
-                                                          result ?? false;
+                                                      isMobileVerified = result ?? false;
                                                     });
                                                   },
                                                 ),
@@ -383,8 +328,7 @@ class _LoginpageState extends State<Loginpage> {
                                             : Align(
                                                 alignment: Alignment.topRight,
                                                 child: Container(
-                                                  child: Icon(Icons.verified,
-                                                      color: Colors.green),
+                                                  child: Icon(Icons.verified, color: Colors.green),
                                                 ),
                                               )
                                         : Container(),
@@ -392,28 +336,19 @@ class _LoginpageState extends State<Loginpage> {
                                       height: 16,
                                     ),
                                     Container(
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color: Color(0xffEAEEF2),
-                                                blurRadius: 2,
-                                                offset: Offset(2, 2))
-                                          ]),
+                                      decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                                        BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))
+                                      ]),
                                       padding: EdgeInsets.only(left: 8),
                                       child: TextField(
                                         // controller: nameController,
                                         // enableSuggestions: true,
-                                        onChanged: (str) =>
-                                            loginViewModel.setPass(str),
+                                        onChanged: (str) => loginViewModel.setPass(str),
 
                                         textInputAction: TextInputAction.done,
                                         obscureText: isShow ? false : true,
 
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .subtitle1!
-                                            .copyWith(
+                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                               color: Colors.black,
                                               fontWeight: FontWeight.w500,
                                             ),
@@ -428,8 +363,7 @@ class _LoginpageState extends State<Loginpage> {
                                                       isShow = !isShow;
                                                     });
                                                   },
-                                                  child: Icon(
-                                                      Icons.remove_red_eye))
+                                                  child: Icon(Icons.remove_red_eye))
                                               : InkWell(
                                                   onTap: () {
                                                     setState(() {
@@ -442,10 +376,8 @@ class _LoginpageState extends State<Loginpage> {
                                                   ),
                                                 ),
                                           labelText: 'Set Password',
-                                          errorText: loginViewModel
-                                              .login1ViewModelErrorState.pass,
-                                          icon: Image.asset("image/pass.png",
-                                              height: 28),
+                                          errorText: loginViewModel.login1ViewModelErrorState.pass,
+                                          icon: Image.asset("image/pass.png", height: 28),
                                           // prefixIcon: Image.asset("image/pass.png",height: 8),
                                           filled: true,
                                           fillColor: Color(0xffFFFFFF),
@@ -469,10 +401,7 @@ class _LoginpageState extends State<Loginpage> {
                                         Text(
                                           "Password should be 8 characters long",
                                           textAlign: TextAlign.center,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1!
-                                              .copyWith(
+                                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                 color: Color(0xff2D2D2D),
                                                 fontWeight: FontWeight.w400,
                                               ),
@@ -486,56 +415,34 @@ class _LoginpageState extends State<Loginpage> {
                                       onTap: () async {
                                         await showDialog(
                                             context: context,
-                                            builder:
-                                                (BuildContext dialogContext) {
+                                            builder: (BuildContext dialogContext) {
                                               return AlertDialog(
-                                                contentPadding:
-                                                    EdgeInsets.all(0),
+                                                contentPadding: EdgeInsets.all(0),
                                                 content: Container(
                                                   height: 580,
                                                   child: Stack(
                                                     children: [
                                                       Container(
-                                                        padding:
-                                                            EdgeInsets.all(16),
-                                                        width: MediaQuery.of(
-                                                                context)
-                                                            .size
-                                                            .width,
-                                                        color:
-                                                            Color(0xffEAEEF2),
-                                                        child:
-                                                            SingleChildScrollView(
+                                                        padding: EdgeInsets.all(16),
+                                                        width: MediaQuery.of(context).size.width,
+                                                        color: Color(0xffEAEEF2),
+                                                        child: SingleChildScrollView(
                                                           child: Column(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .start,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
+                                                            mainAxisAlignment: MainAxisAlignment.start,
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
                                                             children: [
                                                               Row(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .end,
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .end,
+                                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                                crossAxisAlignment: CrossAxisAlignment.end,
                                                                 children: [
                                                                   InkWell(
-                                                                      onTap:
-                                                                          () {
-                                                                        Navigator.of(context)
-                                                                            .pop();
+                                                                      onTap: () {
+                                                                        Navigator.of(context).pop();
                                                                       },
-                                                                      child:
-                                                                          Icon(
-                                                                        Icons
-                                                                            .close,
-                                                                        size:
-                                                                            20,
-                                                                        color: Color(
-                                                                            0xff979797),
+                                                                      child: Icon(
+                                                                        Icons.close,
+                                                                        size: 20,
+                                                                        color: Color(0xff979797),
                                                                       ))
                                                                 ],
                                                               ),
@@ -543,21 +450,18 @@ class _LoginpageState extends State<Loginpage> {
                                                                 children: [
                                                                   Image.asset(
                                                                     "image/Vector (22).png",
-                                                                    color: Color(
-                                                                        0XFF202232),
+                                                                    color: Color(0XFF202232),
                                                                   ),
                                                                   SizedBox(
                                                                     width: 5,
                                                                   ),
                                                                   Text(
                                                                     'TERMS & CONDITIONS',
-                                                                    style: Theme.of(
-                                                                            context)
+                                                                    style: Theme.of(context)
                                                                         .textTheme
                                                                         .subtitle1!
                                                                         .copyWith(
-                                                                            color:
-                                                                                Color(0XFF202232),
+                                                                            color: Color(0XFF202232),
                                                                             fontWeight: FontWeight.w400,
                                                                             letterSpacing: 2),
                                                                   ),
@@ -571,10 +475,8 @@ class _LoginpageState extends State<Loginpage> {
                                                               ),
                                                               SizedBox(
                                                                 height: 420,
-                                                                child:
-                                                                    SingleChildScrollView(
-                                                                  child:
-                                                                      HtmlWidget(
+                                                                child: SingleChildScrollView(
+                                                                  child: HtmlWidget(
                                                                     // the first parameter (`html`) is required
 
                                                                     // all other parameters are optional, a few notable params:
@@ -593,9 +495,7 @@ class _LoginpageState extends State<Loginpage> {
                                                                     // consider using `ListView` or `SliverList` for better performance
 
                                                                     // set the default styling for text
-                                                                    textStyle: TextStyle(
-                                                                        fontSize:
-                                                                            14),
+                                                                    textStyle: TextStyle(fontSize: 14),
 
                                                                     // turn on `webView` if you need IFRAME support (it's disabled by default)
                                                                   ),
@@ -613,39 +513,27 @@ class _LoginpageState extends State<Loginpage> {
                                                                 children: [
                                                                   Spacer(),
                                                                   TextButton(
-                                                                      onPressed:
-                                                                          () {
-                                                                        setState(
-                                                                            () {
-                                                                          isCheked =
-                                                                              false;
+                                                                      onPressed: () {
+                                                                        setState(() {
+                                                                          isCheked = false;
                                                                         });
-                                                                        Navigator.of(context)
-                                                                            .pop();
+                                                                        Navigator.of(context).pop();
                                                                       },
-                                                                      child:
-                                                                          Text(
+                                                                      child: Text(
                                                                         "DISAGREE",
-                                                                        style: Theme.of(context)
-                                                                            .textTheme
-                                                                            .button,
+                                                                        style: Theme.of(context).textTheme.button,
                                                                       )),
                                                                   SizedBox(
                                                                     width: 24,
                                                                   ),
                                                                   ElevatedButton(
-                                                                      onPressed:
-                                                                          () {
-                                                                        setState(
-                                                                            () {
-                                                                          isCheked =
-                                                                              true;
+                                                                      onPressed: () {
+                                                                        setState(() {
+                                                                          isCheked = true;
                                                                         });
-                                                                        Navigator.of(context)
-                                                                            .pop();
+                                                                        Navigator.of(context).pop();
                                                                       },
-                                                                      child:
-                                                                          Text(
+                                                                      child: Text(
                                                                         "AGREE",
                                                                         style: Theme.of(context)
                                                                             .textTheme
@@ -669,21 +557,15 @@ class _LoginpageState extends State<Loginpage> {
                                       },
                                       child: Row(
                                         children: [
-                                          Checkbox(
-                                              value: isCheked,
-                                              onChanged: (val) async {}),
+                                          Checkbox(value: isCheked, onChanged: (val) async {}),
                                           Row(
                                             children: [
                                               Text(
                                                 "Agreeing to",
                                                 textAlign: TextAlign.center,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .bodyText1!
-                                                    .copyWith(
+                                                style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                       color: Color(0xff2D2D2D),
-                                                      fontWeight:
-                                                          FontWeight.w400,
+                                                      fontWeight: FontWeight.w400,
                                                     ),
                                               ),
                                               SizedBox(
@@ -692,19 +574,12 @@ class _LoginpageState extends State<Loginpage> {
                                               Text(
                                                 "Terms & Conditions",
                                                 textAlign: TextAlign.center,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .bodyText1!
-                                                    .copyWith(
+                                                style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                       color: Color(0xff2D2D2D),
-                                                      decoration: TextDecoration
-                                                          .underline,
-                                                      decorationStyle:
-                                                          TextDecorationStyle
-                                                              .solid,
+                                                      decoration: TextDecoration.underline,
+                                                      decorationStyle: TextDecorationStyle.solid,
                                                       decorationThickness: 1,
-                                                      fontWeight:
-                                                          FontWeight.bold,
+                                                      fontWeight: FontWeight.bold,
                                                     ),
                                               ),
                                             ],
@@ -719,74 +594,51 @@ class _LoginpageState extends State<Loginpage> {
                                       onTap: () {
                                         // Navigator.pushReplacement(
                                         //     context, MaterialPageRoute(builder: (BuildContext context) => KYCPage()));
-                                        if (loginViewModel
-                                            .login1ViewModelErrorState
-                                            .hasErrors) {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(SnackBar(
+                                        if (loginViewModel.login1ViewModelErrorState.hasErrors) {
+                                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                             content: Text(
                                               'Enter Valid Details',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headline6,
+                                              style: Theme.of(context).textTheme.headline6,
                                             ),
                                             backgroundColor: Colors.red,
                                           ));
                                         } else {
-                                          if (isEmailVerified &&
-                                              isMobileVerified) {
-                                            loginViewModel
-                                                .gesignUp()
-                                                .then((value) => {
-                                                      if (value.status == 200)
-                                                        {
-                                                          Navigator.pushReplacement(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                                  builder: (BuildContext
-                                                                          context) =>
-                                                                      KYCPage(loginViewModel
-                                                                          .name))),
-                                                        }
-                                                      else
-                                                        {
-                                                          ScaffoldMessenger.of(
-                                                                  context)
-                                                              .showSnackBar(
-                                                                  SnackBar(
-                                                            content: Text(
-                                                              'Enter Valid Credentials ${value.message}',
-                                                              style: Theme.of(
-                                                                      context)
-                                                                  .textTheme
-                                                                  .headline6,
-                                                            ),
-                                                            backgroundColor:
-                                                                Colors.red,
-                                                          )),
-                                                        }
-                                                    });
+                                          if (isEmailVerified && isMobileVerified) {
+                                            loginViewModel.gesignUp().then((value) => {
+                                                  if (value.status == 200)
+                                                    {
+                                                      Navigator.pushReplacement(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: (BuildContext context) =>
+                                                                  KYCPage(loginViewModel.name))),
+                                                    }
+                                                  else
+                                                    {
+                                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                                        content: Text(
+                                                          'Enter Valid Credentials ${value.message}',
+                                                          style: Theme.of(context).textTheme.headline6,
+                                                        ),
+                                                        backgroundColor: Colors.red,
+                                                      )),
+                                                    }
+                                                });
                                           } else {
                                             if (!isEmailVerified) {
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(SnackBar(
+                                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                                 content: Text(
                                                   'Please Verify Email',
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .headline6,
+                                                  style: Theme.of(context).textTheme.headline6,
                                                 ),
                                                 backgroundColor: Colors.red,
                                               ));
                                             }
                                             if (!isMobileVerified) {
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(SnackBar(
+                                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                                 content: Text(
                                                   'Please Verify Mobile',
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .headline6,
+                                                  style: Theme.of(context).textTheme.headline6,
                                                 ),
                                                 backgroundColor: Colors.red,
                                               ));
@@ -798,24 +650,18 @@ class _LoginpageState extends State<Loginpage> {
                                       },
                                       child: Container(
                                         height: 50,
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                .75,
+                                        width: MediaQuery.of(context).size.width * .75,
                                         decoration: BoxDecoration(
                                             gradient: LinearGradient(colors: [
                                               Color(0xffB45156),
                                               Color(0xffE74B52),
                                             ]),
-                                            borderRadius:
-                                                BorderRadius.circular(20)),
+                                            borderRadius: BorderRadius.circular(20)),
                                         child: Center(
                                           child: Text(
                                             "SIGN UP",
                                             textAlign: TextAlign.center,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .subtitle1!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                   color: Color(0xffffffff),
                                                   fontWeight: FontWeight.w400,
                                                 ),
@@ -842,23 +688,15 @@ class _LoginpageState extends State<Loginpage> {
                                     height: 20,
                                   ),
                                   Text("Welcome Back",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .subtitle1!
-                                          .copyWith(
-                                              fontWeight: FontWeight.w900)),
+                                      style:
+                                          Theme.of(context).textTheme.subtitle1!.copyWith(fontWeight: FontWeight.w900)),
                                   SizedBox(
                                     height: 20,
                                   ),
                                   Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Color(0xffEAEEF2),
-                                              blurRadius: 2,
-                                              offset: Offset(2, 2))
-                                        ]),
+                                    decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                                      BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))
+                                    ]),
                                     margin: EdgeInsets.all(28),
                                     padding: EdgeInsets.all(8),
                                     child: TextField(
@@ -870,10 +708,7 @@ class _LoginpageState extends State<Loginpage> {
                                       keyboardType: TextInputType.number,
                                       maxLength: 10,
                                       maxLines: 1,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .subtitle1!
-                                          .copyWith(
+                                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                             color: Colors.black,
                                             fontWeight: FontWeight.w500,
                                           ),
@@ -881,9 +716,7 @@ class _LoginpageState extends State<Loginpage> {
                                         border: InputBorder.none,
                                         // labelText: 'Name',
                                         hintText: 'Enter Mobile Number',
-                                        errorText: loginViewModel
-                                            .loginViewModelMobileErrorState
-                                            .mobile,
+                                        errorText: loginViewModel.loginViewModelMobileErrorState.mobile,
                                         // prefixIcon:
                                         // prefixIcon: ,
                                         // icon: Image.asset("image/people.png",height: 32),
@@ -898,83 +731,57 @@ class _LoginpageState extends State<Loginpage> {
                                     alignment: Alignment.bottomCenter,
                                     child: InkWell(
                                       onTap: () {
-                                        if (loginViewModel
-                                                .loginViewModelMobileErrorState
-                                                .hasErrors ||
+                                        if (loginViewModel.loginViewModelMobileErrorState.hasErrors ||
                                             MOBILEController.text.length <= 5) {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(SnackBar(
+                                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                             content: Text(
                                               'Enter A Valid Mobile Number',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headline6,
+                                              style: Theme.of(context).textTheme.headline6,
                                             ),
                                             backgroundColor: Colors.red,
                                           ));
                                         } else {
-                                          loginViewModel
-                                              .getLoginWithMobile()
-                                              .then((value) => {
-                                                    if (value.status == 200)
-                                                      {
-                                                        Navigator.pushReplacement(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                                builder: (BuildContext
-                                                                        context) =>
-                                                                    GetOtppage(
-                                                                        value
-                                                                            .data,
-                                                                        loginViewModel
-                                                                            .mobile,
-                                                                        loginViewModel))),
-                                                      }
-                                                    else
-                                                      {
-                                                        ScaffoldMessenger.of(
-                                                                context)
-                                                            .showSnackBar(
-                                                                SnackBar(
-                                                          content: Text(
-                                                            '${value.message}',
-                                                            style: Theme.of(
-                                                                    context)
-                                                                .textTheme
-                                                                .labelMedium!
-                                                                .copyWith(
-                                                                    color: Colors
-                                                                        .white),
-                                                          ),
-                                                          backgroundColor:
-                                                              Colors.red,
-                                                        )),
-                                                      }
-                                                  });
+                                          loginViewModel.getLoginWithMobile().then((value) => {
+                                                if (value.status == 200)
+                                                  {
+                                                    Navigator.pushReplacement(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (BuildContext context) => GetOtppage(
+                                                                value.data, loginViewModel.mobile, loginViewModel))),
+                                                  }
+                                                else
+                                                  {
+                                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                                      content: Text(
+                                                        '${value.message}',
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .labelMedium!
+                                                            .copyWith(color: Colors.white),
+                                                      ),
+                                                      backgroundColor: Colors.red,
+                                                    )),
+                                                  }
+                                              });
                                         }
 
                                         // Navigator.push(context, MaterialPageRoute(builder: (context) => GetOtppage()));
                                       },
                                       child: Container(
                                         height: 50,
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                .75,
+                                        width: MediaQuery.of(context).size.width * .75,
                                         decoration: BoxDecoration(
                                             gradient: LinearGradient(colors: [
                                               Color(0xffB45156),
                                               Color(0xffE74B52),
                                             ]),
-                                            borderRadius:
-                                                BorderRadius.circular(20)),
+                                            borderRadius: BorderRadius.circular(20)),
                                         child: Center(
                                           child: Text(
                                             "GET OTP",
                                             textAlign: TextAlign.center,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .subtitle1!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                   color: Color(0xffffffff),
                                                   fontWeight: FontWeight.w400,
                                                 ),
@@ -1000,22 +807,15 @@ class _LoginpageState extends State<Loginpage> {
                                         // Child text spans will inherit styles from parent
                                         children: <TextSpan>[
                                           TextSpan(
-                                            text:
-                                                'Login with Email & Password? ',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .subtitle1!
-                                                .copyWith(
+                                            text: 'Login with Email & Password? ',
+                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.w400,
                                                 ),
                                           ),
                                           TextSpan(
                                             text: 'Sign in',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .subtitle1!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                   color: Colors.red,
                                                   fontWeight: FontWeight.w600,
                                                 ),
@@ -1036,25 +836,16 @@ class _LoginpageState extends State<Loginpage> {
                                     height: 20,
                                   ),
                                   Text("Welcome Back",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .subtitle1!
-                                          .copyWith(
-                                              fontWeight: FontWeight.w900)),
+                                      style:
+                                          Theme.of(context).textTheme.subtitle1!.copyWith(fontWeight: FontWeight.w900)),
                                   SizedBox(
                                     height: 20,
                                   ),
                                   Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Color(0xffEAEEF2),
-                                              blurRadius: 2,
-                                              offset: Offset(2, 2))
-                                        ]),
-                                    margin: EdgeInsets.symmetric(
-                                        horizontal: 28, vertical: 8),
+                                    decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                                      BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))
+                                    ]),
+                                    margin: EdgeInsets.symmetric(horizontal: 28, vertical: 8),
                                     padding: EdgeInsets.all(8),
                                     child: TextField(
                                       controller: EMAILController,
@@ -1063,10 +854,7 @@ class _LoginpageState extends State<Loginpage> {
                                         loginViewModel.setEmail(str);
                                       },
                                       keyboardType: TextInputType.emailAddress,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .subtitle1!
-                                          .copyWith(
+                                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                             color: Colors.black,
                                             fontWeight: FontWeight.w500,
                                           ),
@@ -1074,8 +862,7 @@ class _LoginpageState extends State<Loginpage> {
                                         border: InputBorder.none,
                                         // labelText: 'Name',
                                         hintText: 'Email',
-                                        errorText: loginViewModel
-                                            .loginViewModelErrorState.email,
+                                        errorText: loginViewModel.loginViewModelErrorState.email,
                                         // prefixIcon:
                                         // prefixIcon: ,
                                         // icon: Image.asset("image/people.png",height: 32),
@@ -1087,16 +874,10 @@ class _LoginpageState extends State<Loginpage> {
                                     ),
                                   ),
                                   Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Color(0xffEAEEF2),
-                                              blurRadius: 2,
-                                              offset: Offset(2, 2))
-                                        ]),
-                                    margin: EdgeInsets.symmetric(
-                                        horizontal: 28, vertical: 8),
+                                    decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                                      BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))
+                                    ]),
+                                    margin: EdgeInsets.symmetric(horizontal: 28, vertical: 8),
                                     padding: EdgeInsets.all(8),
                                     child: TextField(
                                       // controller: nameController,
@@ -1106,10 +887,7 @@ class _LoginpageState extends State<Loginpage> {
                                       },
                                       keyboardType: TextInputType.text,
                                       obscureText: isShow ? false : true,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .subtitle1!
-                                          .copyWith(
+                                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                             color: Colors.black,
                                             fontWeight: FontWeight.w500,
                                           ),
@@ -1121,8 +899,7 @@ class _LoginpageState extends State<Loginpage> {
                                                     isShow = !isShow;
                                                   });
                                                 },
-                                                child:
-                                                    Icon(Icons.remove_red_eye))
+                                                child: Icon(Icons.remove_red_eye))
                                             : InkWell(
                                                 onTap: () {
                                                   setState(() {
@@ -1137,8 +914,7 @@ class _LoginpageState extends State<Loginpage> {
                                         border: InputBorder.none,
                                         // labelText: 'Name',
                                         hintText: 'Enter Password',
-                                        errorText: loginViewModel
-                                            .loginViewModelErrorState.pass,
+                                        errorText: loginViewModel.loginViewModelErrorState.pass,
                                         // prefixIcon:
                                         // prefixIcon: ,
                                         // icon: Image.asset("image/people.png",height: 32),
@@ -1156,64 +932,43 @@ class _LoginpageState extends State<Loginpage> {
                                     alignment: Alignment.bottomCenter,
                                     child: InkWell(
                                       onTap: () {
-                                        if (loginViewModel.email == "" ||
-                                            loginViewModel.pass == "") {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(SnackBar(
+                                        if (loginViewModel.email == "" || loginViewModel.pass == "") {
+                                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                             content: Text(
                                               'Enter A Valid Email Or Password',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headline6,
+                                              style: Theme.of(context).textTheme.headline6,
                                             ),
                                             backgroundColor: Colors.red,
                                           ));
                                         } else {
-                                          if (loginViewModel
-                                              .loginViewModelErrorState
-                                              .hasErrors) {
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(SnackBar(
+                                          if (loginViewModel.loginViewModelErrorState.hasErrors) {
+                                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                               content: Text(
                                                 'Enter A Valid Email',
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .headline6,
+                                                style: Theme.of(context).textTheme.headline6,
                                               ),
                                               backgroundColor: Colors.red,
                                             ));
                                           } else {
-                                            loginViewModel
-                                                .getLoginWithEmailPass()
-                                                .then((value) => {
-                                                      if (value.status == 200)
-                                                        {
-                                                          Navigator.pushReplacement(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                                  builder: (BuildContext
-                                                                          context) =>
-                                                                      DashboardUi(
-                                                                          0))),
-                                                        }
-                                                      else
-                                                        {
-                                                          ScaffoldMessenger.of(
-                                                                  context)
-                                                              .showSnackBar(
-                                                                  SnackBar(
-                                                            content: Text(
-                                                              'Enter Valid Credentials ${value.message}',
-                                                              style: Theme.of(
-                                                                      context)
-                                                                  .textTheme
-                                                                  .headline6,
-                                                            ),
-                                                            backgroundColor:
-                                                                Colors.red,
-                                                          )),
-                                                        }
-                                                    });
+                                            loginViewModel.getLoginWithEmailPass().then((value) => {
+                                                  if (value.status == 200)
+                                                    {
+                                                      Navigator.pushReplacement(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: (BuildContext context) => DashboardUi(0))),
+                                                    }
+                                                  else
+                                                    {
+                                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                                        content: Text(
+                                                          'Enter Valid Credentials ${value.message}',
+                                                          style: Theme.of(context).textTheme.headline6,
+                                                        ),
+                                                        backgroundColor: Colors.red,
+                                                      )),
+                                                    }
+                                                });
                                           }
                                         }
 
@@ -1221,34 +976,23 @@ class _LoginpageState extends State<Loginpage> {
                                       },
                                       child: Column(
                                         children: [
-                                          loginViewModel.isLoading
-                                              ? LinearProgressIndicator()
-                                              : Container(),
+                                          loginViewModel.isLoading ? LinearProgressIndicator() : Container(),
                                           Container(
                                             height: 50,
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                .75,
+                                            width: MediaQuery.of(context).size.width * .75,
                                             decoration: BoxDecoration(
-                                                gradient:
-                                                    LinearGradient(colors: [
+                                                gradient: LinearGradient(colors: [
                                                   Color(0xffB45156),
                                                   Color(0xffE74B52),
                                                 ]),
-                                                borderRadius:
-                                                    BorderRadius.circular(20)),
+                                                borderRadius: BorderRadius.circular(20)),
                                             child: Center(
                                               child: Text(
                                                 "LOGIN",
                                                 textAlign: TextAlign.center,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .subtitle1!
-                                                    .copyWith(
+                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                       color: Color(0xffffffff),
-                                                      fontWeight:
-                                                          FontWeight.w400,
+                                                      fontWeight: FontWeight.w400,
                                                     ),
                                               ),
                                             ),
@@ -1275,20 +1019,14 @@ class _LoginpageState extends State<Loginpage> {
                                         children: <TextSpan>[
                                           TextSpan(
                                             text: 'Login with OTP? ',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .subtitle1!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.w400,
                                                 ),
                                           ),
                                           TextSpan(
                                             text: 'Sign in',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .subtitle1!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                   color: Colors.red,
                                                   fontWeight: FontWeight.w600,
                                                 ),

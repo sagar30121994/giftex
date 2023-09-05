@@ -170,6 +170,7 @@ class WebCMSApiModel {
   final String homehighlightlot = 'artistdata';
   final String homerecordpricelot = 'HomeRecordPriceLots';
   final String recordpricelots = 'RecordPriceLots';
+  final String HomeHighlightsLots = 'HomeHighlightsLots';
   final String getdepartments = 'GetPaymentGrid';
   final String GetDepartments = 'GetDepartments';
   final String getdepartmentdetails = 'artistdata';

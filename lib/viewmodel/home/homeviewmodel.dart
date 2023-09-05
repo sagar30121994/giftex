@@ -1,5 +1,6 @@
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/data/network/models/responce/home/GetSellDetailsResponse.dart';
+import 'package:giftex/data/network/models/responce/home/getArtMovementResponse.dart';
 import 'package:giftex/data/network/models/responce/home/getDepartmentsResponse.dart';
 import 'package:giftex/data/network/models/responce/home/getOurCollectorResponse.dart';
 import 'package:giftex/data/network/models/responce/home/homeresponse.dart';
@@ -117,6 +118,22 @@ abstract class _HomeViewModel with Store {
   }
 
   @observable
+  UpComingLotsResponse? getFeaturedItemsResponse = UpComingLotsResponse();
+  @observable
+  bool isloadingfeatureditems = false;
+
+  Future<HttpResponse> getfeatureditems() async {
+    isloadingfeatureditems = true;
+    getFeaturedItemsResponse = null;
+    HttpResponse httpResponse = await webCmsApiModelRepo!.featureditems();
+    if (httpResponse.status == 200) {
+      getFeaturedItemsResponse = httpResponse.data;
+    }
+    isloadingfeatureditems = false;
+    return httpResponse;
+  }
+
+  @observable
   GetBuyDetailsResponse? getBuyDetailsResponse = GetBuyDetailsResponse();
   @observable
   bool isloadingbuyDetails = false;
@@ -177,6 +194,22 @@ abstract class _HomeViewModel with Store {
       getOurCollectorResponse = httpResponse.data;
     }
     isloadingourCollector = false;
+    return httpResponse;
+  }
+
+  @observable
+  GetArtMovementResponse? getArtMovementResponse = GetArtMovementResponse();
+  @observable
+  bool isloadingartmovement = false;
+
+  Future<HttpResponse> getArtsMovement() async {
+    isloadingartmovement = true;
+    getArtMovementResponse = null;
+    HttpResponse httpResponse = await webCmsApiModelRepo!.getArtsMovement();
+    if (httpResponse.status == 200) {
+      getArtMovementResponse = httpResponse.data;
+    }
+    isloadingartmovement = false;
     return httpResponse;
   }
 

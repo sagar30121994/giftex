@@ -189,6 +189,40 @@ mixin _$HomeViewModel on _HomeViewModel, Store {
     });
   }
 
+  late final _$getFeaturedItemsResponseAtom =
+      Atom(name: '_HomeViewModel.getFeaturedItemsResponse', context: context);
+
+  @override
+  UpComingLotsResponse? get getFeaturedItemsResponse {
+    _$getFeaturedItemsResponseAtom.reportRead();
+    return super.getFeaturedItemsResponse;
+  }
+
+  @override
+  set getFeaturedItemsResponse(UpComingLotsResponse? value) {
+    _$getFeaturedItemsResponseAtom
+        .reportWrite(value, super.getFeaturedItemsResponse, () {
+      super.getFeaturedItemsResponse = value;
+    });
+  }
+
+  late final _$isloadingfeatureditemsAtom =
+      Atom(name: '_HomeViewModel.isloadingfeatureditems', context: context);
+
+  @override
+  bool get isloadingfeatureditems {
+    _$isloadingfeatureditemsAtom.reportRead();
+    return super.isloadingfeatureditems;
+  }
+
+  @override
+  set isloadingfeatureditems(bool value) {
+    _$isloadingfeatureditemsAtom
+        .reportWrite(value, super.isloadingfeatureditems, () {
+      super.isloadingfeatureditems = value;
+    });
+  }
+
   late final _$getBuyDetailsResponseAtom =
       Atom(name: '_HomeViewModel.getBuyDetailsResponse', context: context);
 
@@ -324,6 +358,40 @@ mixin _$HomeViewModel on _HomeViewModel, Store {
     });
   }
 
+  late final _$getArtMovementResponseAtom =
+      Atom(name: '_HomeViewModel.getArtMovementResponse', context: context);
+
+  @override
+  GetArtMovementResponse? get getArtMovementResponse {
+    _$getArtMovementResponseAtom.reportRead();
+    return super.getArtMovementResponse;
+  }
+
+  @override
+  set getArtMovementResponse(GetArtMovementResponse? value) {
+    _$getArtMovementResponseAtom
+        .reportWrite(value, super.getArtMovementResponse, () {
+      super.getArtMovementResponse = value;
+    });
+  }
+
+  late final _$isloadingartmovementAtom =
+      Atom(name: '_HomeViewModel.isloadingartmovement', context: context);
+
+  @override
+  bool get isloadingartmovement {
+    _$isloadingartmovementAtom.reportRead();
+    return super.isloadingartmovement;
+  }
+
+  @override
+  set isloadingartmovement(bool value) {
+    _$isloadingartmovementAtom.reportWrite(value, super.isloadingartmovement,
+        () {
+      super.isloadingartmovement = value;
+    });
+  }
+
   late final _$getRecordPriceArtworkResponseAtom = Atom(
       name: '_HomeViewModel.getRecordPriceArtworkResponse', context: context);
 
@@ -372,6 +440,8 @@ selectedNewsTabIndex: ${selectedNewsTabIndex},
 isLoadingForUpCommingAuction: ${isLoadingForUpCommingAuction},
 isLoadingForLots: ${isLoadingForLots},
 isLoadingForNews: ${isLoadingForNews},
+getFeaturedItemsResponse: ${getFeaturedItemsResponse},
+isloadingfeatureditems: ${isloadingfeatureditems},
 getBuyDetailsResponse: ${getBuyDetailsResponse},
 isloadingbuyDetails: ${isloadingbuyDetails},
 getSellDetailsResponse: ${getSellDetailsResponse},
@@ -380,6 +450,8 @@ getDepartmentsResponse: ${getDepartmentsResponse},
 isloadingdepartments: ${isloadingdepartments},
 getOurCollectorResponse: ${getOurCollectorResponse},
 isloadingourCollector: ${isloadingourCollector},
+getArtMovementResponse: ${getArtMovementResponse},
+isloadingartmovement: ${isloadingartmovement},
 getRecordPriceArtworkResponse: ${getRecordPriceArtworkResponse},
 isloadinggetpriceartwork: ${isloadinggetpriceartwork}
     ''';

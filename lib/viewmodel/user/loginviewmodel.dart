@@ -287,6 +287,7 @@ abstract class _LoginViewModel with Store {
 
   Future<HttpResponse> getLoginWithOTPConfirm() async {
     isLoading = true;
+    String? userId = localSharedPrefrence!.getUserId();
 
     HttpResponse httpResponse = await loginRepo!.loginMobileConfirm(LoginReqestModel(
         countryCode: "91",
@@ -300,7 +301,7 @@ abstract class _LoginViewModel with Store {
         fcmTockenWebsite: "",
         loginFrom: "Website",
         password: "",
-        userid: ""));
+        userid: userId));
 
     if (httpResponse.status == 200) {
       loginResponse = httpResponse.data;
