@@ -73,13 +73,47 @@ mixin _$ServiceViewModel on _ServiceViewModel, Store {
     });
   }
 
+  late final _$pressResponseAtom =
+      Atom(name: '_ServiceViewModel.pressResponse', context: context);
+
+  @override
+  PressResponse? get pressResponse {
+    _$pressResponseAtom.reportRead();
+    return super.pressResponse;
+  }
+
+  @override
+  set pressResponse(PressResponse? value) {
+    _$pressResponseAtom.reportWrite(value, super.pressResponse, () {
+      super.pressResponse = value;
+    });
+  }
+
+  late final _$blogsResponseAtom =
+      Atom(name: '_ServiceViewModel.blogsResponse', context: context);
+
+  @override
+  BlogsResponse? get blogsResponse {
+    _$blogsResponseAtom.reportRead();
+    return super.blogsResponse;
+  }
+
+  @override
+  set blogsResponse(BlogsResponse? value) {
+    _$blogsResponseAtom.reportWrite(value, super.blogsResponse, () {
+      super.blogsResponse = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
 isloading: ${isloading},
 whoWeAreResponse: ${whoWeAreResponse},
 serviceResponse: ${serviceResponse},
-careersResponse: ${careersResponse}
+careersResponse: ${careersResponse},
+pressResponse: ${pressResponse},
+blogsResponse: ${blogsResponse}
     ''';
   }
 }

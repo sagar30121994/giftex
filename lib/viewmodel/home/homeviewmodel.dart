@@ -1,6 +1,7 @@
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/data/network/models/responce/home/GetSellDetailsResponse.dart';
 import 'package:giftex/data/network/models/responce/home/getDepartmentsResponse.dart';
+import 'package:giftex/data/network/models/responce/home/getOurCollectorResponse.dart';
 import 'package:giftex/data/network/models/responce/home/homeresponse.dart';
 import 'package:giftex/data/network/models/responce/home/newsblogsvideoresponse.dart';
 import 'package:giftex/data/network/models/responce/home/recordpricelots.dart';
@@ -160,6 +161,22 @@ abstract class _HomeViewModel with Store {
       getDepartmentsResponse = httpResponse.data;
     }
     isloadingdepartments = false;
+    return httpResponse;
+  }
+
+  @observable
+  GetOurCollectorResponse? getOurCollectorResponse = GetOurCollectorResponse();
+  @observable
+  bool isloadingourCollector = false;
+
+  Future<HttpResponse> getOurCollector() async {
+    isloadingourCollector = true;
+    getOurCollectorResponse = null;
+    HttpResponse httpResponse = await webCmsApiModelRepo!.getOurCollector();
+    if (httpResponse.status == 200) {
+      getOurCollectorResponse = httpResponse.data;
+    }
+    isloadingourCollector = false;
     return httpResponse;
   }
 

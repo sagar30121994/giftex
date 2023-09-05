@@ -290,6 +290,40 @@ mixin _$HomeViewModel on _HomeViewModel, Store {
     });
   }
 
+  late final _$getOurCollectorResponseAtom =
+      Atom(name: '_HomeViewModel.getOurCollectorResponse', context: context);
+
+  @override
+  GetOurCollectorResponse? get getOurCollectorResponse {
+    _$getOurCollectorResponseAtom.reportRead();
+    return super.getOurCollectorResponse;
+  }
+
+  @override
+  set getOurCollectorResponse(GetOurCollectorResponse? value) {
+    _$getOurCollectorResponseAtom
+        .reportWrite(value, super.getOurCollectorResponse, () {
+      super.getOurCollectorResponse = value;
+    });
+  }
+
+  late final _$isloadingourCollectorAtom =
+      Atom(name: '_HomeViewModel.isloadingourCollector', context: context);
+
+  @override
+  bool get isloadingourCollector {
+    _$isloadingourCollectorAtom.reportRead();
+    return super.isloadingourCollector;
+  }
+
+  @override
+  set isloadingourCollector(bool value) {
+    _$isloadingourCollectorAtom.reportWrite(value, super.isloadingourCollector,
+        () {
+      super.isloadingourCollector = value;
+    });
+  }
+
   late final _$getRecordPriceArtworkResponseAtom = Atom(
       name: '_HomeViewModel.getRecordPriceArtworkResponse', context: context);
 
@@ -344,6 +378,8 @@ getSellDetailsResponse: ${getSellDetailsResponse},
 isloadingsellDetails: ${isloadingsellDetails},
 getDepartmentsResponse: ${getDepartmentsResponse},
 isloadingdepartments: ${isloadingdepartments},
+getOurCollectorResponse: ${getOurCollectorResponse},
+isloadingourCollector: ${isloadingourCollector},
 getRecordPriceArtworkResponse: ${getRecordPriceArtworkResponse},
 isloadinggetpriceartwork: ${isloadinggetpriceartwork}
     ''';

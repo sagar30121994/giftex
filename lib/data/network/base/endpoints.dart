@@ -133,6 +133,7 @@ class WebCMSApiModel {
   final String GetBuyDetails = 'GetBuyDetails';
   final String getselldetails = 'GetPaymentGrid';
   final String GetSellDetails = 'GetSellDetails';
+  final String GetOurCollections = 'GetOurCollections';
   final String getprivateselldetails = 'artistdata';
   final String getservisedetails = 'InsertsubscribeForm';
   final String getfaqdetails = 'getHashStr';

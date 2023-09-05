@@ -6,6 +6,7 @@ import 'package:giftex/data/network/models/responce/cmsweb/careersresponse.dart'
 import 'package:giftex/data/network/models/responce/cmsweb/whoweare.dart';
 import 'package:giftex/data/network/models/responce/home/GetSellDetailsResponse.dart';
 import 'package:giftex/data/network/models/responce/home/getDepartmentsResponse.dart';
+import 'package:giftex/data/network/models/responce/home/getOurCollectorResponse.dart';
 import 'package:giftex/data/network/models/responce/home/homeresponse.dart';
 import 'package:giftex/data/network/models/responce/home/newsblogsvideoresponse.dart';
 import 'package:giftex/data/network/models/responce/home/recordpricelots.dart';
@@ -77,6 +78,38 @@ class WebCmsApiModelRepo {
         httpResponse.message = 'Successful';
         httpResponse.data = GetSellDetailsResponse.fromJson(responce.data);
         // httpResponse.data = LoginResponse.fromJson(responce.data);
+      } else {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = responce.data['message'];
+        httpResponse.data = null;
+      }
+      return httpResponse;
+    }).catchError((err) {
+      print(err);
+      httpResponse.status = 400;
+      httpResponse.message = err.toString();
+      httpResponse.data = err.toString();
+      return httpResponse;
+    });
+
+    return httpResponse;
+  }
+
+  Future<HttpResponse> getOurCollector() async {
+    HttpResponse httpResponse = HttpResponse();
+    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    await httpClient!.post(BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().GetOurCollections, body: {
+      "authkey_web": "${localSharedPrefrence!.authkey ?? ''}",
+      "authkey_mobile": "",
+      "userid": "${localSharedPrefrence!.userId ?? ''}",
+      "CRMClientID": "${localSharedPrefrence!.crmId ?? ''}",
+    }).then((responce) async {
+      print(responce);
+
+      if (responce.statusCode == 200) {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = 'Successful';
+        httpResponse.data = GetOurCollectorResponse.fromJson(responce.data);
       } else {
         httpResponse.status = responce.statusCode;
         httpResponse.message = responce.data['message'];

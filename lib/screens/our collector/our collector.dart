@@ -3,8 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:giftex/screens/components/footer/footer.dart';
 import 'package:giftex/screens/components/header.dart';
-
-import '../homepage/homapage.dart';
+import 'package:giftex/viewmodel/home/homeviewmodel.dart';
 
 class OurCollectors extends StatefulWidget {
   const OurCollectors({super.key});
@@ -13,17 +12,26 @@ class OurCollectors extends StatefulWidget {
   State<OurCollectors> createState() => _OurCollectorsState();
 }
 
+HomeViewModel homeViewModel = HomeViewModel();
+
 class _OurCollectorsState extends State<OurCollectors> {
+  @override
+  void initState() {
+    homeViewModel.getOurCollector();
+    // nameController.text="Aryan Raj";
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: NavBar(),
       body: Observer(builder: (context) {
-        return homeViewModel.isloadingdepartments
+        return homeViewModel.isloadingourCollector
             ? LinearProgressIndicator(
                 minHeight: 2,
               )
-            // : homeViewModel.getDepartmentsResponse == null
+            // : homeViewModel.getOurCollectorResponse == null
             //     ? Container()
             : Container(
                 width: MediaQuery.of(context).size.width,
@@ -35,7 +43,7 @@ class _OurCollectorsState extends State<OurCollectors> {
                         height: 16,
                       ),
                       Text(
-                        "Our Collector",
+                        "${homeViewModel.getOurCollectorResponse!.pageContent!.bannerItem!.title ?? ''}",
                         textAlign: TextAlign.left,
                         style: Theme.of(context)
                             .textTheme
@@ -46,7 +54,7 @@ class _OurCollectorsState extends State<OurCollectors> {
                         height: 10,
                       ),
                       Text(
-                        "",
+                        '${homeViewModel.getOurCollectorResponse!.pageContent!.bannerItem!.title2 ?? ''}',
                         textAlign: TextAlign.left,
                         style: Theme.of(context).textTheme.bodyText1!.copyWith(
                               color: Theme.of(context).colorScheme.primary,
@@ -59,7 +67,7 @@ class _OurCollectorsState extends State<OurCollectors> {
                       Container(
                         width: MediaQuery.of(context).size.width * .90,
                         child:
-                            HtmlWidget('${homeViewModel.getDepartmentsResponse!.pageContent!.bannerItem!.desc ?? ''}'),
+                            HtmlWidget('${homeViewModel.getOurCollectorResponse!.pageContent!.bannerItem!.desc ?? ''}'),
                         // Text(
                         //
                         //   // "${homeViewModel.getDepartmentsResponse!.pageContent!.bannerItem!.desc ?? ''}",
@@ -120,7 +128,7 @@ class _OurCollectorsState extends State<OurCollectors> {
                                 right: 0,
                                 bottom: 54,
                                 child: Image.network(
-                                  "${homeViewModel.getDepartmentsResponse!.pageContent!.bannerItem!.image!.mobile ?? ''}",
+                                  "${homeViewModel.getOurCollectorResponse!.pageContent!.bannerItem!.image! ?? ''}",
                                   height: 200,
                                 )),
                           ],
@@ -131,7 +139,7 @@ class _OurCollectorsState extends State<OurCollectors> {
                         child: Wrap(
                             spacing: 20,
                             runSpacing: 20,
-                            children: homeViewModel.getDepartmentsResponse!.pageContent!.departments!.map((e) {
+                            children: homeViewModel.getOurCollectorResponse!.pageContent!.collection!.map((e) {
                               return Container(
                                 width: MediaQuery.of(context).size.width / 2.2, // Half the screen width
 
@@ -142,7 +150,7 @@ class _OurCollectorsState extends State<OurCollectors> {
                                       fit: BoxFit.contain,
                                     ),
                                     Text(
-                                      e!.title ?? "",
+                                      e!.name ?? "",
                                       textAlign: TextAlign.center,
                                     )
                                   ],
@@ -150,26 +158,6 @@ class _OurCollectorsState extends State<OurCollectors> {
                                 // child: Text('Furniture & Decorative Art'),
                               );
                             }).toList()),
-                        // GridView.builder(
-                        //   gridDelegate:
-                        //       SliverGridDelegateWithFixedCrossAxisCount(
-                        //     crossAxisCount: 2,
-                        //     mainAxisSpacing: 4,
-                        //     crossAxisSpacing: 4,
-                        //   ),
-                        //   itemCount: 10,
-                        //   itemBuilder: (BuildContext context, int index) {
-                        //     return Container(
-                        //       height: 5,
-                        //       width: 5,
-                        //       color: Colors.white,
-                        //       child: Center(
-                        //         child: Image.network(
-                        //             "${homeViewModel.getDepartmentsResponse!.pageContent!.departments![0].image!.mobile ?? ''}"),
-                        //       ),
-                        //     );
-                        //   },
-                        // ),
                       ),
                       SizedBox(width: MediaQuery.of(context).size.width, child: Footer()),
                       Container(

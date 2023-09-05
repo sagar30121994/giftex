@@ -462,7 +462,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                           auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length > position
                                               ? Container(
                                                   width: MediaQuery.of(context).size.width,
-                                                  height: 230,
+                                                  height: 245,
                                                   decoration: BoxDecoration(
                                                     image: DecorationImage(
                                                       image: NetworkImage(
@@ -474,7 +474,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                     // homeViewModel.homeUpcommingAuctionResponse!.auctionArray!.map((e) =>
                                                     Container(
                                                       width: MediaQuery.of(context).size.width,
-                                                      height: 230,
+                                                      height: 245,
                                                       color: Color(0xffEAEEF2).withOpacity(.4),
                                                       child: Padding(
                                                         padding: const EdgeInsets.all(20.0),
@@ -926,7 +926,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                 padding: const EdgeInsets.all(10.0),
                                 child: Container(
                                     color: Color(0xffFFFFFF),
-                                    height: 380,
+                                    height: 385,
                                     width: 200,
                                     alignment: Alignment.center,
                                     child: Stack(
@@ -938,7 +938,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                           child: Container(
                                             //replace this Container with your Card
                                             color: Color(0xffF8F8F8),
-                                            height: 380,
+                                            height: 385,
                                             width: 200,
                                           ),
                                         ),
@@ -980,7 +980,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                       overflow: TextOverflow.ellipsis),
                                                 ),
                                                 SizedBox(
-                                                  height: 10,
+                                                  height: 4,
                                                 ),
                                                 Text(
                                                   "₹ ${homeViewModel.recordPriceLots!.tabArray![homeViewModel.selectedTabIndex].lots![pos].estimateFrom!.iNR}",

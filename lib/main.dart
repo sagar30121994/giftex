@@ -5,10 +5,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:giftex/data/local/client/prefs.dart';
+import 'package:giftex/firebase_options.dart';
 import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
 import 'package:giftex/screens/signup/login.dart';
 import 'package:giftex/utils/themeutils.dart';
-import 'firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 SharedPreferences? myGlobalPreference;
@@ -37,6 +37,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   LocalSharedPrefrence? localSharedPrefrence;
+
   // This widget is the root of your application.
   // late LocalSharedPrefrence localSharedPrefrence;
 
@@ -53,9 +54,7 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         title: 'Giftex',
         theme: kDarkTheme,
-        home: localSharedPrefrence!.getLoginStatus()
-            ? DashboardUi(0)
-            : Loginpage()
+        home: localSharedPrefrence!.getLoginStatus() ? DashboardUi(0) : Loginpage()
 
         // home: KYCPage(),
         );

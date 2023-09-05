@@ -45,10 +45,10 @@ class _DepartmentsState extends State<Departments> {
                       Text(
                         "${homeViewModel.getDepartmentsResponse!.pageContent!.bannerItem!.title ?? ''}",
                         textAlign: TextAlign.left,
-                        style: Theme.of(context).textTheme.headline5!.copyWith(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 0.888889),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline5!
+                            .copyWith(color: Colors.black, fontWeight: FontWeight.bold, letterSpacing: 0.888889),
                       ),
                       const SizedBox(
                         height: 10,
@@ -66,8 +66,8 @@ class _DepartmentsState extends State<Departments> {
                       ),
                       Container(
                         width: MediaQuery.of(context).size.width * .90,
-                        child: HtmlWidget(
-                            '${homeViewModel.getDepartmentsResponse!.pageContent!.bannerItem!.desc ?? ''}'),
+                        child:
+                            HtmlWidget('${homeViewModel.getDepartmentsResponse!.pageContent!.bannerItem!.desc ?? ''}'),
                         // Text(
                         //
                         //   // "${homeViewModel.getDepartmentsResponse!.pageContent!.bannerItem!.desc ?? ''}",
@@ -109,8 +109,7 @@ class _DepartmentsState extends State<Departments> {
                               child: Padding(
                                 padding: EdgeInsets.only(top: 30, bottom: 0),
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 40.0),
+                                  padding: const EdgeInsets.symmetric(horizontal: 40.0),
                                   child: Container(
                                     decoration: const BoxDecoration(
                                       color: Color(0xff8C9FB1),
@@ -140,12 +139,9 @@ class _DepartmentsState extends State<Departments> {
                         child: Wrap(
                             spacing: 20,
                             runSpacing: 20,
-                            children: homeViewModel.getDepartmentsResponse!
-                                .pageContent!.departments!
-                                .map((e) {
+                            children: homeViewModel.getDepartmentsResponse!.pageContent!.departments!.map((e) {
                               return Container(
-                                width: MediaQuery.of(context).size.width /
-                                    2.2, // Half the screen width
+                                width: MediaQuery.of(context).size.width / 2.2, // Half the screen width
 
                                 child: Column(
                                   children: [
@@ -162,30 +158,8 @@ class _DepartmentsState extends State<Departments> {
                                 // child: Text('Furniture & Decorative Art'),
                               );
                             }).toList()),
-                        // GridView.builder(
-                        //   gridDelegate:
-                        //       SliverGridDelegateWithFixedCrossAxisCount(
-                        //     crossAxisCount: 2,
-                        //     mainAxisSpacing: 4,
-                        //     crossAxisSpacing: 4,
-                        //   ),
-                        //   itemCount: 10,
-                        //   itemBuilder: (BuildContext context, int index) {
-                        //     return Container(
-                        //       height: 5,
-                        //       width: 5,
-                        //       color: Colors.white,
-                        //       child: Center(
-                        //         child: Image.network(
-                        //             "${homeViewModel.getDepartmentsResponse!.pageContent!.departments![0].image!.mobile ?? ''}"),
-                        //       ),
-                        //     );
-                        //   },
-                        // ),
                       ),
-                      SizedBox(
-                          width: MediaQuery.of(context).size.width,
-                          child: Footer()),
+                      SizedBox(width: MediaQuery.of(context).size.width, child: Footer()),
                       Container(
                         height: 100,
                         color: Color(0xff1F2A52),

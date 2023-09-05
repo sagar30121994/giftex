@@ -23,12 +23,12 @@ import 'package:giftex/screens/profile/profile.dart';
 import 'package:giftex/screens/record_price_artwork/record_price_artwork.dart';
 import 'package:giftex/screens/servicepage/servicepage.dart';
 import 'package:giftex/screens/services/mainservices.dart';
-import 'package:giftex/screens/signup/login.dart';
 import 'package:giftex/viewmodel/bottomviewmodel.dart';
 
 import '../../artmovement/artmovement.dart';
 import '../../departments/departments.dart';
 import '../../homepage/homapage.dart';
+import '../../popwidget.dart';
 
 BottomViewModel bottomViewModel = BottomViewModel();
 
@@ -1023,23 +1023,3 @@ class _DashboardUiState extends State<DashboardUi> {
 //   }
 //
 // }
-
-class PopupWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) => AlertDialog(
-        title: Text('Sign up / Sign in'),
-        content: Text('You need to sign up or sign in first.'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Loginpage()));
-            },
-            child: Text('Ok'),
-          ),
-        ],
-      );
-}
