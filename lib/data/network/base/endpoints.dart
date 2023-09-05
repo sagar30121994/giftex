@@ -151,6 +151,7 @@ class WebCMSApiModel {
   final String getblogdetails = 'GetPaymentGrid';
   final String getourcollections = 'artistdata';
   final String getartmovement = 'InsertsubscribeForm';
+  final String GetArtMovement = 'GetArtMovement';
   final String getauctionguide = 'getHashStr';
   final String getnewsvideos = 'HomeNewsVideosBlogs';
   final String getartistlisting = 'artistdata';

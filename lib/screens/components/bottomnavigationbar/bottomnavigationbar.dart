@@ -4,10 +4,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/data/local/client/prefs.dart';
 import 'package:giftex/screens/aboutus/aboutus.dart';
+import 'package:giftex/screens/art%20movement/art%20movement.dart';
 import 'package:giftex/screens/carrerpage/careerpage.dart';
 import 'package:giftex/screens/components/drawer/drawermain.dart';
 import 'package:giftex/screens/contactus/contactus.dart';
 import 'package:giftex/screens/faq/faq.dart';
+import 'package:giftex/screens/homepage/searchpage.dart';
 import 'package:giftex/screens/howtobuy/howtobuy.dart';
 import 'package:giftex/screens/howtosell/howtosell.dart';
 import 'package:giftex/screens/liveauction/liveauction.dart';
@@ -971,13 +973,18 @@ class _DashboardUiState extends State<DashboardUi> {
 
       case 29:
         return Aboutuspage();
+
       case 30:
-        return CareerPage();
+        return ArtMovement();
 
       case 31:
         return ContactusPage();
+
       case 32:
         return OurCollectors();
+
+      case 33:
+        return SearchBarUi();
 
       default:
         {

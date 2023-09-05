@@ -12,9 +12,9 @@ class OurCollectors extends StatefulWidget {
   State<OurCollectors> createState() => _OurCollectorsState();
 }
 
-HomeViewModel homeViewModel = HomeViewModel();
-
 class _OurCollectorsState extends State<OurCollectors> {
+  HomeViewModel homeViewModel = HomeViewModel();
+
   @override
   void initState() {
     homeViewModel.getOurCollector();
@@ -128,7 +128,7 @@ class _OurCollectorsState extends State<OurCollectors> {
                                 right: 0,
                                 bottom: 54,
                                 child: Image.network(
-                                  "${homeViewModel.getOurCollectorResponse!.pageContent!.bannerItem!.image! ?? ''}",
+                                  "${homeViewModel.getOurCollectorResponse!.pageContent!.bannerItem!.image ?? ''}",
                                   height: 200,
                                 )),
                           ],
