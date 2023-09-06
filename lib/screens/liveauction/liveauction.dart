@@ -7,13 +7,11 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/data/network/models/responce/profile/GetRegInfoResponse.dart';
 import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
+import 'package:giftex/screens/components/footer/footer.dart';
+import 'package:giftex/screens/components/header.dart';
 import 'package:giftex/screens/homepage/liveitem.dart';
-import 'package:giftex/screens/homepage/upcomingauctionlist.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
-
-import '../../viewmodel/profile/profileviewmodel.dart';
-import '../components/footer/footer.dart';
-import '../components/header.dart';
+import 'package:giftex/viewmodel/profile/profileviewmodel.dart';
 
 AuctionViewModel auctionViewModel = AuctionViewModel();
 ProfileViewModel profileViewModel = ProfileViewModel();
@@ -37,6 +35,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
   Timer? timer;
 
   bool countDown = true, selected = false;
+
   Future laodData() async {
     await profileViewModel.getRegInfo();
     setState(() {});
@@ -185,8 +184,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                     ),
 
                     Padding(
-                        padding: EdgeInsets.only(
-                            top: 400 / 2.0, bottom: 0, left: 25.0, right: 25),
+                        padding: EdgeInsets.only(top: 400 / 2.0, bottom: 0, left: 25.0, right: 25),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -203,10 +201,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                             Text(
                               "25th-27th Aug, 2022",
                               textAlign: TextAlign.center,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText1!
-                                  .copyWith(
+                              style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w400,
                                   ),
@@ -281,11 +276,10 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                   padding: EdgeInsets.all(0),
                   unselectedLabelColor: Color(0xffFFFFFF).withOpacity(0.6),
                   labelColor: const Color(0xFFFFFFFF),
-                  unselectedLabelStyle:
-                      Theme.of(context).textTheme.subtitle1!.copyWith(
-                            color: Colors.grey,
-                            fontWeight: FontWeight.w400,
-                          ),
+                  unselectedLabelStyle: Theme.of(context).textTheme.subtitle1!.copyWith(
+                        color: Colors.grey,
+                        fontWeight: FontWeight.w400,
+                      ),
                   labelStyle: Theme.of(context).textTheme.subtitle1!.copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -305,18 +299,13 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
         auctionViewModel.auctionType == "live"
             ? auctionViewModel.upcomingAuctionResponse == null
                 ? SliverToBoxAdapter(child: Container())
-                : (auctionViewModel.upcomingAuctionResponse!.result?.auctions ??
-                                [])
-                            .length ==
-                        0
+                : (auctionViewModel.upcomingAuctionResponse!.result?.auctions ?? []).length == 0
                     ? SliverToBoxAdapter(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Transform.rotate(
-                                angle: -pi / 35.13,
-                                child: Image.asset("image/auctionhammer.png",
-                                    width: 266)),
+                                angle: -pi / 35.13, child: Image.asset("image/auctionhammer.png", width: 266)),
                             SizedBox(
                               height: 25,
                             ),
@@ -330,30 +319,21 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                   children: <TextSpan>[
                                     TextSpan(
                                       text: 'There is ',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline6!
-                                          .copyWith(
+                                      style: Theme.of(context).textTheme.headline6!.copyWith(
                                             color: Colors.black,
                                             fontWeight: FontWeight.w400,
                                           ),
                                     ),
                                     TextSpan(
                                       text: 'No Live Auction',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline6!
-                                          .copyWith(
+                                      style: Theme.of(context).textTheme.headline6!.copyWith(
                                             color: Colors.black,
                                             fontWeight: FontWeight.w600,
                                           ),
                                     ),
                                     TextSpan(
                                       text: '\n at this moment',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline6!
-                                          .copyWith(
+                                      style: Theme.of(context).textTheme.headline6!.copyWith(
                                             color: Colors.black,
                                             fontWeight: FontWeight.w400,
                                           ),
@@ -370,18 +350,12 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                           addAutomaticKeepAlives: true,
                           addSemanticIndexes: true,
                           (BuildContext context, int index) {
-                            return LiveItem(
-                                auctionViewModel.upcomingAuctionResponse!
-                                    .result!.auctions![index],
-                                index);
+                            return LiveItem(auctionViewModel.upcomingAuctionResponse!.result!.auctions![index], index);
                           },
                           // 40 list items
-                          childCount: auctionViewModel
-                                      .upcomingAuctionResponse!.result ==
-                                  null
+                          childCount: auctionViewModel.upcomingAuctionResponse!.result == null
                               ? 0
-                              : auctionViewModel.upcomingAuctionResponse!
-                                  .result!.auctions!.length,
+                              : auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length,
                         ),
                       )
             : SliverToBoxAdapter(child: Container()),
@@ -391,9 +365,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                 child: Observer(builder: (context) {
                   return auctionViewModel.auctionType == "upcoming"
                       ? Container(
-                          child: auctionViewModel.upcomingAuctionResponse!
-                                      .result!.auctions!.length ==
-                                  0
+                          child: auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length == 0
                               ? Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
@@ -402,8 +374,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                       height: 25,
                                     ),
                                     SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          .70,
+                                      width: MediaQuery.of(context).size.width * .70,
                                       child: RichText(
                                         textAlign: TextAlign.center,
                                         text: TextSpan(
@@ -412,30 +383,21 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                           children: <TextSpan>[
                                             TextSpan(
                                               text: 'There is ',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headline6!
-                                                  .copyWith(
+                                              style: Theme.of(context).textTheme.headline6!.copyWith(
                                                     color: Colors.black,
                                                     fontWeight: FontWeight.w400,
                                                   ),
                                             ),
                                             TextSpan(
                                               text: 'No Upcoming Auction',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headline6!
-                                                  .copyWith(
+                                              style: Theme.of(context).textTheme.headline6!.copyWith(
                                                     color: Colors.black,
                                                     fontWeight: FontWeight.w600,
                                                   ),
                                             ),
                                             TextSpan(
                                               text: '\n at this moment',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headline6!
-                                                  .copyWith(
+                                              style: Theme.of(context).textTheme.headline6!.copyWith(
                                                     color: Colors.black,
                                                     fontWeight: FontWeight.w400,
                                                   ),
@@ -446,25 +408,18 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                     ),
                                   ],
                                 )
-                              : auctionViewModel.upcomingAuctionResponse!
-                                          .result!.auctions!.length >
-                                      1
+                              : auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length > 1
                                   ? Container(
                                       padding: EdgeInsets.all(16),
                                       color: Colors.white,
                                       child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             "5 Days Until Online \nBidding Opens",
                                             textAlign: TextAlign.start,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline5!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.headline5!.copyWith(
                                                   color: Color(0xff2d2d2d),
                                                   fontWeight: FontWeight.w400,
                                                 ),
@@ -481,18 +436,10 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                 description:
                                                     '${auctionViewModel.upcomingAuctionResponse!.result!.auctions![0].auctionName}',
                                                 location: 'Event location',
-                                                startDate: DateTime.parse(
-                                                    auctionViewModel
-                                                        .upcomingAuctionResponse!
-                                                        .result!
-                                                        .auctions![0]!
-                                                        .auctionDate!),
-                                                endDate: DateTime.parse(
-                                                    auctionViewModel
-                                                        .upcomingAuctionResponse!
-                                                        .result!
-                                                        .auctions![0]!
-                                                        .auctionEndDate!),
+                                                startDate: DateTime.parse(auctionViewModel
+                                                    .upcomingAuctionResponse!.result!.auctions![0]!.auctionDate!),
+                                                endDate: DateTime.parse(auctionViewModel
+                                                    .upcomingAuctionResponse!.result!.auctions![0]!.auctionEndDate!),
                                                 iosParams: IOSParams(
                                                   reminder: Duration(
                                                       /* Ex. hours:1 */), // on iOS, you can set alarm notification after your event.
@@ -508,45 +455,26 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                             },
                                             child: Container(
                                                 height: 50,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    .65,
+                                                width: MediaQuery.of(context).size.width * .65,
                                                 decoration: BoxDecoration(
-                                                    gradient:
-                                                        LinearGradient(colors: [
+                                                    gradient: LinearGradient(colors: [
                                                       Color(0xffB45156),
                                                       Color(0xffE74B52),
                                                     ]),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20)),
+                                                    borderRadius: BorderRadius.circular(20)),
                                                 child: Padding(
                                                   padding:
-                                                      const EdgeInsets.only(
-                                                          right: 5.0,
-                                                          left: 5,
-                                                          top: 12,
-                                                          bottom: 12),
+                                                      const EdgeInsets.only(right: 5.0, left: 5, top: 12, bottom: 12),
                                                   child: Center(
                                                     child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
+                                                      mainAxisAlignment: MainAxisAlignment.center,
                                                       children: [
                                                         Text(
                                                           'ADD TO CALENDER',
-                                                          style:
-                                                              Theme.of(context)
-                                                                  .textTheme
-                                                                  .bodyText1!
-                                                                  .copyWith(
-                                                                    color: Color(
-                                                                        0XFFFFFFFF),
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                  ),
+                                                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                                color: Color(0XFFFFFFFF),
+                                                                fontWeight: FontWeight.w600,
+                                                              ),
                                                         ),
                                                         SizedBox(
                                                           width: 16,
@@ -555,8 +483,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                           "image/cal.png",
                                                           height: 25,
                                                           width: 25,
-                                                          color:
-                                                              Color(0XFFFFFFFF),
+                                                          color: Color(0XFFFFFFFF),
                                                         )
                                                       ],
                                                     ),
@@ -573,22 +500,14 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                   top: 54,
                                                   child: Container(
                                                     height: 500,
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                            .size
-                                                            .width,
-                                                    decoration: BoxDecoration(
-                                                        color:
-                                                            Color(0xffF8F8F8)),
+                                                    width: MediaQuery.of(context).size.width,
+                                                    decoration: BoxDecoration(color: Color(0xffF8F8F8)),
                                                   ),
                                                 ),
                                                 Align(
-                                                  alignment:
-                                                      Alignment.topCenter,
+                                                  alignment: Alignment.topCenter,
                                                   child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
                                                     children: [
                                                       Image.network(
                                                         "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![0].image}",
@@ -596,40 +515,28 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                       ),
                                                       Container(
                                                         child: SizedBox(
-                                                          width: MediaQuery.of(
-                                                                  context)
-                                                              .size
-                                                              .width,
+                                                          width: MediaQuery.of(context).size.width,
                                                           child: Wrap(
                                                             // mainAxisAlignment: MainAxisAlignment.start,
                                                             // mainAxisSize: MainAxisSize.max,
                                                             children: [
                                                               Text(
                                                                   "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![0].auctionName}",
-                                                                  style: Theme.of(
-                                                                          context)
-                                                                      .textTheme
-                                                                      .headline6!
-                                                                      .copyWith(
-                                                                        fontWeight:
-                                                                            FontWeight.bold,
-                                                                        letterSpacing:
-                                                                            2,
-                                                                        color: Color(
-                                                                            0xff585858),
-                                                                      )),
+                                                                  style:
+                                                                      Theme.of(context).textTheme.headline6!.copyWith(
+                                                                            fontWeight: FontWeight.bold,
+                                                                            letterSpacing: 2,
+                                                                            color: Color(0xff585858),
+                                                                          )),
                                                               SizedBox(
                                                                 width: 8,
                                                               ),
                                                               Text(
                                                                   "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![0].auctionName}",
-                                                                  style: Theme.of(
-                                                                          context)
+                                                                  style: Theme.of(context)
                                                                       .textTheme
                                                                       .headline6!
-                                                                      .copyWith(
-                                                                          fontWeight:
-                                                                              FontWeight.normal)),
+                                                                      .copyWith(fontWeight: FontWeight.normal)),
                                                             ],
                                                           ),
                                                         ),
@@ -641,71 +548,39 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                         onTap: () {
                                                           // Navigator.push(context, MaterialPageRoute(builder: (context) => LiveAuctionUiDetails(widget.auction)));
 
-                                                          if ((auctionViewModel
-                                                                  .upcomingAuctionResponse!
-                                                                  .result!
-                                                                  .auctions![0]
-                                                                  .auctionDate!) !=
+                                                          if ((auctionViewModel.upcomingAuctionResponse!.result!
+                                                                  .auctions![0].auctionDate!) !=
                                                               "TBA") {
-                                                            auctionViewModel
-                                                                    .upComingLotsResponse =
-                                                                null;
+                                                            auctionViewModel.upComingLotsResponse = null;
                                                             setState(() {
-                                                              auctionViewModel
-                                                                      .selectedAuction =
-                                                                  auctionViewModel
-                                                                      .upcomingAuctionResponse!
-                                                                      .result!
-                                                                      .auctions![0];
+                                                              auctionViewModel.selectedAuction = auctionViewModel
+                                                                  .upcomingAuctionResponse!.result!.auctions![0];
 
-                                                              bottomViewModel
-                                                                  .setIndex(8);
+                                                              bottomViewModel.setIndex(8);
                                                             });
                                                           } else {
-                                                            showinterestPopup(
-                                                                auctionViewModel
-                                                                    .upcomingAuctionResponse!
-                                                                    .result!
-                                                                    .auctions![
-                                                                        0]
-                                                                    .auctionId
-                                                                    .toString());
+                                                            showinterestPopup(auctionViewModel
+                                                                .upcomingAuctionResponse!.result!.auctions![0].auctionId
+                                                                .toString());
                                                           }
                                                         },
                                                         child: Container(
-                                                          padding:
-                                                              EdgeInsets.all(8),
+                                                          padding: EdgeInsets.all(8),
                                                           decoration: BoxDecoration(
-                                                              color: Color(
-                                                                  0xffEAEEF2),
-                                                              borderRadius: BorderRadius
-                                                                  .all(Radius
-                                                                      .circular(
-                                                                          10))),
+                                                              color: Color(0xffEAEEF2),
+                                                              borderRadius: BorderRadius.all(Radius.circular(10))),
                                                           child: Text(
-                                                            (auctionViewModel
-                                                                            .upcomingAuctionResponse!
-                                                                            .result!
-                                                                            .auctions![0]
-                                                                            .auctionDate ??
+                                                            (auctionViewModel.upcomingAuctionResponse!.result!
+                                                                            .auctions![0].auctionDate ??
                                                                         '') ==
                                                                     "TBA"
                                                                 ? "SHOW INTEREST"
                                                                 : "EXPLORE",
-                                                            textAlign:
-                                                                TextAlign.start,
-                                                            style: Theme
-                                                                    .of(context)
-                                                                .textTheme
-                                                                .subtitle1!
-                                                                .copyWith(
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold,
-                                                                    letterSpacing:
-                                                                        2),
+                                                            textAlign: TextAlign.start,
+                                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                color: Colors.black,
+                                                                fontWeight: FontWeight.bold,
+                                                                letterSpacing: 2),
                                                           ),
                                                         ),
                                                       ),
@@ -714,32 +589,19 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                       ),
                                                       Text(
                                                           "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![0].displayDate!.split(",")[0].trim()}",
-                                                          style: Theme.of(
-                                                                  context)
-                                                              .textTheme
-                                                              .headline5!
-                                                              .copyWith(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .normal,
-                                                                  color: Theme.of(
-                                                                          context)
-                                                                      .colorScheme
-                                                                      .primary,
-                                                                  letterSpacing:
-                                                                      2)),
+                                                          style: Theme.of(context).textTheme.headline5!.copyWith(
+                                                              fontWeight: FontWeight.normal,
+                                                              color: Theme.of(context).colorScheme.primary,
+                                                              letterSpacing: 2)),
                                                       SizedBox(
                                                         height: 8,
                                                       ),
                                                       Text(
                                                           "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![0].displayDate!.split(",")[1].trim()}",
-                                                          style: Theme.of(
-                                                                  context)
+                                                          style: Theme.of(context)
                                                               .textTheme
                                                               .subtitle1!
-                                                              .copyWith(
-                                                                  color: Color(
-                                                                      0xff585858))),
+                                                              .copyWith(color: Color(0xff585858))),
                                                     ],
                                                   ),
                                                 )
@@ -1049,21 +911,16 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                       : Container();
                 }),
               ),
-        auctionViewModel.isLoadingForUpCommingAuction
-            ? SliverToBoxAdapter(child: LinearProgressIndicator())
-            : SliverList(
-                delegate: SliverChildBuilderDelegate(
-                addAutomaticKeepAlives: true,
-                childCount: (auctionViewModel
-                                .upcomingAuctionResponse!.result!.auctions ??
-                            [])
-                        .length -
-                    1,
-                (BuildContext context, int index) {
-                  return UpcomingAuctionItem(
-                      index + 1, auctionViewModel, bottomViewModel);
-                },
-              )),
+        // auctionViewModel.isLoadingForUpCommingAuction
+        //     ? SliverToBoxAdapter(child: LinearProgressIndicator())
+        //     : SliverList(
+        //         delegate: SliverChildBuilderDelegate(
+        //         addAutomaticKeepAlives: true,
+        //         childCount: (auctionViewModel.upcomingAuctionResponse!.result!.auctions ?? []).length - 1,
+        //         (BuildContext context, int index) {
+        //           return UpcomingAuctionItem(index + 1, auctionViewModel, bottomViewModel);
+        //         },
+        //       )),
         auctionViewModel.isLoadingForUpCommingAuction
             ? SliverToBoxAdapter(child: LinearProgressIndicator())
             : SliverToBoxAdapter(
@@ -1071,9 +928,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                   print(auctionViewModel.auctionType);
                   return auctionViewModel.auctionType == "past"
                       ? Container(
-                          child: auctionViewModel.upcomingAuctionResponse!
-                                      .result!.auctions!.length ==
-                                  0
+                          child: auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length == 0
                               ? Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
@@ -1082,8 +937,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                       height: 25,
                                     ),
                                     SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          .70,
+                                      width: MediaQuery.of(context).size.width * .70,
                                       child: RichText(
                                         textAlign: TextAlign.center,
                                         text: TextSpan(
@@ -1092,30 +946,21 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                           children: <TextSpan>[
                                             TextSpan(
                                               text: 'There is ',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headline6!
-                                                  .copyWith(
+                                              style: Theme.of(context).textTheme.headline6!.copyWith(
                                                     color: Colors.black,
                                                     fontWeight: FontWeight.w400,
                                                   ),
                                             ),
                                             TextSpan(
                                               text: 'No Past Auction',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headline6!
-                                                  .copyWith(
+                                              style: Theme.of(context).textTheme.headline6!.copyWith(
                                                     color: Colors.black,
                                                     fontWeight: FontWeight.w600,
                                                   ),
                                             ),
                                             TextSpan(
                                               text: '\n at this moment',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headline6!
-                                                  .copyWith(
+                                              style: Theme.of(context).textTheme.headline6!.copyWith(
                                                     color: Colors.black,
                                                     fontWeight: FontWeight.w400,
                                                   ),
@@ -1194,9 +1039,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
             ? SliverToBoxAdapter(child: LinearProgressIndicator())
             : auctionViewModel.upcomingAuctionResponse!.result == null
                 ? SliverToBoxAdapter(child: Container())
-                : auctionViewModel
-                            .upcomingAuctionResponse!.result!.auctions!.length >
-                        1
+                : auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length > 1
                     ? auctionViewModel.auctionType == "past"
                         ? SliverList(
                             delegate: SliverChildBuilderDelegate(
@@ -1206,10 +1049,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                 return InkWell(
                                   onTap: () {
                                     auctionViewModel.selectedAuction =
-                                        auctionViewModel
-                                            .upcomingAuctionResponse!
-                                            .result!
-                                            .auctions![index];
+                                        auctionViewModel.upcomingAuctionResponse!.result!.auctions![index];
 
                                     bottomViewModel.selectedIndex = 8;
                                   },
@@ -1219,49 +1059,35 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                         color: Color(0xffFFFFFF),
                                         height: 480.0,
                                         margin: const EdgeInsets.only(top: 8.0),
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                .8,
+                                        width: MediaQuery.of(context).size.width * .8,
                                         alignment: Alignment.center,
                                         // margin: EdgeInsets.only(bottom: 17),
                                         child: Stack(children: [
                                           Padding(
-                                            padding: EdgeInsets.only(
-                                                top: 80 / 2.0, bottom: 0),
+                                            padding: EdgeInsets.only(top: 80 / 2.0, bottom: 0),
                                             child: Container(
                                               //replace this Container with your Card
-                                              color: Colors.black
-                                                  .withOpacity(0.05),
+                                              color: Colors.black.withOpacity(0.05),
                                               height: 500.0,
                                             ),
                                           ),
                                           Align(
                                             alignment: Alignment.topCenter,
                                             child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 35.0, right: 25),
+                                              padding: const EdgeInsets.only(left: 35.0, right: 25),
                                               child: Image.network(
                                                 "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![index].image}",
                                                 height: 300,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    .8,
+                                                width: MediaQuery.of(context).size.width * .8,
                                                 fit: BoxFit.contain,
                                               ),
                                             ),
                                           ),
                                           Padding(
-                                              padding: EdgeInsets.only(
-                                                  top: 310,
-                                                  bottom: 0,
-                                                  left: 25.0,
-                                                  right: 25),
+                                              padding: EdgeInsets.only(top: 310, bottom: 0, left: 25.0, right: 25),
                                               child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   SizedBox(
                                                     width: 20,
@@ -1269,16 +1095,11 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                   Text(
                                                     "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![index].auctionName}",
                                                     textAlign: TextAlign.center,
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .headline5!
-                                                        .copyWith(
+                                                    style: Theme.of(context).textTheme.headline5!.copyWith(
                                                           color: Colors.black,
                                                           letterSpacing: 1,
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                          fontWeight:
-                                                              FontWeight.bold,
+                                                          overflow: TextOverflow.ellipsis,
+                                                          fontWeight: FontWeight.bold,
                                                         ),
                                                   ),
                                                   SizedBox(
@@ -1287,48 +1108,28 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                   Text(
                                                     "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![index].auctionDate}",
                                                     textAlign: TextAlign.center,
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .subtitle1!
-                                                        .copyWith(
-                                                          color:
-                                                              Color(0xff747474),
-                                                          fontWeight:
-                                                              FontWeight.w400,
+                                                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                          color: Color(0xff747474),
+                                                          fontWeight: FontWeight.w400,
                                                         ),
                                                   ),
                                                   SizedBox(
                                                     height: 20,
                                                   ),
                                                   Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
                                                     children: [
                                                       Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
+                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
                                                         children: [
                                                           Text(
                                                             "Total Sales Value",
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                            style: Theme.of(
-                                                                    context)
-                                                                .textTheme
-                                                                .subtitle1!
-                                                                .copyWith(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
+                                                            textAlign: TextAlign.center,
+                                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                  color: Colors.black,
+                                                                  fontWeight: FontWeight.w400,
                                                                 ),
                                                           ),
                                                           SizedBox(
@@ -1336,58 +1137,29 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                           ),
                                                           Text(
                                                             "₹${auctionViewModel.upcomingAuctionResponse!.result!.auctions![index].totalSaleValue}",
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                            style: Theme.of(
-                                                                    context)
-                                                                .textTheme
-                                                                .headline6!
-                                                                .copyWith(
-                                                                  color: Theme.of(
-                                                                          context)
-                                                                      .colorScheme
-                                                                      .primary,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
+                                                            textAlign: TextAlign.center,
+                                                            style: Theme.of(context).textTheme.headline6!.copyWith(
+                                                                  color: Theme.of(context).colorScheme.primary,
+                                                                  fontWeight: FontWeight.bold,
                                                                 ),
                                                           ),
                                                         ],
                                                       ),
                                                       Spacer(),
                                                       Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
+                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
                                                         children: [
                                                           Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                        .only(
-                                                                    right: 8.0,
-                                                                    left: 8,
-                                                                    top: 12,
-                                                                    bottom: 12),
+                                                            padding: const EdgeInsets.only(
+                                                                right: 8.0, left: 8, top: 12, bottom: 12),
                                                             child: Text(
                                                               'View All',
-                                                              style: Theme.of(
-                                                                      context)
-                                                                  .textTheme
-                                                                  .subtitle1!
-                                                                  .copyWith(
-                                                                    color: Color(
-                                                                        0XFF1F2A52),
-                                                                    decoration:
-                                                                        TextDecoration
-                                                                            .underline,
-                                                                    letterSpacing:
-                                                                        1,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold,
+                                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                    color: Color(0XFF1F2A52),
+                                                                    decoration: TextDecoration.underline,
+                                                                    letterSpacing: 1,
+                                                                    fontWeight: FontWeight.bold,
                                                                   ),
                                                             ),
                                                           ),
@@ -1405,11 +1177,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                 );
                               },
                               // 40 list items
-                              childCount: auctionViewModel
-                                  .upcomingAuctionResponse!
-                                  .result!
-                                  .auctions!
-                                  .length,
+                              childCount: auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length,
                             ),
                           )
                         : SliverToBoxAdapter(child: Container())
@@ -1424,8 +1192,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                 }),
         ),
         SliverToBoxAdapter(
-          child: SizedBox(
-              width: MediaQuery.of(context).size.width, child: Footer()),
+          child: SizedBox(width: MediaQuery.of(context).size.width, child: Footer()),
         ),
         SliverToBoxAdapter(
           child: Container(
@@ -1491,10 +1258,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                           style: Theme.of(context)
                               .textTheme
                               .subtitle1!
-                              .copyWith(
-                                  color: Color(0XFF202232),
-                                  fontWeight: FontWeight.w400,
-                                  letterSpacing: 2),
+                              .copyWith(color: Color(0XFF202232), fontWeight: FontWeight.w400, letterSpacing: 2),
                         ),
                       ],
                     ),
@@ -1536,44 +1300,32 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                 contentPadding: EdgeInsets.all(0),
                               ),
                               child: DropdownMenu<CountryList>(
-                                  textStyle: TextStyle(color: Colors.black),
-                                  controller: countrycode,
-                                  onSelected: (item) {
-                                    countrycode.text = item!.code ?? '';
-                                  },
-                                  menuStyle: MenuStyle(
-                                    backgroundColor:
-                                        MaterialStatePropertyAll(Colors.white),
-                                  ),
-                                  inputDecorationTheme: InputDecorationTheme(
-                                    filled: true,
-                                    contentPadding: EdgeInsets.symmetric(
-                                        vertical: 5.0, horizontal: 8),
-                                    //  fillColor: Colors.blue.shade100
-                                  ),
-                                  dropdownMenuEntries: profileViewModel
-                                      .getRegInfoResponse!.countryList!
-                                      .map((e) => DropdownMenuEntry(
-                                          value: e,
-                                          label:
-                                              "${e.name ?? ''} (${e.code ?? ''})",
-                                          style: ButtonStyle(
-                                            foregroundColor:
-                                                MaterialStatePropertyAll(
-                                                    Colors.black),
-                                            padding: MaterialStatePropertyAll(
-                                                EdgeInsets.symmetric(
-                                                    horizontal: 8)),
-                                            backgroundColor:
-                                                MaterialStatePropertyAll(
-                                                    Colors.white),
-                                          )))
-                                      .toList(),
-                                  width:
-                                      MediaQuery.of(dialogContext).size.width *
-                                          .70,
-                                  hintText: "Country Code",
-                                  // errorText: err_counrtyCode
+                                textStyle: TextStyle(color: Colors.black),
+                                controller: countrycode,
+                                onSelected: (item) {
+                                  countrycode.text = item!.code ?? '';
+                                },
+                                menuStyle: MenuStyle(
+                                  backgroundColor: MaterialStatePropertyAll(Colors.white),
+                                ),
+                                inputDecorationTheme: InputDecorationTheme(
+                                  filled: true,
+                                  contentPadding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 8),
+                                  //  fillColor: Colors.blue.shade100
+                                ),
+                                dropdownMenuEntries: profileViewModel.getRegInfoResponse!.countryList!
+                                    .map((e) => DropdownMenuEntry(
+                                        value: e,
+                                        label: "${e.name ?? ''} (${e.code ?? ''})",
+                                        style: ButtonStyle(
+                                          foregroundColor: MaterialStatePropertyAll(Colors.black),
+                                          padding: MaterialStatePropertyAll(EdgeInsets.symmetric(horizontal: 8)),
+                                          backgroundColor: MaterialStatePropertyAll(Colors.white),
+                                        )))
+                                    .toList(),
+                                width: MediaQuery.of(dialogContext).size.width * .70,
+                                hintText: "Country Code",
+                                // errorText: err_counrtyCode
                               ),
                             );
                     }),
@@ -1610,19 +1362,12 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                       alignment: Alignment.topCenter,
                       child: ElevatedButton(
                         style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Color(0XFFB45156)),
-                            shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    side: BorderSide(
-                                        color: Color(0XFFB45156),
-                                        width: 0.5)))),
+                            backgroundColor: MaterialStateProperty.all(Color(0XFFB45156)),
+                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                                side: BorderSide(color: Color(0XFFB45156), width: 0.5)))),
                         onPressed: () async {
-                          if (name.text == '' ||
-                              email.text == '' ||
-                              countrycode.text == '') {
+                          if (name.text == '' || email.text == '' || countrycode.text == '') {
                             if (name.text == '') {
                               err_name = 'Please enter Name';
                             }
@@ -1634,44 +1379,30 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                               err_counrtyCode = 'Please enter Country Code';
                             }
                           } else {
-                            HttpResponse res =
-                                await auctionViewModel.showIntrestInAuction(
-                                    name.text,
-                                    email.text,
-                                    countrycode.text,
-                                    phone.text,
-                                    message.text,
-                                    auctionId);
+                            HttpResponse res = await auctionViewModel.showIntrestInAuction(
+                                name.text, email.text, countrycode.text, phone.text, message.text, auctionId);
                             if (res.status == 200) {
-                              ScaffoldMessenger.maybeOf(context)!
-                                  .showSnackBar(SnackBar(
-                                content: Text("Thank you for your interest.",
-                                    style: TextStyle(color: Colors.black)),
+                              ScaffoldMessenger.maybeOf(context)!.showSnackBar(SnackBar(
+                                content: Text("Thank you for your interest.", style: TextStyle(color: Colors.black)),
                                 backgroundColor: Colors.green,
                               ));
                               Navigator.maybeOf(context)!.pop();
                             } else {
-                              ScaffoldMessenger.maybeOf(context)!
-                                  .showSnackBar(SnackBar(
-                                content: Text(res.message ?? '',
-                                    style: TextStyle(color: Colors.black)),
+                              ScaffoldMessenger.maybeOf(context)!.showSnackBar(SnackBar(
+                                content: Text(res.message ?? '', style: TextStyle(color: Colors.black)),
                                 backgroundColor: Colors.orange,
                               ));
                             }
                           }
                         },
                         child: Padding(
-                          padding: const EdgeInsets.only(
-                              right: 0.0, left: 0, top: 12, bottom: 12),
+                          padding: const EdgeInsets.only(right: 0.0, left: 0, top: 12, bottom: 12),
                           child: Text(
                             'Submit',
                             style: Theme.of(context)
                                 .textTheme
                                 .caption!
-                                .copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w700,
-                                    letterSpacing: 1.33333),
+                                .copyWith(color: Colors.white, fontWeight: FontWeight.w700, letterSpacing: 1.33333),
                           ),
                         ),
                       ),

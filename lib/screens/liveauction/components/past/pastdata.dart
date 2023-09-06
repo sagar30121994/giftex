@@ -5,6 +5,7 @@ import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
 
 class PastData extends StatefulWidget {
   PastData(this.auctionViewModel);
+
   AuctionViewModel auctionViewModel;
 
   @override
@@ -17,7 +18,7 @@ class _PastDataState extends State<PastData> {
     return Observer(builder: (context) {
       return widget.auctionViewModel.isLoadingForUpCommingAuction
           ? SliverToBoxAdapter(child: LinearProgressIndicator())
-          : widget.auctionViewModel.upcomingAuctionResponse!.result == null
+          : widget.auctionViewModel.upcomingAuctionResponse == null
               ? SliverToBoxAdapter(child: Container())
               : widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length > 1
                   ? SliverList(
