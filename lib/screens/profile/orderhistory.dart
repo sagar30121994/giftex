@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:giftex/screens/components/footer/footer.dart';
+import 'package:giftex/screens/components/header.dart';
 import 'package:giftex/viewmodel/profile/profileviewmodel.dart';
-
-import '../components/footer/footer.dart';
-import '../components/header.dart';
 
 class MyOrderHistorypage extends StatefulWidget {
   MyOrderHistorypage(this.profileViewModel);
@@ -21,9 +20,11 @@ class _MyOrderHistorypageState extends State<MyOrderHistorypage> {
   List<Menu> data = [];
   static const countdownDuration = Duration(minutes: 10);
   Duration duration = Duration();
+
   // Timer? timer;
   String auctionType = "";
   bool countDown = true, selected = false;
+
   Widget _buildList(Menu list) {
     if (list.subMenu!.isEmpty)
       return Builder(builder: (context) {
@@ -55,7 +56,6 @@ class _MyOrderHistorypageState extends State<MyOrderHistorypage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     // dataList.forEach((element) {
     //   data.add(Menu.fromJson(element));
     // });
@@ -358,11 +358,19 @@ class _MyOrderHistorypageState extends State<MyOrderHistorypage> {
                                                                 height: 140,
                                                                 width: 90,
                                                               )
-                                                            : Image.network(
-                                                                "${e.lot!.thumbImage}",
-                                                                height: 140,
-                                                                width: 90,
-                                                                fit: BoxFit.contain,
+                                                            : InkWell(
+                                                                onTap: () async {
+                                                                  // Navigator.push(
+                                                                  //     context,
+                                                                  //     MaterialPageRoute(
+                                                                  //         builder: (context) => ProductDetailPage()));
+                                                                },
+                                                                child: Image.network(
+                                                                  "${e.lot!.thumbImage}",
+                                                                  height: 140,
+                                                                  width: 90,
+                                                                  fit: BoxFit.contain,
+                                                                ),
                                                               ),
                                                         SizedBox(
                                                           width: 10,

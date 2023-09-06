@@ -13,9 +13,10 @@ class ArtMovementPage extends StatefulWidget {
 class _ArtMovementPageState extends State<ArtMovementPage> {
   int _pageIndex = 0;
   Color tabColor = Color(0xff6D905D);
-  String newsType = "LATEST NEWS";
+  String newsType = "ABOUT ART";
   PageController _controller = PageController();
   final controller = PageController(viewportFraction: 0.8, keepPage: true);
+
   // final GlobalKey<ExpansionTileCardState> cardA = new GlobalKey();
   // final GlobalKey<ExpansionTileCardState> cardB= new GlobalKey();
   @override

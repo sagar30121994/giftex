@@ -8,6 +8,7 @@ import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationba
 import 'package:giftex/screens/liveauction/liveauction.dart';
 import 'package:giftex/screens/newsandupdates/newsandupdates.dart';
 import 'package:giftex/viewmodel/home/homeviewmodel.dart';
+import 'package:intl/intl.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../components/footer/footer.dart';
@@ -73,6 +74,12 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
     // TODO: implement dispose
     timer!.cancel();
     super.dispose();
+  }
+
+  String formateNumber(String number) {
+    var f = NumberFormat('##,##,##,##,###.##', 'HI');
+
+    return f.format(double.parse(number));
   }
 
   @override
@@ -417,7 +424,8 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                     height: 4,
                                                   ),
                                                   Text(
-                                                    "₹ ${homeViewModel.getFeaturedItemsResponse!.result!.lots![pos].liveStatus!.currentBid!.iNR}",
+                                                    "₹ ${formateNumber(homeViewModel.getFeaturedItemsResponse!.result!.lots![pos].liveStatus!.currentBid!.iNR ?? "0")}",
+                                                    // "₹${formateNumber(widget.lots.liveStatus!.nextValidBid!.iNR ?? "0")}"
                                                     textAlign: TextAlign.center,
                                                     style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                           color: Theme.of(context).colorScheme.primary,

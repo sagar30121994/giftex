@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:giftex/data/local/client/prefs.dart'; // import 'package:giftex/data/local/client/prefsens/liveauction/liveauction.dart';
+import 'package:giftex/data/local/client/prefs.dart';
 import 'package:giftex/screens/liveauction/liveauction.dart';
 import 'package:giftex/screens/popwidget.dart';
 import 'package:giftex/screens/productdetailspage/productdetailpage.dart';
@@ -390,10 +390,9 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                                             borderRadius: BorderRadius.circular(20.0),
                                             side: BorderSide(color: Color(0xff747474), width: 0.38)))),
                                     onPressed: () async {
-                                      await auctionViewModel.getProxyAmountByLot(widget.lots);
-
                                       if (auctionViewModel.getProxyBidAmountResponse!.status == "true" &&
                                           preference!.getLoginStatus()) {
+                                        await auctionViewModel.getProxyAmountByLot(widget.lots);
                                         showModalBottomSheet<void>(
                                           // context and builder are
                                           // required properties in this widget
@@ -598,7 +597,6 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                                   InkWell(
                                     onTap: () {
                                       if (preference!.getLoginStatus()) {
-                                        // Navigator.push(context, MaterialPageRoute(builder: (context) => GetOtppage()));
                                       } else {
                                         WidgetsBinding.instance?.addPostFrameCallback((_) {
                                           showDialog(
@@ -656,17 +654,39 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                             ),
 
                             SizedBox(height: 12),
-                            Container(
-                              decoration:
-                                  BoxDecoration(borderRadius: BorderRadius.circular(16), color: Color(0xffF3E8E9)),
-                              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                              child: Text("${widget.lots.bidCount} BIDS"),
-                            ),
+                            // Container(
+                            //   decoration:
+                            //       BoxDecoration(borderRadius: BorderRadius.circular(16), color: Color(0xffF3E8E9)),
+                            //   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                            //   child: Text("${widget.lots.bidCount} BIDS"),
+                            // ),
                             SizedBox(height: 12),
-                            Icon(
-                              (widget.lots.isLiked ?? "false") == "true" ? Icons.favorite : Icons.favorite_border,
-                              color: (widget.lots.isLiked ?? "false") == "true" ? Colors.pink : Colors.grey,
+                            InkWell(
+                              onTap: () {
+                                if (preference!.getLoginStatus()) {
+                                  widget.auctionViewModel.addRemoveLotToWishlist(
+                                      widget.lots, (widget.lots.isLiked ?? "false") == "true" ? "false" : "true");
+                                } else {
+                                  WidgetsBinding.instance?.addPostFrameCallback((_) {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return PopupWidget();
+                                      },
+                                    );
+                                  });
+                                }
+                              },
+                              child: Icon(
+                                (widget.lots.isLiked ?? "false") == "true" && preference!.getLoginStatus()
+                                    ? Icons.favorite
+                                    : Icons.favorite_border,
+                                color: (widget.lots.isLiked ?? "false") == "true" && preference!.getLoginStatus()
+                                    ? Colors.pink
+                                    : Colors.grey,
+                              ),
                             ),
+
                             //     :Icon(
                             //   Icons.favorite,
                             //   color: Colors.pink,
@@ -765,12 +785,12 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                                       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                                     ),
                                     SizedBox(width: 12),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(16), color: Color(0xffF3E8E9)),
-                                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                                      child: Text("${widget.lots.bidCount} BIDS"),
-                                    ),
+                                    // Container(
+                                    //   decoration: BoxDecoration(
+                                    //       borderRadius: BorderRadius.circular(16), color: Color(0xffF3E8E9)),
+                                    //   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                    //   child: Text("${widget.lots.bidCount} BIDS"),
+                                    // ),
                                   ],
                                 ),
                                 SizedBox(
@@ -831,34 +851,37 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                                   height: 8,
                                 ),
                                 (widget.lots.proxyStatus!.status != "CanBid")
-                                    ? Container(
-                                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                                        decoration: BoxDecoration(
-                                            color: Colors.yellowAccent.withOpacity(.1),
-                                            borderRadius: BorderRadius.circular(16)),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Proxy Bid",
-                                              textAlign: TextAlign.center,
-                                              style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                    color: Color(0xff202232),
-                                                    // fontWeight: FontWeight.w400,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                            ),
-                                            Spacer(),
-                                            Text(
-                                              "₹${formateNumber(widget.lots.proxyStatus!.proxyAmount!.iNR ?? "0")}",
-                                              textAlign: TextAlign.center,
-                                              style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                    color: Color(0xff202232),
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                            ),
-                                          ],
+                                    ? Visibility(
+                                        visible: preference!.getLoginStatus(),
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                                          decoration: BoxDecoration(
+                                              color: Colors.yellowAccent.withOpacity(.1),
+                                              borderRadius: BorderRadius.circular(16)),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Proxy Bid",
+                                                textAlign: TextAlign.center,
+                                                style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                      color: Color(0xff202232),
+                                                      // fontWeight: FontWeight.w400,
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                              ),
+                                              Spacer(),
+                                              Text(
+                                                "₹${formateNumber(widget.lots.proxyStatus!.proxyAmount!.iNR ?? "0")}",
+                                                textAlign: TextAlign.center,
+                                                style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                      color: Color(0xff202232),
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       )
                                     : Container(),
@@ -872,22 +895,6 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                                 //         minutes == "00" &&
                                 //         seconds == "00")
                                 //     ?
-                                Container(
-                                    child: (widget.lots.proxyStatus!.Id ==
-                                            widget.auctionViewModel.localSharedPrefrence.getUserId())
-                                        ? Align(
-                                            alignment: Alignment.topRight,
-                                            child: Column(
-                                              children: [
-                                                Text(
-                                                  "₹${widget.lots.leadingUser!.bid!.iNR}",
-                                                  style: Theme.of(context).textTheme.subtitle2,
-                                                ),
-                                                Text("${widget.lots.leadingUser!.notes}"),
-                                              ],
-                                            ),
-                                          )
-                                        : Container()),
 
                                 SizedBox(
                                   height: 8,
@@ -918,8 +925,12 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                                     }
                                   },
                                   child: Icon(
-                                    (widget.lots.isLiked ?? "false") == "true" ? Icons.favorite : Icons.favorite_border,
-                                    color: (widget.lots.isLiked ?? "false") == "true" ? Colors.pink : Colors.grey,
+                                    (widget.lots.isLiked ?? "false") == "true" && preference!.getLoginStatus()
+                                        ? Icons.favorite
+                                        : Icons.favorite_border,
+                                    color: (widget.lots.isLiked ?? "false") == "true" && preference!.getLoginStatus()
+                                        ? Colors.pink
+                                        : Colors.grey,
                                   ),
                                 ),
                                 SizedBox(height: 12),
@@ -963,17 +974,22 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                                         mode: LaunchMode.externalApplication,
                                       );
                                     },
-                                    child: Container(
-                                      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                                      decoration: BoxDecoration(
-                                          color: Color(0xffEAEEF2), borderRadius: BorderRadius.circular(16)),
-                                      child: Row(
-                                        children: [
-                                          Icon(Icons.download_outlined),
-                                          Text("${"DOWNLOAD PDF FOR CHANGE IN PROXY"}",
-                                              style:
-                                                  Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.black)),
-                                        ],
+                                    child: Visibility(
+                                      visible: preference!.getLoginStatus(),
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                                        decoration: BoxDecoration(
+                                            color: Color(0xffEAEEF2), borderRadius: BorderRadius.circular(16)),
+                                        child: Row(
+                                          children: [
+                                            Icon(Icons.download_outlined),
+                                            Text("${"DOWNLOAD PDF FOR CHANGE IN PROXY"}",
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodySmall!
+                                                    .copyWith(color: Colors.black)),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   )

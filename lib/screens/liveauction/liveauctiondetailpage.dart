@@ -29,12 +29,14 @@ class HttpOverrideCertificateVerificationInDev extends HttpOverrides {
 
 class LiveAuctionUiDetails extends StatefulWidget {
   LiveAuctionUiDetails();
+
   @override
   _LiveAuctionUiDetailsState createState() => _LiveAuctionUiDetailsState();
 }
 
 class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
   int _pageIndex = 0;
+
   // String auctions = "live";
   Color tabColor = Color(0xffE74B52);
   List<Menu> data = [];
@@ -248,13 +250,13 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
                                           ),
                                     ),
                                     Spacer(),
-                                    InkWell(
-                                      onTap: () {},
-                                      child: Image.asset(
-                                        "image/share.png",
-                                        height: 32,
-                                      ),
-                                    ),
+                                    // InkWell(
+                                    //   onTap: () {},
+                                    //   child: Image.asset(
+                                    //     "image/share.png",
+                                    //     height: 32,
+                                    //   ),
+                                    // ),
 
                                     SizedBox(
                                       width: 20,
