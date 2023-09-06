@@ -962,7 +962,7 @@ class _DashboardUiState extends State<DashboardUi> {
       case 24:
         return ServiceAll("storage", "Storage");
       case 25:
-        return NewsAndUpdatesPage();
+        return NewsAndUpdatesPage("LATEST NEWS");
       case 26:
         return CareerPage();
       case 27:
@@ -982,6 +982,8 @@ class _DashboardUiState extends State<DashboardUi> {
 
       case 32:
         return OurCollectors();
+      case 33:
+        return NewsAndUpdatesPage("BLOGS");
 
       case 33:
         return SearchBarUi();

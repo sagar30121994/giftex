@@ -8,6 +8,10 @@ import '../components/header.dart';
 ServiceViewModel serviceViewModel = ServiceViewModel();
 
 class NewsAndUpdatesPage extends StatefulWidget {
+  NewsAndUpdatesPage(this.type);
+
+  String type;
+
   @override
   _NewsAndUpdatesPageState createState() => _NewsAndUpdatesPageState();
 }
@@ -20,6 +24,7 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
   @override
   void initState() {
     // TODO: implement initState
+    newsType = widget.type;
     callApi();
     super.initState();
   }
