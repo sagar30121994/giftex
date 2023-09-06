@@ -5,12 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:giftex/data/local/client/prefs.dart';
+import 'package:giftex/screens/liveauction/liveauction.dart';
 import 'package:giftex/screens/signup/login.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
 import 'package:intl/intl.dart';
 import 'package:share/share.dart';
+import 'package:sliver_tools/sliver_tools.dart';
 
 import '../../data/network/models/responce/lot/upcominglotsresponse.dart';
+import '../aboutus/aboutus.dart';
 import '../components/header.dart';
 
 class ProductDetailPage extends StatefulWidget {
@@ -23,6 +26,8 @@ class ProductDetailPage extends StatefulWidget {
 
 class _ProductDetailPageState extends State<ProductDetailPage>
     with AutomaticKeepAliveClientMixin {
+  String newsType ="ARTWORK DETAIL";
+
   int _pageIndex = 0;
   bool countDown = true, selected = false;
   Color tabColor = Color(0xff6D905D);
@@ -354,6 +359,14 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                         child: TabBar(
                           onTap: (index) {
                             setState(() {
+
+                              if(index==1){
+                                newsType = "PROVENANCE DETAILS";
+                              }else{
+                                newsType = "ARTWORK DETAIL";
+
+                              }
+
                               // if(index==0) { tabColor = Color(0xff6D905D);}
                               // if(index==1) {tabColor =  Color(0xff6D905D);}
                               // if(index==2) {tabColor =  Color(0xff6D905D);}
@@ -373,10 +386,11 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                               Theme.of(context).textTheme.subtitle1!.copyWith(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w400,
+                                fontSize: 14
                                   ),
                           tabs: [
-                            Tab(text: "il"),
-                            Tab(text: "Provenance"),
+                            Tab(text: "ARTWORK DETAIL"),
+                            Tab(text: "PROVENANCE DETAILS"),
                             // Tab(text: "Condition"),
                             // Tab(text: "Provenance"),
                             // Tab(text: "Condition"),
@@ -386,6 +400,27 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                     ),
                   ),
                 ),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: 16,
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              child: auctionViewModel.isLoadingForlots ? LinearProgressIndicator() : Container(),
+            ),
+          ),
+           newsType == "PROVENANCE DETAILS"
+              ? auctionViewModel.isLoadingForlots
+              ? SliverToBoxAdapter()
+              : SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: HtmlWidget(
+                '${widget.auctionViewModel.getsingleResponse!.result!.lots![0].additionalInfo!.provenance}',
+              ),
+            ),
+          ):
 
           widget.auctionViewModel.isLoadingForUpCommingAuction
               ? SliverToBoxAdapter()
@@ -641,7 +676,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                           height: 16,
                         ),
                         Observer(builder: (context) {
-                          return widget.lots.status!.toLowerCase() == "live"
+                          return widget.lots!.status!.toLowerCase() == "live"
                               ? Row(
                                   children: [
                                     Column(
@@ -664,7 +699,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                                           height: 10,
                                         ),
                                         Text(
-                                          '₹${formateNumber(widget.lots.liveStatus!.currentBid!.iNR ?? "0")}',
+                                          '₹${formateNumber(widget.lots!.liveStatus!.currentBid!.iNR ?? "0")}',
                                           style: Theme.of(context)
                                               .textTheme
                                               .headline6!
@@ -700,7 +735,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                                           height: 10,
                                         ),
                                         Text(
-                                          '₹${formateNumber(widget.lots.liveStatus!.nextValidBid!.iNR ?? "0")}',
+                                          '₹${formateNumber(widget.lots!.liveStatus!.nextValidBid!.iNR ?? "0")}',
                                           style: Theme.of(context)
                                               .textTheme
                                               .headline6!
@@ -713,10 +748,10 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                                     )
                                   ],
                                 )
-                              : widget.lots.status!.toLowerCase() == "upcoming"
-                                  ? (widget.lots.proxyStatus == null
+                              : widget.lots!.status!.toLowerCase() == "upcoming"
+                                  ? (widget.lots!.proxyStatus == null
                                               ? '0'
-                                              : widget.lots.proxyStatus!
+                                              : widget.lots!.proxyStatus!
                                                   .proxyAmount!.iNR) ==
                                           "0"
                                       ? Container()
@@ -752,7 +787,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                                                 ),
                                                 Spacer(),
                                                 Text(
-                                                  "₹${formateNumber((widget.lots.proxyStatus == null ? '0' : widget.lots.proxyStatus!.proxyAmount!.iNR ?? "0"))}",
+                                                  "₹${formateNumber((widget.lots!.proxyStatus == null ? '0' : widget.lots!.proxyStatus!.proxyAmount!.iNR ?? "0"))}",
                                                   textAlign: TextAlign.center,
                                                   style: Theme.of(context)
                                                       .textTheme

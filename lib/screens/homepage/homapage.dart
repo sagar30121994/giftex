@@ -1569,7 +1569,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => NewsAndUpdatesPage()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => NewsAndUpdatesPage("BLOGS")));
                   },
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 2),
