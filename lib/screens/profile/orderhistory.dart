@@ -296,7 +296,7 @@ class _MyOrderHistorypageState extends State<MyOrderHistorypage> {
                 ),
                 type == "auction"
                     ? Container(
-                        padding: EdgeInsets.only(top: 0, left: 16, right: 16),
+                        padding: EdgeInsets.only(top: 0, left: 24, right: 24),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -319,12 +319,15 @@ class _MyOrderHistorypageState extends State<MyOrderHistorypage> {
                                 ? LinearProgressIndicator()
                                 : (widget.profileViewModel.myPurchaseReponse!.data ?? []).length == 0
                                     ? Center(
-                                        child: Container(
-                                          child: Text("No Orders Found",
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headlineSmall!
-                                                  .copyWith(color: Colors.black)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(24),
+                                          child: Container(
+                                            child: Text("No Orders Found",
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headlineSmall!
+                                                    .copyWith(color: Colors.black)),
+                                          ),
                                         ),
                                       )
                                     : Column(
@@ -373,7 +376,7 @@ class _MyOrderHistorypageState extends State<MyOrderHistorypage> {
                                                                 ),
                                                               ),
                                                         SizedBox(
-                                                          width: 10,
+                                                          width: 14,
                                                         ),
                                                         Container(
                                                           width: MediaQuery.of(context).size.width * .55,

@@ -146,7 +146,7 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
               padding: const EdgeInsets.all(15.0),
               child: Container(
                   color: Color(0xffFFFFFF),
-                  height: 460,
+                  height: 492,
                   alignment: Alignment.center,
                   child: Stack(
                     children: [
@@ -155,7 +155,7 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                         child: Container(
                           //replace this Container with your Card
                           color: Color(0xffF9F9F9),
-                          height: 460.0,
+                          height: 492.0,
                         ),
                       ),
                       InkWell(
@@ -166,7 +166,7 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                                   builder: (context) => ProductDetailPage(widget.lots, auctionViewModel)));
                         },
                         child: Padding(
-                          padding: const EdgeInsets.only(top: 10.0),
+                          padding: const EdgeInsets.only(top: 30),
                           child: Image.network(
                             "${widget.lots.thumbImage}",
                             height: 250,
@@ -207,6 +207,17 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                                         fontWeight: FontWeight.w400,
                                       ),
                                 ),
+                              ),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              Text(
+                                "${widget.lots.category}",
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                      color: Color(0xff747474),
+                                      fontWeight: FontWeight.w400,
+                                    ),
                               ),
                               SizedBox(
                                 height: 8,

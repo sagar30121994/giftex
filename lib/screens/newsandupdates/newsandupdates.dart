@@ -235,7 +235,7 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                           delegate: SliverChildBuilderDelegate(
                             (BuildContext context, int index) {
                               return Padding(
-                                padding: const EdgeInsets.only(left: 32.0, right: 32.0),
+                                padding: const EdgeInsets.only(left: 32.0, right: 28.0),
                                 child: Container(
                                   color: Color(0xffFFFFFF),
                                   height: 350,
@@ -261,7 +261,7 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                                                 ),
                                           ),
                                           SizedBox(
-                                            width: 10,
+                                            width: 8,
                                           ),
                                           SizedBox(
                                               width: 8,
@@ -503,7 +503,7 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                                               ],
                                             ),
                                             const SizedBox(
-                                              height: 8,
+                                              height: 6,
                                             ),
                                             Text(
                                               "Lorem ipsum dolor sit",
