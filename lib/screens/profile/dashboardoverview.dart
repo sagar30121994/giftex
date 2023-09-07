@@ -83,8 +83,8 @@ class _MyAuctionDashboardState extends State<MyAuctionDashboard> {
                           ),
                           CircleAvatar(
                             radius: 37,
-                            backgroundImage: NetworkImage(
-                                '${baseUrl + (widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.basicDetails!.profilePicUrl ?? '')}'),
+                            backgroundImage:  NetworkImage(
+                                '${(widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.basicDetails!.profilePicUrl ?? '')}'),
                             // child: Image.asset("image/image 40.png",fit: BoxFit.fill,),
                           ),
                         ],
