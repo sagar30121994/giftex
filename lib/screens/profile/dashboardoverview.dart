@@ -19,7 +19,7 @@ class MyAuctionDashboard extends StatefulWidget {
 
 class _MyAuctionDashboardState extends State<MyAuctionDashboard> {
   int _pageIndex = 0;
-  String type = "auction";
+  String type = "LAST 5 BIDS";
   TextEditingController nameController = TextEditingController();
   List<Menu> data = [];
   static const countdownDuration = Duration(minutes: 10);
@@ -109,17 +109,17 @@ class _MyAuctionDashboardState extends State<MyAuctionDashboard> {
                                         TextSpan(
                                           text: 'Hello ',
                                           style: Theme.of(context).textTheme.headline6!.copyWith(
-                                            color: Color(0xffE74B52),
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                                color: Color(0xffE74B52),
+                                                fontWeight: FontWeight.bold,
+                                              ),
                                         ),
                                         TextSpan(
                                           text:
-                                          '${(widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.basicDetails!.firstName ?? '')}',
+                                              '${(widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.basicDetails!.firstName ?? '')}',
                                           style: Theme.of(context).textTheme.headline6!.copyWith(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold,
+                                              ),
                                         ),
                                       ],
                                     ),
@@ -138,16 +138,16 @@ class _MyAuctionDashboardState extends State<MyAuctionDashboard> {
                                         width: 3,
                                       ),
                                       widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.address!
-                                          .isEmpty
+                                              .isEmpty
                                           ? Container()
                                           : Text(
-                                        '${(widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.address!.first!.city ?? '')}',
-                                        textAlign: TextAlign.center,
-                                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                          color: Color(0xff2D2D2D),
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
+                                              '${(widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.address!.first!.city ?? '')}',
+                                              textAlign: TextAlign.center,
+                                              style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                    color: Color(0xff2D2D2D),
+                                                    fontWeight: FontWeight.w400,
+                                                  ),
+                                            ),
                                       SizedBox(
                                         width: 16,
                                       ),
@@ -353,20 +353,20 @@ class _MyAuctionDashboardState extends State<MyAuctionDashboard> {
                             //   //         .auctionId!,
                             //   //     widget.auctionViewModel.liveAuctionType);
                             // });
+
+                            setState(() {
+                              type = "LAST 5 BIDS";
+                            });
                           }
                           if (index == 1) {
+                            setState(() {
+                              type = "LAST 5 PURCHASES";
+                            });
+
                             // tabColor = Color(0xffE74B52);
                             // setState(() {
                             //   widget.auctionViewModel.liveAuctionType = "mygallery";
                             //   widget.auctionViewModel.myAuctionGallery();
-                            // });
-                          }
-                          if (index == 2) {
-                            // tabColor = Color(0xffE74B52);
-                            // setState(() {
-                            //   widget.auctionViewModel.liveAuctionType = "review";
-                            //   widget.auctionViewModel
-                            //       .getReviewauctions(lot: widget.auctionViewModel.selectedAuction!);
                             // });
                           }
 
@@ -392,6 +392,20 @@ class _MyAuctionDashboardState extends State<MyAuctionDashboard> {
                     ),
                   ),
                 ),
+
+                type == "LAST 5 BIDS"
+                    ? Container(
+                        child: widget.profileViewModel.getLastBidsResponce == null
+                            ? Container()
+                            : Column(
+                                children: widget.profileViewModel.getLastBidsResponce!.result!.lots!
+                                    .map(
+                                      (e) => Container(),
+                                    )
+                                    .toList(),
+                              ),
+                      )
+                    : Container(),
 
                 const SizedBox(
                   height: 16,
