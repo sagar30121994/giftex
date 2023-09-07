@@ -97,32 +97,28 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
 
     lotReference.onValue.listen((DatabaseEvent event) {
       final data = event.snapshot.value;
-      print("*********" + data.toString());
+      print("*********${data}");
       // initiateTimer();
 
       if (data.toString() != "null") {
-        if (!isFirst) {
-          isFirst = true;
-        } else {
-          final cleanup = jsonDecode(jsonEncode(data));
-          Lots l1 = Lots.fromJson(cleanup as Map<String, dynamic>);
+        final cleanup = jsonDecode(jsonEncode(data));
+        Lots l1 = Lots.fromJson(cleanup as Map<String, dynamic>);
 
-          setState(() {
-            String isLike = widget.lots.isLiked!;
+        setState(() {
+          String isLike = widget.lots.isLiked!;
 
-            widget.lots = l1;
+          widget.lots = l1;
 
-            if (widget.lots.leadingUser!.id! != widget.auctionViewModel.localSharedPrefrence.getUserId()) {
-              widget.lots.isLiked = isLike;
-            }
-
-            widget.auctionViewModel.replaceLots(l1);
-          });
-          if (widget.lots.status != "UpComing") {
-            setState(() {
-              myDuration = Duration(seconds: int.parse(widget.lots.liveStatus!.remainingSeconds ?? "0"));
-            });
+          if (widget.lots.leadingUser!.id! != widget.auctionViewModel.localSharedPrefrence.getUserId()) {
+            widget.lots.isLiked = isLike;
           }
+
+          widget.auctionViewModel.replaceLots(l1);
+        });
+        if (widget.lots.status != "UpComing") {
+          setState(() {
+            myDuration = Duration(seconds: int.parse(widget.lots.liveStatus!.remainingSeconds ?? "0"));
+          });
         }
       }
     });
@@ -181,11 +177,13 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
       final days = strDigits(myDuration.inHours);
       // Step 7
 
-      setState(() {
-        hours = strDigits(myDuration.inHours);
-        minutes = strDigits(myDuration.inMinutes.remainder(60));
-        seconds = strDigits(myDuration.inSeconds.remainder(60));
-      });
+      if (mounted) {
+        setState(() {
+          hours = strDigits(myDuration.inHours);
+          minutes = strDigits(myDuration.inMinutes.remainder(60));
+          seconds = strDigits(myDuration.inSeconds.remainder(60));
+        });
+      }
     }
   }
 
