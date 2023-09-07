@@ -12,6 +12,7 @@ import 'package:giftex/screens/components/header.dart';
 import 'package:giftex/screens/homepage/liveitem.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
 import 'package:giftex/viewmodel/profile/profileviewmodel.dart';
+import 'package:intl/intl.dart';
 
 AuctionViewModel auctionViewModel = AuctionViewModel();
 ProfileViewModel profileViewModel = ProfileViewModel();
@@ -71,6 +72,12 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
 
   void startTimer() {
     timer = Timer.periodic(new Duration(seconds: 1), (_) => addTime());
+  }
+
+  String formateNumber(String number) {
+    var f = NumberFormat('##,##,##,##,###.##', 'HI');
+
+    return f.format(double.parse(number));
   }
 
   void addTime() {
@@ -138,7 +145,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
           child: Align(
             child: Text(
               "OPULENT COLLECTIBLES",
-              textAlign: TextAlign.left,
+              textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headline6!.copyWith(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -1057,7 +1064,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                     padding: const EdgeInsets.all(16.0),
                                     child: Container(
                                         color: Color(0xffFFFFFF),
-                                        height: 480.0,
+                                        height: 500.0,
                                         margin: const EdgeInsets.only(top: 8.0),
                                         width: MediaQuery.of(context).size.width * .8,
                                         alignment: Alignment.center,

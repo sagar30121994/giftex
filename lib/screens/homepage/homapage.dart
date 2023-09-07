@@ -1010,10 +1010,10 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (BuildContext context, int pos) {
                               return Padding(
-                                padding: const EdgeInsets.all(10.0),
+                                padding: const EdgeInsets.all(4.0),
                                 child: Container(
-                                    color: Color(0xffFFFFFF),
-                                    height: 385,
+                                    // color: Color(0xffFFFFFF),
+                                    height: 185,
                                     width: 200,
                                     alignment: Alignment.center,
                                     child: Stack(
@@ -1024,8 +1024,8 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                           right: 50,
                                           child: Container(
                                             //replace this Container with your Card
-                                            color: Color(0xffF8F8F8),
-                                            height: 385,
+                                            // color: Color(0xffF8F8F8),
+                                            height: 100,
                                             width: 200,
                                           ),
                                         ),
@@ -1066,11 +1066,11 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                       letterSpacing: 1.5,
                                                       overflow: TextOverflow.ellipsis),
                                                 ),
-                                                SizedBox(
-                                                  height: 4,
-                                                ),
+                                                // SizedBox(
+                                                //   height: 4,
+                                                // ),
                                                 Text(
-                                                  "₹ ${homeViewModel.recordPriceLots!.tabArray![homeViewModel.selectedTabIndex].lots![pos].estimateFrom!.iNR}",
+                                                  "₹ ${formateNumber(homeViewModel.recordPriceLots!.tabArray![homeViewModel.selectedTabIndex].lots![pos].estimateFrom!.iNR ?? "0")}",
                                                   textAlign: TextAlign.center,
                                                   style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                         color: Theme.of(context).colorScheme.primary,

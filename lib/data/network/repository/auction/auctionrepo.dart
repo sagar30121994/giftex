@@ -22,6 +22,7 @@ import '../../models/request/webapimodel/userloginrequestmodel.dart';
 class AuctionRepo {
   DioClientNew? httpClient;
   LocalSharedPrefrence? localSharedPrefrence;
+
   AuctionRepo() {
     httpClient = DioClientNew();
     localSharedPrefrence = LocalSharedPrefrence();
@@ -30,11 +31,8 @@ class AuctionRepo {
   Future<HttpResponse> auctionAnalysis(AnalysisRequestModel model) async {
     HttpResponse httpResponse = HttpResponse();
     String userlogin = json.encode(LoginReqestModel);
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.formUrlEncodedContentType);
-    await httpClient!
-        .post(BaseUrl.baseUrl + endPoints.Auction().analysis, body: userlogin)
-        .then((responce) async {
+    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    await httpClient!.post(BaseUrl.baseUrl + endPoints.Auction().analysis, body: userlogin).then((responce) async {
       print(responce);
 
       if (responce.statusCode == 200) {
@@ -58,17 +56,14 @@ class AuctionRepo {
     return httpResponse;
   }
 
-  Future<HttpResponse> sortLostbyAution(
-      String auctionId, String filterType) async {
+  Future<HttpResponse> sortLostbyAution(String auctionId, String filterType) async {
     HttpResponse httpResponse = HttpResponse();
     // String userlogin = json.encode(LoginReqestModel);
     String userid = localSharedPrefrence!.getUserId();
     String authKey = localSharedPrefrence!.getAuthKeyWeb();
     String crmClientId = localSharedPrefrence!.getCrmClinetId();
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.jsonContentType);
-    await httpClient!
-        .post(BaseUrl.baseUrl + endPoints.Auction().sortReviewauctions, body: {
+    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
+    await httpClient!.post(BaseUrl.baseUrl + endPoints.Auction().sortReviewauctions, body: {
       "authkey_web": authKey,
       "authkey_mobile": "",
       "userid": userid,
@@ -112,22 +107,19 @@ class AuctionRepo {
     String userid = localSharedPrefrence!.getUserId();
     String authKey = localSharedPrefrence!.getAuthKeyWeb();
     String crmClientId = localSharedPrefrence!.getCrmClinetId();
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.jsonContentType);
-    await httpClient!.post(
-        BaseUrl.baseUrl + endPoints.Auction().ShowInterestInAuction,
-        body: {
-          "authkey_web": authKey,
-          "authkey_mobile": "",
-          "userid": userid,
-          "CRMClientID": crmClientId,
-          "AuctionId": AuctionId,
-          "country_code": country_code,
-          "email": email,
-          "message": message,
-          "mobile": mobile,
-          "name": name,
-        }).then((responce) async {
+    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
+    await httpClient!.post(BaseUrl.baseUrl + endPoints.Auction().ShowInterestInAuction, body: {
+      "authkey_web": authKey,
+      "authkey_mobile": "",
+      "userid": userid,
+      "CRMClientID": crmClientId,
+      "AuctionId": AuctionId,
+      "country_code": country_code,
+      "email": email,
+      "message": message,
+      "mobile": mobile,
+      "name": name,
+    }).then((responce) async {
       print(responce);
 
       if (responce.statusCode == 200) {
@@ -157,10 +149,8 @@ class AuctionRepo {
     String authKey = localSharedPrefrence!.getAuthKeyWeb();
     String crmClientId = localSharedPrefrence!.getCrmClinetId();
     // String userlogin=json.encode(LoginReqestModel);
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.jsonContentType);
-    await httpClient!
-        .post(BaseUrl.baseUrl + endPoints.Auction().upcommingAuction, body: {
+    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
+    await httpClient!.post(BaseUrl.baseUrl + endPoints.Auction().upcommingAuction, body: {
       "userId": userid,
       "authkey_mobile": "",
       "authkey_web": authKey,
@@ -198,10 +188,8 @@ class AuctionRepo {
     String authKey = localSharedPrefrence!.getAuthKeyWeb();
     String crmClientId = localSharedPrefrence!.getCrmClinetId();
     // String userlogin=json.encode(LoginReqestModel);
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.jsonContentType);
-    await httpClient!
-        .post(BaseUrl.baseUrl + endPoints.Auction().bidHistory, body: {
+    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
+    await httpClient!.post(BaseUrl.baseUrl + endPoints.Auction().bidHistory, body: {
       "userId": userid,
       "authkey_mobile": "",
       "authkey_web": authKey,
@@ -237,10 +225,8 @@ class AuctionRepo {
     String userid = localSharedPrefrence!.getUserId();
     String authKey = localSharedPrefrence!.getAuthKeyWeb();
     String crmClientId = localSharedPrefrence!.getCrmClinetId();
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.jsonContentType);
-    await httpClient!
-        .post(BaseUrl.baseUrl + endPoints.WebApiModel().getlotdetails, body: {
+    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
+    await httpClient!.post(BaseUrl.baseUrl + endPoints.WebApiModel().getlotdetails, body: {
       "userId": userid,
       "authkey_mobile": "",
       "authkey_web": authKey,
@@ -276,10 +262,8 @@ class AuctionRepo {
     String authKey = localSharedPrefrence!.getAuthKeyWeb();
     String crmClientId = localSharedPrefrence!.getCrmClinetId();
     // String userlogin=json.encode(LoginReqestModel);
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.jsonContentType);
-    await httpClient!
-        .post(BaseUrl.baseUrl + endPoints.Auction().getLotById, body: {
+    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
+    await httpClient!.post(BaseUrl.baseUrl + endPoints.Auction().getLotById, body: {
       "userId": userid,
       "authkey_mobile": "",
       "authkey_web": authKey,
@@ -316,19 +300,16 @@ class AuctionRepo {
     String authKey = localSharedPrefrence!.getAuthKeyWeb();
     String crmClientId = localSharedPrefrence!.getCrmClinetId();
     // String userlogin=json.encode(LoginReqestModel);
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.jsonContentType);
-    await httpClient!.post(
-        BaseUrl.baseUrl + endPoints.Auction().upcommingAuctionLots,
-        body: {
-          "userId": userid,
-          "authkey_mobile": "",
-          "authkey_web": authKey,
-          "CRMClientID": crmClientId,
-          "PageIndex": page,
-          "PageSize": 0,
-          "AuctionId": ids
-        }).then((responce) async {
+    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
+    await httpClient!.post(BaseUrl.baseUrl + endPoints.Auction().upcommingAuctionLots, body: {
+      "userId": userid,
+      "authkey_mobile": "",
+      "authkey_web": authKey,
+      "CRMClientID": crmClientId,
+      "PageIndex": page,
+      "PageSize": 0,
+      "AuctionId": ids
+    }).then((responce) async {
       print(responce);
 
       if (responce.statusCode == 200) {
@@ -358,10 +339,8 @@ class AuctionRepo {
     String authKey = localSharedPrefrence!.getAuthKeyWeb();
     String crmClientId = localSharedPrefrence!.getCrmClinetId();
     // String userlogin=json.encode(LoginReqestModel);
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.jsonContentType);
-    await httpClient!
-        .post(BaseUrl.baseUrl + endPoints.Auction().myAuctionGallery, body: {
+    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
+    await httpClient!.post(BaseUrl.baseUrl + endPoints.Auction().myAuctionGallery, body: {
       "userId": userid,
       "authkey_mobile": "",
       "authkey_web": authKey,
@@ -396,10 +375,8 @@ class AuctionRepo {
     String authKey = localSharedPrefrence!.getAuthKeyWeb();
     String crmClientId = localSharedPrefrence!.getCrmClinetId();
     // String userlogin=json.encode(LoginReqestModel);
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.jsonContentType);
-    await httpClient!
-        .post(BaseUrl.baseUrl + endPoints.Auction().getReviewauctions, body: {
+    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
+    await httpClient!.post(BaseUrl.baseUrl + endPoints.Auction().getReviewauctions, body: {
       "userId": userid,
       "authkey_mobile": "",
       "authkey_web": authKey,
@@ -436,8 +413,7 @@ class AuctionRepo {
     String authKey = localSharedPrefrence!.getAuthKeyWeb();
     String crmClientId = localSharedPrefrence!.getCrmClinetId();
     // String userlogin=json.encode(LoginReqestModel);
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.jsonContentType);
+    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
     await httpClient!.post(BaseUrl.baseUrl + endPoints.Search().global, body: {
       "userId": userid,
       "authkey_mobile": "",
@@ -477,8 +453,7 @@ class AuctionRepo {
     String authKey = localSharedPrefrence!.getAuthKeyWeb();
     String crmClientId = localSharedPrefrence!.getCrmClinetId();
     // String userlogin=json.encode(LoginReqestModel);
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.jsonContentType);
+    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
     await httpClient!.post(BaseUrl.baseUrl + endPoints.Search().global, body: {
       "userId": userid,
       "authkey_mobile": "",
@@ -518,10 +493,8 @@ class AuctionRepo {
     String userid = localSharedPrefrence!.getUserId();
     String authKey = localSharedPrefrence!.getAuthKeyWeb();
     String crmClientId = localSharedPrefrence!.getCrmClinetId();
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.jsonContentType);
-    await httpClient!
-        .post(BaseUrl.baseUrl + endPoints.Lots().proxyBidAmount, body: {
+    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
+    await httpClient!.post(BaseUrl.baseUrl + endPoints.Lots().proxyBidAmount, body: {
       "userId": userid,
       "authkey_mobile": "",
       "authkey_web": authKey,
@@ -561,10 +534,8 @@ class AuctionRepo {
     String userid = localSharedPrefrence!.getUserId();
     String authKey = localSharedPrefrence!.getAuthKeyWeb();
     String crmClientId = localSharedPrefrence!.getCrmClinetId();
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.jsonContentType);
-    await httpClient!
-        .post(BaseUrl.baseUrl + endPoints.Lots().addremoveToWishlist, body: {
+    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
+    await httpClient!.post(BaseUrl.baseUrl + endPoints.Lots().addremoveToWishlist, body: {
       "userId": userid,
       "authkey_mobile": "",
       "authkey_web": authKey,
@@ -600,10 +571,8 @@ class AuctionRepo {
     String userid = localSharedPrefrence!.getUserId();
     String authKey = localSharedPrefrence!.getAuthKeyWeb();
     String crmClientId = localSharedPrefrence!.getCrmClinetId();
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.jsonContentType);
-    await httpClient!
-        .post(BaseUrl.baseUrl + endPoints.Lots().additionalcharges, body: {
+    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
+    await httpClient!.post(BaseUrl.baseUrl + endPoints.Lots().additionalcharges, body: {
       "userId": userid,
       "authkey_mobile": "",
       "authkey_web": authKey,
@@ -645,10 +614,8 @@ class AuctionRepo {
     String userid = localSharedPrefrence!.getUserId();
     String authKey = localSharedPrefrence!.getAuthKeyWeb();
     String crmClientId = localSharedPrefrence!.getCrmClinetId();
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.jsonContentType);
-    await httpClient!
-        .post(BaseUrl.baseUrl + endPoints.LiveAuction().acutionAnalysis, body: {
+    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
+    await httpClient!.post(BaseUrl.baseUrl + endPoints.LiveAuction().acutionAnalysis, body: {
       "userId": userid,
       "authkey_mobile": "",
       "authkey_web": authKey,
@@ -678,14 +645,12 @@ class AuctionRepo {
     return httpResponse;
   }
 
-  Future<HttpResponse> placeBid(
-      Lots model, String proxybidampount, String placeBidAmount) async {
+  Future<HttpResponse> placeBid(Lots model, String proxybidampount, String placeBidAmount) async {
     HttpResponse httpResponse = HttpResponse();
     String userid = localSharedPrefrence!.getUserId();
     String authKey = localSharedPrefrence!.getAuthKeyWeb();
     String crmClientId = localSharedPrefrence!.getCrmClinetId();
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.jsonContentType);
+    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
     await httpClient!.post(BaseUrl.baseUrl + endPoints.Lots().placeBid, body: {
       "userId": userid,
       "authkey_mobile": "",
@@ -725,10 +690,8 @@ class AuctionRepo {
     String userid = localSharedPrefrence!.getUserId();
     String authKey = localSharedPrefrence!.getAuthKeyWeb();
     String crmClientId = localSharedPrefrence!.getCrmClinetId();
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.jsonContentType);
-    await httpClient!
-        .post(BaseUrl.baseUrl + endPoints.Lots().getMyPurchases, body: {
+    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
+    await httpClient!.post(BaseUrl.baseUrl + endPoints.Lots().getMyPurchases, body: {
       "userId": userid,
       "authkey_mobile": "",
       "authkey_web": authKey,
@@ -763,10 +726,8 @@ class AuctionRepo {
     String authKey = localSharedPrefrence!.getAuthKeyWeb();
     String crmClientId = localSharedPrefrence!.getCrmClinetId();
     // String userlogin=json.encode(LoginReqestModel);
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.jsonContentType);
-    await httpClient!
-        .post(BaseUrl.baseUrl + endPoints.Auction().singleAuctionLots, body: {
+    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
+    await httpClient!.post(BaseUrl.baseUrl + endPoints.Auction().singleAuctionLots, body: {
       "userId": userid,
       "authkey_mobile": "",
       "authkey_web": authKey,
@@ -778,8 +739,7 @@ class AuctionRepo {
       if (responce.statusCode == 200) {
         httpResponse.status = responce.statusCode;
         httpResponse.message = 'Successful';
-        httpResponse.data =
-            SingleAuctionDetsilaResponse.fromJson(responce.data);
+        httpResponse.data = SingleAuctionDetsilaResponse.fromJson(responce.data);
       } else {
         httpResponse.status = responce.statusCode;
         httpResponse.message = responce.data['message'];
@@ -798,21 +758,14 @@ class AuctionRepo {
   }
 
   Future<HttpResponse> getShowInterestInAuction(
-      String name,
-      String email,
-      String country_code,
-      String number,
-      String auction_id,
-      String Messege) async {
+      String name, String email, String country_code, String number, String auction_id, String Messege) async {
     HttpResponse httpResponse = HttpResponse();
     String userid = localSharedPrefrence!.getUserId();
     String authKey = localSharedPrefrence!.getAuthKeyWeb();
     String crmClientId = localSharedPrefrence!.getCrmClinetId();
     // String userlogin=json.encode(LoginReqestModel);
-    httpClient!.client!.options =
-        BaseOptions(contentType: Headers.jsonContentType);
-    await httpClient!
-        .post(BaseUrl.baseUrl + endPoints.Auction().singleAuctionLots, body: {
+    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
+    await httpClient!.post(BaseUrl.baseUrl + endPoints.Auction().singleAuctionLots, body: {
       "userId": userid,
       "authkey_mobile": "",
       "authkey_web": authKey,

@@ -146,16 +146,16 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
               padding: const EdgeInsets.all(15.0),
               child: Container(
                   color: Color(0xffFFFFFF),
-                  height: 550,
+                  height: 460,
                   alignment: Alignment.center,
                   child: Stack(
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(top: 150 / 2.0, bottom: 0),
+                        padding: EdgeInsets.only(top: 15, bottom: 0),
                         child: Container(
                           //replace this Container with your Card
                           color: Color(0xffF9F9F9),
-                          height: 500.0,
+                          height: 460.0,
                         ),
                       ),
                       InkWell(
@@ -166,7 +166,7 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                                   builder: (context) => ProductDetailPage(widget.lots, auctionViewModel)));
                         },
                         child: Padding(
-                          padding: const EdgeInsets.all(20.0),
+                          padding: const EdgeInsets.only(top: 10.0),
                           child: Image.network(
                             "${widget.lots.thumbImage}",
                             height: 250,
@@ -241,142 +241,142 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                                     ],
                                   ),
                                   Spacer(),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Bid Closing in",
-                                        textAlign: TextAlign.center,
-                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                              color: Color(0xff747474),
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      // Row(
-                                      //   children: [
-                                      //     Container(
-                                      //         decoration: BoxDecoration(
-                                      //           borderRadius:
-                                      //               BorderRadius.circular(8),
-                                      //           color: Color(0xff8C9FB1),
-                                      //         ),
-                                      //         padding: EdgeInsets.all(4),
-                                      //         child: Text(
-                                      //           "${hours}",
-                                      //           style: Theme.of(context)
-                                      //               .textTheme
-                                      //               .subtitle2!
-                                      //               .copyWith(
-                                      //                   color: Colors.white),
-                                      //         )),
-                                      //     Container(
-                                      //         // color: Colors.black,
-                                      //         padding: EdgeInsets.all(4),
-                                      //         child: Text(":")),
-                                      //     Container(
-                                      //         decoration: BoxDecoration(
-                                      //           borderRadius:
-                                      //               BorderRadius.circular(8),
-                                      //           color: Color(0xff8C9FB1),
-                                      //         ),
-                                      //         padding: EdgeInsets.all(4),
-                                      //         child: Text(
-                                      //           "${minutes}",
-                                      //           style: Theme.of(context)
-                                      //               .textTheme
-                                      //               .subtitle2!
-                                      //               .copyWith(
-                                      //                   color: Colors.white),
-                                      //         )),
-                                      //     Container(
-                                      //         // color: Colors.black,
-                                      //         padding: EdgeInsets.all(4),
-                                      //         child: Text(":")),
-                                      //     Container(
-                                      //         decoration: BoxDecoration(
-                                      //           borderRadius:
-                                      //               BorderRadius.circular(8),
-                                      //           color: Color(0xff8C9FB1),
-                                      //         ),
-                                      //         padding: EdgeInsets.all(4),
-                                      //         child: Text(
-                                      //           "${seconds}",
-                                      //           style: Theme.of(context)
-                                      //               .textTheme
-                                      //               .subtitle2!
-                                      //               .copyWith(
-                                      //                   color: Colors.white),
-                                      //         )),
-                                      //   ],
-                                      // ),
-                                    ],
-                                  ),
+                                  // Column(
+                                  //   mainAxisAlignment: MainAxisAlignment.start,
+                                  //   crossAxisAlignment: CrossAxisAlignment.start,
+                                  //   children: [
+                                  //     Text(
+                                  //       "Bid Closing in",
+                                  //       textAlign: TextAlign.center,
+                                  //       style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                  //             color: Color(0xff747474),
+                                  //             fontWeight: FontWeight.w400,
+                                  //           ),
+                                  //     ),
+                                  //     SizedBox(
+                                  //       height: 10,
+                                  //     ),
+                                  //     // Row(
+                                  //     //   children: [
+                                  //     //     Container(
+                                  //     //         decoration: BoxDecoration(
+                                  //     //           borderRadius:
+                                  //     //               BorderRadius.circular(8),
+                                  //     //           color: Color(0xff8C9FB1),
+                                  //     //         ),
+                                  //     //         padding: EdgeInsets.all(4),
+                                  //     //         child: Text(
+                                  //     //           "${hours}",
+                                  //     //           style: Theme.of(context)
+                                  //     //               .textTheme
+                                  //     //               .subtitle2!
+                                  //     //               .copyWith(
+                                  //     //                   color: Colors.white),
+                                  //     //         )),
+                                  //     //     Container(
+                                  //     //         // color: Colors.black,
+                                  //     //         padding: EdgeInsets.all(4),
+                                  //     //         child: Text(":")),
+                                  //     //     Container(
+                                  //     //         decoration: BoxDecoration(
+                                  //     //           borderRadius:
+                                  //     //               BorderRadius.circular(8),
+                                  //     //           color: Color(0xff8C9FB1),
+                                  //     //         ),
+                                  //     //         padding: EdgeInsets.all(4),
+                                  //     //         child: Text(
+                                  //     //           "${minutes}",
+                                  //     //           style: Theme.of(context)
+                                  //     //               .textTheme
+                                  //     //               .subtitle2!
+                                  //     //               .copyWith(
+                                  //     //                   color: Colors.white),
+                                  //     //         )),
+                                  //     //     Container(
+                                  //     //         // color: Colors.black,
+                                  //     //         padding: EdgeInsets.all(4),
+                                  //     //         child: Text(":")),
+                                  //     //     Container(
+                                  //     //         decoration: BoxDecoration(
+                                  //     //           borderRadius:
+                                  //     //               BorderRadius.circular(8),
+                                  //     //           color: Color(0xff8C9FB1),
+                                  //     //         ),
+                                  //     //         padding: EdgeInsets.all(4),
+                                  //     //         child: Text(
+                                  //     //           "${seconds}",
+                                  //     //           style: Theme.of(context)
+                                  //     //               .textTheme
+                                  //     //               .subtitle2!
+                                  //     //               .copyWith(
+                                  //     //                   color: Colors.white),
+                                  //     //         )),
+                                  //     //   ],
+                                  //     // ),
+                                  //   ],
+                                  // ),
                                 ],
                               ),
                               SizedBox(
                                 height: 12,
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Current Bid",
-                                        textAlign: TextAlign.center,
-                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                              color: Color(0xff747474),
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        "₹${formateNumber(widget.lots.liveStatus!.currentBid!.iNR ?? "0")}",
-                                        textAlign: TextAlign.center,
-                                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                              color: Color(0xff202232),
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                      ),
-                                    ],
-                                  ),
-                                  Spacer(),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Next Valid Bid",
-                                        textAlign: TextAlign.center,
-                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                              color: Color(0xff747474),
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        "₹${formateNumber(widget.lots.liveStatus!.nextValidBid!.iNR ?? "0")}",
-                                        textAlign: TextAlign.center,
-                                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                              color: Theme.of(context).colorScheme.primary,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
+                              // Row(
+                              //   mainAxisAlignment: MainAxisAlignment.start,
+                              //   crossAxisAlignment: CrossAxisAlignment.start,
+                              //   children: [
+                              //     Column(
+                              //       mainAxisAlignment: MainAxisAlignment.start,
+                              //       crossAxisAlignment: CrossAxisAlignment.start,
+                              //       children: [
+                              //         Text(
+                              //           "Current Bid",
+                              //           textAlign: TextAlign.center,
+                              //           style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                              //                 color: Color(0xff747474),
+                              //                 fontWeight: FontWeight.w400,
+                              //               ),
+                              //         ),
+                              //         SizedBox(
+                              //           height: 10,
+                              //         ),
+                              //         Text(
+                              //           "₹${formateNumber(widget.lots.liveStatus!.currentBid!.iNR ?? "0")}",
+                              //           textAlign: TextAlign.center,
+                              //           style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                              //                 color: Color(0xff202232),
+                              //                 fontWeight: FontWeight.w600,
+                              //               ),
+                              //         ),
+                              //       ],
+                              //     ),
+                              //     Spacer(),
+                              //     Column(
+                              //       mainAxisAlignment: MainAxisAlignment.start,
+                              //       crossAxisAlignment: CrossAxisAlignment.start,
+                              //       children: [
+                              //         Text(
+                              //           "Next Valid Bid",
+                              //           textAlign: TextAlign.center,
+                              //           style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                              //                 color: Color(0xff747474),
+                              //                 fontWeight: FontWeight.w400,
+                              //               ),
+                              //         ),
+                              //         SizedBox(
+                              //           height: 10,
+                              //         ),
+                              //         Text(
+                              //           "₹${formateNumber(widget.lots.liveStatus!.nextValidBid!.iNR ?? "0")}",
+                              //           textAlign: TextAlign.center,
+                              //           style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                              //                 color: Theme.of(context).colorScheme.primary,
+                              //                 fontWeight: FontWeight.w600,
+                              //               ),
+                              //         ),
+                              //       ],
+                              //     ),
+                              //   ],
+                              // ),
                               SizedBox(
                                 height: 12,
                               ),
@@ -591,47 +591,47 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      if (preference!.getLoginStatus()) {
-                                      } else {
-                                        WidgetsBinding.instance?.addPostFrameCallback((_) {
-                                          showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return PopupWidget();
-                                            },
-                                          );
-                                        });
-                                      }
-                                    },
-                                    child: Container(
-                                      height: 50,
-                                      // width: 150,
-                                      decoration: BoxDecoration(
-                                          gradient: LinearGradient(colors: [
-                                            Color(0xffE74B52),
-                                            Color(0xffE74B52),
-                                          ]),
-                                          // color: Color(0xff466D33),
-                                          borderRadius: BorderRadius.circular(24)),
-                                      child: Center(
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(right: 32.0, left: 32, top: 12, bottom: 12),
-                                          child: Text(
-                                            'BID NOW',
-                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                  color: Color(0XFFFFFFFF),
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                  // SizedBox(
+                                  //   width: 10,
+                                  // ),
+                                  // InkWell(
+                                  //   onTap: () {
+                                  //     if (preference!.getLoginStatus()) {
+                                  //     } else {
+                                  //       WidgetsBinding.instance?.addPostFrameCallback((_) {
+                                  //         showDialog(
+                                  //           context: context,
+                                  //           builder: (BuildContext context) {
+                                  //             return PopupWidget();
+                                  //           },
+                                  //         );
+                                  //       });
+                                  //     }
+                                  //   },
+                                  //   child: Container(
+                                  //     height: 50,
+                                  //     // width: 150,
+                                  //     decoration: BoxDecoration(
+                                  //         gradient: LinearGradient(colors: [
+                                  //           Color(0xffE74B52),
+                                  //           Color(0xffE74B52),
+                                  //         ]),
+                                  //         // color: Color(0xff466D33),
+                                  //         borderRadius: BorderRadius.circular(24)),
+                                  //     child: Center(
+                                  //       child: Padding(
+                                  //         padding: const EdgeInsets.only(right: 32.0, left: 32, top: 12, bottom: 12),
+                                  //         child: Text(
+                                  //           'BID NOW',
+                                  //           style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                  //                 color: Color(0XFFFFFFFF),
+                                  //                 fontWeight: FontWeight.bold,
+                                  //               ),
+                                  //         ),
+                                  //       ),
+                                  //     ),
+                                  //   ),
+                                  // ),
                                 ],
                               ),
                               SizedBox(
