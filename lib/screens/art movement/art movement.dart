@@ -257,58 +257,55 @@ class _ArtMovement extends State<ArtMovement> {
                       child: Container(
                     child: Column(
                       children: [
-                        Row(
-                          children: [
-                            Text(
-                              "${homeViewModel.getArtMovementResponse!.pageContent!.artVideos!.title}",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline6!
-                                  .copyWith(color: Colors.black, fontWeight: FontWeight.w600, letterSpacing: 0.888889),
-                            )
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.only(left: 12.0),
+                          child: Row(
+                            children: [
+                              Text(
+                                "${homeViewModel.getArtMovementResponse!.pageContent!.artVideos!.title}",
+                                style: Theme.of(context).textTheme.headline6!.copyWith(
+                                    color: Colors.black, fontWeight: FontWeight.w600, letterSpacing: 0.888889),
+                              )
+                            ],
+                          ),
                         ),
                         SizedBox(height: 12),
-                        Column(
-                          children: [
-                            Wrap(
-                                spacing: 20,
-                                runSpacing: 20,
-                                children: homeViewModel.getArtMovementResponse!.pageContent!.artVideos!.array!.map((e) {
-                                  return Padding(
-                                    padding: const EdgeInsets.all(12.0),
-                                    child: Container(
-                                      width: MediaQuery.of(context).size.width, // Half the screen width
+                        Wrap(
+                            spacing: 20,
+                            runSpacing: 20,
+                            children: homeViewModel.getArtMovementResponse!.pageContent!.artVideos!.array!.map((e) {
+                              return Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width, // Half the screen width
 
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Image.network(
-                                            "${e.image!.mobile ?? ''}",
-                                            fit: BoxFit.contain,
-                                          ),
-                                          SizedBox(height: 18),
-                                          Text(
-                                            style: TextStyle(fontWeight: FontWeight.w400),
-                                            e!.date ?? "",
-                                          ),
-                                          SizedBox(height: 12),
-                                          HtmlWidget(
-                                            textStyle: TextStyle(fontWeight: FontWeight.bold),
-                                            e!.title ?? "",
-                                          ),
-                                          HtmlWidget(
-                                            textStyle: TextStyle(overflow: TextOverflow.ellipsis),
-                                            "${e!.videoUrl ?? ""}",
-                                          ),
-                                        ],
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Image.network(
+                                        "${e.image!.mobile ?? ''}",
+                                        fit: BoxFit.contain,
                                       ),
-                                      // child: Text('Furniture & Decorative Art'),
-                                    ),
-                                  );
-                                }).toList()),
-                          ],
-                        )
+                                      SizedBox(height: 18),
+                                      Text(
+                                        style: TextStyle(fontWeight: FontWeight.w400),
+                                        e!.date ?? "",
+                                      ),
+                                      SizedBox(height: 12),
+                                      HtmlWidget(
+                                        textStyle: TextStyle(fontWeight: FontWeight.bold),
+                                        e!.title ?? "",
+                                      ),
+                                      HtmlWidget(
+                                        textStyle: TextStyle(overflow: TextOverflow.ellipsis),
+                                        "${e!.videoUrl ?? ""}",
+                                      ),
+                                    ],
+                                  ),
+                                  // child: Text('Furniture & Decorative Art'),
+                                ),
+                              );
+                            }).toList())
                       ],
                     ),
                   )),

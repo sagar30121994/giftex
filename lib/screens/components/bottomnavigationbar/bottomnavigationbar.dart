@@ -985,7 +985,7 @@ class _DashboardUiState extends State<DashboardUi> {
       case 33:
         return NewsAndUpdatesPage("BLOGS");
 
-      case 33:
+      case 34:
         return SearchBarUi();
 
       default:
