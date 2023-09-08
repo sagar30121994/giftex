@@ -1,6 +1,7 @@
 import 'package:giftex/data/local/client/prefs.dart';
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/data/network/models/responce/cmsweb/careersresponse.dart';
+import 'package:giftex/data/network/models/responce/cmsweb/insertCareerFormResponse.dart';
 import 'package:giftex/data/network/models/responce/cmsweb/whoweare.dart';
 import 'package:giftex/data/network/models/responce/news/blogsresponse.dart';
 import 'package:giftex/data/network/models/responce/news/newsreponse.dart';
@@ -41,6 +42,40 @@ abstract class _ServiceViewModel with Store {
   @observable
   BlogsResponse? blogsResponse;
 
+  @observable
+  InsertCareerFormResponse? insertCareerFormResponse;
+
+  @observable
+  String fullname = '';
+
+  @observable
+  String email = '';
+
+  @observable
+  String mobile = '';
+
+  @observable
+  String resume = '';
+
+  @action
+  setFullName(String value) {
+    fullname = value;
+  }
+
+  @action
+  setEmail(String value) {
+    email = value;
+  }
+
+  @action
+  setMobile(String value) {
+    mobile = value;
+  }
+
+  @action
+  setResume(String value) {
+    resume = value;
+  }
   Future<HttpResponse> getServices(String type) async {
     isloading = true;
     serviceResponse = null;
@@ -60,6 +95,17 @@ abstract class _ServiceViewModel with Store {
 
     if (httpResponse.status == 200) {
       careersResponse = httpResponse.data;
+    }
+    isloading = false;
+    return httpResponse;
+  }
+
+
+  Future<HttpResponse> insertCareerForm() async {
+    isloading = true;
+    HttpResponse httpResponse = await webCmsApiModelRepo.insertCareerForm(fullname, email, mobile, resume);
+    if (httpResponse.status == 200) {
+      insertCareerFormResponse = httpResponse.data;
     }
     isloading = false;
     return httpResponse;

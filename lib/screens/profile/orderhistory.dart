@@ -181,7 +181,7 @@ class _MyOrderHistorypageState extends State<MyOrderHistorypage> {
                                               context, MaterialPageRoute(builder: (context) => DashboardUi(12)));
                                         },
                                         child: Padding(
-                                          padding: const EdgeInsets.only(right: 8.0, left: 8, top: 12, bottom: 12),
+                                          padding: const EdgeInsets.only(right: 0.0, left: 8, top: 12, bottom: 12),
                                           child: Row(
                                             children: [
                                               Text(
@@ -234,27 +234,33 @@ class _MyOrderHistorypageState extends State<MyOrderHistorypage> {
                 SizedBox(
                   height: 16,
                 ),
-                Text(
-                  "My Order History",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                        color: Color(0xff2D2D2D),
-                        fontWeight: FontWeight.w600,
-                      ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Text(
+                    "My Order History",
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          color: Color(0xff2D2D2D),
+                          fontWeight: FontWeight.w600,
+                        ),
+                  ),
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 widget.profileViewModel.isloading
                     ? Container()
-                    : Text(
-                        "${widget.profileViewModel.myPurchaseReponse!.data!.length} Products found",
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                              color: Theme.of(context).colorScheme.primary,
-                              fontWeight: FontWeight.w600,
-                            ),
-                      ),
+                    : Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Text(
+                          "${widget.profileViewModel.myPurchaseReponse!.data!.length} Products found",
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                color: Theme.of(context).colorScheme.primary,
+                                fontWeight: FontWeight.w600,
+                              ),
+                        ),
+                    ),
                 SizedBox(
                   height: 16,
                 ),
@@ -301,7 +307,7 @@ class _MyOrderHistorypageState extends State<MyOrderHistorypage> {
                 ),
                 type == "auction"
                     ? Container(
-                        padding: EdgeInsets.only(top: 0, left: 24, right: 24),
+                        padding: EdgeInsets.only(top: 0, left: 12, right: 12),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -343,7 +349,7 @@ class _MyOrderHistorypageState extends State<MyOrderHistorypage> {
                                                 height: 180,
                                                 alignment: Alignment.center,
                                                 width: MediaQuery.of(context).size.width,
-                                                padding: const EdgeInsets.only(left: 0.0, right: 5.0),
+                                                padding: const EdgeInsets.only(left: 0.0, right: 0.0),
                                                 child: Column(
                                                   mainAxisAlignment: MainAxisAlignment.start,
                                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -364,7 +370,7 @@ class _MyOrderHistorypageState extends State<MyOrderHistorypage> {
                                                         e.lot!.thumbImage == null
                                                             ? Container(
                                                                 height: 140,
-                                                                width: 90,
+                                                                width: 60,
                                                               )
                                                             : InkWell(
                                                                 onTap: () async {
@@ -381,10 +387,10 @@ class _MyOrderHistorypageState extends State<MyOrderHistorypage> {
                                                                 ),
                                                               ),
                                                         SizedBox(
-                                                          width: 14,
+                                                          width: 8,
                                                         ),
                                                         Container(
-                                                          width: MediaQuery.of(context).size.width * .55,
+                                                          width: MediaQuery.of(context).size.width * .60,
                                                           child: Column(
                                                             children: [
                                                               Row(

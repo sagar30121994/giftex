@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:giftex/data/local/client/prefs.dart';
+import 'package:giftex/data/network/models/request/webapimodel/insertcareerformrequestmodel.dart';
 import 'package:giftex/data/network/models/responce/cmsweb/careersresponse.dart';
+import 'package:giftex/data/network/models/responce/cmsweb/insertCareerFormResponse.dart';
 import 'package:giftex/data/network/models/responce/cmsweb/whoweare.dart';
 import 'package:giftex/data/network/models/responce/home/GetSellDetailsResponse.dart';
 import 'package:giftex/data/network/models/responce/home/getArtMovementResponse.dart';
@@ -529,6 +531,45 @@ class WebCmsApiModelRepo {
 
     return httpResponse;
   }
+
+  Future<HttpResponse> insertCareerForm(String fullname,String email, String mobile, String resumebase64) async {
+    HttpResponse httpResponse = HttpResponse();
+    // String userlogin = json.encode(model);
+    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
+    await httpClient!.post(BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().insertcareerform,
+        body: {"authkey_web": "${localSharedPrefrence!.authkey ?? ''}",
+      "authkey_mobile": "",
+      "userid": "${localSharedPrefrence!.userId ?? ''}",
+      "CRMClientID": "${localSharedPrefrence!.crmId ?? ''}",
+      "fullname" : fullname,
+      "emailid" : email,
+      "resume" : resumebase64,
+      "query" : "",
+      "jobtitle" : "",
+      "howyouknow" : "",
+    }).then((responce) async {
+      print(responce);
+      if (responce.statusCode == 200) {
+        // httpResponse.status = responce.statusCode;
+        // httpResponse.message = 'Successful';
+        httpResponse.data = InsertCareerFormResponse.fromJson(responce.data);
+      } else {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = responce.data['message'];
+        httpResponse.data = null;
+      }
+      return httpResponse;
+    }).catchError((err) {
+      print(err);
+      httpResponse.status = 400;
+      httpResponse.message = err.toString();
+      httpResponse.data = err.toString();
+      return httpResponse;
+    });
+
+    return httpResponse;
+  }
+
 
   Future<HttpResponse> getBlogsDetails() async {
     HttpResponse httpResponse = HttpResponse();

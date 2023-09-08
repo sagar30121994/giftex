@@ -974,35 +974,35 @@ class WebapimodelRepo {
     return httpResponse;
   }
 
-  Future<HttpResponse> insertCarrerForm(InsertCareerFormRequestModel model) async {
-    HttpResponse httpResponse = HttpResponse();
-    String userlogin = json.encode(LoginReqestModel);
-    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
-    await httpClient!
-        .post(BaseUrl.baseUrl + endPoints.WebApiModel().insertcareerform, body: userlogin)
-        .then((responce) async {
-      print(responce);
-
-      if (responce.statusCode == 200) {
-        httpResponse.status = responce.statusCode;
-        httpResponse.message = 'Successful';
-        // httpResponse.data = LoginResponse.fromJson(responce.data);
-      } else {
-        httpResponse.status = responce.statusCode;
-        httpResponse.message = responce.data['message'];
-        httpResponse.data = null;
-      }
-      return httpResponse;
-    }).catchError((err) {
-      print(err);
-      httpResponse.status = 400;
-      httpResponse.message = err.toString();
-      httpResponse.data = err.toString();
-      return httpResponse;
-    });
-
-    return httpResponse;
-  }
+  // Future<HttpResponse> insertCareerForm(InsertCareerFormRequestModel model) async {
+  //   HttpResponse httpResponse = HttpResponse();
+  //   String userlogin = json.encode(LoginReqestModel);
+  //   httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
+  //   await httpClient!
+  //       .post(BaseUrl.baseUrl + endPoints.WebApiModel().insertcareerform, body: userlogin)
+  //       .then((responce) async {
+  //     print(responce);
+  //
+  //     if (responce.statusCode == 200) {
+  //       httpResponse.status = responce.statusCode;
+  //       httpResponse.message = 'Successful';
+  //       // httpResponse.data = LoginResponse.fromJson(responce.data);
+  //     } else {
+  //       httpResponse.status = responce.statusCode;
+  //       httpResponse.message = responce.data['message'];
+  //       httpResponse.data = null;
+  //     }
+  //     return httpResponse;
+  //   }).catchError((err) {
+  //     print(err);
+  //     httpResponse.status = 400;
+  //     httpResponse.message = err.toString();
+  //     httpResponse.data = err.toString();
+  //     return httpResponse;
+  //   });
+  //
+  //   return httpResponse;
+  // }
 
   Future<HttpResponse> getBidHistory(GetBidHistoryRequstModel model) async {
     HttpResponse httpResponse = HttpResponse();

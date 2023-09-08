@@ -146,6 +146,7 @@ class WebCMSApiModel {
   final String getpressdetails = 'GetPaymentGrid';
   final String getcommoninfo = 'artistdata';
   final String getcareers = 'GetCareers';
+  final String insertcareerform = 'InsertCareerForm';
 
   // final String getblogs = 'getHashStr';
   final String getblogdetails = 'GetPaymentGrid';

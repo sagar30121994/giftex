@@ -117,7 +117,7 @@ class _ContactusPageState extends State<ContactusPage> {
                 child: Column(
                   children: [
                     Container(
-                      height: 255,
+                      height: 265,
                       color: Color(0xffF3E8E9),
                       padding: EdgeInsets.all(16),
                       child: Column(
@@ -177,7 +177,7 @@ class _ContactusPageState extends State<ContactusPage> {
                             ],
                           ),
                           SizedBox(
-                            height: 16,
+                            height: 8,
                           ),
                           Row(
                             children: [

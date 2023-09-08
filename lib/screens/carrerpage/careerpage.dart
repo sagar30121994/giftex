@@ -1,6 +1,11 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import 'package:http/http.dart' as http;
 import 'package:giftex/screens/components/footer/footer.dart';
 import 'package:giftex/screens/components/header.dart';
 import 'package:giftex/viewmodel/service/serviceviewmodel.dart';
@@ -13,7 +18,33 @@ class CareerPage extends StatefulWidget {
 }
 
 class _CareerPageState extends State<CareerPage> {
+
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController mobileController = TextEditingController();
+
   int _pageIndex = 0;
+  String selectedFileName = '';
+
+  Future<void> showInvalidFileDialog(BuildContext context, String message) async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Invalid File'),
+          content: Text(message),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   void initState() {
@@ -296,6 +327,9 @@ class _CareerPageState extends State<CareerPage> {
                                     filled: true,
                                     fillColor: Color(0xffFFFFFF),
                                     isDense: true),
+
+                                onChanged: (str) => serviceViewModel.setFullName(str),
+
                               ),
                             ),
                             Padding(
@@ -309,11 +343,14 @@ class _CareerPageState extends State<CareerPage> {
                                     filled: true,
                                     fillColor: Color(0xffFFFFFF),
                                     isDense: true),
+                                onChanged: (str) => serviceViewModel.setEmail(str),
+
                               ),
                             ),
                             Padding(
                               padding: EdgeInsets.only(top: 15),
                               child: TextField(
+                                keyboardType: TextInputType.phone,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(),
                                     labelText: 'Mobile No',
@@ -322,20 +359,74 @@ class _CareerPageState extends State<CareerPage> {
                                     filled: true,
                                     fillColor: Color(0xffFFFFFF),
                                     isDense: true),
+                                onChanged: (str) => serviceViewModel.setMobile(str),
+
                               ),
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 15),
-                              child: TextField(
-                                decoration: InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    labelText: 'Upload Resume',
-                                    hintText: '',
-                                    filled: true,
-                                    fillColor: Color(0xffFFFFFF),
-                                    isDense: true),
+                            SizedBox(height: 8,),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.white
+                              ),
+                              onPressed: () async {
+                                FilePickerResult? result = await FilePicker.platform.pickFiles(
+                                  type: FileType.custom,
+                                  allowedExtensions: ['pdf'],
+                                );
+
+                                if (result != null) {
+                                  PlatformFile file = result.files.first;
+                                  String fileName = file.name ?? ''; // Get the file name
+                                  int fileSize = file.size ?? 0; // Get the file size in bytes
+
+                                  if (fileName.endsWith('.pdf') && fileSize <= 2 * 1024 * 1024) {
+                                    String baseURI = "";
+                                    setState(() {
+                                      File pdfFile = File(file.path!);
+                                      List<int> bytes = pdfFile.readAsBytesSync();
+                                      String file64 = base64Encode(bytes);
+                                      print("data:application/pdf;base64,"+file64);
+                                      selectedFileName = fileName;
+                                      baseURI = "data:application/pdf;base64,"+file64;
+
+                                });
+                                serviceViewModel.setResume(baseURI);
+
+                                } else {
+                                    // Show a dialog indicating that the file does not meet the criteria
+                                    String message = '';
+
+                                    if (!fileName.endsWith('.pdf')) {
+                                      message = 'Only PDF files are allowed.';
+                                    }
+
+                                    if (fileSize > 2 * 1024 * 1024) {
+                                      message += '\nFile size should be less than 2MB.';
+                                    }
+
+                                    showInvalidFileDialog(context, message);
+                                  }
+                                } else {
+                                  // User canceled the file picker or selected an invalid file
+                                }
+                              },
+                              child: Text(
+                                'Upload PDF Resume${selectedFileName.isNotEmpty ? ' - $selectedFileName' : ''}',
+                                style: TextStyle(fontWeight: FontWeight.bold),
                               ),
                             ),
+                            // Padding(
+                            //   padding: EdgeInsets.only(top: 15),
+                            //   child: TextField(
+                            //     decoration: InputDecoration(
+                            //         border: OutlineInputBorder(),
+                            //         labelText: 'Upload Resume',
+                            //         hintText: '',
+                            //         filled: true,
+                            //         fillColor: Color(0xffFFFFFF),
+                            //         isDense: true),
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),
@@ -349,7 +440,19 @@ class _CareerPageState extends State<CareerPage> {
                                   borderRadius: BorderRadius.circular(20.0),
                                   // side: BorderSide(color: Colors.red)
                                 ))),
-                            onPressed: () {},
+                            onPressed: ()
+                              {
+                              serviceViewModel.insertCareerForm().then((value) => {
+                              if (value.status == 200)
+                              {
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value.message!),
+                              backgroundColor: Colors.green,),)
+                              }else{
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value.message!),
+                                  backgroundColor: Colors.green,),)
+                              }
+                              });
+                              },
                             child: Padding(
                               padding: const EdgeInsets.only(right: 8.0, left: 8, top: 12, bottom: 12),
                               child: Text(

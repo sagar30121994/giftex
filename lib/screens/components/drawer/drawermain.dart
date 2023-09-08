@@ -128,8 +128,10 @@ class _MainDrawerState extends State<MainDrawer> {
 
             ListTile(
               title: const Text('Blogs'),
+              selected: bottomViewModel.selectedIndex == 33,
               onTap: () {
-                Navigator.of(context).pop();
+               _onItemTapped(33);
+               Navigator.pop(context);
                 // Update the state of the app.
                 // ...
               },

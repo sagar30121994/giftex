@@ -38,6 +38,14 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
     }
   }
 
+  String capitalizeFirstLetter(String text) {
+    if (text.isEmpty) {
+      return text;
+    }
+    return text[0].toUpperCase() + text.substring(1);
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -235,26 +243,33 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                           delegate: SliverChildBuilderDelegate(
                             (BuildContext context, int index) {
                               return Padding(
-                                padding: const EdgeInsets.only(left: 32.0, right: 28.0),
+                                padding: const EdgeInsets.only(left: 12.0, right: 12.0),
                                 child: Container(
+                                  margin: EdgeInsets.only(bottom: 15),
                                   color: Color(0xffFFFFFF),
-                                  height: 350,
+                                  height: 360,
                                   alignment: Alignment.center,
                                   child: Column(
                                     children: [
-                                      Image.network(
-                                        "${serviceViewModel.blogsResponse!.pageContent!.blogArray![index].image!.mobile}",
-                                        fit: BoxFit.cover,
-                                        height: 180,
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 12.0),
+                                        child: Image.network(
+                                          "${serviceViewModel.blogsResponse!.pageContent!.blogArray![index].image!.mobile}",
+                                          fit: BoxFit.cover,
+                                          height: 180,
+                                        ),
                                       ),
                                       SizedBox(
-                                        height: 16,
+                                        height: 12,
                                       ),
-                                      Row(
+                                      Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Text(
                                             "${serviceViewModel.blogsResponse!.pageContent!.blogArray![index].authorName}",
                                             textAlign: TextAlign.center,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
                                             style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                   color: Color(0XFF747474),
                                                   fontWeight: FontWeight.w400,
@@ -262,13 +277,14 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                                           ),
                                           SizedBox(
                                             width: 8,
+                                            height: 8,
                                           ),
-                                          SizedBox(
-                                              width: 8,
-                                              child: Divider(
-                                                color: Color(0xff3C5233),
-                                                thickness: 1,
-                                              )),
+                                          // SizedBox(
+                                          //     width: 8,
+                                          //     child: Divider(
+                                          //       color: Color(0xff3C5233),
+                                          //       thickness: 1,
+                                          //     )),
                                           // Image.asset("image/Line.png",width: 18,color: Color(0xff3C5233),),
                                           SizedBox(
                                             width: 10,
@@ -283,16 +299,22 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                                           ),
                                         ],
                                       ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        "${serviceViewModel.blogsResponse!.pageContent!.blogArray![index].title}",
-                                        textAlign: TextAlign.left,
-                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                              color: Color(0xff2D2D2D),
-                                              fontWeight: FontWeight.w600,
-                                            ),
+                                      // const SizedBox(
+                                      //   height: 10,
+                                      // ),
+
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          "${serviceViewModel.blogsResponse!.pageContent!.blogArray![index].title!.toUpperCase()}",
+                                          textAlign: TextAlign.left,
+                                          maxLines: 3,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                color: Color(0xff2D2D2D),
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                        ),
                                       ),
                                       const SizedBox(
                                         height: 10,
