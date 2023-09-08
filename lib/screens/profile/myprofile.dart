@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
 import 'package:giftex/viewmodel/bottomviewmodel.dart';
 import 'package:intl/intl.dart';
 
@@ -7,6 +8,7 @@ import '../components/header.dart';
 
 class MyProfilepage extends StatefulWidget {
   BottomViewModel bottomViewModel;
+
   MyProfilepage(this.bottomViewModel);
 
   @override
@@ -53,9 +55,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
         "${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.dipositedAmount ?? '0')}";
     depositmodeController.text = "";
     bidLimitController.text = "";
-    widget.bottomViewModel.profileViewModel!
-        .getDashboardOverview()
-        .then((value) {
+    widget.bottomViewModel.profileViewModel!.getDashboardOverview().then((value) {
       bidLimitController.text =
           "${formateNumber('${widget.bottomViewModel.profileViewModel!.dashboradOverviewResponse!.totalSpent}')}";
       depositmodeController.text = "";
@@ -127,10 +127,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                   children: <TextSpan>[
                                     TextSpan(
                                       text: 'Hello ',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline6!
-                                          .copyWith(
+                                      style: Theme.of(context).textTheme.headline6!.copyWith(
                                             color: Color(0xffE74B52),
                                             fontWeight: FontWeight.bold,
                                           ),
@@ -138,10 +135,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                     TextSpan(
                                       text:
                                           '${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.basicDetails!.firstName ?? '')}',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline6!
-                                          .copyWith(
+                                      style: Theme.of(context).textTheme.headline6!.copyWith(
                                             color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                           ),
@@ -162,22 +156,13 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                   SizedBox(
                                     width: 3,
                                   ),
-                                  widget
-                                          .bottomViewModel
-                                          .profileViewModel!
-                                          .getUserAllDetailsResponse!
-                                          .result!
-                                          .profile!
-                                          .address!
-                                          .isEmpty
+                                  widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!
+                                          .address!.isEmpty
                                       ? Container()
                                       : Text(
                                           '${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address!.first!.city ?? '')}',
                                           textAlign: TextAlign.center,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1!
-                                              .copyWith(
+                                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                 color: Color(0xff2D2D2D),
                                                 fontWeight: FontWeight.w400,
                                               ),
@@ -187,37 +172,24 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                   ),
                                   ElevatedButton(
                                     style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all(
-                                                Color(0XFFFFFFFF)),
-                                        shape: MaterialStateProperty.all<
-                                                RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(20.0),
-                                                side: BorderSide(
-                                                    color: Color(0xff747474),
-                                                    width: 0.38)))),
-                                    onPressed: () {},
+                                        backgroundColor: MaterialStateProperty.all(Color(0XFFFFFFFF)),
+                                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(20.0),
+                                            side: BorderSide(color: Color(0xff747474), width: 0.38)))),
+                                    onPressed: () {
+                                      Navigator.pushReplacement(
+                                          context, MaterialPageRoute(builder: (context) => DashboardUi(12)));
+                                    },
                                     child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          right: 8.0,
-                                          left: 8,
-                                          top: 12,
-                                          bottom: 12),
+                                      padding: const EdgeInsets.only(right: 8.0, left: 8, top: 12, bottom: 12),
                                       child: Row(
                                         children: [
                                           Text(
                                             'EDIT',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1!
-                                                .copyWith(
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .primary,
-                                                    fontWeight: FontWeight.bold,
-                                                    letterSpacing: 2),
+                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                color: Theme.of(context).colorScheme.primary,
+                                                fontWeight: FontWeight.bold,
+                                                letterSpacing: 2),
                                           ),
                                           SizedBox(
                                             width: 5,
@@ -312,23 +284,16 @@ class _MyProfilepageState extends State<MyProfilepage> {
                       children: [
                         Container(
                           margin: EdgeInsets.only(top: 24),
-                          padding:
-                              EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+                          padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
                           decoration: BoxDecoration(
                               color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Color(0xffEAEEF2),
-                                    blurRadius: 2,
-                                    offset: Offset(2, 2))
-                              ]),
+                              boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
                           child: TextField(
                             controller: nameController,
-                            style:
-                                Theme.of(context).textTheme.subtitle1!.copyWith(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w500,
-                                    ),
+                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                ),
                             decoration: InputDecoration(
                                 labelText: 'Full Name',
                                 hintText: 'Enter Your Name',
@@ -338,73 +303,47 @@ class _MyProfilepageState extends State<MyProfilepage> {
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 24),
-                          padding:
-                              EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+                          padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
                           decoration: BoxDecoration(
                               color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Color(0xffEAEEF2),
-                                    blurRadius: 2,
-                                    offset: Offset(2, 2))
-                              ]),
+                              boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
                           child: TextField(
                             controller: adharController,
-                            style:
-                                Theme.of(context).textTheme.subtitle1!.copyWith(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                            decoration: InputDecoration(
-                                labelText: 'Aadhar Details',
-                                hintText: '*1234',
-                                isDense: true),
+                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                            decoration: InputDecoration(labelText: 'Aadhar Details', hintText: '*1234', isDense: true),
                           ),
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 24),
-                          padding:
-                              EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+                          padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
                           decoration: BoxDecoration(
                               color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Color(0xffEAEEF2),
-                                    blurRadius: 2,
-                                    offset: Offset(2, 2))
-                              ]),
+                              boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
                           child: TextField(
                             controller: panController,
-                            style:
-                                Theme.of(context).textTheme.subtitle1!.copyWith(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                            decoration: InputDecoration(
-                                labelText: 'PAN Card Details',
-                                hintText: '*1234',
-                                isDense: true),
+                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                            decoration:
+                                InputDecoration(labelText: 'PAN Card Details', hintText: '*1234', isDense: true),
                           ),
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 24),
-                          padding:
-                              EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+                          padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
                           decoration: BoxDecoration(
                               color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Color(0xffEAEEF2),
-                                    blurRadius: 2,
-                                    offset: Offset(2, 2))
-                              ]),
+                              boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
                           child: TextField(
                             controller: emailController,
-                            style:
-                                Theme.of(context).textTheme.subtitle1!.copyWith(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w500,
-                                    ),
+                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                ),
                             decoration: InputDecoration(
                                 labelText: 'Email Address',
                                 hintText: 'aryansethi@gmail.com',
@@ -417,23 +356,16 @@ class _MyProfilepageState extends State<MyProfilepage> {
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 24),
-                          padding:
-                              EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+                          padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
                           decoration: BoxDecoration(
                               color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Color(0xffEAEEF2),
-                                    blurRadius: 2,
-                                    offset: Offset(2, 2))
-                              ]),
+                              boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
                           child: TextField(
                             controller: contactController,
-                            style:
-                                Theme.of(context).textTheme.subtitle1!.copyWith(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w500,
-                                    ),
+                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                ),
                             decoration: InputDecoration(
                                 labelText: 'Contact Number',
                                 hintText: '91+ 9867345212',
@@ -446,77 +378,48 @@ class _MyProfilepageState extends State<MyProfilepage> {
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 24),
-                          padding:
-                              EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+                          padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
                           decoration: BoxDecoration(
                               color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Color(0xffEAEEF2),
-                                    blurRadius: 2,
-                                    offset: Offset(2, 2))
-                              ]),
+                              boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
                           child: TextField(
                             controller: dobController,
-                            style:
-                                Theme.of(context).textTheme.subtitle1!.copyWith(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                            decoration: InputDecoration(
-                                labelText: 'Date of Birth',
-                                hintText: '22/03/1998',
-                                isDense: true),
+                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                            decoration:
+                                InputDecoration(labelText: 'Date of Birth', hintText: '22/03/1998', isDense: true),
                           ),
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 24),
-                          padding:
-                              EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+                          padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
                           decoration: BoxDecoration(
                               color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Color(0xffEAEEF2),
-                                    blurRadius: 2,
-                                    offset: Offset(2, 2))
-                              ]),
+                              boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
                           child: TextField(
                             controller: genderController,
-                            style:
-                                Theme.of(context).textTheme.subtitle1!.copyWith(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                            decoration: InputDecoration(
-                                labelText: 'Gender',
-                                hintText: 'Male',
-                                isDense: true),
+                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                            decoration: InputDecoration(labelText: 'Gender', hintText: 'Male', isDense: true),
                           ),
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 24),
-                          padding:
-                              EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+                          padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
                           decoration: BoxDecoration(
                               color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Color(0xffEAEEF2),
-                                    blurRadius: 2,
-                                    offset: Offset(2, 2))
-                              ]),
+                              boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
                           child: TextField(
                             controller: nationalityController,
-                            style:
-                                Theme.of(context).textTheme.subtitle1!.copyWith(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                            decoration: InputDecoration(
-                                labelText: 'Nationality',
-                                hintText: 'Indian',
-                                isDense: true),
+                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                            decoration: InputDecoration(labelText: 'Nationality', hintText: 'Indian', isDense: true),
                           ),
                         ),
                         SizedBox(
@@ -536,22 +439,14 @@ class _MyProfilepageState extends State<MyProfilepage> {
                           width: MediaQuery.of(context).size.width * .9,
                           child: ListView.builder(
                             // itemExtent: 150,
-                            itemCount: widget
-                                .bottomViewModel
-                                .profileViewModel!
-                                .getUserAllDetailsResponse!
-                                .result!
-                                .profile!
-                                .address!
-                                .length,
+                            itemCount: widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!
+                                .profile!.address!.length,
                             scrollDirection: Axis.vertical,
                             itemBuilder: (context, index) => Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 0.0, right: 0.0, top: 8),
+                              padding: const EdgeInsets.only(left: 0.0, right: 0.0, top: 8),
                               child: Container(
                                   padding: EdgeInsets.all(8),
-                                  decoration: BoxDecoration(
-                                      color: Color(0xffF9F9F9)
+                                  decoration: BoxDecoration(color: Color(0xffF9F9F9)
                                       // image: DecorationImage(
                                       //   image: AssetImage("image/Rectangle 1536.png"),
                                       //   fit: BoxFit.cover,
@@ -564,21 +459,16 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                     children: [
                                       Expanded(
                                         child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             Expanded(
                                               flex: 3,
                                               child: Text(
                                                 "${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].type ?? ''}",
                                                 textAlign: TextAlign.start,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .subtitle1!
-                                                    .copyWith(
+                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                       color: Color(0xff2D2D2D),
-                                                      fontWeight:
-                                                          FontWeight.w600,
+                                                      fontWeight: FontWeight.w600,
                                                     ),
                                               ),
                                             ),
@@ -589,43 +479,22 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                                 style: ButtonStyle(
                                                     backgroundColor: MaterialStateProperty.all(index == 0
                                                         ? Color(0XFFF9F9F9)
-                                                        : Theme.of(context)
-                                                            .colorScheme
-                                                            .primary
-                                                            .withOpacity(0.2)),
-                                                    shape: MaterialStateProperty.all<
-                                                            RoundedRectangleBorder>(
+                                                        : Theme.of(context).colorScheme.primary.withOpacity(0.2)),
+                                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                                         RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius.circular(
-                                                                    18.0),
-                                                            side: BorderSide(
-                                                                color:
-                                                                    Color(0xff747474),
-                                                                width: 0.38)))),
+                                                            borderRadius: BorderRadius.circular(18.0),
+                                                            side: BorderSide(color: Color(0xff747474), width: 0.38)))),
                                                 onPressed: () {},
                                                 child: Container(
                                                   // padding: const EdgeInsets.only(right: 8.0,left: 8,top: 10,bottom: 10),
                                                   child: Text(
-                                                    index == 0
-                                                        ? 'Default'
-                                                        : "Make Default",
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .caption!
-                                                        .copyWith(
-                                                          color:
-                                                              Theme.of(context)
-                                                                  .colorScheme
-                                                                  .primary,
+                                                    index == 0 ? 'Default' : "Make Default",
+                                                    style: Theme.of(context).textTheme.caption!.copyWith(
+                                                          color: Theme.of(context).colorScheme.primary,
                                                           decoration: index == 0
-                                                              ? TextDecoration
-                                                                  .none
-                                                              : TextDecoration
-                                                                  .underline,
-                                                          fontWeight: index == 0
-                                                              ? FontWeight.w400
-                                                              : FontWeight.bold,
+                                                              ? TextDecoration.none
+                                                              : TextDecoration.underline,
+                                                          fontWeight: index == 0 ? FontWeight.w400 : FontWeight.bold,
                                                         ),
                                                   ),
                                                 ),
@@ -658,10 +527,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                         child: Text(
                                           "${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].addLine1 ?? ''} ${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].addLine2 ?? ''}, ${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].city ?? ''}, ${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].state ?? ''}, ${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].country ?? ''} - ${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].pinCode ?? ''}.",
                                           textAlign: TextAlign.left,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1!
-                                              .copyWith(
+                                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                 color: Color(0xff959595),
                                                 fontWeight: FontWeight.w400,
                                               ),
@@ -711,10 +577,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
                               child: Text(
                                 "ADD NEW ADDRESS",
                                 textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .subtitle1!
-                                    .copyWith(
+                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                       color: Color(0xffffffff),
                                       fontWeight: FontWeight.w400,
                                     ),
@@ -739,10 +602,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
                             Text(
                               "Bank Details 1",
                               textAlign: TextAlign.center,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .subtitle1!
-                                  .copyWith(
+                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                     color: Color(0xff2D2D2D),
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -752,29 +612,17 @@ class _MyProfilepageState extends State<MyProfilepage> {
                             ),
                             ElevatedButton(
                               style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(
-                                      Color(0XFFF9F9F9)),
-                                  shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(18.0),
-                                          side: BorderSide(
-                                              color: Color(0xff747474),
-                                              width: 0.38)))),
+                                  backgroundColor: MaterialStateProperty.all(Color(0XFFF9F9F9)),
+                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18.0),
+                                      side: BorderSide(color: Color(0xff747474), width: 0.38)))),
                               onPressed: () {},
                               child: Padding(
-                                padding: const EdgeInsets.only(
-                                    right: 8.0, left: 8, top: 10, bottom: 10),
+                                padding: const EdgeInsets.only(right: 8.0, left: 8, top: 10, bottom: 10),
                                 child: Text(
                                   'Default',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText1!
-                                      .copyWith(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .primary,
+                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                        color: Theme.of(context).colorScheme.primary,
                                         fontWeight: FontWeight.w400,
                                       ),
                                 ),
@@ -786,76 +634,50 @@ class _MyProfilepageState extends State<MyProfilepage> {
 
                         Container(
                           margin: EdgeInsets.only(top: 24),
-                          padding:
-                              EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                          padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                           decoration: BoxDecoration(
                               color: Color(0xffF9F9F9),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Color(0xffEAEEF2),
-                                    blurRadius: 2,
-                                    offset: Offset(2, 2))
-                              ]),
+                              boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
                           child: TextField(
                             controller: depositmodeController,
                             readOnly: true,
-                            style:
-                                Theme.of(context).textTheme.subtitle1!.copyWith(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w500,
-                                    ),
+                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                ),
                             decoration: InputDecoration(
-                                labelText: 'Mode of Deposit',
-                                hintText: '',
-                                isDense: true,
-                                border: InputBorder.none),
+                                labelText: 'Mode of Deposit', hintText: '', isDense: true, border: InputBorder.none),
                           ),
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 24),
-                          padding:
-                              EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                          padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                           decoration: BoxDecoration(
                               color: Color(0xffF9F9F9),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Color(0xffEAEEF2),
-                                    blurRadius: 2,
-                                    offset: Offset(2, 2))
-                              ]),
+                              boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
                           child: TextField(
                             controller: depositAmountController,
-                            style:
-                                Theme.of(context).textTheme.subtitle1!.copyWith(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                            decoration: InputDecoration(
-                                labelText: 'Deposit Amount',
-                                hintText: '1,00,000',
-                                isDense: true),
+                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                            decoration:
+                                InputDecoration(labelText: 'Deposit Amount', hintText: '1,00,000', isDense: true),
                           ),
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 24),
-                          padding:
-                              EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                          padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                           decoration: BoxDecoration(
                               color: Color(0xffF9F9F9),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Color(0xffEAEEF2),
-                                    blurRadius: 2,
-                                    offset: Offset(2, 2))
-                              ]),
+                              boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
                           child: TextField(
                             controller: bidLimitController,
                             readOnly: true,
-                            style:
-                                Theme.of(context).textTheme.subtitle1!.copyWith(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w500,
-                                    ),
+                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                ),
                             decoration: InputDecoration(
                                 labelText: 'Bid Limit',
                                 hintText: '`10,00,000',
@@ -919,10 +741,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                 children: [
                                   Text(
                                     'Increade Bid Limit',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .subtitle1!
-                                        .copyWith(
+                                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                           color: Color(0XFFFFFFFF),
                                           fontWeight: FontWeight.w600,
                                         ),
@@ -951,9 +770,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
               color: Color(0Xff2D2D2D),
               child: Column(
                 children: [
-                  Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: Footer()),
+                  Container(width: MediaQuery.of(context).size.width, child: Footer()),
                   Container(
                     color: Color(0Xff1F2A52),
                     height: 50,

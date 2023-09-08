@@ -4,6 +4,7 @@ import 'package:giftex/screens/liveauction/browsitemlistitem.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
 import 'package:giftex/viewmodel/profile/profileviewmodel.dart';
 
+import '../components/bottomnavigationbar/bottomnavigationbar.dart';
 import '../components/footer/footer.dart';
 import '../components/header.dart';
 
@@ -32,7 +33,6 @@ class _MyAuctionReviewpageState extends State<MyAuctionReviewpage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     // dataList.forEach((element) {
     //   data.add(Menu.fromJson(element));
     // });
@@ -150,7 +150,10 @@ class _MyAuctionReviewpageState extends State<MyAuctionReviewpage> {
                                                 RoundedRectangleBorder(
                                                     borderRadius: BorderRadius.circular(20.0),
                                                     side: BorderSide(color: Color(0xff747474), width: 0.38)))),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Navigator.pushReplacement(
+                                              context, MaterialPageRoute(builder: (context) => DashboardUi(12)));
+                                        },
                                         child: Padding(
                                           padding: const EdgeInsets.only(right: 8.0, left: 8, top: 12, bottom: 12),
                                           child: Row(

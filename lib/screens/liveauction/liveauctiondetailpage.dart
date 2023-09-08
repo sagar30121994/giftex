@@ -172,13 +172,16 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
                   ? SliverToBoxAdapter()
                   : SliverToBoxAdapter(
                       child: Align(
-                        child: Text(
-                          "${auctionViewModel.singleAuctionDetsilaResponse!.result!.auctionTitle!}",
-                          textAlign: TextAlign.left,
-                          style: Theme.of(context).textTheme.headline6!.copyWith(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 12, right: 12.0),
+                          child: Text(
+                            "${auctionViewModel.singleAuctionDetsilaResponse!.result!.auctionTitle!}",
+                            textAlign: TextAlign.left,
+                            style: Theme.of(context).textTheme.headline6!.copyWith(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                          ),
                         ),
                       ),
                     ),

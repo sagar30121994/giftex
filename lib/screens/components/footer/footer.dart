@@ -689,7 +689,7 @@ class _FooterState extends State<Footer> {
                               children: <Widget>[
                                 InkWell(
                                   onTap: () {
-                                    bottomViewModel.selectedIndex = 25;
+                                    bottomViewModel.selectedIndex = 29;
                                     // Navigator.push(context, MaterialPageRoute(builder: (context) => Aboutuspage()));
                                   },
                                   child: Padding(
@@ -727,21 +727,26 @@ class _FooterState extends State<Footer> {
                                 //     ],
                                 //   ),
                                 // ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 20.0, top: 16),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Press",
-                                        textAlign: TextAlign.start,
-                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                              color: Color(0XFFFFFFFF),
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                      ),
-                                    ],
+                                InkWell(
+                                  onTap: () {
+                                    bottomViewModel.selectedIndex = 25;
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 20.0, top: 16),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Press",
+                                          textAlign: TextAlign.start,
+                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                color: Color(0XFFFFFFFF),
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                                 InkWell(

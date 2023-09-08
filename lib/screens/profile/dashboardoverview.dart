@@ -5,6 +5,7 @@ import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
 import 'package:giftex/viewmodel/profile/profileviewmodel.dart';
 import 'package:intl/intl.dart';
 
+import '../components/bottomnavigationbar/bottomnavigationbar.dart';
 import '../components/footer/footer.dart';
 import '../components/header.dart';
 
@@ -38,6 +39,7 @@ class _MyAuctionDashboardState extends State<MyAuctionDashboard> {
     //   data.add(Menu.fromJson(element));
     // });
     // nameController.text = "Aryan Raj";
+
     widget.profileViewModel.getDashboardOverview();
     widget.profileViewModel.getLast5Bids();
     super.initState();
@@ -158,7 +160,10 @@ class _MyAuctionDashboardState extends State<MyAuctionDashboard> {
                                                 RoundedRectangleBorder(
                                                     borderRadius: BorderRadius.circular(20.0),
                                                     side: BorderSide(color: Color(0xff747474), width: 0.38)))),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Navigator.pushReplacement(
+                                              context, MaterialPageRoute(builder: (context) => DashboardUi(12)));
+                                        },
                                         child: Padding(
                                           padding: const EdgeInsets.only(right: 8.0, left: 8, top: 12, bottom: 12),
                                           child: Row(

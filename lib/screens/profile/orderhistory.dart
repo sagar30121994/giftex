@@ -4,6 +4,8 @@ import 'package:giftex/screens/components/footer/footer.dart';
 import 'package:giftex/screens/components/header.dart';
 import 'package:giftex/viewmodel/profile/profileviewmodel.dart';
 
+import '../components/bottomnavigationbar/bottomnavigationbar.dart';
+
 class MyOrderHistorypage extends StatefulWidget {
   MyOrderHistorypage(this.profileViewModel);
 
@@ -60,7 +62,7 @@ class _MyOrderHistorypageState extends State<MyOrderHistorypage> {
     //   data.add(Menu.fromJson(element));
     // });
     // nameController.text = "Aryan Raj";
-
+    bottomViewModel.profileViewModel!.getUserAllDetails();
     widget.profileViewModel.getMyPurchase();
     super.initState();
   }
@@ -174,7 +176,10 @@ class _MyOrderHistorypageState extends State<MyOrderHistorypage> {
                                                 RoundedRectangleBorder(
                                                     borderRadius: BorderRadius.circular(20.0),
                                                     side: BorderSide(color: Color(0xff747474), width: 0.38)))),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Navigator.pushReplacement(
+                                              context, MaterialPageRoute(builder: (context) => DashboardUi(12)));
+                                        },
                                         child: Padding(
                                           padding: const EdgeInsets.only(right: 8.0, left: 8, top: 12, bottom: 12),
                                           child: Row(

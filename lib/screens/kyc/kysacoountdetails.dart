@@ -1,11 +1,7 @@
 // import 'package:country_picker/country_picker.dart';
 import 'dart:math';
-import 'dart:typed_data';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-
-// import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:flutter/material.dart'; // import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/screens/kyc/kycaddressdetails.dart';
 import 'package:giftex/viewmodel/profile/profileviewmodel.dart';
@@ -24,7 +20,6 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -45,8 +40,7 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
                     child: Stack(
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(
-                              top: 0, bottom: 0, right: 0, left: 0),
+                          padding: EdgeInsets.only(top: 0, bottom: 0, right: 0, left: 0),
                           child: Image.asset(
                             "image/Shapebh.png",
                             height: 200.0,
@@ -55,8 +49,7 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(
-                              top: 0, bottom: 0, right: 0, left: 0),
+                          padding: EdgeInsets.only(top: 0, bottom: 0, right: 0, left: 0),
                           child: Image.asset(
                             "image/Shapebgup.png",
                             height: 130.0,
@@ -65,15 +58,13 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(
-                              top: 20, bottom: 0, right: 0, left: 100),
+                          padding: EdgeInsets.only(top: 20, bottom: 0, right: 0, left: 100),
                           child: Image.asset(
                             "image/Group 14185.png",
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(
-                              top: 70, bottom: 0, right: 0, left: 130),
+                          padding: EdgeInsets.only(top: 70, bottom: 0, right: 0, left: 130),
                           child: Image.asset(
                             "image/Group 14127 (1).png",
                             height: 120.0,
@@ -86,8 +77,7 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
                             Navigator.of(context).pop();
                           },
                           child: Padding(
-                            padding: EdgeInsets.only(
-                                top: 16, bottom: 0, right: 0, left: 16),
+                            padding: EdgeInsets.only(top: 16, bottom: 0, right: 0, left: 16),
                             child: Icon(
                               Icons.arrow_back,
                               color: Colors.grey,
@@ -108,11 +98,10 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
                           Text(
                             "ACCOUNT DETAILS",
                             textAlign: TextAlign.center,
-                            style:
-                                Theme.of(context).textTheme.headline5!.copyWith(
-                                      color: Color(0xff2D2D2D),
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                            style: Theme.of(context).textTheme.headline5!.copyWith(
+                                  color: Color(0xff2D2D2D),
+                                  fontWeight: FontWeight.bold,
+                                ),
                           ),
                           Spacer(),
                           SizedBox(
@@ -126,12 +115,7 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
                       Container(
                         decoration: BoxDecoration(
                             color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Color(0xffEAEEF2),
-                                  blurRadius: 2,
-                                  offset: Offset(2, 2))
-                            ]),
+                            boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
                         padding: EdgeInsets.only(left: 0),
                         child: TextField(
                           controller: adharController,
@@ -140,15 +124,12 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
                             profileViewModel.setaadharNo(v);
                           },
 
-                          style:
-                              Theme.of(context).textTheme.subtitle1!.copyWith(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500,
+                              ),
                           decoration: InputDecoration(
-                            border: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Color(0xff979797))),
+                            border: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff979797))),
                             // labelText: 'Name',
                             hintText: 'Aadhar No',
                             // prefixIcon:
@@ -176,14 +157,10 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      pickedImage==null?"Upload Aadhaar Card Front":pickedImage!.name,
+                                      pickedImage == null ? "Upload Aadhaar Card Front" : pickedImage!.name,
                                       textAlign: TextAlign.center,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .subtitle1!
-                                          .copyWith(
-                                            color: Color(0xff2D2D2D)
-                                                .withOpacity(0.4),
+                                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                            color: Color(0xff2D2D2D).withOpacity(0.4),
                                             fontWeight: FontWeight.w500,
                                           ),
                                     ),
@@ -194,15 +171,11 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
                                           width: 3,
                                         ),
                                         Text(
-                                       //   getFileSizeString(bytes: pickedImage.length()),
+                                          //   getFileSizeString(bytes: pickedImage.length()),
                                           "Jpg/ Png upto 2mb",
                                           textAlign: TextAlign.center,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1!
-                                              .copyWith(
-                                                color: Color(0xff2D2D2D)
-                                                    .withOpacity(0.4),
+                                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                color: Color(0xff2D2D2D).withOpacity(0.4),
                                                 fontWeight: FontWeight.w400,
                                               ),
                                         ),
@@ -212,51 +185,40 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
                                 ),
                                 Spacer(),
                                 InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        showDialog(
-                                            context: context,
-                                            builder: (ctx) => StatefulBuilder(
-                                                builder: (context, i) =>
-                                                    AlertDialog(
-                                                      title: Text("Pick Image"),
-                                                      content: Text("Please select image source"),
-                                                      actions: [
-                                                        ElevatedButton(
-                                                          onPressed: (){
-                                                            getImage(ImageSource.camera);
-                                                            Navigator.of(ctx)!.pop();
-
-                                                          },
-                                                          child: Text("Camera"),
-                                                        ),
-                                                        ElevatedButton(
-                                                          onPressed: (){
-                                                            getImage(ImageSource.gallery);
-                                                            Navigator.of(ctx)!.pop();
-                                                          },
-                                                          child: Text("Gallery"),
-                                                        ),
-                                                      ],
-                                                    )
-                                            )
-                                        );
-                                      });
-
-
-
-                                    },
-                                     child:
-                                     pickedImage==null?
-                                    Image.asset("image/download.png")
-                                     :CircleAvatar(
-                                         radius: 15,
-                                         backgroundColor: Theme.of(context)
-                                             .colorScheme
-                                             .onTertiary,
-                                         child:
-                                         Image.asset("image/Vector (23).png")),
-                                        //:Image.memory(pickedImage!.readAsBytes() as Uint8List),
+                                  onTap: () {
+                                    setState(() {
+                                      showDialog(
+                                          context: context,
+                                          builder: (ctx) => StatefulBuilder(
+                                              builder: (context, i) => AlertDialog(
+                                                    title: Text("Pick Image"),
+                                                    content: Text("Please select image source"),
+                                                    actions: [
+                                                      ElevatedButton(
+                                                        onPressed: () {
+                                                          getImage(ImageSource.camera);
+                                                          Navigator.of(ctx)!.pop();
+                                                        },
+                                                        child: Text("Camera"),
+                                                      ),
+                                                      ElevatedButton(
+                                                        onPressed: () {
+                                                          getImage(ImageSource.gallery);
+                                                          Navigator.of(ctx)!.pop();
+                                                        },
+                                                        child: Text("Gallery"),
+                                                      ),
+                                                    ],
+                                                  )));
+                                    });
+                                  },
+                                  child: pickedImage == null
+                                      ? Image.asset("image/download.png")
+                                      : CircleAvatar(
+                                          radius: 15,
+                                          backgroundColor: Theme.of(context).colorScheme.onTertiary,
+                                          child: Image.asset("image/Vector (23).png")),
+                                  //:Image.memory(pickedImage!.readAsBytes() as Uint8List),
                                 ),
                               ],
                             ),
@@ -273,18 +235,14 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
                                 children: [
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Row(
                                         children: [
                                           Text(
                                             "Aadhaar Card Back",
                                             textAlign: TextAlign.center,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .subtitle1!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                   color: Color(0xff2D2D2D),
                                                   fontWeight: FontWeight.w500,
                                                 ),
@@ -292,10 +250,7 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
                                           SizedBox(
                                             width: 3,
                                           ),
-                                          InkWell(
-                                              onTap: () {},
-                                              child: Image.asset(
-                                                  "image/Group 14184.png")),
+                                          InkWell(onTap: () {}, child: Image.asset("image/Group 14184.png")),
                                         ],
                                       ),
                                       Row(
@@ -307,12 +262,8 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
                                           Text(
                                             "1.5mb",
                                             textAlign: TextAlign.center,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1!
-                                                .copyWith(
-                                                  color: Color(0xff2D2D2D)
-                                                      .withOpacity(0.4),
+                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                  color: Color(0xff2D2D2D).withOpacity(0.4),
                                                   fontWeight: FontWeight.w400,
                                                 ),
                                           ),
@@ -323,11 +274,8 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
                                   Spacer(),
                                   CircleAvatar(
                                       radius: 15,
-                                      backgroundColor: Theme.of(context)
-                                          .colorScheme
-                                          .onTertiary,
-                                      child:
-                                          Image.asset("image/Vector (23).png")),
+                                      backgroundColor: Theme.of(context).colorScheme.onTertiary,
+                                      child: Image.asset("image/Vector (23).png")),
                                 ],
                               ),
                             ),
@@ -340,12 +288,7 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
                       Container(
                         decoration: BoxDecoration(
                             color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Color(0xffEAEEF2),
-                                  blurRadius: 2,
-                                  offset: Offset(2, 2))
-                            ]),
+                            boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
                         padding: EdgeInsets.only(left: 0),
                         child: TextField(
                           controller: panController,
@@ -354,15 +297,12 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
                             profileViewModel.setpanNo(v);
                           },
 
-                          style:
-                              Theme.of(context).textTheme.subtitle1!.copyWith(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500,
+                              ),
                           decoration: InputDecoration(
-                            border: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Color(0xff979797))),
+                            border: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff979797))),
                             // labelText: 'Name',
                             hintText: 'PAN No',
                             // prefixIcon:
@@ -390,25 +330,148 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "Upload PAN Card",
+                                      pickedImage1 == null ? "Upload PAN Card" : pickedImage1!.name,
                                       textAlign: TextAlign.center,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .subtitle1!
-                                          .copyWith(
-                                            color: Color(0xff2D2D2D)
-                                                .withOpacity(0.4),
+                                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                            color: Color(0xff2D2D2D).withOpacity(0.4),
                                             fontWeight: FontWeight.w500,
                                           ),
+                                    ),
+                                    Row(
+                                      children: [
+                                        Image.asset("image/Ellipse 87.png"),
+                                        SizedBox(
+                                          width: 3,
+                                        ),
+                                        Text(
+                                          //   getFileSizeString(bytes: pickedImage.length()),
+                                          "Jpg/ Png upto 2mb",
+                                          textAlign: TextAlign.center,
+                                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                color: Color(0xff2D2D2D).withOpacity(0.4),
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
                                 Spacer(),
                                 InkWell(
-                                    onTap: () {},
-                                    child: Image.asset("image/download.png")),
+                                  onTap: () {
+                                    setState(() {
+                                      showDialog(
+                                          context: context,
+                                          builder: (ctx) => StatefulBuilder(
+                                              builder: (context, j) => AlertDialog(
+                                                    title: Text("Pick Image"),
+                                                    content: Text("Please select image source"),
+                                                    actions: [
+                                                      ElevatedButton(
+                                                        onPressed: () {
+                                                          getImage1(ImageSource.camera);
+                                                          Navigator.of(ctx)!.pop();
+                                                        },
+                                                        child: Text("Camera"),
+                                                      ),
+                                                      ElevatedButton(
+                                                        onPressed: () {
+                                                          getImage1(ImageSource.gallery);
+                                                          Navigator.of(ctx)!.pop();
+                                                        },
+                                                        child: Text("Gallery"),
+                                                      ),
+                                                    ],
+                                                  )));
+                                    });
+                                  },
+                                  child: pickedImage1 == null
+                                      ? Image.asset("image/download.png")
+                                      : CircleAvatar(
+                                          radius: 15,
+                                          backgroundColor: Theme.of(context).colorScheme.onTertiary,
+                                          child: Image.asset("image/Vector (23).png")),
+                                  //:Image.memory(pickedImage!.readAsBytes() as Uint8List),
+                                ),
                               ],
                             ),
+                            // Row(
+                            //   children: [
+                            //     Column(
+                            //       mainAxisAlignment: MainAxisAlignment.start,
+                            //       crossAxisAlignment: CrossAxisAlignment.start,
+                            //       children: [
+                            //         Text(
+                            //           pickedImage1 == null ? "Upload PAN Card" : pickedImage1!.name,
+                            //           textAlign: TextAlign.center,
+                            //           style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                            //                 color: Color(0xff2D2D2D).withOpacity(0.4),
+                            //                 fontWeight: FontWeight.w500,
+                            //               ),
+                            //         ),
+                            //         Row(
+                            //           children: [
+                            //             Image.asset("image/Ellipse 87.png"),
+                            //             SizedBox(
+                            //               width: 3,
+                            //             ),
+                            //             Text(
+                            //               //   getFileSizeString(bytes: pickedImage.length()),
+                            //               "Jpg/ Png upto 2mb",
+                            //               textAlign: TextAlign.center,
+                            //               style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            //                     color: Color(0xff2D2D2D).withOpacity(0.4),
+                            //                     fontWeight: FontWeight.w400,
+                            //                   ),
+                            //             ),
+                            //           ],
+                            //         ),
+                            //       ],
+                            //     ),
+                            //     Spacer(),
+                            //     InkWell(
+                            //       onTap: () {
+                            //         setState(() {
+                            //           showDialog(
+                            //               context: context,
+                            //               builder: (ctx) => StatefulBuilder(
+                            //                   builder: (context, i) => AlertDialog(
+                            //                         title: Text("Pick Image"),
+                            //                         content: Text("Please select image source"),
+                            //                         actions: [
+                            //                           ElevatedButton(
+                            //                             onPressed: () {
+                            //                               getImage(ImageSource.camera);
+                            //                               Navigator.of(ctx)!.pop();
+                            //                             },
+                            //                             child: Text("Camera"),
+                            //                           ),
+                            //                           ElevatedButton(
+                            //                             onPressed: () {
+                            //                               getImage(ImageSource.gallery);
+                            //                               Navigator.of(ctx)!.pop();
+                            //                             },
+                            //                             child: Text("Gallery"),
+                            //                           ),
+                            //                         ],
+                            //                       )));
+                            //         });
+                            //       },
+                            //       child: pickedImage1 == null
+                            //           ? Image.asset("image/download.png")
+                            //           : CircleAvatar(
+                            //               radius: 15,
+                            //               backgroundColor: Theme.of(context).colorScheme.onTertiary,
+                            //               child: Image.asset("image/Vector (23).png")),
+                            //       //:Image.memory(pickedImage!.readAsBytes() as Uint8List),
+                            //     ),
+                            //     // InkWell(
+                            //     //     onTap: () {
+                            //     //
+                            //     //     },
+                            //     //     child: Image.asset("image/download.png")),
+                            //   ],
+                            // ),
                           ],
                         ),
                       ),
@@ -423,8 +486,7 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
                 ),
                 InkWell(
                   onTap: () async {
-                    HttpResponse res =
-                        await profileViewModel.updateRegBankingDetails();
+                    HttpResponse res = await profileViewModel.updateRegBankingDetails();
                     if (res.status == 200) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
@@ -440,10 +502,7 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
                         ),
                       );
                     }
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => KYCAddresspage()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => KYCAddresspage()));
                   },
                   child: Container(
                     height: 50,
@@ -478,8 +537,9 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
   }
 
   XFile? pickedImage;
-  
-  static String getFileSizeString({ required int bytes, int decimals = 0}) {
+  XFile? pickedImage1;
+
+  static String getFileSizeString({required int bytes, int decimals = 0}) {
     if (bytes <= 0) return "0 Bytes";
     const suffixes = [" Bytes", "KB", "MB", "GB", "TB"];
     var i = (log(bytes) / log(1024)).floor();
@@ -492,11 +552,21 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
     setState(() {
       if (pickedFile != null) {
         pickedImage = (pickedFile);
-
       } else {
         print('No image selected.');
       }
     });
+  }
 
+  Future getImage1(ImageSource source) async {
+    dynamic pickedFile = await ImagePicker().pickImage(source: source);
+
+    setState(() {
+      if (pickedFile != null) {
+        pickedImage1 = (pickedFile);
+      } else {
+        print('No image selected.');
+      }
+    });
   }
 }
