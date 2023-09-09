@@ -557,7 +557,17 @@ class _LoginpageState extends State<Loginpage> {
                                       },
                                       child: Row(
                                         children: [
-                                          Checkbox(value: isCheked, onChanged: (val) async {}),
+                                          Checkbox(
+                                           // activeColor: Colors.green,
+
+                                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                                              fillColor: MaterialStatePropertyAll(Colors.green),
+
+                                              value: isCheked, onChanged: (val) async {
+                                            setState(() {
+                                              isCheked=!isCheked;
+                                            });
+                                          }),
                                           Row(
                                             children: [
                                               Text(
@@ -598,6 +608,14 @@ class _LoginpageState extends State<Loginpage> {
                                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                             content: Text(
                                               'Enter Valid Details',
+                                              style: Theme.of(context).textTheme.headline6,
+                                            ),
+                                            backgroundColor: Colors.red,
+                                          ));
+                                        }else if(isCheked==false){
+                                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                            content: Text(
+                                              'Please select Agree to Terms and Conditions. ',
                                               style: Theme.of(context).textTheme.headline6,
                                             ),
                                             backgroundColor: Colors.red,

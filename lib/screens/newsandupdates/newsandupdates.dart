@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:giftex/viewmodel/service/serviceviewmodel.dart';
 import 'package:sliver_tools/sliver_tools.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../components/header.dart';
 
@@ -33,6 +35,7 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
     if (newsType == "LATEST NEWS") {
       serviceViewModel.getNews();
     } else if (newsType == "VIDEOS") {
+      serviceViewModel.getVideos();
     } else {
       serviceViewModel.getBlogs();
     }
@@ -455,52 +458,64 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                           delegate: SliverChildBuilderDelegate(
                             (BuildContext context, int index) {
                               return Padding(
-                                padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 16, bottom: 10),
+                                padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 8, bottom: 8),
                                 child: Container(
-                                  height: 140,
+                                  margin: EdgeInsets.only(bottom: 16),
+
+                               //   height: 250,
 
                                   // alignment: Alignment.center,
 
                                   child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Container(
-                                        width: MediaQuery.of(context).size.width * .25,
-                                        height: 140,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            image: AssetImage(
-                                              "image/Rectangle (3).png",
+                                      InkWell(
+                                        onTap: () async {
+                                          Uri _url=Uri.parse("${serviceViewModel.homeNewsVideosBlogsResponse!.videos?[index].videoUrl??''}");
+                                          if (!await launchUrl(_url)) {
+                                            throw Exception('Could not launch $_url');
+                                          }
+
+                                        },
+                                        child: Container(
+                                          width: MediaQuery.of(context).size.width * .25,
+                                          height: 120,
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                              image: AssetImage(
+                                                "image/Rectangle (3).png",
+                                              ),
+                                              fit: BoxFit.cover,
                                             ),
-                                            fit: BoxFit.cover,
+                                            color: Color(0xffFFFFFF),
                                           ),
-                                          color: Color(0xffFFFFFF),
-                                        ),
-                                        child: Stack(
-                                          children: [
-                                            Container(
-                                              child: Image.asset(
-                                                "image/Rectangle 1741.png",
-                                                height: 150,
-                                                fit: BoxFit.cover,
+                                          child: Stack(
+                                            children: [
+                                              Container(
+                                                child: Image.network(
+                                                  serviceViewModel.homeNewsVideosBlogsResponse!.videos?[index].image!.desktop??'',
+                                                  height: 150,
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
-                                            ),
-                                            Center(
-                                                child: Image.asset(
-                                              "image/6.png",
-                                              height: 45,
-                                            )),
-                                            Center(
-                                              child: CircleAvatar(
-                                                radius: 15,
-                                                backgroundColor: Color(0xff526D46),
+                                              Center(
+                                                  child: Image.asset(
+                                                    "image/6.png",
+                                                height: 45,
+                                              )),
+                                              Center(
+                                                child: CircleAvatar(
+                                                  radius: 15,
+                                                  backgroundColor: Color(0xff526D46),
+                                                ),
                                               ),
-                                            ),
-                                            Center(
-                                                child: Image.asset(
-                                              "image/7.png",
-                                              height: 13,
-                                            ))
-                                          ],
+                                              Center(
+                                                  child: Image.asset(
+                                                "image/7.png",
+                                                height: 13,
+                                              ))
+                                            ],
+                                          ),
                                         ),
                                       ),
                                       SizedBox(
@@ -515,7 +530,7 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                                             Row(
                                               children: [
                                                 Text(
-                                                  "Jan 10, 2022",
+                                                  serviceViewModel.homeNewsVideosBlogsResponse!.videos?[index].timestamp??'',
                                                   textAlign: TextAlign.start,
                                                   style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                         color: Color(0XFF3C5233),
@@ -527,45 +542,27 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                                             const SizedBox(
                                               height: 6,
                                             ),
-                                            Text(
-                                              "Lorem ipsum dolor sit",
-                                              textAlign: TextAlign.left,
-                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                    color: Color(0xff2D2D2D),
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
+                                            HtmlWidget(
+                                              textStyle:  Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                color: Color(0xff2D2D2D),
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                              serviceViewModel.homeNewsVideosBlogsResponse!.videos?[index].title??'',
                                             ),
-                                            const SizedBox(
+                                         /*   const SizedBox(
                                               height: 8,
                                             ),
                                             Container(
                                               width: MediaQuery.of(context).size.width,
-                                              child: Text(
-                                                "Lorem ipsum dolor sit amet, consecte tur adipiscing elit,",
-                                                textAlign: TextAlign.left,
-                                                style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                      color: Color(0xff747474),
-                                                      fontWeight: FontWeight.w400,
-                                                    ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 8,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  "watch More",
-                                                  textAlign: TextAlign.center,
-                                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                        color: Color(0XFF5D7E4D),
-                                                        fontWeight: FontWeight.w600,
-                                                        decoration: TextDecoration.underline,
-                                                      ),
+                                              child: HtmlWidget(
+                                                textStyle:  Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                  color: Color(0xff2D2D2D),
+                                                  fontWeight: FontWeight.w400,
                                                 ),
-                                              ],
-                                            ),
+                                                serviceViewModel.homeNewsVideosBlogsResponse!.videos?[index].desc??'',
+                                              ),
+                                            ),*/
+
                                           ],
                                         ),
                                       )

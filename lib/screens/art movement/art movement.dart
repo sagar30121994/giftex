@@ -219,7 +219,71 @@ class _ArtMovement extends State<ArtMovement> {
                   newsType == "ARTIST"
                       ? homeViewModel.isloadingartmovement
                           ? SliverToBoxAdapter()
-                          : SliverToBoxAdapter()
+                          : SliverToBoxAdapter(
+                      child: Container(
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 12.0),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "${homeViewModel.getArtMovementResponse!.pageContent!.artVideos!.title}",
+                                    style: Theme.of(context).textTheme.headline6!.copyWith(
+                                        color: Colors.black, fontWeight: FontWeight.w600, letterSpacing: 0.888889),
+                                  )
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: 12),
+                            Wrap(
+                                spacing: 20,
+                                runSpacing: 20,
+                                children: homeViewModel.getArtMovementResponse!.pageContent!.artVideos!.array!.map((e) {
+                                  return  Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width, // Half the screen width
+
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          InkWell(
+                                            onTap: () async {
+                                              Uri _url=Uri.parse("${e.videoUrl}");
+                                              if (!await launchUrl(_url)) {
+                                                throw Exception('Could not launch $_url');
+                                              }
+
+                                            },
+                                            child: Image.network(
+                                              "${e.image!.mobile ?? ''}",
+                                              fit: BoxFit.contain,
+                                            ),
+                                          ),
+                                          SizedBox(height: 18),
+                                          Text(
+                                            style: TextStyle(fontWeight: FontWeight.w400),
+                                            e!.date ?? "",
+                                          ),
+                                          SizedBox(height: 12),
+                                          HtmlWidget(
+                                            textStyle: TextStyle(fontWeight: FontWeight.bold),
+                                            e!.title ?? "",
+                                          ),
+                                          /* HtmlWidget(
+                                        textStyle: TextStyle(overflow: TextOverflow.ellipsis),
+                                        "${e!.videoUrl ?? ""}",
+                                      ),*/
+                                        ],
+                                      ),
+                                      // child: Text('Furniture & Decorative Art'),
+                                    ),
+                                  );
+                                }).toList())
+                          ],
+                        ),
+                      ))
                       : SliverToBoxAdapter(
                           child: SizedBox(
                             child: homeViewModel.isloadingartmovement ? LinearProgressIndicator() : Container(),
@@ -252,73 +316,120 @@ class _ArtMovement extends State<ArtMovement> {
                   newsType == "HISTORY"
                       ? homeViewModel.isloadingartmovement
                           ? SliverToBoxAdapter()
-                          : SliverToBoxAdapter()
-                      : SliverToBoxAdapter(),
-                  SliverToBoxAdapter(
+                          :  SliverToBoxAdapter(
                       child: Container(
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 12.0),
-                          child: Row(
-                            children: [
-                              Text(
-                                "${homeViewModel.getArtMovementResponse!.pageContent!.artVideos!.title}",
-                                style: Theme.of(context).textTheme.headline6!.copyWith(
-                                    color: Colors.black, fontWeight: FontWeight.w600, letterSpacing: 0.888889),
-                              )
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 12),
-                        Wrap(
-                            spacing: 20,
-                            runSpacing: 20,
-                            children: homeViewModel.getArtMovementResponse!.pageContent!.artVideos!.array!.map((e) {
-                              return Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Container(
-                                  width: MediaQuery.of(context).size.width, // Half the screen width
+                        child: Column(
+                          children: [
 
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      InkWell(
-                                        onTap: () async {
-                                           Uri _url=Uri.parse("${e.videoUrl}");
-                                            if (!await launchUrl(_url)) {
-                                              throw Exception('Could not launch $_url');
-                                            }
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: SingleChildScrollView(
+                                padding: EdgeInsets.symmetric(horizontal: 16),
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: homeViewModel.historyYearList.map((e) =>
+                                      Row(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            height: 24,margin: EdgeInsets.only(right: 0),
+                                            child: ElevatedButton(
 
-                                        },
-                                        child: Image.network(
-                                          "${e.image!.mobile ?? ''}",
-                                          fit: BoxFit.contain,
-                                        ),
-                                      ),
-                                      SizedBox(height: 18),
-                                      Text(
-                                        style: TextStyle(fontWeight: FontWeight.w400),
-                                        e!.date ?? "",
-                                      ),
-                                      SizedBox(height: 12),
-                                      HtmlWidget(
-                                        textStyle: TextStyle(fontWeight: FontWeight.bold),
-                                        e!.title ?? "",
-                                      ),
-                                     /* HtmlWidget(
-                                        textStyle: TextStyle(overflow: TextOverflow.ellipsis),
-                                        "${e!.videoUrl ?? ""}",
-                                      ),*/
-                                    ],
-                                  ),
-                                  // child: Text('Furniture & Decorative Art'),
+                                              style: ElevatedButton.styleFrom(
+                                                  shape: StadiumBorder(),
+                                                  backgroundColor: Colors.white,alignment: Alignment.center
+                                              ),
+                                              onPressed: () {
+                                                setState(() {
+                                                  homeViewModel.selectedyear=e;
+                                                });
+
+                                              },
+                                              child: Text('${e??''}',
+                                                style: Theme.of(context).textTheme!.subtitle1!.copyWith(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: homeViewModel.selectedyear==e?Colors.red:Colors.grey,
+                                                ),
+                                              ),
+
+                                            ),
+                                          ),
+                                          if(homeViewModel.historyYearList.indexOf(e)<(homeViewModel.historyYearList.length-1))
+                                            Container(
+                                              height: 20,
+                                              alignment: Alignment.center,
+                                              child: Text(' ---> ',textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold,color: Colors.grey),),
+                                            ),
+                                        ],
+                                      )
+                                  ).toList(),
                                 ),
-                              );
-                            }).toList())
-                      ],
-                    ),
-                  )),
+                              ),
+                            ),
+                            SizedBox(height: 16,),
+
+                            Observer(
+                                builder: (context) {
+                                  return Wrap(
+                                      spacing: 0,
+                                      runSpacing: 0,
+                                      children: homeViewModel.getArtMovementResponse!.pageContent!.history!.array!.map((e) {
+                                        return homeViewModel.selectedyear==e.year?
+
+                                        Padding(
+                                          padding: const EdgeInsets.all(16.0),
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                width: MediaQuery.of(context).size.width, // Half the screen width
+
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                                  children: [
+                                                    InkWell(
+                                                      onTap: () async {
+                                                        /* Uri _url=Uri.parse("${e.videoUrl}");
+                                                    if (!await launchUrl(_url)) {
+                                                      throw Exception('Could not launch $_url');
+                                                    }
+*/
+                                                      },
+                                                      child: Image.network(
+                                                        "${e.image!.mobile ?? ''}",
+                                                        fit: BoxFit.contain,
+                                                      ),
+                                                    ),
+                                                    SizedBox(height: 8),
+                                              Text(
+                                                style: TextStyle(fontWeight: FontWeight.w900,fontSize: 48,color: Colors.blueGrey.withOpacity(.3)),
+                                                e!.year ?? "",
+                                              ),
+                                                    SizedBox(height: 8),
+                                                    HtmlWidget(
+                                                      textStyle: TextStyle(fontWeight: FontWeight.bold),
+                                                      '<center>'+(e!.desc ?? "")+"</center>",
+                                                    ),
+                                                    /* HtmlWidget(
+                                                textStyle: TextStyle(overflow: TextOverflow.ellipsis),
+                                                "${e!.videoUrl ?? ""}",
+                                              ),*/
+                                                  ],
+                                                ),
+                                                // child: Text('Furniture & Decorative Art'),
+                                              ),
+                                              Divider(color: Colors.grey),
+                                            ],
+                                          ),
+                                        ):Container();
+                                      }).toList());
+                                }
+                            )
+                          ],
+                        ),
+                      ))
+                      : SliverToBoxAdapter(),
+
                   SliverToBoxAdapter(child: SizedBox(width: MediaQuery.of(context).size.width, child: Footer())),
                   SliverToBoxAdapter(
                     child: Container(

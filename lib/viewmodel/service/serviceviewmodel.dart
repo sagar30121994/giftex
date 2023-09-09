@@ -3,6 +3,7 @@ import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/data/network/models/responce/cmsweb/careersresponse.dart';
 import 'package:giftex/data/network/models/responce/cmsweb/insertCareerFormResponse.dart';
 import 'package:giftex/data/network/models/responce/cmsweb/whoweare.dart';
+import 'package:giftex/data/network/models/responce/home/newsblogsvideoresponse.dart';
 import 'package:giftex/data/network/models/responce/news/blogsresponse.dart';
 import 'package:giftex/data/network/models/responce/news/newsreponse.dart';
 import 'package:giftex/data/network/models/responce/service/serviceresponse.dart';
@@ -142,6 +143,21 @@ abstract class _ServiceViewModel with Store {
 
     if (httpResponse.status == 200) {
       blogsResponse = httpResponse.data;
+    }
+    isloading = false;
+    return httpResponse;
+  }
+
+
+  @observable
+  HomeNewsVideosBlogsResponse? homeNewsVideosBlogsResponse=HomeNewsVideosBlogsResponse();
+  Future<HttpResponse> getVideos() async {
+    isloading = true;
+
+    HttpResponse httpResponse = await webCmsApiModelRepo!.getNewsVideos();
+
+    if (httpResponse.status == 200) {
+      homeNewsVideosBlogsResponse = httpResponse.data;
     }
     isloading = false;
     return httpResponse;
