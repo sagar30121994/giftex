@@ -117,7 +117,7 @@ class _UpcommingTabsState extends State<UpcommingTabs> {
                                     widget.auctionViewModel.isGrid = false;
                                   });
                                 },
-                                child: Image.asset("image/list.png", height: 30)),
+                                child: Image.asset("image/list.png", height: 30,color: !widget.auctionViewModel.isGrid?Colors.indigo:Colors.black,)),
                             SizedBox(
                               width: 10,
                             ),
@@ -128,7 +128,7 @@ class _UpcommingTabsState extends State<UpcommingTabs> {
                                   });
                                   // auctionViewModel.isGrid=true;
                                 },
-                                child: Image.asset("image/grid.png", height: 30)),
+                                child: Image.asset("image/grid.png", height: 30,color:widget.auctionViewModel.isGrid?Colors.indigo:Colors.black,)),
                             SizedBox(
                               width: 10,
                             ),

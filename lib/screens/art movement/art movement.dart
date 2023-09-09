@@ -5,6 +5,7 @@ import 'package:giftex/screens/components/footer/footer.dart';
 import 'package:giftex/screens/components/header.dart';
 import 'package:giftex/viewmodel/home/homeviewmodel.dart';
 import 'package:sliver_tools/sliver_tools.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ArtMovement extends StatefulWidget {
   @override
@@ -282,9 +283,18 @@ class _ArtMovement extends State<ArtMovement> {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Image.network(
-                                        "${e.image!.mobile ?? ''}",
-                                        fit: BoxFit.contain,
+                                      InkWell(
+                                        onTap: () async {
+                                           Uri _url=Uri.parse("${e.videoUrl}");
+                                            if (!await launchUrl(_url)) {
+                                              throw Exception('Could not launch $_url');
+                                            }
+
+                                        },
+                                        child: Image.network(
+                                          "${e.image!.mobile ?? ''}",
+                                          fit: BoxFit.contain,
+                                        ),
                                       ),
                                       SizedBox(height: 18),
                                       Text(
@@ -296,10 +306,10 @@ class _ArtMovement extends State<ArtMovement> {
                                         textStyle: TextStyle(fontWeight: FontWeight.bold),
                                         e!.title ?? "",
                                       ),
-                                      HtmlWidget(
+                                     /* HtmlWidget(
                                         textStyle: TextStyle(overflow: TextOverflow.ellipsis),
                                         "${e!.videoUrl ?? ""}",
-                                      ),
+                                      ),*/
                                     ],
                                   ),
                                   // child: Text('Furniture & Decorative Art'),

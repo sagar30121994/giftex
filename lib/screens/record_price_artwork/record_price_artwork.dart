@@ -164,7 +164,7 @@ class _Record_price_artworkState extends State<Record_price_artwork> {
                                             grid = false;
                                           });
                                         },
-                                        child: Image.asset("image/list.png", height: 30)),
+                                        child: Image.asset("image/list.png", height: 30,color: !grid?Colors.indigo:Colors.black,)),
                                     SizedBox(
                                       width: 10,
                                     ),
@@ -175,7 +175,7 @@ class _Record_price_artworkState extends State<Record_price_artwork> {
                                           });
                                           // auctionViewModel.isGrid=true;
                                         },
-                                        child: Image.asset("image/grid.png", height: 30)),
+                                        child: Image.asset("image/grid.png", height: 30,color: grid?Colors.indigo:Colors.black,)),
                                     SizedBox(
                                       width: 10,
                                     ),
@@ -214,390 +214,465 @@ class _Record_price_artworkState extends State<Record_price_artwork> {
                                                           .getRecordPriceArtworkResponse!.result!.lots!
                                                           .map(
                                                             (e) => grid
-                                                                ? Padding(
-                                                                    padding: const EdgeInsets.all(16.0),
-                                                                    child: Container(
-                                                                        color: Color(0xffFFFFFF),
-                                                                        height: 520,
-                                                                        width: double.maxFinite,
-                                                                        alignment: Alignment.center,
-                                                                        child: Stack(
-                                                                          children: [
-                                                                            Padding(
-                                                                              padding:
-                                                                                  EdgeInsets.only(top: 0, bottom: 0),
-                                                                              child: Container(
-                                                                                //replace this Container with your Card
-                                                                                color: Color(0xffF9F9F9),
-                                                                                height: 520,
-                                                                              ),
+                                                                ? Container(
+                                                                    color: Color(0xffFFFFFF),
+                                                                    width: MediaQuery.of(context).size.width,
+                                                                    height: 520,
+                                                                padding: const EdgeInsets.symmetric(
+                                                                    horizontal: 8, vertical: 8),
+                                                                    alignment: Alignment.center,
+                                                                    child: Stack(
+                                                                      children: [
+                                                                        Padding(
+                                                                          padding:
+                                                                              EdgeInsets.only(top: 0, bottom: 0),
+                                                                          child: Container(
+                                                                            //replace this Container with your Card
+                                                                            color: Color(0xffF9F9F9),
+                                                                            height: 520,
+                                                                          ),
+                                                                        ),
+                                                                        InkWell(
+                                                                          onTap: () {
+                                                                            Navigator.push(
+                                                                                context,
+                                                                                MaterialPageRoute(
+                                                                                    builder: (context) =>
+                                                                                        ProductDetailPage(
+                                                                                            e, auctionViewModel)));
+                                                                          },
+                                                                          child: Padding(
+                                                                            padding:
+                                                                                const EdgeInsets.only(left: 2.0),
+                                                                            child: Image.network(
+                                                                              "${e.thumbImage}",
+                                                                              height: 250,
+                                                                              width: MediaQuery.of(context)
+                                                                                      .size
+                                                                                      .width *
+                                                                                  .65,
+                                                                              alignment: Alignment.center,
                                                                             ),
-                                                                            InkWell(
-                                                                              onTap: () {
-                                                                                Navigator.push(
-                                                                                    context,
-                                                                                    MaterialPageRoute(
-                                                                                        builder: (context) =>
-                                                                                            ProductDetailPage(
-                                                                                                e, auctionViewModel)));
-                                                                              },
-                                                                              child: Padding(
-                                                                                padding:
-                                                                                    const EdgeInsets.only(left: 2.0),
-                                                                                child: Image.network(
-                                                                                  "${e.thumbImage}",
-                                                                                  height: 250,
-                                                                                  width: MediaQuery.of(context)
-                                                                                          .size
-                                                                                          .width *
-                                                                                      .65,
-                                                                                  alignment: Alignment.center,
+                                                                          ),
+                                                                        ),
+                                                                        Padding(
+                                                                            padding: EdgeInsets.only(
+                                                                                top: 252,
+                                                                                bottom: 0,
+                                                                                left: 25.0,
+                                                                                right: 25),
+                                                                            child: Column(
+                                                                              mainAxisAlignment:
+                                                                                  MainAxisAlignment.start,
+                                                                              crossAxisAlignment:
+                                                                                  CrossAxisAlignment.start,
+                                                                              children: [
+                                                                                SizedBox(
+                                                                                  height: 34,
                                                                                 ),
-                                                                              ),
-                                                                            ),
-                                                                            Padding(
-                                                                                padding: EdgeInsets.only(
-                                                                                    top: 252,
-                                                                                    bottom: 0,
-                                                                                    left: 25.0,
-                                                                                    right: 25),
-                                                                                child: Column(
-                                                                                  mainAxisAlignment:
-                                                                                      MainAxisAlignment.start,
-                                                                                  crossAxisAlignment:
-                                                                                      CrossAxisAlignment.start,
+                                                                                e.auctionType == "1"
+                                                                                    ? Text(
+                                                                                        "${e.info == null ? '' : e.info!.title}",
+                                                                                        textAlign: TextAlign.center,
+                                                                                        style: Theme.of(context)
+                                                                                            .textTheme
+                                                                                            .headline6!
+                                                                                            .copyWith(
+                                                                                              color: Colors.black,
+                                                                                              letterSpacing: 2,
+                                                                                              fontWeight:
+                                                                                                  FontWeight.bold,
+                                                                                            ),
+                                                                                      )
+                                                                                    : Container(),
+                                                                                SizedBox(
+                                                                                  height: 10,
+                                                                                ),
+                                                                                Text(
+                                                                                  "${e.info == null ? '' : e.info!.lotTitle}",
+                                                                                  textAlign: TextAlign.left,
+                                                                                  maxLines: 2,
+                                                                                  overflow: TextOverflow.ellipsis,
+                                                                                  style: Theme.of(context)
+                                                                                      .textTheme
+                                                                                      .subtitle1!
+                                                                                      .copyWith(
+                                                                                        color: Color(0xff747474),
+                                                                                        fontWeight: FontWeight.w400,
+                                                                                      ),
+                                                                                ),
+                                                                                SizedBox(
+                                                                                  height: 10,
+                                                                                ),
+                                                                                Text(
+                                                                                  "${e.lotDesc}",
+                                                                                  textAlign: TextAlign.left,
+                                                                                  maxLines: 2,
+                                                                                  overflow: TextOverflow.ellipsis,
+                                                                                  style: Theme.of(context)
+                                                                                      .textTheme
+                                                                                      .subtitle1!
+                                                                                      .copyWith(
+                                                                                        color: Theme.of(context)
+                                                                                            .colorScheme
+                                                                                            .primary,
+                                                                                        fontWeight: FontWeight.w400,
+                                                                                      ),
+                                                                                ),
+                                                                                SizedBox(
+                                                                                  height: 12,
+                                                                                ),
+                                                                                Row(
+                                                                                  // mainAxisAlignment: MainAxisAlignment.end,
                                                                                   children: [
-                                                                                    SizedBox(
-                                                                                      height: 34,
-                                                                                    ),
-                                                                                    e.auctionType == "1"
-                                                                                        ? Text(
-                                                                                            "${e.info == null ? '' : e.info!.title}",
-                                                                                            textAlign: TextAlign.center,
-                                                                                            style: Theme.of(context)
-                                                                                                .textTheme
-                                                                                                .headline6!
-                                                                                                .copyWith(
-                                                                                                  color: Colors.black,
-                                                                                                  letterSpacing: 2,
-                                                                                                  fontWeight:
-                                                                                                      FontWeight.bold,
-                                                                                                ),
-                                                                                          )
-                                                                                        : Container(),
-                                                                                    SizedBox(
-                                                                                      height: 10,
-                                                                                    ),
-                                                                                    Text(
-                                                                                      "${e.info == null ? '' : e.info!.lotTitle}",
-                                                                                      textAlign: TextAlign.left,
-                                                                                      maxLines: 2,
-                                                                                      overflow: TextOverflow.ellipsis,
-                                                                                      style: Theme.of(context)
-                                                                                          .textTheme
-                                                                                          .subtitle1!
-                                                                                          .copyWith(
-                                                                                            color: Color(0xff747474),
-                                                                                            fontWeight: FontWeight.w400,
-                                                                                          ),
-                                                                                    ),
-                                                                                    SizedBox(
-                                                                                      height: 10,
-                                                                                    ),
-                                                                                    Text(
-                                                                                      "${e.lotDesc}",
-                                                                                      textAlign: TextAlign.left,
-                                                                                      maxLines: 2,
-                                                                                      overflow: TextOverflow.ellipsis,
-                                                                                      style: Theme.of(context)
-                                                                                          .textTheme
-                                                                                          .subtitle1!
-                                                                                          .copyWith(
-                                                                                            color: Theme.of(context)
-                                                                                                .colorScheme
-                                                                                                .primary,
-                                                                                            fontWeight: FontWeight.w400,
-                                                                                          ),
-                                                                                    ),
-                                                                                    SizedBox(
-                                                                                      height: 12,
-                                                                                    ),
-                                                                                    Row(
-                                                                                      // mainAxisAlignment: MainAxisAlignment.end,
+                                                                                    Column(
+                                                                                      crossAxisAlignment:
+                                                                                          CrossAxisAlignment.start,
                                                                                       children: [
-                                                                                        Column(
-                                                                                          crossAxisAlignment:
-                                                                                              CrossAxisAlignment.start,
-                                                                                          children: [
-                                                                                            Text(
-                                                                                              "₹${formateNumber(e.leadingUser!.bid!.iNR ?? "0")}",
-                                                                                              // "\u20b9 ${e.leadingUser!.bid!.iNR}",
-                                                                                              textAlign: TextAlign.left,
-                                                                                              maxLines: 2,
-                                                                                              overflow:
-                                                                                                  TextOverflow.ellipsis,
-                                                                                              style: Theme.of(context)
-                                                                                                  .textTheme
-                                                                                                  .subtitle1!
-                                                                                                  .copyWith(
-                                                                                                      color: Color(
-                                                                                                          0xff747474),
-                                                                                                      fontWeight:
-                                                                                                          FontWeight
-                                                                                                              .bold,
-                                                                                                      fontSize: 18),
-                                                                                            ),
-                                                                                            SizedBox(
-                                                                                              height: 8,
-                                                                                            ),
-                                                                                            Text(
-                                                                                              "${e.leadingUser!.notes}",
-                                                                                              textAlign: TextAlign.left,
-                                                                                              maxLines: 2,
-                                                                                              overflow:
-                                                                                                  TextOverflow.ellipsis,
-                                                                                              style: Theme.of(context)
-                                                                                                  .textTheme
-                                                                                                  .subtitle1!
-                                                                                                  .copyWith(
-                                                                                                      color: Color(
-                                                                                                          0xff747474),
-                                                                                                      fontWeight:
-                                                                                                          FontWeight
-                                                                                                              .w400,
-                                                                                                      fontSize: 14),
-                                                                                            ),
-                                                                                          ],
+                                                                                        Text(
+                                                                                          "₹${formateNumber(e.leadingUser!.bid!.iNR ?? "0")}",
+                                                                                          // "\u20b9 ${e.leadingUser!.bid!.iNR}",
+                                                                                          textAlign: TextAlign.left,
+                                                                                          maxLines: 2,
+                                                                                          overflow:
+                                                                                              TextOverflow.ellipsis,
+                                                                                          style: Theme.of(context)
+                                                                                              .textTheme
+                                                                                              .subtitle1!
+                                                                                              .copyWith(
+                                                                                                  color: Color(
+                                                                                                      0xff747474),
+                                                                                                  fontWeight:
+                                                                                                      FontWeight
+                                                                                                          .bold,
+                                                                                                  fontSize: 18),
                                                                                         ),
-                                                                                        Spacer(),
-                                                                                        Padding(
-                                                                                          padding:
-                                                                                              const EdgeInsets.only(
-                                                                                                  bottom: 12.0),
-                                                                                          child: ElevatedButton(
-                                                                                            style: ButtonStyle(
-                                                                                                backgroundColor:
-                                                                                                    MaterialStateProperty.all(
-                                                                                                        Color(
-                                                                                                            0XFFF9F9F9)),
-                                                                                                shape: MaterialStateProperty.all<
-                                                                                                        RoundedRectangleBorder>(
-                                                                                                    RoundedRectangleBorder(
-                                                                                                        borderRadius:
-                                                                                                            BorderRadius.circular(
-                                                                                                                20.0),
-                                                                                                        side: BorderSide(
-                                                                                                            color: Color(
-                                                                                                                0xff747474),
-                                                                                                            width:
-                                                                                                                0.38)))),
-                                                                                            onPressed: () {
-                                                                                              Navigator.push(
-                                                                                                  context,
-                                                                                                  MaterialPageRoute(
-                                                                                                      builder: (context) =>
-                                                                                                          ProductDetailPage(
-                                                                                                              e,
-                                                                                                              auctionViewModel)));
-                                                                                            },
-                                                                                            child: Padding(
-                                                                                              padding:
-                                                                                                  const EdgeInsets.only(
-                                                                                                      right: 8.0,
-                                                                                                      left: 8,
-                                                                                                      top: 12,
-                                                                                                      bottom: 12),
-                                                                                              child: Text(
-                                                                                                'DETAILS',
-                                                                                                style: Theme.of(context)
-                                                                                                    .textTheme
-                                                                                                    .bodyText1!
-                                                                                                    .copyWith(
-                                                                                                        color: Theme.of(
-                                                                                                                context)
-                                                                                                            .colorScheme
-                                                                                                            .primary,
-                                                                                                        fontWeight:
-                                                                                                            FontWeight
-                                                                                                                .bold,
-                                                                                                        letterSpacing:
-                                                                                                            2),
-                                                                                              ),
-                                                                                            ),
-                                                                                          ),
-                                                                                        )
+                                                                                        SizedBox(
+                                                                                          height: 8,
+                                                                                        ),
+                                                                                        Text(
+                                                                                          "${e.leadingUser!.notes}",
+                                                                                          textAlign: TextAlign.left,
+                                                                                          maxLines: 2,
+                                                                                          overflow:
+                                                                                              TextOverflow.ellipsis,
+                                                                                          style: Theme.of(context)
+                                                                                              .textTheme
+                                                                                              .subtitle1!
+                                                                                              .copyWith(
+                                                                                                  color: Color(
+                                                                                                      0xff747474),
+                                                                                                  fontWeight:
+                                                                                                      FontWeight
+                                                                                                          .w400,
+                                                                                                  fontSize: 14),
+                                                                                        ),
                                                                                       ],
                                                                                     ),
+                                                                                    Spacer(),
+                                                                                    Padding(
+                                                                                      padding:
+                                                                                          const EdgeInsets.only(
+                                                                                              bottom: 12.0),
+                                                                                      child: ElevatedButton(
+                                                                                        style: ButtonStyle(
+                                                                                            backgroundColor:
+                                                                                                MaterialStateProperty.all(
+                                                                                                    Color(
+                                                                                                        0XFFF9F9F9)),
+                                                                                            shape: MaterialStateProperty.all<
+                                                                                                    RoundedRectangleBorder>(
+                                                                                                RoundedRectangleBorder(
+                                                                                                    borderRadius:
+                                                                                                        BorderRadius.circular(
+                                                                                                            20.0),
+                                                                                                    side: BorderSide(
+                                                                                                        color: Color(
+                                                                                                            0xff747474),
+                                                                                                        width:
+                                                                                                            0.38)))),
+                                                                                        onPressed: () {
+                                                                                          Navigator.push(
+                                                                                              context,
+                                                                                              MaterialPageRoute(
+                                                                                                  builder: (context) =>
+                                                                                                      ProductDetailPage(
+                                                                                                          e,
+                                                                                                          auctionViewModel)));
+                                                                                        },
+                                                                                        child: Padding(
+                                                                                          padding:
+                                                                                              const EdgeInsets.only(
+                                                                                                  right: 8.0,
+                                                                                                  left: 8,
+                                                                                                  top: 12,
+                                                                                                  bottom: 12),
+                                                                                          child: Text(
+                                                                                            'DETAILS',
+                                                                                            style: Theme.of(context)
+                                                                                                .textTheme
+                                                                                                .bodyText1!
+                                                                                                .copyWith(
+                                                                                                    color: Theme.of(
+                                                                                                            context)
+                                                                                                        .colorScheme
+                                                                                                        .primary,
+                                                                                                    fontWeight:
+                                                                                                        FontWeight
+                                                                                                            .bold,
+                                                                                                    letterSpacing:
+                                                                                                        2),
+                                                                                          ),
+                                                                                        ),
+                                                                                      ),
+                                                                                    )
                                                                                   ],
-                                                                                )),
-                                                                            Positioned(
-                                                                              right: 4,
-                                                                              top: 50,
-                                                                              child: Column(
+                                                                                ),
+                                                                              ],
+                                                                            )),
+                                                                        Positioned(
+                                                                          right: 4,
+                                                                          top: 50,
+                                                                          child: Column(
+                                                                            children: [
+                                                                              Container(
+                                                                                child: Text(
+                                                                                  "Lot  ${e.lotNumber}",
+                                                                                  textAlign: TextAlign.center,
+                                                                                ),
+                                                                                decoration: BoxDecoration(
+                                                                                  borderRadius:
+                                                                                      BorderRadius.circular(16),
+                                                                                  color: Color(0xffEAEEF2),
+                                                                                ),
+                                                                                padding: EdgeInsets.symmetric(
+                                                                                    horizontal: 4, vertical: 4),
+                                                                              ),
+
+                                                                              SizedBox(height: 12),
+
+                                                                              // Container(
+                                                                              //   padding: EdgeInsets.all(16),
+                                                                              //   decoration: BoxDecoration(
+                                                                              //     color:  Colors.lightBlueAccent.withOpacity(.2),
+                                                                              //     borderRadius: BorderRadius.circular(32)
+                                                                              //
+                                                                              //   ),
+                                                                              // )
+                                                                            ],
+                                                                          ),
+                                                                        )
+                                                                      ],
+                                                                    )
+                                                            )
+                                                                : Container(
+                                                                    color: Color(0xffF9F9F9),
+                                                                    width: MediaQuery.of(context).size.width,
+                                                                    height: 300,
+                                                                    padding: const EdgeInsets.symmetric(
+                                                                        horizontal: 8, vertical: 8),
+                                                                    // height: (hours == "00" && minutes == "00" && seconds == "00") ? 310 : 370,
+                                                                    alignment: Alignment.center,
+                                                                    child: Stack(
+                                                                      children: [
+                                                                        Padding(
+                                                                          padding: EdgeInsets.only(
+                                                                              top: 0, bottom: 0),
+                                                                          child: Container(
+                                                                            //replace this Container with your Card
+                                                                            color: Color(0xffFFFFFF),
+                                                                            height: 300.0,
+                                                                          ),
+                                                                        ),
+                                                                        InkWell(
+                                                                          onTap: () {
+                                                                            Navigator.push(
+                                                                                context,
+                                                                                MaterialPageRoute(
+                                                                                    builder: (context) =>
+                                                                                        ProductDetailPage(
+                                                                                            e as Lots,
+                                                                                            auctionViewModel)));
+                                                                          },
+                                                                          child: Padding(
+                                                                            padding: EdgeInsets.all(16.0),
+                                                                            child: Image.network(
+                                                                              "${e.thumbImage}",
+                                                                              height: 150,
+                                                                              fit: BoxFit.cover,
+                                                                              width: 125,
+                                                                              // alignment: Alignment.center,
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                        Container(
+                                                                          padding:
+                                                                              const EdgeInsets.only(left: 150),
+                                                                          height: 300,
+                                                                          child: Column(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.start,
+                                                                            crossAxisAlignment:
+                                                                                CrossAxisAlignment.start,
+                                                                            children: [
+                                                                              SizedBox(
+                                                                                height: 16,
+                                                                              ),
+                                                                              Row(
                                                                                 children: [
                                                                                   Container(
                                                                                     child: Text(
                                                                                       "Lot  ${e.lotNumber}",
-                                                                                      textAlign: TextAlign.center,
+                                                                                      textAlign:
+                                                                                          TextAlign.center,
                                                                                     ),
                                                                                     decoration: BoxDecoration(
                                                                                       borderRadius:
-                                                                                          BorderRadius.circular(16),
+                                                                                          BorderRadius.circular(
+                                                                                              16),
                                                                                       color: Color(0xffEAEEF2),
                                                                                     ),
-                                                                                    padding: EdgeInsets.symmetric(
-                                                                                        horizontal: 4, vertical: 4),
+                                                                                    padding:
+                                                                                        EdgeInsets.symmetric(
+                                                                                            horizontal: 12,
+                                                                                            vertical: 4),
                                                                                   ),
-
-                                                                                  SizedBox(height: 12),
-
-                                                                                  // Container(
-                                                                                  //   padding: EdgeInsets.all(16),
-                                                                                  //   decoration: BoxDecoration(
-                                                                                  //     color:  Colors.lightBlueAccent.withOpacity(.2),
-                                                                                  //     borderRadius: BorderRadius.circular(32)
-                                                                                  //
-                                                                                  //   ),
-                                                                                  // )
+                                                                                  SizedBox(width: 12),
                                                                                 ],
                                                                               ),
-                                                                            )
-                                                                          ],
-                                                                        )),
-                                                                  )
-                                                                : Padding(
-                                                                    padding: const EdgeInsets.symmetric(
-                                                                        horizontal: 8, vertical: 8),
-                                                                    child: Container(
-                                                                        color: Color(0xffF9F9F9),
-                                                                        // height: (hours == "00" && minutes == "00" && seconds == "00") ? 310 : 370,
-                                                                        alignment: Alignment.center,
-                                                                        child: Column(
-                                                                          children: [
-                                                                            Stack(
-                                                                              children: [
-                                                                                Padding(
-                                                                                  padding: EdgeInsets.only(
-                                                                                      top: 24, bottom: 0),
-                                                                                  child: Container(
-                                                                                    //replace this Container with your Card
-                                                                                    color: Color(0xffF9F9F9),
-                                                                                    height: 180.0,
-                                                                                  ),
+                                                                              Text(
+                                                                                "${e.info!.title??''}",
+                                                                                maxLines: 2,
+                                                                                overflow: TextOverflow.ellipsis,
+                                                                                textAlign: TextAlign.start,
+                                                                                style: Theme.of(context)
+                                                                                    .textTheme
+                                                                                    .headline6!
+                                                                                    .copyWith(
+                                                                                      color: Colors.black,
+                                                                                      letterSpacing: 2,
+                                                                                      fontWeight:
+                                                                                          FontWeight.bold,
+                                                                                    ),
+                                                                              ),
+                                                                              SizedBox(
+                                                                                height: 8,
+                                                                              ),
+                                                                              Text(
+                                                                                "${e.info!.lotTitle??''}",
+                                                                                maxLines: 2,
+                                                                                overflow: TextOverflow.ellipsis,
+                                                                                textAlign: TextAlign.start,
+                                                                                style: Theme.of(context)
+                                                                                    .textTheme
+                                                                                    .subtitle1!
+                                                                                    .copyWith(
+                                                                                      color: Color(0xff747474),
+                                                                                      fontWeight:
+                                                                                          FontWeight.w400,
+                                                                                    ),
+                                                                              ),
+                                                                              SizedBox(
+                                                                                height: 8,
+                                                                              ),
+                                                                              Text(
+                                                                                "${e.lotDesc??''}",
+                                                                                maxLines: 2,
+                                                                                overflow: TextOverflow.ellipsis,
+                                                                                textAlign: TextAlign.start,
+                                                                                style: Theme.of(context)
+                                                                                    .textTheme
+                                                                                    .subtitle1!
+                                                                                    .copyWith(
+                                                                                      color: Theme.of(context)
+                                                                                          .colorScheme
+                                                                                          .primary,
+                                                                                      fontWeight:
+                                                                                          FontWeight.w400,
+                                                                                    ),
+                                                                              ),
+                                                                              SizedBox(
+                                                                                height: 8,
+                                                                              ),
+                                                                              Text(
+                                                                                "\u20b9 ${formateNumber(e.leadingUser!.bid!.iNR??"0")}",
+                                                                                textAlign: TextAlign.start,
+                                                                                style: Theme.of(context)
+                                                                                    .textTheme
+                                                                                    .subtitle1!
+                                                                                    .copyWith(
+                                                                                  color: Color(0xff747474),
+                                                                                  fontWeight:
+                                                                                  FontWeight.w400,
                                                                                 ),
-                                                                                InkWell(
-                                                                                  onTap: () {
+                                                                              ),
+                                                                              SizedBox(
+                                                                                height: 8,
+                                                                              ),
+                                                                              Text(
+                                                                                "${e.leadingUser!.notes??''}",
+                                                                                textAlign: TextAlign.start,
+                                                                                style: Theme.of(context)
+                                                                                    .textTheme
+                                                                                    .subtitle1!
+                                                                                    .copyWith(
+                                                                                  color: Color(0xff747474),
+                                                                                  fontWeight:
+                                                                                  FontWeight.w400,
+                                                                                ),
+                                                                              ),
+                                                                              Spacer(),
+                                                                              SizedBox(height: 25,
+                                                                                child: ElevatedButton(
+                                                                                  style: ButtonStyle(
+                                                                                      backgroundColor:
+                                                                                      MaterialStateProperty.all(
+                                                                                          Color(
+                                                                                              0XFFF9F9F9)),
+                                                                                      shape: MaterialStateProperty.all<
+                                                                                          RoundedRectangleBorder>(
+                                                                                          RoundedRectangleBorder(
+                                                                                              borderRadius:
+                                                                                              BorderRadius.circular(
+                                                                                                  20.0),
+                                                                                              side: BorderSide(
+                                                                                                  color: Color(
+                                                                                                      0xff747474),
+                                                                                                  width:
+                                                                                                  0.38)))),
+                                                                                  onPressed: () {
                                                                                     Navigator.push(
                                                                                         context,
                                                                                         MaterialPageRoute(
                                                                                             builder: (context) =>
                                                                                                 ProductDetailPage(
-                                                                                                    e as Lots,
+                                                                                                    e,
                                                                                                     auctionViewModel)));
                                                                                   },
-                                                                                  child: Padding(
-                                                                                    padding: EdgeInsets.all(16.0),
-                                                                                    child: Image.network(
-                                                                                      "${e.thumbImage}",
-                                                                                      height: 150,
-                                                                                      fit: BoxFit.contain,
-                                                                                      width: 125,
-                                                                                      // alignment: Alignment.center,
-                                                                                    ),
+                                                                                  child: Text(
+                                                                                    'DETAILS',
+                                                                                    style: Theme.of(context)
+                                                                                        .textTheme
+                                                                                        .bodyText1!
+                                                                                        .copyWith(
+                                                                                        color: Theme.of(
+                                                                                            context)
+                                                                                            .colorScheme
+                                                                                            .primary,
+                                                                                        fontWeight:
+                                                                                        FontWeight
+                                                                                            .bold,
+                                                                                        letterSpacing:
+                                                                                        2),
                                                                                   ),
                                                                                 ),
-                                                                                Padding(
-                                                                                  padding:
-                                                                                      const EdgeInsets.only(left: 150),
-                                                                                  child: Column(
-                                                                                    mainAxisAlignment:
-                                                                                        MainAxisAlignment.start,
-                                                                                    crossAxisAlignment:
-                                                                                        CrossAxisAlignment.start,
-                                                                                    children: [
-                                                                                      SizedBox(
-                                                                                        height: 28,
-                                                                                      ),
-                                                                                      Row(
-                                                                                        children: [
-                                                                                          Container(
-                                                                                            child: Text(
-                                                                                              "Lot  ${e.lotNumber}",
-                                                                                              textAlign:
-                                                                                                  TextAlign.center,
-                                                                                            ),
-                                                                                            decoration: BoxDecoration(
-                                                                                              borderRadius:
-                                                                                                  BorderRadius.circular(
-                                                                                                      16),
-                                                                                              color: Color(0xffEAEEF2),
-                                                                                            ),
-                                                                                            padding:
-                                                                                                EdgeInsets.symmetric(
-                                                                                                    horizontal: 12,
-                                                                                                    vertical: 4),
-                                                                                          ),
-                                                                                          SizedBox(width: 12),
-                                                                                        ],
-                                                                                      ),
-                                                                                      SizedBox(
-                                                                                        width: MediaQuery.of(context)
-                                                                                                .size
-                                                                                                .width *
-                                                                                            .42,
-                                                                                        child: Text(
-                                                                                          "${e.info!.title}",
-                                                                                          textAlign: TextAlign.start,
-                                                                                          style: Theme.of(context)
-                                                                                              .textTheme
-                                                                                              .headline6!
-                                                                                              .copyWith(
-                                                                                                color: Colors.black,
-                                                                                                letterSpacing: 2,
-                                                                                                fontWeight:
-                                                                                                    FontWeight.bold,
-                                                                                              ),
-                                                                                        ),
-                                                                                      ),
-                                                                                      SizedBox(
-                                                                                        height: 8,
-                                                                                      ),
-                                                                                      Text(
-                                                                                        "${e.category}",
-                                                                                        textAlign: TextAlign.start,
-                                                                                        style: Theme.of(context)
-                                                                                            .textTheme
-                                                                                            .subtitle1!
-                                                                                            .copyWith(
-                                                                                              color: Color(0xff747474),
-                                                                                              fontWeight:
-                                                                                                  FontWeight.w400,
-                                                                                            ),
-                                                                                      ),
-                                                                                      SizedBox(
-                                                                                        height: 8,
-                                                                                      ),
-                                                                                      Text(
-                                                                                        "${e.category}",
-                                                                                        textAlign: TextAlign.start,
-                                                                                        style: Theme.of(context)
-                                                                                            .textTheme
-                                                                                            .subtitle1!
-                                                                                            .copyWith(
-                                                                                              color: Color(0xff747474),
-                                                                                              fontWeight:
-                                                                                                  FontWeight.w400,
-                                                                                            ),
-                                                                                      ),
-                                                                                      Spacer(),
-                                                                                    ],
-                                                                                  ),
-                                                                                ),
-                                                                              ],
-                                                                            ),
-                                                                          ],
-                                                                        )),
-                                                                  ),
+                                                                              ),
+                                                                              Spacer(),
+                                                                            ],
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    )),
                                                           )
                                                           .toList(),
                                                     ),
