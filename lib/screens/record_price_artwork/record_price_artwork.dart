@@ -606,9 +606,7 @@ class _Record_price_artworkState extends State<Record_price_artwork> {
                                                                                   FontWeight.w400,
                                                                                 ),
                                                                               ),
-                                                                              SizedBox(
-                                                                                height: 8,
-                                                                              ),
+                                                                              SizedBox(height: 8,),
                                                                               Text(
                                                                                 "${e.leadingUser!.notes??''}",
                                                                                 textAlign: TextAlign.start,
