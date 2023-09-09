@@ -105,6 +105,134 @@ mixin _$ServiceViewModel on _ServiceViewModel, Store {
     });
   }
 
+  late final _$insertCareerFormResponseAtom = Atom(
+      name: '_ServiceViewModel.insertCareerFormResponse', context: context);
+
+  @override
+  InsertCareerFormResponse? get insertCareerFormResponse {
+    _$insertCareerFormResponseAtom.reportRead();
+    return super.insertCareerFormResponse;
+  }
+
+  @override
+  set insertCareerFormResponse(InsertCareerFormResponse? value) {
+    _$insertCareerFormResponseAtom
+        .reportWrite(value, super.insertCareerFormResponse, () {
+      super.insertCareerFormResponse = value;
+    });
+  }
+
+  late final _$fullnameAtom =
+      Atom(name: '_ServiceViewModel.fullname', context: context);
+
+  @override
+  String get fullname {
+    _$fullnameAtom.reportRead();
+    return super.fullname;
+  }
+
+  @override
+  set fullname(String value) {
+    _$fullnameAtom.reportWrite(value, super.fullname, () {
+      super.fullname = value;
+    });
+  }
+
+  late final _$emailAtom =
+      Atom(name: '_ServiceViewModel.email', context: context);
+
+  @override
+  String get email {
+    _$emailAtom.reportRead();
+    return super.email;
+  }
+
+  @override
+  set email(String value) {
+    _$emailAtom.reportWrite(value, super.email, () {
+      super.email = value;
+    });
+  }
+
+  late final _$mobileAtom =
+      Atom(name: '_ServiceViewModel.mobile', context: context);
+
+  @override
+  String get mobile {
+    _$mobileAtom.reportRead();
+    return super.mobile;
+  }
+
+  @override
+  set mobile(String value) {
+    _$mobileAtom.reportWrite(value, super.mobile, () {
+      super.mobile = value;
+    });
+  }
+
+  late final _$resumeAtom =
+      Atom(name: '_ServiceViewModel.resume', context: context);
+
+  @override
+  String get resume {
+    _$resumeAtom.reportRead();
+    return super.resume;
+  }
+
+  @override
+  set resume(String value) {
+    _$resumeAtom.reportWrite(value, super.resume, () {
+      super.resume = value;
+    });
+  }
+
+  late final _$_ServiceViewModelActionController =
+      ActionController(name: '_ServiceViewModel', context: context);
+
+  @override
+  dynamic setFullName(String value) {
+    final _$actionInfo = _$_ServiceViewModelActionController.startAction(
+        name: '_ServiceViewModel.setFullName');
+    try {
+      return super.setFullName(value);
+    } finally {
+      _$_ServiceViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setEmail(String value) {
+    final _$actionInfo = _$_ServiceViewModelActionController.startAction(
+        name: '_ServiceViewModel.setEmail');
+    try {
+      return super.setEmail(value);
+    } finally {
+      _$_ServiceViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setMobile(String value) {
+    final _$actionInfo = _$_ServiceViewModelActionController.startAction(
+        name: '_ServiceViewModel.setMobile');
+    try {
+      return super.setMobile(value);
+    } finally {
+      _$_ServiceViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setResume(String value) {
+    final _$actionInfo = _$_ServiceViewModelActionController.startAction(
+        name: '_ServiceViewModel.setResume');
+    try {
+      return super.setResume(value);
+    } finally {
+      _$_ServiceViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
@@ -113,7 +241,12 @@ whoWeAreResponse: ${whoWeAreResponse},
 serviceResponse: ${serviceResponse},
 careersResponse: ${careersResponse},
 pressResponse: ${pressResponse},
-blogsResponse: ${blogsResponse}
+blogsResponse: ${blogsResponse},
+insertCareerFormResponse: ${insertCareerFormResponse},
+fullname: ${fullname},
+email: ${email},
+mobile: ${mobile},
+resume: ${resume}
     ''';
   }
 }

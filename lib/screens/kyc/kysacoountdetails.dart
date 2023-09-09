@@ -1,4 +1,6 @@
 // import 'package:country_picker/country_picker.dart';
+import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart'; // import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
@@ -22,6 +24,24 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
   void initState() {
     super.initState();
   }
+
+  Future<String?> convertXFileToBase64(XFile? xFile) async {
+    if (xFile == null) {
+      return null;
+    }
+
+    File imageFile = File(xFile.path);
+    if (!await imageFile.exists()) {
+      return null;
+    }
+
+    List<int> imageBytes = await imageFile.readAsBytes();
+    String base64Image = base64Encode(imageBytes);
+
+    return base64Image;
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -195,14 +215,20 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
                                                     content: Text("Please select image source"),
                                                     actions: [
                                                       ElevatedButton(
-                                                        onPressed: () {
-                                                          getImage(ImageSource.camera);
+                                                        onPressed: () async{
+                                                          pickedImage = await ImagePicker().pickImage(source: ImageSource.camera);
+                                                          String? base64Image = await convertXFileToBase64(pickedImage);
+                                                          print("data:application/image;base64,"+base64Image!);
+                                                           getImage(ImageSource.camera);
                                                           Navigator.of(ctx)!.pop();
                                                         },
                                                         child: Text("Camera"),
                                                       ),
                                                       ElevatedButton(
-                                                        onPressed: () {
+                                                        onPressed: () async{
+                                                          pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
+                                                          String? base64Image = await convertXFileToBase64(pickedImage);
+                                                          print("data:application/image;base64,"+base64Image!);
                                                           getImage(ImageSource.gallery);
                                                           Navigator.of(ctx)!.pop();
                                                         },
@@ -368,14 +394,20 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
                                                     content: Text("Please select image source"),
                                                     actions: [
                                                       ElevatedButton(
-                                                        onPressed: () {
+                                                        onPressed: () async{
+                                                          pickedImage1 = await ImagePicker().pickImage(source: ImageSource.camera);
+                                                          String? base64Image = await convertXFileToBase64(pickedImage1);
+                                                          print("data:application/image;base64,"+base64Image!);
                                                           getImage1(ImageSource.camera);
                                                           Navigator.of(ctx)!.pop();
                                                         },
                                                         child: Text("Camera"),
                                                       ),
                                                       ElevatedButton(
-                                                        onPressed: () {
+                                                        onPressed: () async{
+                                                          pickedImage1 = await ImagePicker().pickImage(source: ImageSource.camera);
+                                                          String? base64Image = await convertXFileToBase64(pickedImage1);
+                                                          print("data:application/image;base64,"+base64Image!);
                                                           getImage1(ImageSource.gallery);
                                                           Navigator.of(ctx)!.pop();
                                                         },
