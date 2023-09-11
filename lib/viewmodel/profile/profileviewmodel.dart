@@ -132,6 +132,11 @@ abstract class _ProfileViewModel with Store {
     return httpResponse;
   }
 
+  @observable
+  String? aadharBase64;
+  @observable
+  String? panBase64;
+
   Future<HttpResponse> updateRegBankingDetails() async {
     isloading = true;
     updateRegBankingDetailsRequest = UpdateRegBankingDetailsRequest();
@@ -143,9 +148,33 @@ abstract class _ProfileViewModel with Store {
     updateRegBankingDetailsRequest!.panCardNum = panNo;
     updateRegBankingDetailsRequest!.adhaarCardNum = aadharNo;
 
+    updateRegBankingDetailsRequest!.adhaarCardBase64 = aadharBase64;
+    updateRegBankingDetailsRequest!.panCardBase64 = panBase64;
+
+    updateRegBankingDetailsRequest!.email ='';
+    updateRegBankingDetailsRequest!.mobile ='';
+    updateRegBankingDetailsRequest!.bankName ='';
+    updateRegBankingDetailsRequest!.ifscCode ='';
+    updateRegBankingDetailsRequest!.swiftCode ='';
+    updateRegBankingDetailsRequest!.accountNum ='';
+    updateRegBankingDetailsRequest!.photoidNum ='';
+    updateRegBankingDetailsRequest!.photoidUrl ='';
+    updateRegBankingDetailsRequest!.panCardUrl ='';
+    updateRegBankingDetailsRequest!.passportNum ='';
+    updateRegBankingDetailsRequest!.passportUrl ='';
+    updateRegBankingDetailsRequest!.authkeyMobile ='';
+    updateRegBankingDetailsRequest!.photoidBase64 ='';
+    updateRegBankingDetailsRequest!.termCondition ='';
+    updateRegBankingDetailsRequest!.adhaarCardUrl ='';
+    updateRegBankingDetailsRequest!.passportBase64 ='';
+
+
+
     HttpResponse httpResponse = await profileRepo!.updateRegBankingDetails(updateRegBankingDetailsRequest);
 
     if (httpResponse.status == 200) {}
+    aadharBase64=null;
+    panBase64=null;
     isloading = false;
     return httpResponse;
   }

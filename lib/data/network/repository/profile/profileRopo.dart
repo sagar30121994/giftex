@@ -183,7 +183,7 @@ class ProfileRepo {
     HttpResponse httpResponse = HttpResponse();
 
     await httpClient!
-        .post(BaseUrl.baseUrl + endPoints.KYC().UpdateRegMyAddress, body: updateRegBankingDetailsRequest!.toJson())
+        .post(BaseUrl.baseUrl + endPoints.KYC().UpdateRegBankingDetails, body: updateRegBankingDetailsRequest!.toJson())
         .then((responce) async {
       print(responce);
 

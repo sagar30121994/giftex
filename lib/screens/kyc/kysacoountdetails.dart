@@ -4,6 +4,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart'; // import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:flutter/services.dart';
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/screens/kyc/kycaddressdetails.dart';
 import 'package:giftex/viewmodel/profile/profileviewmodel.dart';
@@ -143,15 +144,21 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
                           onChanged: (v) {
                             profileViewModel.setaadharNo(v);
                           },
+                          maxLength: 12,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
 
                           style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                 color: Colors.black,
                                 fontWeight: FontWeight.w500,
                               ),
                           decoration: InputDecoration(
+                            counter: Container(),
                             border: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff979797))),
                             // labelText: 'Name',
-                            hintText: 'Aadhar No',
+                            hintText: 'Aadhaar No',
                             // prefixIcon:
                             // prefixIcon: ,
                             // icon: Image.asset("image/people.png",height: 32),
@@ -228,6 +235,9 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
                                                         onPressed: () async{
                                                           pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
                                                           String? base64Image = await convertXFileToBase64(pickedImage);
+                                                          if(base64Image!=null){
+                                                            profileViewModel.aadharBase64=base64Image;
+                                                          }
                                                           print("data:application/image;base64,"+base64Image!);
                                                           getImage(ImageSource.gallery);
                                                           Navigator.of(ctx)!.pop();
@@ -322,12 +332,14 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
                           onChanged: (v) {
                             profileViewModel.setpanNo(v);
                           },
+                          maxLength: 10,
 
                           style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                 color: Colors.black,
                                 fontWeight: FontWeight.w500,
                               ),
                           decoration: InputDecoration(
+                            counter: Container(),
                             border: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff979797))),
                             // labelText: 'Name',
                             hintText: 'PAN No',
@@ -405,8 +417,11 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
                                                       ),
                                                       ElevatedButton(
                                                         onPressed: () async{
-                                                          pickedImage1 = await ImagePicker().pickImage(source: ImageSource.camera);
+                                                          pickedImage1 = await ImagePicker().pickImage(source: ImageSource.gallery);
                                                           String? base64Image = await convertXFileToBase64(pickedImage1);
+                                                          if(base64Image!=null){
+                                                            profileViewModel.panBase64=base64Image;
+                                                          }
                                                           print("data:application/image;base64,"+base64Image!);
                                                           getImage1(ImageSource.gallery);
                                                           Navigator.of(ctx)!.pop();
@@ -518,23 +533,20 @@ class _KYCAccountDetailspageState extends State<KYCAccountDetailspage> {
                 ),
                 InkWell(
                   onTap: () async {
-                    HttpResponse res = await profileViewModel.updateRegBankingDetails();
-                    if (res.status == 200) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Record Updated....'),
-                          backgroundColor: Colors.green,
-                        ),
-                      );
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text("${res.message!}"),
-                          backgroundColor: Colors.orange,
-                        ),
-                      );
+                    if(profileViewModel.aadharBase64==null){
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please upload Aadhaar...'), backgroundColor: Colors.red,),);
+                    }else if(profileViewModel.panBase64==null){
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please upload PAN...'), backgroundColor: Colors.red,),);
+                    }else{
+                      HttpResponse res = await profileViewModel.updateRegBankingDetails();
+                      if (res.status == 200) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Record Updated....'), backgroundColor: Colors.green,),);
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => KYCAddresspage()));
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res.message!}"), backgroundColor: Colors.orange,),);
+                      }
                     }
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => KYCAddresspage()));
+
                   },
                   child: Container(
                     height: 50,

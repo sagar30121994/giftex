@@ -244,7 +244,7 @@ abstract class _LoginViewModel with Store {
       signUpResponse = httpResponse.data;
       localSharedPrefrence.setLoginStatus(true);
       // await localSharedPrefrence.setToken(loginResponse!.!);
-      // await localSharedPrefrence.setUserId(loginResponse!.result!.userid!);
+   //    await localSharedPrefrence.setUserId(signUpResponse!.userid!);
       await localSharedPrefrence.setCrmClinetId(signUpResponse!.clientID!);
       // await localSharedPrefrence.setAuthKeyWeb(signUpResponse!.authkeyWeb!);
       //await localSharedPrefrence.setRole(loginResponse!.user!.role!);

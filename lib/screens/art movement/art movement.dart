@@ -415,8 +415,7 @@ class _ArtMovement extends State<ArtMovement> {
                                                 "${e!.videoUrl ?? ""}",
                                               ),*/
                                                   ],
-                                                ),
-                                                // child: Text('Furniture & Decorative Art'),
+                                                ), // child: Text('Furniture & Decorative Art'),
                                               ),
                                               Divider(color: Colors.grey),
                                             ],
