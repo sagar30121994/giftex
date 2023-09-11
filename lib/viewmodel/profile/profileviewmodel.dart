@@ -107,6 +107,27 @@ abstract class _ProfileViewModel with Store {
 
     updateRegMyAddressRequest!.addLine1 = address;
 
+    updateRegMyAddressRequest!.city = '';
+    updateRegMyAddressRequest!.email = '';
+    updateRegMyAddressRequest!.state = '';
+    updateRegMyAddressRequest!.mobile = '';
+    updateRegMyAddressRequest!.location = '';
+    updateRegMyAddressRequest!.pinCode = '';
+    updateRegMyAddressRequest!.addLine2 = '';
+    updateRegMyAddressRequest!.yourName = '';
+    updateRegMyAddressRequest!.billingCity = '';
+    updateRegMyAddressRequest!.billingState = '';
+    updateRegMyAddressRequest!.authkeyMobile = '';
+    updateRegMyAddressRequest!.billingCountry = '';
+    updateRegMyAddressRequest!.billingGstNum = '';
+    updateRegMyAddressRequest!.billingLocation = '';
+    updateRegMyAddressRequest!.billingPinCode = '';
+    updateRegMyAddressRequest!.country = '';
+    updateRegMyAddressRequest!.gstNum = '';
+    updateRegMyAddressRequest!.isbillingaddress = '';
+    updateRegMyAddressRequest!.billingAddLine1 = '';
+    updateRegMyAddressRequest!.billingAddLine2 = '';
+
     HttpResponse httpResponse = await profileRepo!.updateRegMyAddress(updateRegMyAddressRequest);
 
     if (httpResponse.status == 200) {}
