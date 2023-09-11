@@ -160,10 +160,12 @@ abstract class _LoginViewModel with Store {
 
     if (httpResponse.status == 200) {
       loginResponse = httpResponse.data;
+
       // localSharedPrefrence
       //     .setLoginStatus(true);
       // await localSharedPrefrence.setToken(loginResponse!.!);
       await localSharedPrefrence.setUserId(loginResponse!.result!.userid!);
+
       //await localSharedPrefrence.setRole(loginResponse!.user!.role!);
     }
     isLoading = false;
@@ -228,6 +230,7 @@ abstract class _LoginViewModel with Store {
       //     .setLoginStatus(true);
       // await localSharedPrefrence.setToken(loginResponse!.!);
       await localSharedPrefrence.setUserId(loginResponse!.result!.userid!);
+
       await localSharedPrefrence.setCrmClinetId(loginResponse!.result!.cRMClientID!);
       //await localSharedPrefrence.setRole(loginResponse!.user!.role!);
     }
@@ -278,6 +281,8 @@ abstract class _LoginViewModel with Store {
       await localSharedPrefrence.setLoginStatus(true);
       await localSharedPrefrence.setCrmClinetId(loginResponse!.result!.cRMClientID!);
       await localSharedPrefrence.setAuthKeyWeb(loginResponse!.result!.authkeyWeb!);
+      await localSharedPrefrence.setFullname(loginResponse!.result!.firstName!+" "+loginResponse!.result!.lastName!);
+      await localSharedPrefrence.setEmail(loginResponse!.result!.email!);
 
       //await localSharedPrefrence.setRole(loginResponse!.user!.role!);
     }
@@ -309,6 +314,8 @@ abstract class _LoginViewModel with Store {
         localSharedPrefrence.setLoginStatus(true);
         // await localSharedPrefrence.setToken(loginResponse!.!);
         await localSharedPrefrence.setUserId(loginResponse!.result!.userid!);
+        await localSharedPrefrence.setFullname(loginResponse!.result!.firstName!+" "+loginResponse!.result!.lastName!);
+        await localSharedPrefrence.setEmail(loginResponse!.result!.email!);
         // await localSharedPrefrence.setLoginStatus(true);
         await localSharedPrefrence.setAuthKeyWeb(loginResponse!.result!.authkeyWeb!);
       }
@@ -329,7 +336,8 @@ abstract class _LoginViewModel with Store {
 
 class LoginViewModelErrorState = _LoginViewModelErrorState with _$LoginViewModelErrorState;
 
-abstract class _LoginViewModelErrorState with Store {
+abstract class _LoginViewModelErrorState with Store
+{
   @observable
   String? email;
 

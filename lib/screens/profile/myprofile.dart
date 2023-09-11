@@ -346,7 +346,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                 ),
                             decoration: InputDecoration(
                                 labelText: 'Email Address',
-                                hintText: 'aryansethi@gmail.com',
+                                // hintText: 'aryansethi@gmail.com',
                                 suffixIcon: Icon(
                                   Icons.edit,
                                   color: Colors.black,
@@ -368,7 +368,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                 ),
                             decoration: InputDecoration(
                                 labelText: 'Contact Number',
-                                hintText: '91+ 9867345212',
+                                // hintText: '91+ 9867345212',
                                 suffixIcon: Icon(
                                   Icons.edit,
                                   color: Colors.black,
@@ -389,7 +389,9 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                   fontWeight: FontWeight.w500,
                                 ),
                             decoration:
-                                InputDecoration(labelText: 'Date of Birth', hintText: '22/03/1998', isDense: true),
+                                InputDecoration(labelText: 'Date of Birth',
+                                    // hintText: '22/03/1998',
+                                    isDense: true),
                           ),
                         ),
                         Container(
@@ -404,7 +406,9 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                   color: Colors.black,
                                   fontWeight: FontWeight.w500,
                                 ),
-                            decoration: InputDecoration(labelText: 'Gender', hintText: 'Male', isDense: true),
+                            decoration: InputDecoration(labelText: 'Gender',
+                                // hintText: 'Male',
+                                isDense: true),
                           ),
                         ),
                         Container(

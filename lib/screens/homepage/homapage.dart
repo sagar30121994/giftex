@@ -634,20 +634,20 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                                     ),
                                                               ),
                                                             ),
-                                                            const SizedBox(
-                                                              height: 8,
-                                                            ),
-                                                            SizedBox(
-                                                              width: MediaQuery.of(context).size.width * .70,
-                                                              child: Text(
-                                                                "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![position].displayDate}",
-                                                                textAlign: TextAlign.start,
-                                                                style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                                    color: Colors.black87,
-                                                                    fontWeight: FontWeight.bold,
-                                                                    letterSpacing: 0.772727),
-                                                              ),
-                                                            ),
+                                                            // const SizedBox(
+                                                            //   height: 8,
+                                                            // ),
+                                                            // SizedBox(
+                                                            //   width: MediaQuery.of(context).size.width * .70,
+                                                            //   child: Text(
+                                                            //     "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![position].displayDate}",
+                                                            //     textAlign: TextAlign.start,
+                                                            //     style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                            //         color: Colors.black87,
+                                                            //         fontWeight: FontWeight.bold,
+                                                            //         letterSpacing: 0.772727),
+                                                            //   ),
+                                                            // ),
                                                             const SizedBox(
                                                               height: 14,
                                                             ),
@@ -748,21 +748,21 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                                             ),
                                                                   ),
                                                                 ),
-                                                                const SizedBox(
-                                                                  height: 5,
-                                                                ),
-                                                                SizedBox(
-                                                                  width: MediaQuery.of(context).size.width * .70,
-                                                                  child: Text(
-                                                                    "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![position + 1].displayDate}",
-                                                                    textAlign: TextAlign.end,
-                                                                    style:
-                                                                        Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                                              color: Colors.white,
-                                                                              fontWeight: FontWeight.bold,
-                                                                            ),
-                                                                  ),
-                                                                ),
+                                                                // const SizedBox(
+                                                                //   height: 5,
+                                                                // ),
+                                                                // SizedBox(
+                                                                //   width: MediaQuery.of(context).size.width * .70,
+                                                                //   child: Text(
+                                                                //     "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![position + 1].displayDate}",
+                                                                //     textAlign: TextAlign.end,
+                                                                //     style:
+                                                                //         Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                                //               color: Colors.white,
+                                                                //               fontWeight: FontWeight.bold,
+                                                                //             ),
+                                                                //   ),
+                                                                // ),
                                                                 const SizedBox(
                                                                   height: 10,
                                                                 ),
@@ -1339,7 +1339,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                       width: 16,
                     ),
                     Text(
-                      "NEWS & UPDATES.",
+                      "NEWS & UPDATES",
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.headline5!.copyWith(
                             color: Color(0xff373737),

@@ -24,7 +24,8 @@ class _ProfilepageState extends State<Profilepage> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)
+  {
     return Scaffold(
       appBar: NavBar(),
       backgroundColor: Colors.white,

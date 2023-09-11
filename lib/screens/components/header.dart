@@ -22,17 +22,17 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
           padding: EdgeInsets.all(8),
           child: Image.asset("image/giftlogo.png", height: 28, width: 96, fit: BoxFit.fitWidth)),
       actions: [
-        InkWell(
-          child: Image.asset(
-            "image/app2.png",
-            height: 20,
-          ),
-        ),
+        // InkWell(
+        //   child: Image.asset(
+        //     "image/app2.png",
+        //     height: 20,
+        //   ),
+        // ),
         // SizedBox(width: 3,),
         InkWell(
             onTap: () {
               homeViewModel.search = (!homeViewModel.search);
-              Navigator.push(context, MaterialPageRoute(builder: (context) => SearchBarUi()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => DashboardUi(34)));
             },
             child: Image.asset(
               "image/app3.png",

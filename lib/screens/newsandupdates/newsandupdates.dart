@@ -18,15 +18,27 @@ class NewsAndUpdatesPage extends StatefulWidget {
   _NewsAndUpdatesPageState createState() => _NewsAndUpdatesPageState();
 }
 
-class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
+class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> with TickerProviderStateMixin {
   int _pageIndex = 0;
   Color tabColor = Color(0xff6D905D);
   String newsType = "LATEST NEWS";
+  late TabController tabController;
+
 
   @override
-  void initState() {
+  void initState()
+  {
+
+    tabController=TabController(
+        initialIndex: newsType=='BLOGS'?2:newsType=='VIDEOS'?1:0,
+        length: 3,
+        vsync:this
+    );
     // TODO: implement initState
     newsType = widget.type;
+    if(newsType=='BLOGS'){
+      tabController.index=2;
+    }
     callApi();
     super.initState();
   }
@@ -39,13 +51,6 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
     } else {
       serviceViewModel.getBlogs();
     }
-  }
-
-  String capitalizeFirstLetter(String text) {
-    if (text.isEmpty) {
-      return text;
-    }
-    return text[0].toUpperCase() + text.substring(1);
   }
 
 
@@ -184,6 +189,8 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> {
                       border: Border(bottom: BorderSide(color: Color(0xffDFDFDF), width: 2)),
                     ),
                     child: TabBar(
+                      controller:tabController ,
+
                       onTap: (index) {
                         setState(() {
                           if (index == 0) {
