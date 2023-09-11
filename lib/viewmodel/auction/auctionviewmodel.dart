@@ -422,6 +422,9 @@ abstract class _AuctionViewModel with Store {
     await localSharedPrefrence.setAuthKeyWeb("");
     await localSharedPrefrence.setCrmClinetId("");
     await localSharedPrefrence.setToken("");
+    await localSharedPrefrence.setFullname("");
+    await localSharedPrefrence.setEmail("");
+    await localSharedPrefrence.setMobileno("");
   }
 
   void trackFirebaseEvents() {

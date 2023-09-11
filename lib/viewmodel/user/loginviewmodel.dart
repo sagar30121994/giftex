@@ -283,6 +283,8 @@ abstract class _LoginViewModel with Store {
       await localSharedPrefrence.setAuthKeyWeb(loginResponse!.result!.authkeyWeb!);
       await localSharedPrefrence.setFullname(loginResponse!.result!.firstName!+" "+loginResponse!.result!.lastName!);
       await localSharedPrefrence.setEmail(loginResponse!.result!.email!);
+      await localSharedPrefrence.setMobileno(loginResponse!.result!.mobile!);
+
 
       //await localSharedPrefrence.setRole(loginResponse!.user!.role!);
     }
@@ -316,6 +318,7 @@ abstract class _LoginViewModel with Store {
         await localSharedPrefrence.setUserId(loginResponse!.result!.userid!);
         await localSharedPrefrence.setFullname(loginResponse!.result!.firstName!+" "+loginResponse!.result!.lastName!);
         await localSharedPrefrence.setEmail(loginResponse!.result!.email!);
+        await localSharedPrefrence.setMobileno(loginResponse!.result!.mobile!);
         // await localSharedPrefrence.setLoginStatus(true);
         await localSharedPrefrence.setAuthKeyWeb(loginResponse!.result!.authkeyWeb!);
       }

@@ -110,8 +110,7 @@ class _FooterState extends State<Footer> {
                           padding: const EdgeInsets.all(10.0),
                           child: TextField(
                             controller: nameController,
-                            onChanged: (str) {
-                            },
+                            onChanged: (str) {},
                             decoration: InputDecoration(
                                 isDense: true,
                                 labelText: 'Name',

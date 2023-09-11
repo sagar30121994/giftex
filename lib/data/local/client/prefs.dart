@@ -13,6 +13,7 @@ class LocalSharedPrefrence {
   String userId = 'UserId';
   String fullname = "Fullname";
   String email = "Email";
+  String mobileno = 'Mobileno';
   String crmId = 'CRMId';
   String isLogin = 'UserLoginStatus';
   String isTerms = 'TermsConditions';
@@ -70,6 +71,19 @@ class LocalSharedPrefrence {
   String getEmail() {
     if (prefsAvailable) {
       return myGlobalPreference!.getString(email) ?? "";
+    }
+    return "";
+  }
+
+  Future<void> setMobileno(String flag) async {
+    if (prefsAvailable) {
+      await myGlobalPreference!.setString(mobileno, flag);
+    }
+  }
+
+  String getMobileno() {
+    if (prefsAvailable) {
+      return myGlobalPreference!.getString(mobileno) ?? "";
     }
     return "";
   }

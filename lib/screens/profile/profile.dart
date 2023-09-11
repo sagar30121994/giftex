@@ -23,6 +23,43 @@ class _ProfilepageState extends State<Profilepage> {
     super.initState();
   }
 
+  Future<void> _showLogoutConfirmationDialog(BuildContext context) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Confirm Logout'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Are you sure, you want to log out?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Logout'),
+              onPressed: () async{
+                await auctionViewModel.logout();
+
+                Navigator.pushReplacement(
+                    context, MaterialPageRoute(builder: (BuildContext context) => Loginpage()));
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+
   @override
   Widget build(BuildContext context)
   {
@@ -421,11 +458,9 @@ class _ProfilepageState extends State<Profilepage> {
                                   height: 70,
                                 ),
                                 InkWell(
-                                  onTap: () async {
-                                    await auctionViewModel.logout();
+                                  onTap: ()  {
+                                    _showLogoutConfirmationDialog(context);
 
-                                    Navigator.pushReplacement(
-                                        context, MaterialPageRoute(builder: (BuildContext context) => Loginpage()));
                                   },
                                   child: Container(
                                     color: Color(0xffE6EEF0),

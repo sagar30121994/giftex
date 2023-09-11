@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:giftex/data/local/client/prefs.dart';
 import 'package:giftex/screens/components/footer/footer.dart';
 import 'package:giftex/screens/components/header.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ContactusPage extends StatefulWidget {
   @override
@@ -8,6 +11,40 @@ class ContactusPage extends StatefulWidget {
 }
 
 class _ContactusPageState extends State<ContactusPage> {
+  LocalSharedPrefrence? prefrence;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    prefrence = LocalSharedPrefrence();
+    nameController.text = prefrence?.getFullname() ?? '';
+    emailController.text = prefrence?.getEmail() ?? '';
+    mobilenoController.text = prefrence?.getMobileno() ?? '';
+    footerViewModel.setupValidations();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    mobilenoController.dispose();
+    super.dispose();
+  }
+
+  void _launchGoogleMaps(double latitude, double longitude) async {
+    final url = 'https://www.google.com/maps?q=$latitude,$longitude';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch Google Maps';
+    }
+  }
+
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final mobilenoController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -113,7 +150,8 @@ class _ContactusPageState extends State<ContactusPage> {
 
               Container(
                 width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.all(16),
+                padding: EdgeInsets.all(8),
+                margin: EdgeInsets.all(8),
                 child: Column(
                   children: [
                     Container(
@@ -201,11 +239,20 @@ class _ContactusPageState extends State<ContactusPage> {
                         ],
                       ),
                     ),
-                    SizedBox(
-                      height: 16,
-                    ),
+                    // SizedBox(
+                    //   height: 4,
+                    // ),
                     Container(
-                      height: 220,
+                      height: 300,
+                      child: GestureDetector(
+                        onTap: (){
+                          _launchGoogleMaps(18.9276052399, 72.8327411413);
+                        },
+                          child: Image.asset('image/headoffice.jpeg')),
+                    ),
+                    // SizedBox(height: 8),
+                    Container(
+                      height: 250,
                       color: Color(0xffEAEEF2),
                       padding: EdgeInsets.all(16),
                       child: Column(
@@ -240,6 +287,10 @@ class _ContactusPageState extends State<ContactusPage> {
                           ),
                           SizedBox(
                             height: 16,
+                          ),
+                          Divider(),
+                          SizedBox(
+                            height: 16
                           ),
                           Row(
                             children: [
@@ -285,11 +336,23 @@ class _ContactusPageState extends State<ContactusPage> {
                         ],
                       ),
                     ),
+                    // SizedBox(
+                    //   height: 4,
+                    // ),
+                    Container(
+                      height: 300,
+                      child: GestureDetector(
+                        onTap: (){
+                          _launchGoogleMaps(19.08261,72.840524);
+                        },
+                          child: Image.asset('image/gallery.jpeg')),
+                    ),
                     SizedBox(
-                      height: 16,
+                      height: 4,
                     ),
                     Container(
                       width: MediaQuery.of(context).size.width,
+                      height: 475,
                       color: Color(0xffEAEEF2),
                       padding: EdgeInsets.all(16),
                       child: Column(
@@ -322,7 +385,7 @@ class _ContactusPageState extends State<ContactusPage> {
                                 boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
                             padding: EdgeInsets.only(left: 8),
                             child: TextField(
-                              // controller: nameController,
+                              controller: nameController,
                               keyboardType: TextInputType.name,
                               style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                     color: Colors.black,
@@ -351,7 +414,7 @@ class _ContactusPageState extends State<ContactusPage> {
                                 boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
                             padding: EdgeInsets.only(left: 8),
                             child: TextField(
-                              // controller: nameController,
+                              controller: emailController,
                               keyboardType: TextInputType.emailAddress,
                               style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                     color: Colors.black,
@@ -360,7 +423,7 @@ class _ContactusPageState extends State<ContactusPage> {
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 labelText: 'Email ID',
-                                hintText: 'aryansethi@gmail.com',
+                                hintText: 'Enter your email',
                                 icon: Image.asset("image/email.png", height: 24),
                                 // prefixIcon: Icon(Icons.email_outlined,color: Color(0xff779868)),
                                 filled: true,
@@ -378,7 +441,7 @@ class _ContactusPageState extends State<ContactusPage> {
                                 boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
                             padding: EdgeInsets.only(left: 8),
                             child: TextField(
-                              // controller: nameController,
+                              controller: mobilenoController,
                               keyboardType: TextInputType.phone,
                               style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                     color: Colors.black,
@@ -387,7 +450,7 @@ class _ContactusPageState extends State<ContactusPage> {
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 labelText: 'Mobile No.',
-                                hintText: '91+ 9867345212',
+                                hintText: 'Enter your mobile no.',
                                 icon: Image.asset("image/phone.png", height: 28),
                                 // prefixIcon: Icon(Icons.call,color: Color(0xff779868),),
                                 filled: true,
@@ -457,16 +520,6 @@ class _ContactusPageState extends State<ContactusPage> {
                           ),
                           SizedBox(
                             height: 8,
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          SizedBox(
-                            height: 32,
-                          ),
-                          Image.asset("image/imapo.png"),
-                          SizedBox(
-                            height: 32,
                           ),
                         ],
                       ),
