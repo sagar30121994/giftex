@@ -200,470 +200,476 @@ class _DashboardUiState extends State<DashboardUi> {
                       ),
                       Container(),
                       InkWell(
-                        onTap: () {
-                          bottomViewModel.selectedIndex = 2;
-                          showModalBottomSheet(
-                              context: context,
-                              backgroundColor: Colors.transparent,
-                              builder: (context) {
-                                return Container(
-                                  height: MediaQuery.of(context).size.height * .7,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(30), topLeft: Radius.circular(30)),
-                                      color: Colors.white),
-                                  child: SingleChildScrollView(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: <Widget>[
-                                          Container(
-                                            child: ExpansionTileCard(
-                                              finalPadding: EdgeInsets.all(0),
-                                              baseColor: Color(0xffFFFFFF),
-                                              expandedColor: Color(0xffF3F2EC),
-                                              key: cardA,
+                        onTap:
+                             () {
+                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                 content: Text("Coming soon"),
+                                 backgroundColor: Colors.red,
+                               ));
+                          // bottomViewModel.selectedIndex = 2;
 
-                                              // trailing: Icon(Icons.add,size: 18,color: Colors.black,),
-                                              leading: Container(
-                                                height: 40,
-                                                width: 40,
-                                                child: Image.asset(
-                                                  "image/jwellery.png",
-                                                  width: 24,
-                                                  height: 24,
-                                                ),
-                                              ),
-                                              title: Text(
-                                                "JEWELLERY",
-                                                textAlign: TextAlign.start,
-                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                      color: Color(0XFF8C9FB1),
-                                                      fontWeight: FontWeight.w700,
-                                                    ),
-                                              ),
-                                              children: <Widget>[
-                                                Container(
-                                                  padding: EdgeInsets.all(16),
-                                                  child: Column(
-                                                    children: [
-                                                      Row(
-                                                        mainAxisAlignment: MainAxisAlignment.start,
-                                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                                        children: [
-                                                          Image.asset(
-                                                            "image/Group (21).png",
-                                                            height: 20,
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                          InkWell(
-                                                            onTap: () {
-                                                              // Navigator.push(context, MaterialPageRoute(builder: (context) =>HowToBuyPage()));
-                                                            },
-                                                            child: Padding(
-                                                              padding: const EdgeInsets.only(left: 10.0, top: 0),
-                                                              child: Row(
-                                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                                children: [
-                                                                  Text(
-                                                                    "ART",
-                                                                    textAlign: TextAlign.start,
-                                                                    style: Theme.of(context)
-                                                                        .textTheme
-                                                                        .headline6!
-                                                                        .copyWith(
-                                                                            color: Color(0XFF5D7E4D),
-                                                                            fontWeight:
-                                                                                bottomViewModel.selectedIndex == 0
-                                                                                    ? FontWeight.bold
-                                                                                    : FontWeight.normal,
-                                                                            letterSpacing: 1),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      InkWell(
-                                                        onTap: () {
-                                                          // Navigator.push(context, MaterialPageRoute(builder: (context) =>HowToBuyPage()));
-                                                        },
-                                                        child: Padding(
-                                                          padding: const EdgeInsets.only(left: 20.0, top: 10),
-                                                          child: Row(
-                                                            mainAxisAlignment: MainAxisAlignment.start,
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                                            children: [
-                                                              Text(
-                                                                "Painting",
-                                                                textAlign: TextAlign.start,
-                                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                    color: Color(0XFF171515),
-                                                                    fontWeight: FontWeight.w500,
-                                                                    letterSpacing: 1),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Image.asset(
-                                                        "image/Line 45.png",
-                                                        fit: BoxFit.cover,
-                                                      ),
-                                                      InkWell(
-                                                        onTap: () {
-                                                          // Navigator.push(context, MaterialPageRoute(builder: (context) => HowToSellPage()));
-                                                        },
-                                                        child: Padding(
-                                                          padding: const EdgeInsets.only(left: 20.0, top: 16),
-                                                          child: Row(
-                                                            mainAxisAlignment: MainAxisAlignment.start,
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                                            children: [
-                                                              Text(
-                                                                "Sculpture",
-                                                                textAlign: TextAlign.start,
-                                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                    color: Color(0XFF171515),
-                                                                    fontWeight: FontWeight.w500,
-                                                                    letterSpacing: 1),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding: const EdgeInsets.only(left: 20.0, top: 16),
-                                                        child: Row(
-                                                          mainAxisAlignment: MainAxisAlignment.start,
-                                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                                          children: [
-                                                            Text(
-                                                              "Photography",
-                                                              textAlign: TextAlign.start,
-                                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                  color: Color(0XFF171515),
-                                                                  fontWeight: FontWeight.w500,
-                                                                  letterSpacing: 1),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      InkWell(
-                                                        onTap: () {
-                                                          Navigator.push(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                                  builder: (context) => ArtMovementPage()));
-                                                        },
-                                                        child: Padding(
-                                                          padding: const EdgeInsets.only(left: 20.0, top: 16),
-                                                          child: Row(
-                                                            mainAxisAlignment: MainAxisAlignment.start,
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                                            children: [
-                                                              Text(
-                                                                "Modern Art",
-                                                                textAlign: TextAlign.start,
-                                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                    color: Color(0XFF171515),
-                                                                    fontWeight: FontWeight.w500,
-                                                                    letterSpacing: 1),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 10,
-                                                      )
-                                                    ],
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                          Container(
-                                            decoration: BoxDecoration(
-                                                color: Color(0xffEAEEF2),
-                                                image: DecorationImage(image: AssetImage("image/maskbg.png"))),
-                                            child: ExpansionTileCard(
-                                              finalPadding: EdgeInsets.all(0),
-                                              baseColor: Color(0xffFFFFFF),
-                                              expandedColor: Colors.lightBlueAccent.withOpacity(.1),
-                                              key: cardA,
-
-                                              // trailing: Icon(Icons.add,size: 18,color: Colors.black,),
-                                              leading: Container(
-                                                height: 40,
-                                                width: 40,
-                                                child: Image.asset(
-                                                  "image/art.png",
-                                                  width: 24,
-                                                  height: 24,
-                                                ),
-                                              ),
-                                              title: Text(
-                                                "ART",
-                                                textAlign: TextAlign.start,
-                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.w700,
-                                                    ),
-                                              ),
-                                              children: <Widget>[
-                                                Container(
-                                                  padding: EdgeInsets.all(16),
-                                                  child: Column(
-                                                    children: [
-                                                      InkWell(
-                                                        onTap: () {
-                                                          // Navigator.push(context, MaterialPageRoute(builder: (context) =>HowToBuyPage()));
-                                                        },
-                                                        child: Padding(
-                                                          padding: const EdgeInsets.only(left: 20.0, top: 10),
-                                                          child: Row(
-                                                            mainAxisAlignment: MainAxisAlignment.start,
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                                            children: [
-                                                              Text(
-                                                                "Painting",
-                                                                textAlign: TextAlign.start,
-                                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                    color: Color(0XFF171515),
-                                                                    fontWeight: FontWeight.w500,
-                                                                    letterSpacing: 1),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Image.asset(
-                                                        "image/Line 45.png",
-                                                        fit: BoxFit.cover,
-                                                      ),
-                                                      InkWell(
-                                                        onTap: () {
-                                                          // Navigator.push(context, MaterialPageRoute(builder: (context) => HowToSellPage()));
-                                                        },
-                                                        child: Padding(
-                                                          padding: const EdgeInsets.only(left: 20.0, top: 16),
-                                                          child: Row(
-                                                            mainAxisAlignment: MainAxisAlignment.start,
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                                            children: [
-                                                              Text(
-                                                                "Sculpture",
-                                                                textAlign: TextAlign.start,
-                                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                    color: Color(0XFF171515),
-                                                                    fontWeight: FontWeight.w500,
-                                                                    letterSpacing: 1),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding: const EdgeInsets.only(left: 20.0, top: 16),
-                                                        child: Row(
-                                                          mainAxisAlignment: MainAxisAlignment.start,
-                                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                                          children: [
-                                                            Text(
-                                                              "Photography",
-                                                              textAlign: TextAlign.start,
-                                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                  color: Color(0XFF171515),
-                                                                  fontWeight: FontWeight.w500,
-                                                                  letterSpacing: 1),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      InkWell(
-                                                        onTap: () {
-                                                          Navigator.push(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                                  builder: (context) => ArtMovementPage()));
-                                                        },
-                                                        child: Padding(
-                                                          padding: const EdgeInsets.only(left: 20.0, top: 16),
-                                                          child: Row(
-                                                            mainAxisAlignment: MainAxisAlignment.start,
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                                            children: [
-                                                              Text(
-                                                                "Modern Art",
-                                                                textAlign: TextAlign.start,
-                                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                    color: Color(0XFF171515),
-                                                                    fontWeight: FontWeight.w500,
-                                                                    letterSpacing: 1),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 10,
-                                                      )
-                                                    ],
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                          Container(
-                                            child: ExpansionTileCard(
-                                              finalPadding: EdgeInsets.all(0),
-                                              baseColor: Color(0xffFFFFFF),
-                                              expandedColor: Color(0xffF3F2EC),
-                                              key: cardB,
-
-                                              // trailing: Icon(Icons.add,size: 18,color: Colors.black,),
-                                              leading: Container(
-                                                height: 40,
-                                                width: 40,
-                                                child: Image.asset(
-                                                  "image/furniture.png",
-                                                  width: 24,
-                                                  height: 24,
-                                                ),
-                                              ),
-                                              title: Text(
-                                                "FURNITURE",
-                                                textAlign: TextAlign.start,
-                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                      color: Color(0XFF8C9FB1),
-                                                      fontWeight: FontWeight.w700,
-                                                    ),
-                                              ),
-                                              children: <Widget>[],
-                                            ),
-                                          ),
-                                          Container(
-                                            child: ExpansionTileCard(
-                                              finalPadding: EdgeInsets.all(0),
-                                              baseColor: Color(0xffFFFFFF),
-                                              expandedColor: Color(0xffF3F2EC),
-                                              key: cardC,
-
-                                              // trailing: Icon(Icons.add,size: 18,color: Colors.black,),
-                                              leading: Container(
-                                                height: 40,
-                                                width: 40,
-                                                child: Image.asset(
-                                                  "image/watches.png",
-                                                  width: 24,
-                                                  height: 24,
-                                                ),
-                                              ),
-                                              title: Text(
-                                                "WATCHES",
-                                                textAlign: TextAlign.start,
-                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                      color: Color(0XFF8C9FB1),
-                                                      fontWeight: FontWeight.w700,
-                                                    ),
-                                              ),
-                                              children: <Widget>[],
-                                            ),
-                                          ),
-                                          Container(
-                                            child: ExpansionTileCard(
-                                              finalPadding: EdgeInsets.all(0),
-                                              baseColor: Color(0xffFFFFFF),
-                                              expandedColor: Color(0xffF3F2EC),
-                                              key: cardD,
-
-                                              // trailing: Icon(Icons.add,size: 18,color: Colors.black,),
-                                              leading: Container(
-                                                height: 40,
-                                                width: 40,
-                                                child: Image.asset(
-                                                  "image/books.png",
-                                                  width: 24,
-                                                  height: 24,
-                                                ),
-                                              ),
-                                              title: Text(
-                                                "BOOKS",
-                                                textAlign: TextAlign.start,
-                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                      color: Color(0XFF8C9FB1),
-                                                      fontWeight: FontWeight.w700,
-                                                    ),
-                                              ),
-                                              children: <Widget>[],
-                                            ),
-                                          ),
-                                          Container(
-                                            child: ExpansionTileCard(
-                                              finalPadding: EdgeInsets.all(0),
-                                              baseColor: Color(0xffFFFFFF),
-                                              expandedColor: Color(0xffF3F2EC),
-                                              key: cardE,
-
-                                              // trailing: Icon(Icons.add,size: 18,color: Colors.black,),
-                                              leading: Container(
-                                                height: 40,
-                                                width: 40,
-                                                child: Image.asset(
-                                                  "image/mechanidise.png",
-                                                  width: 24,
-                                                  height: 24,
-                                                ),
-                                              ),
-                                              title: Text(
-                                                "MERCENDISE",
-                                                textAlign: TextAlign.start,
-                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                      color: Color(0XFF8C9FB1),
-                                                      fontWeight: FontWeight.w700,
-                                                    ),
-                                              ),
-                                              children: <Widget>[],
-                                            ),
-                                          ),
-                                          Container(
-                                            child: ExpansionTileCard(
-                                              finalPadding: EdgeInsets.all(0),
-                                              baseColor: Color(0xffFFFFFF),
-                                              expandedColor: Color(0xffF3F2EC),
-                                              key: cardF,
-
-                                              // trailing: Icon(Icons.add,size: 18,color: Colors.black,),
-                                              leading: Container(
-                                                height: 40,
-                                                width: 40,
-                                                child: SizedBox(
-                                                    width: 8,
-                                                    height: 8,
-                                                    child: Image.asset("image/print.png", width: 8, height: 8)),
-                                              ),
-                                              title: Text(
-                                                "PRINT",
-                                                textAlign: TextAlign.start,
-                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                      color: Color(0XFF8C9FB1),
-                                                      fontWeight: FontWeight.w700,
-                                                    ),
-                                              ),
-                                              children: <Widget>[],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              });
-                        },
+                          // showModalBottomSheet(
+                          //     context: context,
+                          //     backgroundColor: Colors.transparent,
+                          //     builder: (context) {
+                          //       return Container(
+                          //         height: MediaQuery.of(context).size.height * .7,
+                          //         decoration: BoxDecoration(
+                          //             borderRadius: BorderRadius.only(
+                          //                 topRight: Radius.circular(30), topLeft: Radius.circular(30)),
+                          //             color: Colors.white),
+                          //         child: SingleChildScrollView(
+                          //           child: Padding(
+                          //             padding: const EdgeInsets.all(16.0),
+                          //             child: Column(
+                          //               mainAxisSize: MainAxisSize.min,
+                          //               children: <Widget>[
+                          //                 Container(
+                          //                   child: ExpansionTileCard(
+                          //                     finalPadding: EdgeInsets.all(0),
+                          //                     baseColor: Color(0xffFFFFFF),
+                          //                     expandedColor: Color(0xffF3F2EC),
+                          //                     key: cardA,
+                          //
+                          //                     // trailing: Icon(Icons.add,size: 18,color: Colors.black,),
+                          //                     leading: Container(
+                          //                       height: 40,
+                          //                       width: 40,
+                          //                       child: Image.asset(
+                          //                         "image/jwellery.png",
+                          //                         width: 24,
+                          //                         height: 24,
+                          //                       ),
+                          //                     ),
+                          //                     title: Text(
+                          //                       "JEWELLERY",
+                          //                       textAlign: TextAlign.start,
+                          //                       style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          //                             color: Color(0XFF8C9FB1),
+                          //                             fontWeight: FontWeight.w700,
+                          //                           ),
+                          //                     ),
+                          //                     children: <Widget>[
+                          //                       Container(
+                          //                         padding: EdgeInsets.all(16),
+                          //                         child: Column(
+                          //                           children: [
+                          //                             Row(
+                          //                               mainAxisAlignment: MainAxisAlignment.start,
+                          //                               crossAxisAlignment: CrossAxisAlignment.center,
+                          //                               children: [
+                          //                                 Image.asset(
+                          //                                   "image/Group (21).png",
+                          //                                   height: 20,
+                          //                                   fit: BoxFit.cover,
+                          //                                 ),
+                          //                                 InkWell(
+                          //                                   onTap: () {
+                          //                                     // Navigator.push(context, MaterialPageRoute(builder: (context) =>HowToBuyPage()));
+                          //                                   },
+                          //                                   child: Padding(
+                          //                                     padding: const EdgeInsets.only(left: 10.0, top: 0),
+                          //                                     child: Row(
+                          //                                       mainAxisAlignment: MainAxisAlignment.start,
+                          //                                       crossAxisAlignment: CrossAxisAlignment.start,
+                          //                                       children: [
+                          //                                         Text(
+                          //                                           "ART",
+                          //                                           textAlign: TextAlign.start,
+                          //                                           style: Theme.of(context)
+                          //                                               .textTheme
+                          //                                               .headline6!
+                          //                                               .copyWith(
+                          //                                                   color: Color(0XFF5D7E4D),
+                          //                                                   fontWeight:
+                          //                                                       bottomViewModel.selectedIndex == 0
+                          //                                                           ? FontWeight.bold
+                          //                                                           : FontWeight.normal,
+                          //                                                   letterSpacing: 1),
+                          //                                         ),
+                          //                                       ],
+                          //                                     ),
+                          //                                   ),
+                          //                                 ),
+                          //                               ],
+                          //                             ),
+                          //                             InkWell(
+                          //                               onTap: () {
+                          //                                 // Navigator.push(context, MaterialPageRoute(builder: (context) =>HowToBuyPage()));
+                          //                               },
+                          //                               child: Padding(
+                          //                                 padding: const EdgeInsets.only(left: 20.0, top: 10),
+                          //                                 child: Row(
+                          //                                   mainAxisAlignment: MainAxisAlignment.start,
+                          //                                   crossAxisAlignment: CrossAxisAlignment.start,
+                          //                                   children: [
+                          //                                     Text(
+                          //                                       "Painting",
+                          //                                       textAlign: TextAlign.start,
+                          //                                       style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          //                                           color: Color(0XFF171515),
+                          //                                           fontWeight: FontWeight.w500,
+                          //                                           letterSpacing: 1),
+                          //                                     ),
+                          //                                   ],
+                          //                                 ),
+                          //                               ),
+                          //                             ),
+                          //                             Image.asset(
+                          //                               "image/Line 45.png",
+                          //                               fit: BoxFit.cover,
+                          //                             ),
+                          //                             InkWell(
+                          //                               onTap: () {
+                          //                                 // Navigator.push(context, MaterialPageRoute(builder: (context) => HowToSellPage()));
+                          //                               },
+                          //                               child: Padding(
+                          //                                 padding: const EdgeInsets.only(left: 20.0, top: 16),
+                          //                                 child: Row(
+                          //                                   mainAxisAlignment: MainAxisAlignment.start,
+                          //                                   crossAxisAlignment: CrossAxisAlignment.start,
+                          //                                   children: [
+                          //                                     Text(
+                          //                                       "Sculpture",
+                          //                                       textAlign: TextAlign.start,
+                          //                                       style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          //                                           color: Color(0XFF171515),
+                          //                                           fontWeight: FontWeight.w500,
+                          //                                           letterSpacing: 1),
+                          //                                     ),
+                          //                                   ],
+                          //                                 ),
+                          //                               ),
+                          //                             ),
+                          //                             Padding(
+                          //                               padding: const EdgeInsets.only(left: 20.0, top: 16),
+                          //                               child: Row(
+                          //                                 mainAxisAlignment: MainAxisAlignment.start,
+                          //                                 crossAxisAlignment: CrossAxisAlignment.start,
+                          //                                 children: [
+                          //                                   Text(
+                          //                                     "Photography",
+                          //                                     textAlign: TextAlign.start,
+                          //                                     style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          //                                         color: Color(0XFF171515),
+                          //                                         fontWeight: FontWeight.w500,
+                          //                                         letterSpacing: 1),
+                          //                                   ),
+                          //                                 ],
+                          //                               ),
+                          //                             ),
+                          //                             InkWell(
+                          //                               onTap: () {
+                          //                                 Navigator.push(
+                          //                                     context,
+                          //                                     MaterialPageRoute(
+                          //                                         builder: (context) => ArtMovementPage()));
+                          //                               },
+                          //                               child: Padding(
+                          //                                 padding: const EdgeInsets.only(left: 20.0, top: 16),
+                          //                                 child: Row(
+                          //                                   mainAxisAlignment: MainAxisAlignment.start,
+                          //                                   crossAxisAlignment: CrossAxisAlignment.start,
+                          //                                   children: [
+                          //                                     Text(
+                          //                                       "Modern Art",
+                          //                                       textAlign: TextAlign.start,
+                          //                                       style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          //                                           color: Color(0XFF171515),
+                          //                                           fontWeight: FontWeight.w500,
+                          //                                           letterSpacing: 1),
+                          //                                     ),
+                          //                                   ],
+                          //                                 ),
+                          //                               ),
+                          //                             ),
+                          //                             SizedBox(
+                          //                               height: 10,
+                          //                             )
+                          //                           ],
+                          //                         ),
+                          //                       )
+                          //                     ],
+                          //                   ),
+                          //                 ),
+                          //                 Container(
+                          //                   decoration: BoxDecoration(
+                          //                       color: Color(0xffEAEEF2),
+                          //                       image: DecorationImage(image: AssetImage("image/maskbg.png"))),
+                          //                   child: ExpansionTileCard(
+                          //                     finalPadding: EdgeInsets.all(0),
+                          //                     baseColor: Color(0xffFFFFFF),
+                          //                     expandedColor: Colors.lightBlueAccent.withOpacity(.1),
+                          //                     key: cardA,
+                          //
+                          //                     // trailing: Icon(Icons.add,size: 18,color: Colors.black,),
+                          //                     leading: Container(
+                          //                       height: 40,
+                          //                       width: 40,
+                          //                       child: Image.asset(
+                          //                         "image/art.png",
+                          //                         width: 24,
+                          //                         height: 24,
+                          //                       ),
+                          //                     ),
+                          //                     title: Text(
+                          //                       "ART",
+                          //                       textAlign: TextAlign.start,
+                          //                       style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          //                             color: Colors.black,
+                          //                             fontWeight: FontWeight.w700,
+                          //                           ),
+                          //                     ),
+                          //                     children: <Widget>[
+                          //                       Container(
+                          //                         padding: EdgeInsets.all(16),
+                          //                         child: Column(
+                          //                           children: [
+                          //                             InkWell(
+                          //                               onTap: () {
+                          //                                 // Navigator.push(context, MaterialPageRoute(builder: (context) =>HowToBuyPage()));
+                          //                               },
+                          //                               child: Padding(
+                          //                                 padding: const EdgeInsets.only(left: 20.0, top: 10),
+                          //                                 child: Row(
+                          //                                   mainAxisAlignment: MainAxisAlignment.start,
+                          //                                   crossAxisAlignment: CrossAxisAlignment.start,
+                          //                                   children: [
+                          //                                     Text(
+                          //                                       "Painting",
+                          //                                       textAlign: TextAlign.start,
+                          //                                       style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          //                                           color: Color(0XFF171515),
+                          //                                           fontWeight: FontWeight.w500,
+                          //                                           letterSpacing: 1),
+                          //                                     ),
+                          //                                   ],
+                          //                                 ),
+                          //                               ),
+                          //                             ),
+                          //                             Image.asset(
+                          //                               "image/Line 45.png",
+                          //                               fit: BoxFit.cover,
+                          //                             ),
+                          //                             InkWell(
+                          //                               onTap: () {
+                          //                                 // Navigator.push(context, MaterialPageRoute(builder: (context) => HowToSellPage()));
+                          //                               },
+                          //                               child: Padding(
+                          //                                 padding: const EdgeInsets.only(left: 20.0, top: 16),
+                          //                                 child: Row(
+                          //                                   mainAxisAlignment: MainAxisAlignment.start,
+                          //                                   crossAxisAlignment: CrossAxisAlignment.start,
+                          //                                   children: [
+                          //                                     Text(
+                          //                                       "Sculpture",
+                          //                                       textAlign: TextAlign.start,
+                          //                                       style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          //                                           color: Color(0XFF171515),
+                          //                                           fontWeight: FontWeight.w500,
+                          //                                           letterSpacing: 1),
+                          //                                     ),
+                          //                                   ],
+                          //                                 ),
+                          //                               ),
+                          //                             ),
+                          //                             Padding(
+                          //                               padding: const EdgeInsets.only(left: 20.0, top: 16),
+                          //                               child: Row(
+                          //                                 mainAxisAlignment: MainAxisAlignment.start,
+                          //                                 crossAxisAlignment: CrossAxisAlignment.start,
+                          //                                 children: [
+                          //                                   Text(
+                          //                                     "Photography",
+                          //                                     textAlign: TextAlign.start,
+                          //                                     style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          //                                         color: Color(0XFF171515),
+                          //                                         fontWeight: FontWeight.w500,
+                          //                                         letterSpacing: 1),
+                          //                                   ),
+                          //                                 ],
+                          //                               ),
+                          //                             ),
+                          //                             InkWell(
+                          //                               onTap: () {
+                          //                                 Navigator.push(
+                          //                                     context,
+                          //                                     MaterialPageRoute(
+                          //                                         builder: (context) => ArtMovementPage()));
+                          //                               },
+                          //                               child: Padding(
+                          //                                 padding: const EdgeInsets.only(left: 20.0, top: 16),
+                          //                                 child: Row(
+                          //                                   mainAxisAlignment: MainAxisAlignment.start,
+                          //                                   crossAxisAlignment: CrossAxisAlignment.start,
+                          //                                   children: [
+                          //                                     Text(
+                          //                                       "Modern Art",
+                          //                                       textAlign: TextAlign.start,
+                          //                                       style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          //                                           color: Color(0XFF171515),
+                          //                                           fontWeight: FontWeight.w500,
+                          //                                           letterSpacing: 1),
+                          //                                     ),
+                          //                                   ],
+                          //                                 ),
+                          //                               ),
+                          //                             ),
+                          //                             SizedBox(
+                          //                               height: 10,
+                          //                             )
+                          //                           ],
+                          //                         ),
+                          //                       )
+                          //                     ],
+                          //                   ),
+                          //                 ),
+                          //                 Container(
+                          //                   child: ExpansionTileCard(
+                          //                     finalPadding: EdgeInsets.all(0),
+                          //                     baseColor: Color(0xffFFFFFF),
+                          //                     expandedColor: Color(0xffF3F2EC),
+                          //                     key: cardB,
+                          //
+                          //                     // trailing: Icon(Icons.add,size: 18,color: Colors.black,),
+                          //                     leading: Container(
+                          //                       height: 40,
+                          //                       width: 40,
+                          //                       child: Image.asset(
+                          //                         "image/furniture.png",
+                          //                         width: 24,
+                          //                         height: 24,
+                          //                       ),
+                          //                     ),
+                          //                     title: Text(
+                          //                       "FURNITURE",
+                          //                       textAlign: TextAlign.start,
+                          //                       style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          //                             color: Color(0XFF8C9FB1),
+                          //                             fontWeight: FontWeight.w700,
+                          //                           ),
+                          //                     ),
+                          //                     children: <Widget>[],
+                          //                   ),
+                          //                 ),
+                          //                 Container(
+                          //                   child: ExpansionTileCard(
+                          //                     finalPadding: EdgeInsets.all(0),
+                          //                     baseColor: Color(0xffFFFFFF),
+                          //                     expandedColor: Color(0xffF3F2EC),
+                          //                     key: cardC,
+                          //
+                          //                     // trailing: Icon(Icons.add,size: 18,color: Colors.black,),
+                          //                     leading: Container(
+                          //                       height: 40,
+                          //                       width: 40,
+                          //                       child: Image.asset(
+                          //                         "image/watches.png",
+                          //                         width: 24,
+                          //                         height: 24,
+                          //                       ),
+                          //                     ),
+                          //                     title: Text(
+                          //                       "WATCHES",
+                          //                       textAlign: TextAlign.start,
+                          //                       style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          //                             color: Color(0XFF8C9FB1),
+                          //                             fontWeight: FontWeight.w700,
+                          //                           ),
+                          //                     ),
+                          //                     children: <Widget>[],
+                          //                   ),
+                          //                 ),
+                          //                 Container(
+                          //                   child: ExpansionTileCard(
+                          //                     finalPadding: EdgeInsets.all(0),
+                          //                     baseColor: Color(0xffFFFFFF),
+                          //                     expandedColor: Color(0xffF3F2EC),
+                          //                     key: cardD,
+                          //
+                          //                     // trailing: Icon(Icons.add,size: 18,color: Colors.black,),
+                          //                     leading: Container(
+                          //                       height: 40,
+                          //                       width: 40,
+                          //                       child: Image.asset(
+                          //                         "image/books.png",
+                          //                         width: 24,
+                          //                         height: 24,
+                          //                       ),
+                          //                     ),
+                          //                     title: Text(
+                          //                       "BOOKS",
+                          //                       textAlign: TextAlign.start,
+                          //                       style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          //                             color: Color(0XFF8C9FB1),
+                          //                             fontWeight: FontWeight.w700,
+                          //                           ),
+                          //                     ),
+                          //                     children: <Widget>[],
+                          //                   ),
+                          //                 ),
+                          //                 Container(
+                          //                   child: ExpansionTileCard(
+                          //                     finalPadding: EdgeInsets.all(0),
+                          //                     baseColor: Color(0xffFFFFFF),
+                          //                     expandedColor: Color(0xffF3F2EC),
+                          //                     key: cardE,
+                          //
+                          //                     // trailing: Icon(Icons.add,size: 18,color: Colors.black,),
+                          //                     leading: Container(
+                          //                       height: 40,
+                          //                       width: 40,
+                          //                       child: Image.asset(
+                          //                         "image/mechanidise.png",
+                          //                         width: 24,
+                          //                         height: 24,
+                          //                       ),
+                          //                     ),
+                          //                     title: Text(
+                          //                       "MERCENDISE",
+                          //                       textAlign: TextAlign.start,
+                          //                       style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          //                             color: Color(0XFF8C9FB1),
+                          //                             fontWeight: FontWeight.w700,
+                          //                           ),
+                          //                     ),
+                          //                     children: <Widget>[],
+                          //                   ),
+                          //                 ),
+                          //                 Container(
+                          //                   child: ExpansionTileCard(
+                          //                     finalPadding: EdgeInsets.all(0),
+                          //                     baseColor: Color(0xffFFFFFF),
+                          //                     expandedColor: Color(0xffF3F2EC),
+                          //                     key: cardF,
+                          //
+                          //                     // trailing: Icon(Icons.add,size: 18,color: Colors.black,),
+                          //                     leading: Container(
+                          //                       height: 40,
+                          //                       width: 40,
+                          //                       child: SizedBox(
+                          //                           width: 8,
+                          //                           height: 8,
+                          //                           child: Image.asset("image/print.png", width: 8, height: 8)),
+                          //                     ),
+                          //                     title: Text(
+                          //                       "PRINT",
+                          //                       textAlign: TextAlign.start,
+                          //                       style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          //                             color: Color(0XFF8C9FB1),
+                          //                             fontWeight: FontWeight.w700,
+                          //                           ),
+                          //                     ),
+                          //                     children: <Widget>[],
+                          //                   ),
+                          //                 ),
+                          //               ],
+                          //             ),
+                          //           ),
+                          //         ),
+                          //       );
+                          //     });
+                         },
                         child: Column(
                           children: [
                             Container(
@@ -984,7 +990,6 @@ class _DashboardUiState extends State<DashboardUi> {
         return OurCollectors();
       case 33:
         return NewsAndUpdatesPage("BLOGS");
-
       case 34:
         return SearchBarUi();
 
