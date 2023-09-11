@@ -11,6 +11,8 @@ class LocalSharedPrefrence {
   }
 
   String userId = 'UserId';
+  String fullname = "Fullname";
+  String email = "Email";
   String crmId = 'CRMId';
   String isLogin = 'UserLoginStatus';
   String isTerms = 'TermsConditions';
@@ -41,6 +43,33 @@ class LocalSharedPrefrence {
   String getName() {
     if (prefsAvailable) {
       return myGlobalPreference!.getString(name) ?? "";
+    }
+    return "";
+  }
+
+
+  Future<void> setFullname(String flag) async {
+    if (prefsAvailable) {
+      await myGlobalPreference!.setString(fullname, flag);
+    }
+  }
+
+  String getFullname() {
+    if (prefsAvailable) {
+      return myGlobalPreference!.getString(fullname) ?? "";
+    }
+    return "";
+  }
+
+  Future<void> setEmail(String flag) async {
+    if (prefsAvailable) {
+      await myGlobalPreference!.setString(email, flag);
+    }
+  }
+
+  String getEmail() {
+    if (prefsAvailable) {
+      return myGlobalPreference!.getString(email) ?? "";
     }
     return "";
   }

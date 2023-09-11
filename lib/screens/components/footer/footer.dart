@@ -1,6 +1,7 @@
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:giftex/data/local/client/prefs.dart';
 import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
 import 'package:giftex/screens/faq/faq.dart';
 import 'package:giftex/screens/termsandconditions/termsandconditions.dart';
@@ -16,12 +17,23 @@ class Footer extends StatefulWidget {
 }
 
 class _FooterState extends State<Footer> {
+  LocalSharedPrefrence? prefrence;
+
   @override
   void initState() {
     // TODO: implement initState
-
+    prefrence = LocalSharedPrefrence();
+    nameController.text = prefrence?.getFullname() ?? '';
+    emailController.text = prefrence?.getEmail() ?? '';
     footerViewModel.setupValidations();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    super.dispose();
   }
 
   final GlobalKey<ExpansionTileCardState> cardA = new GlobalKey();
@@ -98,7 +110,8 @@ class _FooterState extends State<Footer> {
                           padding: const EdgeInsets.all(10.0),
                           child: TextField(
                             controller: nameController,
-                            onChanged: (str) => footerViewModel.name = str,
+                            onChanged: (str) {
+                            },
                             decoration: InputDecoration(
                                 isDense: true,
                                 labelText: 'Name',
@@ -113,7 +126,8 @@ class _FooterState extends State<Footer> {
                           padding: const EdgeInsets.all(10.0),
                           child: TextField(
                             controller: emailController,
-                            onChanged: (str) => footerViewModel.email = str,
+                            onChanged: (str) {
+                            },
                             keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
                                 isDense: true,

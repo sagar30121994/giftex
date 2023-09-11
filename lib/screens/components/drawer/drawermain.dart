@@ -48,6 +48,7 @@ class _MainDrawerState extends State<MainDrawer> {
 
             ListTile(
               title: const Text('About Giftex'),
+              selected: bottomViewModel.selectedIndex == 29,
               onTap: () {
                 _onItemTapped(29);
                 Navigator.of(context).pop();
@@ -62,6 +63,7 @@ class _MainDrawerState extends State<MainDrawer> {
             ),
             ListTile(
               title: const Text('Our Collectors'),
+              selected: bottomViewModel.selectedIndex == 32,
               onTap: () {
                 _onItemTapped(32);
                 Navigator.of(context).pop();
@@ -72,6 +74,7 @@ class _MainDrawerState extends State<MainDrawer> {
 
             ListTile(
               title: const Text('Record Price Artwork'),
+              selected: bottomViewModel.selectedIndex == 28,
               onTap: () {
                 _onItemTapped(28);
                 Navigator.of(context).pop();
@@ -82,6 +85,7 @@ class _MainDrawerState extends State<MainDrawer> {
 
             ListTile(
               title: const Text('Art Movement'),
+              selected: bottomViewModel.selectedIndex == 30,
               onTap: () {
                 _onItemTapped(30);
                 Navigator.of(context).pop();
@@ -164,6 +168,7 @@ class _MainDrawerState extends State<MainDrawer> {
 
             ListTile(
               title: const Text('Contact Us'),
+              selected: bottomViewModel.selectedIndex == 31,
               onTap: () {
                 _onItemTapped(31);
                 Navigator.of(context).pop();
@@ -196,6 +201,7 @@ class _MainDrawerState extends State<MainDrawer> {
 
             ListTile(
               title: const Text('Career'),
+              selected: bottomViewModel.selectedIndex == 26,
               onTap: () {
                 _onItemTapped(26);
                 Navigator.of(context).pop();
