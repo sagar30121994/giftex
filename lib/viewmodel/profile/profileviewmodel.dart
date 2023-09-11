@@ -1,9 +1,11 @@
+import 'package:giftex/data/local/client/localprefsmodel.dart';
 import 'package:giftex/data/local/client/prefs.dart';
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/data/network/models/request/kyc/UpdateRegBankingDetailsRequest.dart';
 import 'package:giftex/data/network/models/request/kyc/UpdateRegMyAddressRequest.dart';
 import 'package:giftex/data/network/models/request/kyc/UpdateRegPersonalDetailsRequest.dart';
 import 'package:giftex/data/network/models/responce/lot/upcominglotsresponse.dart';
+import 'package:giftex/data/network/models/responce/profile/GetCityResponse.dart';
 import 'package:giftex/data/network/models/responce/profile/GetRegInfoResponse.dart';
 import 'package:giftex/data/network/models/responce/profile/GetUserAllDetailsResponse.dart';
 import 'package:giftex/data/network/models/responce/purchase/mypurchasereponse.dart';
@@ -13,6 +15,8 @@ import 'package:giftex/data/network/repository/auction/auctionrepo.dart';
 import 'package:giftex/data/network/repository/profile/profileRopo.dart';
 import 'package:giftex/data/network/repository/userdetails/userrepo.dart';
 import 'package:mobx/mobx.dart';
+
+import '../../data/network/models/request/webapimodel/getcityrequestmodel.dart';
 
 part 'profileviewmodel.g.dart';
 
@@ -24,6 +28,7 @@ abstract class _ProfileViewModel with Store {
   UserRepo userRepo = UserRepo();
 
   late LocalSharedPrefrence prefrence;
+
   _ProfileViewModel() {
     prefrence = LocalSharedPrefrence();
   }
@@ -60,6 +65,7 @@ abstract class _ProfileViewModel with Store {
 
   @observable
   String dob = "";
+
   @action
   setDOB(sdob) {
     dob = sdob;
@@ -67,6 +73,7 @@ abstract class _ProfileViewModel with Store {
 
   @observable
   String gendor = "";
+
   @action
   setgendor(sgendor) {
     gendor = sgendor;
@@ -74,6 +81,7 @@ abstract class _ProfileViewModel with Store {
 
   @observable
   String panNo = "";
+
   @action
   setpanNo(spanNo) {
     panNo = spanNo;
@@ -81,6 +89,7 @@ abstract class _ProfileViewModel with Store {
 
   @observable
   String aadharNo = "";
+
   @action
   setaadharNo(saadharNo) {
     aadharNo = saadharNo;
@@ -88,6 +97,7 @@ abstract class _ProfileViewModel with Store {
 
   @observable
   String address = "";
+
   @action
   setaddress(saddress) {
     address = saddress;
@@ -106,6 +116,43 @@ abstract class _ProfileViewModel with Store {
     updateRegMyAddressRequest!.authkeyWeb = prefrence.getAuthKeyWeb();
 
     updateRegMyAddressRequest!.addLine1 = address;
+
+    HttpResponse httpResponse = await profileRepo!.updateRegMyAddress(updateRegMyAddressRequest);
+
+    if (httpResponse.status == 200) {}
+    isloading = false;
+    return httpResponse;
+  }
+
+  Future<HttpResponse> UpdateRegMyAddressnew(String YourName, String AddressLine1, String AddressLine2, String PinCode,
+      String GSTNumber, String selectedCountry_name, String selectedState_name, String selectedCity_name) async {
+    isloading = true;
+    updateRegMyAddressRequest = UpdateRegMyAddressRequest();
+
+    updateRegMyAddressRequest!.cRMClientID = prefrence.getCrmClinetId();
+    updateRegMyAddressRequest!.userid = prefrence.getUserId();
+    updateRegMyAddressRequest!.authkeyWeb = prefrence.getAuthKeyWeb();
+    updateRegMyAddressRequest!.yourName = YourName;
+    updateRegMyAddressRequest!.addLine1 = AddressLine1;
+    updateRegMyAddressRequest!.addLine2 = AddressLine2;
+    updateRegMyAddressRequest!.pinCode = PinCode;
+    updateRegMyAddressRequest!.country = name;
+    updateRegMyAddressRequest!.state = name;
+    updateRegMyAddressRequest!.city = name;
+    updateRegMyAddressRequest!.gstNum = GSTNumber;
+    updateRegMyAddressRequest!.billingAddLine1 = "";
+    updateRegMyAddressRequest!.billingPinCode = "";
+    updateRegMyAddressRequest!.mobile = "";
+    updateRegMyAddressRequest!.email = "";
+    updateRegMyAddressRequest!.location = "";
+    updateRegMyAddressRequest!.billingAddLine2 = "";
+    updateRegMyAddressRequest!.billingCity = "";
+    updateRegMyAddressRequest!.billingCountry = "";
+    updateRegMyAddressRequest!.billingGstNum = "";
+    updateRegMyAddressRequest!.billingLocation = "";
+    updateRegMyAddressRequest!.billingState = "";
+    updateRegMyAddressRequest!.isbillingaddress = "";
+    updateRegMyAddressRequest!.authkeyMobile = "";
 
     HttpResponse httpResponse = await profileRepo!.updateRegMyAddress(updateRegMyAddressRequest);
 
@@ -229,6 +276,7 @@ abstract class _ProfileViewModel with Store {
 
   @observable
   GetRegInfoResponse? getRegInfoResponse = GetRegInfoResponse();
+
   Future<HttpResponse> getRegInfo() async {
     isloading = true;
 
@@ -238,6 +286,28 @@ abstract class _ProfileViewModel with Store {
       getRegInfoResponse = httpResponse.data;
     }
     isloading = false;
+    return httpResponse;
+  }
+
+  @observable
+  bool isloadingcity = false;
+  @observable
+  GetCityResponse? getCityResponse = GetCityResponse();
+
+  Future<HttpResponse> getCity(String stateID) async {
+    isloadingcity = true;
+    GetCityRequestModel model = GetCityRequestModel();
+    model.authkeyWeb = prefrence.getAuthKeyWeb();
+    model.userid = prefrence.getUserId();
+    model.authkeyMobile = '';
+    model.stateId = int.tryParse(stateID) ?? 0;
+
+    HttpResponse httpResponse = await profileRepo!.getCity(model);
+
+    if (httpResponse.status == 200) {
+      getCityResponse = httpResponse.data;
+    }
+    isloadingcity = false;
     return httpResponse;
   }
 }

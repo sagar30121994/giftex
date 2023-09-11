@@ -1,7 +1,10 @@
+import 'package:dio/dio.dart';
 import 'package:giftex/data/local/client/prefs.dart';
 import 'package:giftex/data/network/models/request/kyc/UpdateRegBankingDetailsRequest.dart';
 import 'package:giftex/data/network/models/request/kyc/UpdateRegMyAddressRequest.dart';
 import 'package:giftex/data/network/models/request/kyc/UpdateRegPersonalDetailsRequest.dart';
+import 'package:giftex/data/network/models/request/webapimodel/getcityrequestmodel.dart';
+import 'package:giftex/data/network/models/responce/profile/GetCityResponse.dart';
 import 'package:giftex/data/network/models/responce/profile/GetRegInfoResponse.dart';
 import 'package:giftex/data/network/models/responce/profile/GetUserAllDetailsResponse.dart';
 
@@ -13,6 +16,7 @@ import '../../models/httpreponsehandler.dart';
 class ProfileRepo {
   DioClientNew? httpClient;
   LocalSharedPrefrence? localSharedPrefrence;
+
   ProfileRepo() {
     httpClient = DioClientNew();
     localSharedPrefrence = LocalSharedPrefrence();
@@ -52,6 +56,7 @@ class ProfileRepo {
 
     return httpResponse;
   }
+
   Future<HttpResponse> getRegInfo() async {
     HttpResponse httpResponse = HttpResponse();
 
@@ -190,6 +195,35 @@ class ProfileRepo {
       if (responce.statusCode == 200) {
         httpResponse.status = responce.statusCode;
         httpResponse.message = 'Successful';
+      } else {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = responce.data['message'];
+        httpResponse.data = null;
+      }
+      return httpResponse;
+    }).catchError((err) {
+      print(err);
+      httpResponse.status = 400;
+      httpResponse.message = err.toString();
+      httpResponse.data = err.toString();
+      return httpResponse;
+    });
+
+    return httpResponse;
+  }
+
+  Future<HttpResponse> getCity(GetCityRequestModel model) async {
+    HttpResponse httpResponse = HttpResponse();
+    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
+    await httpClient!
+        .post(BaseUrl.baseUrl + endPoints.WebApiModel().getcity, body: model.toJson())
+        .then((responce) async {
+      print(responce);
+
+      if (responce.statusCode == 200) {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = 'Successful';
+        httpResponse.data = GetCityResponse.fromJson(responce.data);
       } else {
         httpResponse.status = responce.statusCode;
         httpResponse.message = responce.data['message'];
