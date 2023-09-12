@@ -372,7 +372,8 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                 child: Observer(builder: (context) {
                   return auctionViewModel.auctionType == "upcoming"
                       ? Container(
-                          child: auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length == 0
+                          child: auctionViewModel.upcomingAuctionResponse==null? Container():
+                          auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length == 0
                               ? Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
@@ -935,7 +936,8 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                   print(auctionViewModel.auctionType);
                   return auctionViewModel.auctionType == "past"
                       ? Container(
-                          child: auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length == 0
+                          child:auctionViewModel.upcomingAuctionResponse==null?Container():
+                          auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length == 0
                               ? Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
@@ -1043,7 +1045,8 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                 }),
               ),
         auctionViewModel.isLoadingForUpCommingAuction
-            ? SliverToBoxAdapter(child: LinearProgressIndicator())
+            ? SliverToBoxAdapter(child: LinearProgressIndicator()):
+        auctionViewModel.upcomingAuctionResponse==null?SliverToBoxAdapter(child: Container())
             : auctionViewModel.upcomingAuctionResponse!.result == null
                 ? SliverToBoxAdapter(child: Container())
                 : auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length > 1

@@ -171,6 +171,23 @@ mixin _$ProfileViewModel on _ProfileViewModel, Store {
     });
   }
 
+  late final _$updateAddressRequestAtom =
+      Atom(name: '_ProfileViewModel.updateAddressRequest', context: context);
+
+  @override
+  UpdateAddressRequest? get updateAddressRequest {
+    _$updateAddressRequestAtom.reportRead();
+    return super.updateAddressRequest;
+  }
+
+  @override
+  set updateAddressRequest(UpdateAddressRequest? value) {
+    _$updateAddressRequestAtom.reportWrite(value, super.updateAddressRequest,
+        () {
+      super.updateAddressRequest = value;
+    });
+  }
+
   late final _$addressAtom =
       Atom(name: '_ProfileViewModel.address', context: context);
 
@@ -539,6 +556,7 @@ dob: ${dob},
 gendor: ${gendor},
 panNo: ${panNo},
 aadharNo: ${aadharNo},
+updateAddressRequest: ${updateAddressRequest},
 address: ${address},
 yourName: ${yourName},
 addressLine1: ${addressLine1},
