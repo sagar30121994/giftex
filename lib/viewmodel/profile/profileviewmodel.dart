@@ -92,6 +92,9 @@ abstract class _ProfileViewModel with Store {
   @observable
   String aadharNo = "";
 
+  @observable
+  UpdateAddressRequest? updateAddressRequest;
+
   @action
   setaadharNo(saadharNo) {
     aadharNo = saadharNo;
