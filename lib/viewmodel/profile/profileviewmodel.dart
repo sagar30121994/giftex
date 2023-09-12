@@ -3,7 +3,9 @@ import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/data/network/models/request/kyc/UpdateRegBankingDetailsRequest.dart';
 import 'package:giftex/data/network/models/request/kyc/UpdateRegMyAddressRequest.dart';
 import 'package:giftex/data/network/models/request/kyc/UpdateRegPersonalDetailsRequest.dart';
+import 'package:giftex/data/network/models/request/webapimodel/updateaddressRequest.dart';
 import 'package:giftex/data/network/models/responce/lot/upcominglotsresponse.dart';
+import 'package:giftex/data/network/models/responce/profile/GetCityResponse.dart';
 import 'package:giftex/data/network/models/responce/profile/GetRegInfoResponse.dart';
 import 'package:giftex/data/network/models/responce/profile/GetUserAllDetailsResponse.dart';
 import 'package:giftex/data/network/models/responce/purchase/mypurchasereponse.dart';
@@ -13,6 +15,8 @@ import 'package:giftex/data/network/repository/auction/auctionrepo.dart';
 import 'package:giftex/data/network/repository/profile/profileRopo.dart';
 import 'package:giftex/data/network/repository/userdetails/userrepo.dart';
 import 'package:mobx/mobx.dart';
+
+import '../../data/network/models/request/webapimodel/getcityrequestmodel.dart';
 
 part 'profileviewmodel.g.dart';
 
@@ -24,6 +28,7 @@ abstract class _ProfileViewModel with Store {
   UserRepo userRepo = UserRepo();
 
   late LocalSharedPrefrence prefrence;
+
   _ProfileViewModel() {
     prefrence = LocalSharedPrefrence();
   }
@@ -60,6 +65,7 @@ abstract class _ProfileViewModel with Store {
 
   @observable
   String dob = "";
+
   @action
   setDOB(sdob) {
     dob = sdob;
@@ -67,6 +73,7 @@ abstract class _ProfileViewModel with Store {
 
   @observable
   String gendor = "";
+
   @action
   setgendor(sgendor) {
     gendor = sgendor;
@@ -74,6 +81,7 @@ abstract class _ProfileViewModel with Store {
 
   @observable
   String panNo = "";
+
   @action
   setpanNo(spanNo) {
     panNo = spanNo;
@@ -81,6 +89,7 @@ abstract class _ProfileViewModel with Store {
 
   @observable
   String aadharNo = "";
+
   @action
   setaadharNo(saadharNo) {
     aadharNo = saadharNo;
@@ -88,6 +97,7 @@ abstract class _ProfileViewModel with Store {
 
   @observable
   String address = "";
+
   @action
   setaddress(saddress) {
     address = saddress;
@@ -95,11 +105,13 @@ abstract class _ProfileViewModel with Store {
 
   UpdateRegPersonalDetailsRequest? updateRegPersonalDetailsRequest;
   UpdateRegMyAddressRequest? updateRegMyAddressRequest;
+  UpdateAddressRequest? updateAddressRequest;
   UpdateRegBankingDetailsRequest? updateRegBankingDetailsRequest;
 
   Future<HttpResponse> UpdateRegMyAddress() async {
     isloading = true;
     updateRegMyAddressRequest = UpdateRegMyAddressRequest();
+    updateAddressRequest = UpdateAddressRequest();
 
     updateRegMyAddressRequest!.cRMClientID = prefrence.getCrmClinetId();
     updateRegMyAddressRequest!.userid = prefrence.getUserId();
@@ -129,6 +141,41 @@ abstract class _ProfileViewModel with Store {
     updateRegMyAddressRequest!.billingAddLine2 = '';
 
     HttpResponse httpResponse = await profileRepo!.updateRegMyAddress(updateRegMyAddressRequest);
+
+    if (httpResponse.status == 200) {}
+    isloading = false;
+    return httpResponse;
+  }
+
+  Future<HttpResponse> AddMyNewAddress(
+      String address_id,
+      String YourName,
+      String AddressLine1,
+      String AddressLine2,
+      String PinCode,
+      String GSTNumber,
+      String selectedCountry_name,
+      String selectedState_name,
+      String selectedCity_name,
+      String type,
+      String action) async {
+    isloading = true;
+    updateAddressRequest = UpdateAddressRequest();
+
+    updateAddressRequest!.yourName = YourName;
+    updateAddressRequest!.addLine1 = AddressLine1;
+    updateAddressRequest!.addLine2 = AddressLine2;
+    updateAddressRequest!.pinCode = PinCode;
+    updateAddressRequest!.country = selectedCountry_name;
+    updateAddressRequest!.state = selectedState_name;
+    updateAddressRequest!.city = selectedCity_name;
+    updateAddressRequest!.gstNum = GSTNumber;
+    updateAddressRequest!.type = type;
+    updateAddressRequest!.id = address_id;
+    updateAddressRequest!.action = action;
+    updateAddressRequest!.location = "";
+
+    HttpResponse httpResponse = await profileRepo!.AddMyAddress(updateAddressRequest);
 
     if (httpResponse.status == 200) {}
     isloading = false;
@@ -172,30 +219,28 @@ abstract class _ProfileViewModel with Store {
     updateRegBankingDetailsRequest!.adhaarCardBase64 = aadharBase64;
     updateRegBankingDetailsRequest!.panCardBase64 = panBase64;
 
-    updateRegBankingDetailsRequest!.email ='';
-    updateRegBankingDetailsRequest!.mobile ='';
-    updateRegBankingDetailsRequest!.bankName ='';
-    updateRegBankingDetailsRequest!.ifscCode ='';
-    updateRegBankingDetailsRequest!.swiftCode ='';
-    updateRegBankingDetailsRequest!.accountNum ='';
-    updateRegBankingDetailsRequest!.photoidNum ='';
-    updateRegBankingDetailsRequest!.photoidUrl ='';
-    updateRegBankingDetailsRequest!.panCardUrl ='';
-    updateRegBankingDetailsRequest!.passportNum ='';
-    updateRegBankingDetailsRequest!.passportUrl ='';
-    updateRegBankingDetailsRequest!.authkeyMobile ='';
-    updateRegBankingDetailsRequest!.photoidBase64 ='';
-    updateRegBankingDetailsRequest!.termCondition ='';
-    updateRegBankingDetailsRequest!.adhaarCardUrl ='';
-    updateRegBankingDetailsRequest!.passportBase64 ='';
-
-
+    updateRegBankingDetailsRequest!.email = '';
+    updateRegBankingDetailsRequest!.mobile = '';
+    updateRegBankingDetailsRequest!.bankName = '';
+    updateRegBankingDetailsRequest!.ifscCode = '';
+    updateRegBankingDetailsRequest!.swiftCode = '';
+    updateRegBankingDetailsRequest!.accountNum = '';
+    updateRegBankingDetailsRequest!.photoidNum = '';
+    updateRegBankingDetailsRequest!.photoidUrl = '';
+    updateRegBankingDetailsRequest!.panCardUrl = '';
+    updateRegBankingDetailsRequest!.passportNum = '';
+    updateRegBankingDetailsRequest!.passportUrl = '';
+    updateRegBankingDetailsRequest!.authkeyMobile = '';
+    updateRegBankingDetailsRequest!.photoidBase64 = '';
+    updateRegBankingDetailsRequest!.termCondition = '';
+    updateRegBankingDetailsRequest!.adhaarCardUrl = '';
+    updateRegBankingDetailsRequest!.passportBase64 = '';
 
     HttpResponse httpResponse = await profileRepo!.updateRegBankingDetails(updateRegBankingDetailsRequest);
 
     if (httpResponse.status == 200) {}
-    aadharBase64=null;
-    panBase64=null;
+    aadharBase64 = null;
+    panBase64 = null;
     isloading = false;
     return httpResponse;
   }
@@ -250,6 +295,7 @@ abstract class _ProfileViewModel with Store {
 
   @observable
   GetRegInfoResponse? getRegInfoResponse = GetRegInfoResponse();
+
   Future<HttpResponse> getRegInfo() async {
     isloading = true;
 
@@ -259,6 +305,28 @@ abstract class _ProfileViewModel with Store {
       getRegInfoResponse = httpResponse.data;
     }
     isloading = false;
+    return httpResponse;
+  }
+
+  @observable
+  bool isloadingcity = false;
+  @observable
+  GetCityResponse? getCityResponse = GetCityResponse();
+
+  Future<HttpResponse> getCity(String stateID) async {
+    isloadingcity = true;
+    GetCityRequestModel model = GetCityRequestModel();
+    model.authkeyWeb = prefrence.getAuthKeyWeb();
+    model.userid = prefrence.getUserId();
+    model.authkeyMobile = '';
+    model.stateId = int.tryParse(stateID) ?? 0;
+
+    HttpResponse httpResponse = await profileRepo!.getCity(model);
+
+    if (httpResponse.status == 200) {
+      getCityResponse = httpResponse.data;
+    }
+    isloadingcity = false;
     return httpResponse;
   }
 }

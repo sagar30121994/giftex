@@ -1,7 +1,7 @@
 import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:giftex/data/local/client/prefs.dart';
-import 'package:giftex/data/network/models/request/webapimodel/insertcareerformrequestmodel.dart';
 import 'package:giftex/data/network/models/responce/cmsweb/careersresponse.dart';
 import 'package:giftex/data/network/models/responce/cmsweb/insertCareerFormResponse.dart';
 import 'package:giftex/data/network/models/responce/cmsweb/whoweare.dart';
@@ -15,6 +15,7 @@ import 'package:giftex/data/network/models/responce/home/recordpricelots.dart';
 import 'package:giftex/data/network/models/responce/lot/upcominglotsresponse.dart';
 import 'package:giftex/data/network/models/responce/news/blogsresponse.dart';
 import 'package:giftex/data/network/models/responce/news/newsreponse.dart';
+
 import '../../base/base.dart' as BaseUrl;
 import '../../base/endpoints.dart' as endPoints;
 import '../../client/dioclient.dart';
@@ -62,8 +63,7 @@ class WebCmsApiModelRepo {
     return httpResponse;
   }
 
-  Future<HttpResponse> getArtsMovement() async
-  {
+  Future<HttpResponse> getArtsMovement() async {
     HttpResponse httpResponse = HttpResponse();
     httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
     await httpClient!.post(BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().GetArtMovement, body: {
@@ -532,21 +532,21 @@ class WebCmsApiModelRepo {
     return httpResponse;
   }
 
-  Future<HttpResponse> insertCareerForm(String fullname,String email, String mobile, String resumebase64) async {
+  Future<HttpResponse> insertCareerForm(String fullname, String email, String mobile, String resumebase64) async {
     HttpResponse httpResponse = HttpResponse();
     // String userlogin = json.encode(model);
     httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
-    await httpClient!.post(BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().insertcareerform,
-        body: {"authkey_web": "${localSharedPrefrence!.authkey ?? ''}",
+    await httpClient!.post(BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().insertcareerform, body: {
+      "authkey_web": "${localSharedPrefrence!.authkey ?? ''}",
       "authkey_mobile": "",
       "userid": "${localSharedPrefrence!.userId ?? ''}",
       "CRMClientID": "${localSharedPrefrence!.crmId ?? ''}",
-      "fullname" : fullname,
-      "emailid" : email,
-      "resume" : resumebase64,
-      "query" : "",
-      "jobtitle" : "",
-      "howyouknow" : "",
+      "fullname": fullname,
+      "emailid": email,
+      "resume": resumebase64,
+      "query": "",
+      "jobtitle": "",
+      "howyouknow": "",
     }).then((responce) async {
       print(responce);
       if (responce.statusCode == 200) {
@@ -569,7 +569,6 @@ class WebCmsApiModelRepo {
 
     return httpResponse;
   }
-
 
   Future<HttpResponse> getBlogsDetails() async {
     HttpResponse httpResponse = HttpResponse();

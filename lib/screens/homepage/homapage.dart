@@ -284,25 +284,24 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                     color: Colors.black,
                                     height: 1,
                                   ),
-
                                   Spacer(),
-                                  Container(
-                                    height: 70,
-                                    padding: EdgeInsets.all(20),
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: AssetImage("image/Rectangle Copy.png"),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-
-                                    // child:
-                                    // Icon(Icons.cale)
-                                    child: Image.asset(
-                                      "image/calender.png",
-                                      color: Color(0xff000000),
-                                    ),
-                                  )
+                                  // Container(
+                                  //   height: 70,
+                                  //   padding: EdgeInsets.all(20),
+                                  //   decoration: BoxDecoration(
+                                  //     image: DecorationImage(
+                                  //       image: AssetImage("image/Rectangle Copy.png"),
+                                  //       fit: BoxFit.cover,
+                                  //     ),
+                                  //   ),
+                                  //
+                                  //   // child:
+                                  //   // Icon(Icons.cale)
+                                  //   child: Image.asset(
+                                  //     "image/calender.png",
+                                  //     color: Color(0xff000000),
+                                  //   ),
+                                  // )
                                 ],
                               );
                       }),

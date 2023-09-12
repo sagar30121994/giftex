@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/data/local/client/prefs.dart';
 import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
-import 'package:giftex/screens/faq/faq.dart';
 import 'package:giftex/screens/termsandconditions/termsandconditions.dart';
 import 'package:giftex/viewmodel/user/footerviewmodel.dart';
 
@@ -383,9 +382,7 @@ class _FooterState extends State<Footer> {
                                 // ),
                                 InkWell(
                                   onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => FaqPage()));
                                     bottomViewModel.selectedIndex = 17;
-                                    // Navigator.push(context, MaterialPageRoute(builder: (context) => FaqPage()));
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 20.0, top: 16),

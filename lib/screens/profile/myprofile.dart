@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:giftex/data/network/models/httpreponsehandler.dart';
+import 'package:giftex/data/network/models/responce/profile/GetRegInfoResponse.dart';
 import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
 import 'package:giftex/viewmodel/bottomviewmodel.dart';
+import 'package:giftex/viewmodel/profile/profileviewmodel.dart';
 import 'package:intl/intl.dart';
 
+import '../../data/network/models/responce/profile/GetCityResponse.dart';
 import '../components/footer/footer.dart';
 import '../components/header.dart';
+
+ProfileViewModel profileViewModel = ProfileViewModel();
 
 class MyProfilepage extends StatefulWidget {
   BottomViewModel bottomViewModel;
@@ -17,7 +24,16 @@ class MyProfilepage extends StatefulWidget {
 
 class _MyProfilepageState extends State<MyProfilepage> {
   int _pageIndex = 0;
+  CountryList? selectedCountry;
+  IndianStateList? selectedState;
+  CityList? selectedCity;
   String type = "account";
+  String _addressLine2 = "";
+  String _yourName = "";
+  String _addressLine1 = "";
+  String _pinCode = "";
+  String _gstNumber = "";
+  int addressCount = 0;
   TextEditingController nameController = TextEditingController();
   TextEditingController adharController = TextEditingController();
   TextEditingController panController = TextEditingController();
@@ -30,10 +46,20 @@ class _MyProfilepageState extends State<MyProfilepage> {
   TextEditingController depositmodeController = TextEditingController();
   TextEditingController depositAmountController = TextEditingController();
   TextEditingController bidLimitController = TextEditingController();
+  String newAddress = '';
+
+  Future laodData() async {
+    await profileViewModel.getRegInfo();
+    setState(() {
+      selectedCountry = profileViewModel.getRegInfoResponse!.countryList!.first;
+      selectedState = profileViewModel.getRegInfoResponse!.indianStateList!.first;
+    });
+  }
 
   @override
   void initState() {
-    // TODO: implement initState
+    laodData();
+
     nameController.text =
         "${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.basicDetails!.firstName ?? '')} ${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.basicDetails!.lastName ?? '')}";
     adharController.text =
@@ -60,6 +86,8 @@ class _MyProfilepageState extends State<MyProfilepage> {
           "${formateNumber('${widget.bottomViewModel.profileViewModel!.dashboradOverviewResponse!.totalSpent}')}";
       depositmodeController.text = "";
     });
+
+    addressCount = widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address!.length;
     super.initState();
   }
 
@@ -67,6 +95,36 @@ class _MyProfilepageState extends State<MyProfilepage> {
     var f = NumberFormat('##,##,##,##,###.##', 'HI');
 
     return f.format(double.parse(number));
+  }
+
+  void _showDetailsDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('New Addres'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Address Line 1 : $_addressLine2'),
+              Text('Address Line 2 : $_addressLine1'),
+              Text('Your Name: $_yourName'),
+              Text('Pin Code: $_pinCode'),
+              Text('GST Numberp: $_gstNumber'),
+            ],
+          ),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -388,10 +446,10 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                   color: Colors.black,
                                   fontWeight: FontWeight.w500,
                                 ),
-                            decoration:
-                                InputDecoration(labelText: 'Date of Birth',
-                                    // hintText: '22/03/1998',
-                                    isDense: true),
+                            decoration: InputDecoration(
+                                labelText: 'Date of Birth',
+                                // hintText: '22/03/1998',
+                                isDense: true),
                           ),
                         ),
                         Container(
@@ -406,7 +464,8 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                   color: Colors.black,
                                   fontWeight: FontWeight.w500,
                                 ),
-                            decoration: InputDecoration(labelText: 'Gender',
+                            decoration: InputDecoration(
+                                labelText: 'Gender',
                                 // hintText: 'Male',
                                 isDense: true),
                           ),
@@ -478,7 +537,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                             ),
 
                                             Flexible(
-                                              flex: 2,
+                                              flex: 3,
                                               child: ElevatedButton(
                                                 style: ButtonStyle(
                                                     backgroundColor: MaterialStateProperty.all(index == 0
@@ -487,7 +546,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                                         RoundedRectangleBorder(
                                                             borderRadius: BorderRadius.circular(18.0),
-                                                            side: BorderSide(color: Color(0xff747474), width: 0.38)))),
+                                                            side: BorderSide(color: Color(0xff747474))))),
                                                 onPressed: () {},
                                                 child: Container(
                                                   // padding: const EdgeInsets.only(right: 8.0,left: 8,top: 10,bottom: 10),
@@ -507,9 +566,21 @@ class _MyProfilepageState extends State<MyProfilepage> {
 
                                             Flexible(
                                                 flex: 1,
-                                                child: Image.asset(
-                                                  "image/oredit.png",
-                                                  height: 18,
+                                                child: InkWell(
+                                                  onTap: () async {
+                                                    await _showUpdateUserDialog(
+                                                        context,
+                                                        index,
+                                                        profileViewModel!.getUserAllDetailsResponse!.result != null
+                                                            ? (profileViewModel!.getUserAllDetailsResponse!.result!
+                                                                    .profile!.address![index].id! ??
+                                                                "")
+                                                            : '');
+                                                  },
+                                                  child: Image.asset(
+                                                    "image/oredit.png",
+                                                    height: 18,
+                                                  ),
                                                 )),
                                             // Icon(Icons.edit,size: 20,color: Color(0xff747474),),
                                             SizedBox(
@@ -565,8 +636,8 @@ class _MyProfilepageState extends State<MyProfilepage> {
                         // ),
 
                         InkWell(
-                          onTap: () {
-                            // Navigator.push(context, MaterialPageRoute(builder: (context) => GetOtppage()));
+                          onTap: () async {
+                            await _showAddUserDialog(context);
                           },
                           child: Container(
                             height: 50,
@@ -744,7 +815,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Increade Bid Limit',
+                                    'Increase Bid Limit',
                                     style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                           color: Color(0XFFFFFFFF),
                                           fontWeight: FontWeight.w600,
@@ -799,6 +870,667 @@ class _MyProfilepageState extends State<MyProfilepage> {
       // bottomNavigationBar: CommonBottumNavBar(3),
       // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       // floatingActionButton: CommonFloatingActionButton(),
+    );
+  }
+
+  Future<void> _showAddUserDialog(BuildContext context) async {
+    TextEditingController _YourNameController = TextEditingController();
+    TextEditingController _AddressLine1Controller = TextEditingController();
+    TextEditingController _AddressLine2Controller = TextEditingController();
+    TextEditingController _PinCodeController = TextEditingController();
+    TextEditingController _GSTNumberController = TextEditingController();
+    await profileViewModel.getCity("15");
+    selectedCountry = profileViewModel.getRegInfoResponse!.countryList![98];
+    selectedState = profileViewModel.getRegInfoResponse!.indianStateList![14];
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(builder: (context, setState) {
+          return AlertDialog(
+            scrollable: true,
+            title: Text("Add New Address"),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                  child: TextField(
+                    controller: _YourNameController,
+                    // onChanged: (str) => loginViewModel.setName(str),
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.name,
+                    enableSuggestions: true,
+
+                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(left: 8),
+                      border: InputBorder.none,
+                      labelText: 'Full Name',
+
+                      // errorText: loginViewModel.login1ViewModelErrorState.name,
+                      // prefixIcon:
+                      // prefixIcon: ,
+                      // icon: Image.asset("image/people.png", height: 32),
+                      filled: true,
+                      isDense: false,
+                      fillColor: Color(0xffFFFFFF),
+                      // isDense: true
+                    ),
+                  ),
+                ),
+                SizedBox(height: 8),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                  child: TextField(
+                    controller: _AddressLine1Controller,
+                    // onChanged: (str) => loginViewModel.setName(str),
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.name,
+                    enableSuggestions: true,
+
+                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(left: 8),
+                      border: InputBorder.none,
+                      labelText: 'Address Line 1',
+
+                      // errorText: loginViewModel.login1ViewModelErrorState.name,
+                      // prefixIcon:
+                      // prefixIcon: ,
+                      // icon: Image.asset("image/people.png", height: 32),
+                      filled: true,
+                      isDense: false,
+                      fillColor: Color(0xffFFFFFF),
+                      // isDense: true
+                    ),
+                  ),
+                ),
+                SizedBox(height: 8),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                  child: TextField(
+                    controller: _AddressLine2Controller,
+                    // onChanged: (str) => loginViewModel.setName(str),
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.name,
+                    enableSuggestions: true,
+
+                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(left: 8),
+                      border: InputBorder.none,
+                      labelText: 'Address Line 2',
+
+                      // prefixIcon:
+                      // prefixIcon: ,
+                      // icon: Image.asset("image/people.png", height: 32),
+                      filled: true,
+                      isDense: false,
+                      fillColor: Color(0xffFFFFFF),
+                      // isDense: true
+                    ),
+                  ),
+                ),
+                SizedBox(height: 8),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                  child: TextField(
+                    controller: _PinCodeController,
+                    // onChanged: (str) => loginViewModel.setName(str),
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.name,
+                    enableSuggestions: true,
+
+                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(left: 8),
+                      border: InputBorder.none,
+                      labelText: 'Pin Code',
+
+                      filled: true,
+                      isDense: false,
+                      fillColor: Color(0xffFFFFFF),
+                      // isDense: true
+                    ),
+                  ),
+                ),
+                SizedBox(height: 8),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                  child: DropdownButtonFormField(
+                      value: selectedCountry,
+                      isExpanded: true,
+                      hint: Text("Select Country"),
+                      items: profileViewModel.getRegInfoResponse!.countryList!.map((e) {
+                        return DropdownMenuItem(
+                          alignment: Alignment.centerLeft,
+                          child: Container(
+                              child: Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: Text(
+                              '${e.name ?? ''}',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          )),
+                          value: e,
+                        );
+                      }).toList(),
+                      onChanged: (CountryList? v) {
+                        setState(() {
+                          selectedCountry = v;
+                        });
+                      }),
+                ),
+                SizedBox(height: 16),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                  child: DropdownButtonFormField(
+                      value: selectedState,
+                      isExpanded: true,
+                      hint: Text("Select State"),
+                      items: profileViewModel.getRegInfoResponse!.indianStateList!.map((e) {
+                        return DropdownMenuItem(
+                          alignment: Alignment.centerLeft,
+                          child: Container(
+                              child: Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: Text(
+                              '${e.name ?? ''}',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          )),
+                          value: e,
+                        );
+                      }).toList(),
+                      onChanged: (IndianStateList? v) async {
+                        setState(() {
+                          selectedState = v;
+                        });
+                        await profileViewModel.getCity(selectedState!.id ?? '');
+                      }),
+                ),
+                SizedBox(height: 16),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                  child: Observer(builder: (context) {
+                    return profileViewModel.isloadingcity
+                        ? LinearProgressIndicator(
+                            minHeight: 2,
+                          )
+                        : profileViewModel.getCityResponse == null
+                            ? Container()
+                            : profileViewModel.getCityResponse!.cityList == null
+                                ? Container()
+                                : DropdownButtonFormField<CityList?>(
+                                    value: selectedCity,
+                                    isExpanded: true,
+                                    hint: Text("Select City"),
+                                    items: profileViewModel.getCityResponse!.cityList!.map((CityList? e) {
+                                      return DropdownMenuItem(
+                                        alignment: Alignment.centerLeft,
+                                        child: Container(
+                                            child: Padding(
+                                          padding: const EdgeInsets.only(left: 8.0),
+                                          child: Text(
+                                            '${e!.name ?? ''}',
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        )),
+                                        value: e,
+                                      );
+                                    }).toList(),
+                                    onChanged: (CityList? v) {
+                                      setState(() {
+                                        selectedCity = v;
+                                      });
+                                    });
+                  }),
+                ),
+                SizedBox(height: 16),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                  child: TextField(
+                    controller: _GSTNumberController,
+                    // onChanged: (str) => loginViewModel.setName(str),
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.name,
+                    enableSuggestions: true,
+
+                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(left: 8),
+                      border: InputBorder.none,
+                      labelText: 'GST Number',
+
+                      filled: true,
+                      isDense: false,
+                      fillColor: Color(0xffFFFFFF),
+                      // isDense: true
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  await profileViewModel.getCity("15");
+                  selectedState = profileViewModel.getRegInfoResponse!.indianStateList![14];
+                  String type = "Postal";
+                  if (addressCount == 0) {
+                    type = "Postal";
+                  } else {
+                    type = "Billing";
+                  }
+                  HttpResponse res = await profileViewModel.AddMyNewAddress(
+                      "",
+                      _YourNameController.text,
+                      _AddressLine1Controller.text,
+                      _AddressLine2Controller.text,
+                      _PinCodeController.text,
+                      _GSTNumberController.text,
+                      selectedCountry!.name ?? '',
+                      selectedState!.name ?? '',
+                      selectedCity!.name ?? '',
+                      type,
+                      "add");
+                  if (res.status == 200) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text(res.message ?? ''),
+                      backgroundColor: Colors.green,
+                    ));
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text(res.message ?? ''),
+                      backgroundColor: Colors.orange,
+                    ));
+                  }
+                  Navigator.of(context).pop();
+                },
+                child: Text('Save'),
+              ),
+            ],
+          );
+        });
+      },
+    );
+  }
+
+  Future<void> _showUpdateUserDialog(BuildContext context, int index, String id) async {
+    TextEditingController _YourNameController = TextEditingController();
+    TextEditingController _AddressLine1Controller = TextEditingController();
+    TextEditingController _AddressLine2Controller = TextEditingController();
+    TextEditingController _PinCodeController = TextEditingController();
+    TextEditingController _GSTNumberController = TextEditingController();
+    await profileViewModel.getCity("15");
+    selectedCountry = profileViewModel.getRegInfoResponse!.countryList![98];
+    selectedState = profileViewModel.getRegInfoResponse!.indianStateList![14];
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(builder: (context, setState) {
+          return AlertDialog(
+            scrollable: true,
+            title: Text("Update Address"),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                  child: TextField(
+                    controller: _YourNameController,
+                    // onChanged: (str) => loginViewModel.setName(str),
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.name,
+                    enableSuggestions: true,
+
+                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(left: 8),
+                      border: InputBorder.none,
+                      labelText: 'Full Name',
+                      hintText:
+                          "${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].yourName ?? ''}",
+
+                      // errorText: loginViewModel.login1ViewModelErrorState.name,
+                      // prefixIcon:
+                      // prefixIcon: ,
+                      // icon: Image.asset("image/people.png", height: 32),
+                      filled: true,
+                      isDense: false,
+                      fillColor: Color(0xffFFFFFF),
+                      // isDense: true
+                    ),
+                  ),
+                ),
+                SizedBox(height: 8),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                  child: TextField(
+                    controller: _AddressLine1Controller,
+                    // onChanged: (str) => loginViewModel.setName(str),
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.name,
+                    enableSuggestions: true,
+
+                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(left: 8),
+                      border: InputBorder.none,
+                      labelText: 'Address Line 1',
+                      hintText:
+                          "${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].addLine1 ?? ''}",
+
+                      // errorText: loginViewModel.login1ViewModelErrorState.name,
+                      // prefixIcon:
+                      // prefixIcon: ,
+                      // icon: Image.asset("image/people.png", height: 32),
+                      filled: true,
+                      isDense: false,
+                      fillColor: Color(0xffFFFFFF),
+                      // isDense: true
+                    ),
+                  ),
+                ),
+                SizedBox(height: 8),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                  child: TextField(
+                    controller: _AddressLine2Controller,
+                    // onChanged: (str) => loginViewModel.setName(str),
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.name,
+                    enableSuggestions: true,
+
+                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(left: 8),
+                      border: InputBorder.none,
+                      labelText: 'Address Line 2',
+                      hintText:
+                          "${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].addLine2 ?? ''}",
+
+                      // prefixIcon:
+                      // prefixIcon: ,
+                      // icon: Image.asset("image/people.png", height: 32),
+                      filled: true,
+                      isDense: false,
+                      fillColor: Color(0xffFFFFFF),
+                      // isDense: true
+                    ),
+                  ),
+                ),
+                SizedBox(height: 8),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                  child: TextField(
+                    controller: _PinCodeController,
+                    // onChanged: (str) => loginViewModel.setName(str),
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.name,
+                    enableSuggestions: true,
+
+                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(left: 8),
+                      border: InputBorder.none,
+                      labelText: 'Pin Code',
+                      hintText:
+                          "${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].pinCode ?? ''}",
+
+                      filled: true,
+                      isDense: false,
+                      fillColor: Color(0xffFFFFFF),
+                      // isDense: true
+                    ),
+                  ),
+                ),
+                SizedBox(height: 8),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                  child: DropdownButtonFormField(
+                      value: selectedCountry,
+                      isExpanded: true,
+                      hint: Text(
+                          "${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].country ?? ''}"),
+                      items: profileViewModel.getRegInfoResponse!.countryList!.map((e) {
+                        return DropdownMenuItem(
+                          alignment: Alignment.centerLeft,
+                          child: Container(
+                              child: Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: Text(
+                              '${e.name ?? ''}',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          )),
+                          value: e,
+                        );
+                      }).toList(),
+                      onChanged: (CountryList? v) {
+                        setState(() {
+                          selectedCountry = v;
+                        });
+                      }),
+                ),
+                SizedBox(height: 16),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                  child: DropdownButtonFormField(
+                      value: selectedState,
+                      isExpanded: true,
+                      hint: Text(
+                          "${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].state ?? ''}"),
+                      items: profileViewModel.getRegInfoResponse!.indianStateList!.map((e) {
+                        return DropdownMenuItem(
+                          alignment: Alignment.centerLeft,
+                          child: Container(
+                              child: Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: Text(
+                              '${e.name ?? ''}',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          )),
+                          value: e,
+                        );
+                      }).toList(),
+                      onChanged: (IndianStateList? v) async {
+                        setState(() {
+                          selectedState = v;
+                        });
+                        await profileViewModel.getCity(selectedState!.id ?? '');
+                      }),
+                ),
+                SizedBox(height: 16),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                  child: Observer(builder: (context) {
+                    return profileViewModel.isloadingcity
+                        ? LinearProgressIndicator(
+                            minHeight: 2,
+                          )
+                        : profileViewModel.getCityResponse == null
+                            ? Container()
+                            : profileViewModel.getCityResponse!.cityList == null
+                                ? Container()
+                                : DropdownButtonFormField<CityList?>(
+                                    value: selectedCity,
+                                    isExpanded: true,
+                                    hint: Text(
+                                        "${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].city ?? ''}"),
+                                    items: profileViewModel.getCityResponse!.cityList!.map((CityList? e) {
+                                      return DropdownMenuItem(
+                                        alignment: Alignment.centerLeft,
+                                        child: Container(
+                                            child: Padding(
+                                          padding: const EdgeInsets.only(left: 8.0),
+                                          child: Text(
+                                            '${e!.name ?? ''}',
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        )),
+                                        value: e,
+                                      );
+                                    }).toList(),
+                                    onChanged: (CityList? v) {
+                                      setState(() {
+                                        selectedCity = v;
+                                      });
+                                    });
+                  }),
+                ),
+                SizedBox(height: 16),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                  child: TextField(
+                    controller: _GSTNumberController,
+                    // onChanged: (str) => loginViewModel.setName(str),
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.name,
+                    enableSuggestions: true,
+
+                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(left: 8),
+                      border: InputBorder.none,
+                      labelText: 'GST Number',
+                      hintText:
+                          "${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].gstNum ?? ''}",
+
+                      filled: true,
+                      isDense: false,
+                      fillColor: Color(0xffFFFFFF),
+                      // isDense: true
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  await profileViewModel.getCity("15");
+                  selectedState = profileViewModel.getRegInfoResponse!.indianStateList![14];
+                  String type = "Postal";
+                  if (addressCount == 0) {
+                    type = "Postal";
+                  } else {
+                    type = "Billing";
+                  }
+                  HttpResponse res = await profileViewModel.AddMyNewAddress(
+                      id,
+                      _YourNameController.text,
+                      _AddressLine1Controller.text,
+                      _AddressLine2Controller.text,
+                      _PinCodeController.text,
+                      _GSTNumberController.text,
+                      selectedCountry!.name ?? '',
+                      selectedState!.name ?? '',
+                      selectedCity!.name ?? '',
+                      type,
+                      "update");
+                  if (res.status == 200) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text(res.message ?? ''),
+                      backgroundColor: Colors.green,
+                    ));
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text(res.message ?? ''),
+                      backgroundColor: Colors.orange,
+                    ));
+                  }
+                  Navigator.of(context).pop();
+                },
+                child: Text('Save'),
+              ),
+            ],
+          );
+        });
+      },
     );
   }
 }
