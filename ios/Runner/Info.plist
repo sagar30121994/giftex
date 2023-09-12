@@ -6,6 +6,14 @@
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>LSApplicationQueriesSchemes</key>
+    <array>
+    <string>phonepe</string>
+    <string>paytm</string>
+    <string>tez</string>
+    </array>
+    <key>NSCameraUsageDescription</key>
+    <string>Camera is being use for Image Capture of profile and QR scanner in payment gateway</string>
 	<key>CFBundleDisplayName</key>
 	<string>Giftex</string>
 	<key>CFBundleExecutable</key>

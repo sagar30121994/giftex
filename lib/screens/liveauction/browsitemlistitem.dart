@@ -41,7 +41,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
     // if(countdownTimer != null){
     //   countdownTimer!.cancel();
     // }
-    if ((widget.lots.status ?? "") != "UpComing") {
+    if ((widget.lots.status ?? "") == "Live") {
       setState(() {
         myDuration = Duration(seconds: int.parse(widget.lots.liveStatus!.remainingSeconds ?? "0"));
       });
@@ -54,7 +54,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
     preference = new LocalSharedPrefrence();
     print("remaining time ${widget.lots.status!}");
 
-    if ((widget.lots.status ?? "") != "UpComing") {
+    if ((widget.lots.status ?? "") == "Live") {
       initiateTimer();
 
       startTimer();

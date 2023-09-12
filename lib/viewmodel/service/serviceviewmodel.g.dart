@@ -122,6 +122,23 @@ mixin _$ServiceViewModel on _ServiceViewModel, Store {
     });
   }
 
+  late final _$insertReachUsFormResponseAtom = Atom(
+      name: '_ServiceViewModel.insertReachUsFormResponse', context: context);
+
+  @override
+  InsertReachUsFormResponse? get insertReachUsFormResponse {
+    _$insertReachUsFormResponseAtom.reportRead();
+    return super.insertReachUsFormResponse;
+  }
+
+  @override
+  set insertReachUsFormResponse(InsertReachUsFormResponse? value) {
+    _$insertReachUsFormResponseAtom
+        .reportWrite(value, super.insertReachUsFormResponse, () {
+      super.insertReachUsFormResponse = value;
+    });
+  }
+
   late final _$fullnameAtom =
       Atom(name: '_ServiceViewModel.fullname', context: context);
 
@@ -183,6 +200,22 @@ mixin _$ServiceViewModel on _ServiceViewModel, Store {
   set resume(String value) {
     _$resumeAtom.reportWrite(value, super.resume, () {
       super.resume = value;
+    });
+  }
+
+  late final _$queryAtom =
+      Atom(name: '_ServiceViewModel.query', context: context);
+
+  @override
+  String get query {
+    _$queryAtom.reportRead();
+    return super.query;
+  }
+
+  @override
+  set query(String value) {
+    _$queryAtom.reportWrite(value, super.query, () {
+      super.query = value;
     });
   }
 
@@ -251,6 +284,17 @@ mixin _$ServiceViewModel on _ServiceViewModel, Store {
   }
 
   @override
+  dynamic setQuery(String value) {
+    final _$actionInfo = _$_ServiceViewModelActionController.startAction(
+        name: '_ServiceViewModel.setQuery');
+    try {
+      return super.setQuery(value);
+    } finally {
+      _$_ServiceViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 isloading: ${isloading},
@@ -260,10 +304,12 @@ careersResponse: ${careersResponse},
 pressResponse: ${pressResponse},
 blogsResponse: ${blogsResponse},
 insertCareerFormResponse: ${insertCareerFormResponse},
+insertReachUsFormResponse: ${insertReachUsFormResponse},
 fullname: ${fullname},
 email: ${email},
 mobile: ${mobile},
 resume: ${resume},
+query: ${query},
 homeNewsVideosBlogsResponse: ${homeNewsVideosBlogsResponse}
     ''';
   }

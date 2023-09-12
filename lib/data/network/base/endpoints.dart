@@ -150,6 +150,7 @@ class WebCMSApiModel {
 
   // final String getblogs = 'getHashStr';
   final String getblogdetails = 'GetPaymentGrid';
+  final String getPaymentGrid = 'GetPaymentGrid';
   final String getourcollections = 'artistdata';
   final String getartmovement = 'InsertsubscribeForm';
   final String GetArtMovement = 'GetArtMovement';
