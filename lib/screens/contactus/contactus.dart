@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:giftex/data/local/client/prefs.dart';
 import 'package:giftex/screens/components/footer/footer.dart';
-import 'package:giftex/screens/components/header.dart';
-import 'package:flutter_map/flutter_map.dart';
+import 'package:giftex/screens/components/header.dart'; // import 'package:giftex/screens/components/headerer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactusPage extends StatefulWidget {
@@ -32,12 +31,22 @@ class _ContactusPageState extends State<ContactusPage> {
     super.dispose();
   }
 
-  void _launchGoogleMaps(double latitude, double longitude) async {
-    final url = 'https://www.google.com/maps?q=$latitude,$longitude';
-    if (await canLaunch(url)) {
-      await launch(url);
+  // void _launchGoogleMaps(double latitude, double longitude) async {
+  //   final url = 'https://www.google.com/maps?q=$latitude,$longitude';
+  //   if (await canLaunch(url)) {
+  //     await launch(url);
+  //   } else {
+  //     throw 'Could not launch Google Maps';
+  //   }
+  // }
+
+  static Future<void> _launchGoogleMaps(double latitude, double longitude) async {
+    String googleUrl = 'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
+    String encodedURl = Uri.encodeFull(googleUrl);
+    if (await canLaunch(encodedURl) != null) {
+      await launch(encodedURl);
     } else {
-      throw 'Could not launch Google Maps';
+      throw 'Could not open the map.';
     }
   }
 
@@ -245,9 +254,9 @@ class _ContactusPageState extends State<ContactusPage> {
                     Container(
                       height: 300,
                       child: GestureDetector(
-                        onTap: (){
-                          _launchGoogleMaps(18.9276052399, 72.8327411413);
-                        },
+                          onTap: () {
+                            _launchGoogleMaps(18.9276052399, 72.8327411413);
+                          },
                           child: Image.asset('image/headoffice.jpeg')),
                     ),
                     // SizedBox(height: 8),
@@ -289,9 +298,7 @@ class _ContactusPageState extends State<ContactusPage> {
                             height: 16,
                           ),
                           Divider(),
-                          SizedBox(
-                            height: 16
-                          ),
+                          SizedBox(height: 16),
                           Row(
                             children: [
                               Image.asset(
@@ -342,9 +349,9 @@ class _ContactusPageState extends State<ContactusPage> {
                     Container(
                       height: 300,
                       child: GestureDetector(
-                        onTap: (){
-                          _launchGoogleMaps(19.08261,72.840524);
-                        },
+                          onTap: () {
+                            _launchGoogleMaps(19.08261, 72.840524);
+                          },
                           child: Image.asset('image/gallery.jpeg')),
                     ),
                     SizedBox(
