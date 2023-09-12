@@ -1,8 +1,12 @@
 // import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/screens/kyc/paydeposit.dart';
 import 'package:giftex/viewmodel/profile/profileviewmodel.dart';
+import 'package:giftex/data/network/models/responce/profile/GetRegInfoResponse.dart';
+import '../../data/network/models/responce/profile/GetCityResponse.dart';
 
 ProfileViewModel profileViewModel = ProfileViewModel();
 
@@ -16,6 +20,7 @@ class _KYCAddresspageState extends State<KYCAddresspage> {
 
   @override
   void initState() {
+    loadData();
     // TODO: implement initState
     super.initState();
   }
@@ -196,10 +201,10 @@ class _KYCAddresspageState extends State<KYCAddresspage> {
                       SizedBox(
                         height: 16,
                       ),
-                      Image.asset("image/MAp (1).png"),
+                     /* Image.asset("image/MAp (1).png"),
                       SizedBox(
                         height: 16,
-                      ),
+                      ),*/
                       Row(
                         children: [
                           Text(
@@ -278,9 +283,366 @@ class _KYCAddresspageState extends State<KYCAddresspage> {
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 16,
+
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                        child: Observer(builder: (context) {
+                          return TextField(
+                            controller: _YourNameController,
+                            onChanged: (str) {
+                              profileViewModel.setYourName(str);
+                            },
+                            textInputAction: TextInputAction.next,
+                            keyboardType: TextInputType.name,
+                            enableSuggestions: true,
+                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(left: 8),
+                              border: InputBorder.none,
+                              labelText: 'Full Name',
+
+                              errorText: profileViewModel.profileViewModelErrorState.yourName,
+                              // prefixIcon:
+                              // prefixIcon: ,
+                              // icon: Image.asset("image/people.png", height: 32),
+                              filled: true,
+                              isDense: false,
+                              fillColor: Color(0xffFFFFFF),
+                              // isDense: true
+                            ),
+                          );
+                        }),
+                      ),
+                      SizedBox(height: 8),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                        child: Observer(builder: (context) {
+                          return TextField(
+                            controller: _AddressLine1Controller,
+                            onChanged: (str) {
+                              profileViewModel.setAddressLine1(str);
+                            },
+                            textInputAction: TextInputAction.next,
+                            keyboardType: TextInputType.name,
+                            enableSuggestions: true,
+                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(left: 8),
+                              border: InputBorder.none,
+                              labelText: 'Address Line 1',
+
+                              errorText: profileViewModel.profileViewModelErrorState.addressLine1,
+                              // prefixIcon:
+                              // prefixIcon: ,
+                              // icon: Image.asset("image/people.png", height: 32),
+                              filled: true,
+                              isDense: false,
+                              fillColor: Color(0xffFFFFFF),
+                              // isDense: true
+                            ),
+                          );
+                        }),
+                      ),
+                      SizedBox(height: 8),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                        child: Observer(builder: (context) {
+                          return TextField(
+                            controller: _AddressLine2Controller,
+                            onChanged: (str) {
+                              profileViewModel.setAddressLine1(str);
+                            },
+                            textInputAction: TextInputAction.next,
+                            keyboardType: TextInputType.name,
+                            enableSuggestions: true,
+                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(left: 8),
+                              border: InputBorder.none,
+                              labelText: 'Address Line 2',
+                              errorText: profileViewModel.profileViewModelErrorState.addressLine2,
+                              // prefixIcon:
+                              // prefixIcon: ,
+                              // icon: Image.asset("image/people.png", height: 32),
+                              filled: true,
+                              isDense: false,
+                              fillColor: Color(0xffFFFFFF),
+                              // isDense: true
+                            ),
+                          );
+                        }),
+                      ),
+                      SizedBox(height: 8),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                        child: Observer(builder: (context) {
+                          return TextField(
+                            controller: _PinCodeController,
+                            onChanged: (str) {
+                              profileViewModel.setPinCode(str);
+                            },
+                            textInputAction: TextInputAction.next,
+                            keyboardType: TextInputType.number,
+                            enableSuggestions: true,
+                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            maxLength: 6,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                            ],
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(left: 8),
+                              border: InputBorder.none,
+                              labelText: 'Pin Code',
+                              errorText: profileViewModel.profileViewModelErrorState.pinCode,
+                              filled: true,
+                              isDense: false,
+                              fillColor: Color(0xffFFFFFF),
+                              // isDense: true
+                            ),
+                          );
+                        }),
+                      ),
+                      SizedBox(height: 8),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                        child: DropdownButtonFormField<CountryList?>(
+                            value: selectedCountry,
+                            isExpanded: true,
+                            hint: Text("Select Country"),
+                            items: (profileViewModel.getRegInfoResponse!.countryList ?? [])!.map((CountryList? e) {
+                              return DropdownMenuItem(
+                                alignment: Alignment.centerLeft,
+                                child: Container(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: Text(
+                                        '${e!.name ?? ''}',
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    )),
+                                value: e,
+                              );
+                            }).toList(),
+                            onChanged: (CountryList? v) {
+                              setState(() {
+                                selectedCountry = v;
+                              });
+                            }),
+                      ),
+                      SizedBox(height: 16),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                        child: DropdownButtonFormField<IndianStateList?>(
+                            value: selectedState,
+                            isExpanded: true,
+                            hint: Text("Select State"),
+                            items: (profileViewModel.getRegInfoResponse!.indianStateList ?? [])!.map((IndianStateList? e) {
+                              return DropdownMenuItem(
+                                alignment: Alignment.centerLeft,
+                                child: Container(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: Text(
+                                        '${e!.name ?? ''}',
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    )),
+                                value: e,
+                              );
+                            }).toList(),
+                            onChanged: (IndianStateList? v) async {
+                              setState(() {
+                                selectedState = v;
+                              });
+                              await profileViewModel.getCity(selectedState!.id ?? '');
+                            }),
+                      ),
+                      SizedBox(height: 16),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                        child: Observer(builder: (context) {
+                          return profileViewModel.isloadingcity
+                              ? LinearProgressIndicator(
+                            minHeight: 2,
+                          )
+                              : profileViewModel.getCityResponse == null
+                              ? Container()
+                              : profileViewModel.getCityResponse!.cityList == null
+                              ? Container()
+                              : DropdownButtonFormField<CityList?>(
+                              value: selectedCity,
+                              isExpanded: true,
+                              hint: Text("Select City"),
+                              items: (profileViewModel.getCityResponse!.cityList ?? [])!.map((CityList? e) {
+                                return DropdownMenuItem(
+                                  alignment: Alignment.centerLeft,
+                                  child: Container(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left: 8.0),
+                                        child: Text(
+                                          '${e!.name ?? ''}',
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      )),
+                                  value: e,
+                                );
+                              }).toList(),
+                              onChanged: (CityList? v) {
+                                setState(() {
+                                  selectedCity = v;
+                                });
+                              });
+                        }),
+                      ),
+                      SizedBox(height: 16),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                        child: Observer(builder: (context) {
+                          return TextField(
+                            controller: _GSTNumberController,
+                            onChanged: (str) {
+                              profileViewModel.setGSTNumber(str);
+                            },
+                            textInputAction: TextInputAction.next,
+                            keyboardType: TextInputType.name,
+                            enableSuggestions: true,
+                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            maxLength: 15,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(left: 8),
+                              border: InputBorder.none,
+                              labelText: 'GST Number',
+                              errorText: profileViewModel.profileViewModelErrorState.gSTNumber,
+                              filled: true,
+                              isDense: false,
+                              fillColor: Color(0xffFFFFFF),
+                              // isDense: true
+                            ),
+                          );
+                        }),
+                      ),
+                    ],
+                  ),
                 ),
+                SizedBox(height: 16,),
+
+                InkWell(
+                  onTap: ()async {
+                    profileViewModel.validateAll();
+                    if ((selectedState == null)) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text('Please Select State'),
+                        backgroundColor: Colors.orangeAccent,
+                      ));
+                    } else if ((selectedCity == null)) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text('Please Select City'),
+                        backgroundColor: Colors.orangeAccent,
+                      ));
+                    } else if (profileViewModel.profileViewModelErrorState.hasErrors) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text('Please Enter all Mandatory Fields'),
+                        backgroundColor: Colors.orangeAccent,
+                      ));
+                    } else {
+                      await profileViewModel.getCity("15");
+                      selectedState = profileViewModel.getRegInfoResponse!.indianStateList == null
+                          ? null
+                          : profileViewModel.getRegInfoResponse!.indianStateList![14];
+                      String type = "Postal";
+
+
+                      profileViewModel.validateAll();
+                      HttpResponse res = await profileViewModel.AddMyNewAddress(
+                          "",
+                          _YourNameController.text,
+                          _AddressLine1Controller.text,
+                          _AddressLine2Controller.text,
+                          _PinCodeController.text,
+                          _GSTNumberController.text,
+                          (selectedCountry == null) ? '' : selectedCountry!.name ?? '',
+                          (selectedState == null) ? '' : selectedState!.name ?? '',
+                          (selectedCity == null) ? '' : selectedCity!.name ?? '',
+                          type,
+                          "add");
+                      if (res.status == 200) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(res.message ?? ''),
+                          backgroundColor: Colors.green,
+                        ));
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(res.message ?? ''),
+                          backgroundColor: Colors.orange,
+                        ));
+                      }
+                      Navigator.of(context).pop();
+                    }
+                  },
+                  child: Container(
+                    height: 50,
+                    width: MediaQuery.of(context).size.width * .75,
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(colors: [
+                          Color(0xff015000),
+                          Color(0xff023020),
+                          Color(0xff015000),
+                        ]),
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Center(
+                      child: Text(
+                        "SAVE",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          color: Color(0xffffffff),
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 16,),
+
                 InkWell(
                   onTap: () async {
                     HttpResponse res = await profileViewModel.UpdateRegMyAddress();
@@ -331,5 +693,387 @@ class _KYCAddresspageState extends State<KYCAddresspage> {
         ),
       ),
     );
+  }
+  CountryList? selectedCountry;
+  IndianStateList? selectedState;
+  CityList? selectedCity;
+  TextEditingController _YourNameController = TextEditingController();
+  TextEditingController _AddressLine1Controller = TextEditingController();
+  TextEditingController _AddressLine2Controller = TextEditingController();
+  TextEditingController _PinCodeController = TextEditingController();
+  TextEditingController _GSTNumberController = TextEditingController();
+
+  Future<void> _showAddUserDialog(BuildContext context) async {
+    TextEditingController _YourNameController = TextEditingController();
+    TextEditingController _AddressLine1Controller = TextEditingController();
+    TextEditingController _AddressLine2Controller = TextEditingController();
+    TextEditingController _PinCodeController = TextEditingController();
+    TextEditingController _GSTNumberController = TextEditingController();
+
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(builder: (context, setState) {
+          return AlertDialog(
+            scrollable: true,
+            title: Text("Add New Address"),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                  child: Observer(builder: (context) {
+                    return TextField(
+                      controller: _YourNameController,
+                      onChanged: (str) {
+                        profileViewModel.setYourName(str);
+                      },
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.name,
+                      enableSuggestions: true,
+                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.only(left: 8),
+                        border: InputBorder.none,
+                        labelText: 'Full Name',
+
+                        errorText: profileViewModel.profileViewModelErrorState.yourName,
+                        // prefixIcon:
+                        // prefixIcon: ,
+                        // icon: Image.asset("image/people.png", height: 32),
+                        filled: true,
+                        isDense: false,
+                        fillColor: Color(0xffFFFFFF),
+                        // isDense: true
+                      ),
+                    );
+                  }),
+                ),
+                SizedBox(height: 8),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                  child: Observer(builder: (context) {
+                    return TextField(
+                      controller: _AddressLine1Controller,
+                      onChanged: (str) {
+                        profileViewModel.setAddressLine1(str);
+                      },
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.name,
+                      enableSuggestions: true,
+                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.only(left: 8),
+                        border: InputBorder.none,
+                        labelText: 'Address Line 1',
+
+                        errorText: profileViewModel.profileViewModelErrorState.addressLine1,
+                        // prefixIcon:
+                        // prefixIcon: ,
+                        // icon: Image.asset("image/people.png", height: 32),
+                        filled: true,
+                        isDense: false,
+                        fillColor: Color(0xffFFFFFF),
+                        // isDense: true
+                      ),
+                    );
+                  }),
+                ),
+                SizedBox(height: 8),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                  child: Observer(builder: (context) {
+                    return TextField(
+                      controller: _AddressLine2Controller,
+                      onChanged: (str) {
+                        profileViewModel.setAddressLine1(str);
+                      },
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.name,
+                      enableSuggestions: true,
+                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.only(left: 8),
+                        border: InputBorder.none,
+                        labelText: 'Address Line 2',
+                        errorText: profileViewModel.profileViewModelErrorState.addressLine2,
+                        // prefixIcon:
+                        // prefixIcon: ,
+                        // icon: Image.asset("image/people.png", height: 32),
+                        filled: true,
+                        isDense: false,
+                        fillColor: Color(0xffFFFFFF),
+                        // isDense: true
+                      ),
+                    );
+                  }),
+                ),
+                SizedBox(height: 8),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                  child: Observer(builder: (context) {
+                    return TextField(
+                      controller: _PinCodeController,
+                      onChanged: (str) {
+                        profileViewModel.setPinCode(str);
+                      },
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.number,
+                      enableSuggestions: true,
+                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      maxLength: 6,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                      ],
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.only(left: 8),
+                        border: InputBorder.none,
+                        labelText: 'Pin Code',
+                        errorText: profileViewModel.profileViewModelErrorState.pinCode,
+                        filled: true,
+                        isDense: false,
+                        fillColor: Color(0xffFFFFFF),
+                        // isDense: true
+                      ),
+                    );
+                  }),
+                ),
+                SizedBox(height: 8),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                  child: DropdownButtonFormField<CountryList?>(
+                      value: selectedCountry,
+                      isExpanded: true,
+                      hint: Text("Select Country"),
+                      items: (profileViewModel.getRegInfoResponse!.countryList ?? [])!.map((CountryList? e) {
+                        return DropdownMenuItem(
+                          alignment: Alignment.centerLeft,
+                          child: Container(
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 8.0),
+                                child: Text(
+                                  '${e!.name ?? ''}',
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              )),
+                          value: e,
+                        );
+                      }).toList(),
+                      onChanged: (CountryList? v) {
+                        setState(() {
+                          selectedCountry = v;
+                        });
+                      }),
+                ),
+                SizedBox(height: 16),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                  child: DropdownButtonFormField<IndianStateList?>(
+                      value: selectedState,
+                      isExpanded: true,
+                      hint: Text("Select State"),
+                      items: (profileViewModel.getRegInfoResponse!.indianStateList ?? [])!.map((IndianStateList? e) {
+                        return DropdownMenuItem(
+                          alignment: Alignment.centerLeft,
+                          child: Container(
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 8.0),
+                                child: Text(
+                                  '${e!.name ?? ''}',
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              )),
+                          value: e,
+                        );
+                      }).toList(),
+                      onChanged: (IndianStateList? v) async {
+                        setState(() {
+                          selectedState = v;
+                        });
+                        await profileViewModel.getCity(selectedState!.id ?? '');
+                      }),
+                ),
+                SizedBox(height: 16),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                  child: Observer(builder: (context) {
+                    return profileViewModel.isloadingcity
+                        ? LinearProgressIndicator(
+                      minHeight: 2,
+                    )
+                        : profileViewModel.getCityResponse == null
+                        ? Container()
+                        : profileViewModel.getCityResponse!.cityList == null
+                        ? Container()
+                        : DropdownButtonFormField<CityList?>(
+                        value: selectedCity,
+                        isExpanded: true,
+                        hint: Text("Select City"),
+                        items: (profileViewModel.getCityResponse!.cityList ?? [])!.map((CityList? e) {
+                          return DropdownMenuItem(
+                            alignment: Alignment.centerLeft,
+                            child: Container(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 8.0),
+                                  child: Text(
+                                    '${e!.name ?? ''}',
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                )),
+                            value: e,
+                          );
+                        }).toList(),
+                        onChanged: (CityList? v) {
+                          setState(() {
+                            selectedCity = v;
+                          });
+                        });
+                  }),
+                ),
+                SizedBox(height: 16),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                  child: Observer(builder: (context) {
+                    return TextField(
+                      controller: _GSTNumberController,
+                      onChanged: (str) {
+                        profileViewModel.setGSTNumber(str);
+                      },
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.name,
+                      enableSuggestions: true,
+                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      maxLength: 15,
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.only(left: 8),
+                        border: InputBorder.none,
+                        labelText: 'GST Number',
+                        errorText: profileViewModel.profileViewModelErrorState.gSTNumber,
+                        filled: true,
+                        isDense: false,
+                        fillColor: Color(0xffFFFFFF),
+                        // isDense: true
+                      ),
+                    );
+                  }),
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  profileViewModel.validateAll();
+                  if ((selectedState == null)) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text('Please Select State'),
+                      backgroundColor: Colors.green,
+                    ));
+                  } else if ((selectedCity == null)) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text('Please Select City'),
+                      backgroundColor: Colors.orange,
+                    ));
+                  } else if (profileViewModel.profileViewModelErrorState.hasErrors) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text('Please Enter all Mandatory Fields'),
+                      backgroundColor: Colors.orange,
+                    ));
+                  } else {
+                    await profileViewModel.getCity("15");
+                    selectedState = profileViewModel.getRegInfoResponse!.indianStateList == null
+                        ? null
+                        : profileViewModel.getRegInfoResponse!.indianStateList![14];
+                    String type = "Postal";
+
+
+                    profileViewModel.validateAll();
+                    HttpResponse res = await profileViewModel.AddMyNewAddress(
+                        "",
+                        _YourNameController.text,
+                        _AddressLine1Controller.text,
+                        _AddressLine2Controller.text,
+                        _PinCodeController.text,
+                        _GSTNumberController.text,
+                        (selectedCountry == null) ? '' : selectedCountry!.name ?? '',
+                        (selectedState == null) ? '' : selectedState!.name ?? '',
+                        (selectedCity == null) ? '' : selectedCity!.name ?? '',
+                        type,
+                        "add");
+                    if (res.status == 200) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(res.message ?? ''),
+                        backgroundColor: Colors.green,
+                      ));
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(res.message ?? ''),
+                        backgroundColor: Colors.orange,
+                      ));
+                    }
+                    Navigator.of(context).pop();
+                  }
+                },
+                child: Text('Save'),
+              ),
+            ],
+          );
+        });
+      },
+    );
+  }
+
+  Future loadData() async{
+    await profileViewModel.getCity("15");
+    selectedCountry = profileViewModel.getRegInfoResponse == null
+        ? null
+        : profileViewModel.getRegInfoResponse!.countryList == null
+        ? null
+        : (profileViewModel.getRegInfoResponse!.countryList?[98]);
+    selectedState = profileViewModel.getRegInfoResponse == null
+        ? null
+        : (profileViewModel.getRegInfoResponse!.indianStateList == null)
+        ? null
+        : (profileViewModel.getRegInfoResponse!.indianStateList?[14]);
   }
 }

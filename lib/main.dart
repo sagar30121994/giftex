@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:giftex/data/local/client/prefs.dart';
 import 'package:giftex/firebase_options.dart';
 import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
+import 'package:giftex/screens/kyc/kycaddressdetails.dart';
 import 'package:giftex/screens/signup/login.dart';
 import 'package:giftex/utils/themeutils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -54,7 +55,8 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         title: 'Giftex',
         theme: kDarkTheme,
-        home: localSharedPrefrence!.getLoginStatus() ? DashboardUi(0) : Loginpage()
+        home: //KYCAddresspage()
+        localSharedPrefrence!.getLoginStatus() ? DashboardUi(0) : Loginpage()
 
         // home: KYCPage(),
         );
