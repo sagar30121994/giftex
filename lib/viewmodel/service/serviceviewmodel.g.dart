@@ -186,6 +186,23 @@ mixin _$ServiceViewModel on _ServiceViewModel, Store {
     });
   }
 
+  late final _$homeNewsVideosBlogsResponseAtom = Atom(
+      name: '_ServiceViewModel.homeNewsVideosBlogsResponse', context: context);
+
+  @override
+  HomeNewsVideosBlogsResponse? get homeNewsVideosBlogsResponse {
+    _$homeNewsVideosBlogsResponseAtom.reportRead();
+    return super.homeNewsVideosBlogsResponse;
+  }
+
+  @override
+  set homeNewsVideosBlogsResponse(HomeNewsVideosBlogsResponse? value) {
+    _$homeNewsVideosBlogsResponseAtom
+        .reportWrite(value, super.homeNewsVideosBlogsResponse, () {
+      super.homeNewsVideosBlogsResponse = value;
+    });
+  }
+
   late final _$_ServiceViewModelActionController =
       ActionController(name: '_ServiceViewModel', context: context);
 
@@ -246,7 +263,8 @@ insertCareerFormResponse: ${insertCareerFormResponse},
 fullname: ${fullname},
 email: ${email},
 mobile: ${mobile},
-resume: ${resume}
+resume: ${resume},
+homeNewsVideosBlogsResponse: ${homeNewsVideosBlogsResponse}
     ''';
   }
 }

@@ -187,6 +187,118 @@ mixin _$ProfileViewModel on _ProfileViewModel, Store {
     });
   }
 
+  late final _$yourNameAtom =
+      Atom(name: '_ProfileViewModel.yourName', context: context);
+
+  @override
+  String get yourName {
+    _$yourNameAtom.reportRead();
+    return super.yourName;
+  }
+
+  @override
+  set yourName(String value) {
+    _$yourNameAtom.reportWrite(value, super.yourName, () {
+      super.yourName = value;
+    });
+  }
+
+  late final _$addressLine1Atom =
+      Atom(name: '_ProfileViewModel.addressLine1', context: context);
+
+  @override
+  String get addressLine1 {
+    _$addressLine1Atom.reportRead();
+    return super.addressLine1;
+  }
+
+  @override
+  set addressLine1(String value) {
+    _$addressLine1Atom.reportWrite(value, super.addressLine1, () {
+      super.addressLine1 = value;
+    });
+  }
+
+  late final _$addressLine2Atom =
+      Atom(name: '_ProfileViewModel.addressLine2', context: context);
+
+  @override
+  String get addressLine2 {
+    _$addressLine2Atom.reportRead();
+    return super.addressLine2;
+  }
+
+  @override
+  set addressLine2(String value) {
+    _$addressLine2Atom.reportWrite(value, super.addressLine2, () {
+      super.addressLine2 = value;
+    });
+  }
+
+  late final _$pinCodeAtom =
+      Atom(name: '_ProfileViewModel.pinCode', context: context);
+
+  @override
+  String get pinCode {
+    _$pinCodeAtom.reportRead();
+    return super.pinCode;
+  }
+
+  @override
+  set pinCode(String value) {
+    _$pinCodeAtom.reportWrite(value, super.pinCode, () {
+      super.pinCode = value;
+    });
+  }
+
+  late final _$gSTNumberAtom =
+      Atom(name: '_ProfileViewModel.gSTNumber', context: context);
+
+  @override
+  String get gSTNumber {
+    _$gSTNumberAtom.reportRead();
+    return super.gSTNumber;
+  }
+
+  @override
+  set gSTNumber(String value) {
+    _$gSTNumberAtom.reportWrite(value, super.gSTNumber, () {
+      super.gSTNumber = value;
+    });
+  }
+
+  late final _$aadharBase64Atom =
+      Atom(name: '_ProfileViewModel.aadharBase64', context: context);
+
+  @override
+  String? get aadharBase64 {
+    _$aadharBase64Atom.reportRead();
+    return super.aadharBase64;
+  }
+
+  @override
+  set aadharBase64(String? value) {
+    _$aadharBase64Atom.reportWrite(value, super.aadharBase64, () {
+      super.aadharBase64 = value;
+    });
+  }
+
+  late final _$panBase64Atom =
+      Atom(name: '_ProfileViewModel.panBase64', context: context);
+
+  @override
+  String? get panBase64 {
+    _$panBase64Atom.reportRead();
+    return super.panBase64;
+  }
+
+  @override
+  set panBase64(String? value) {
+    _$panBase64Atom.reportWrite(value, super.panBase64, () {
+      super.panBase64 = value;
+    });
+  }
+
   late final _$getRegInfoResponseAtom =
       Atom(name: '_ProfileViewModel.getRegInfoResponse', context: context);
 
@@ -200,6 +312,38 @@ mixin _$ProfileViewModel on _ProfileViewModel, Store {
   set getRegInfoResponse(GetRegInfoResponse? value) {
     _$getRegInfoResponseAtom.reportWrite(value, super.getRegInfoResponse, () {
       super.getRegInfoResponse = value;
+    });
+  }
+
+  late final _$isloadingcityAtom =
+      Atom(name: '_ProfileViewModel.isloadingcity', context: context);
+
+  @override
+  bool get isloadingcity {
+    _$isloadingcityAtom.reportRead();
+    return super.isloadingcity;
+  }
+
+  @override
+  set isloadingcity(bool value) {
+    _$isloadingcityAtom.reportWrite(value, super.isloadingcity, () {
+      super.isloadingcity = value;
+    });
+  }
+
+  late final _$getCityResponseAtom =
+      Atom(name: '_ProfileViewModel.getCityResponse', context: context);
+
+  @override
+  GetCityResponse? get getCityResponse {
+    _$getCityResponseAtom.reportRead();
+    return super.getCityResponse;
+  }
+
+  @override
+  set getCityResponse(GetCityResponse? value) {
+    _$getCityResponseAtom.reportWrite(value, super.getCityResponse, () {
+      super.getCityResponse = value;
     });
   }
 
@@ -262,6 +406,116 @@ mixin _$ProfileViewModel on _ProfileViewModel, Store {
   }
 
   @override
+  dynamic setYourName(dynamic sYourName) {
+    final _$actionInfo = _$_ProfileViewModelActionController.startAction(
+        name: '_ProfileViewModel.setYourName');
+    try {
+      return super.setYourName(sYourName);
+    } finally {
+      _$_ProfileViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setAddressLine1(dynamic sAddressLine1) {
+    final _$actionInfo = _$_ProfileViewModelActionController.startAction(
+        name: '_ProfileViewModel.setAddressLine1');
+    try {
+      return super.setAddressLine1(sAddressLine1);
+    } finally {
+      _$_ProfileViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setAddressLine2(dynamic sAddressLine2) {
+    final _$actionInfo = _$_ProfileViewModelActionController.startAction(
+        name: '_ProfileViewModel.setAddressLine2');
+    try {
+      return super.setAddressLine2(sAddressLine2);
+    } finally {
+      _$_ProfileViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setPinCode(dynamic sPinCode) {
+    final _$actionInfo = _$_ProfileViewModelActionController.startAction(
+        name: '_ProfileViewModel.setPinCode');
+    try {
+      return super.setPinCode(sPinCode);
+    } finally {
+      _$_ProfileViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setGSTNumber(dynamic sGSTNumber) {
+    final _$actionInfo = _$_ProfileViewModelActionController.startAction(
+        name: '_ProfileViewModel.setGSTNumber');
+    try {
+      return super.setGSTNumber(sGSTNumber);
+    } finally {
+      _$_ProfileViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void validateYourName(String? yourName) {
+    final _$actionInfo = _$_ProfileViewModelActionController.startAction(
+        name: '_ProfileViewModel.validateYourName');
+    try {
+      return super.validateYourName(yourName);
+    } finally {
+      _$_ProfileViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void validateAddressLine1(String? addressLine1) {
+    final _$actionInfo = _$_ProfileViewModelActionController.startAction(
+        name: '_ProfileViewModel.validateAddressLine1');
+    try {
+      return super.validateAddressLine1(addressLine1);
+    } finally {
+      _$_ProfileViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void validateAddressLine2(String? addressLine2) {
+    final _$actionInfo = _$_ProfileViewModelActionController.startAction(
+        name: '_ProfileViewModel.validateAddressLine2');
+    try {
+      return super.validateAddressLine2(addressLine2);
+    } finally {
+      _$_ProfileViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void validatePinCode(String? pinCode) {
+    final _$actionInfo = _$_ProfileViewModelActionController.startAction(
+        name: '_ProfileViewModel.validatePinCode');
+    try {
+      return super.validatePinCode(pinCode);
+    } finally {
+      _$_ProfileViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void validateGSTNumber(String? gSTNumber) {
+    final _$actionInfo = _$_ProfileViewModelActionController.startAction(
+        name: '_ProfileViewModel.validateGSTNumber');
+    try {
+      return super.validateGSTNumber(gSTNumber);
+    } finally {
+      _$_ProfileViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 isloading: ${isloading},
@@ -275,7 +529,118 @@ gendor: ${gendor},
 panNo: ${panNo},
 aadharNo: ${aadharNo},
 address: ${address},
-getRegInfoResponse: ${getRegInfoResponse}
+yourName: ${yourName},
+addressLine1: ${addressLine1},
+addressLine2: ${addressLine2},
+pinCode: ${pinCode},
+gSTNumber: ${gSTNumber},
+aadharBase64: ${aadharBase64},
+panBase64: ${panBase64},
+getRegInfoResponse: ${getRegInfoResponse},
+isloadingcity: ${isloadingcity},
+getCityResponse: ${getCityResponse}
+    ''';
+  }
+}
+
+mixin _$ProfileViewModelErrorState on _ProfileViewModelErrorState, Store {
+  Computed<bool>? _$hasErrorsComputed;
+
+  @override
+  bool get hasErrors =>
+      (_$hasErrorsComputed ??= Computed<bool>(() => super.hasErrors,
+              name: '_ProfileViewModelErrorState.hasErrors'))
+          .value;
+
+  late final _$yourNameAtom =
+      Atom(name: '_ProfileViewModelErrorState.yourName', context: context);
+
+  @override
+  String? get yourName {
+    _$yourNameAtom.reportRead();
+    return super.yourName;
+  }
+
+  @override
+  set yourName(String? value) {
+    _$yourNameAtom.reportWrite(value, super.yourName, () {
+      super.yourName = value;
+    });
+  }
+
+  late final _$addressLine1Atom =
+      Atom(name: '_ProfileViewModelErrorState.addressLine1', context: context);
+
+  @override
+  String? get addressLine1 {
+    _$addressLine1Atom.reportRead();
+    return super.addressLine1;
+  }
+
+  @override
+  set addressLine1(String? value) {
+    _$addressLine1Atom.reportWrite(value, super.addressLine1, () {
+      super.addressLine1 = value;
+    });
+  }
+
+  late final _$addressLine2Atom =
+      Atom(name: '_ProfileViewModelErrorState.addressLine2', context: context);
+
+  @override
+  String? get addressLine2 {
+    _$addressLine2Atom.reportRead();
+    return super.addressLine2;
+  }
+
+  @override
+  set addressLine2(String? value) {
+    _$addressLine2Atom.reportWrite(value, super.addressLine2, () {
+      super.addressLine2 = value;
+    });
+  }
+
+  late final _$pinCodeAtom =
+      Atom(name: '_ProfileViewModelErrorState.pinCode', context: context);
+
+  @override
+  String? get pinCode {
+    _$pinCodeAtom.reportRead();
+    return super.pinCode;
+  }
+
+  @override
+  set pinCode(String? value) {
+    _$pinCodeAtom.reportWrite(value, super.pinCode, () {
+      super.pinCode = value;
+    });
+  }
+
+  late final _$gSTNumberAtom =
+      Atom(name: '_ProfileViewModelErrorState.gSTNumber', context: context);
+
+  @override
+  String? get gSTNumber {
+    _$gSTNumberAtom.reportRead();
+    return super.gSTNumber;
+  }
+
+  @override
+  set gSTNumber(String? value) {
+    _$gSTNumberAtom.reportWrite(value, super.gSTNumber, () {
+      super.gSTNumber = value;
+    });
+  }
+
+  @override
+  String toString() {
+    return '''
+yourName: ${yourName},
+addressLine1: ${addressLine1},
+addressLine2: ${addressLine2},
+pinCode: ${pinCode},
+gSTNumber: ${gSTNumber},
+hasErrors: ${hasErrors}
     ''';
   }
 }
