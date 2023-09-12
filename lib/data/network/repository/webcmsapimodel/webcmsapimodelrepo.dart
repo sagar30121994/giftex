@@ -5,6 +5,7 @@ import 'package:giftex/data/local/client/prefs.dart';
 import 'package:giftex/data/network/models/responce/cmsweb/careersresponse.dart';
 import 'package:giftex/data/network/models/responce/cmsweb/insertCareerFormResponse.dart';
 import 'package:giftex/data/network/models/responce/cmsweb/whoweare.dart';
+import 'package:giftex/data/network/models/responce/contactusform/insertreachusformresponse.dart';
 import 'package:giftex/data/network/models/responce/home/GetSellDetailsResponse.dart';
 import 'package:giftex/data/network/models/responce/home/getArtMovementResponse.dart';
 import 'package:giftex/data/network/models/responce/home/getDepartmentsResponse.dart';
@@ -569,6 +570,8 @@ class WebCmsApiModelRepo {
 
     return httpResponse;
   }
+
+
 
   Future<HttpResponse> getBlogsDetails() async {
     HttpResponse httpResponse = HttpResponse();

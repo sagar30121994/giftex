@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:giftex/data/local/client/prefs.dart';
+import 'package:giftex/screens/aboutus/aboutus.dart';
 import 'package:giftex/screens/components/footer/footer.dart';
 import 'package:giftex/screens/components/header.dart'; // import 'package:giftex/screens/components/headerer.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -502,7 +503,16 @@ class _ContactusPageState extends State<ContactusPage> {
                           ),
                           InkWell(
                             onTap: () {
-                              // Navigator.push(context, MaterialPageRoute(builder: (context) => GetOtppage()));
+                              serviceViewModel.InsertReachUsForm().then((value) => {
+                                if (value.status == 200)
+                                  {
+                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value.message!),
+                                      backgroundColor: Colors.green,),)
+                                  }else{
+                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value.message!),
+                                    backgroundColor: Colors.green,),)
+                                }
+                              });
                             },
                             child: Container(
                               height: 50,

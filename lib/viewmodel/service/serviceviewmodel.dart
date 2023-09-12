@@ -1,13 +1,16 @@
 import 'package:giftex/data/local/client/prefs.dart';
+import 'package:giftex/data/network/base/endpoints.dart';
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/data/network/models/responce/cmsweb/careersresponse.dart';
 import 'package:giftex/data/network/models/responce/cmsweb/insertCareerFormResponse.dart';
 import 'package:giftex/data/network/models/responce/cmsweb/whoweare.dart';
+import 'package:giftex/data/network/models/responce/contactusform/insertreachusformresponse.dart';
 import 'package:giftex/data/network/models/responce/home/newsblogsvideoresponse.dart';
 import 'package:giftex/data/network/models/responce/news/blogsresponse.dart';
 import 'package:giftex/data/network/models/responce/news/newsreponse.dart';
 import 'package:giftex/data/network/models/responce/service/serviceresponse.dart';
 import 'package:giftex/data/network/repository/service/servicerepo.dart';
+import 'package:giftex/data/network/repository/webapimodel/webapimodelrepo.dart';
 import 'package:giftex/data/network/repository/webcmsapimodel/webcmsapimodelrepo.dart';
 import 'package:mobx/mobx.dart';
 
@@ -18,6 +21,7 @@ class ServiceViewModel = _ServiceViewModel with _$ServiceViewModel;
 abstract class _ServiceViewModel with Store {
   ServiceRepo serviceRepo = ServiceRepo();
   WebCmsApiModelRepo webCmsApiModelRepo = WebCmsApiModelRepo();
+  WebapimodelRepo webapimodelRepo = WebapimodelRepo();
 
   late LocalSharedPrefrence prefrence;
 
@@ -47,6 +51,9 @@ abstract class _ServiceViewModel with Store {
   InsertCareerFormResponse? insertCareerFormResponse;
 
   @observable
+  InsertReachUsFormResponse? insertReachUsFormResponse;
+
+  @observable
   String fullname = '';
 
   @observable
@@ -57,6 +64,9 @@ abstract class _ServiceViewModel with Store {
 
   @observable
   String resume = '';
+
+  @observable
+  String query = '';
 
   @action
   setFullName(String value) {
@@ -76,6 +86,11 @@ abstract class _ServiceViewModel with Store {
   @action
   setResume(String value) {
     resume = value;
+  }
+
+  @action
+  setQuery(String value) {
+    query = value;
   }
   Future<HttpResponse> getServices(String type) async {
     isloading = true;
@@ -107,6 +122,16 @@ abstract class _ServiceViewModel with Store {
     HttpResponse httpResponse = await webCmsApiModelRepo.insertCareerForm(fullname, email, mobile, resume);
     if (httpResponse.status == 200) {
       insertCareerFormResponse = httpResponse.data;
+    }
+    isloading = false;
+    return httpResponse;
+  }
+
+  Future<HttpResponse> InsertReachUsForm() async {
+    isloading = true;
+    HttpResponse httpResponse = await webapimodelRepo.InsertReachUsForm(fullname, email, mobile, query);
+    if (httpResponse.status == 200) {
+      insertReachUsFormResponse = httpResponse.data;
     }
     isloading = false;
     return httpResponse;

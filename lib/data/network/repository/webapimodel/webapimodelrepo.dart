@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:giftex/data/local/client/prefs.dart';
 import 'package:giftex/data/network/models/request/webapimodel/additionalchargesrequestmodel.dart';
 import 'package:giftex/data/network/models/request/webapimodel/addremovelottowishlistrequestmodel.dart';
 import 'package:giftex/data/network/models/request/webapimodel/artistdatarequestmodel.dart';
@@ -33,6 +34,7 @@ import 'package:giftex/data/network/models/request/webapimodel/userloginotpreque
 import 'package:giftex/data/network/models/request/webapimodel/userlogoutrequestmodel.dart';
 import 'package:giftex/data/network/models/request/webapimodel/verifyemailrequestmodel.dart';
 import 'package:giftex/data/network/models/request/webapimodel/verifymobilerequestmodel.dart';
+import 'package:giftex/data/network/models/responce/contactusform/insertreachusformresponse.dart';
 
 import '../../base/base.dart' as BaseUrl;
 import '../../base/endpoints.dart' as endPoints;
@@ -43,6 +45,7 @@ import '../../models/responce/user/loginrespose.dart';
 
 class WebapimodelRepo {
   DioClientNew? httpClient;
+  LocalSharedPrefrence? localSharedPrefrence;
 
   WebapimodelRepo() {
     httpClient = DioClientNew();
@@ -944,19 +947,57 @@ class WebapimodelRepo {
     return httpResponse;
   }
 
-  Future<HttpResponse> insertReachUsForm(InsertReachUsFormRequestModel model) async {
-    HttpResponse httpResponse = HttpResponse();
-    String userlogin = json.encode(LoginReqestModel);
-    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
-    await httpClient!
-        .post(BaseUrl.baseUrl + endPoints.WebApiModel().insertreachusform, body: userlogin)
-        .then((responce) async {
-      print(responce);
+  // Future<HttpResponse> insertReachUsForm(InsertReachUsFormRequestModel model) async {
+  //   HttpResponse httpResponse = HttpResponse();
+  //   String userlogin = json.encode(LoginReqestModel);
+  //   httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
+  //   await httpClient!
+  //       .post(BaseUrl.baseUrl + endPoints.WebApiModel().insertreachusform, body: userlogin)
+  //       .then((responce) async {
+  //     print(responce);
+  //
+  //     if (responce.statusCode == 200) {
+  //       httpResponse.status = responce.statusCode;
+  //       httpResponse.message = 'Successful';
+  //       // httpResponse.data = LoginResponse.fromJson(responce.data);
+  //     } else {
+  //       httpResponse.status = responce.statusCode;
+  //       httpResponse.message = responce.data['message'];
+  //       httpResponse.data = null;
+  //     }
+  //     return httpResponse;
+  //   }).catchError((err) {
+  //     print(err);
+  //     httpResponse.status = 400;
+  //     httpResponse.message = err.toString();
+  //     httpResponse.data = err.toString();
+  //     return httpResponse;
+  //   });
+  //
+  //   return httpResponse;
+  // }
 
+  Future<HttpResponse> InsertReachUsForm(String fullname, String email, String mobile, String query) async {
+    HttpResponse httpResponse = HttpResponse();
+    // String userlogin = json.encode(model);
+    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
+    await httpClient!.post(BaseUrl.CMSBaseurl + endPoints.WebApiModel().insertreachusform, body: {
+      "authkey_web": "${localSharedPrefrence!.authkey ?? ''}",
+      "authkey_mobile": "",
+      "userid": "${localSharedPrefrence!.userId ?? ''}",
+      "CRMClientID": "${localSharedPrefrence!.crmId ?? ''}",
+      "department":"",
+      "fullname": fullname,
+      "emailid": email,
+      "phonenumber":mobile,
+      "query": query,
+      "userid":""
+    }).then((responce) async {
+      print(responce);
       if (responce.statusCode == 200) {
-        httpResponse.status = responce.statusCode;
-        httpResponse.message = 'Successful';
-        // httpResponse.data = LoginResponse.fromJson(responce.data);
+        // httpResponse.status = responce.statusCode;
+        // httpResponse.message = 'Successful';
+        httpResponse.data = InsertReachUsFormResponse.fromJson(responce.data);
       } else {
         httpResponse.status = responce.statusCode;
         httpResponse.message = responce.data['message'];
