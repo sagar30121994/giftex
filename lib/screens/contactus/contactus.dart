@@ -32,15 +32,6 @@ class _ContactusPageState extends State<ContactusPage> {
     super.dispose();
   }
 
-  // void _launchGoogleMaps(double latitude, double longitude) async {
-  //   final url = 'https://www.google.com/maps?q=$latitude,$longitude';
-  //   if (await canLaunch(url)) {
-  //     await launch(url);
-  //   } else {
-  //     throw 'Could not launch Google Maps';
-  //   }
-  // }
-
   static Future<void> _launchGoogleMaps(double latitude, double longitude) async {
     String googleUrl = 'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
     String encodedURl = Uri.encodeFull(googleUrl);
@@ -165,7 +156,7 @@ class _ContactusPageState extends State<ContactusPage> {
                 child: Column(
                   children: [
                     Container(
-                      height: 265,
+                      height: 276,
                       color: Color(0xffF3E8E9),
                       padding: EdgeInsets.all(16),
                       child: Column(
@@ -262,7 +253,7 @@ class _ContactusPageState extends State<ContactusPage> {
                     ),
                     // SizedBox(height: 8),
                     Container(
-                      height: 250,
+                      height: 262,
                       color: Color(0xffEAEEF2),
                       padding: EdgeInsets.all(16),
                       child: Column(
@@ -360,7 +351,7 @@ class _ContactusPageState extends State<ContactusPage> {
                     ),
                     Container(
                       width: MediaQuery.of(context).size.width,
-                      height: 475,
+                      height: 495,
                       color: Color(0xffEAEEF2),
                       padding: EdgeInsets.all(16),
                       child: Column(

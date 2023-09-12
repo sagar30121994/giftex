@@ -260,6 +260,26 @@ abstract class _ProfileViewModel with Store {
     return httpResponse;
   }
 
+  Future<HttpResponse> deleteMyAddress(String addressId) async {
+    isloading = true;
+    HttpResponse httpResponse = await profileRepo!.deleteMyAddress(addressId);
+    if (httpResponse.status == 200) {
+      myPurchaseReponse = httpResponse.data;
+    }
+    isloading = false;
+    return httpResponse;
+  }
+
+  Future<HttpResponse> setDefaultAddress(String addressId) async {
+    isloading = true;
+    HttpResponse httpResponse = await profileRepo!.setDefaultAddress(addressId);
+    if (httpResponse.status == 200) {
+      myPurchaseReponse = httpResponse.data;
+    }
+    isloading = false;
+    return httpResponse;
+  }
+
   Future<HttpResponse> AddMyNewAddress(
       String address_id,
       String YourName,

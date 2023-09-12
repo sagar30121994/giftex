@@ -146,7 +146,7 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
               padding: const EdgeInsets.all(15.0),
               child: Container(
                   color: Color(0xffFFFFFF),
-                  height: 492,
+                  height: 392,
                   alignment: Alignment.center,
                   child: Stack(
                     children: [
@@ -155,7 +155,7 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                         child: Container(
                           //replace this Container with your Card
                           color: Color(0xffF9F9F9),
-                          height: 492.0,
+                          height: 392,
                         ),
                       ),
                       InkWell(

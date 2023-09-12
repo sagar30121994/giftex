@@ -549,7 +549,18 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                                         RoundedRectangleBorder(
                                                             borderRadius: BorderRadius.circular(18.0),
                                                             side: BorderSide(color: Color(0xff747474))))),
-                                                onPressed: () {},
+                                                onPressed: () async {
+                                                  String? tempid;
+                                                  tempid = profileViewModel!.getUserAllDetailsResponse == null
+                                                      ? ""
+                                                      : profileViewModel!.getUserAllDetailsResponse!.result == null
+                                                          ? ''
+                                                          : (profileViewModel!.getUserAllDetailsResponse!.result!
+                                                                  .profile!.address![index].id! ??
+                                                              "");
+
+                                                  await _showSetDefaultAddressDialog(context, tempid);
+                                                },
                                                 child: Container(
                                                   // padding: const EdgeInsets.only(right: 8.0,left: 8,top: 10,bottom: 10),
                                                   child: Text(
@@ -592,9 +603,23 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                             ),
                                             Flexible(
                                                 flex: 1,
-                                                child: Image.asset(
-                                                  "image/updelete.png",
-                                                  height: 18,
+                                                child: InkWell(
+                                                  onTap: () async {
+                                                    String? tempid;
+                                                    tempid = profileViewModel!.getUserAllDetailsResponse == null
+                                                        ? ""
+                                                        : profileViewModel!.getUserAllDetailsResponse!.result == null
+                                                            ? ''
+                                                            : (profileViewModel!.getUserAllDetailsResponse!.result!
+                                                                    .profile!.address![index].id! ??
+                                                                "");
+
+                                                    await _showDeleteAddressDialog(context, tempid);
+                                                  },
+                                                  child: Image.asset(
+                                                    "image/updelete.png",
+                                                    height: 18,
+                                                  ),
                                                 )),
                                           ],
                                         ),
@@ -1192,7 +1217,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
                   if ((selectedState == null)) {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text('Please Select State'),
-                      backgroundColor: Colors.green,
+                      backgroundColor: Colors.orange,
                     ));
                   } else if ((selectedCity == null)) {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -1215,7 +1240,6 @@ class _MyProfilepageState extends State<MyProfilepage> {
                     } else {
                       type = "Billing";
                     }
-
                     profileViewModel.validateAll();
                     HttpResponse res = await profileViewModel.AddMyNewAddress(
                         "",
@@ -1413,12 +1437,16 @@ class _MyProfilepageState extends State<MyProfilepage> {
                         profileViewModel.setPinCode(str);
                       },
                       textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.name,
+                      keyboardType: TextInputType.number,
                       enableSuggestions: true,
                       style: Theme.of(context).textTheme.subtitle1!.copyWith(
                             color: Colors.black,
                             fontWeight: FontWeight.w500,
                           ),
+                      maxLength: 6,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                      ],
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.only(left: 8),
                         border: InputBorder.none,
@@ -1438,18 +1466,18 @@ class _MyProfilepageState extends State<MyProfilepage> {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
-                  child: DropdownButtonFormField(
+                  child: DropdownButtonFormField<CountryList?>(
                       value: selectedCountry,
                       isExpanded: true,
-                      // hint: Text("${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].country ?? ''}"),
-                      items: profileViewModel.getRegInfoResponse!.countryList!.map((e) {
+                      hint: Text("Select Country"),
+                      items: (profileViewModel.getRegInfoResponse!.countryList ?? [])!.map((CountryList? e) {
                         return DropdownMenuItem(
                           alignment: Alignment.centerLeft,
                           child: Container(
                               child: Padding(
                             padding: const EdgeInsets.only(left: 8.0),
                             child: Text(
-                              '${e.name ?? ''}',
+                              '${e!.name ?? ''}',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -1468,18 +1496,18 @@ class _MyProfilepageState extends State<MyProfilepage> {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
-                  child: DropdownButtonFormField(
+                  child: DropdownButtonFormField<IndianStateList?>(
                       value: selectedState,
                       isExpanded: true,
-                      // hint: Text("${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].state ?? ''}"),
-                      items: profileViewModel.getRegInfoResponse!.indianStateList!.map((e) {
+                      hint: Text("Select State"),
+                      items: (profileViewModel.getRegInfoResponse!.indianStateList ?? [])!.map((IndianStateList? e) {
                         return DropdownMenuItem(
                           alignment: Alignment.centerLeft,
                           child: Container(
                               child: Padding(
                             padding: const EdgeInsets.only(left: 8.0),
                             child: Text(
-                              '${e.name ?? ''}',
+                              '${e!.name ?? ''}',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -1511,8 +1539,8 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                 : DropdownButtonFormField<CityList?>(
                                     value: selectedCity,
                                     isExpanded: true,
-                                    // hint: Text("${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].city ?? ''}"),
-                                    items: profileViewModel.getCityResponse!.cityList!.map((CityList? e) {
+                                    hint: Text("Select City"),
+                                    items: (profileViewModel.getCityResponse!.cityList ?? [])!.map((CityList? e) {
                                       return DropdownMenuItem(
                                         alignment: Alignment.centerLeft,
                                         child: Container(
@@ -1552,6 +1580,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
                             color: Colors.black,
                             fontWeight: FontWeight.w500,
                           ),
+                      maxLength: 15,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.only(left: 8),
                         border: InputBorder.none,
@@ -1577,26 +1606,87 @@ class _MyProfilepageState extends State<MyProfilepage> {
               ),
               TextButton(
                 onPressed: () async {
-                  await profileViewModel.getCity("15");
-                  selectedState = profileViewModel.getRegInfoResponse!.indianStateList![14];
-                  String type = "Postal";
-                  if (addressCount == 0) {
-                    type = "Postal";
+                  profileViewModel.validateAll();
+                  if ((selectedState == null)) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text('Please Select State'),
+                      backgroundColor: Colors.orange,
+                    ));
+                  } else if ((selectedCity == null)) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text('Please Select City'),
+                      backgroundColor: Colors.orange,
+                    ));
+                  } else if (profileViewModel.profileViewModelErrorState.hasErrors) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text('Please Enter all Mandatory Fields'),
+                      backgroundColor: Colors.orange,
+                    ));
                   } else {
-                    type = "Billing";
+                    await profileViewModel.getCity("15");
+                    selectedState = profileViewModel.getRegInfoResponse!.indianStateList == null
+                        ? null
+                        : profileViewModel.getRegInfoResponse!.indianStateList![14];
+                    String type = "Postal";
+                    if (addressCount == 0) {
+                      type = "Postal";
+                    } else {
+                      type = "Billing";
+                    }
+                    profileViewModel.validateAll();
+                    HttpResponse res = await profileViewModel.AddMyNewAddress(
+                        "",
+                        _YourNameController.text,
+                        _AddressLine1Controller.text,
+                        _AddressLine2Controller.text,
+                        _PinCodeController.text,
+                        _GSTNumberController.text,
+                        (selectedCountry == null) ? '' : selectedCountry!.name ?? '',
+                        (selectedState == null) ? '' : selectedState!.name ?? '',
+                        (selectedCity == null) ? '' : selectedCity!.name ?? '',
+                        type,
+                        "update");
+                    if (res.status == 200) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(res.message ?? ''),
+                        backgroundColor: Colors.green,
+                      ));
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(res.message ?? ''),
+                        backgroundColor: Colors.orange,
+                      ));
+                    }
+                    Navigator.of(context).pop();
                   }
-                  HttpResponse res = await profileViewModel.AddMyNewAddress(
-                      id,
-                      _YourNameController.text,
-                      _AddressLine1Controller.text,
-                      _AddressLine2Controller.text,
-                      _PinCodeController.text,
-                      _GSTNumberController.text,
-                      selectedCountry!.name ?? '',
-                      selectedState!.name ?? '',
-                      selectedCity!.name ?? '',
-                      type,
-                      "update");
+                },
+                child: Text('Save'),
+              ),
+            ],
+          );
+        });
+      },
+    );
+  }
+
+  Future<void> _showDeleteAddressDialog(BuildContext context, String addressId) async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(builder: (context, setState) {
+          return AlertDialog(
+            title: Text('Delete Address'),
+            content: Text('Are you sure, you want to delete this address ?'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  HttpResponse res = await profileViewModel.deleteMyAddress(addressId);
                   if (res.status == 200) {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text(res.message ?? ''),
@@ -1610,7 +1700,47 @@ class _MyProfilepageState extends State<MyProfilepage> {
                   }
                   Navigator.of(context).pop();
                 },
-                child: Text('Save'),
+                child: Text('Delete'),
+              ),
+            ],
+          );
+        });
+      },
+    );
+  }
+
+  Future<void> _showSetDefaultAddressDialog(BuildContext context, String addressId) async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(builder: (context, setState) {
+          return AlertDialog(
+            title: Text('Default Address'),
+            content: Text('Are you sure, you want to set this address as default address?'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  HttpResponse res = await profileViewModel.setDefaultAddress(addressId);
+                  if (res.status == 200) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text(res.message ?? ''),
+                      backgroundColor: Colors.green,
+                    ));
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text(res.message ?? ''),
+                      backgroundColor: Colors.orange,
+                    ));
+                  }
+                  Navigator.of(context).pop();
+                },
+                child: Text('Delete'),
               ),
             ],
           );

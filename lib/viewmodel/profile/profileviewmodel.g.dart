@@ -406,110 +406,121 @@ mixin _$ProfileViewModel on _ProfileViewModel, Store {
   }
 
   @override
-  dynamic setYourName(dynamic sYourName) {
+  dynamic setYourName(String value) {
     final _$actionInfo = _$_ProfileViewModelActionController.startAction(
         name: '_ProfileViewModel.setYourName');
     try {
-      return super.setYourName(sYourName);
+      return super.setYourName(value);
     } finally {
       _$_ProfileViewModelActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic setAddressLine1(dynamic sAddressLine1) {
+  dynamic setAddressLine1(String value) {
     final _$actionInfo = _$_ProfileViewModelActionController.startAction(
         name: '_ProfileViewModel.setAddressLine1');
     try {
-      return super.setAddressLine1(sAddressLine1);
+      return super.setAddressLine1(value);
     } finally {
       _$_ProfileViewModelActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic setAddressLine2(dynamic sAddressLine2) {
+  dynamic setAddressLine2(String value) {
     final _$actionInfo = _$_ProfileViewModelActionController.startAction(
         name: '_ProfileViewModel.setAddressLine2');
     try {
-      return super.setAddressLine2(sAddressLine2);
+      return super.setAddressLine2(value);
     } finally {
       _$_ProfileViewModelActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic setPinCode(dynamic sPinCode) {
+  dynamic setPinCode(String value) {
     final _$actionInfo = _$_ProfileViewModelActionController.startAction(
         name: '_ProfileViewModel.setPinCode');
     try {
-      return super.setPinCode(sPinCode);
+      return super.setPinCode(value);
     } finally {
       _$_ProfileViewModelActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic setGSTNumber(dynamic sGSTNumber) {
+  dynamic setGSTNumber(String value) {
     final _$actionInfo = _$_ProfileViewModelActionController.startAction(
         name: '_ProfileViewModel.setGSTNumber');
     try {
-      return super.setGSTNumber(sGSTNumber);
+      return super.setGSTNumber(value);
     } finally {
       _$_ProfileViewModelActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void validateYourName(String? yourName) {
+  dynamic validateAll() {
+    final _$actionInfo = _$_ProfileViewModelActionController.startAction(
+        name: '_ProfileViewModel.validateAll');
+    try {
+      return super.validateAll();
+    } finally {
+      _$_ProfileViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void validateYourName(String? value) {
     final _$actionInfo = _$_ProfileViewModelActionController.startAction(
         name: '_ProfileViewModel.validateYourName');
     try {
-      return super.validateYourName(yourName);
+      return super.validateYourName(value);
     } finally {
       _$_ProfileViewModelActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void validateAddressLine1(String? addressLine1) {
+  void validateAddressLine1(String? value) {
     final _$actionInfo = _$_ProfileViewModelActionController.startAction(
         name: '_ProfileViewModel.validateAddressLine1');
     try {
-      return super.validateAddressLine1(addressLine1);
+      return super.validateAddressLine1(value);
     } finally {
       _$_ProfileViewModelActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void validateAddressLine2(String? addressLine2) {
+  void validateAddressLine2(String? value) {
     final _$actionInfo = _$_ProfileViewModelActionController.startAction(
         name: '_ProfileViewModel.validateAddressLine2');
     try {
-      return super.validateAddressLine2(addressLine2);
+      return super.validateAddressLine2(value);
     } finally {
       _$_ProfileViewModelActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void validatePinCode(String? pinCode) {
+  void validatePinCode(String? value) {
     final _$actionInfo = _$_ProfileViewModelActionController.startAction(
         name: '_ProfileViewModel.validatePinCode');
     try {
-      return super.validatePinCode(pinCode);
+      return super.validatePinCode(value);
     } finally {
       _$_ProfileViewModelActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void validateGSTNumber(String? gSTNumber) {
+  void validateGSTNumber(String? value) {
     final _$actionInfo = _$_ProfileViewModelActionController.startAction(
         name: '_ProfileViewModel.validateGSTNumber');
     try {
-      return super.validateGSTNumber(gSTNumber);
+      return super.validateGSTNumber(value);
     } finally {
       _$_ProfileViewModelActionController.endAction(_$actionInfo);
     }

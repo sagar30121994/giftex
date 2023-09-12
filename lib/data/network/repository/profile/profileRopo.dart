@@ -161,6 +161,76 @@ class ProfileRepo {
     return httpResponse;
   }
 
+  Future<HttpResponse> setDefaultAddress(String addressId) async {
+    HttpResponse httpResponse = HttpResponse();
+    String userid = localSharedPrefrence!.getUserId();
+    String authKey = localSharedPrefrence!.getAuthKeyWeb();
+    String crmClientId = localSharedPrefrence!.getCrmClinetId();
+    await httpClient!.post(BaseUrl.baseUrl + endPoints.WebApiModel().setdefaultmyaddress, body: {
+      "authkey_web": authKey,
+      "authkey_mobile": "",
+      "userid": userid,
+      "CRMClientID": crmClientId,
+      "address_id": addressId
+    }).then((responce) async {
+      print(responce);
+
+      if (responce.statusCode == 200) {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = responce.data['message'];
+        // httpResponse.data = GetRegInfoResponse.fromJson(responce.data);
+      } else {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = responce.data['message'];
+        httpResponse.data = null;
+      }
+      return httpResponse;
+    }).catchError((err) {
+      print(err);
+      httpResponse.status = 400;
+      httpResponse.message = err.toString();
+      httpResponse.data = err.toString();
+      return httpResponse;
+    });
+
+    return httpResponse;
+  }
+
+  Future<HttpResponse> deleteMyAddress(String addressId) async {
+    HttpResponse httpResponse = HttpResponse();
+    String userid = localSharedPrefrence!.getUserId();
+    String authKey = localSharedPrefrence!.getAuthKeyWeb();
+    String crmClientId = localSharedPrefrence!.getCrmClinetId();
+    await httpClient!.post(BaseUrl.baseUrl + endPoints.WebApiModel().deletemyaddress, body: {
+      "authkey_web": authKey,
+      "authkey_mobile": "",
+      "userid": userid,
+      "CRMClientID": crmClientId,
+      "address_id": addressId
+    }).then((responce) async {
+      print(responce);
+
+      if (responce.statusCode == 200) {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = responce.data['message'];
+        // httpResponse.data = GetRegInfoResponse.fromJson(responce.data);
+      } else {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = responce.data['message'];
+        httpResponse.data = null;
+      }
+      return httpResponse;
+    }).catchError((err) {
+      print(err);
+      httpResponse.status = 400;
+      httpResponse.message = err.toString();
+      httpResponse.data = err.toString();
+      return httpResponse;
+    });
+
+    return httpResponse;
+  }
+
   Future<HttpResponse> updateRegMyAddress(UpdateRegMyAddressRequest? updateRegMyAddressRequest) async {
     HttpResponse httpResponse = HttpResponse();
 
