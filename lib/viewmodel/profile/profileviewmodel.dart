@@ -33,6 +33,8 @@ abstract class _ProfileViewModel with Store {
     prefrence = LocalSharedPrefrence();
   }
 
+  ProfileViewModelErrorState profileViewModelErrorState = ProfileViewModelErrorState();
+
   @observable
   bool isloading = false;
 
@@ -101,6 +103,117 @@ abstract class _ProfileViewModel with Store {
   @action
   setaddress(saddress) {
     address = saddress;
+  }
+
+  @observable
+  String yourName = "";
+
+  @action
+  setYourName(String value) {
+    yourName = value;
+  }
+
+  @observable
+  String addressLine1 = "";
+
+  @action
+  setAddressLine1(String value) {
+    addressLine1 = value;
+  }
+
+  @observable
+  String addressLine2 = "";
+
+  @action
+  setAddressLine2(String value) {
+    addressLine2 = value;
+  }
+
+  @observable
+  String pinCode = "";
+
+  @action
+  setPinCode(String value) {
+    pinCode = value;
+  }
+
+  @observable
+  String gSTNumber = "";
+
+  @action
+  setGSTNumber(String value) {
+    gSTNumber = value;
+  }
+
+  late List<ReactionDisposer> _disposers;
+
+  void setupValidations() {
+    _disposers = [
+      reaction((_) => yourName, validateYourName),
+      reaction((_) => addressLine1, validateAddressLine1),
+      reaction((_) => addressLine2, validateAddressLine2),
+      reaction((_) => pinCode, validatePinCode),
+      reaction((_) => gSTNumber, validateGSTNumber),
+    ];
+  }
+
+  @action
+  validateAll() {
+    validateYourName(yourName);
+    validateAddressLine1(addressLine1);
+    validateAddressLine2(addressLine2);
+    validatePinCode(pinCode);
+  }
+
+  void dispose() {
+    for (final d in _disposers) {
+      d();
+    }
+  }
+
+  @action
+  void validateYourName(String? value) {
+    if (value == null || value.trim() == "") {
+      profileViewModelErrorState.yourName = "Please Enter Valid Name";
+    } else {
+      profileViewModelErrorState.yourName = null;
+    }
+  }
+
+  @action
+  void validateAddressLine1(String? value) {
+    if (addressLine1 == null || addressLine1.trim() == "") {
+      profileViewModelErrorState.addressLine1 = "Please Enter Valid Address";
+    } else {
+      profileViewModelErrorState.addressLine1 = null;
+    }
+  }
+
+  @action
+  void validateAddressLine2(String? value) {
+    if (addressLine2 == null || addressLine2.trim() == "") {
+      profileViewModelErrorState.addressLine2 = "Please Enter Valid Address";
+    } else {
+      profileViewModelErrorState.addressLine2 = null;
+    }
+  }
+
+  @action
+  void validatePinCode(String? value) {
+    if (pinCode == null || pinCode.trim() == "") {
+      profileViewModelErrorState.pinCode = "Please Enter Valid Pincode";
+    } else {
+      profileViewModelErrorState.pinCode = null;
+    }
+  }
+
+  @action
+  void validateGSTNumber(String? value) {
+    if (gSTNumber == null || gSTNumber.trim() == "") {
+      profileViewModelErrorState.gSTNumber = "Please Enter Valid GSTNumber";
+    } else {
+      profileViewModelErrorState.gSTNumber = null;
+    }
   }
 
   UpdateRegPersonalDetailsRequest? updateRegPersonalDetailsRequest;
@@ -308,4 +421,27 @@ abstract class _ProfileViewModel with Store {
     isloadingcity = false;
     return httpResponse;
   }
+}
+
+class ProfileViewModelErrorState = _ProfileViewModelErrorState with _$ProfileViewModelErrorState;
+
+abstract class _ProfileViewModelErrorState with Store {
+  @observable
+  String? yourName;
+
+  @observable
+  String? addressLine1;
+
+  @observable
+  String? addressLine2;
+
+  @observable
+  String? pinCode;
+
+  @observable
+  String? gSTNumber;
+
+  @computed
+  bool get hasErrors =>
+      yourName != null || addressLine1 != null || addressLine2 != null || pinCode != null || gSTNumber != null;
 }

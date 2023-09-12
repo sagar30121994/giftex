@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/data/network/models/responce/profile/GetRegInfoResponse.dart';
@@ -58,6 +59,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
 
   @override
   void initState() {
+    profileViewModel.setupValidations();
     laodData();
 
     nameController.text =
@@ -568,14 +570,16 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                                 flex: 1,
                                                 child: InkWell(
                                                   onTap: () async {
-                                                    await _showUpdateUserDialog(
-                                                        context,
-                                                        index,
-                                                        profileViewModel!.getUserAllDetailsResponse!.result != null
-                                                            ? (profileViewModel!.getUserAllDetailsResponse!.result!
+                                                    String? tempid;
+                                                    tempid = profileViewModel!.getUserAllDetailsResponse == null
+                                                        ? ""
+                                                        : profileViewModel!.getUserAllDetailsResponse!.result == null
+                                                            ? ''
+                                                            : (profileViewModel!.getUserAllDetailsResponse!.result!
                                                                     .profile!.address![index].id! ??
-                                                                "")
-                                                            : '');
+                                                                "");
+
+                                                    await _showUpdateUserDialog(context, index, tempid);
                                                   },
                                                   child: Image.asset(
                                                     "image/oredit.png",
@@ -880,8 +884,17 @@ class _MyProfilepageState extends State<MyProfilepage> {
     TextEditingController _PinCodeController = TextEditingController();
     TextEditingController _GSTNumberController = TextEditingController();
     await profileViewModel.getCity("15");
-    selectedCountry = profileViewModel.getRegInfoResponse!.countryList![98];
-    selectedState = profileViewModel.getRegInfoResponse!.indianStateList![14];
+
+    selectedCountry = profileViewModel.getRegInfoResponse == null
+        ? null
+        : profileViewModel.getRegInfoResponse!.countryList == null
+            ? null
+            : (profileViewModel.getRegInfoResponse!.countryList?[98]);
+    selectedState = profileViewModel.getRegInfoResponse == null
+        ? null
+        : (profileViewModel.getRegInfoResponse!.indianStateList == null)
+            ? null
+            : (profileViewModel.getRegInfoResponse!.indianStateList?[14]);
     await showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -897,141 +910,157 @@ class _MyProfilepageState extends State<MyProfilepage> {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
-                  child: TextField(
-                    controller: _YourNameController,
-                    // onChanged: (str) => loginViewModel.setName(str),
-                    textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.name,
-                    enableSuggestions: true,
+                  child: Observer(builder: (context) {
+                    return TextField(
+                      controller: _YourNameController,
+                      onChanged: (str) {
+                        profileViewModel.setYourName(str);
+                      },
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.name,
+                      enableSuggestions: true,
+                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                          ),
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.only(left: 8),
+                        border: InputBorder.none,
+                        labelText: 'Full Name',
 
-                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                        ),
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(left: 8),
-                      border: InputBorder.none,
-                      labelText: 'Full Name',
-
-                      // errorText: loginViewModel.login1ViewModelErrorState.name,
-                      // prefixIcon:
-                      // prefixIcon: ,
-                      // icon: Image.asset("image/people.png", height: 32),
-                      filled: true,
-                      isDense: false,
-                      fillColor: Color(0xffFFFFFF),
-                      // isDense: true
-                    ),
-                  ),
+                        errorText: profileViewModel.profileViewModelErrorState.yourName,
+                        // prefixIcon:
+                        // prefixIcon: ,
+                        // icon: Image.asset("image/people.png", height: 32),
+                        filled: true,
+                        isDense: false,
+                        fillColor: Color(0xffFFFFFF),
+                        // isDense: true
+                      ),
+                    );
+                  }),
                 ),
                 SizedBox(height: 8),
                 Container(
                   decoration: BoxDecoration(
                       color: Colors.white,
                       boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
-                  child: TextField(
-                    controller: _AddressLine1Controller,
-                    // onChanged: (str) => loginViewModel.setName(str),
-                    textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.name,
-                    enableSuggestions: true,
+                  child: Observer(builder: (context) {
+                    return TextField(
+                      controller: _AddressLine1Controller,
+                      onChanged: (str) {
+                        profileViewModel.setAddressLine1(str);
+                      },
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.name,
+                      enableSuggestions: true,
+                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                          ),
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.only(left: 8),
+                        border: InputBorder.none,
+                        labelText: 'Address Line 1',
 
-                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                        ),
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(left: 8),
-                      border: InputBorder.none,
-                      labelText: 'Address Line 1',
-
-                      // errorText: loginViewModel.login1ViewModelErrorState.name,
-                      // prefixIcon:
-                      // prefixIcon: ,
-                      // icon: Image.asset("image/people.png", height: 32),
-                      filled: true,
-                      isDense: false,
-                      fillColor: Color(0xffFFFFFF),
-                      // isDense: true
-                    ),
-                  ),
+                        errorText: profileViewModel.profileViewModelErrorState.addressLine1,
+                        // prefixIcon:
+                        // prefixIcon: ,
+                        // icon: Image.asset("image/people.png", height: 32),
+                        filled: true,
+                        isDense: false,
+                        fillColor: Color(0xffFFFFFF),
+                        // isDense: true
+                      ),
+                    );
+                  }),
                 ),
                 SizedBox(height: 8),
                 Container(
                   decoration: BoxDecoration(
                       color: Colors.white,
                       boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
-                  child: TextField(
-                    controller: _AddressLine2Controller,
-                    // onChanged: (str) => loginViewModel.setName(str),
-                    textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.name,
-                    enableSuggestions: true,
-
-                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                        ),
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(left: 8),
-                      border: InputBorder.none,
-                      labelText: 'Address Line 2',
-
-                      // prefixIcon:
-                      // prefixIcon: ,
-                      // icon: Image.asset("image/people.png", height: 32),
-                      filled: true,
-                      isDense: false,
-                      fillColor: Color(0xffFFFFFF),
-                      // isDense: true
-                    ),
-                  ),
+                  child: Observer(builder: (context) {
+                    return TextField(
+                      controller: _AddressLine2Controller,
+                      onChanged: (str) {
+                        profileViewModel.setAddressLine1(str);
+                      },
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.name,
+                      enableSuggestions: true,
+                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                          ),
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.only(left: 8),
+                        border: InputBorder.none,
+                        labelText: 'Address Line 2',
+                        errorText: profileViewModel.profileViewModelErrorState.addressLine2,
+                        // prefixIcon:
+                        // prefixIcon: ,
+                        // icon: Image.asset("image/people.png", height: 32),
+                        filled: true,
+                        isDense: false,
+                        fillColor: Color(0xffFFFFFF),
+                        // isDense: true
+                      ),
+                    );
+                  }),
                 ),
                 SizedBox(height: 8),
                 Container(
                   decoration: BoxDecoration(
                       color: Colors.white,
                       boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
-                  child: TextField(
-                    controller: _PinCodeController,
-                    // onChanged: (str) => loginViewModel.setName(str),
-                    textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.name,
-                    enableSuggestions: true,
-
-                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                        ),
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(left: 8),
-                      border: InputBorder.none,
-                      labelText: 'Pin Code',
-
-                      filled: true,
-                      isDense: false,
-                      fillColor: Color(0xffFFFFFF),
-                      // isDense: true
-                    ),
-                  ),
+                  child: Observer(builder: (context) {
+                    return TextField(
+                      controller: _PinCodeController,
+                      onChanged: (str) {
+                        profileViewModel.setPinCode(str);
+                      },
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.number,
+                      enableSuggestions: true,
+                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                          ),
+                      maxLength: 6,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                      ],
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.only(left: 8),
+                        border: InputBorder.none,
+                        labelText: 'Pin Code',
+                        errorText: profileViewModel.profileViewModelErrorState.pinCode,
+                        filled: true,
+                        isDense: false,
+                        fillColor: Color(0xffFFFFFF),
+                        // isDense: true
+                      ),
+                    );
+                  }),
                 ),
                 SizedBox(height: 8),
                 Container(
                   decoration: BoxDecoration(
                       color: Colors.white,
                       boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
-                  child: DropdownButtonFormField(
+                  child: DropdownButtonFormField<CountryList?>(
                       value: selectedCountry,
                       isExpanded: true,
                       hint: Text("Select Country"),
-                      items: profileViewModel.getRegInfoResponse!.countryList!.map((e) {
+                      items: (profileViewModel.getRegInfoResponse!.countryList ?? [])!.map((CountryList? e) {
                         return DropdownMenuItem(
                           alignment: Alignment.centerLeft,
                           child: Container(
                               child: Padding(
                             padding: const EdgeInsets.only(left: 8.0),
                             child: Text(
-                              '${e.name ?? ''}',
+                              '${e!.name ?? ''}',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -1050,18 +1079,18 @@ class _MyProfilepageState extends State<MyProfilepage> {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
-                  child: DropdownButtonFormField(
+                  child: DropdownButtonFormField<IndianStateList?>(
                       value: selectedState,
                       isExpanded: true,
                       hint: Text("Select State"),
-                      items: profileViewModel.getRegInfoResponse!.indianStateList!.map((e) {
+                      items: (profileViewModel.getRegInfoResponse!.indianStateList ?? [])!.map((IndianStateList? e) {
                         return DropdownMenuItem(
                           alignment: Alignment.centerLeft,
                           child: Container(
                               child: Padding(
                             padding: const EdgeInsets.only(left: 8.0),
                             child: Text(
-                              '${e.name ?? ''}',
+                              '${e!.name ?? ''}',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -1094,7 +1123,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                     value: selectedCity,
                                     isExpanded: true,
                                     hint: Text("Select City"),
-                                    items: profileViewModel.getCityResponse!.cityList!.map((CityList? e) {
+                                    items: (profileViewModel.getCityResponse!.cityList ?? [])!.map((CityList? e) {
                                       return DropdownMenuItem(
                                         alignment: Alignment.centerLeft,
                                         child: Container(
@@ -1121,28 +1150,32 @@ class _MyProfilepageState extends State<MyProfilepage> {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
-                  child: TextField(
-                    controller: _GSTNumberController,
-                    // onChanged: (str) => loginViewModel.setName(str),
-                    textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.name,
-                    enableSuggestions: true,
-
-                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                        ),
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(left: 8),
-                      border: InputBorder.none,
-                      labelText: 'GST Number',
-
-                      filled: true,
-                      isDense: false,
-                      fillColor: Color(0xffFFFFFF),
-                      // isDense: true
-                    ),
-                  ),
+                  child: Observer(builder: (context) {
+                    return TextField(
+                      controller: _GSTNumberController,
+                      onChanged: (str) {
+                        profileViewModel.setGSTNumber(str);
+                      },
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.name,
+                      enableSuggestions: true,
+                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                          ),
+                      maxLength: 15,
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.only(left: 8),
+                        border: InputBorder.none,
+                        labelText: 'GST Number',
+                        errorText: profileViewModel.profileViewModelErrorState.gSTNumber,
+                        filled: true,
+                        isDense: false,
+                        fillColor: Color(0xffFFFFFF),
+                        // isDense: true
+                      ),
+                    );
+                  }),
                 ),
               ],
             ),
@@ -1155,38 +1188,60 @@ class _MyProfilepageState extends State<MyProfilepage> {
               ),
               TextButton(
                 onPressed: () async {
-                  await profileViewModel.getCity("15");
-                  selectedState = profileViewModel.getRegInfoResponse!.indianStateList![14];
-                  String type = "Postal";
-                  if (addressCount == 0) {
-                    type = "Postal";
-                  } else {
-                    type = "Billing";
-                  }
-                  HttpResponse res = await profileViewModel.AddMyNewAddress(
-                      "",
-                      _YourNameController.text,
-                      _AddressLine1Controller.text,
-                      _AddressLine2Controller.text,
-                      _PinCodeController.text,
-                      _GSTNumberController.text,
-                      selectedCountry!.name ?? '',
-                      selectedState!.name ?? '',
-                      selectedCity!.name ?? '',
-                      type,
-                      "add");
-                  if (res.status == 200) {
+                  profileViewModel.validateAll();
+                  if ((selectedState == null)) {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text(res.message ?? ''),
+                      content: Text('Please Select State'),
                       backgroundColor: Colors.green,
                     ));
-                  } else {
+                  } else if ((selectedCity == null)) {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text(res.message ?? ''),
+                      content: Text('Please Select City'),
                       backgroundColor: Colors.orange,
                     ));
+                  } else if (profileViewModel.profileViewModelErrorState.hasErrors) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text('Please Enter all Mandatory Fields'),
+                      backgroundColor: Colors.orange,
+                    ));
+                  } else {
+                    await profileViewModel.getCity("15");
+                    selectedState = profileViewModel.getRegInfoResponse!.indianStateList == null
+                        ? null
+                        : profileViewModel.getRegInfoResponse!.indianStateList![14];
+                    String type = "Postal";
+                    if (addressCount == 0) {
+                      type = "Postal";
+                    } else {
+                      type = "Billing";
+                    }
+
+                    profileViewModel.validateAll();
+                    HttpResponse res = await profileViewModel.AddMyNewAddress(
+                        "",
+                        _YourNameController.text,
+                        _AddressLine1Controller.text,
+                        _AddressLine2Controller.text,
+                        _PinCodeController.text,
+                        _GSTNumberController.text,
+                        (selectedCountry == null) ? '' : selectedCountry!.name ?? '',
+                        (selectedState == null) ? '' : selectedState!.name ?? '',
+                        (selectedCity == null) ? '' : selectedCity!.name ?? '',
+                        type,
+                        "add");
+                    if (res.status == 200) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(res.message ?? ''),
+                        backgroundColor: Colors.green,
+                      ));
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(res.message ?? ''),
+                        backgroundColor: Colors.orange,
+                      ));
+                    }
+                    Navigator.of(context).pop();
                   }
-                  Navigator.of(context).pop();
                 },
                 child: Text('Save'),
               ),
@@ -1203,9 +1258,38 @@ class _MyProfilepageState extends State<MyProfilepage> {
     TextEditingController _AddressLine2Controller = TextEditingController();
     TextEditingController _PinCodeController = TextEditingController();
     TextEditingController _GSTNumberController = TextEditingController();
+
     await profileViewModel.getCity("15");
     selectedCountry = profileViewModel.getRegInfoResponse!.countryList![98];
     selectedState = profileViewModel.getRegInfoResponse!.indianStateList![14];
+
+    _YourNameController.text =
+        "${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].yourName ?? ''}";
+    _AddressLine1Controller.text =
+        "${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].addLine1 ?? ''}";
+    _AddressLine2Controller.text =
+        "${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].addLine2 ?? ''}";
+    _PinCodeController.text =
+        "${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].pinCode ?? ''}";
+    _GSTNumberController.text =
+        "${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].gstNum ?? ''}";
+
+    profileViewModel.getRegInfoResponse!.countryList!.forEach((element) {
+      if ((element.name ?? '').toUpperCase() ==
+          "${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].country ?? ''}"
+              .toUpperCase()) {
+        selectedCountry = element;
+      }
+    });
+
+    profileViewModel.getRegInfoResponse!.indianStateList!.forEach((element) {
+      if ((element.name ?? '').toUpperCase() ==
+          "${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].state ?? ''}"
+              .toUpperCase()) {
+        selectedState = element;
+      }
+    });
+
     await showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -1221,131 +1305,133 @@ class _MyProfilepageState extends State<MyProfilepage> {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
-                  child: TextField(
-                    controller: _YourNameController,
-                    // onChanged: (str) => loginViewModel.setName(str),
-                    textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.name,
-                    enableSuggestions: true,
+                  child: Observer(builder: (context) {
+                    return TextField(
+                      controller: _YourNameController,
+                      onChanged: (str) {
+                        profileViewModel.setYourName(str);
+                      },
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.name,
+                      enableSuggestions: true,
+                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                          ),
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.only(left: 8),
+                        border: InputBorder.none,
+                        labelText: 'Full Name',
+                        // hintText:"${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].yourName ?? ''}",
 
-                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                        ),
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(left: 8),
-                      border: InputBorder.none,
-                      labelText: 'Full Name',
-                      hintText:
-                          "${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].yourName ?? ''}",
-
-                      // errorText: loginViewModel.login1ViewModelErrorState.name,
-                      // prefixIcon:
-                      // prefixIcon: ,
-                      // icon: Image.asset("image/people.png", height: 32),
-                      filled: true,
-                      isDense: false,
-                      fillColor: Color(0xffFFFFFF),
-                      // isDense: true
-                    ),
-                  ),
+                        errorText: profileViewModel.profileViewModelErrorState.yourName,
+                        filled: true,
+                        isDense: false,
+                        fillColor: Color(0xffFFFFFF),
+                        // isDense: true
+                      ),
+                    );
+                  }),
                 ),
                 SizedBox(height: 8),
                 Container(
                   decoration: BoxDecoration(
                       color: Colors.white,
                       boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
-                  child: TextField(
-                    controller: _AddressLine1Controller,
-                    // onChanged: (str) => loginViewModel.setName(str),
-                    textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.name,
-                    enableSuggestions: true,
+                  child: Observer(builder: (context) {
+                    return TextField(
+                      controller: _AddressLine1Controller,
+                      onChanged: (str) {
+                        profileViewModel.setAddressLine1(str);
+                      },
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.name,
+                      enableSuggestions: true,
+                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                          ),
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.only(left: 8),
+                        border: InputBorder.none,
+                        labelText: 'Address Line 1',
+                        // hintText: "${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].addLine1 ?? ''}",
 
-                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                        ),
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(left: 8),
-                      border: InputBorder.none,
-                      labelText: 'Address Line 1',
-                      hintText:
-                          "${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].addLine1 ?? ''}",
-
-                      // errorText: loginViewModel.login1ViewModelErrorState.name,
-                      // prefixIcon:
-                      // prefixIcon: ,
-                      // icon: Image.asset("image/people.png", height: 32),
-                      filled: true,
-                      isDense: false,
-                      fillColor: Color(0xffFFFFFF),
-                      // isDense: true
-                    ),
-                  ),
+                        errorText: profileViewModel.profileViewModelErrorState.addressLine1,
+                        // prefixIcon:
+                        // prefixIcon: ,
+                        // icon: Image.asset("image/people.png", height: 32),
+                        filled: true,
+                        isDense: false,
+                        fillColor: Color(0xffFFFFFF),
+                        // isDense: true
+                      ),
+                    );
+                  }),
                 ),
                 SizedBox(height: 8),
                 Container(
                   decoration: BoxDecoration(
                       color: Colors.white,
                       boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
-                  child: TextField(
-                    controller: _AddressLine2Controller,
-                    // onChanged: (str) => loginViewModel.setName(str),
-                    textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.name,
-                    enableSuggestions: true,
-
-                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                        ),
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(left: 8),
-                      border: InputBorder.none,
-                      labelText: 'Address Line 2',
-                      hintText:
-                          "${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].addLine2 ?? ''}",
-
-                      // prefixIcon:
-                      // prefixIcon: ,
-                      // icon: Image.asset("image/people.png", height: 32),
-                      filled: true,
-                      isDense: false,
-                      fillColor: Color(0xffFFFFFF),
-                      // isDense: true
-                    ),
-                  ),
+                  child: Observer(builder: (context) {
+                    return TextField(
+                      controller: _AddressLine2Controller,
+                      onChanged: (str) {
+                        profileViewModel.setAddressLine2(str);
+                      },
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.name,
+                      enableSuggestions: true,
+                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                          ),
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.only(left: 8),
+                        border: InputBorder.none,
+                        labelText: 'Address Line 2',
+                        // hintText: "${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].addLine2 ?? ''}",
+                        errorText: profileViewModel.profileViewModelErrorState.addressLine2,
+                        filled: true,
+                        isDense: false,
+                        fillColor: Color(0xffFFFFFF),
+                        // isDense: true
+                      ),
+                    );
+                  }),
                 ),
                 SizedBox(height: 8),
                 Container(
                   decoration: BoxDecoration(
                       color: Colors.white,
                       boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
-                  child: TextField(
-                    controller: _PinCodeController,
-                    // onChanged: (str) => loginViewModel.setName(str),
-                    textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.name,
-                    enableSuggestions: true,
-
-                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                        ),
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(left: 8),
-                      border: InputBorder.none,
-                      labelText: 'Pin Code',
-                      hintText:
-                          "${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].pinCode ?? ''}",
-
-                      filled: true,
-                      isDense: false,
-                      fillColor: Color(0xffFFFFFF),
-                      // isDense: true
-                    ),
-                  ),
+                  child: Observer(builder: (context) {
+                    return TextField(
+                      controller: _PinCodeController,
+                      onChanged: (str) {
+                        profileViewModel.setPinCode(str);
+                      },
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.name,
+                      enableSuggestions: true,
+                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                          ),
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.only(left: 8),
+                        border: InputBorder.none,
+                        labelText: 'Pin Code',
+                        // hintText: "${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].pinCode ?? ''}",
+                        errorText: profileViewModel.profileViewModelErrorState.pinCode,
+                        filled: true,
+                        isDense: false,
+                        fillColor: Color(0xffFFFFFF),
+                        // isDense: true
+                      ),
+                    );
+                  }),
                 ),
                 SizedBox(height: 8),
                 Container(
@@ -1355,8 +1441,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
                   child: DropdownButtonFormField(
                       value: selectedCountry,
                       isExpanded: true,
-                      hint: Text(
-                          "${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].country ?? ''}"),
+                      // hint: Text("${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].country ?? ''}"),
                       items: profileViewModel.getRegInfoResponse!.countryList!.map((e) {
                         return DropdownMenuItem(
                           alignment: Alignment.centerLeft,
@@ -1386,8 +1471,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
                   child: DropdownButtonFormField(
                       value: selectedState,
                       isExpanded: true,
-                      hint: Text(
-                          "${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].state ?? ''}"),
+                      // hint: Text("${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].state ?? ''}"),
                       items: profileViewModel.getRegInfoResponse!.indianStateList!.map((e) {
                         return DropdownMenuItem(
                           alignment: Alignment.centerLeft,
@@ -1427,8 +1511,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                 : DropdownButtonFormField<CityList?>(
                                     value: selectedCity,
                                     isExpanded: true,
-                                    hint: Text(
-                                        "${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].city ?? ''}"),
+                                    // hint: Text("${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].city ?? ''}"),
                                     items: profileViewModel.getCityResponse!.cityList!.map((CityList? e) {
                                       return DropdownMenuItem(
                                         alignment: Alignment.centerLeft,
@@ -1456,30 +1539,32 @@ class _MyProfilepageState extends State<MyProfilepage> {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
-                  child: TextField(
-                    controller: _GSTNumberController,
-                    // onChanged: (str) => loginViewModel.setName(str),
-                    textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.name,
-                    enableSuggestions: true,
-
-                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                        ),
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(left: 8),
-                      border: InputBorder.none,
-                      labelText: 'GST Number',
-                      hintText:
-                          "${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].gstNum ?? ''}",
-
-                      filled: true,
-                      isDense: false,
-                      fillColor: Color(0xffFFFFFF),
-                      // isDense: true
-                    ),
-                  ),
+                  child: Observer(builder: (context) {
+                    return TextField(
+                      controller: _GSTNumberController,
+                      onChanged: (str) {
+                        profileViewModel.setGSTNumber(str);
+                      },
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.name,
+                      enableSuggestions: true,
+                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                          ),
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.only(left: 8),
+                        border: InputBorder.none,
+                        labelText: 'GST Number',
+                        // hintText: "${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address?[index].gstNum ?? ''}",
+                        errorText: profileViewModel.profileViewModelErrorState.gSTNumber,
+                        filled: true,
+                        isDense: false,
+                        fillColor: Color(0xffFFFFFF),
+                        // isDense: true
+                      ),
+                    );
+                  }),
                 ),
               ],
             ),

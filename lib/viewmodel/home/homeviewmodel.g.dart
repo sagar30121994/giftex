@@ -358,6 +358,38 @@ mixin _$HomeViewModel on _HomeViewModel, Store {
     });
   }
 
+  late final _$selectedyearAtom =
+      Atom(name: '_HomeViewModel.selectedyear', context: context);
+
+  @override
+  String? get selectedyear {
+    _$selectedyearAtom.reportRead();
+    return super.selectedyear;
+  }
+
+  @override
+  set selectedyear(String? value) {
+    _$selectedyearAtom.reportWrite(value, super.selectedyear, () {
+      super.selectedyear = value;
+    });
+  }
+
+  late final _$historyYearListAtom =
+      Atom(name: '_HomeViewModel.historyYearList', context: context);
+
+  @override
+  List<String> get historyYearList {
+    _$historyYearListAtom.reportRead();
+    return super.historyYearList;
+  }
+
+  @override
+  set historyYearList(List<String> value) {
+    _$historyYearListAtom.reportWrite(value, super.historyYearList, () {
+      super.historyYearList = value;
+    });
+  }
+
   late final _$getArtMovementResponseAtom =
       Atom(name: '_HomeViewModel.getArtMovementResponse', context: context);
 
@@ -450,6 +482,8 @@ getDepartmentsResponse: ${getDepartmentsResponse},
 isloadingdepartments: ${isloadingdepartments},
 getOurCollectorResponse: ${getOurCollectorResponse},
 isloadingourCollector: ${isloadingourCollector},
+selectedyear: ${selectedyear},
+historyYearList: ${historyYearList},
 getArtMovementResponse: ${getArtMovementResponse},
 isloadingartmovement: ${isloadingartmovement},
 getRecordPriceArtworkResponse: ${getRecordPriceArtworkResponse},
