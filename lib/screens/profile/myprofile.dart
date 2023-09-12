@@ -43,6 +43,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
   TextEditingController dobController = TextEditingController();
   TextEditingController genderController = TextEditingController();
   TextEditingController nationalityController = TextEditingController();
+  TextEditingController defaultController = TextEditingController();
 
   TextEditingController depositmodeController = TextEditingController();
   TextEditingController depositAmountController = TextEditingController();

@@ -1,5 +1,4 @@
 import 'package:giftex/data/local/client/prefs.dart';
-import 'package:giftex/data/network/base/endpoints.dart';
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/data/network/models/responce/cmsweb/careersresponse.dart';
 import 'package:giftex/data/network/models/responce/cmsweb/insertCareerFormResponse.dart';
@@ -92,6 +91,7 @@ abstract class _ServiceViewModel with Store {
   setQuery(String value) {
     query = value;
   }
+
   Future<HttpResponse> getServices(String type) async {
     isloading = true;
     serviceResponse = null;
@@ -115,7 +115,6 @@ abstract class _ServiceViewModel with Store {
     isloading = false;
     return httpResponse;
   }
-
 
   Future<HttpResponse> insertCareerForm() async {
     isloading = true;
@@ -173,9 +172,8 @@ abstract class _ServiceViewModel with Store {
     return httpResponse;
   }
 
-
   @observable
-  HomeNewsVideosBlogsResponse? homeNewsVideosBlogsResponse=HomeNewsVideosBlogsResponse();
+  HomeNewsVideosBlogsResponse? homeNewsVideosBlogsResponse = HomeNewsVideosBlogsResponse();
   Future<HttpResponse> getVideos() async {
     isloading = true;
 

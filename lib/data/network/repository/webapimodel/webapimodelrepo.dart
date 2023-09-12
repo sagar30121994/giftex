@@ -16,9 +16,7 @@ import 'package:giftex/data/network/models/request/webapimodel/getpaymentgridreq
 import 'package:giftex/data/network/models/request/webapimodel/getproxybidequestmodel.dart';
 import 'package:giftex/data/network/models/request/webapimodel/getuserdetailsrequestmodel.dart';
 import 'package:giftex/data/network/models/request/webapimodel/inserregrequestmodel.dart';
-import 'package:giftex/data/network/models/request/webapimodel/insertcareerformrequestmodel.dart';
 import 'package:giftex/data/network/models/request/webapimodel/insertestimationrequestmodel.dart';
-import 'package:giftex/data/network/models/request/webapimodel/insertreachusformrequestmodel.dart';
 import 'package:giftex/data/network/models/request/webapimodel/insertsubsriptionrequestmodel.dart';
 import 'package:giftex/data/network/models/request/webapimodel/precheckloginrequestmodel.dart';
 import 'package:giftex/data/network/models/request/webapimodel/setdefaultmyaddressrequestmodel.dart';
@@ -34,7 +32,6 @@ import 'package:giftex/data/network/models/request/webapimodel/userloginotpreque
 import 'package:giftex/data/network/models/request/webapimodel/userlogoutrequestmodel.dart';
 import 'package:giftex/data/network/models/request/webapimodel/verifyemailrequestmodel.dart';
 import 'package:giftex/data/network/models/request/webapimodel/verifymobilerequestmodel.dart';
-import 'package:giftex/data/network/models/responce/contactusform/insertreachusformresponse.dart';
 
 import '../../base/base.dart' as BaseUrl;
 import '../../base/endpoints.dart' as endPoints;
@@ -49,6 +46,7 @@ class WebapimodelRepo {
 
   WebapimodelRepo() {
     httpClient = DioClientNew();
+    localSharedPrefrence = LocalSharedPrefrence();
   }
 
   Future<HttpResponse> verifyEmail(VerifyEmailRequestModel model) async {
@@ -738,7 +736,7 @@ class WebapimodelRepo {
   Future<HttpResponse> showIntrestInAuction(ShowIntrestRequestModel model) async {
     HttpResponse httpResponse = HttpResponse();
 
-    model.authkeyMobile='';
+    model.authkeyMobile = '';
 
     httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
     await httpClient!
@@ -981,23 +979,22 @@ class WebapimodelRepo {
     HttpResponse httpResponse = HttpResponse();
     // String userlogin = json.encode(model);
     httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
-    await httpClient!.post(BaseUrl.CMSBaseurl + endPoints.WebApiModel().insertreachusform, body: {
-      "authkey_web": "${localSharedPrefrence!.authkey ?? ''}",
+    await httpClient!.post(BaseUrl.baseUrl + endPoints.WebApiModel().insertreachusform, body: {
+      "authkey_web": "${localSharedPrefrence!.getAuthKeyWeb() ?? ''}",
       "authkey_mobile": "",
-      "userid": "${localSharedPrefrence!.userId ?? ''}",
-      "CRMClientID": "${localSharedPrefrence!.crmId ?? ''}",
-      "department":"",
+      "userid": "${localSharedPrefrence!.getUserId() ?? ''}",
+      "CRMClientID": "${localSharedPrefrence!.getCrmClinetId() ?? ''}",
+      "department": "",
       "fullname": fullname,
       "emailid": email,
-      "phonenumber":mobile,
+      "phonenumber": mobile,
       "query": query,
-      "userid":""
     }).then((responce) async {
       print(responce);
       if (responce.statusCode == 200) {
-        // httpResponse.status = responce.statusCode;
-        // httpResponse.message = 'Successful';
-        httpResponse.data = InsertReachUsFormResponse.fromJson(responce.data);
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = 'Successful';
+        // httpResponse.data = InsertReachUsFormResponse.fromJson(responce.data);
       } else {
         httpResponse.status = responce.statusCode;
         httpResponse.message = responce.data['message'];

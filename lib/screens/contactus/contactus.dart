@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:giftex/data/local/client/prefs.dart';
-import 'package:giftex/screens/aboutus/aboutus.dart';
 import 'package:giftex/screens/components/footer/footer.dart';
-import 'package:giftex/screens/components/header.dart'; // import 'package:giftex/screens/components/headerer.dart';
+import 'package:giftex/screens/components/header.dart';
+import 'package:giftex/viewmodel/service/serviceviewmodel.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+ServiceViewModel serviceViewModel = ServiceViewModel();
 
 class ContactusPage extends StatefulWidget {
   @override
@@ -42,9 +44,9 @@ class _ContactusPageState extends State<ContactusPage> {
     }
   }
 
-  final nameController = TextEditingController();
-  final emailController = TextEditingController();
-  final mobilenoController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController mobilenoController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -390,6 +392,7 @@ class _ContactusPageState extends State<ContactusPage> {
                                     color: Colors.black,
                                     fontWeight: FontWeight.w500,
                                   ),
+                              onChanged: (str) => serviceViewModel.setFullName(str),
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 labelText: 'Name',
@@ -419,6 +422,7 @@ class _ContactusPageState extends State<ContactusPage> {
                                     color: Colors.black,
                                     fontWeight: FontWeight.w500,
                                   ),
+                              onChanged: (str) => serviceViewModel.setEmail(str),
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 labelText: 'Email ID',
@@ -446,6 +450,7 @@ class _ContactusPageState extends State<ContactusPage> {
                                     color: Colors.black,
                                     fontWeight: FontWeight.w500,
                                   ),
+                              onChanged: (str) => serviceViewModel.setMobile(str),
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 labelText: 'Mobile No.',
@@ -473,6 +478,7 @@ class _ContactusPageState extends State<ContactusPage> {
                                     color: Colors.black,
                                     fontWeight: FontWeight.w500,
                                   ),
+                              onChanged: (str) => serviceViewModel.setQuery(str),
 
                               decoration: InputDecoration(
                                 border: InputBorder.none,
@@ -495,15 +501,25 @@ class _ContactusPageState extends State<ContactusPage> {
                           InkWell(
                             onTap: () {
                               serviceViewModel.InsertReachUsForm().then((value) => {
-                                if (value.status == 200)
-                                  {
-                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value.message!),
-                                      backgroundColor: Colors.green,),)
-                                  }else{
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value.message!),
-                                    backgroundColor: Colors.green,),)
-                                }
-                              });
+                                    if (value.status == 200)
+                                      {
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(
+                                            content: Text(value.message!),
+                                            backgroundColor: Colors.green,
+                                          ),
+                                        )
+                                      }
+                                    else
+                                      {
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(
+                                            content: Text(value.message!),
+                                            backgroundColor: Colors.deepOrange,
+                                          ),
+                                        )
+                                      }
+                                  });
                             },
                             child: Container(
                               height: 50,
