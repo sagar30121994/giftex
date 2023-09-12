@@ -9,6 +9,7 @@ import 'package:giftex/screens/liveauction/liveauction.dart';
 import 'package:giftex/screens/newsandupdates/newsandupdates.dart';
 import 'package:giftex/viewmodel/home/homeviewmodel.dart';
 import 'package:intl/intl.dart';
+import 'package:mobx/mobx.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../components/footer/footer.dart';
@@ -29,10 +30,11 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
   Color tabColor = Color(0xff6D905D);
   String newsType = "LATEST NEWS";
   final controller = PageController(viewportFraction: 0.8, keepPage: true);
-  final sliderController = PageController();
+  PageController sliderController = PageController();
   final controller1 = PageController(viewportFraction: 0.8, keepPage: true);
   final controller2 = PageController(viewportFraction: 0.8, keepPage: true);
 
+  @observable
   int position = 0;
 
   //
@@ -40,7 +42,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
   Timer? timer;
 
   startTimer() {
-    timer = Timer.periodic(Duration(seconds: 4), (_) async {
+    timer = Timer.periodic(Duration(seconds: 5), (_) async {
       setState(() {
         if (homeViewModel.homeBanerResponse == null) {
         } else {
@@ -118,138 +120,140 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                               SizedBox(
                                 height: 450,
                                 width: MediaQuery.of(context).size.width,
-                                child: PageView.builder(
-                                  controller: sliderController,
-                                  onPageChanged: (pos) {
-                                    setState(() {
-                                      position = pos % 4;
-                                    });
-                                  },
-                                  itemCount: homeViewModel.homeBanerResponse == null
-                                      ? 0
-                                      : homeViewModel.homeBanerResponse!.pageContent!.banner!.length,
-                                  itemBuilder: (context, pos) => SizedBox(
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Text(
-                                          "${homeViewModel.homeBanerResponse!.pageContent!.banner![pos].title1}",
-                                          textAlign: TextAlign.left,
-                                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                              color: Theme.of(context).colorScheme.primary,
-                                              fontWeight: FontWeight.w500,
-                                              letterSpacing: 2.0),
-                                        ),
-                                        const SizedBox(
-                                          height: 8,
-                                        ),
-                                        Text(
-                                          "${homeViewModel.homeBanerResponse!.pageContent!.banner![pos].title2}",
-                                          textAlign: TextAlign.left,
-                                          style: Theme.of(context).textTheme.headline5!.copyWith(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w700,
-                                              ),
-                                        ),
-                                        const SizedBox(
-                                          height: 8,
-                                        ),
-                                        Container(
-                                          width: MediaQuery.of(context).size.width * .80,
-                                          child: Text(
-                                            "${homeViewModel.homeBanerResponse!.pageContent!.banner![pos].title3}",
-                                            textAlign: TextAlign.center,
-                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                color: Color(0XFF747474),
-                                                fontWeight: FontWeight.w600,
-                                                letterSpacing: 1),
+                                child: Observer(builder: (context) {
+                                  return PageView.builder(
+                                    controller: sliderController,
+                                    onPageChanged: (pos) {
+                                      setState(() {
+                                        // position = pos % 4;
+                                      });
+                                    },
+                                    itemCount: homeViewModel.homeBanerResponse == null
+                                        ? 0
+                                        : homeViewModel.homeBanerResponse!.pageContent!.banner!.length,
+                                    itemBuilder: (context, pos) => SizedBox(
+                                      width: MediaQuery.of(context).size.width,
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          SizedBox(
+                                            height: 10,
                                           ),
-                                        ),
-                                        const SizedBox(
-                                          height: 16,
-                                        ),
-                                        Container(
-                                          height: 300,
-                                          child: Column(
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(left: 25.0, right: 25),
-                                                child: Image.network(
-                                                    "${homeViewModel.homeBanerResponse!.pageContent!.banner![pos].image!.mobile}",
-                                                    fit: BoxFit.cover,
-                                                    height: 220,
-                                                    width: MediaQuery.of(context).size.width),
-                                              ),
-                                              SizedBox(
-                                                height: 24,
-                                              ),
-                                              InkWell(
-                                                onTap: () {
-                                                  setState(() {
-                                                    auctionViewModel.selectedAuction = Auctions(
-                                                      auctionId: homeViewModel.homeBanerResponse!.pageContent!
-                                                          .banner![pos].button!.result!.auctions!.first.auctionId,
-                                                      image: homeViewModel.homeBanerResponse!.pageContent!.banner![pos]
-                                                          .button!.result!.auctions!.first.image,
-                                                      displayDate: homeViewModel.homeBanerResponse!.pageContent!
-                                                          .banner![pos].button!.result!.auctions!.first.displayDate,
-                                                      // displayDate: homeViewModel.homeBanerResponse!.pageContent!
-                                                      //     .banner![pos].button!.result!.auctions!.first.displayDate,
-                                                    );
+                                          Text(
+                                            "${homeViewModel.homeBanerResponse!.pageContent!.banner![pos].title1}",
+                                            textAlign: TextAlign.left,
+                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                color: Theme.of(context).colorScheme.primary,
+                                                fontWeight: FontWeight.w500,
+                                                letterSpacing: 2.0),
+                                          ),
+                                          const SizedBox(
+                                            height: 8,
+                                          ),
+                                          Text(
+                                            "${homeViewModel.homeBanerResponse!.pageContent!.banner![pos].title2}",
+                                            textAlign: TextAlign.left,
+                                            style: Theme.of(context).textTheme.headline5!.copyWith(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w700,
+                                                ),
+                                          ),
+                                          const SizedBox(
+                                            height: 8,
+                                          ),
+                                          Container(
+                                            width: MediaQuery.of(context).size.width * .80,
+                                            child: Text(
+                                              "${homeViewModel.homeBanerResponse!.pageContent!.banner![pos].title3}",
+                                              textAlign: TextAlign.center,
+                                              style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                  color: Color(0XFF747474),
+                                                  fontWeight: FontWeight.w600,
+                                                  letterSpacing: 1),
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 16,
+                                          ),
+                                          Container(
+                                            height: 300,
+                                            child: Column(
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.only(left: 25.0, right: 25),
+                                                  child: Image.network(
+                                                      "${homeViewModel.homeBanerResponse!.pageContent!.banner![pos].image!.mobile}",
+                                                      fit: BoxFit.cover,
+                                                      height: 220,
+                                                      width: MediaQuery.of(context).size.width),
+                                                ),
+                                                SizedBox(
+                                                  height: 24,
+                                                ),
+                                                InkWell(
+                                                  onTap: () {
+                                                    setState(() {
+                                                      auctionViewModel.selectedAuction = Auctions(
+                                                        auctionId: homeViewModel.homeBanerResponse!.pageContent!
+                                                            .banner![pos].button!.result!.auctions!.first.auctionId,
+                                                        image: homeViewModel.homeBanerResponse!.pageContent!
+                                                            .banner![pos].button!.result!.auctions!.first.image,
+                                                        displayDate: homeViewModel.homeBanerResponse!.pageContent!
+                                                            .banner![pos].button!.result!.auctions!.first.displayDate,
+                                                        // displayDate: homeViewModel.homeBanerResponse!.pageContent!
+                                                        //     .banner![pos].button!.result!.auctions!.first.displayDate,
+                                                      );
 
-                                                    bottomViewModel.setIndex(8);
-                                                  });
-                                                  auctionViewModel.liveAuctionType = "lots";
-                                                  auctionViewModel.auctionType = "upcoming";
-                                                  // launchUrl(
-                                                  //   Uri.parse(homeViewModel.homeBanerResponse!.pageContent!.banner![pos]
-                                                  //       .button!.cta!.link!),
-                                                  //   mode: LaunchMode.externalApplication,
-                                                  // );
-                                                },
-                                                child: SizedBox(
-                                                  height: 50,
-                                                  child: Center(
-                                                    child: Container(
-                                                      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 2),
-                                                      decoration: BoxDecoration(
-                                                          borderRadius: BorderRadius.circular(22.0),
-                                                          gradient: LinearGradient(
-                                                            begin: Alignment.bottomLeft,
-                                                            end: Alignment.topRight,
-                                                            colors: [
-                                                              Color(0xffB45156),
-                                                              Color(0xffE74B52),
-                                                              // Color(0xffFFFFFF),
-                                                            ],
-                                                          )),
-                                                      child: Padding(
-                                                        padding: const EdgeInsets.only(
-                                                            right: 8.0, left: 8, top: 12, bottom: 12),
-                                                        child: Text(
-                                                          '${homeViewModel.homeBanerResponse!.pageContent!.banner![pos].button!.text}',
-                                                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                              color: Color(0XFFFFFFFF),
-                                                              fontWeight: FontWeight.w600,
-                                                              letterSpacing: 1),
+                                                      bottomViewModel.setIndex(8);
+                                                    });
+                                                    auctionViewModel.liveAuctionType = "lots";
+                                                    auctionViewModel.auctionType = "upcoming";
+                                                    // launchUrl(
+                                                    //   Uri.parse(homeViewModel.homeBanerResponse!.pageContent!.banner![pos]
+                                                    //       .button!.cta!.link!),
+                                                    //   mode: LaunchMode.externalApplication,
+                                                    // );
+                                                  },
+                                                  child: SizedBox(
+                                                    height: 50,
+                                                    child: Center(
+                                                      child: Container(
+                                                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+                                                        decoration: BoxDecoration(
+                                                            borderRadius: BorderRadius.circular(22.0),
+                                                            gradient: LinearGradient(
+                                                              begin: Alignment.bottomLeft,
+                                                              end: Alignment.topRight,
+                                                              colors: [
+                                                                Color(0xffB45156),
+                                                                Color(0xffE74B52),
+                                                                // Color(0xffFFFFFF),
+                                                              ],
+                                                            )),
+                                                        child: Padding(
+                                                          padding: const EdgeInsets.only(
+                                                              right: 8.0, left: 8, top: 12, bottom: 12),
+                                                          child: Text(
+                                                            '${homeViewModel.homeBanerResponse!.pageContent!.banner![pos].button!.text}',
+                                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                                color: Color(0XFFFFFFFF),
+                                                                fontWeight: FontWeight.w600,
+                                                                letterSpacing: 1),
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
                                                   ),
-                                                ),
-                                              )
-                                            ],
+                                                )
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ),
+                                  );
+                                }),
                               ),
                             ],
                           ),
@@ -1415,7 +1419,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                 height: 350,
                                 alignment: Alignment.center,
                                 margin: EdgeInsets.only(right: 16),
-                                width: MediaQuery.of(context).size.width * .9,
+                                width: MediaQuery.of(context).size.width * .1,
                                 child: Stack(
                                   children: [
                                     Padding(
@@ -1425,7 +1429,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 16, right: 16),
+                                      padding: const EdgeInsets.only(left: 8, right: 16),
                                       child: Column(
                                         children: [
                                           homeViewModel.selectedNewsTabIndex == 0
@@ -1576,7 +1580,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => NewsAndUpdatesPage("BLOGS")));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => NewsAndUpdatesPage("LATEST NEWS")));
                   },
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 2),

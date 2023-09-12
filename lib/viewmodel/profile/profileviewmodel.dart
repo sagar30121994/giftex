@@ -221,7 +221,7 @@ abstract class _ProfileViewModel with Store {
 
   UpdateRegPersonalDetailsRequest? updateRegPersonalDetailsRequest;
   UpdateRegMyAddressRequest? updateRegMyAddressRequest;
- // UpdateAddressRequest? updateAddressRequest;
+  // UpdateAddressRequest? updateAddressRequest;
   UpdateRegBankingDetailsRequest? updateRegBankingDetailsRequest;
 
   Future<HttpResponse> UpdateRegMyAddress() async {

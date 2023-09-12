@@ -24,20 +24,20 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> with TickerProv
   String newsType = "LATEST NEWS";
   late TabController tabController;
 
-
   @override
-  void initState()
-  {
-
-    tabController=TabController(
-        initialIndex: newsType=='BLOGS'?2:newsType=='VIDEOS'?1:0,
+  void initState() {
+    tabController = TabController(
+        initialIndex: newsType == 'BLOGS'
+            ? 2
+            : newsType == 'VIDEOS'
+                ? 1
+                : 0,
         length: 3,
-        vsync:this
-    );
+        vsync: this);
     // TODO: implement initState
     newsType = widget.type;
-    if(newsType=='BLOGS'){
-      tabController.index=2;
+    if (newsType == 'BLOGS') {
+      tabController.index = 2;
     }
     callApi();
     super.initState();
@@ -52,7 +52,6 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> with TickerProv
       serviceViewModel.getBlogs();
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -189,8 +188,7 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> with TickerProv
                       border: Border(bottom: BorderSide(color: Color(0xffDFDFDF), width: 2)),
                     ),
                     child: TabBar(
-                      controller:tabController ,
-
+                      controller: tabController,
                       onTap: (index) {
                         setState(() {
                           if (index == 0) {
@@ -257,7 +255,7 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> with TickerProv
                                 child: Container(
                                   margin: EdgeInsets.only(bottom: 15),
                                   color: Color(0xffFFFFFF),
-                                  height: 360,
+                                  height: 366,
                                   alignment: Alignment.center,
                                   child: Column(
                                     children: [
@@ -363,7 +361,7 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> with TickerProv
                                 padding: const EdgeInsets.only(left: 16.0, right: 16.0),
                                 child: Container(
                                   color: Color(0xffFFFFFF),
-                                  height: 420,
+                                  height: 425,
                                   alignment: Alignment.center,
                                   child: Stack(
                                     children: [
@@ -415,7 +413,7 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> with TickerProv
                                                   ),
                                             ),
                                             const SizedBox(
-                                              height: 10,
+                                              height: 4,
                                             ),
                                             // Text(
                                             //   "${serviceViewModel.pressResponse!.pageContent!.array![index].}",
@@ -431,15 +429,30 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> with TickerProv
                                             Row(
                                               mainAxisAlignment: MainAxisAlignment.start,
                                               children: [
-                                                Text(
-                                                  "Read More",
-                                                  textAlign: TextAlign.center,
-                                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                        color: Color(0XFF5D7E4D),
-                                                        fontWeight: FontWeight.w700,
-                                                        decoration: TextDecoration.underline,
-                                                      ),
-                                                ),
+                                                InkWell(
+                                                  onTap: () {},
+                                                  child: Text(
+                                                    "Read More",
+                                                    textAlign: TextAlign.center,
+                                                    style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                          color: Color(0XFF5D7E4D),
+                                                          fontWeight: FontWeight.w700,
+                                                          decoration: TextDecoration.underline,
+                                                        ),
+                                                  ),
+                                                )
+                                                // InkWell(
+                                                //   child:
+                                                //   Text(
+                                                //     "Read More",
+                                                //     textAlign: TextAlign.center,
+                                                //     style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                //           color: Color(0XFF5D7E4D),
+                                                //           fontWeight: FontWeight.w700,
+                                                //           decoration: TextDecoration.underline,
+                                                //         ),
+                                                //   ),
+                                                // ),
                                               ],
                                             ),
                                           ],
@@ -469,7 +482,7 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> with TickerProv
                                 child: Container(
                                   margin: EdgeInsets.only(bottom: 16),
 
-                               //   height: 250,
+                                  //   height: 250,
 
                                   // alignment: Alignment.center,
 
@@ -478,11 +491,11 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> with TickerProv
                                     children: [
                                       InkWell(
                                         onTap: () async {
-                                          Uri _url=Uri.parse("${serviceViewModel.homeNewsVideosBlogsResponse!.videos?[index].videoUrl??''}");
+                                          Uri _url = Uri.parse(
+                                              "${serviceViewModel.homeNewsVideosBlogsResponse!.videos?[index].videoUrl ?? ''}");
                                           if (!await launchUrl(_url)) {
                                             throw Exception('Could not launch $_url');
                                           }
-
                                         },
                                         child: Container(
                                           width: MediaQuery.of(context).size.width * .25,
@@ -500,14 +513,16 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> with TickerProv
                                             children: [
                                               Container(
                                                 child: Image.network(
-                                                  serviceViewModel.homeNewsVideosBlogsResponse!.videos?[index].image!.desktop??'',
+                                                  serviceViewModel
+                                                          .homeNewsVideosBlogsResponse!.videos?[index].image!.desktop ??
+                                                      '',
                                                   height: 150,
                                                   fit: BoxFit.cover,
                                                 ),
                                               ),
                                               Center(
                                                   child: Image.asset(
-                                                    "image/6.png",
+                                                "image/6.png",
                                                 height: 45,
                                               )),
                                               Center(
@@ -537,7 +552,9 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> with TickerProv
                                             Row(
                                               children: [
                                                 Text(
-                                                  serviceViewModel.homeNewsVideosBlogsResponse!.videos?[index].timestamp??'',
+                                                  serviceViewModel
+                                                          .homeNewsVideosBlogsResponse!.videos?[index].timestamp ??
+                                                      '',
                                                   textAlign: TextAlign.start,
                                                   style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                         color: Color(0XFF3C5233),
@@ -550,13 +567,13 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> with TickerProv
                                               height: 6,
                                             ),
                                             HtmlWidget(
-                                              textStyle:  Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                color: Color(0xff2D2D2D),
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                              serviceViewModel.homeNewsVideosBlogsResponse!.videos?[index].title??'',
+                                              textStyle: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                    color: Color(0xff2D2D2D),
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                              serviceViewModel.homeNewsVideosBlogsResponse!.videos?[index].title ?? '',
                                             ),
-                                         /*   const SizedBox(
+                                            /*   const SizedBox(
                                               height: 8,
                                             ),
                                             Container(
@@ -569,7 +586,6 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> with TickerProv
                                                 serviceViewModel.homeNewsVideosBlogsResponse!.videos?[index].desc??'',
                                               ),
                                             ),*/
-
                                           ],
                                         ),
                                       )
