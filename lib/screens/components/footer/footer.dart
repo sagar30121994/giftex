@@ -178,8 +178,8 @@ class _FooterState extends State<Footer> {
                         footerViewModel.insertsubscribeForm().then((value) => {
                               emailController.text = "",
                               nameController.text = "",
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                content: Text("Thank you for subcribing"),
+                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                content: Text("Thank you for subscribing"),
                                 backgroundColor: Colors.green,
                               ))
                             });

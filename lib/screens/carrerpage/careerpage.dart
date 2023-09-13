@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:http/http.dart' as http;
@@ -319,6 +320,9 @@ class _CareerPageState extends State<CareerPage> {
                             Padding(
                               padding: EdgeInsets.only(top: 15),
                               child: TextField(
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(RegExp('[a-zA-Z]')),
+                                ],
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(),
                                     labelText: 'Name',
@@ -335,6 +339,7 @@ class _CareerPageState extends State<CareerPage> {
                             Padding(
                               padding: EdgeInsets.only(top: 15),
                               child: TextField(
+                                keyboardType: TextInputType.emailAddress,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(),
                                     labelText: 'Email Id',
@@ -351,8 +356,11 @@ class _CareerPageState extends State<CareerPage> {
                               padding: EdgeInsets.only(top: 15),
                               child: TextField(
                                 keyboardType: TextInputType.phone,
+                                maxLength: 10,
+                                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(),
+                                    counter: Container(),
                                     labelText: 'Mobile No',
                                     hintText: 'Enter Your No',
                                     prefixIcon: Icon(Icons.add_ic_call),
