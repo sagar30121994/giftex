@@ -82,13 +82,13 @@ class _MyProfilepageState extends State<MyProfilepage> {
 
     depositAmountController.text =
         "${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.dipositedAmount ?? '0')}";
-    depositmodeController.text = "";
     bidLimitController.text = "";
     widget.bottomViewModel.profileViewModel!.getDashboardOverview().then((value) {
       bidLimitController.text =
-          "${formateNumber('${widget.bottomViewModel.profileViewModel!.dashboradOverviewResponse!.totalSpent}')}";
-      depositmodeController.text = "";
+          "${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.balanceAmount ?? '0')}";
     });
+
+    depositmodeController.text = "Net Banking";
 
     addressCount = widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address!.length;
     super.initState();
