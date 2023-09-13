@@ -1422,7 +1422,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                 height: 350,
                                 alignment: Alignment.center,
                                 margin: EdgeInsets.only(right: 16),
-                                width: MediaQuery.of(context).size.width * .1,
+                                // width: MediaQuery.of(context).size.width,
                                 child: Stack(
                                   children: [
                                     Padding(
@@ -1432,22 +1432,23 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 8, right: 16),
+                                      padding: const EdgeInsets.only(left: 16, right: 16),
                                       child: Column(
+                                        // crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           homeViewModel.selectedNewsTabIndex == 0
                                               ? Image.network(
                                                   "${homeViewModel.homeNewsVideosBlogsResponse!.news![pos].image!.mobile}",
-                                                  fit: BoxFit.cover,
+                                                  fit: BoxFit.contain,
                                                   height: 200)
                                               : homeViewModel.selectedNewsTabIndex == 1
                                                   ? Image.network(
                                                       "${homeViewModel.homeNewsVideosBlogsResponse!.videos![pos].image!.mobile}",
-                                                      fit: BoxFit.cover,
+                                                      fit: BoxFit.contain,
                                                       height: 200)
                                                   : Image.network(
                                                       "${homeViewModel.homeNewsVideosBlogsResponse!.blogs![pos].image!.mobile}",
-                                                      fit: BoxFit.cover,
+                                                      fit: BoxFit.contain,
                                                       height: 200),
                                           SizedBox(
                                             height: 16,
