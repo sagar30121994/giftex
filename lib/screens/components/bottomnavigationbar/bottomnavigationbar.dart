@@ -9,6 +9,7 @@ import 'package:giftex/screens/carrerpage/careerpage.dart';
 import 'package:giftex/screens/components/drawer/drawermain.dart';
 import 'package:giftex/screens/contactus/contactus.dart';
 import 'package:giftex/screens/faq/faq.dart';
+import 'package:giftex/screens/homepage/homapage.dart';
 import 'package:giftex/screens/homepage/searchpage.dart';
 import 'package:giftex/screens/howtobuy/howtobuy.dart';
 import 'package:giftex/screens/howtosell/howtosell.dart';
@@ -16,6 +17,7 @@ import 'package:giftex/screens/liveauction/liveauction.dart';
 import 'package:giftex/screens/liveauction/liveauctiondetailpage.dart';
 import 'package:giftex/screens/newsandupdates/newsandupdates.dart';
 import 'package:giftex/screens/our%20collector/ourcollector.dart';
+import 'package:giftex/screens/popwidget.dart';
 import 'package:giftex/screens/profile/dashboardoverview.dart';
 import 'package:giftex/screens/profile/myauctionreview.dart';
 import 'package:giftex/screens/profile/mygallary.dart';
@@ -26,7 +28,8 @@ import 'package:giftex/screens/record_price_artwork/record_price_artwork.dart';
 import 'package:giftex/screens/servicepage/servicepage.dart';
 import 'package:giftex/screens/services/mainservices.dart';
 import 'package:giftex/viewmodel/bottomviewmodel.dart';
-'../../popwidget.dart';
+
+import '../../departments/departments.dart';
 
 BottomViewModel bottomViewModel = BottomViewModel();
 
@@ -196,12 +199,11 @@ class _DashboardUiState extends State<DashboardUi> {
                       ),
                       Container(),
                       InkWell(
-                        onTap:
-                             () {
-                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                 content: Text("Coming soon"),
-                                 backgroundColor: Colors.red,
-                               ));
+                        onTap: () {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text("Coming soon"),
+                            backgroundColor: Colors.red,
+                          ));
                           // bottomViewModel.selectedIndex = 2;
 
                           // showModalBottomSheet(
@@ -665,7 +667,7 @@ class _DashboardUiState extends State<DashboardUi> {
                           //         ),
                           //       );
                           //     });
-                         },
+                        },
                         child: Column(
                           children: [
                             Container(
