@@ -7,13 +7,13 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>LSApplicationQueriesSchemes</key>
-    <array>
-    <string>phonepe</string>
-    <string>paytm</string>
-    <string>tez</string>
-    </array>
-    <key>NSCameraUsageDescription</key>
-    <string>Camera is being use for Image Capture of profile and QR scanner in payment gateway</string>
+	<array>
+		<string>phonepe</string>
+		<string>paytm</string>
+		<string>tez</string>
+	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera is being use for Image Capture of profile and QR scanner in payment gateway</string>
 	<key>CFBundleDisplayName</key>
 	<string>Giftex</string>
 	<key>CFBundleExecutable</key>
@@ -33,11 +33,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>$(FLUTTER_BUILD_NAME)</string>
+	<string>1.0.6</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<string>6</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCalendarsUsageDescription</key>

@@ -46,6 +46,14 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
         myDuration = Duration(seconds: int.parse(widget.lots.liveStatus!.remainingSeconds ?? "0"));
       });
       countdownTimer = Timer.periodic(Duration(seconds: 1), (_) => setCountDown());
+    }else{
+      if (mounted) {
+        setState(() {
+          hours = "00";
+          minutes ="00";
+          seconds = "00";
+        });
+      }
     }
   }
 
@@ -58,6 +66,14 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
       initiateTimer();
 
       startTimer();
+    }else{
+      if (mounted) {
+        setState(() {
+          hours = "00";
+          minutes ="00";
+          seconds = "00";
+        });
+      }
     }
 
     checkEvent();
@@ -115,10 +131,19 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
 
           widget.auctionViewModel.replaceLots(l1);
         });
-        if (widget.lots.status != "UpComing") {
+        if ((widget.lots.status ?? "") == "Live") {
+
           setState(() {
             myDuration = Duration(seconds: int.parse(widget.lots.liveStatus!.remainingSeconds ?? "0"));
           });
+        }else{
+          if (mounted) {
+            setState(() {
+              hours = "00";
+              minutes ="00";
+              seconds = "00";
+            });
+          }
         }
       }
     });
@@ -164,7 +189,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
   String seconds = "";
 
   void setCountDown() {
-    if (widget.lots.status != "UpComing") {
+    if (widget.lots.status == "Live") {
       final reduceSecondsBy = 1;
 
       final secondss = myDuration.inSeconds - reduceSecondsBy;
@@ -182,6 +207,14 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
           hours = strDigits(myDuration.inHours);
           minutes = strDigits(myDuration.inMinutes.remainder(60));
           seconds = strDigits(myDuration.inSeconds.remainder(60));
+        });
+      }
+    }else{
+      if (mounted) {
+        setState(() {
+          hours = "00";
+          minutes ="00";
+          seconds = "00";
         });
       }
     }
