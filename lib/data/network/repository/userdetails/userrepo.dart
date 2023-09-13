@@ -6,6 +6,7 @@ import 'package:giftex/data/network/models/request/userdeails/getliveauctionrevi
 import 'package:giftex/data/network/models/request/userdeails/userrequestmodel.dart';
 import 'package:giftex/data/network/models/request/userdeails/usersavesettingrequestmodel.dart';
 import 'package:giftex/data/network/models/responce/lot/upcominglotsresponse.dart';
+import 'package:giftex/data/network/models/responce/payment/paymentresponce.dart';
 import 'package:giftex/data/network/models/responce/payments/paymentgridrepsonse.dart';
 import 'package:giftex/data/network/models/responce/user/dashboardauctioncalenderresponce.dart';
 import 'package:giftex/data/network/models/responce/user/dashboardoverviewreponse.dart';
@@ -175,6 +176,42 @@ class UserRepo {
         httpResponse.status = responce.statusCode;
         httpResponse.message = 'Successful';
         httpResponse.data = PaymentGridResponse.fromJson(responce.data);
+      } else {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = responce.data['message'];
+        httpResponse.data = null;
+      }
+      return httpResponse;
+    }).catchError((err) {
+      print(err);
+      httpResponse.status = 400;
+      httpResponse.message = err.toString();
+      httpResponse.data = err.toString();
+      return httpResponse;
+    });
+
+    return httpResponse;
+  }
+
+  Future<HttpResponse> getPayment(String amount) async {
+    HttpResponse httpResponse = HttpResponse();
+    String userid = localSharedPrefrence!.getUserId();
+    String authKey = localSharedPrefrence!.getAuthKeyWeb();
+    String crmClientId = localSharedPrefrence!.getCrmClinetId();
+    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
+    await httpClient!.post(BaseUrl.baseUrl + endPoints.WebCMSApiModel().getPayment, body: {
+      "userId": userid,
+      "Amount": amount,
+      "authkey_mobile": "",
+      "authkey_web": authKey,
+      "CRMClientID": crmClientId,
+    }).then((responce) async {
+      print(responce);
+
+      if (responce.statusCode == 200) {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = 'Successful';
+        httpResponse.data = PaymentResponce.fromJson(responce.data);
       } else {
         httpResponse.status = responce.statusCode;
         httpResponse.message = responce.data['message'];
