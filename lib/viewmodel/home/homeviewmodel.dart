@@ -1,4 +1,6 @@
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
+import 'package:giftex/data/network/models/responce/home/CheckAppVersionResponse.dart';
+import 'package:giftex/data/network/models/responce/home/CheckFeatureResponse.dart';
 import 'package:giftex/data/network/models/responce/home/GetSellDetailsResponse.dart';
 import 'package:giftex/data/network/models/responce/home/getArtMovementResponse.dart';
 import 'package:giftex/data/network/models/responce/home/getDepartmentsResponse.dart';
@@ -241,4 +243,32 @@ abstract class _HomeViewModel with Store {
     isloadinggetpriceartwork = false;
     return httpResponse;
   }
+
+
+  @observable
+  CheckFeatureResponse? checkFeatureResponse=CheckFeatureResponse();
+  Future<HttpResponse> checkFeature() async {
+    isLoading = true;
+    checkFeatureResponse=null;
+    HttpResponse httpResponse = await webCmsApiModelRepo!.checkFeature();
+    if (httpResponse.status == 200) {
+      checkFeatureResponse= httpResponse.data;
+    }
+    isLoading = false;
+    return httpResponse;
+  }
+
+  @observable
+  CheckAppVersionResponse? checkAppVersionResponse=CheckAppVersionResponse();
+  Future<HttpResponse> checkAppVersion() async {
+    isLoading = true;
+    checkAppVersionResponse=null;
+    HttpResponse httpResponse = await webCmsApiModelRepo!.checkAppVersion();
+    if (httpResponse.status == 200) {
+      checkAppVersionResponse= httpResponse.data;
+    }
+    isLoading = false;
+    return httpResponse;
+  }
+
 }

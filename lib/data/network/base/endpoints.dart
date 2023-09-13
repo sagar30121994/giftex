@@ -197,3 +197,9 @@ class KYC {
   final String UpdateRegMyAddress = 'UpdateRegMyAddress';
   final String UpdateRegBankingDetails = 'UpdateRegBankingDetails';
 }
+
+class Update{
+  final String CheckFeature = 'CheckFeature';
+  final String CheckAppVersion = 'CheckAppVersion';
+
+}

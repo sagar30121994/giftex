@@ -81,6 +81,7 @@ dependencies:
   image_picker: ^1.0.1
   firebase_crashlytics: ^3.3.4
   payu_checkoutpro_flutter: ^1.0.4
+  package_info_plus: ^4.1.0
 
 
 

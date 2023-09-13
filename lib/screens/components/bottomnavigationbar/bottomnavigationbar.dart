@@ -57,6 +57,7 @@ class _DashboardUiState extends State<DashboardUi> {
   void initState() {
     preference = new LocalSharedPrefrence();
     bottomViewModel.selectedIndex = widget.selectedIndex;
+
     super.initState();
   }
 

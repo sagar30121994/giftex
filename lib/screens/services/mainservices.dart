@@ -24,7 +24,8 @@ class _ServiceAllState extends State<ServiceAll> {
   @override
   void initState() {
     // TODO: implement initState
-
+    controller.animateTo(0.0,
+        duration: Duration(milliseconds: 500), curve: Curves.bounceIn);
     serviceViewModel.getServices(widget.api).then((value) => {controller.jumpTo(0)});
 
     super.initState();
@@ -33,7 +34,7 @@ class _ServiceAllState extends State<ServiceAll> {
   @override
   void dispose() {
     // TODO: implement dispose
-    controller.dispose();
+
     super.dispose();
   }
 
