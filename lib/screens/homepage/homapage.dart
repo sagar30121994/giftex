@@ -1394,9 +1394,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                       fontWeight: FontWeight.w600,
                                     ),
                                 tabs: [
-                                  Tab(
-                                    text: "LATEST NEWS",
-                                  ),
+                                  Tab(text: "LATEST NEWS"),
                                   Tab(text: "VIDEOS"),
                                   Tab(text: "BLOGS"),
                                 ],
