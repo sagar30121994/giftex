@@ -1,42 +1,42 @@
 class PaymentResponce {
-  Null? txnid;
-  Null? udf5;
-  Null? udf1;
-  Null? udf2;
-  Null? curl;
-  Null? firstname;
-  Null? key;
-  Null? furl;
-  Null? pg;
-  Null? phone;
-  Null? surl;
-  Null? amount;
-  Null? lastname;
-  Null? productinfo;
-  Null? email;
-  Null? hash;
+  String? txnid;
+  String? udf5;
+  String? udf1;
+  String? udf2;
+  String? curl;
+  String? firstname;
+  String? key;
+  String? furl;
+  String? pg;
+  String? phone;
+  String? surl;
+  String? amount;
+  String? lastname;
+  String? productinfo;
+  String? email;
+  String? hash;
   Null? formHtml;
-  Null? formPostUrl;
+  String? formPostUrl;
 
   PaymentResponce(
       {this.txnid,
-        this.udf5,
-        this.udf1,
-        this.udf2,
-        this.curl,
-        this.firstname,
-        this.key,
-        this.furl,
-        this.pg,
-        this.phone,
-        this.surl,
-        this.amount,
-        this.lastname,
-        this.productinfo,
-        this.email,
-        this.hash,
-        this.formHtml,
-        this.formPostUrl});
+      this.udf5,
+      this.udf1,
+      this.udf2,
+      this.curl,
+      this.firstname,
+      this.key,
+      this.furl,
+      this.pg,
+      this.phone,
+      this.surl,
+      this.amount,
+      this.lastname,
+      this.productinfo,
+      this.email,
+      this.hash,
+      this.formHtml,
+      this.formPostUrl});
 
   PaymentResponce.fromJson(Map<String, dynamic> json) {
     txnid = json['txnid'];

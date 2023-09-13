@@ -4,9 +4,12 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/data/network/models/responce/profile/GetRegInfoResponse.dart';
 import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
+import 'package:giftex/screens/profile/hashservice.dart';
 import 'package:giftex/viewmodel/bottomviewmodel.dart';
 import 'package:giftex/viewmodel/profile/profileviewmodel.dart';
 import 'package:intl/intl.dart';
+import 'package:payu_checkoutpro_flutter/PayUConstantKeys.dart';
+import 'package:payu_checkoutpro_flutter/payu_checkoutpro_flutter.dart';
 
 import '../../data/network/models/responce/profile/GetCityResponse.dart';
 import '../components/footer/footer.dart';
@@ -23,7 +26,7 @@ class MyProfilepage extends StatefulWidget {
   _MyProfilepageState createState() => _MyProfilepageState();
 }
 
-class _MyProfilepageState extends State<MyProfilepage> {
+class _MyProfilepageState extends State<MyProfilepage> implements PayUCheckoutProProtocol {
   int _pageIndex = 0;
   CountryList? selectedCountry;
   IndianStateList? selectedState;
@@ -58,11 +61,12 @@ class _MyProfilepageState extends State<MyProfilepage> {
     });
   }
 
+  late PayUCheckoutProFlutter _checkoutPro;
+
   @override
   void initState() {
     profileViewModel.setupValidations();
     laodData();
-
     nameController.text =
         "${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.basicDetails!.firstName ?? '')} ${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.basicDetails!.lastName ?? '')}";
     adharController.text =
@@ -82,16 +86,17 @@ class _MyProfilepageState extends State<MyProfilepage> {
 
     depositAmountController.text =
         "${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.dipositedAmount ?? '0')}";
-    bidLimitController.text = "";
-    widget.bottomViewModel.profileViewModel!.getDashboardOverview().then((value) {
-      bidLimitController.text =
-          "${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.balanceAmount ?? '0')}";
-    });
+
+    bidLimitController.text =
+        "${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.balanceAmount ?? '0')}";
+
+    widget.bottomViewModel.profileViewModel!.getDashboardOverview().then((value) {});
 
     depositmodeController.text = "Net Banking";
 
     addressCount = widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address!.length;
     super.initState();
+    _checkoutPro = PayUCheckoutProFlutter(this);
   }
 
   String formateNumber(String number) {
@@ -301,7 +306,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
                 length: 3,
                 child: SingleChildScrollView(
                   child: TabBar(
-                    onTap: (index) {
+                    onTap: (index) async {
                       setState(() {
                         if (index == 0) {
                           type = "account";
@@ -311,8 +316,12 @@ class _MyProfilepageState extends State<MyProfilepage> {
                         }
                         if (index == 2) {
                           type = "banking";
+                          // await widget.bottomViewModel.profileViewModel!.getPaymentGrid();
                         }
                       });
+                      if (index == 2) {
+                        await widget.bottomViewModel.profileViewModel!.getPaymentGrid();
+                      }
                       print(index);
                     },
                     // indicator: BoxDecoration(
@@ -787,7 +796,6 @@ class _MyProfilepageState extends State<MyProfilepage> {
                                 labelText: 'Bid Limit',
                                 hintText: '`10,00,000',
                                 isDense: true,
-                                prefixText: "\u20b9 ",
                                 border: InputBorder.none),
                           ),
                         ),
@@ -828,6 +836,7 @@ class _MyProfilepageState extends State<MyProfilepage> {
                         // ),
                         InkWell(
                           onTap: () {
+                            _showPaymentGridDialog(context);
                             // Navigator.push(context, MaterialPageRoute(builder: (context) => GetOtppage()));
                           },
                           child: Container(
@@ -1710,6 +1719,127 @@ class _MyProfilepageState extends State<MyProfilepage> {
     );
   }
 
+  Future<void> _showPaymentGridDialog(BuildContext context) async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(builder: (context, setState) {
+          return AlertDialog(
+            title: Text('Increase Bid Limit'),
+            content: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "PAY AMOUNT",
+                  style:
+                      Theme.of(context).textTheme.titleLarge!.copyWith(color: Colors.red, fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  "Bid Limits running low. Increase them immediately. Select one of the below slabs and see you bid limit increase immediately.",
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                SizedBox(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Deposit Amount",
+                          style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold)),
+                      Text("Bid Limits",
+                          style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold)),
+                      Text("Pay Now",
+                          style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                Column(
+                  children: widget.bottomViewModel.profileViewModel!.paymentGridResponse!.result!.paymentGrids!
+                      .map(
+                        (e) => SizedBox(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("₹${formateNumber(e.paymentAmount ?? "0")}",
+                                  style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold)),
+                              Text("₹${formateNumber(e.paymentAmount ?? "0.0")}",
+                                  style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold)),
+                              ElevatedButton(
+                                  onPressed: () async {
+                                    await widget.bottomViewModel.profileViewModel!.getPayment(e.paymentAmount!);
+
+                                    _checkoutPro.openCheckoutScreen(
+                                      payUPaymentParams: PayUParams.createPayUPaymentParams(
+                                        widget.bottomViewModel.profileViewModel!.paymentResponce!.udf1!,
+                                        widget.bottomViewModel.profileViewModel!.paymentResponce!.udf2!,
+                                        widget.bottomViewModel.profileViewModel!.paymentResponce!.udf5!,
+                                        widget.bottomViewModel.profileViewModel!.paymentResponce!.key,
+                                        widget.bottomViewModel.profileViewModel!.paymentResponce!.amount,
+                                        widget.bottomViewModel.profileViewModel!.paymentResponce!.productinfo,
+                                        widget.bottomViewModel.profileViewModel!.paymentResponce!.firstname,
+                                        widget.bottomViewModel.profileViewModel!.paymentResponce!.email,
+                                        widget.bottomViewModel.profileViewModel!.paymentResponce!.phone,
+                                        widget.bottomViewModel.profileViewModel!.paymentResponce!.surl,
+                                        widget.bottomViewModel.profileViewModel!.paymentResponce!.furl,
+                                      ),
+                                      payUCheckoutProConfig: PayUParams.createPayUConfigParams(),
+                                    );
+                                  },
+                                  child: Text(
+                                    "PAY NOW",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall!
+                                        .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                                  ))
+                            ],
+                          ),
+                        ),
+                      )
+                      .toList(),
+                ),
+                SizedBox(
+                  height: 24,
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  // HttpResponse res = await profileViewModel.deleteMyAddress(addressId);
+                  // if (res.status == 200) {
+                  //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  //     content: Text(res.message ?? ''),
+                  //     backgroundColor: Colors.green,
+                  //   ));
+                  // } else {
+                  //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  //     content: Text(res.message ?? ''),
+                  //     backgroundColor: Colors.orange,
+                  //   ));
+                  // }
+                  Navigator.of(context).pop();
+                },
+                child: Text('Delete'),
+              ),
+            ],
+          );
+        });
+      },
+    );
+  }
+
   Future<void> _showSetDefaultAddressDialog(BuildContext context, String addressId) async {
     await showDialog(
       context: context,
@@ -1748,5 +1878,156 @@ class _MyProfilepageState extends State<MyProfilepage> {
         });
       },
     );
+  }
+
+  @override
+  generateHash(Map response) {
+    // TODO: implement generateHash
+    Map hashResponse = {};
+
+    //Keep the salt and hash calculation logic in the backend for security reasons. Don't use local hash logic.
+    //Uncomment following line to test the test hash.
+    hashResponse = HashService.generateHash(response);
+
+    _checkoutPro.hashGenerated(hash: hashResponse);
+  }
+
+  @override
+  onError(Map? response) {
+    // TODO: implement onError
+    print(response);
+  }
+
+  @override
+  onPaymentCancel(Map? response) {
+    // TODO: implement onPaymentCancel
+    print(response);
+  }
+
+  @override
+  onPaymentFailure(response) {
+    // TODO: implement onPaymentFailure
+    print(response);
+  }
+
+  @override
+  onPaymentSuccess(response) {
+    // TODO: implement onPaymentSuccess
+    print(response);
+  }
+}
+
+class PayUParams {
+  //
+  // PayUParams(this.udf1,this.udf2,this.udf5,this.mkey,this.phone,this.fname,this.email,this.tr_id,this.productinfo,this.surl,this.furl,this.amount);
+  // String udf1,udf2,udf5,mkey,phone,fname,email,tr_id,productinfo,surl,furl,amount;
+
+  static Map createPayUPaymentParams(
+      String udf1, udf2, udf5, mkey, amount, productinfo, fname, email, phone, surl, furl) {
+    var siParams = {
+      PayUSIParamsKeys.isFreeTrial: true,
+      PayUSIParamsKeys.billingAmount: '1', //Required
+      PayUSIParamsKeys.billingInterval: 1, //Required
+      PayUSIParamsKeys.paymentStartDate: '2023-04-20', //Required
+      PayUSIParamsKeys.paymentEndDate: '2023-04-30', //Required
+      PayUSIParamsKeys.billingCycle: //Required
+          'daily', //Can be any of 'daily','weekly','yearly','adhoc','once','monthly'
+      PayUSIParamsKeys.remarks: 'Test SI transaction',
+      PayUSIParamsKeys.billingCurrency: 'INR',
+      PayUSIParamsKeys.billingLimit: 'ON', //ON, BEFORE, AFTER
+      PayUSIParamsKeys.billingRule: 'MAX', //MAX, EXACT
+    };
+
+    var additionalParam = {
+      PayUAdditionalParamKeys.udf1: udf1,
+      PayUAdditionalParamKeys.udf2: udf2,
+      PayUAdditionalParamKeys.udf5: udf5,
+      PayUAdditionalParamKeys.merchantAccessKey: mkey,
+    };
+
+    //
+    // var spitPaymentDetails =
+    // {
+    //   "type": "absolute",
+    //   "splitInfo": {
+    //     PayUTestCredentials.merchantKey: {
+    //       "aggregatorSubTxnId": "1234567540099887766650092", //unique for each transaction
+    //       "aggregatorSubAmt": "1"
+    //     },
+    //     /* "qOoYIv": {
+    //       "aggregatorSubTxnId": "12345678",
+    //       "aggregatorSubAmt": "40"
+    //    },*/
+    //   }
+    // };
+
+    var payUPaymentParams = {
+      PayUPaymentParamKey.key: mkey,
+      PayUPaymentParamKey.amount: amount,
+      PayUPaymentParamKey.productInfo: productinfo,
+      PayUPaymentParamKey.firstName: fname,
+      PayUPaymentParamKey.email: email,
+      PayUPaymentParamKey.phone: phone,
+      PayUPaymentParamKey.ios_surl: surl,
+      PayUPaymentParamKey.ios_furl: furl,
+      PayUPaymentParamKey.android_surl: surl,
+      PayUPaymentParamKey.android_furl: furl,
+      PayUPaymentParamKey.environment: "1", //0 => Production 1 => Test
+      PayUPaymentParamKey.userCredential: null, //TODO: Pass user credential to fetch saved cards => A:B - Optional
+      PayUPaymentParamKey.transactionId: DateTime.now().millisecondsSinceEpoch.toString(),
+      PayUPaymentParamKey.additionalParam: additionalParam,
+      PayUPaymentParamKey.enableNativeOTP: true,
+      // PayUPaymentParamKey.splitPaymentDetails:json.encode(spitPaymentDetails),
+      PayUPaymentParamKey.userToken: "", //TODO: Pass a unique token to fetch offers. - Optional
+    };
+
+    return payUPaymentParams;
+  }
+
+  static Map createPayUConfigParams() {
+    var paymentModesOrder = [
+      {"Wallets": "PHONEPE"},
+      {"UPI": "TEZ"},
+      {"Wallets": ""},
+      {"EMI": ""},
+      {"NetBanking": ""},
+    ];
+
+    var cartDetails = [
+      {"GST": "5%"},
+      {"Delivery Date": "25 Dec"},
+      {"Status": "In Progress"}
+    ];
+    var enforcePaymentList = [
+      {"payment_type": "CARD", "enforce_ibiboCode": "UTIBENCC"},
+    ];
+
+    var customNotes = [
+      {
+        "custom_note": "Its Common custom note for testing purpose",
+        "custom_note_category": [PayUPaymentTypeKeys.emi, PayUPaymentTypeKeys.card]
+      },
+      {"custom_note": "Payment options custom note", "custom_note_category": null}
+    ];
+
+    var payUCheckoutProConfig = {
+      PayUCheckoutProConfigKeys.primaryColor: "#4994EC",
+      PayUCheckoutProConfigKeys.secondaryColor: "#FFFFFF",
+      PayUCheckoutProConfigKeys.merchantName: "Giftex",
+      // PayUCheckoutProConfigKeys.merchantLogo: "logo",
+      PayUCheckoutProConfigKeys.showExitConfirmationOnCheckoutScreen: true,
+      PayUCheckoutProConfigKeys.showExitConfirmationOnPaymentScreen: true,
+      PayUCheckoutProConfigKeys.cartDetails: cartDetails,
+      PayUCheckoutProConfigKeys.paymentModesOrder: paymentModesOrder,
+      PayUCheckoutProConfigKeys.merchantResponseTimeout: 30000,
+      PayUCheckoutProConfigKeys.customNotes: customNotes,
+      PayUCheckoutProConfigKeys.autoSelectOtp: true,
+      // PayUCheckoutProConfigKeys.enforcePaymentList: enforcePaymentList,
+      PayUCheckoutProConfigKeys.waitingTime: 30000,
+      PayUCheckoutProConfigKeys.autoApprove: true,
+      PayUCheckoutProConfigKeys.merchantSMSPermission: true,
+      PayUCheckoutProConfigKeys.showCbToolbar: true,
+    };
+    return payUCheckoutProConfig;
   }
 }

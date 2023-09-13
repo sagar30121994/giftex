@@ -295,6 +295,61 @@ mixin _$ServiceViewModel on _ServiceViewModel, Store {
   }
 
   @override
+  dynamic validateAll() {
+    final _$actionInfo = _$_ServiceViewModelActionController.startAction(
+        name: '_ServiceViewModel.validateAll');
+    try {
+      return super.validateAll();
+    } finally {
+      _$_ServiceViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void validateName(String? value) {
+    final _$actionInfo = _$_ServiceViewModelActionController.startAction(
+        name: '_ServiceViewModel.validateName');
+    try {
+      return super.validateName(value);
+    } finally {
+      _$_ServiceViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void validateEmail(String? value) {
+    final _$actionInfo = _$_ServiceViewModelActionController.startAction(
+        name: '_ServiceViewModel.validateEmail');
+    try {
+      return super.validateEmail(value);
+    } finally {
+      _$_ServiceViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void validateMobile(String? value) {
+    final _$actionInfo = _$_ServiceViewModelActionController.startAction(
+        name: '_ServiceViewModel.validateMobile');
+    try {
+      return super.validateMobile(value);
+    } finally {
+      _$_ServiceViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void validateQuery(String? value) {
+    final _$actionInfo = _$_ServiceViewModelActionController.startAction(
+        name: '_ServiceViewModel.validateQuery');
+    try {
+      return super.validateQuery(value);
+    } finally {
+      _$_ServiceViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 isloading: ${isloading},
@@ -311,6 +366,91 @@ mobile: ${mobile},
 resume: ${resume},
 query: ${query},
 homeNewsVideosBlogsResponse: ${homeNewsVideosBlogsResponse}
+    ''';
+  }
+}
+
+mixin _$ServiceViewModelErrorState on _ServiceViewModelErrorState, Store {
+  Computed<bool>? _$hasErrorsComputed;
+
+  @override
+  bool get hasErrors =>
+      (_$hasErrorsComputed ??= Computed<bool>(() => super.hasErrors,
+              name: '_ServiceViewModelErrorState.hasErrors'))
+          .value;
+
+  late final _$fullnameAtom =
+      Atom(name: '_ServiceViewModelErrorState.fullname', context: context);
+
+  @override
+  String? get fullname {
+    _$fullnameAtom.reportRead();
+    return super.fullname;
+  }
+
+  @override
+  set fullname(String? value) {
+    _$fullnameAtom.reportWrite(value, super.fullname, () {
+      super.fullname = value;
+    });
+  }
+
+  late final _$emailAtom =
+      Atom(name: '_ServiceViewModelErrorState.email', context: context);
+
+  @override
+  String? get email {
+    _$emailAtom.reportRead();
+    return super.email;
+  }
+
+  @override
+  set email(String? value) {
+    _$emailAtom.reportWrite(value, super.email, () {
+      super.email = value;
+    });
+  }
+
+  late final _$mobileAtom =
+      Atom(name: '_ServiceViewModelErrorState.mobile', context: context);
+
+  @override
+  String? get mobile {
+    _$mobileAtom.reportRead();
+    return super.mobile;
+  }
+
+  @override
+  set mobile(String? value) {
+    _$mobileAtom.reportWrite(value, super.mobile, () {
+      super.mobile = value;
+    });
+  }
+
+  late final _$queryAtom =
+      Atom(name: '_ServiceViewModelErrorState.query', context: context);
+
+  @override
+  String? get query {
+    _$queryAtom.reportRead();
+    return super.query;
+  }
+
+  @override
+  set query(String? value) {
+    _$queryAtom.reportWrite(value, super.query, () {
+      super.query = value;
+    });
+  }
+
+  @override
+  String toString() {
+    return '''
+fullname: ${fullname},
+email: ${email},
+mobile: ${mobile},
+query: ${query},
+hasErrors: ${hasErrors}
     ''';
   }
 }

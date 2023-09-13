@@ -5,6 +5,8 @@ import 'package:giftex/data/network/models/request/kyc/UpdateRegMyAddressRequest
 import 'package:giftex/data/network/models/request/kyc/UpdateRegPersonalDetailsRequest.dart';
 import 'package:giftex/data/network/models/request/webapimodel/updateaddressRequest.dart';
 import 'package:giftex/data/network/models/responce/lot/upcominglotsresponse.dart';
+import 'package:giftex/data/network/models/responce/payment/paymentresponce.dart';
+import 'package:giftex/data/network/models/responce/payments/paymentgridrepsonse.dart';
 import 'package:giftex/data/network/models/responce/profile/GetCityResponse.dart';
 import 'package:giftex/data/network/models/responce/profile/GetRegInfoResponse.dart';
 import 'package:giftex/data/network/models/responce/profile/GetUserAllDetailsResponse.dart';
@@ -51,8 +53,15 @@ abstract class _ProfileViewModel with Store {
   DashboradOverviewResponse? dashboradOverviewResponse;
 
   @observable
+  PaymentResponce? paymentResponce;
+
+  @observable
+  PaymentGridResponse? paymentGridResponse;
+
+  @observable
   GetLastBidsResponce? getLastBidsResponce;
 
+  @action
   Future<HttpResponse> getUserAllDetails() async {
     isloading = true;
 
@@ -60,6 +69,19 @@ abstract class _ProfileViewModel with Store {
 
     if (httpResponse.status == 200) {
       getUserAllDetailsResponse = httpResponse.data;
+    }
+    isloading = false;
+    return httpResponse;
+  }
+
+  @action
+  Future<HttpResponse> getPaymentGrid() async {
+    isloading = true;
+
+    HttpResponse httpResponse = await userRepo!.getPaymentGrid();
+
+    if (httpResponse.status == 200) {
+      paymentGridResponse = httpResponse.data;
     }
     isloading = false;
     return httpResponse;
@@ -221,6 +243,7 @@ abstract class _ProfileViewModel with Store {
 
   UpdateRegPersonalDetailsRequest? updateRegPersonalDetailsRequest;
   UpdateRegMyAddressRequest? updateRegMyAddressRequest;
+
   // UpdateAddressRequest? updateAddressRequest;
   UpdateRegBankingDetailsRequest? updateRegBankingDetailsRequest;
 
@@ -412,6 +435,19 @@ abstract class _ProfileViewModel with Store {
 
     if (httpResponse.status == 200) {
       dashboradOverviewResponse = httpResponse.data;
+    }
+    isloading = false;
+    return httpResponse;
+  }
+
+  @action
+  Future<HttpResponse> getPayment(String amount) async {
+    isloading = true;
+
+    HttpResponse httpResponse = await userRepo!.getPayment(amount);
+
+    if (httpResponse.status == 200) {
+      paymentResponce = httpResponse.data;
     }
     isloading = false;
     return httpResponse;

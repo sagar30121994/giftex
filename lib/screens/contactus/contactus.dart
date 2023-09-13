@@ -406,6 +406,7 @@ class _ContactusPageState extends State<ContactusPage> {
                                 border: InputBorder.none,
                                 labelText: 'Name',
                                 hintText: 'Enter Your Name',
+                                errorText: serviceViewModel.serviceViewModelErrorState.fullname,
                                 // prefixIcon:
                                 // prefixIcon: ,
                                 icon: Image.asset("image/people.png", height: 32),
@@ -436,6 +437,7 @@ class _ContactusPageState extends State<ContactusPage> {
                                 border: InputBorder.none,
                                 labelText: 'Email ID',
                                 hintText: 'Enter your email',
+                                errorText: serviceViewModel.serviceViewModelErrorState.email,
                                 icon: Image.asset("image/email.png", height: 24),
                                 // prefixIcon: Icon(Icons.email_outlined,color: Color(0xff779868)),
                                 filled: true,
@@ -464,6 +466,7 @@ class _ContactusPageState extends State<ContactusPage> {
                                 border: InputBorder.none,
                                 labelText: 'Mobile No.',
                                 hintText: 'Enter your mobile no.',
+                                errorText: serviceViewModel.serviceViewModelErrorState.mobile,
                                 icon: Image.asset("image/phone.png", height: 28),
                                 // prefixIcon: Icon(Icons.call,color: Color(0xff779868),),
                                 filled: true,
@@ -492,6 +495,7 @@ class _ContactusPageState extends State<ContactusPage> {
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 labelText: 'Queries',
+                                errorText: serviceViewModel.serviceViewModelErrorState.query,
 
                                 icon: Image.asset("image/pqueries.png", height: 28),
                                 // prefixIcon: Image.asset("image/pass.png",height: 8),
@@ -520,25 +524,23 @@ class _ContactusPageState extends State<ContactusPage> {
                                 }
                               });
                             },
-                            child: Center(
-                              child: Container(
-                                height: 50,
-                                width: 150,
-                                decoration: BoxDecoration(
-                                    gradient: LinearGradient(colors: [
-                                      Color(0xffB45156),
-                                      Color(0xffE74B52),
-                                    ]),
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: Center(
-                                  child: Text(
-                                    "SUBMIT",
-                                    textAlign: TextAlign.center,
-                                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                          color: Color(0xffffffff),
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                  ),
+                            child: Container(
+                              height: 50,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                  gradient: LinearGradient(colors: [
+                                    Color(0xffB45156),
+                                    Color(0xffE74B52),
+                                  ]),
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: Center(
+                                child: Text(
+                                  "SUBMIT",
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                        color: Color(0xffffffff),
+                                        fontWeight: FontWeight.w400,
+                                      ),
                                 ),
                               ),
                             ),
