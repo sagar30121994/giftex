@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
+import 'package:sliver_tools/sliver_tools.dart';
 
 class UpcommingTabs extends StatefulWidget {
   UpcommingTabs(this.auctionViewModel);
@@ -24,7 +25,7 @@ class _UpcommingTabsState extends State<UpcommingTabs> {
 
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
+    return SliverPinnedHeader(
       child: Observer(builder: (context) {
         return Container(
           child: Column(
@@ -117,7 +118,11 @@ class _UpcommingTabsState extends State<UpcommingTabs> {
                                     widget.auctionViewModel.isGrid = false;
                                   });
                                 },
-                                child: Image.asset("image/list.png", height: 30,color: !widget.auctionViewModel.isGrid?Colors.indigo:Colors.black,)),
+                                child: Image.asset(
+                                  "image/list.png",
+                                  height: 30,
+                                  color: !widget.auctionViewModel.isGrid ? Colors.indigo : Colors.black,
+                                )),
                             SizedBox(
                               width: 10,
                             ),
@@ -128,7 +133,11 @@ class _UpcommingTabsState extends State<UpcommingTabs> {
                                   });
                                   // auctionViewModel.isGrid=true;
                                 },
-                                child: Image.asset("image/grid.png", height: 30,color:widget.auctionViewModel.isGrid?Colors.indigo:Colors.black,)),
+                                child: Image.asset(
+                                  "image/grid.png",
+                                  height: 30,
+                                  color: widget.auctionViewModel.isGrid ? Colors.indigo : Colors.black,
+                                )),
                             SizedBox(
                               width: 10,
                             ),

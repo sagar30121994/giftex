@@ -24,8 +24,12 @@ class _PastDataState extends State<PastData> {
                   ? SliverList(
                       delegate: SliverChildBuilderDelegate(
                         (BuildContext context, int index) {
-                          return BrowseItemListItem(widget.auctionViewModel.upComingLotsResponse!.result!.lots![index],
-                              widget.auctionViewModel.isGrid, widget.auctionViewModel);
+                          return Observer(builder: (context) {
+                            return BrowseItemListItem(
+                                widget.auctionViewModel.upComingLotsResponse!.result!.lots![index],
+                                widget.auctionViewModel.isGrid,
+                                widget.auctionViewModel);
+                          });
                         },
                         // 40 list items
                         childCount: widget.auctionViewModel.upComingLotsResponse == null

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
+import 'package:sliver_tools/sliver_tools.dart';
 
 class PastTabs extends StatefulWidget {
   PastTabs(this.auctionViewModel);
@@ -23,7 +24,7 @@ class _LiveTabsState extends State<PastTabs> {
 
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
+    return SliverPinnedHeader(
       child: Observer(builder: (context) {
         return Container(
           width: MediaQuery.of(context).size.width,
@@ -46,8 +47,7 @@ class _LiveTabsState extends State<PastTabs> {
                       border: Border(bottom: BorderSide(color: Color(0xffDFDFDF), width: 2)),
                     ),
                     child: TabBar(
-
-                 //    tabAlignment: TabAlignment.fill,
+                      //    tabAlignment: TabAlignment.fill,
                       onTap: (index) {
                         if (index == 0) {
                           tabColor = Color(0xffE74B52);
@@ -108,7 +108,11 @@ class _LiveTabsState extends State<PastTabs> {
                                     widget.auctionViewModel.isGrid = false;
                                   });
                                 },
-                                child: Image.asset("image/list.png", height: 30,color:!widget.auctionViewModel.isGrid?Colors.indigo:Colors.black,)),
+                                child: Image.asset(
+                                  "image/list.png",
+                                  height: 30,
+                                  color: !widget.auctionViewModel.isGrid ? Colors.indigo : Colors.black,
+                                )),
                             SizedBox(
                               width: 10,
                             ),
@@ -119,7 +123,11 @@ class _LiveTabsState extends State<PastTabs> {
                                   });
                                   // auctionViewModel.isGrid=true;
                                 },
-                                child: Image.asset("image/grid.png", height: 30,color:widget.auctionViewModel.isGrid?Colors.indigo:Colors.black,)),
+                                child: Image.asset(
+                                  "image/grid.png",
+                                  height: 30,
+                                  color: widget.auctionViewModel.isGrid ? Colors.indigo : Colors.black,
+                                )),
                             SizedBox(
                               width: 10,
                             ),
