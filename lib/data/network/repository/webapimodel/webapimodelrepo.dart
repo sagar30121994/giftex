@@ -989,9 +989,11 @@ class WebapimodelRepo {
       "emailid": email,
       "phonenumber": mobile,
       "query": query,
-    }).then((responce) async {
+    }).then((responce) async
+    {
       print(responce);
-      if (responce.statusCode == 200) {
+      if (responce.statusCode == 200)
+      {
         httpResponse.status = responce.statusCode;
         httpResponse.message = 'Successful';
         // httpResponse.data = InsertReachUsFormResponse.fromJson(responce.data);
@@ -1061,7 +1063,8 @@ class WebapimodelRepo {
         httpResponse.data = null;
       }
       return httpResponse;
-    }).catchError((err) {
+    }).catchError((err)
+    {
       print(err);
       httpResponse.status = 400;
       httpResponse.message = err.toString();

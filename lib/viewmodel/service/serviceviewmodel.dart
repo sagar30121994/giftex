@@ -129,7 +129,8 @@ abstract class _ServiceViewModel with Store {
   Future<HttpResponse> InsertReachUsForm() async {
     isloading = true;
     HttpResponse httpResponse = await webapimodelRepo.InsertReachUsForm(fullname, email, mobile, query);
-    if (httpResponse.status == 200) {
+    if (httpResponse.status == 200)
+    {
       insertReachUsFormResponse = httpResponse.data;
     }
     isloading = false;

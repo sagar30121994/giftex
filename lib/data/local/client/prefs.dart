@@ -29,7 +29,8 @@ class LocalSharedPrefrence {
   }
 
   String getToken() {
-    if (prefsAvailable) {
+    if (prefsAvailable)
+    {
       return myGlobalPreference!.getString(token) ?? "";
     }
     return "";

@@ -34,6 +34,15 @@ class _ContactusPageState extends State<ContactusPage> {
     super.dispose();
   }
 
+  // void _launchGoogleMaps(double latitude, double longitude) async {
+  //   final url = 'https://www.google.com/maps?q=$latitude,$longitude';
+  //   if (await canLaunch(url)) {
+  //     await launch(url);
+  //   } else {
+  //     throw 'Could not launch Google Maps';
+  //   }
+  // }
+
   static Future<void> _launchGoogleMaps(double latitude, double longitude) async {
     String googleUrl = 'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
     String encodedURl = Uri.encodeFull(googleUrl);
@@ -158,7 +167,7 @@ class _ContactusPageState extends State<ContactusPage> {
                 child: Column(
                   children: [
                     Container(
-                      height: 276,
+                      height: 265,
                       color: Color(0xffF3E8E9),
                       padding: EdgeInsets.all(16),
                       child: Column(
@@ -353,7 +362,7 @@ class _ContactusPageState extends State<ContactusPage> {
                     ),
                     Container(
                       width: MediaQuery.of(context).size.width,
-                      height: 495,
+                      height: 475,
                       color: Color(0xffEAEEF2),
                       padding: EdgeInsets.all(16),
                       child: Column(
@@ -501,43 +510,35 @@ class _ContactusPageState extends State<ContactusPage> {
                           InkWell(
                             onTap: () {
                               serviceViewModel.InsertReachUsForm().then((value) => {
-                                    if (value.status == 200)
-                                      {
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                          SnackBar(
-                                            content: Text(value.message!),
-                                            backgroundColor: Colors.green,
-                                          ),
-                                        )
-                                      }
-                                    else
-                                      {
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                          SnackBar(
-                                            content: Text(value.message!),
-                                            backgroundColor: Colors.deepOrange,
-                                          ),
-                                        )
-                                      }
-                                  });
+                                if (value.status == 200)
+                                  {
+                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value.message!),
+                                      backgroundColor: Colors.green,),)
+                                  }else{
+                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value.message!),
+                                    backgroundColor: Colors.green,),)
+                                }
+                              });
                             },
-                            child: Container(
-                              height: 50,
-                              width: 150,
-                              decoration: BoxDecoration(
-                                  gradient: LinearGradient(colors: [
-                                    Color(0xffB45156),
-                                    Color(0xffE74B52),
-                                  ]),
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: Center(
-                                child: Text(
-                                  "SUBMIT",
-                                  textAlign: TextAlign.center,
-                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                        color: Color(0xffffffff),
-                                        fontWeight: FontWeight.w400,
-                                      ),
+                            child: Center(
+                              child: Container(
+                                height: 50,
+                                width: 150,
+                                decoration: BoxDecoration(
+                                    gradient: LinearGradient(colors: [
+                                      Color(0xffB45156),
+                                      Color(0xffE74B52),
+                                    ]),
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: Center(
+                                  child: Text(
+                                    "SUBMIT",
+                                    textAlign: TextAlign.center,
+                                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                          color: Color(0xffffffff),
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                  ),
                                 ),
                               ),
                             ),
