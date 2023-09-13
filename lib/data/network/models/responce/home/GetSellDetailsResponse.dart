@@ -1,8 +1,8 @@
 class GetSellDetailsResponse {
   Seo? seo;
   PageContent? pageContent;
-  dynamic? status;
-  dynamic? message;
+  dynamic status;
+  dynamic message;
 
   GetSellDetailsResponse(
       {this.seo, this.pageContent, this.status, this.message});

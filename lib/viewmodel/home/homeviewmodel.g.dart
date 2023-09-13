@@ -91,6 +91,23 @@ mixin _$HomeViewModel on _HomeViewModel, Store {
     });
   }
 
+  late final _$getSellDetailsResponseAtom =
+      Atom(name: '_HomeViewModel.getSellDetailsResponse', context: context);
+
+  @override
+  GetSellDetailsResponse? get getSellDetailsResponse {
+    _$getSellDetailsResponseAtom.reportRead();
+    return super.getSellDetailsResponse;
+  }
+
+  @override
+  set getSellDetailsResponse(GetSellDetailsResponse? value) {
+    _$getSellDetailsResponseAtom
+        .reportWrite(value, super.getSellDetailsResponse, () {
+      super.getSellDetailsResponse = value;
+    });
+  }
+
   late final _$isLoadingAtom =
       Atom(name: '_HomeViewModel.isLoading', context: context);
 
@@ -253,23 +270,6 @@ mixin _$HomeViewModel on _HomeViewModel, Store {
   set isloadingbuyDetails(bool value) {
     _$isloadingbuyDetailsAtom.reportWrite(value, super.isloadingbuyDetails, () {
       super.isloadingbuyDetails = value;
-    });
-  }
-
-  late final _$getSellDetailsResponseAtom =
-      Atom(name: '_HomeViewModel.getSellDetailsResponse', context: context);
-
-  @override
-  GetSellDetailsResponse? get getSellDetailsResponse {
-    _$getSellDetailsResponseAtom.reportRead();
-    return super.getSellDetailsResponse;
-  }
-
-  @override
-  set getSellDetailsResponse(GetSellDetailsResponse? value) {
-    _$getSellDetailsResponseAtom
-        .reportWrite(value, super.getSellDetailsResponse, () {
-      super.getSellDetailsResponse = value;
     });
   }
 
@@ -466,6 +466,7 @@ search: ${search},
 homeUpcommingAuctionResponse: ${homeUpcommingAuctionResponse},
 recordPriceLots: ${recordPriceLots},
 homeNewsVideosBlogsResponse: ${homeNewsVideosBlogsResponse},
+getSellDetailsResponse: ${getSellDetailsResponse},
 isLoading: ${isLoading},
 selectedTabIndex: ${selectedTabIndex},
 selectedNewsTabIndex: ${selectedNewsTabIndex},
@@ -476,7 +477,6 @@ getFeaturedItemsResponse: ${getFeaturedItemsResponse},
 isloadingfeatureditems: ${isloadingfeatureditems},
 getBuyDetailsResponse: ${getBuyDetailsResponse},
 isloadingbuyDetails: ${isloadingbuyDetails},
-getSellDetailsResponse: ${getSellDetailsResponse},
 isloadingsellDetails: ${isloadingsellDetails},
 getDepartmentsResponse: ${getDepartmentsResponse},
 isloadingdepartments: ${isloadingdepartments},

@@ -44,6 +44,10 @@
 	<string>toaddAuctiontocalender</string>
 	<key>NSContactsUsageDescription</key>
 	<string>toaddAuctiontocalender</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Using in video recording</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Using for Adhar And PAN card uploading</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
@@ -56,8 +60,10 @@
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
