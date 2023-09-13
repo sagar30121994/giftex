@@ -16,6 +16,7 @@ import 'package:giftex/screens/liveauction/liveauction.dart';
 import 'package:giftex/screens/liveauction/liveauctiondetailpage.dart';
 import 'package:giftex/screens/newsandupdates/newsandupdates.dart';
 import 'package:giftex/screens/our%20collector/our%20collector.dart';
+import 'package:giftex/screens/productdetailspage/productdetailpage.dart';
 import 'package:giftex/screens/profile/dashboardoverview.dart';
 import 'package:giftex/screens/profile/myauctionreview.dart';
 import 'package:giftex/screens/profile/mygallary.dart';

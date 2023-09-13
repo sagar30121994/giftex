@@ -157,10 +157,11 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
   Widget build(BuildContext context) {
     return Observer(builder: (context) {
       return Scaffold(
+        appBar: NavBar(),
         body: CustomScrollView(slivers: <Widget>[
-          SliverToBoxAdapter(
-            child: NavBar(),
-          ),
+          // SliverToBoxAdapter(
+          //   child: NavBar(),
+          // ),
           SliverToBoxAdapter(
             child: SizedBox(
               height: 16,
@@ -260,7 +261,6 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
                                     //     height: 32,
                                     //   ),
                                     // ),
-
                                     SizedBox(
                                       width: 20,
                                     ),
@@ -271,7 +271,6 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
                                     // SizedBox(width: 10,),
                                   ],
                                 )),
-
                             // Column(
                             //   mainAxisAlignment: MainAxisAlignment.end,
                             //   crossAxisAlignment: CrossAxisAlignment.end,
@@ -328,9 +327,7 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
                         fontWeight: FontWeight.bold,
                       ),
                   tabs: [
-                    Tab(
-                      text: "LIVE AUCTION",
-                    ),
+                    Tab(text: "LIVE AUCTION"),
                     Tab(text: "UPCOMING AUCTION"),
                     Tab(text: "PAST AUCTION"),
                   ],

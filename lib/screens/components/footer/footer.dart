@@ -402,21 +402,26 @@ class _FooterState extends State<Footer> {
                                     ),
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 20.0, top: 16),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Blogs",
-                                        textAlign: TextAlign.start,
-                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                              color: Color(0XFFFFFFFF),
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                      ),
-                                    ],
+                                InkWell(
+                                  onTap: (){
+                                    bottomViewModel.selectedIndex = 33;
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 20.0, top: 16),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Blogs",
+                                          textAlign: TextAlign.start,
+                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                color: Color(0XFFFFFFFF),
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                                 // Padding(

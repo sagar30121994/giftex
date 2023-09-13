@@ -269,7 +269,7 @@ class _MyGallarypageState extends State<MyGallarypage> {
                           ),
                       tabs: [
                         Tab(text: "AUCTION GALLERY"),
-                        Tab(text: "STORE GALLERY"),
+                        // Tab(text: "STORE GALLERY"),
                       ],
                     ),
                   ),
@@ -330,193 +330,193 @@ class _MyGallarypageState extends State<MyGallarypage> {
                       ),
                     )
                   : Container(),
-              type == "store"
-                  ? Container(
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Icon(
-                                Icons.menu_sharp,
-                                size: 30,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Icon(
-                                Icons.dashboard_outlined,
-                                size: 30,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 500,
-                            width: MediaQuery.of(context).size.width,
-                            child: ListView.builder(
-                                // itemExtent: 150,
-                                scrollDirection: Axis.vertical,
-                                itemBuilder: (context, index) => Padding(
-                                      padding: const EdgeInsets.only(left: 0.0, right: 0.0, top: 16),
-                                      child: Container(
-                                          padding: EdgeInsets.all(10),
-                                          height: 210,
-                                          decoration: BoxDecoration(
-                                              // image: DecorationImage(
-                                              //   // image: AssetImage("image/Rectangle (7).png"),
-                                              //   fit: BoxFit.cover,
-                                              // ),
-                                              color: Color(0xffF9F9F9)),
-                                          // alignment: Alignment.center,
-                                          width: MediaQuery.of(context).size.width,
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.start,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-                                                  Image.asset(
-                                                    "image/Bitmap1.png",
-                                                    height: 80,
-                                                    width: 90,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                  SizedBox(
-                                                    width: 20,
-                                                  ),
-                                                  Column(
-                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      Text(
-                                                        "Jamini Roy",
-                                                        textAlign: TextAlign.center,
-                                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                              color: Colors.black,
-                                                              fontWeight: FontWeight.w600,
-                                                            ),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 5,
-                                                      ),
-                                                      Text(
-                                                        "Mother & Child",
-                                                        textAlign: TextAlign.center,
-                                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                              color: Color(0xff747474),
-                                                              fontWeight: FontWeight.w400,
-                                                            ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Spacer(),
-                                                  Image.asset(
-                                                    "image/Vector (15).png",
-                                                    height: 30,
-                                                    color: Theme.of(context).colorScheme.secondary,
-                                                  )
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                              Row(
-                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-                                                  Column(
-                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      Text(
-                                                        "Category Name",
-                                                        textAlign: TextAlign.center,
-                                                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                              color: Color(0xff747580),
-                                                              fontWeight: FontWeight.w400,
-                                                            ),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      Text(
-                                                        "20cm X 25cm",
-                                                        textAlign: TextAlign.center,
-                                                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                              color: Color(0xff202232),
-                                                              fontWeight: FontWeight.w600,
-                                                            ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Spacer(),
-                                                  Column(
-                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      Text(
-                                                        "MRP.",
-                                                        textAlign: TextAlign.center,
-                                                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                              color: Color(0xff747580),
-                                                              fontWeight: FontWeight.w400,
-                                                            ),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      Text(
-                                                        "₹50,000",
-                                                        textAlign: TextAlign.center,
-                                                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                              color: Theme.of(context).colorScheme.secondary,
-                                                              fontWeight: FontWeight.w600,
-                                                            ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Spacer(),
-                                                  ElevatedButton(
-                                                    style: ButtonStyle(
-                                                        backgroundColor: MaterialStateProperty.all(Color(0XFFF9F9F9)),
-                                                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                                            RoundedRectangleBorder(
-                                                                borderRadius: BorderRadius.circular(16.0),
-                                                                side: BorderSide(
-                                                                    color: Color(0xff747474), width: 0.38)))),
-                                                    onPressed: () {},
-                                                    child: Padding(
-                                                      padding: const EdgeInsets.only(
-                                                          right: 0.0, left: 0, top: 12, bottom: 12),
-                                                      child: Text(
-                                                        'ADD TO CART',
-                                                        style: Theme.of(context).textTheme.caption!.copyWith(
-                                                              color: Color(0XFF2D2D2D),
-                                                              fontWeight: FontWeight.bold,
-                                                            ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              )
-                                            ],
-                                          )),
-                                    ),
-                                itemCount: 4),
-                          ),
-                        ],
-                      ),
-                    )
-                  : Container(),
+              // type == "store"
+              //     ? Container(
+              //         child: Column(
+              //           children: [
+              //             Row(
+              //               mainAxisAlignment: MainAxisAlignment.end,
+              //               crossAxisAlignment: CrossAxisAlignment.end,
+              //               children: [
+              //                 Icon(
+              //                   Icons.menu_sharp,
+              //                   size: 30,
+              //                 ),
+              //                 SizedBox(
+              //                   width: 10,
+              //                 ),
+              //                 Icon(
+              //                   Icons.dashboard_outlined,
+              //                   size: 30,
+              //                 ),
+              //                 SizedBox(
+              //                   width: 10,
+              //                 ),
+              //               ],
+              //             ),
+              //             SizedBox(
+              //               height: 500,
+              //               width: MediaQuery.of(context).size.width,
+              //               child: ListView.builder(
+              //                   // itemExtent: 150,
+              //                   scrollDirection: Axis.vertical,
+              //                   itemBuilder: (context, index) => Padding(
+              //                         padding: const EdgeInsets.only(left: 0.0, right: 0.0, top: 16),
+              //                         child: Container(
+              //                             padding: EdgeInsets.all(10),
+              //                             height: 210,
+              //                             decoration: BoxDecoration(
+              //                                 // image: DecorationImage(
+              //                                 //   // image: AssetImage("image/Rectangle (7).png"),
+              //                                 //   fit: BoxFit.cover,
+              //                                 // ),
+              //                                 color: Color(0xffF9F9F9)),
+              //                             // alignment: Alignment.center,
+              //                             width: MediaQuery.of(context).size.width,
+              //                             child: Column(
+              //                               mainAxisAlignment: MainAxisAlignment.start,
+              //                               crossAxisAlignment: CrossAxisAlignment.start,
+              //                               children: [
+              //                                 Row(
+              //                                   mainAxisAlignment: MainAxisAlignment.start,
+              //                                   crossAxisAlignment: CrossAxisAlignment.start,
+              //                                   children: [
+              //                                     Image.asset(
+              //                                       "image/Bitmap1.png",
+              //                                       height: 80,
+              //                                       width: 90,
+              //                                       fit: BoxFit.cover,
+              //                                     ),
+              //                                     SizedBox(
+              //                                       width: 20,
+              //                                     ),
+              //                                     Column(
+              //                                       mainAxisAlignment: MainAxisAlignment.start,
+              //                                       crossAxisAlignment: CrossAxisAlignment.start,
+              //                                       children: [
+              //                                         SizedBox(
+              //                                           height: 10,
+              //                                         ),
+              //                                         Text(
+              //                                           "Jamini Roy",
+              //                                           textAlign: TextAlign.center,
+              //                                           style: Theme.of(context).textTheme.subtitle1!.copyWith(
+              //                                                 color: Colors.black,
+              //                                                 fontWeight: FontWeight.w600,
+              //                                               ),
+              //                                         ),
+              //                                         SizedBox(
+              //                                           height: 5,
+              //                                         ),
+              //                                         Text(
+              //                                           "Mother & Child",
+              //                                           textAlign: TextAlign.center,
+              //                                           style: Theme.of(context).textTheme.subtitle1!.copyWith(
+              //                                                 color: Color(0xff747474),
+              //                                                 fontWeight: FontWeight.w400,
+              //                                               ),
+              //                                         ),
+              //                                       ],
+              //                                     ),
+              //                                     Spacer(),
+              //                                     Image.asset(
+              //                                       "image/Vector (15).png",
+              //                                       height: 30,
+              //                                       color: Theme.of(context).colorScheme.secondary,
+              //                                     )
+              //                                   ],
+              //                                 ),
+              //                                 SizedBox(
+              //                                   height: 10,
+              //                                 ),
+              //                                 Row(
+              //                                   mainAxisAlignment: MainAxisAlignment.start,
+              //                                   crossAxisAlignment: CrossAxisAlignment.start,
+              //                                   children: [
+              //                                     Column(
+              //                                       mainAxisAlignment: MainAxisAlignment.start,
+              //                                       crossAxisAlignment: CrossAxisAlignment.start,
+              //                                       children: [
+              //                                         Text(
+              //                                           "Category Name",
+              //                                           textAlign: TextAlign.center,
+              //                                           style: Theme.of(context).textTheme.bodyText1!.copyWith(
+              //                                                 color: Color(0xff747580),
+              //                                                 fontWeight: FontWeight.w400,
+              //                                               ),
+              //                                         ),
+              //                                         SizedBox(
+              //                                           height: 10,
+              //                                         ),
+              //                                         Text(
+              //                                           "20cm X 25cm",
+              //                                           textAlign: TextAlign.center,
+              //                                           style: Theme.of(context).textTheme.bodyText1!.copyWith(
+              //                                                 color: Color(0xff202232),
+              //                                                 fontWeight: FontWeight.w600,
+              //                                               ),
+              //                                         ),
+              //                                       ],
+              //                                     ),
+              //                                     Spacer(),
+              //                                     Column(
+              //                                       mainAxisAlignment: MainAxisAlignment.start,
+              //                                       crossAxisAlignment: CrossAxisAlignment.start,
+              //                                       children: [
+              //                                         Text(
+              //                                           "MRP.",
+              //                                           textAlign: TextAlign.center,
+              //                                           style: Theme.of(context).textTheme.bodyText1!.copyWith(
+              //                                                 color: Color(0xff747580),
+              //                                                 fontWeight: FontWeight.w400,
+              //                                               ),
+              //                                         ),
+              //                                         SizedBox(
+              //                                           height: 10,
+              //                                         ),
+              //                                         Text(
+              //                                           "₹50,000",
+              //                                           textAlign: TextAlign.center,
+              //                                           style: Theme.of(context).textTheme.bodyText1!.copyWith(
+              //                                                 color: Theme.of(context).colorScheme.secondary,
+              //                                                 fontWeight: FontWeight.w600,
+              //                                               ),
+              //                                         ),
+              //                                       ],
+              //                                     ),
+              //                                     Spacer(),
+              //                                     ElevatedButton(
+              //                                       style: ButtonStyle(
+              //                                           backgroundColor: MaterialStateProperty.all(Color(0XFFF9F9F9)),
+              //                                           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              //                                               RoundedRectangleBorder(
+              //                                                   borderRadius: BorderRadius.circular(16.0),
+              //                                                   side: BorderSide(
+              //                                                       color: Color(0xff747474), width: 0.38)))),
+              //                                       onPressed: () {},
+              //                                       child: Padding(
+              //                                         padding: const EdgeInsets.only(
+              //                                             right: 0.0, left: 0, top: 12, bottom: 12),
+              //                                         child: Text(
+              //                                           'ADD TO CART',
+              //                                           style: Theme.of(context).textTheme.caption!.copyWith(
+              //                                                 color: Color(0XFF2D2D2D),
+              //                                                 fontWeight: FontWeight.bold,
+              //                                               ),
+              //                                         ),
+              //                                       ),
+              //                                     ),
+              //                                   ],
+              //                                 )
+              //                               ],
+              //                             )),
+              //                       ),
+              //                   itemCount: 4),
+              //             ),
+              //           ],
+              //         ),
+              //       )
+              //     : Container(),
               const SizedBox(
                 height: 16,
               ),
