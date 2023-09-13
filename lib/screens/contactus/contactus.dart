@@ -520,25 +520,23 @@ class _ContactusPageState extends State<ContactusPage> {
                                 }
                               });
                             },
-                            child: Center(
-                              child: Container(
-                                height: 50,
-                                width: 150,
-                                decoration: BoxDecoration(
-                                    gradient: LinearGradient(colors: [
-                                      Color(0xffB45156),
-                                      Color(0xffE74B52),
-                                    ]),
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: Center(
-                                  child: Text(
-                                    "SUBMIT",
-                                    textAlign: TextAlign.center,
-                                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                          color: Color(0xffffffff),
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                  ),
+                            child: Container(
+                              height: 50,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                  gradient: LinearGradient(colors: [
+                                    Color(0xffB45156),
+                                    Color(0xffE74B52),
+                                  ]),
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: Center(
+                                child: Text(
+                                  "SUBMIT",
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                        color: Color(0xffffffff),
+                                        fontWeight: FontWeight.w400,
+                                      ),
                                 ),
                               ),
                             ),

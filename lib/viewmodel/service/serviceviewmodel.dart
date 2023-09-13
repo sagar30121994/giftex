@@ -1,3 +1,4 @@
+import 'package:giftex/data/local/client/localprefsmodel.dart';
 import 'package:giftex/data/local/client/prefs.dart';
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/data/network/models/responce/cmsweb/careersresponse.dart';
@@ -27,6 +28,8 @@ abstract class _ServiceViewModel with Store {
   _ServiceViewModel() {
     prefrence = LocalSharedPrefrence();
   }
+
+  ServiceViewModelErrorState serviceViewModelErrorState = ServiceViewModelErrorState();
 
   @observable
   bool isloading = false;
@@ -90,6 +93,67 @@ abstract class _ServiceViewModel with Store {
   @action
   setQuery(String value) {
     query = value;
+  }
+
+  late List<ReactionDisposer> _disposers;
+
+  void setupValidations() {
+    _disposers = [
+      reaction((_) => fullname, validateName),
+      reaction((_) => email, validateEmail),
+      reaction((_) => mobile, validateMobile),
+      reaction((_) => query, validateQuery),
+    ];
+  }
+
+  @action
+  validateAll() {
+    validateName(fullname);
+    validateEmail(email);
+    validateMobile(mobile);
+    validateQuery(query);
+  }
+
+  void dispose() {
+    for (final d in _disposers) {
+      d();
+    }
+  }
+
+  @action
+  void validateName(String? value) {
+    if (value == null || value.trim() == "") {
+      serviceViewModelErrorState.fullname = "Please Enter Valid Name";
+    } else {
+      serviceViewModelErrorState.fullname = null;
+    }
+  }
+
+  @action
+  void validateEmail(String? value) {
+    if (value == null || value.trim() == "") {
+      serviceViewModelErrorState.email = "Please Enter Valid Email";
+    } else {
+      serviceViewModelErrorState.email = null;
+    }
+  }
+
+  @action
+  void validateMobile(String? value) {
+    if (value == null || value.trim() == "") {
+      serviceViewModelErrorState.mobile = "Please Enter Valid Mobile Number";
+    } else {
+      serviceViewModelErrorState.mobile = null;
+    }
+  }
+
+  @action
+  void validateQuery(String? value) {
+    if (value == null || value.trim() == "") {
+      serviceViewModelErrorState.query = "Please Enter Valid Query";
+    } else {
+      serviceViewModelErrorState.query = null;
+    }
   }
 
   Future<HttpResponse> getServices(String type) async {
@@ -186,4 +250,24 @@ abstract class _ServiceViewModel with Store {
     isloading = false;
     return httpResponse;
   }
+}
+
+class ServiceViewModelErrorState = _ServiceViewModelErrorState with _$ServiceViewModelErrorState;
+
+abstract class _ServiceViewModelErrorState with Store {
+  @observable
+  String? fullname;
+
+  @observable
+  String? email;
+
+  @observable
+  String? mobile;
+
+  @observable
+  String? query;
+
+  @computed
+  bool get hasErrors =>
+      fullname != null || email != null || mobile != null || query != null;
 }
