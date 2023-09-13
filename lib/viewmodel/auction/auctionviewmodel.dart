@@ -114,8 +114,7 @@ abstract class _AuctionViewModel with Store {
     getliveauctionsResponse = null;
     upcomingAuctionResponse = null;
 
-    HttpResponse httpResponse =
-        await auctionRepo.getUpcommingAuction(auction, page);
+    HttpResponse httpResponse = await auctionRepo.getUpcommingAuction(auction, page);
 
     if (httpResponse.status == 200) {
       upcomingAuctionResponse = httpResponse.data;
@@ -128,13 +127,13 @@ abstract class _AuctionViewModel with Store {
   List<String> getSortingItem() {
     List<String> list = [];
 
-    if (auctionType == "live") {
+    if (auctionType.toLowerCase() == "live") {
       upComingLotsResponse!.result!.lots!.forEach((element) {
         if (!list.contains(element.category)) {
           list.add(element.category ?? "");
         }
       });
-    } else if (auctionType == "past") {
+    } else if (auctionType.toLowerCase() == "past") {
     } else {}
 
     return list;
@@ -157,8 +156,7 @@ abstract class _AuctionViewModel with Store {
   Future<HttpResponse> getAuctionResult() async {
     isLoadingForUpCommingAuction = true;
 
-    HttpResponse httpResponse =
-        await auctionRepo.getAuctionAnalysis(selectedAuction!.auctionId!);
+    HttpResponse httpResponse = await auctionRepo.getAuctionAnalysis(selectedAuction!.auctionId!);
 
     if (httpResponse.status == 200) {
       autionResultResponse = httpResponse.data;
@@ -171,8 +169,7 @@ abstract class _AuctionViewModel with Store {
   Future<HttpResponse> getUpcommingBidAuction(String auction) async {
     isLoadingForUpCommingAuction = true;
 
-    HttpResponse httpResponse =
-        await auctionRepo.getUpcommingAuctionLots(auction, page);
+    HttpResponse httpResponse = await auctionRepo.getUpcommingAuctionLots(auction, page);
 
     if (httpResponse.status == 200) {
       upComingLotsResponse = httpResponse.data;
@@ -269,9 +266,7 @@ abstract class _AuctionViewModel with Store {
   }
 
   int getIndex(String inr) {
-    for (int i = 0;
-        i < getProxyBidAmountResponse!.result!.nextValidBid!.length;
-        i++) {
+    for (int i = 0; i < getProxyBidAmountResponse!.result!.nextValidBid!.length; i++) {
       if (getProxyBidAmountResponse!.result!.nextValidBid![i].iNR == inr) {
         return i;
       }
@@ -326,8 +321,7 @@ abstract class _AuctionViewModel with Store {
   Future<HttpResponse> addRemoveLotToWishlist(Lots lot, String flag) async {
     isLoadingForProxy = true;
 
-    HttpResponse httpResponse =
-        await auctionRepo.addremoveToWishlist(lot, flag);
+    HttpResponse httpResponse = await auctionRepo.addremoveToWishlist(lot, flag);
 
     if (httpResponse.status == 200) {
       // getProxyBidAmountResponse = httpResponse.data;
@@ -350,12 +344,10 @@ abstract class _AuctionViewModel with Store {
   }
 
   @action
-  Future<HttpResponse> placeBid(
-      Lots lot, String proxyamount, String currentBid) async {
+  Future<HttpResponse> placeBid(Lots lot, String proxyamount, String currentBid) async {
     isLoadingForProxy = true;
 
-    HttpResponse httpResponse =
-        await auctionRepo.placeBid(lot, proxyamount, currentBid);
+    HttpResponse httpResponse = await auctionRepo.placeBid(lot, proxyamount, currentBid);
 
     if (httpResponse.status == 200) {
       proxyBidResponse = httpResponse.data;
@@ -368,8 +360,7 @@ abstract class _AuctionViewModel with Store {
   Future<HttpResponse> getSingleAuctionDetails(String auction) async {
     isLoadingForUpCommingAuction = true;
 
-    HttpResponse httpResponse =
-        await auctionRepo.getSingleAuctionDetails(auction);
+    HttpResponse httpResponse = await auctionRepo.getSingleAuctionDetails(auction);
 
     if (httpResponse.status == 200) {
       singleAuctionDetsilaResponse = httpResponse.data;
@@ -382,8 +373,7 @@ abstract class _AuctionViewModel with Store {
   Future<HttpResponse> sortAUction(String auction, String filterType) async {
     isLoadingForUpCommingAuction = true;
 
-    HttpResponse httpResponse =
-        await auctionRepo.sortLostbyAution(auction, filterType);
+    HttpResponse httpResponse = await auctionRepo.sortLostbyAution(auction, filterType);
 
     if (httpResponse.status == 200) {
       getliveauctionsResponse = httpResponse.data;
@@ -392,8 +382,8 @@ abstract class _AuctionViewModel with Store {
     return httpResponse;
   }
 
-  Future<HttpResponse> showIntrestInAuction(String name, String email,
-      String countryCOde, String phone, String messae, String auctionId) async {
+  Future<HttpResponse> showIntrestInAuction(
+      String name, String email, String countryCOde, String phone, String messae, String auctionId) async {
     isLoadingForUpCommingAuction = true;
     ShowIntrestRequestModel requestModel = ShowIntrestRequestModel();
     requestModel.message = messae;
@@ -406,8 +396,7 @@ abstract class _AuctionViewModel with Store {
     requestModel.userid = localSharedPrefrence.getUserId();
     requestModel.authkeyWeb = localSharedPrefrence.getAuthKeyWeb();
 
-    HttpResponse httpResponse =
-        await webapimodelRepo.showIntrestInAuction(requestModel);
+    HttpResponse httpResponse = await webapimodelRepo.showIntrestInAuction(requestModel);
 
     if (httpResponse.status == 200) {
       // getliveauctionsResponse = httpResponse.data;
@@ -429,8 +418,7 @@ abstract class _AuctionViewModel with Store {
 
   void trackFirebaseEvents() {
     print("******* Tracking events*******");
-    final userlikeReference = FirebaseDatabase.instance
-        .ref("userlike/" + localSharedPrefrence.getUserId());
+    final userlikeReference = FirebaseDatabase.instance.ref("userlike/" + localSharedPrefrence.getUserId());
 
     userlikeReference.onValue.listen((DatabaseEvent event) {
       print(event);
