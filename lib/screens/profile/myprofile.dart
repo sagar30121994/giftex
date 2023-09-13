@@ -62,7 +62,6 @@ class _MyProfilepageState extends State<MyProfilepage> {
   void initState() {
     profileViewModel.setupValidations();
     laodData();
-
     nameController.text =
         "${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.basicDetails!.firstName ?? '')} ${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.basicDetails!.lastName ?? '')}";
     adharController.text =
