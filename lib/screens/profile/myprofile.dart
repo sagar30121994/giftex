@@ -105,36 +105,6 @@ class _MyProfilepageState extends State<MyProfilepage> implements PayUCheckoutPr
     return f.format(double.parse(number));
   }
 
-  void _showDetailsDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text('New Addres'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Address Line 1 : $_addressLine2'),
-              Text('Address Line 2 : $_addressLine1'),
-              Text('Your Name: $_yourName'),
-              Text('Pin Code: $_pinCode'),
-              Text('GST Numberp: $_gstNumber'),
-            ],
-          ),
-          actions: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

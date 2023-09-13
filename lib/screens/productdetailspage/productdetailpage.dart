@@ -474,6 +474,130 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                       SizedBox(
                         height: 16,
                       ),
+                          tabs: [
+                            Tab(text: "ARTWORK DETAIL"),
+                            Tab(text: "PROVENANCE DETAILS"),
+                            // Tab(text: "Condition"),
+                            // Tab(text: "Provenance"),
+                            // Tab(text: "Condition"),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: 16,
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              child: auctionViewModel.isLoadingForlots ? LinearProgressIndicator() : Container(),
+            ),
+          ),
+          newsType == "ARTWORK DETAIL"
+              ? auctionViewModel.isLoadingForlots
+                  ? SliverToBoxAdapter()
+                  : widget.auctionViewModel.getsingleResponse == null
+                      ? SliverToBoxAdapter()
+                      : widget.auctionViewModel.getsingleResponse!.result!.lots![0].additionalInfo == null
+                          ? SliverToBoxAdapter()
+                          : (widget.auctionViewModel.getsingleResponse!.result!.lots![0].additionalInfo!.description ==
+                                      null ||
+                                  widget.auctionViewModel.getsingleResponse!.result!.lots![0].additionalInfo!
+                                          .description ==
+                                      ""
+                              ? SliverToBoxAdapter(
+                                  child: Container(
+                                  child: getErrorMEssage(),
+                                ))
+                              : SliverToBoxAdapter(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: HtmlWidget(
+                                      '${widget.auctionViewModel.getsingleResponse!.result!.lots![0].additionalInfo!.description}',
+                                    ),
+                                  ),
+                                ))
+              : newsType == "PROVENANCE DETAILS"
+                  ? auctionViewModel.isLoadingForlots
+                      ? SliverToBoxAdapter()
+                      : SliverToBoxAdapter(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: HtmlWidget(
+                              '${widget.auctionViewModel.getsingleResponse!.result!.lots![0].additionalInfo!.provenance}',
+                            ),
+                          ),
+                        )
+                  : SliverToBoxAdapter(),
+          SliverToBoxAdapter(
+            child: Container(
+              color: Colors.white,
+              padding: EdgeInsets.all(16),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Text('Auction> Opulent Collectibles >Porcelain Pot ', style:
+                  // Theme.of(context).textTheme.bodyText1!.copyWith(
+                  //   color: Color(0XFF2D2D2D),
+                  //   fontWeight: FontWeight.w600,
+                  //   letterSpacing: 1
+                  // ),),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(16)),
+                          color: Color(0xffF8F8F8),
+                        ),
+                        padding: EdgeInsets.all(3),
+                        child: Icon(
+                          Icons.keyboard_arrow_left,
+                          size: 25,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(16)),
+                          color: Color.fromRGBO(117, 206, 246, 0.249918),
+                        ),
+                        child: Text(
+                          'Lot ${widget.lots.lotNumber}',
+                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                color: Color(0XFF2D2D2D),
+                                fontWeight: FontWeight.w600,
+                              ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          color: Color.fromRGBO(117, 206, 246, 0.249918),
+                        ),
+                        padding: EdgeInsets.all(3),
+                        child: Icon(
+                          Icons.keyboard_arrow_right,
+                          size: 25,
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
 
                       widget.lots.auctionType == "1"
                           ? Row(

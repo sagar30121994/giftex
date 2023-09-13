@@ -124,8 +124,7 @@ class _FooterState extends State<Footer> {
                           padding: const EdgeInsets.all(10.0),
                           child: TextField(
                             controller: emailController,
-                            onChanged: (str) {
-                            },
+                            onChanged: (str) {},
                             keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
                                 isDense: true,
@@ -391,7 +390,7 @@ class _FooterState extends State<Footer> {
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "Faq's",
+                                          "FAQs",
                                           textAlign: TextAlign.start,
                                           style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                 color: Color(0XFFFFFFFF),

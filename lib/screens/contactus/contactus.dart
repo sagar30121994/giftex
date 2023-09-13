@@ -23,6 +23,7 @@ class _ContactusPageState extends State<ContactusPage> {
     emailController.text = prefrence?.getEmail() ?? '';
     mobilenoController.text = prefrence?.getMobileno() ?? '';
     footerViewModel.setupValidations();
+    serviceViewModel.setupValidations();
     super.initState();
   }
 
@@ -167,7 +168,7 @@ class _ContactusPageState extends State<ContactusPage> {
                 child: Column(
                   children: [
                     Container(
-                      height: 265,
+                      height: 276,
                       color: Color(0xffF3E8E9),
                       padding: EdgeInsets.all(16),
                       child: Column(
@@ -362,7 +363,7 @@ class _ContactusPageState extends State<ContactusPage> {
                     ),
                     Container(
                       width: MediaQuery.of(context).size.width,
-                      height: 475,
+                      height: 500,
                       color: Color(0xffEAEEF2),
                       padding: EdgeInsets.all(16),
                       child: Column(
@@ -514,15 +515,25 @@ class _ContactusPageState extends State<ContactusPage> {
                           InkWell(
                             onTap: () {
                               serviceViewModel.InsertReachUsForm().then((value) => {
-                                if (value.status == 200)
-                                  {
-                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value.message!),
-                                      backgroundColor: Colors.green,),)
-                                  }else{
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value.message!),
-                                    backgroundColor: Colors.green,),)
-                                }
-                              });
+                                    if (value.status == 200)
+                                      {
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(
+                                            content: Text(value.message!),
+                                            backgroundColor: Colors.green,
+                                          ),
+                                        )
+                                      }
+                                    else
+                                      {
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(
+                                            content: Text(value.message!),
+                                            backgroundColor: Colors.green,
+                                          ),
+                                        )
+                                      }
+                                  });
                             },
                             child: Container(
                               height: 50,

@@ -23,7 +23,6 @@ import '../../base/endpoints.dart' as endPoints;
 import '../../client/dioclient.dart';
 import '../../models/httpreponsehandler.dart';
 import '../../models/request/webapimodel/userloginrequestmodel.dart';
-import '../../models/responce/home/CheckAppVersionResponse.dart';
 import '../../models/responce/home/getBuyDetailsResponse.dart';
 
 class WebCmsApiModelRepo {
@@ -626,6 +625,8 @@ class WebCmsApiModelRepo {
     return httpResponse;
   }
 
+
+
   Future<HttpResponse> getBlogsDetails() async {
     HttpResponse httpResponse = HttpResponse();
     String userlogin = json.encode(LoginReqestModel);
@@ -636,6 +637,66 @@ class WebCmsApiModelRepo {
             BaseUrl.notificationbaseUrl +
                 endPoints.WebCMSApiModel().getblogdetails,
             body: userlogin)
+        .then((responce) async {
+      print(responce);
+
+      if (responce.statusCode == 200) {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = 'Successful';
+        // httpResponse.data = LoginResponse.fromJson(responce.data);
+      } else {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = responce.data['message'];
+        httpResponse.data = null;
+      }
+      return httpResponse;
+    }).catchError((err) {
+      print(err);
+      httpResponse.status = 400;
+      httpResponse.message = err.toString();
+      httpResponse.data = err.toString();
+      return httpResponse;
+    });
+
+    return httpResponse;
+  }
+
+  Future<HttpResponse> getblogsDetails() async {
+    HttpResponse httpResponse = HttpResponse();
+    String userlogin = json.encode(LoginReqestModel);
+    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    await httpClient!
+        .post(BaseUrl.notificationbaseUrl + endPoints.WebCMSApiModel().Getblogdetails, body: userlogin)
+        .then((responce) async {
+      print(responce);
+
+      if (responce.statusCode == 200) {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = 'Successful';
+        // httpResponse.data = LoginResponse.fromJson(responce.data);
+      } else {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = responce.data['message'];
+        httpResponse.data = null;
+      }
+      return httpResponse;
+    }).catchError((err) {
+      print(err);
+      httpResponse.status = 400;
+      httpResponse.message = err.toString();
+      httpResponse.data = err.toString();
+      return httpResponse;
+    });
+
+    return httpResponse;
+  }
+
+  Future<HttpResponse> getpressDetails() async {
+    HttpResponse httpResponse = HttpResponse();
+    String userlogin = json.encode(LoginReqestModel);
+    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    await httpClient!
+        .post(BaseUrl.notificationbaseUrl + endPoints.WebCMSApiModel().Getpressdetails, body: userlogin)
         .then((responce) async {
       print(responce);
 

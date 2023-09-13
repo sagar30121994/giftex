@@ -1422,7 +1422,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                 height: 350,
                                 alignment: Alignment.center,
                                 margin: EdgeInsets.only(right: 16),
-                                // width: MediaQuery.of(context).size.width,
+                                width: MediaQuery.of(context).size.width * 0.8,
                                 child: Stack(
                                   children: [
                                     Padding(

@@ -46,11 +46,11 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
         myDuration = Duration(seconds: int.parse(widget.lots.liveStatus!.remainingSeconds ?? "0"));
       });
       countdownTimer = Timer.periodic(Duration(seconds: 1), (_) => setCountDown());
-    }else{
+    } else {
       if (mounted) {
         setState(() {
           hours = "00";
-          minutes ="00";
+          minutes = "00";
           seconds = "00";
         });
       }
@@ -66,11 +66,11 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
       initiateTimer();
 
       startTimer();
-    }else{
+    } else {
       if (mounted) {
         setState(() {
           hours = "00";
-          minutes ="00";
+          minutes = "00";
           seconds = "00";
         });
       }
@@ -132,15 +132,14 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
           widget.auctionViewModel.replaceLots(l1);
         });
         if ((widget.lots.status ?? "") == "Live") {
-
           setState(() {
             myDuration = Duration(seconds: int.parse(widget.lots.liveStatus!.remainingSeconds ?? "0"));
           });
-        }else{
+        } else {
           if (mounted) {
             setState(() {
               hours = "00";
-              minutes ="00";
+              minutes = "00";
               seconds = "00";
             });
           }
@@ -209,11 +208,11 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
           seconds = strDigits(myDuration.inSeconds.remainder(60));
         });
       }
-    }else{
+    } else {
       if (mounted) {
         setState(() {
           hours = "00";
-          minutes ="00";
+          minutes = "00";
           seconds = "00";
         });
       }

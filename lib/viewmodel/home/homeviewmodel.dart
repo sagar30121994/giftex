@@ -200,9 +200,9 @@ abstract class _HomeViewModel with Store {
   }
 
   @observable
-  String? selectedyear='';
+  String? selectedyear = '';
   @observable
-  List<String> historyYearList=[];
+  List<String> historyYearList = [];
   @observable
   GetArtMovementResponse? getArtMovementResponse = GetArtMovementResponse();
   @observable
@@ -211,18 +211,18 @@ abstract class _HomeViewModel with Store {
   Future<HttpResponse> getArtsMovement() async {
     isloadingartmovement = true;
     getArtMovementResponse = null;
-    historyYearList=[];
+    historyYearList = [];
     HttpResponse httpResponse = await webCmsApiModelRepo!.getArtsMovement();
     if (httpResponse.status == 200) {
       getArtMovementResponse = httpResponse.data;
-      if(getArtMovementResponse!=null){
+      if (getArtMovementResponse != null) {
         getArtMovementResponse!.pageContent!.history!.array!.forEach((element) {
-          if(!historyYearList.contains(element.year??'')){
-            historyYearList.add(element.year??'');
+          if (!historyYearList.contains(element.year ?? '')) {
+            historyYearList.add(element.year ?? '');
           }
         });
       }
-      selectedyear=historyYearList.first;
+      selectedyear = historyYearList.first;
     }
     isloadingartmovement = false;
     return httpResponse;

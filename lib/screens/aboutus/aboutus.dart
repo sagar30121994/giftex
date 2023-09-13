@@ -54,7 +54,7 @@ class _AboutuspageState extends State<Aboutuspage> {
                         height: 10,
                       ),
                       Text(
-                        "${serviceViewModel.whoWeAreResponse.pageContent!.bannerItem!.title}",
+                        "${serviceViewModel.whoWeAreResponse.pageContent!.bannerItem!.title}".toUpperCase(),
                         textAlign: TextAlign.left,
                         style: Theme.of(context).textTheme.bodyText1!.copyWith(
                               color: Theme.of(context).colorScheme.primary,
@@ -151,7 +151,7 @@ class _AboutuspageState extends State<Aboutuspage> {
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
                                   "01",
@@ -163,28 +163,37 @@ class _AboutuspageState extends State<Aboutuspage> {
                                 ),
                                 SizedBox(
                                   width: 10,
+                                  height: 40,
                                 ),
-                                Image.asset("image/Line.png"),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Image.asset("image/Line.png"),
+                                  ],
+                                ),
                               ],
                             ),
                             SizedBox(
                               height: 10,
                             ),
-                            Text(
-                              "WHO WE ARE",
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                    color: Color(0XFF000000),
-                                    letterSpacing: 1,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 12.0),
+                              child: Text(
+                                "WHO WE ARE",
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                      color: Color(0XFF000000),
+                                      letterSpacing: 1,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                              ),
                             ),
-                            SizedBox(
-                              height: 15,
-                            ),
+                            // SizedBox(
+                            //   height: 5,
+                            // ),
 
                             Padding(
-                              padding: EdgeInsets.all(16),
+                              padding: EdgeInsets.only(left: 16, right: 16),
                               child: HtmlWidget(
                                 "${serviceViewModel.whoWeAreResponse.pageContent!.culture!.desc1}",
                                 // textStyle: TextStyle(fontSize: 14),
@@ -228,7 +237,7 @@ class _AboutuspageState extends State<Aboutuspage> {
                                 children: [
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       Image.asset("image/Line.png"),
                                       SizedBox(
@@ -247,20 +256,23 @@ class _AboutuspageState extends State<Aboutuspage> {
                                   SizedBox(
                                     height: 10,
                                   ),
-                                  Text(
-                                    "${serviceViewModel.whoWeAreResponse.pageContent!.culture!.title}",
-                                    textAlign: TextAlign.end,
-                                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                          color: Color(0XFF000000),
-                                          letterSpacing: 1,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                  ),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
                                   Padding(
-                                    padding: EdgeInsets.all(16),
+                                    padding: const EdgeInsets.only(right: 12),
+                                    child: Text(
+                                      "${serviceViewModel.whoWeAreResponse.pageContent!.culture!.title}".toUpperCase(),
+                                      textAlign: TextAlign.end,
+                                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                            color: Color(0XFF000000),
+                                            letterSpacing: 1,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                    ),
+                                  ),
+                                  // SizedBox(
+                                  //   height: 5,
+                                  // ),
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 16, right: 8),
                                     child: HtmlWidget(
                                       "${serviceViewModel.whoWeAreResponse.pageContent!.culture!.desc1}",
                                       // textStyle: TextStyle(fontSize: 14),
@@ -319,7 +331,7 @@ class _AboutuspageState extends State<Aboutuspage> {
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
                                   "03",
@@ -340,18 +352,18 @@ class _AboutuspageState extends State<Aboutuspage> {
                             ),
                             // SizedBox(height: 16,),
                             Text(
-                              "${serviceViewModel.whoWeAreResponse.pageContent!.ourValues!.title}",
-                              textAlign: TextAlign.start,
+                              "${serviceViewModel.whoWeAreResponse.pageContent!.ourValues!.title}".toUpperCase(),
+                              textAlign: TextAlign.right,
                               style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                     color: Color(0XFF000000),
                                     fontWeight: FontWeight.w600,
                                   ),
                             ),
-                            SizedBox(
-                              height: 15,
-                            ),
+                            // SizedBox(
+                            //   height: 15,
+                            // ),
                             Padding(
-                              padding: EdgeInsets.all(16),
+                              padding: EdgeInsets.only(left: 8, right: 8),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -404,7 +416,7 @@ class _AboutuspageState extends State<Aboutuspage> {
                       ),
                       // SizedBox(height: 16,),
                       Text(
-                        "${serviceViewModel.whoWeAreResponse.pageContent!.management!.title}",
+                        "${serviceViewModel.whoWeAreResponse.pageContent!.management!.title}".toUpperCase(),
                         textAlign: TextAlign.start,
                         style: Theme.of(context).textTheme.subtitle1!.copyWith(
                               color: Color(0XFF000000),

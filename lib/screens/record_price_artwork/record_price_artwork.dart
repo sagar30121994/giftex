@@ -164,7 +164,11 @@ class _Record_price_artworkState extends State<Record_price_artwork> {
                                             grid = false;
                                           });
                                         },
-                                        child: Image.asset("image/list.png", height: 30,color: !grid?Colors.indigo:Colors.black,)),
+                                        child: Image.asset(
+                                          "image/list.png",
+                                          height: 30,
+                                          color: !grid ? Colors.indigo : Colors.black,
+                                        )),
                                     SizedBox(
                                       width: 10,
                                     ),
@@ -175,7 +179,11 @@ class _Record_price_artworkState extends State<Record_price_artwork> {
                                           });
                                           // auctionViewModel.isGrid=true;
                                         },
-                                        child: Image.asset("image/grid.png", height: 30,color: grid?Colors.indigo:Colors.black,)),
+                                        child: Image.asset(
+                                          "image/grid.png",
+                                          height: 30,
+                                          color: grid ? Colors.indigo : Colors.black,
+                                        )),
                                     SizedBox(
                                       width: 10,
                                     ),
@@ -218,14 +226,13 @@ class _Record_price_artworkState extends State<Record_price_artwork> {
                                                                     color: Color(0xffFFFFFF),
                                                                     width: MediaQuery.of(context).size.width,
                                                                     height: 520,
-                                                                padding: const EdgeInsets.symmetric(
-                                                                    horizontal: 8, vertical: 8),
+                                                                    padding: const EdgeInsets.symmetric(
+                                                                        horizontal: 8, vertical: 8),
                                                                     alignment: Alignment.center,
                                                                     child: Stack(
                                                                       children: [
                                                                         Padding(
-                                                                          padding:
-                                                                              EdgeInsets.only(top: 0, bottom: 0),
+                                                                          padding: EdgeInsets.only(top: 0, bottom: 0),
                                                                           child: Container(
                                                                             //replace this Container with your Card
                                                                             color: Color(0xffF9F9F9),
@@ -242,14 +249,11 @@ class _Record_price_artworkState extends State<Record_price_artwork> {
                                                                                             e, auctionViewModel)));
                                                                           },
                                                                           child: Padding(
-                                                                            padding:
-                                                                                const EdgeInsets.only(left: 2.0),
+                                                                            padding: const EdgeInsets.only(left: 2.0),
                                                                             child: Image.network(
                                                                               "${e.thumbImage}",
                                                                               height: 250,
-                                                                              width: MediaQuery.of(context)
-                                                                                      .size
-                                                                                      .width *
+                                                                              width: MediaQuery.of(context).size.width *
                                                                                   .65,
                                                                               alignment: Alignment.center,
                                                                             ),
@@ -340,11 +344,10 @@ class _Record_price_artworkState extends State<Record_price_artwork> {
                                                                                               .textTheme
                                                                                               .subtitle1!
                                                                                               .copyWith(
-                                                                                                  color: Color(
-                                                                                                      0xff747474),
+                                                                                                  color:
+                                                                                                      Color(0xff747474),
                                                                                                   fontWeight:
-                                                                                                      FontWeight
-                                                                                                          .bold,
+                                                                                                      FontWeight.bold,
                                                                                                   fontSize: 18),
                                                                                         ),
                                                                                         SizedBox(
@@ -360,37 +363,34 @@ class _Record_price_artworkState extends State<Record_price_artwork> {
                                                                                               .textTheme
                                                                                               .subtitle1!
                                                                                               .copyWith(
-                                                                                                  color: Color(
-                                                                                                      0xff747474),
+                                                                                                  color:
+                                                                                                      Color(0xff747474),
                                                                                                   fontWeight:
-                                                                                                      FontWeight
-                                                                                                          .w400,
+                                                                                                      FontWeight.w400,
                                                                                                   fontSize: 14),
                                                                                         ),
                                                                                       ],
                                                                                     ),
                                                                                     Spacer(),
                                                                                     Padding(
-                                                                                      padding:
-                                                                                          const EdgeInsets.only(
-                                                                                              bottom: 12.0),
+                                                                                      padding: const EdgeInsets.only(
+                                                                                          bottom: 12.0),
                                                                                       child: ElevatedButton(
                                                                                         style: ButtonStyle(
                                                                                             backgroundColor:
                                                                                                 MaterialStateProperty.all(
-                                                                                                    Color(
-                                                                                                        0XFFF9F9F9)),
+                                                                                                    Color(0XFFF9F9F9)),
                                                                                             shape: MaterialStateProperty.all<
                                                                                                     RoundedRectangleBorder>(
                                                                                                 RoundedRectangleBorder(
                                                                                                     borderRadius:
-                                                                                                        BorderRadius.circular(
-                                                                                                            20.0),
+                                                                                                        BorderRadius
+                                                                                                            .circular(
+                                                                                                                20.0),
                                                                                                     side: BorderSide(
                                                                                                         color: Color(
                                                                                                             0xff747474),
-                                                                                                        width:
-                                                                                                            0.38)))),
+                                                                                                        width: 0.38)))),
                                                                                         onPressed: () {
                                                                                           Navigator.push(
                                                                                               context,
@@ -418,10 +418,8 @@ class _Record_price_artworkState extends State<Record_price_artwork> {
                                                                                                         .colorScheme
                                                                                                         .primary,
                                                                                                     fontWeight:
-                                                                                                        FontWeight
-                                                                                                            .bold,
-                                                                                                    letterSpacing:
-                                                                                                        2),
+                                                                                                        FontWeight.bold,
+                                                                                                    letterSpacing: 2),
                                                                                           ),
                                                                                         ),
                                                                                       ),
@@ -463,12 +461,11 @@ class _Record_price_artworkState extends State<Record_price_artwork> {
                                                                           ),
                                                                         )
                                                                       ],
-                                                                    )
-                                                            )
+                                                                    ))
                                                                 : Container(
                                                                     color: Color(0xffF9F9F9),
                                                                     width: MediaQuery.of(context).size.width,
-                                                                    height: 300,
+                                                                    height: 320,
                                                                     padding: const EdgeInsets.symmetric(
                                                                         horizontal: 8, vertical: 8),
                                                                     // height: (hours == "00" && minutes == "00" && seconds == "00") ? 310 : 370,
@@ -476,12 +473,11 @@ class _Record_price_artworkState extends State<Record_price_artwork> {
                                                                     child: Stack(
                                                                       children: [
                                                                         Padding(
-                                                                          padding: EdgeInsets.only(
-                                                                              top: 0, bottom: 0),
+                                                                          padding: EdgeInsets.only(top: 0, bottom: 0),
                                                                           child: Container(
                                                                             //replace this Container with your Card
                                                                             color: Color(0xffFFFFFF),
-                                                                            height: 300.0,
+                                                                            height: 320.0,
                                                                           ),
                                                                         ),
                                                                         InkWell(
@@ -490,8 +486,7 @@ class _Record_price_artworkState extends State<Record_price_artwork> {
                                                                                 context,
                                                                                 MaterialPageRoute(
                                                                                     builder: (context) =>
-                                                                                        ProductDetailPage(
-                                                                                            e as Lots,
+                                                                                        ProductDetailPage(e as Lots,
                                                                                             auctionViewModel)));
                                                                           },
                                                                           child: Padding(
@@ -506,12 +501,10 @@ class _Record_price_artworkState extends State<Record_price_artwork> {
                                                                           ),
                                                                         ),
                                                                         Container(
-                                                                          padding:
-                                                                              const EdgeInsets.only(left: 150),
+                                                                          padding: const EdgeInsets.only(left: 150),
                                                                           height: 300,
                                                                           child: Column(
-                                                                            mainAxisAlignment:
-                                                                                MainAxisAlignment.start,
+                                                                            mainAxisAlignment: MainAxisAlignment.start,
                                                                             crossAxisAlignment:
                                                                                 CrossAxisAlignment.start,
                                                                             children: [
@@ -523,25 +516,21 @@ class _Record_price_artworkState extends State<Record_price_artwork> {
                                                                                   Container(
                                                                                     child: Text(
                                                                                       "Lot  ${e.lotNumber}",
-                                                                                      textAlign:
-                                                                                          TextAlign.center,
+                                                                                      textAlign: TextAlign.center,
                                                                                     ),
                                                                                     decoration: BoxDecoration(
                                                                                       borderRadius:
-                                                                                          BorderRadius.circular(
-                                                                                              16),
+                                                                                          BorderRadius.circular(16),
                                                                                       color: Color(0xffEAEEF2),
                                                                                     ),
-                                                                                    padding:
-                                                                                        EdgeInsets.symmetric(
-                                                                                            horizontal: 12,
-                                                                                            vertical: 4),
+                                                                                    padding: EdgeInsets.symmetric(
+                                                                                        horizontal: 12, vertical: 4),
                                                                                   ),
                                                                                   SizedBox(width: 12),
                                                                                 ],
                                                                               ),
                                                                               Text(
-                                                                                "${e.info!.title??''}",
+                                                                                "${e.info!.title ?? ''}",
                                                                                 maxLines: 2,
                                                                                 overflow: TextOverflow.ellipsis,
                                                                                 textAlign: TextAlign.start,
@@ -551,15 +540,14 @@ class _Record_price_artworkState extends State<Record_price_artwork> {
                                                                                     .copyWith(
                                                                                       color: Colors.black,
                                                                                       letterSpacing: 2,
-                                                                                      fontWeight:
-                                                                                          FontWeight.bold,
+                                                                                      fontWeight: FontWeight.bold,
                                                                                     ),
                                                                               ),
                                                                               SizedBox(
                                                                                 height: 8,
                                                                               ),
                                                                               Text(
-                                                                                "${e.info!.lotTitle??''}",
+                                                                                "${e.info!.lotTitle ?? ''}",
                                                                                 maxLines: 2,
                                                                                 overflow: TextOverflow.ellipsis,
                                                                                 textAlign: TextAlign.start,
@@ -568,15 +556,14 @@ class _Record_price_artworkState extends State<Record_price_artwork> {
                                                                                     .subtitle1!
                                                                                     .copyWith(
                                                                                       color: Color(0xff747474),
-                                                                                      fontWeight:
-                                                                                          FontWeight.w400,
+                                                                                      fontWeight: FontWeight.w400,
                                                                                     ),
                                                                               ),
                                                                               SizedBox(
                                                                                 height: 8,
                                                                               ),
                                                                               Text(
-                                                                                "${e.lotDesc??''}",
+                                                                                "${e.lotDesc ?? ''}",
                                                                                 maxLines: 2,
                                                                                 overflow: TextOverflow.ellipsis,
                                                                                 textAlign: TextAlign.start,
@@ -587,64 +574,61 @@ class _Record_price_artworkState extends State<Record_price_artwork> {
                                                                                       color: Theme.of(context)
                                                                                           .colorScheme
                                                                                           .primary,
-                                                                                      fontWeight:
-                                                                                          FontWeight.w400,
+                                                                                      fontWeight: FontWeight.w400,
                                                                                     ),
                                                                               ),
                                                                               SizedBox(
                                                                                 height: 8,
                                                                               ),
                                                                               Text(
-                                                                                "\u20b9 ${formateNumber(e.leadingUser!.bid!.iNR??"0")}",
+                                                                                "\u20b9 ${formateNumber(e.leadingUser!.bid!.iNR ?? "0")}",
                                                                                 textAlign: TextAlign.start,
                                                                                 style: Theme.of(context)
                                                                                     .textTheme
                                                                                     .subtitle1!
                                                                                     .copyWith(
-                                                                                  color: Color(0xff747474),
-                                                                                  fontWeight:
-                                                                                  FontWeight.w400,
-                                                                                ),
+                                                                                      color: Color(0xff747474),
+                                                                                      fontWeight: FontWeight.w400,
+                                                                                    ),
                                                                               ),
-                                                                              SizedBox(height: 8,),
+                                                                              SizedBox(
+                                                                                height: 8,
+                                                                              ),
                                                                               Text(
-                                                                                "${e.leadingUser!.notes??''}",
+                                                                                "${e.leadingUser!.notes ?? ''}",
                                                                                 textAlign: TextAlign.start,
                                                                                 style: Theme.of(context)
                                                                                     .textTheme
                                                                                     .subtitle1!
                                                                                     .copyWith(
-                                                                                  color: Color(0xff747474),
-                                                                                  fontWeight:
-                                                                                  FontWeight.w400,
-                                                                                ),
+                                                                                      color: Color(0xff747474),
+                                                                                      fontWeight: FontWeight.w400,
+                                                                                    ),
                                                                               ),
                                                                               Spacer(),
-                                                                              SizedBox(height: 25,
+                                                                              SizedBox(
+                                                                                height: 40,
                                                                                 child: ElevatedButton(
                                                                                   style: ButtonStyle(
                                                                                       backgroundColor:
-                                                                                      MaterialStateProperty.all(
-                                                                                          Color(
-                                                                                              0XFFF9F9F9)),
+                                                                                          MaterialStateProperty.all(
+                                                                                              Color(0XFFF9F9F9)),
                                                                                       shape: MaterialStateProperty.all<
-                                                                                          RoundedRectangleBorder>(
+                                                                                              RoundedRectangleBorder>(
                                                                                           RoundedRectangleBorder(
                                                                                               borderRadius:
-                                                                                              BorderRadius.circular(
-                                                                                                  20.0),
+                                                                                                  BorderRadius.circular(
+                                                                                                      20.0),
                                                                                               side: BorderSide(
-                                                                                                  color: Color(
-                                                                                                      0xff747474),
-                                                                                                  width:
-                                                                                                  0.38)))),
+                                                                                                  color:
+                                                                                                      Color(0xff747474),
+                                                                                                  width: 0.38)))),
                                                                                   onPressed: () {
                                                                                     Navigator.push(
                                                                                         context,
                                                                                         MaterialPageRoute(
                                                                                             builder: (context) =>
-                                                                                                ProductDetailPage(
-                                                                                                    e,
+                                                                                                ProductDetailPage(e,
                                                                                                     auctionViewModel)));
                                                                                   },
                                                                                   child: Text(
@@ -653,15 +637,11 @@ class _Record_price_artworkState extends State<Record_price_artwork> {
                                                                                         .textTheme
                                                                                         .bodyText1!
                                                                                         .copyWith(
-                                                                                        color: Theme.of(
-                                                                                            context)
-                                                                                            .colorScheme
-                                                                                            .primary,
-                                                                                        fontWeight:
-                                                                                        FontWeight
-                                                                                            .bold,
-                                                                                        letterSpacing:
-                                                                                        2),
+                                                                                            color: Theme.of(context)
+                                                                                                .colorScheme
+                                                                                                .primary,
+                                                                                            fontWeight: FontWeight.bold,
+                                                                                            letterSpacing: 2),
                                                                                   ),
                                                                                 ),
                                                                               ),

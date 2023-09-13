@@ -15,8 +15,7 @@ import 'package:giftex/screens/howtosell/howtosell.dart';
 import 'package:giftex/screens/liveauction/liveauction.dart';
 import 'package:giftex/screens/liveauction/liveauctiondetailpage.dart';
 import 'package:giftex/screens/newsandupdates/newsandupdates.dart';
-import 'package:giftex/screens/our%20collector/our%20collector.dart';
-import 'package:giftex/screens/productdetailspage/productdetailpage.dart';
+import 'package:giftex/screens/our%20collector/ourcollector.dart';
 import 'package:giftex/screens/profile/dashboardoverview.dart';
 import 'package:giftex/screens/profile/myauctionreview.dart';
 import 'package:giftex/screens/profile/mygallary.dart';
@@ -27,11 +26,7 @@ import 'package:giftex/screens/record_price_artwork/record_price_artwork.dart';
 import 'package:giftex/screens/servicepage/servicepage.dart';
 import 'package:giftex/screens/services/mainservices.dart';
 import 'package:giftex/viewmodel/bottomviewmodel.dart';
-
-import '../../artmovement/artmovement.dart';
-import '../../departments/departments.dart';
-import '../../homepage/homapage.dart';
-import '../../popwidget.dart';
+'../../popwidget.dart';
 
 BottomViewModel bottomViewModel = BottomViewModel();
 
@@ -58,7 +53,6 @@ class _DashboardUiState extends State<DashboardUi> {
   void initState() {
     preference = new LocalSharedPrefrence();
     bottomViewModel.selectedIndex = widget.selectedIndex;
-
     super.initState();
   }
 
