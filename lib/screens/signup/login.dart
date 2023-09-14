@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:giftex/screens/signup/emailotp.dart';
@@ -286,6 +287,10 @@ class _LoginpageState extends State<Loginpage> {
                                         enableSuggestions: true,
                                         // maxLength: 10,
                                         maxLines: 1,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter.digitsOnly
+                                        ],
+                                        maxLength: 10,
 
                                         textInputAction: TextInputAction.next,
                                         keyboardType: TextInputType.phone,
@@ -296,6 +301,7 @@ class _LoginpageState extends State<Loginpage> {
                                         decoration: InputDecoration(
                                           border: InputBorder.none,
                                           labelText: 'Mobile No.',
+                                          counterText: '',
                                           errorText: loginViewModel.login1ViewModelErrorState.mobile,
                                           isDense: true,
                                           icon: Image.asset("image/phone.png", height: 28),
@@ -471,10 +477,10 @@ class _LoginpageState extends State<Loginpage> {
                                                                 height: 16,
                                                               ),
                                                               SizedBox(
-                                                                height: 20,
+                                                                height: 8,
                                                               ),
                                                               SizedBox(
-                                                                height: 420,
+                                                                height: 380,
                                                                 child: SingleChildScrollView(
                                                                   child: HtmlWidget(
                                                                     // the first parameter (`html`) is required
@@ -561,7 +567,7 @@ class _LoginpageState extends State<Loginpage> {
                                            // activeColor: Colors.green,
 
                                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-                                              fillColor: MaterialStatePropertyAll(Colors.green),
+                                             // fillColor: MaterialStatePropertyAll(Colors.green),
 
                                               value: isCheked, onChanged: (val) async {
                                             setState(() {
