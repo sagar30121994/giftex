@@ -564,14 +564,15 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                       fit: BoxFit.cover,
                                                     ),
                                                   ),
-                                                  child: Column(children: [
+                                                  child: Column(
+                                                      children: [
                                                     // homeViewModel.homeUpcommingAuctionResponse!.auctionArray!.map((e) =>
                                                     Container(
                                                       width: MediaQuery.of(context).size.width,
                                                       height: 245,
                                                       color: Color(0xffEAEEF2).withOpacity(.4),
                                                       child: Padding(
-                                                        padding: const EdgeInsets.all(20.0),
+                                                        padding: const EdgeInsets.only(top: 42.0,bottom: 12,left: 12),
                                                         child: Column(
                                                           mainAxisAlignment: MainAxisAlignment.start,
                                                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -686,7 +687,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                           height: 230,
                                                           color: Color(0xffEAEEF2).withOpacity(.4),
                                                           child: Padding(
-                                                            padding: EdgeInsets.only(right: 12.0),
+                                                            padding: EdgeInsets.only(right: 12.0,top: 34),
                                                             child: Column(
                                                               crossAxisAlignment: CrossAxisAlignment.end,
                                                               children: [
@@ -1064,6 +1065,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                       letterSpacing: 1.5,
                                                       overflow: TextOverflow.ellipsis),
                                                 ),
+
                                                 Text(
                                                   "${homeViewModel.recordPriceLots!.tabArray![homeViewModel.selectedTabIndex].lots![pos].info!.description}",
                                                   textAlign: TextAlign.start,
@@ -1073,9 +1075,9 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                       letterSpacing: 1.5,
                                                       overflow: TextOverflow.ellipsis),
                                                 ),
-                                                // SizedBox(
-                                                //   height: 4,
-                                                // ),
+                                                SizedBox(
+                                                  height: 4,
+                                                ),
                                                 Text(
                                                   "₹ ${formateNumber(homeViewModel.recordPriceLots!.tabArray![homeViewModel.selectedTabIndex].lots![pos].estimateFrom!.iNR ?? "0")}",
                                                   textAlign: TextAlign.center,

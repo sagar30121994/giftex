@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/data/local/client/prefs.dart';
 import 'package:giftex/screens/components/header.dart';
+import 'package:giftex/screens/liveauction/components/image/imagecomponent.dart';
 import 'package:giftex/screens/productdetailspage/productdetailpage.dart'; // import 'package:giftex/data/network/models/responce/lot/upcominglotsresponsectionviewmodel.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
 import 'package:intl/intl.dart';
+
+import '../../data/network/models/responce/liveauction/liveauctionreviewlotresponce.dart';
 
 class SearchBarUi extends StatefulWidget {
   const SearchBarUi({Key? key}) : super(key: key);
@@ -212,7 +215,7 @@ class _SearchBarUiState extends State<SearchBarUi> {
                                                     padding: const EdgeInsets.all(16.0),
                                                     child: Container(
                                                         color: Color(0xffFFFFFF),
-                                                        height: 500,
+                                                        height: 480,
                                                         width: double.maxFinite,
                                                         alignment: Alignment.center,
                                                         child: Stack(
@@ -234,7 +237,7 @@ class _SearchBarUiState extends State<SearchBarUi> {
                                                                             ProductDetailPage(e, auctionViewModel)));
                                                               },
                                                               child: Padding(
-                                                                padding: const EdgeInsets.all(24.0),
+                                                                padding: const EdgeInsets.only(left: 8.0,top: 24),
                                                                 child: Image.network(
                                                                   "${e.thumbImage}",
                                                                   height: 200,
@@ -351,7 +354,7 @@ class _SearchBarUiState extends State<SearchBarUi> {
                                                                                         ),
                                                                                   ),
                                                                             Text(
-                                                                              "₹${e.leadingUser!.notes ?? ""}",
+                                                                              "${e.leadingUser!.notes ?? ""}",
                                                                               textAlign: TextAlign.center,
                                                                               style: Theme.of(context)
                                                                                   .textTheme
@@ -532,7 +535,7 @@ class _SearchBarUiState extends State<SearchBarUi> {
                                                                       color: Color(0xffEAEEF2),
                                                                     ),
                                                                     padding: EdgeInsets.symmetric(
-                                                                        horizontal: 10, vertical: 4),
+                                                                        horizontal: 6, vertical: 4),
                                                                   ),
 
                                                                   // SizedBox(
@@ -589,11 +592,14 @@ class _SearchBarUiState extends State<SearchBarUi> {
                                                                   SizedBox(height: 12),
                                                                   InkWell(
                                                                     onTap: () {
-                                                                      // Navigator.push(
-                                                                      //     context,
-                                                                      //     MaterialPageRoute(
-                                                                      //         builder: (context) => ImageConponent(
-                                                                      //             e.images!.cast<Images>())));
+                                                                          Navigator.push(
+                                                                        context,
+                                                                        MaterialPageRoute(
+                                                                          builder: (context) => ImageFullScreenDialog(
+                                                                            imageUrl: e.thumbImage ?? '',
+                                                                          ),
+                                                                        ),
+                                                                      );
                                                                     },
                                                                     child: Icon(
                                                                       Icons.open_in_full,
@@ -786,7 +792,7 @@ class _SearchBarUiState extends State<SearchBarUi> {
                                                                                             ),
                                                                                       ),
                                                                                 Text(
-                                                                                  "₹${e.leadingUser!.notes ?? ""}",
+                                                                                  "${e.leadingUser!.notes ?? ""}",
                                                                                   textAlign: TextAlign.center,
                                                                                   style: Theme.of(context)
                                                                                       .textTheme
@@ -916,12 +922,19 @@ class _SearchBarUiState extends State<SearchBarUi> {
                                                                         padding: const EdgeInsets.only(right: 12.0),
                                                                         child: InkWell(
                                                                           onTap: () {
+                                                                            Navigator.push(
+                                                                              context,
+                                                                              MaterialPageRoute(
+                                                                                builder: (context) => ImageFullScreenDialog(
+                                                                                  imageUrl: e.thumbImage ?? '',
+                                                                                ),
+                                                                              ),
+                                                                            );
                                                                             // Navigator.push(
                                                                             //     context,
                                                                             //     MaterialPageRoute(
                                                                             //         builder: (context) =>
-                                                                            //             ImageConponent(
-                                                                            //                 e.images!.cast<Images>())));
+                                                                            //             ImageConponent(auctionViewModel.newsearchResponse!.result!.lots!.images.cast<Images>())));
                                                                           },
                                                                           child: Icon(
                                                                             Icons.open_in_full,
@@ -1060,7 +1073,7 @@ class _SearchBarUiState extends State<SearchBarUi> {
         SizedBox(
           height: 24,
         ),
-        Text("No data availavle"),
+        Text("No data available"),
         SizedBox(
           height: 24,
         ),
@@ -1068,3 +1081,50 @@ class _SearchBarUiState extends State<SearchBarUi> {
     );
   }
 }
+
+
+class ImageFullScreenDialog extends StatelessWidget {
+  final String imageUrl;
+
+  ImageFullScreenDialog({required this.imageUrl});
+
+  @override
+  Widget build(BuildContext context) {
+
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white.withOpacity(.3),
+        body: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          child: Column(
+            children: [
+              Align(
+                alignment: Alignment.topRight,
+                child: IconButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    icon: Icon(
+                      Icons.close,
+                      color: Colors.white,
+                    )),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * .8,
+                child: Center(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height,
+                      child: Image.network(imageUrl,
+                      fit: BoxFit.contain,)),
+                  ),
+                ),
+               ],
+              ),
+          ),
+        ),
+      );
+  }
+}
+

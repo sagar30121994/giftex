@@ -156,7 +156,7 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                     child: Container(
                       //replace this Container with your Card
                       color: Color(0xffF9F9F9),
-                      height: 515,
+                      height: 530,
                     ),
                   ),
                   InkWell(
@@ -214,14 +214,14 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                           SizedBox(
                             height: 8,
                           ),
-                          Text(
-                            "${widget.lots.category}",
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                              color: Color(0xff747474),
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
+                          // Text(
+                          //   "${widget.lots.category}",
+                          //   textAlign: TextAlign.center,
+                          //   style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          //     color: Color(0xff747474),
+                          //     fontWeight: FontWeight.w400,
+                          //   ),
+                          // ),
                           SizedBox(
                             height: 8,
                           ),
@@ -801,7 +801,7 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                               ],
                             ),
                             SizedBox(
-                              width: MediaQuery.of(context).size.width * .42,
+                              width: MediaQuery.of(context).size.width * .45,
                               child: Text(
                                 "${widget.lots.info!.title}",
                                 textAlign: TextAlign.start,
@@ -816,12 +816,17 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                             SizedBox(
                               height: 8,
                             ),
-                            Text(
-                              "${widget.lots.category}",
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                color: Color(0xff747474),
-                                fontWeight: FontWeight.w400,
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * .45,
+                              child: Text(
+                                "${widget.lots.lotTitle}",
+                                textAlign: TextAlign.start,
+                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                  color: Color(0xff747474),
+                                  overflow: TextOverflow.ellipsis,
+                                  fontWeight: FontWeight.w400,
+                                ),
+
                               ),
                             ),
                             SizedBox(
@@ -833,7 +838,7 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Opening Bid ",
+                                  "Opening Bid",
                                   textAlign: TextAlign.center,
                                   style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                     color: Color(0xff747474),

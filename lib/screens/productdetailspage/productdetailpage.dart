@@ -2845,7 +2845,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
         SizedBox(
           height: 24,
         ),
-        Text("No data availavle"),
+        Text("No data available"),
         SizedBox(
           height: 24,
         ),

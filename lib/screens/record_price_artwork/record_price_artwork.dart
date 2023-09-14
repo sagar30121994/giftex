@@ -717,7 +717,7 @@ class _Record_price_artworkState extends State<Record_price_artwork> {
         SizedBox(
           height: 24,
         ),
-        Text("No data availavle"),
+        Text("No data available"),
         SizedBox(
           height: 24,
         ),
