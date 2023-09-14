@@ -565,7 +565,7 @@ class _LoginpageState extends State<Loginpage> {
 
                                               value: isCheked, onChanged: (val) async {
                                             setState(() {
-                                              isCheked=!isCheked;
+                                           //   isCheked=!isCheked;
                                             });
                                           }),
                                           Row(

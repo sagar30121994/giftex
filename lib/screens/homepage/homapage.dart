@@ -1709,7 +1709,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                   // title: Text("Update Available"),
                   actionsAlignment: MainAxisAlignment.center,
                   content: SizedBox(
-                    height: 150,
+                    height: 170,
                     child: Column(
                       children: [
                         SizedBox(
