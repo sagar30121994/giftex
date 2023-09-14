@@ -13,6 +13,7 @@ import 'package:giftex/screens/liveauction/components/past/pasttabs.dart';
 import 'package:giftex/screens/liveauction/components/upcomming/upcommingdata.dart';
 import 'package:giftex/screens/liveauction/components/upcomming/upcommingtabs.dart';
 import 'package:giftex/screens/liveauction/liveauction.dart';
+import 'package:sliver_tools/sliver_tools.dart';
 
 // import 'package:signalr_netcore/signalr_client.dart';
 import '../components/bottomnavigationbar/bottomnavigationbar.dart';
@@ -284,7 +285,7 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
                     );
                   }),
                 ),
-          SliverToBoxAdapter(
+          SliverPinnedHeader(
             child: Container(
               color: Theme.of(context).colorScheme.onPrimary,
               child: DefaultTabController(

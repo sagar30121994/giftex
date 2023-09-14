@@ -7,7 +7,8 @@ import 'package:payu_checkoutpro_flutter/PayUConstantKeys.dart';
 class HashService {
 //Find the test credentials from dev guide: https://devguide.payu.in/flutter-sdk-integration/getting-started-flutter-sdk/mobile-sdk-test-environment/
 //Keep the hash in backend for Security reasons.
-  static const merchantSalt = "g4RzXdFq6SskDEOF8xdpmcutWzE8GxCU"; // Add you Salt here.
+  static const merchantSalt = "g4RzXdFq6SskDEOF8xdpmcutWzE8GxCU"; // UAT
+//   static const merchantSalt = "SMznAbdBnkDIVXqWUb9MvFcOv5bzB9bD"; // Production
   // static const merchantSecretKey = "SMznAbdBnkDIVXqWUb9MvFcOv5bzB9bD"; // Add Merchant Secrete Key - Optional
 
   static Map generateHash(Map response) {

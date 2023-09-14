@@ -2,7 +2,12 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:giftex/data/local/client/prefs.dart';
+import 'package:giftex/data/network/base/base.dart' as BaseUrl;
+import 'package:giftex/data/network/base/endpoints.dart' as endPoints;
+import 'package:giftex/data/network/client/dioclient.dart';
+import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/data/network/models/request/auction/analysisrequestmodel.dart';
+import 'package:giftex/data/network/models/request/webapimodel/userloginrequestmodel.dart';
 import 'package:giftex/data/network/models/responce/liveauction/auctionresultresponse.dart';
 import 'package:giftex/data/network/models/responce/liveauction/singleauctiondetailsresponse.dart';
 import 'package:giftex/data/network/models/responce/liveauction/upcommingauctionresponse.dart';
@@ -12,12 +17,6 @@ import 'package:giftex/data/network/models/responce/lot/proxybidamountresponse.d
 import 'package:giftex/data/network/models/responce/lot/proxybidresponse.dart';
 import 'package:giftex/data/network/models/responce/lot/upcominglotsresponse.dart';
 import 'package:giftex/data/network/models/responce/purchase/mypurchasereponse.dart';
-
-import '../../base/base.dart' as BaseUrl;
-import '../../base/endpoints.dart' as endPoints;
-import '../../client/dioclient.dart';
-import '../../models/httpreponsehandler.dart';
-import '../../models/request/webapimodel/userloginrequestmodel.dart';
 
 class AuctionRepo {
   DioClientNew? httpClient;

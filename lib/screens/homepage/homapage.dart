@@ -11,8 +11,9 @@ import 'package:giftex/screens/newsandupdates/newsandupdates.dart';
 import 'package:giftex/viewmodel/home/homeviewmodel.dart';
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
 import '../components/footer/footer.dart';
 import '../components/header.dart';
 
@@ -70,8 +71,6 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
     auctionViewModel.getUpcommingAuction("UpComing");
 
     checkUpdate();
-
-
 
     super.initState();
   }
@@ -1687,45 +1686,65 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
     );
   }
 
-  Future checkUpdate() async{
+  Future checkUpdate() async {
     HttpResponse res = await homeViewModel.checkFeature();
-    if(res.status==200){
-      if((homeViewModel.checkFeatureResponse!.status??"")=="true"){
-
+    if (res.status == 200) {
+      if ((homeViewModel.checkFeatureResponse!.status ?? "") == "true") {
         HttpResponse res1 = await homeViewModel.checkAppVersion();
-        if(res1.status==200){
-          if((homeViewModel.checkAppVersionResponse!.status??"")=="true"){
-
+        if (res1.status == 200) {
+          if ((homeViewModel.checkAppVersionResponse!.status ?? "") == "true") {
             PackageInfo packageInfo = await PackageInfo.fromPlatform();
             String version = packageInfo.version;
 
             print("++++++++++++++++++++++++++++App Version : ${version}");
-            print("++++++++++++++++++++++++++++API Version : ${homeViewModel.checkAppVersionResponse!.result!.version}");
-            if(version!=homeViewModel.checkAppVersionResponse!.result!.version){
+            print(
+                "++++++++++++++++++++++++++++API Version : ${homeViewModel.checkAppVersionResponse!.result!.version}");
+            if (version != homeViewModel.checkAppVersionResponse!.result!.version) {
               await showDialog(
                 context: context,
-                builder: (context) =>
-                    AlertDialog(
-                      backgroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                builder: (context) => AlertDialog(
+                  backgroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
 
-                      // title: Text("Update Available"),
-                      actionsAlignment: MainAxisAlignment.center,
-                      content: SizedBox(
-                        height: 150,
-                        child: Column(
-                          children: [
-                            SizedBox(height: 70,child: Image.asset('image/giftlogo.png',height: 70,width: 140,),),
-                            SizedBox(height: 16,),
-                            Text('We\'re getting better !',style: Theme.of(context).textTheme!.headlineSmall!.copyWith(color: Colors.black,fontWeight: FontWeight.bold,),),
-                            SizedBox(height: 16,),
-                            Text('Update the app to unlock new features !',style: Theme.of(context).textTheme!.bodySmall!.copyWith(color: Colors.black,fontWeight: FontWeight.normal),),
-                          ],
+                  // title: Text("Update Available"),
+                  actionsAlignment: MainAxisAlignment.center,
+                  content: SizedBox(
+                    height: 150,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 70,
+                          child: Image.asset(
+                            'image/giftlogo.png',
+                            height: 70,
+                            width: 140,
+                          ),
                         ),
-                      ),
-                      actions: [
-
-                        /* TextButton(
+                        SizedBox(
+                          height: 16,
+                        ),
+                        Text(
+                          'We\'re getting better !',
+                          style: Theme.of(context).textTheme!.headlineSmall!.copyWith(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                        ),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        Text(
+                          'Update the app to unlock new features !',
+                          style: Theme.of(context)
+                              .textTheme!
+                              .bodySmall!
+                              .copyWith(color: Colors.black, fontWeight: FontWeight.normal),
+                        ),
+                      ],
+                    ),
+                  ),
+                  actions: [
+                    /* TextButton(
                             style: TextButton.styleFrom(
                                // shape: StadiumBorder(),
                               //  backgroundColor: Colors.grey,
@@ -1733,22 +1752,26 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                             onPressed: (){
                           Navigator.of(context).pop();
                         }, child: Text("Update Later")),*/
-                        ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                              backgroundColor: Colors.black,
-                              padding: EdgeInsets.all(8),
-                            ),
-                            onPressed: (){
-                              Navigator.of(context).pop();
-                            }, child: Text("Update Now".toUpperCase(),style: Theme.of(context).textTheme!.button!.copyWith(color: Colors.white,fontWeight: FontWeight.bold),)),
-                      ],
-                    ),
-
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                          backgroundColor: Theme.of(context).colorScheme.primary,
+                          padding: EdgeInsets.all(8),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(
+                          "Update Now".toUpperCase(),
+                          style: Theme.of(context)
+                              .textTheme!
+                              .button!
+                              .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                        )),
+                  ],
+                ),
               );
             }
-
-
           }
         }
       }

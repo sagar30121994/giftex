@@ -54,19 +54,12 @@ class _MyProfilepageState extends State<MyProfilepage> implements PayUCheckoutPr
   String newAddress = '';
 
   Future laodData() async {
+    await bottomViewModel.profileViewModel!.getUserAllDetails();
     await profileViewModel.getRegInfo();
     setState(() {
       selectedCountry = profileViewModel.getRegInfoResponse!.countryList!.first;
       selectedState = profileViewModel.getRegInfoResponse!.indianStateList!.first;
     });
-  }
-
-  late PayUCheckoutProFlutter _checkoutPro;
-
-  @override
-  void initState() {
-    profileViewModel.setupValidations();
-    laodData();
     nameController.text =
         "${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.basicDetails!.firstName ?? '')} ${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.basicDetails!.lastName ?? '')}";
     adharController.text =
@@ -95,6 +88,15 @@ class _MyProfilepageState extends State<MyProfilepage> implements PayUCheckoutPr
     depositmodeController.text = "Net Banking";
 
     addressCount = widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address!.length;
+  }
+
+  late PayUCheckoutProFlutter _checkoutPro;
+
+  @override
+  void initState() {
+    profileViewModel.setupValidations();
+    laodData();
+
     super.initState();
     _checkoutPro = PayUCheckoutProFlutter(this);
   }
@@ -1713,6 +1715,7 @@ class _MyProfilepageState extends State<MyProfilepage> implements PayUCheckoutPr
                   height: 16,
                 ),
                 SizedBox(
+                  width: MediaQuery.of(context).size.width * .8,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -1732,6 +1735,7 @@ class _MyProfilepageState extends State<MyProfilepage> implements PayUCheckoutPr
                   children: widget.bottomViewModel.profileViewModel!.paymentGridResponse!.result!.paymentGrids!
                       .map(
                         (e) => SizedBox(
+                          width: MediaQuery.of(context).size.width * .8,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -1742,6 +1746,7 @@ class _MyProfilepageState extends State<MyProfilepage> implements PayUCheckoutPr
                               ElevatedButton(
                                   onPressed: () async {
                                     await widget.bottomViewModel.profileViewModel!.getPayment(e.paymentAmount!);
+                                    // await widget.bottomViewModel.profileViewModel!.getPayment("1");
 
                                     _checkoutPro.openCheckoutScreen(
                                       payUPaymentParams: PayUParams.createPayUPaymentParams(
@@ -1750,6 +1755,7 @@ class _MyProfilepageState extends State<MyProfilepage> implements PayUCheckoutPr
                                         widget.bottomViewModel.profileViewModel!.paymentResponce!.udf5!,
                                         widget.bottomViewModel.profileViewModel!.paymentResponce!.key,
                                         widget.bottomViewModel.profileViewModel!.paymentResponce!.amount,
+                                        // "1",
                                         widget.bottomViewModel.profileViewModel!.paymentResponce!.productinfo,
                                         widget.bottomViewModel.profileViewModel!.paymentResponce!.firstname,
                                         widget.bottomViewModel.profileViewModel!.paymentResponce!.email,
@@ -1759,6 +1765,7 @@ class _MyProfilepageState extends State<MyProfilepage> implements PayUCheckoutPr
                                       ),
                                       payUCheckoutProConfig: PayUParams.createPayUConfigParams(),
                                     );
+                                    Navigator.of(context).pop();
                                   },
                                   child: Text(
                                     "PAY NOW",
@@ -1784,24 +1791,6 @@ class _MyProfilepageState extends State<MyProfilepage> implements PayUCheckoutPr
                   Navigator.of(context).pop();
                 },
                 child: Text('Cancel'),
-              ),
-              TextButton(
-                onPressed: () async {
-                  // HttpResponse res = await profileViewModel.deleteMyAddress(addressId);
-                  // if (res.status == 200) {
-                  //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  //     content: Text(res.message ?? ''),
-                  //     backgroundColor: Colors.green,
-                  //   ));
-                  // } else {
-                  //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  //     content: Text(res.message ?? ''),
-                  //     backgroundColor: Colors.orange,
-                  //   ));
-                  // }
-                  Navigator.of(context).pop();
-                },
-                child: Text('Delete'),
               ),
             ],
           );
@@ -1850,6 +1839,33 @@ class _MyProfilepageState extends State<MyProfilepage> implements PayUCheckoutPr
     );
   }
 
+  Future<void> paymentStatus(BuildContext context, bool isSuccess, bool isCanceled) async {
+    laodData();
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(builder: (context, setState) {
+          return AlertDialog(
+            title: Text(isCanceled
+                ? "Payment Cancelled"
+                : isSuccess
+                    ? 'Payment Successful'
+                    : "Payment Failed"),
+            // content: Text('Are you sure, you want to set this address as default address?'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Ok'),
+              ),
+            ],
+          );
+        });
+      },
+    );
+  }
+
   @override
   generateHash(Map response) {
     // TODO: implement generateHash
@@ -1865,25 +1881,25 @@ class _MyProfilepageState extends State<MyProfilepage> implements PayUCheckoutPr
   @override
   onError(Map? response) {
     // TODO: implement onError
-    print(response);
+    paymentStatus(context, false, false);
   }
 
   @override
   onPaymentCancel(Map? response) {
     // TODO: implement onPaymentCancel
-    print(response);
+    paymentStatus(context, false, true);
   }
 
   @override
   onPaymentFailure(response) {
     // TODO: implement onPaymentFailure
-    print(response);
+    paymentStatus(context, false, false);
   }
 
   @override
   onPaymentSuccess(response) {
     // TODO: implement onPaymentSuccess
-    print(response);
+    paymentStatus(context, true, false);
   }
 }
 
@@ -1896,12 +1912,14 @@ class PayUParams {
       String udf1, udf2, udf5, mkey, amount, productinfo, fname, email, phone, surl, furl) {
     var siParams = {
       PayUSIParamsKeys.isFreeTrial: true,
-      PayUSIParamsKeys.billingAmount: '1', //Required
-      PayUSIParamsKeys.billingInterval: 1, //Required
-      PayUSIParamsKeys.paymentStartDate: '2023-04-20', //Required
-      PayUSIParamsKeys.paymentEndDate: '2023-04-30', //Required
+      PayUSIParamsKeys.billingAmount: amount, //Required
+      PayUSIParamsKeys.billingInterval: 2, //Required
+      PayUSIParamsKeys.paymentStartDate:
+          '${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day}', //Required
+      PayUSIParamsKeys.paymentEndDate:
+          '${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day}', //Required
       PayUSIParamsKeys.billingCycle: //Required
-          'daily', //Can be any of 'daily','weekly','yearly','adhoc','once','monthly'
+          'once', //Can be any of 'daily','weekly','yearly','adhoc','once','monthly'
       PayUSIParamsKeys.remarks: 'Test SI transaction',
       PayUSIParamsKeys.billingCurrency: 'INR',
       PayUSIParamsKeys.billingLimit: 'ON', //ON, BEFORE, AFTER
@@ -1948,37 +1966,37 @@ class PayUParams {
       PayUPaymentParamKey.additionalParam: additionalParam,
       PayUPaymentParamKey.enableNativeOTP: true,
       // PayUPaymentParamKey.splitPaymentDetails:json.encode(spitPaymentDetails),
-      PayUPaymentParamKey.userToken: "", //TODO: Pass a unique token to fetch offers. - Optional
+      // PayUPaymentParamKey.userToken: "", //TODO: Pass a unique token to fetch offers. - Optional
     };
 
     return payUPaymentParams;
   }
 
   static Map createPayUConfigParams() {
-    var paymentModesOrder = [
-      {"Wallets": "PHONEPE"},
-      {"UPI": "TEZ"},
-      {"Wallets": ""},
-      {"EMI": ""},
-      {"NetBanking": ""},
-    ];
-
-    var cartDetails = [
-      {"GST": "5%"},
-      {"Delivery Date": "25 Dec"},
-      {"Status": "In Progress"}
-    ];
-    var enforcePaymentList = [
-      {"payment_type": "CARD", "enforce_ibiboCode": "UTIBENCC"},
-    ];
-
-    var customNotes = [
-      {
-        "custom_note": "Its Common custom note for testing purpose",
-        "custom_note_category": [PayUPaymentTypeKeys.emi, PayUPaymentTypeKeys.card]
-      },
-      {"custom_note": "Payment options custom note", "custom_note_category": null}
-    ];
+    // var paymentModesOrder = [
+    //   {"Wallets": "PHONEPE"},
+    //   {"UPI": "TEZ"},
+    //   {"Wallets": ""},
+    //   {"EMI": ""},
+    //   {"NetBanking": ""},
+    // ];
+    //
+    // var cartDetails = [
+    //   {"GST": "5%"},
+    //   {"Delivery Date": "25 Dec"},
+    //   {"Status": "In Progress"}
+    // ];
+    // var enforcePaymentList = [
+    //   {"payment_type": "CARD", "enforce_ibiboCode": "UTIBENCC"},
+    // ];
+    //
+    // var customNotes = [
+    //   {
+    //     "custom_note": "Its Common custom note for testing purpose",
+    //     "custom_note_category": [PayUPaymentTypeKeys.emi, PayUPaymentTypeKeys.card]
+    //   },
+    //   {"custom_note": "Payment options custom note", "custom_note_category": null}
+    // ];
 
     var payUCheckoutProConfig = {
       PayUCheckoutProConfigKeys.primaryColor: "#4994EC",
@@ -1987,10 +2005,9 @@ class PayUParams {
       // PayUCheckoutProConfigKeys.merchantLogo: "logo",
       PayUCheckoutProConfigKeys.showExitConfirmationOnCheckoutScreen: true,
       PayUCheckoutProConfigKeys.showExitConfirmationOnPaymentScreen: true,
-      PayUCheckoutProConfigKeys.cartDetails: cartDetails,
-      PayUCheckoutProConfigKeys.paymentModesOrder: paymentModesOrder,
+      // PayUCheckoutProConfigKeys.cartDetails: cartDetails,
       PayUCheckoutProConfigKeys.merchantResponseTimeout: 30000,
-      PayUCheckoutProConfigKeys.customNotes: customNotes,
+
       PayUCheckoutProConfigKeys.autoSelectOtp: true,
       // PayUCheckoutProConfigKeys.enforcePaymentList: enforcePaymentList,
       PayUCheckoutProConfigKeys.waitingTime: 30000,
