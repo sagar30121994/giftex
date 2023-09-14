@@ -7,6 +7,7 @@ import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/data/network/models/responce/liveauction/upcommingauctionresponse.dart';
 import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
 import 'package:giftex/screens/liveauction/liveauction.dart';
+import 'package:giftex/screens/newsandupdates/newsandupdates.dart';
 import 'package:giftex/viewmodel/home/homeviewmodel.dart';
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
@@ -1769,28 +1770,26 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                         )),
                   ],
                 ),
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                          backgroundColor: Colors.black,
-                          padding: EdgeInsets.all(8),
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: Text(
-                          "Update Now".toUpperCase(),
-                          style: Theme.of(context)
-                              .textTheme!
-                              .button!
-                              .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
-                        )),
-                  ],
-                ),
+                //       ElevatedButton(
+                //           style: ElevatedButton.styleFrom(
+                //             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                //             backgroundColor: Colors.black,
+                //             padding: EdgeInsets.all(8),
+                //           ),
+                //           onPressed: () {
+                //             Navigator.of(context).pop();
+                //           },
+                //           child: Text(
+                //             "Update Now".toUpperCase(),
+                //             style: Theme.of(context)
+                //                 .textTheme!
+                //                 .button!
+                //                 .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                //           ),
+                //
+                // );
               );
             }
-
-
           }
         }
       }
