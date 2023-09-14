@@ -570,8 +570,8 @@ class _ContactusPageState extends State<ContactusPage> {
               ),
               SizedBox(width: MediaQuery.of(context).size.width, child: Footer()),
               Container(
-                color: Color(0xff1F2A52),
-                height: 30,
+                color: Color(0Xff1F2A52),
+                height: 120,
                 width: MediaQuery.of(context).size.width,
               ),
             ],

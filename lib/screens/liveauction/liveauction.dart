@@ -1174,7 +1174,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                                     height: 10,
                                                                   ),
                                                                   Text(
-                                                                    "₹${auctionViewModel.upcomingAuctionResponse!.result!.auctions![index].totalSaleValue}",
+                                                                    "\u20b9 ${formateNumber((auctionViewModel.upcomingAuctionResponse!.result!.auctions![index].totalSaleValue).toString())}",
                                                                     textAlign: TextAlign.center,
                                                                     style: Theme.of(context)
                                                                         .textTheme

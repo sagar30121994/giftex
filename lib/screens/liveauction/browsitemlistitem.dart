@@ -227,7 +227,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
 
   @override
   Widget build(BuildContext context) {
-    return widget.grid
+    return widget.auctionViewModel.isGrid
         ? Padding(
             padding: const EdgeInsets.all(15.0),
             child: Container(

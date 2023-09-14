@@ -18,7 +18,7 @@ class _ServicepageState extends State<Servicepage> {
       appBar: NavBar(),
       // bottomNavigationBar: BottomNavigationBarUi(),
       body: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
           width: MediaQuery.of(context).size.width,
           // height: MediaQuery.of(context).size.height*.90,
           child: SingleChildScrollView(

@@ -37,7 +37,7 @@ class _PastAuctionResultDataState extends State<PastAuctionResultData> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("TOATL",
+                        Text("TOTAL",
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineSmall!
@@ -282,7 +282,7 @@ class _PastAuctionResultDataState extends State<PastAuctionResultData> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text("Winning value (INR \$)",
+                                          Text("Winning value (INR \u20b9)",
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .bodyLarge!

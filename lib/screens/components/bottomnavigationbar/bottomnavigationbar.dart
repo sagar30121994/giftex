@@ -897,7 +897,7 @@ class _DashboardUiState extends State<DashboardUi> {
             ),
 
             body: Observer(builder: (context) {
-              bottomViewModel.selectedIndex;
+           //   bottomViewModel.selectedIndex;
               return getPage();
             }),
           ),

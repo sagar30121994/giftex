@@ -499,7 +499,7 @@ class _FooterState extends State<Footer> {
                                 InkWell(
                                   onTap: () {
                                     bottomViewModel.selectedIndex = 18;
-                                    // Navigator.push(context, MaterialPageRoute(builder: (context) => FaqPage()));
+                                 //   Navigator.push(context, MaterialPageRoute(builder: (context) => DashboardUi(18)));
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 20.0, top: 10),

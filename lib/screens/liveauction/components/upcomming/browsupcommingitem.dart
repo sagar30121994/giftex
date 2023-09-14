@@ -752,14 +752,7 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                 children: [
                   Stack(
                     children: [
-                   /*   Padding(
-                        padding: EdgeInsets.only(top: 16, bottom: 0),
-                        child: Container(
-                          //replace this Container with your Card
-                          color: Color(0xffF9F9F9),
-                          height: 180.0,
-                        ),
-                      ),*/
+
                       InkWell(
                         onTap: () async {
                           await Navigator.push(
