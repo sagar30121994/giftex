@@ -606,13 +606,17 @@ class WebCmsApiModelRepo {
     return httpResponse;
   }
 
-  Future<HttpResponse> getblogsDetails() async {
+  Future<HttpResponse> getblogsDetails(String pageID) async {
     HttpResponse httpResponse = HttpResponse();
-    String userlogin = json.encode(LoginReqestModel);
+    // String userlogin = json.encode(LoginReqestModel);
     httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
-    await httpClient!
-        .post(BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().Getblogdetails, body: userlogin)
-        .then((responce) async {
+    await httpClient!.post(BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().Getblogdetails, body: {
+      "authkey_web": "${localSharedPrefrence!.getAuthKeyWeb() ?? ''}",
+      "authkey_mobile": "",
+      "userid": "${localSharedPrefrence!.getUserId() ?? ''}",
+      "CRMClientID": "${localSharedPrefrence!.getCrmClinetId() ?? ''}",
+      "pageId": pageID
+    }).then((responce) async {
       print(responce);
 
       if (responce.statusCode == 200) {
@@ -640,33 +644,32 @@ class WebCmsApiModelRepo {
     HttpResponse httpResponse = HttpResponse();
     // String userlogin = json.encode(LoginReqestModel);
     httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
-    await httpClient!.post(BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().Getpressdetails,
-        body: await httpClient!.post(BaseUrl.notificationbaseUrl + endPoints.WebCMSApiModel().getblogdetails, body: {
-          "authkey_web": "${localSharedPrefrence!.authkey ?? ''}",
-          "authkey_mobile": "",
-          "userid": "${localSharedPrefrence!.userId ?? ''}",
-          "CRMClientID": "${localSharedPrefrence!.crmId ?? ''}",
-          "pageId": "106"
-        }).then((responce) async {
-          print(responce);
+    await httpClient!.post(BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().Getpressdetails, body: {
+      "authkey_web": "${localSharedPrefrence!.getAuthKeyWeb() ?? ''}",
+      "authkey_mobile": "",
+      "userid": "${localSharedPrefrence!.getUserId() ?? ''}",
+      "CRMClientID": "${localSharedPrefrence!.getCrmClinetId() ?? ''}",
+      "pageId": pageID
+    }).then((responce) async {
+      print(responce);
 
-          if (responce.statusCode == 200) {
-            httpResponse.status = responce.statusCode;
-            httpResponse.message = 'Successful';
-            httpResponse.data = PressResponse.fromJson(responce.data);
-          } else {
-            httpResponse.status = responce.statusCode;
-            httpResponse.message = responce.data['message'];
-            httpResponse.data = null;
-          }
-          return httpResponse;
-        }).catchError((err) {
-          print(err);
-          httpResponse.status = 400;
-          httpResponse.message = err.toString();
-          httpResponse.data = err.toString();
-          return httpResponse;
-        }));
+      if (responce.statusCode == 200) {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = 'Successful';
+        httpResponse.data = PressResponse.fromJson(responce.data);
+      } else {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = responce.data['message'];
+        httpResponse.data = null;
+      }
+      return httpResponse;
+    }).catchError((err) {
+      print(err);
+      httpResponse.status = 400;
+      httpResponse.message = err.toString();
+      httpResponse.data = err.toString();
+      return httpResponse;
+    });
 
     return httpResponse;
   }

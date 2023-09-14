@@ -111,6 +111,14 @@ class _DashboardUiState extends State<DashboardUi> {
               });
             } else if (bottomViewModel.selectedIndex == 0) {
               _onWillPop(context);
+            } else if (bottomViewModel.selectedIndex == 35) {
+              setState(() {
+                bottomViewModel.selectedIndex = 25;
+              });
+            } else if (bottomViewModel.selectedIndex == 36) {
+              setState(() {
+                bottomViewModel.selectedIndex = 33;
+              });
             } else {
               setState(() {
                 bottomViewModel.selectedIndex = 0;
@@ -994,8 +1002,8 @@ class _DashboardUiState extends State<DashboardUi> {
         return SearchBarUi();
 
       case 35:
-        return NewsDetails("pageID");
-      case 34:
+        return NewsDetails();
+      case 36:
         return BlogDetails();
 
       default:

@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
-import 'package:giftex/viewmodel/service/serviceviewmodel.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../components/footer/footer.dart';
 import '../components/header.dart';
-
-ServiceViewModel serviceViewModel = ServiceViewModel();
+import '../newsandupdates/newsandupdates.dart';
 
 class NewsDetails extends StatefulWidget {
-  NewsDetails(this.pageID);
-
-  String pageID;
-
   @override
   _NewsDetailsState createState() => _NewsDetailsState();
 }
@@ -24,7 +19,7 @@ class _NewsDetailsState extends State<NewsDetails> {
   void initState() {
     // TODO: implement initState
 
-    serviceViewModel.getpressDetails(widget.pageID);
+    serviceViewModel.getpressDetails(serviceViewModel.newsArry!.id!);
     super.initState();
   }
 
@@ -32,6 +27,15 @@ class _NewsDetailsState extends State<NewsDetails> {
   void dispose() {
     controller.dispose();
     super.dispose();
+  }
+
+  _launchURL(String readMoreUrl) async {
+    String url = readMoreUrl; // Replace with the URL you want to open
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   ScrollController controller = ScrollController();
@@ -66,28 +70,30 @@ class _NewsDetailsState extends State<NewsDetails> {
                       const SizedBox(
                         height: 10,
                       ),
-                      Text(
-                        serviceViewModel.pressDetailsResponse!.pageContent!.pressDetail!.title ?? "",
-                        textAlign: TextAlign.left,
-                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                              color: Theme.of(context).colorScheme.primary,
-                              fontWeight: FontWeight.w600,
-                            ),
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      Container(
-                        width: MediaQuery.of(context).size.width * .80,
+                      Padding(
+                        padding: const EdgeInsets.only(left: 16, right: 16),
                         child: Text(
-                          serviceViewModel.pressDetailsResponse!.pageContent!.pressDetail!.credits ?? "",
+                          // widget.array!.title ?? '',
+                          serviceViewModel.pressDetailsResponse!.pageContent!.pressDetail!.title ?? "",
                           textAlign: TextAlign.center,
-                          style: Theme.of(context)
-                              .textTheme
-                              .subtitle1!
-                              .copyWith(color: Color(0XFF000000), fontWeight: FontWeight.w500, letterSpacing: 1),
+                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                              color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.w500, fontSize: 16),
                         ),
                       ),
+                      // const SizedBox(
+                      //   height: 16,
+                      // ),
+                      // Container(
+                      //   width: MediaQuery.of(context).size.width * .80,
+                      //   child: Text(
+                      //     serviceViewModel.pressDetailsResponse!.pageContent!.pressDetail!.credits ?? "",
+                      //     textAlign: TextAlign.center,
+                      //     style: Theme.of(context)
+                      //         .textTheme
+                      //         .subtitle1!
+                      //         .copyWith(color: Color(0XFF000000), fontWeight: FontWeight.w600, letterSpacing: 1),
+                      //   ),
+                      // ),
                       const SizedBox(
                         height: 16,
                       ),
@@ -129,14 +135,72 @@ class _NewsDetailsState extends State<NewsDetails> {
                           ],
                         ),
                       ),
+
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 16, right: 16),
+                                child: Text(
+                                  "By ${serviceViewModel.pressDetailsResponse!.pageContent!.pressDetail!.credits ?? ""}",
+                                  textAlign: TextAlign.start,
+                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                      color: Color(0XFF000000), fontWeight: FontWeight.w500, letterSpacing: 1),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 16, right: 16),
+                            child: Row(
+                              children: [
+                                Image.asset("image/date.png"),
+                                SizedBox(width: 4),
+                                Text(
+                                  serviceViewModel.pressDetailsResponse!.pageContent!.pressDetail!.timestamp ?? "",
+                                  textAlign: TextAlign.start,
+                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                      color: Color(0XFF000000), fontWeight: FontWeight.w500, letterSpacing: 1),
+                                )
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(16),
+                            child: HtmlWidget(
+                              '${serviceViewModel.pressDetailsResponse!.pageContent!.pressDetail!.desc ?? ""}',
+                              // textStyle: TextStyle(fontSize: 14),
+                            ),
+                          ),
+                        ],
+                      ),
                       const SizedBox(
                         height: 16,
                       ),
-                      Padding(
-                        padding: EdgeInsets.all(16),
-                        child: HtmlWidget(
-                          '${serviceViewModel.pressDetailsResponse!.pageContent!.pressDetail!.desc ?? ""}',
-                          // textStyle: TextStyle(fontSize: 14),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                          backgroundColor: Theme.of(context).colorScheme.primary,
+                          padding: EdgeInsets.all(8),
+                        ),
+                        onPressed: () {
+                          _launchURL(
+                              serviceViewModel.pressDetailsResponse!.pageContent!.pressDetail!.readMoreUrl ?? "");
+                        },
+                        child: Text(
+                          "Read More",
+                          style: Theme.of(context)
+                              .textTheme!
+                              .button!
+                              .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                       ),
                       const SizedBox(

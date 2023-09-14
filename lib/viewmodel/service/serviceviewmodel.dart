@@ -5,8 +5,9 @@ import 'package:giftex/data/network/models/responce/cmsweb/insertCareerFormRespo
 import 'package:giftex/data/network/models/responce/cmsweb/whoweare.dart';
 import 'package:giftex/data/network/models/responce/contactusform/insertreachusformresponse.dart';
 import 'package:giftex/data/network/models/responce/home/newsblogsvideoresponse.dart';
+import 'package:giftex/data/network/models/responce/news/blogsresponse.dart' as blogs;
 import 'package:giftex/data/network/models/responce/news/blogsresponse.dart';
-import 'package:giftex/data/network/models/responce/news/newsreponse.dart';
+import 'package:giftex/data/network/models/responce/news/newsreponse.dart' as news;
 import 'package:giftex/data/network/models/responce/service/serviceresponse.dart';
 import 'package:giftex/data/network/repository/service/servicerepo.dart';
 import 'package:giftex/data/network/repository/webapimodel/webapimodelrepo.dart';
@@ -34,6 +35,12 @@ abstract class _ServiceViewModel with Store {
   bool isloading = false;
 
   @observable
+  news.Array? newsArry;
+
+  @observable
+  blogs.BlogArray? blogsArray;
+
+  @observable
   WhoWeAreResponse whoWeAreResponse = WhoWeAreResponse();
 
   @observable
@@ -43,7 +50,7 @@ abstract class _ServiceViewModel with Store {
   CareersResponse? careersResponse;
 
   @observable
-  PressResponse? pressResponse;
+  news.PressResponse? pressResponse;
 
   @observable
   BlogsResponse? blogsResponse;
@@ -250,7 +257,7 @@ abstract class _ServiceViewModel with Store {
   }
 
   @observable
-  PressResponse? pressDetailsResponse = PressResponse();
+  news.PressResponse? pressDetailsResponse = news.PressResponse();
   Future<HttpResponse> getpressDetails(String pageID) async {
     isloading = true;
     pressDetailsResponse = null;
@@ -263,11 +270,11 @@ abstract class _ServiceViewModel with Store {
   }
 
   @observable
-  PressResponse? blogDetailsResponse = PressResponse();
-  Future<HttpResponse> getblogsDetails() async {
+  news.PressResponse? blogDetailsResponse = news.PressResponse();
+  Future<HttpResponse> getblogsDetails(String pageID) async {
     isloading = true;
     blogDetailsResponse = null;
-    HttpResponse httpResponse = await webCmsApiModelRepo!.getblogsDetails();
+    HttpResponse httpResponse = await webCmsApiModelRepo!.getblogsDetails(pageID);
 
     if (httpResponse.status == 200) {
       blogDetailsResponse = httpResponse.data;

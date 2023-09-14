@@ -25,6 +25,38 @@ mixin _$ServiceViewModel on _ServiceViewModel, Store {
     });
   }
 
+  late final _$newsArryAtom =
+      Atom(name: '_ServiceViewModel.newsArry', context: context);
+
+  @override
+  news.Array? get newsArry {
+    _$newsArryAtom.reportRead();
+    return super.newsArry;
+  }
+
+  @override
+  set newsArry(news.Array? value) {
+    _$newsArryAtom.reportWrite(value, super.newsArry, () {
+      super.newsArry = value;
+    });
+  }
+
+  late final _$blogsArrayAtom =
+      Atom(name: '_ServiceViewModel.blogsArray', context: context);
+
+  @override
+  BlogArray? get blogsArray {
+    _$blogsArrayAtom.reportRead();
+    return super.blogsArray;
+  }
+
+  @override
+  set blogsArray(BlogArray? value) {
+    _$blogsArrayAtom.reportWrite(value, super.blogsArray, () {
+      super.blogsArray = value;
+    });
+  }
+
   late final _$whoWeAreResponseAtom =
       Atom(name: '_ServiceViewModel.whoWeAreResponse', context: context);
 
@@ -77,13 +109,13 @@ mixin _$ServiceViewModel on _ServiceViewModel, Store {
       Atom(name: '_ServiceViewModel.pressResponse', context: context);
 
   @override
-  PressResponse? get pressResponse {
+  news.PressResponse? get pressResponse {
     _$pressResponseAtom.reportRead();
     return super.pressResponse;
   }
 
   @override
-  set pressResponse(PressResponse? value) {
+  set pressResponse(news.PressResponse? value) {
     _$pressResponseAtom.reportWrite(value, super.pressResponse, () {
       super.pressResponse = value;
     });
@@ -240,13 +272,13 @@ mixin _$ServiceViewModel on _ServiceViewModel, Store {
       Atom(name: '_ServiceViewModel.pressDetailsResponse', context: context);
 
   @override
-  PressResponse? get pressDetailsResponse {
+  news.PressResponse? get pressDetailsResponse {
     _$pressDetailsResponseAtom.reportRead();
     return super.pressDetailsResponse;
   }
 
   @override
-  set pressDetailsResponse(PressResponse? value) {
+  set pressDetailsResponse(news.PressResponse? value) {
     _$pressDetailsResponseAtom.reportWrite(value, super.pressDetailsResponse,
         () {
       super.pressDetailsResponse = value;
@@ -257,13 +289,13 @@ mixin _$ServiceViewModel on _ServiceViewModel, Store {
       Atom(name: '_ServiceViewModel.blogDetailsResponse', context: context);
 
   @override
-  PressResponse? get blogDetailsResponse {
+  news.PressResponse? get blogDetailsResponse {
     _$blogDetailsResponseAtom.reportRead();
     return super.blogDetailsResponse;
   }
 
   @override
-  set blogDetailsResponse(PressResponse? value) {
+  set blogDetailsResponse(news.PressResponse? value) {
     _$blogDetailsResponseAtom.reportWrite(value, super.blogDetailsResponse, () {
       super.blogDetailsResponse = value;
     });
@@ -386,6 +418,8 @@ mixin _$ServiceViewModel on _ServiceViewModel, Store {
   String toString() {
     return '''
 isloading: ${isloading},
+newsArry: ${newsArry},
+blogsArray: ${blogsArray},
 whoWeAreResponse: ${whoWeAreResponse},
 serviceResponse: ${serviceResponse},
 careersResponse: ${careersResponse},

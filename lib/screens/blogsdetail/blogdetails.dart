@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
-import 'package:giftex/viewmodel/service/serviceviewmodel.dart';
 
 import '../components/footer/footer.dart';
 import '../components/header.dart';
-
-ServiceViewModel serviceViewModel = ServiceViewModel();
+import '../newsandupdates/newsandupdates.dart';
 
 class BlogDetails extends StatefulWidget {
   @override
@@ -18,8 +16,7 @@ class _BlogDetailsState extends State<BlogDetails> {
 
   @override
   void initState() {
-    // TODO: implement initState
-
+    serviceViewModel.getblogsDetails(serviceViewModel.blogsArray!.id!);
     super.initState();
   }
 
@@ -36,7 +33,7 @@ class _BlogDetailsState extends State<BlogDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: NavBar(),
-      // bottomNavigationBar: BottomNavigationBarUi(),
+
       body: SingleChildScrollView(
         controller: controller,
         child: Observer(builder: (context) {
@@ -52,7 +49,7 @@ class _BlogDetailsState extends State<BlogDetails> {
                         height: 16,
                       ),
                       Text(
-                        "",
+                        "Blogs",
                         textAlign: TextAlign.left,
                         style: Theme.of(context)
                             .textTheme
@@ -62,26 +59,19 @@ class _BlogDetailsState extends State<BlogDetails> {
                       const SizedBox(
                         height: 10,
                       ),
-                      Text(
-                        serviceViewModel.serviceResponse!.pageContent!.banner!.title2 ?? "",
-                        textAlign: TextAlign.left,
-                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                              color: Theme.of(context).colorScheme.primary,
-                              fontWeight: FontWeight.w600,
-                            ),
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      Container(
-                        width: MediaQuery.of(context).size.width * .80,
+                      Padding(
+                        padding: const EdgeInsets.only(left: 16, right: 16),
                         child: Text(
-                          serviceViewModel.serviceResponse!.pageContent!.banner!.title3 ?? "",
+                          serviceViewModel.blogDetailsResponse == null
+                              ? ''
+                              : serviceViewModel.blogDetailsResponse!.pageContent == null
+                                  ? ''
+                                  : serviceViewModel.blogDetailsResponse!.pageContent!.blogDetail == null
+                                      ? ''
+                                      : serviceViewModel.blogDetailsResponse!.pageContent!.blogDetail!.title ?? "",
                           textAlign: TextAlign.center,
-                          style: Theme.of(context)
-                              .textTheme
-                              .subtitle1!
-                              .copyWith(color: Color(0XFF000000), fontWeight: FontWeight.w500, letterSpacing: 1),
+                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                              color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.w500, fontSize: 16),
                         ),
                       ),
                       const SizedBox(
@@ -119,11 +109,61 @@ class _BlogDetailsState extends State<BlogDetails> {
                                 left: 0,
                                 right: 0,
                                 child: Image.network(
-                                  serviceViewModel.serviceResponse!.pageContent!.banner!.image!.mobile!,
+                                  serviceViewModel.blogDetailsResponse == null
+                                      ? ''
+                                      : serviceViewModel.blogDetailsResponse!.pageContent == null
+                                          ? ''
+                                          : serviceViewModel.blogDetailsResponse!.pageContent!.blogDetail == null
+                                              ? ''
+                                              : serviceViewModel
+                                                      .blogDetailsResponse!.pageContent!.blogDetail!.image!.mobile ??
+                                                  "",
                                   height: 180,
                                 )),
                           ],
                         ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            // mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 16.0, right: 16),
+                                child: Text(
+                                  "By ${serviceViewModel.blogDetailsResponse == null ? '' : serviceViewModel.blogDetailsResponse!.pageContent == null ? '' : serviceViewModel.blogDetailsResponse!.pageContent!.blogDetail == null ? '' : serviceViewModel.blogDetailsResponse!.pageContent!.blogDetail!.credits ?? ""}",
+                                  textAlign: TextAlign.start,
+                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                      color: Color(0XFF000000), fontWeight: FontWeight.w500, letterSpacing: 1),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 16, right: 16),
+                        child: Row(
+                          children: [
+                            Image.asset("image/date.png"),
+                            SizedBox(width: 4),
+                            Text(
+                              serviceViewModel.blogDetailsResponse!.pageContent!.blogDetail!.timestamp ?? "",
+                              textAlign: TextAlign.start,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .subtitle1!
+                                  .copyWith(color: Color(0XFF000000), fontWeight: FontWeight.w500, letterSpacing: 1),
+                            )
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 8,
                       ),
                       const SizedBox(
                         height: 16,
@@ -131,7 +171,13 @@ class _BlogDetailsState extends State<BlogDetails> {
                       Padding(
                         padding: EdgeInsets.all(16),
                         child: HtmlWidget(
-                          '${serviceViewModel.serviceResponse!.pageContent!.banner!.desc}',
+                          serviceViewModel.blogDetailsResponse == null
+                              ? ''
+                              : serviceViewModel.blogDetailsResponse!.pageContent == null
+                                  ? ''
+                                  : serviceViewModel.blogDetailsResponse!.pageContent!.blogDetail == null
+                                      ? ''
+                                      : '${serviceViewModel.blogDetailsResponse!.pageContent!.blogDetail!.desc ?? ''}',
                           // textStyle: TextStyle(fontSize: 14),
                         ),
                       ),

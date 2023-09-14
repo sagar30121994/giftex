@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
 import 'package:giftex/screens/homepage/homapage.dart';
-import 'package:giftex/screens/homepage/searchpage.dart';
 
 class NavBar extends StatelessWidget implements PreferredSizeWidget {
   // NavBar(this.key);
