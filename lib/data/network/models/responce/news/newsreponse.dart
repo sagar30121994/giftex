@@ -1,20 +1,20 @@
 class PressResponse {
   Seo? seo;
   PageContent? pageContent;
-  Null? status;
-  Null? message;
-  Null? navigation;
-  Null? auctionArray;
-  Null? servicesArray;
-  Null? collectors;
-  Null? news;
-  Null? videos;
-  Null? blogs;
-  Null? heading;
-  Null? desc;
-  Null? image;
-  Null? link;
-  Null? title;
+  dynamic? status;
+  dynamic? message;
+  dynamic? navigation;
+  dynamic? auctionArray;
+  dynamic? servicesArray;
+  dynamic? collectors;
+  dynamic? news;
+  dynamic? videos;
+  dynamic? blogs;
+  dynamic? heading;
+  dynamic? desc;
+  dynamic? image;
+  dynamic? link;
+  dynamic? title;
 
   PressResponse(
       {this.seo,
@@ -108,40 +108,40 @@ class Seo {
 }
 
 class PageContent {
-  Null? banner;
-  Null? culture;
-  Null? ourValues;
-  Null? management;
-  Null? accordion;
-  Null? artists;
-  Null? talkToExpert;
-  Null? consign;
-  Null? steps;
-  Null? guide;
-  Null? reachForm;
-  Null? location;
+  dynamic? banner;
+  dynamic? culture;
+  dynamic? ourValues;
+  dynamic? management;
+  dynamic? accordion;
+  dynamic? artists;
+  dynamic? talkToExpert;
+  dynamic? consign;
+  dynamic? steps;
+  dynamic? guide;
+  dynamic? reachForm;
+  dynamic? location;
   List<Array>? array;
-  Null? vacancies;
-  Null? workEnvironment;
-  Null? employeeSays;
-  Null? applyForJob;
-  Null? blogArray;
-  Null? collection;
-  Null? aboutArt;
-  Null? history;
-  Null? artVideos;
+  dynamic? vacancies;
+  dynamic? workEnvironment;
+  dynamic? employeeSays;
+  dynamic? applyForJob;
+  dynamic? blogArray;
+  dynamic? collection;
+  dynamic? aboutArt;
+  dynamic? history;
+  dynamic? artVideos;
   String? title;
-  Null? desc;
-  Null? dataTabArray;
-  Null? latestnews;
-  Null? videos;
-  Null? newsDetail;
-  Null? bannerArray;
-  Null? bannerItem;
-  Null? blogDetail;
-  Null? blogDetailsArray;
-  Null? departments;
-  Null? pressDetail;
+  dynamic? desc;
+  dynamic? dataTabArray;
+  dynamic? latestnews;
+  dynamic? videos;
+  dynamic? newsDetail;
+  dynamic? bannerArray;
+  dynamic? bannerItem;
+  BlogDetail? blogDetail;
+  dynamic? blogDetailsArray;
+  dynamic? departments;
+  PressDetail? pressDetail;
 
   PageContent(
       {this.banner,
@@ -215,10 +215,10 @@ class PageContent {
     newsDetail = json['newsDetail'];
     bannerArray = json['bannerArray'];
     bannerItem = json['bannerItem'];
-    blogDetail = json['blogDetail'];
+    blogDetail = json['blogDetail'] != null ? new BlogDetail.fromJson(json['blogDetail']) : null;
     blogDetailsArray = json['blogDetailsArray'];
     departments = json['departments'];
-    pressDetail = json['pressDetail'];
+    pressDetail = json['pressDetail'] != null ? new PressDetail.fromJson(json['pressDetail']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -255,10 +255,14 @@ class PageContent {
     data['newsDetail'] = this.newsDetail;
     data['bannerArray'] = this.bannerArray;
     data['bannerItem'] = this.bannerItem;
-    data['blogDetail'] = this.blogDetail;
+    if (this.blogDetail != null) {
+      data['blogDetail'] = this.blogDetail!.toJson();
+    }
     data['blogDetailsArray'] = this.blogDetailsArray;
     data['departments'] = this.departments;
-    data['pressDetail'] = this.pressDetail;
+    if (this.pressDetail != null) {
+      data['pressDetail'] = this.pressDetail!.toJson();
+    }
     return data;
   }
 }
@@ -269,7 +273,7 @@ class Array {
   String? credits;
   String? timestamp;
   String? pageUrl;
-  Null? pageName;
+  dynamic? pageName;
   Image? image;
 
   Array({this.id, this.title, this.credits, this.timestamp, this.pageUrl, this.pageName, this.image});
@@ -314,6 +318,72 @@ class Image {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['desktop'] = this.desktop;
     data['mobile'] = this.mobile;
+    return data;
+  }
+}
+
+class BlogDetail {
+  String? title;
+  Image? image;
+  String? credits;
+  String? timestamp;
+  String? desc;
+
+  BlogDetail({this.title, this.image, this.credits, this.timestamp, this.desc});
+
+  BlogDetail.fromJson(Map<String, dynamic> json) {
+    title = json['title'];
+    image = json['image'] != null ? new Image.fromJson(json['image']) : null;
+    credits = json['credits'];
+    timestamp = json['timestamp'];
+    desc = json['desc'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['title'] = this.title;
+    if (this.image != null) {
+      data['image'] = this.image!.toJson();
+    }
+    data['credits'] = this.credits;
+    data['timestamp'] = this.timestamp;
+    data['desc'] = this.desc;
+    return data;
+  }
+}
+
+class PressDetail {
+  dynamic? id;
+  String? title;
+  Image? image;
+  String? credits;
+  String? timestamp;
+  String? desc;
+  String? readMoreUrl;
+
+  PressDetail({this.id, this.title, this.image, this.credits, this.timestamp, this.desc, this.readMoreUrl});
+
+  PressDetail.fromJson(Map<String, dynamic> json) {
+    id = json['Id'];
+    title = json['title'];
+    image = json['image'] != null ? new Image.fromJson(json['image']) : null;
+    credits = json['credits'];
+    timestamp = json['timestamp'];
+    desc = json['desc'];
+    readMoreUrl = json['readMoreUrl'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['Id'] = this.id;
+    data['title'] = this.title;
+    if (this.image != null) {
+      data['image'] = this.image!.toJson();
+    }
+    data['credits'] = this.credits;
+    data['timestamp'] = this.timestamp;
+    data['desc'] = this.desc;
+    data['readMoreUrl'] = this.readMoreUrl;
     return data;
   }
 }

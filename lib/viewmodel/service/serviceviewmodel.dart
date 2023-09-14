@@ -1,4 +1,3 @@
-import 'package:giftex/data/local/client/localprefsmodel.dart';
 import 'package:giftex/data/local/client/prefs.dart';
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/data/network/models/responce/cmsweb/careersresponse.dart';
@@ -193,8 +192,7 @@ abstract class _ServiceViewModel with Store {
   Future<HttpResponse> InsertReachUsForm() async {
     isloading = true;
     HttpResponse httpResponse = await webapimodelRepo.InsertReachUsForm(fullname, email, mobile, query);
-    if (httpResponse.status == 200)
-    {
+    if (httpResponse.status == 200) {
       insertReachUsFormResponse = httpResponse.data;
     }
     isloading = false;
@@ -250,6 +248,33 @@ abstract class _ServiceViewModel with Store {
     isloading = false;
     return httpResponse;
   }
+
+  @observable
+  PressResponse? pressDetailsResponse = PressResponse();
+  Future<HttpResponse> getpressDetails(String pageID) async {
+    isloading = true;
+    pressDetailsResponse = null;
+    HttpResponse httpResponse = await webCmsApiModelRepo!.getpressDetails(pageID);
+    if (httpResponse.status == 200) {
+      pressDetailsResponse = httpResponse.data;
+    }
+    isloading = false;
+    return httpResponse;
+  }
+
+  @observable
+  PressResponse? blogDetailsResponse = PressResponse();
+  Future<HttpResponse> getblogsDetails() async {
+    isloading = true;
+    blogDetailsResponse = null;
+    HttpResponse httpResponse = await webCmsApiModelRepo!.getblogsDetails();
+
+    if (httpResponse.status == 200) {
+      blogDetailsResponse = httpResponse.data;
+    }
+    isloading = false;
+    return httpResponse;
+  }
 }
 
 class ServiceViewModelErrorState = _ServiceViewModelErrorState with _$ServiceViewModelErrorState;
@@ -268,6 +293,5 @@ abstract class _ServiceViewModelErrorState with Store {
   String? query;
 
   @computed
-  bool get hasErrors =>
-      fullname != null || email != null || mobile != null || query != null;
+  bool get hasErrors => fullname != null || email != null || mobile != null || query != null;
 }

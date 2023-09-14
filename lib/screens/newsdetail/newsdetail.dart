@@ -9,10 +9,9 @@ import '../components/header.dart';
 ServiceViewModel serviceViewModel = ServiceViewModel();
 
 class NewsDetails extends StatefulWidget {
-  NewsDetails(this.api, this.heading);
+  NewsDetails(this.pageID);
 
-  String heading;
-  String api;
+  String pageID;
 
   @override
   _NewsDetailsState createState() => _NewsDetailsState();
@@ -25,14 +24,12 @@ class _NewsDetailsState extends State<NewsDetails> {
   void initState() {
     // TODO: implement initState
 
-    serviceViewModel.getServices(widget.api).then((value) => {controller.jumpTo(0)});
-
+    serviceViewModel.getpressDetails(widget.pageID);
     super.initState();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     controller.dispose();
     super.dispose();
   }
@@ -59,7 +56,7 @@ class _NewsDetailsState extends State<NewsDetails> {
                         height: 16,
                       ),
                       Text(
-                        "${widget.heading}",
+                        "News",
                         textAlign: TextAlign.left,
                         style: Theme.of(context)
                             .textTheme
@@ -70,7 +67,7 @@ class _NewsDetailsState extends State<NewsDetails> {
                         height: 10,
                       ),
                       Text(
-                        serviceViewModel.serviceResponse!.pageContent!.banner!.title2 ?? "",
+                        serviceViewModel.pressDetailsResponse!.pageContent!.pressDetail!.title ?? "",
                         textAlign: TextAlign.left,
                         style: Theme.of(context).textTheme.bodyText1!.copyWith(
                               color: Theme.of(context).colorScheme.primary,
@@ -83,7 +80,7 @@ class _NewsDetailsState extends State<NewsDetails> {
                       Container(
                         width: MediaQuery.of(context).size.width * .80,
                         child: Text(
-                          serviceViewModel.serviceResponse!.pageContent!.banner!.title3 ?? "",
+                          serviceViewModel.pressDetailsResponse!.pageContent!.pressDetail!.credits ?? "",
                           textAlign: TextAlign.center,
                           style: Theme.of(context)
                               .textTheme
@@ -126,7 +123,7 @@ class _NewsDetailsState extends State<NewsDetails> {
                                 left: 0,
                                 right: 0,
                                 child: Image.network(
-                                  serviceViewModel.serviceResponse!.pageContent!.banner!.image!.mobile!,
+                                  serviceViewModel.pressDetailsResponse!.pageContent!.pressDetail!.image!.mobile ?? "",
                                   height: 180,
                                 )),
                           ],
@@ -138,7 +135,7 @@ class _NewsDetailsState extends State<NewsDetails> {
                       Padding(
                         padding: EdgeInsets.all(16),
                         child: HtmlWidget(
-                          '${serviceViewModel.serviceResponse!.pageContent!.banner!.desc}',
+                          '${serviceViewModel.pressDetailsResponse!.pageContent!.pressDetail!.desc ?? ""}',
                           // textStyle: TextStyle(fontSize: 14),
                         ),
                       ),

@@ -9,11 +9,6 @@ import '../components/header.dart';
 ServiceViewModel serviceViewModel = ServiceViewModel();
 
 class BlogDetails extends StatefulWidget {
-  BlogDetails(this.api, this.heading);
-
-  String heading;
-  String api;
-
   @override
   _BlogDetailsState createState() => _BlogDetailsState();
 }
@@ -24,8 +19,6 @@ class _BlogDetailsState extends State<BlogDetails> {
   @override
   void initState() {
     // TODO: implement initState
-
-    serviceViewModel.getServices(widget.api).then((value) => {controller.jumpTo(0)});
 
     super.initState();
   }
@@ -59,7 +52,7 @@ class _BlogDetailsState extends State<BlogDetails> {
                         height: 16,
                       ),
                       Text(
-                        "${widget.heading}",
+                        "",
                         textAlign: TextAlign.left,
                         style: Theme.of(context)
                             .textTheme

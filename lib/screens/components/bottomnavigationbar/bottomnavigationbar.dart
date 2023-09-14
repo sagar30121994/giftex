@@ -5,6 +5,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/data/local/client/prefs.dart';
 import 'package:giftex/screens/aboutus/aboutus.dart';
 import 'package:giftex/screens/art%20movement/art%20movement.dart';
+import 'package:giftex/screens/blogsdetail/blogdetails.dart';
 import 'package:giftex/screens/carrerpage/careerpage.dart';
 import 'package:giftex/screens/components/drawer/drawermain.dart';
 import 'package:giftex/screens/contactus/contactus.dart';
@@ -16,6 +17,7 @@ import 'package:giftex/screens/howtosell/howtosell.dart';
 import 'package:giftex/screens/liveauction/liveauction.dart';
 import 'package:giftex/screens/liveauction/liveauctiondetailpage.dart';
 import 'package:giftex/screens/newsandupdates/newsandupdates.dart';
+import 'package:giftex/screens/newsdetail/newsdetail.dart';
 import 'package:giftex/screens/our%20collector/ourcollector.dart';
 import 'package:giftex/screens/popwidget.dart';
 import 'package:giftex/screens/profile/dashboardoverview.dart';
@@ -990,6 +992,11 @@ class _DashboardUiState extends State<DashboardUi> {
         return NewsAndUpdatesPage("BLOGS");
       case 34:
         return SearchBarUi();
+
+      case 35:
+        return NewsDetails("pageID");
+      case 34:
+        return BlogDetails();
 
       default:
         {

@@ -236,6 +236,39 @@ mixin _$ServiceViewModel on _ServiceViewModel, Store {
     });
   }
 
+  late final _$pressDetailsResponseAtom =
+      Atom(name: '_ServiceViewModel.pressDetailsResponse', context: context);
+
+  @override
+  PressResponse? get pressDetailsResponse {
+    _$pressDetailsResponseAtom.reportRead();
+    return super.pressDetailsResponse;
+  }
+
+  @override
+  set pressDetailsResponse(PressResponse? value) {
+    _$pressDetailsResponseAtom.reportWrite(value, super.pressDetailsResponse,
+        () {
+      super.pressDetailsResponse = value;
+    });
+  }
+
+  late final _$blogDetailsResponseAtom =
+      Atom(name: '_ServiceViewModel.blogDetailsResponse', context: context);
+
+  @override
+  PressResponse? get blogDetailsResponse {
+    _$blogDetailsResponseAtom.reportRead();
+    return super.blogDetailsResponse;
+  }
+
+  @override
+  set blogDetailsResponse(PressResponse? value) {
+    _$blogDetailsResponseAtom.reportWrite(value, super.blogDetailsResponse, () {
+      super.blogDetailsResponse = value;
+    });
+  }
+
   late final _$_ServiceViewModelActionController =
       ActionController(name: '_ServiceViewModel', context: context);
 
@@ -365,7 +398,9 @@ email: ${email},
 mobile: ${mobile},
 resume: ${resume},
 query: ${query},
-homeNewsVideosBlogsResponse: ${homeNewsVideosBlogsResponse}
+homeNewsVideosBlogsResponse: ${homeNewsVideosBlogsResponse},
+pressDetailsResponse: ${pressDetailsResponse},
+blogDetailsResponse: ${blogDetailsResponse}
     ''';
   }
 }

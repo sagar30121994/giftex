@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import 'package:giftex/screens/newsdetail/newsdetail.dart';
 import 'package:giftex/viewmodel/service/serviceviewmodel.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../components/header.dart';
-
-ServiceViewModel serviceViewModel = ServiceViewModel();
 
 class NewsAndUpdatesPage extends StatefulWidget {
   NewsAndUpdatesPage(this.type);
@@ -19,6 +18,7 @@ class NewsAndUpdatesPage extends StatefulWidget {
 }
 
 class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> with TickerProviderStateMixin {
+  ServiceViewModel serviceViewModel = ServiceViewModel();
   int _pageIndex = 0;
   Color tabColor = Color(0xff6D905D);
   String newsType = "LATEST NEWS";
@@ -430,7 +430,13 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> with TickerProv
                                               mainAxisAlignment: MainAxisAlignment.start,
                                               children: [
                                                 InkWell(
-                                                  onTap: () {},
+                                                  onTap: () {
+                                                    Navigator.of(context).push(MaterialPageRoute(
+                                                      builder: (context) => NewsDetails(serviceViewModel
+                                                              .pressResponse!.pageContent!.array![index].id ??
+                                                          ""),
+                                                    ));
+                                                  },
                                                   child: Text(
                                                     "Read More",
                                                     textAlign: TextAlign.center,
