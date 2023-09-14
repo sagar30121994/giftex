@@ -92,6 +92,38 @@ mixin _$ProfileViewModel on _ProfileViewModel, Store {
     });
   }
 
+  late final _$paymentResponceAtom =
+      Atom(name: '_ProfileViewModel.paymentResponce', context: context);
+
+  @override
+  PaymentResponce? get paymentResponce {
+    _$paymentResponceAtom.reportRead();
+    return super.paymentResponce;
+  }
+
+  @override
+  set paymentResponce(PaymentResponce? value) {
+    _$paymentResponceAtom.reportWrite(value, super.paymentResponce, () {
+      super.paymentResponce = value;
+    });
+  }
+
+  late final _$paymentGridResponseAtom =
+      Atom(name: '_ProfileViewModel.paymentGridResponse', context: context);
+
+  @override
+  PaymentGridResponse? get paymentGridResponse {
+    _$paymentGridResponseAtom.reportRead();
+    return super.paymentGridResponse;
+  }
+
+  @override
+  set paymentGridResponse(PaymentGridResponse? value) {
+    _$paymentGridResponseAtom.reportWrite(value, super.paymentGridResponse, () {
+      super.paymentGridResponse = value;
+    });
+  }
+
   late final _$getLastBidsResponceAtom =
       Atom(name: '_ProfileViewModel.getLastBidsResponce', context: context);
 
@@ -364,6 +396,30 @@ mixin _$ProfileViewModel on _ProfileViewModel, Store {
     });
   }
 
+  late final _$getUserAllDetailsAsyncAction =
+      AsyncAction('_ProfileViewModel.getUserAllDetails', context: context);
+
+  @override
+  Future<HttpResponse> getUserAllDetails() {
+    return _$getUserAllDetailsAsyncAction.run(() => super.getUserAllDetails());
+  }
+
+  late final _$getPaymentGridAsyncAction =
+      AsyncAction('_ProfileViewModel.getPaymentGrid', context: context);
+
+  @override
+  Future<HttpResponse> getPaymentGrid() {
+    return _$getPaymentGridAsyncAction.run(() => super.getPaymentGrid());
+  }
+
+  late final _$getPaymentAsyncAction =
+      AsyncAction('_ProfileViewModel.getPayment', context: context);
+
+  @override
+  Future<HttpResponse> getPayment(String amount) {
+    return _$getPaymentAsyncAction.run(() => super.getPayment(amount));
+  }
+
   late final _$_ProfileViewModelActionController =
       ActionController(name: '_ProfileViewModel', context: context);
 
@@ -551,6 +607,8 @@ getUserAllDetailsResponse: ${getUserAllDetailsResponse},
 myPurchaseReponse: ${myPurchaseReponse},
 myAuctionGalleryResponce: ${myAuctionGalleryResponce},
 dashboradOverviewResponse: ${dashboradOverviewResponse},
+paymentResponce: ${paymentResponce},
+paymentGridResponse: ${paymentGridResponse},
 getLastBidsResponce: ${getLastBidsResponce},
 dob: ${dob},
 gendor: ${gendor},

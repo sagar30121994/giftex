@@ -91,23 +91,6 @@ mixin _$HomeViewModel on _HomeViewModel, Store {
     });
   }
 
-  late final _$getSellDetailsResponseAtom =
-      Atom(name: '_HomeViewModel.getSellDetailsResponse', context: context);
-
-  @override
-  GetSellDetailsResponse? get getSellDetailsResponse {
-    _$getSellDetailsResponseAtom.reportRead();
-    return super.getSellDetailsResponse;
-  }
-
-  @override
-  set getSellDetailsResponse(GetSellDetailsResponse? value) {
-    _$getSellDetailsResponseAtom
-        .reportWrite(value, super.getSellDetailsResponse, () {
-      super.getSellDetailsResponse = value;
-    });
-  }
-
   late final _$isLoadingAtom =
       Atom(name: '_HomeViewModel.isLoading', context: context);
 
@@ -270,6 +253,23 @@ mixin _$HomeViewModel on _HomeViewModel, Store {
   set isloadingbuyDetails(bool value) {
     _$isloadingbuyDetailsAtom.reportWrite(value, super.isloadingbuyDetails, () {
       super.isloadingbuyDetails = value;
+    });
+  }
+
+  late final _$getSellDetailsResponseAtom =
+      Atom(name: '_HomeViewModel.getSellDetailsResponse', context: context);
+
+  @override
+  GetSellDetailsResponse? get getSellDetailsResponse {
+    _$getSellDetailsResponseAtom.reportRead();
+    return super.getSellDetailsResponse;
+  }
+
+  @override
+  set getSellDetailsResponse(GetSellDetailsResponse? value) {
+    _$getSellDetailsResponseAtom
+        .reportWrite(value, super.getSellDetailsResponse, () {
+      super.getSellDetailsResponse = value;
     });
   }
 
@@ -458,6 +458,40 @@ mixin _$HomeViewModel on _HomeViewModel, Store {
     });
   }
 
+  late final _$checkFeatureResponseAtom =
+      Atom(name: '_HomeViewModel.checkFeatureResponse', context: context);
+
+  @override
+  CheckFeatureResponse? get checkFeatureResponse {
+    _$checkFeatureResponseAtom.reportRead();
+    return super.checkFeatureResponse;
+  }
+
+  @override
+  set checkFeatureResponse(CheckFeatureResponse? value) {
+    _$checkFeatureResponseAtom.reportWrite(value, super.checkFeatureResponse,
+        () {
+      super.checkFeatureResponse = value;
+    });
+  }
+
+  late final _$checkAppVersionResponseAtom =
+      Atom(name: '_HomeViewModel.checkAppVersionResponse', context: context);
+
+  @override
+  CheckAppVersionResponse? get checkAppVersionResponse {
+    _$checkAppVersionResponseAtom.reportRead();
+    return super.checkAppVersionResponse;
+  }
+
+  @override
+  set checkAppVersionResponse(CheckAppVersionResponse? value) {
+    _$checkAppVersionResponseAtom
+        .reportWrite(value, super.checkAppVersionResponse, () {
+      super.checkAppVersionResponse = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
@@ -466,7 +500,6 @@ search: ${search},
 homeUpcommingAuctionResponse: ${homeUpcommingAuctionResponse},
 recordPriceLots: ${recordPriceLots},
 homeNewsVideosBlogsResponse: ${homeNewsVideosBlogsResponse},
-getSellDetailsResponse: ${getSellDetailsResponse},
 isLoading: ${isLoading},
 selectedTabIndex: ${selectedTabIndex},
 selectedNewsTabIndex: ${selectedNewsTabIndex},
@@ -477,6 +510,7 @@ getFeaturedItemsResponse: ${getFeaturedItemsResponse},
 isloadingfeatureditems: ${isloadingfeatureditems},
 getBuyDetailsResponse: ${getBuyDetailsResponse},
 isloadingbuyDetails: ${isloadingbuyDetails},
+getSellDetailsResponse: ${getSellDetailsResponse},
 isloadingsellDetails: ${isloadingsellDetails},
 getDepartmentsResponse: ${getDepartmentsResponse},
 isloadingdepartments: ${isloadingdepartments},
@@ -487,7 +521,9 @@ historyYearList: ${historyYearList},
 getArtMovementResponse: ${getArtMovementResponse},
 isloadingartmovement: ${isloadingartmovement},
 getRecordPriceArtworkResponse: ${getRecordPriceArtworkResponse},
-isloadinggetpriceartwork: ${isloadinggetpriceartwork}
+isloadinggetpriceartwork: ${isloadinggetpriceartwork},
+checkFeatureResponse: ${checkFeatureResponse},
+checkAppVersionResponse: ${checkAppVersionResponse}
     ''';
   }
 }
