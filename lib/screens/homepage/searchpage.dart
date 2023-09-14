@@ -1083,6 +1083,53 @@ class _SearchBarUiState extends State<SearchBarUi> {
 }
 
 
+// class ImageFullScreenDialog extends StatelessWidget {
+//   final String imageUrl;
+//
+//   ImageFullScreenDialog({required this.imageUrl});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//
+//     return SafeArea(
+//       child: Scaffold(
+//         backgroundColor: Colors.white.withOpacity(.3),
+//         body: Container(
+//           width: MediaQuery.of(context).size.width,
+//           height: MediaQuery.of(context).size.height,
+//           child: Column(
+//             children: [
+//               Align(
+//                 alignment: Alignment.topRight,
+//                 child: IconButton(
+//                     onPressed: () {
+//                       Navigator.of(context).pop();
+//                     },
+//                     icon: Icon(
+//                       Icons.close,
+//                       color: Colors.white,
+//                     )),
+//               ),
+//               SizedBox(
+//                 height: MediaQuery.of(context).size.height * .8,
+//                 child: Center(
+//                     child: Container(
+//                       width: MediaQuery.of(context).size.width,
+//                       height: MediaQuery.of(context).size.height,
+//                       child: Image.network(imageUrl,
+//                       fit: BoxFit.contain,)),
+//                   ),
+//                 ),
+//                ],
+//               ),
+//           ),
+//         ),
+//       );
+//   }
+// }
+
+
+
 class ImageFullScreenDialog extends StatelessWidget {
   final String imageUrl;
 

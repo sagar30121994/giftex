@@ -13,6 +13,7 @@ import 'package:giftex/screens/homepage/liveitem.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
 import 'package:giftex/viewmodel/profile/profileviewmodel.dart';
 import 'package:intl/intl.dart';
+import 'package:sliver_tools/sliver_tools.dart';
 
 AuctionViewModel auctionViewModel = AuctionViewModel();
 ProfileViewModel profileViewModel = ProfileViewModel();
