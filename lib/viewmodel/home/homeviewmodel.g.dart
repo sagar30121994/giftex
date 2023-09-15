@@ -324,6 +324,40 @@ mixin _$HomeViewModel on _HomeViewModel, Store {
     });
   }
 
+  late final _$getDepartmentDetailsResponseAtom = Atom(
+      name: '_HomeViewModel.getDepartmentDetailsResponse', context: context);
+
+  @override
+  GetDepartmentdetailsResponse? get getDepartmentDetailsResponse {
+    _$getDepartmentDetailsResponseAtom.reportRead();
+    return super.getDepartmentDetailsResponse;
+  }
+
+  @override
+  set getDepartmentDetailsResponse(GetDepartmentdetailsResponse? value) {
+    _$getDepartmentDetailsResponseAtom
+        .reportWrite(value, super.getDepartmentDetailsResponse, () {
+      super.getDepartmentDetailsResponse = value;
+    });
+  }
+
+  late final _$isloadingdepartmentdetailsAtom =
+      Atom(name: '_HomeViewModel.isloadingdepartmentdetails', context: context);
+
+  @override
+  bool get isloadingdepartmentdetails {
+    _$isloadingdepartmentdetailsAtom.reportRead();
+    return super.isloadingdepartmentdetails;
+  }
+
+  @override
+  set isloadingdepartmentdetails(bool value) {
+    _$isloadingdepartmentdetailsAtom
+        .reportWrite(value, super.isloadingdepartmentdetails, () {
+      super.isloadingdepartmentdetails = value;
+    });
+  }
+
   late final _$getOurCollectorResponseAtom =
       Atom(name: '_HomeViewModel.getOurCollectorResponse', context: context);
 
@@ -514,6 +548,8 @@ getSellDetailsResponse: ${getSellDetailsResponse},
 isloadingsellDetails: ${isloadingsellDetails},
 getDepartmentsResponse: ${getDepartmentsResponse},
 isloadingdepartments: ${isloadingdepartments},
+getDepartmentDetailsResponse: ${getDepartmentDetailsResponse},
+isloadingdepartmentdetails: ${isloadingdepartmentdetails},
 getOurCollectorResponse: ${getOurCollectorResponse},
 isloadingourCollector: ${isloadingourCollector},
 selectedyear: ${selectedyear},

@@ -178,6 +178,7 @@ class WebCMSApiModel {
   final String HomeHighlightsLots = 'HomeHighlightsLots';
   final String getdepartments = 'GetPaymentGrid';
   final String GetDepartments = 'GetDepartments';
+  final String GetDepartmentDetails = 'GetDepartmentDetails';
   final String getdepartmentdetails = 'artistdata';
   final String getpurchasefaq = 'InsertsubscribeForm';
   final String getusernotification = 'getHashStr';
@@ -201,8 +202,7 @@ class KYC {
   final String UpdateRegBankingDetails = 'UpdateRegBankingDetails';
 }
 
-class Update{
+class Update {
   final String CheckFeature = 'CheckFeature';
   final String CheckAppVersion = 'CheckAppVersion';
-
 }

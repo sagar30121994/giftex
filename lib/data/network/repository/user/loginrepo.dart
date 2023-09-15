@@ -288,7 +288,7 @@ class LoginRepo {
 
       if (responce.statusCode == 200) {
         httpResponse.status = responce.statusCode;
-        httpResponse.message = 'Success';
+        httpResponse.message = responce.data['message'];
         // httpResponse.data = LoginResponse.fromJson(responce.data);
       } else {
         httpResponse.status = responce.statusCode;

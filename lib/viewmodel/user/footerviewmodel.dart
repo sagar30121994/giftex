@@ -19,8 +19,18 @@ abstract class _FooterViewModel with Store {
   @observable
   String? email;
 
+  @action
+  setfirstName(String value) {
+    name = value;
+  }
+
   @observable
   String? name;
+
+  @action
+  setemail(String value) {
+    email = value;
+  }
 
   @observable
   bool isLoadingForUpCommingAuction = false;
@@ -55,7 +65,8 @@ abstract class _FooterViewModel with Store {
   Future<HttpResponse> insertsubscribeForm() async {
     isLoadingForUpCommingAuction = true;
 
-    HttpResponse httpResponse = await loginRepo.insertsubscribeForm(email??"", name??"");
+    HttpResponse httpResponse = await loginRepo.insertsubscribeForm(name!, email!);
+    // HttpResponse httpResponse = await loginRepo.insertsubscribeForm(email ?? "", name ?? "");
 
     if (httpResponse.status == 200) {
       // upComingLotsResponse = httpResponse.data;

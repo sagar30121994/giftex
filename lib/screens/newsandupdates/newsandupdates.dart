@@ -264,13 +264,8 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> with TickerProv
                                         padding: const EdgeInsets.only(top: 12.0),
                                         child: InkWell(
                                           onTap: () {
-                                            // Navigator.of(context).push(MaterialPageRoute(
-                                            //   builder: (context) => DashboardUi(36),
-                                            // ));
-
                                             serviceViewModel.blogsArray =
                                                 serviceViewModel.blogsResponse!.pageContent!.blogArray![index];
-
                                             bottomViewModel.selectedIndex = 36;
                                           },
                                           child: Image.network(
@@ -444,14 +439,8 @@ class _NewsAndUpdatesPageState extends State<NewsAndUpdatesPage> with TickerProv
                                               children: [
                                                 InkWell(
                                                   onTap: () {
-                                                    // Navigator.of(context).push(MaterialPageRoute(
-                                                    //   builder: (context) => NewsDetails(
-                                                    //       serviceViewModel.pressResponse!.pageContent!.array![index]),
-                                                    // ));
-
                                                     serviceViewModel.newsArry =
                                                         serviceViewModel.pressResponse!.pageContent!.array![index];
-
                                                     bottomViewModel.selectedIndex = 35;
                                                   },
                                                   child: Text(

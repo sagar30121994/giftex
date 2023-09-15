@@ -1,4 +1,5 @@
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
+import 'package:giftex/data/network/models/responce/cmsweb/getDepartmentDetails.dart';
 import 'package:giftex/data/network/models/responce/home/CheckAppVersionResponse.dart';
 import 'package:giftex/data/network/models/responce/home/CheckFeatureResponse.dart';
 import 'package:giftex/data/network/models/responce/home/GetSellDetailsResponse.dart';
@@ -184,6 +185,22 @@ abstract class _HomeViewModel with Store {
   }
 
   @observable
+  GetDepartmentdetailsResponse? getDepartmentDetailsResponse = GetDepartmentdetailsResponse();
+  @observable
+  bool isloadingdepartmentdetails = false;
+
+  Future<HttpResponse> getDepartmentDetails(String pageID) async {
+    isloadingdepartmentdetails = true;
+    getDepartmentDetailsResponse = null;
+    HttpResponse httpResponse = await webCmsApiModelRepo!.getDepartmentDetails(pageID);
+    if (httpResponse.status == 200) {
+      getDepartmentDetailsResponse = httpResponse.data;
+    }
+    isloadingdepartmentdetails = false;
+    return httpResponse;
+  }
+
+  @observable
   GetOurCollectorResponse? getOurCollectorResponse = GetOurCollectorResponse();
   @observable
   bool isloadingourCollector = false;
@@ -244,31 +261,29 @@ abstract class _HomeViewModel with Store {
     return httpResponse;
   }
 
-
   @observable
-  CheckFeatureResponse? checkFeatureResponse=CheckFeatureResponse();
+  CheckFeatureResponse? checkFeatureResponse = CheckFeatureResponse();
   Future<HttpResponse> checkFeature() async {
     isLoading = true;
-    checkFeatureResponse=null;
+    checkFeatureResponse = null;
     HttpResponse httpResponse = await webCmsApiModelRepo!.checkFeature();
     if (httpResponse.status == 200) {
-      checkFeatureResponse= httpResponse.data;
+      checkFeatureResponse = httpResponse.data;
     }
     isLoading = false;
     return httpResponse;
   }
 
   @observable
-  CheckAppVersionResponse? checkAppVersionResponse=CheckAppVersionResponse();
+  CheckAppVersionResponse? checkAppVersionResponse = CheckAppVersionResponse();
   Future<HttpResponse> checkAppVersion() async {
     isLoading = true;
-    checkAppVersionResponse=null;
+    checkAppVersionResponse = null;
     HttpResponse httpResponse = await webCmsApiModelRepo!.checkAppVersion();
     if (httpResponse.status == 200) {
-      checkAppVersionResponse= httpResponse.data;
+      checkAppVersionResponse = httpResponse.data;
     }
     isLoading = false;
     return httpResponse;
   }
-
 }

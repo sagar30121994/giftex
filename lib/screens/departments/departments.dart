@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
 import 'package:giftex/screens/components/footer/footer.dart';
 import 'package:giftex/screens/components/header.dart';
 import 'package:giftex/viewmodel/home/homeviewmodel.dart';
@@ -14,7 +15,6 @@ class Departments extends StatefulWidget {
 
 class _DepartmentsState extends State<Departments> {
   HomeViewModel homeViewModel = HomeViewModel();
-
   @override
   void initState() {
     homeViewModel.getDepartments();
@@ -145,9 +145,15 @@ class _DepartmentsState extends State<Departments> {
 
                                 child: Column(
                                   children: [
-                                    Image.network(
-                                      "${e.image!.mobile ?? ''}",
-                                      fit: BoxFit.contain,
+                                    InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context, MaterialPageRoute(builder: (context) => DashboardUi(37)));
+                                      },
+                                      child: Image.network(
+                                        "${e.image!.mobile ?? ''}",
+                                        fit: BoxFit.contain,
+                                      ),
                                     ),
                                     Text(
                                       e!.title ?? "",
