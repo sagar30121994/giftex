@@ -1524,7 +1524,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                 SizedBox(height: 34,),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => NewsAndUpdatesPage("LATEST NEWS")));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => DashboardUi(25)));
                   },
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 2),

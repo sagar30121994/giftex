@@ -127,7 +127,6 @@ class _BlogDetailsState extends State<BlogDetails> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
-                            // mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(left: 16.0, right: 16),
