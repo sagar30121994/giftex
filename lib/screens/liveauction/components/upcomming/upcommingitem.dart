@@ -1,17 +1,14 @@
-import 'dart:async';
-import 'dart:convert';
-
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:giftex/data/network/models/responce/lot/upcominglotsresponse.dart';
 import 'package:giftex/screens/liveauction/liveauction.dart';
 import 'package:giftex/screens/productdetailspage/productdetailpage.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
 import 'package:intl/intl.dart';
-import '../../../../data/network/models/responce/lot/upcominglotsresponse.dart';
 
 class UpcommingItem extends StatefulWidget {
   UpcommingItem(this.lots, this.grid, this.auctionViewModel);
+
   Lots lots;
   bool grid;
   AuctionViewModel auctionViewModel;
@@ -64,8 +61,7 @@ class _UpcommingItemState extends State<UpcommingItem> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ProductDetailPage(
-                                      widget.lots, auctionViewModel)));
+                                  builder: (context) => ProductDetailPage(widget.lots, auctionViewModel)));
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(24.0),
@@ -78,8 +74,7 @@ class _UpcommingItemState extends State<UpcommingItem> {
                         ),
                       ),
                       Padding(
-                          padding: EdgeInsets.only(
-                              top: 250, bottom: 0, left: 25.0, right: 25),
+                          padding: EdgeInsets.only(top: 250, bottom: 0, left: 25.0, right: 25),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,10 +86,7 @@ class _UpcommingItemState extends State<UpcommingItem> {
                                   ? Text(
                                       "${widget.lots.info!.title}",
                                       textAlign: TextAlign.center,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline6!
-                                          .copyWith(
+                                      style: Theme.of(context).textTheme.headline6!.copyWith(
                                             color: Colors.black,
                                             letterSpacing: 2,
                                             fontWeight: FontWeight.bold,
@@ -107,10 +99,7 @@ class _UpcommingItemState extends State<UpcommingItem> {
                               Text(
                                 "${widget.lots.info!.lotTitle}",
                                 textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .subtitle1!
-                                    .copyWith(
+                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                       color: Color(0xff747474),
                                       fontWeight: FontWeight.w400,
                                     ),
@@ -157,16 +146,12 @@ class _UpcommingItemState extends State<UpcommingItem> {
                                   Spacer(),
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         "Bid Closing in",
                                         textAlign: TextAlign.center,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .subtitle1!
-                                            .copyWith(
+                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                               color: Color(0xff747474),
                                               fontWeight: FontWeight.w400,
                                             ),
@@ -187,16 +172,12 @@ class _UpcommingItemState extends State<UpcommingItem> {
                                 children: [
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         "Current Bid",
                                         textAlign: TextAlign.center,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .subtitle1!
-                                            .copyWith(
+                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                               color: Color(0xff747474),
                                               fontWeight: FontWeight.w400,
                                             ),
@@ -207,10 +188,7 @@ class _UpcommingItemState extends State<UpcommingItem> {
                                       Text(
                                         "₹${formateNumber(widget.lots.liveStatus!.currentBid!.iNR ?? "0")}",
                                         textAlign: TextAlign.center,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyText1!
-                                            .copyWith(
+                                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                               color: Color(0xff202232),
                                               fontWeight: FontWeight.w600,
                                             ),
@@ -220,16 +198,12 @@ class _UpcommingItemState extends State<UpcommingItem> {
                                   Spacer(),
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         "Next Valid Bid",
                                         textAlign: TextAlign.center,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .subtitle1!
-                                            .copyWith(
+                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                               color: Color(0xff747474),
                                               fontWeight: FontWeight.w400,
                                             ),
@@ -240,13 +214,8 @@ class _UpcommingItemState extends State<UpcommingItem> {
                                       Text(
                                         "₹${formateNumber(widget.lots.liveStatus!.nextValidBid!.iNR ?? "0")}",
                                         textAlign: TextAlign.center,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyText1!
-                                            .copyWith(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .primary,
+                                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                              color: Theme.of(context).colorScheme.primary,
                                               fontWeight: FontWeight.w600,
                                             ),
                                       ),
@@ -262,25 +231,14 @@ class _UpcommingItemState extends State<UpcommingItem> {
                                 children: [
                                   ElevatedButton(
                                     style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all(
-                                                Color(0XFFF9F9F9)),
-                                        shape: MaterialStateProperty.all<
-                                                RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(20.0),
-                                                side: BorderSide(
-                                                    color: Color(0xff747474),
-                                                    width: 0.38)))),
+                                        backgroundColor: MaterialStateProperty.all(Color(0XFFF9F9F9)),
+                                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(20.0),
+                                            side: BorderSide(color: Color(0xff747474), width: 0.38)))),
                                     onPressed: () async {
-                                      await auctionViewModel
-                                          .getProxyAmountByLot(widget.lots);
+                                      await auctionViewModel.getProxyAmountByLot(widget.lots);
 
-                                      if (auctionViewModel
-                                              .getProxyBidAmountResponse!
-                                              .status ==
-                                          "true") {
+                                      if (auctionViewModel.getProxyBidAmountResponse!.status == "true") {
                                         showModalBottomSheet<void>(
                                           // context and builder are
                                           // required properties in this widget
@@ -290,123 +248,94 @@ class _UpcommingItemState extends State<UpcommingItem> {
                                             // we create center column and display text
 
                                             // Returning SizedBox instead of a Container
-                                            return StatefulBuilder(
-                                                builder: (_, builder) {
+                                            return StatefulBuilder(builder: (_, builder) {
                                               return SizedBox(
-                                                height: MediaQuery.of(context)
-                                                    .size
-                                                    .height,
-                                                child: Observer(
-                                                    builder: (context) {
+                                                height: MediaQuery.of(context).size.height,
+                                                child: Observer(builder: (context) {
                                                   return Container(
-                                                    height:
-                                                        MediaQuery.of(context)
-                                                            .size
-                                                            .height,
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                            .size
-                                                            .width,
+                                                    height: MediaQuery.of(context).size.height,
+                                                    width: MediaQuery.of(context).size.width,
                                                     color: Color(0xffEAEEF2),
                                                     child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
+                                                      mainAxisAlignment: MainAxisAlignment.start,
                                                       children: <Widget>[
                                                         Align(
-                                                          alignment: Alignment
-                                                              .topRight,
+                                                          alignment: Alignment.topRight,
                                                           child: IconButton(
                                                               onPressed: () {
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pop();
+                                                                Navigator.of(context).pop();
                                                               },
-                                                              icon: Icon(
-                                                                  Icons.close)),
+                                                              icon: Icon(Icons.close)),
                                                         ),
                                                         SizedBox(
                                                           height: 16,
                                                         ),
                                                         Text(
                                                           "ENTER YOUR PROXY BID",
-                                                          style: Theme.of(
-                                                                  context)
-                                                              .textTheme
-                                                              .headline5!
-                                                              .copyWith(
-                                                                  letterSpacing:
-                                                                      2,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  color: Colors
-                                                                      .black),
+                                                          style: Theme.of(context).textTheme.headline5!.copyWith(
+                                                              letterSpacing: 2,
+                                                              fontWeight: FontWeight.bold,
+                                                              color: Colors.black),
                                                         ),
                                                         SizedBox(
                                                           height: 16,
                                                         ),
                                                         Text(
                                                           "My Maximum Proxy Bid",
-                                                          style: Theme.of(
-                                                                  context)
+                                                          style: Theme.of(context)
                                                               .textTheme
                                                               .subtitle1!
-                                                              .copyWith(
-                                                                  letterSpacing:
-                                                                      2,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
+                                                              .copyWith(letterSpacing: 2, fontWeight: FontWeight.bold),
                                                         ),
                                                         SizedBox(
                                                           height: 16,
                                                         ),
                                                         Text(
                                                           "Select Next Valid Bid",
-                                                          style: Theme.of(
-                                                                  context)
+                                                          style: Theme.of(context)
                                                               .textTheme
                                                               .subtitle1!
-                                                              .copyWith(
-                                                                  letterSpacing:
-                                                                      2,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
+                                                              .copyWith(letterSpacing: 2, fontWeight: FontWeight.bold),
                                                         ),
                                                         SizedBox(
                                                           height: 16,
                                                         ),
                                                         Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: Observer(
-                                                              builder:
-                                                                  (context) {
+                                                          padding: const EdgeInsets.all(8.0),
+                                                          child: Observer(builder: (context) {
                                                             return Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceAround,
+                                                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                                                               children: auctionViewModel
-                                                                  .getProxyBidAmountResponse!
-                                                                  .result!
-                                                                  .nextValidBid!
-                                                                  .map((e) =>
-                                                                      InkWell(
-                                                                        onTap:
-                                                                            () {
+                                                                  .getProxyBidAmountResponse!.result!.nextValidBid!
+                                                                  .map((e) => InkWell(
+                                                                        onTap: () {
                                                                           auctionViewModel.selectedProxyBid =
                                                                               e.iNR ?? "0";
                                                                         },
-                                                                        child:
-                                                                            Column(
+                                                                        child: Column(
                                                                           children: [
                                                                             Container(
-                                                                              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                                                              decoration: BoxDecoration(color: (auctionViewModel.selectedProxyBid == (e.iNR ?? "0")) ? Color(0xffB45156) : Color(0xffF7FAFD), borderRadius: BorderRadius.circular(8)),
-                                                                              child: Text("₹${formateNumber(e.iNR ?? "0")}", style: Theme.of(context).textTheme.button!.copyWith(color: (auctionViewModel.selectedProxyBid == (e.iNR ?? "0")) ? Colors.white : Colors.grey)),
+                                                                              padding: EdgeInsets.symmetric(
+                                                                                  horizontal: 8, vertical: 4),
+                                                                              decoration: BoxDecoration(
+                                                                                  color: (auctionViewModel
+                                                                                              .selectedProxyBid ==
+                                                                                          (e.iNR ?? "0"))
+                                                                                      ? Color(0xffB45156)
+                                                                                      : Color(0xffF7FAFD),
+                                                                                  borderRadius:
+                                                                                      BorderRadius.circular(8)),
+                                                                              child: Text(
+                                                                                  "₹${formateNumber(e.iNR ?? "0")}",
+                                                                                  style: Theme.of(context)
+                                                                                      .textTheme
+                                                                                      .button!
+                                                                                      .copyWith(
+                                                                                          color: (auctionViewModel
+                                                                                                      .selectedProxyBid ==
+                                                                                                  (e.iNR ?? "0"))
+                                                                                              ? Colors.white
+                                                                                              : Colors.grey)),
                                                                             ),
                                                                             SizedBox(
                                                                               height: 24,
@@ -418,56 +347,56 @@ class _UpcommingItemState extends State<UpcommingItem> {
                                                             );
                                                           }),
                                                         ),
-                                                        (auctionViewModel
-                                                                    .selectedProxyBid
-                                                                    .trim() ==
-                                                                "")
+                                                        (auctionViewModel.selectedProxyBid.trim() == "")
                                                             ? Container()
                                                             : Stack(
                                                                 children: [
                                                                   Positioned(
                                                                       top: 0,
-                                                                      left: auctionViewModel.getIndex(auctionViewModel.selectedProxyBid) ==
+                                                                      left: auctionViewModel.getIndex(
+                                                                                  auctionViewModel.selectedProxyBid) ==
                                                                               0
                                                                           ? 42
-                                                                          : auctionViewModel.getIndex(auctionViewModel.selectedProxyBid) == 1
-                                                                              ? MediaQuery.of(context).size.width / 4 + 42
-                                                                              : auctionViewModel.getIndex(auctionViewModel.selectedProxyBid) == 2
-                                                                                  ? MediaQuery.of(context).size.width / 2 + 42
-                                                                                  : MediaQuery.of(context).size.width - 42,
+                                                                          : auctionViewModel.getIndex(auctionViewModel
+                                                                                      .selectedProxyBid) ==
+                                                                                  1
+                                                                              ? MediaQuery.of(context).size.width / 4 +
+                                                                                  42
+                                                                              : auctionViewModel.getIndex(
+                                                                                          auctionViewModel
+                                                                                              .selectedProxyBid) ==
+                                                                                      2
+                                                                                  ? MediaQuery.of(context).size.width /
+                                                                                          2 +
+                                                                                      42
+                                                                                  : MediaQuery.of(context).size.width -
+                                                                                      42,
                                                                       child: Image.asset(
                                                                         "image/top.png",
-                                                                        width:
-                                                                            16,
-                                                                        height:
-                                                                            7.5,
+                                                                        width: 16,
+                                                                        height: 7.5,
                                                                       )),
                                                                   Align(
-                                                                    alignment: auctionViewModel.getIndex(auctionViewModel.selectedProxyBid) ==
+                                                                    alignment: auctionViewModel.getIndex(
+                                                                                auctionViewModel.selectedProxyBid) ==
                                                                             0
-                                                                        ? Alignment
-                                                                            .topLeft
-                                                                        : auctionViewModel.getIndex(auctionViewModel.selectedProxyBid) ==
+                                                                        ? Alignment.topLeft
+                                                                        : auctionViewModel.getIndex(auctionViewModel
+                                                                                    .selectedProxyBid) ==
                                                                                 1
                                                                             ? Alignment.topCenter
-                                                                            : auctionViewModel.getIndex(auctionViewModel.selectedProxyBid) == 2
+                                                                            : auctionViewModel.getIndex(auctionViewModel
+                                                                                        .selectedProxyBid) ==
+                                                                                    2
                                                                                 ? Alignment.topCenter
                                                                                 : Alignment.topRight,
-                                                                    child:
-                                                                        Container(
-                                                                      margin: EdgeInsets
-                                                                          .only(
-                                                                              top: 7.5),
+                                                                    child: Container(
+                                                                      margin: EdgeInsets.only(top: 7.5),
                                                                       padding: EdgeInsets.symmetric(
-                                                                          horizontal:
-                                                                              8,
-                                                                          vertical:
-                                                                              4),
+                                                                          horizontal: 8, vertical: 4),
                                                                       decoration: BoxDecoration(
-                                                                          color: Color(
-                                                                              0xffB45156),
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(8)),
+                                                                          color: Color(0xffB45156),
+                                                                          borderRadius: BorderRadius.circular(8)),
                                                                       child: Text(
                                                                           "Your Next Valid Bid ₹${formateNumber(auctionViewModel.selectedProxyBid)}",
                                                                           style: Theme.of(context)
@@ -489,17 +418,10 @@ class _UpcommingItemState extends State<UpcommingItem> {
                                       }
                                     },
                                     child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          right: 8.0,
-                                          left: 8,
-                                          top: 12,
-                                          bottom: 12),
+                                      padding: const EdgeInsets.only(right: 8.0, left: 8, top: 12, bottom: 12),
                                       child: Text(
                                         'PROXY BID',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyText1!
-                                            .copyWith(
+                                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                               color: Color(0XFF2D2D2D),
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -522,21 +444,13 @@ class _UpcommingItemState extends State<UpcommingItem> {
                                             Color(0xffE74B52),
                                           ]),
                                           // color: Color(0xff466D33),
-                                          borderRadius:
-                                              BorderRadius.circular(24)),
+                                          borderRadius: BorderRadius.circular(24)),
                                       child: Center(
                                         child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              right: 32.0,
-                                              left: 32,
-                                              top: 12,
-                                              bottom: 12),
+                                          padding: const EdgeInsets.only(right: 32.0, left: 32, top: 12, bottom: 12),
                                           child: Text(
                                             'BID NOW',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1!
-                                                .copyWith(
+                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                   color: Color(0XFFFFFFFF),
                                                   fontWeight: FontWeight.bold,
                                                 ),
@@ -563,27 +477,20 @@ class _UpcommingItemState extends State<UpcommingItem> {
                                 borderRadius: BorderRadius.circular(16),
                                 color: Color(0xffEAEEF2),
                               ),
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 4),
+                              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                             ),
 
                             SizedBox(height: 12),
                             Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(16),
-                                  color: Color(0xffF3E8E9)),
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 4),
+                              decoration:
+                                  BoxDecoration(borderRadius: BorderRadius.circular(16), color: Color(0xffF3E8E9)),
+                              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                               child: Text("${widget.lots.bidCount} BIDS"),
                             ),
                             SizedBox(height: 12),
                             Icon(
-                              (widget.lots.isLiked ?? "false") == "true"
-                                  ? Icons.favorite
-                                  : Icons.favorite_border,
-                              color: (widget.lots.isLiked ?? "false") == "true"
-                                  ? Colors.pink
-                                  : Colors.grey,
+                              (widget.lots.isLiked ?? "false") == "true" ? Icons.favorite : Icons.favorite_border,
+                              color: (widget.lots.isLiked ?? "false") == "true" ? Colors.pink : Colors.grey,
                             ),
                             //     :Icon(
                             //   Icons.favorite,
@@ -618,7 +525,7 @@ class _UpcommingItemState extends State<UpcommingItem> {
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Container(
                 color: Color(0xffF9F9F9),
-                height: 290,
+                // height: 310,
                 alignment: Alignment.center,
                 child: Column(
                   children: [
@@ -629,8 +536,7 @@ class _UpcommingItemState extends State<UpcommingItem> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => ProductDetailPage(
-                                        widget.lots, widget.auctionViewModel)));
+                                    builder: (context) => ProductDetailPage(widget.lots, widget.auctionViewModel)));
                           },
                           child: Padding(
                             padding: EdgeInsets.all(8.0),
@@ -656,10 +562,7 @@ class _UpcommingItemState extends State<UpcommingItem> {
                                 child: Text(
                                   "${widget.lots.info!.title}",
                                   textAlign: TextAlign.start,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline6!
-                                      .copyWith(
+                                  style: Theme.of(context).textTheme.headline6!.copyWith(
                                         color: Colors.black,
                                         letterSpacing: 2,
                                         fontWeight: FontWeight.bold,
@@ -677,8 +580,7 @@ class _UpcommingItemState extends State<UpcommingItem> {
                                       borderRadius: BorderRadius.circular(16),
                                       color: Color(0xffEAEEF2),
                                     ),
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 10, vertical: 4),
+                                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                                   ),
                                   // SizedBox(width: 12),
                                 ],
@@ -705,10 +607,7 @@ class _UpcommingItemState extends State<UpcommingItem> {
                                 Text(
                                   "₹${formateNumber(widget.lots.leadingUser!.bid!.iNR ?? "0")}",
                                   textAlign: TextAlign.center,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .subtitle1!
-                                      .copyWith(
+                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                         color: Color(0xff202232),
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -719,10 +618,7 @@ class _UpcommingItemState extends State<UpcommingItem> {
                                 Text(
                                   "${widget.lots.leadingUser!.notes ?? ""}",
                                   textAlign: TextAlign.center,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText1!
-                                      .copyWith(
+                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                         color: Color(0xff747474),
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -746,14 +642,10 @@ class _UpcommingItemState extends State<UpcommingItem> {
                       child: Container(
                         padding: EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black),
-                            borderRadius: BorderRadius.circular(16)),
+                            border: Border.all(color: Colors.black), borderRadius: BorderRadius.circular(16)),
                         child: Text(
                             "${(widget.lots.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId()) ? "YOU OWN" : "DETAILS"}",
-                            style: Theme.of(context)
-                                .textTheme
-                                .subtitle2!
-                                .copyWith(color: Colors.red)),
+                            style: Theme.of(context).textTheme.subtitle2!.copyWith(color: Colors.red)),
                       ),
                     ),
                   ],
