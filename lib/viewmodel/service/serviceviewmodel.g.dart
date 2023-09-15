@@ -219,6 +219,54 @@ mixin _$ServiceViewModel on _ServiceViewModel, Store {
     });
   }
 
+  late final _$career_fullnameAtom =
+      Atom(name: '_ServiceViewModel.career_fullname', context: context);
+
+  @override
+  String get career_fullname {
+    _$career_fullnameAtom.reportRead();
+    return super.career_fullname;
+  }
+
+  @override
+  set career_fullname(String value) {
+    _$career_fullnameAtom.reportWrite(value, super.career_fullname, () {
+      super.career_fullname = value;
+    });
+  }
+
+  late final _$career_emailAtom =
+      Atom(name: '_ServiceViewModel.career_email', context: context);
+
+  @override
+  String get career_email {
+    _$career_emailAtom.reportRead();
+    return super.career_email;
+  }
+
+  @override
+  set career_email(String value) {
+    _$career_emailAtom.reportWrite(value, super.career_email, () {
+      super.career_email = value;
+    });
+  }
+
+  late final _$career_mobileAtom =
+      Atom(name: '_ServiceViewModel.career_mobile', context: context);
+
+  @override
+  String get career_mobile {
+    _$career_mobileAtom.reportRead();
+    return super.career_mobile;
+  }
+
+  @override
+  set career_mobile(String value) {
+    _$career_mobileAtom.reportWrite(value, super.career_mobile, () {
+      super.career_mobile = value;
+    });
+  }
+
   late final _$resumeAtom =
       Atom(name: '_ServiceViewModel.resume', context: context);
 
@@ -338,6 +386,39 @@ mixin _$ServiceViewModel on _ServiceViewModel, Store {
   }
 
   @override
+  dynamic setCareerFullName(String value) {
+    final _$actionInfo = _$_ServiceViewModelActionController.startAction(
+        name: '_ServiceViewModel.setCareerFullName');
+    try {
+      return super.setCareerFullName(value);
+    } finally {
+      _$_ServiceViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setCareerEmail(String value) {
+    final _$actionInfo = _$_ServiceViewModelActionController.startAction(
+        name: '_ServiceViewModel.setCareerEmail');
+    try {
+      return super.setCareerEmail(value);
+    } finally {
+      _$_ServiceViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setCareerMobile(String value) {
+    final _$actionInfo = _$_ServiceViewModelActionController.startAction(
+        name: '_ServiceViewModel.setCareerMobile');
+    try {
+      return super.setCareerMobile(value);
+    } finally {
+      _$_ServiceViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic setResume(String value) {
     final _$actionInfo = _$_ServiceViewModelActionController.startAction(
         name: '_ServiceViewModel.setResume');
@@ -365,6 +446,17 @@ mixin _$ServiceViewModel on _ServiceViewModel, Store {
         name: '_ServiceViewModel.validateAll');
     try {
       return super.validateAll();
+    } finally {
+      _$_ServiceViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic validateAllCareer() {
+    final _$actionInfo = _$_ServiceViewModelActionController.startAction(
+        name: '_ServiceViewModel.validateAllCareer');
+    try {
+      return super.validateAllCareer();
     } finally {
       _$_ServiceViewModelActionController.endAction(_$actionInfo);
     }
@@ -404,6 +496,39 @@ mixin _$ServiceViewModel on _ServiceViewModel, Store {
   }
 
   @override
+  void validatecareer_Name(String? value) {
+    final _$actionInfo = _$_ServiceViewModelActionController.startAction(
+        name: '_ServiceViewModel.validatecareer_Name');
+    try {
+      return super.validatecareer_Name(value);
+    } finally {
+      _$_ServiceViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void validatecareer_Email(String? value) {
+    final _$actionInfo = _$_ServiceViewModelActionController.startAction(
+        name: '_ServiceViewModel.validatecareer_Email');
+    try {
+      return super.validatecareer_Email(value);
+    } finally {
+      _$_ServiceViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void validatecareer_Mobile(String? value) {
+    final _$actionInfo = _$_ServiceViewModelActionController.startAction(
+        name: '_ServiceViewModel.validatecareer_Mobile');
+    try {
+      return super.validatecareer_Mobile(value);
+    } finally {
+      _$_ServiceViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void validateQuery(String? value) {
     final _$actionInfo = _$_ServiceViewModelActionController.startAction(
         name: '_ServiceViewModel.validateQuery');
@@ -430,6 +555,9 @@ insertReachUsFormResponse: ${insertReachUsFormResponse},
 fullname: ${fullname},
 email: ${email},
 mobile: ${mobile},
+career_fullname: ${career_fullname},
+career_email: ${career_email},
+career_mobile: ${career_mobile},
 resume: ${resume},
 query: ${query},
 homeNewsVideosBlogsResponse: ${homeNewsVideosBlogsResponse},
@@ -519,6 +647,75 @@ fullname: ${fullname},
 email: ${email},
 mobile: ${mobile},
 query: ${query},
+hasErrors: ${hasErrors}
+    ''';
+  }
+}
+
+mixin _$ServiceViewModelCareerErrorState
+    on _ServiceViewModelCareerErrorState, Store {
+  Computed<bool>? _$hasErrorsComputed;
+
+  @override
+  bool get hasErrors =>
+      (_$hasErrorsComputed ??= Computed<bool>(() => super.hasErrors,
+              name: '_ServiceViewModelCareerErrorState.hasErrors'))
+          .value;
+
+  late final _$fullnameAtom = Atom(
+      name: '_ServiceViewModelCareerErrorState.fullname', context: context);
+
+  @override
+  String? get fullname {
+    _$fullnameAtom.reportRead();
+    return super.fullname;
+  }
+
+  @override
+  set fullname(String? value) {
+    _$fullnameAtom.reportWrite(value, super.fullname, () {
+      super.fullname = value;
+    });
+  }
+
+  late final _$emailAtom =
+      Atom(name: '_ServiceViewModelCareerErrorState.email', context: context);
+
+  @override
+  String? get email {
+    _$emailAtom.reportRead();
+    return super.email;
+  }
+
+  @override
+  set email(String? value) {
+    _$emailAtom.reportWrite(value, super.email, () {
+      super.email = value;
+    });
+  }
+
+  late final _$mobileAtom =
+      Atom(name: '_ServiceViewModelCareerErrorState.mobile', context: context);
+
+  @override
+  String? get mobile {
+    _$mobileAtom.reportRead();
+    return super.mobile;
+  }
+
+  @override
+  set mobile(String? value) {
+    _$mobileAtom.reportWrite(value, super.mobile, () {
+      super.mobile = value;
+    });
+  }
+
+  @override
+  String toString() {
+    return '''
+fullname: ${fullname},
+email: ${email},
+mobile: ${mobile},
 hasErrors: ${hasErrors}
     ''';
   }

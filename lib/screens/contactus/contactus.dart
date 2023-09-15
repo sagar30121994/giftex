@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/data/local/client/prefs.dart';
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/screens/components/footer/footer.dart';
@@ -364,7 +365,7 @@ class _ContactusPageState extends State<ContactusPage> {
                     ),
                     Container(
                       width: MediaQuery.of(context).size.width,
-                      height: 500,
+
                       color: Color(0xffEAEEF2),
                       padding: EdgeInsets.all(16),
                       child: Column(
@@ -396,27 +397,31 @@ class _ContactusPageState extends State<ContactusPage> {
                                 color: Colors.white,
                                 boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
                             padding: EdgeInsets.only(left: 8),
-                            child: TextField(
-                              controller: nameController,
-                              keyboardType: TextInputType.name,
-                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500,
+                            child: Observer(
+                              builder: (context) {
+                                return TextField(
+                                  controller: nameController,
+                                  keyboardType: TextInputType.name,
+                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                  onChanged: (str) => serviceViewModel.setFullName(str),
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    labelText: 'Name *',
+                                    hintText: 'Enter Your Name',
+                                    errorText: serviceViewModel.serviceViewModelErrorState.fullname,
+                                    // prefixIcon:
+                                    // prefixIcon: ,
+                                    icon: Image.asset("image/people.png", height: 32),
+                                    filled: true,
+                                    isDense: false,
+                                    fillColor: Color(0xffFFFFFF),
+                                    // isDense: true
                                   ),
-                              onChanged: (str) => serviceViewModel.setFullName(str),
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                labelText: 'Name *',
-                                hintText: 'Enter Your Name',
-                                errorText: serviceViewModel.serviceViewModelErrorState.fullname,
-                                // prefixIcon:
-                                // prefixIcon: ,
-                                icon: Image.asset("image/people.png", height: 32),
-                                filled: true,
-                                isDense: false,
-                                fillColor: Color(0xffFFFFFF),
-                                // isDense: true
-                              ),
+                                );
+                              }
                             ),
                           ),
                           SizedBox(
@@ -427,25 +432,29 @@ class _ContactusPageState extends State<ContactusPage> {
                                 color: Colors.white,
                                 boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
                             padding: EdgeInsets.only(left: 8),
-                            child: TextField(
-                              controller: emailController,
-                              keyboardType: TextInputType.emailAddress,
-                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500,
+                            child: Observer(
+                              builder: (context) {
+                                return TextField(
+                                  controller: emailController,
+                                  keyboardType: TextInputType.emailAddress,
+                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                  onChanged: (str) => serviceViewModel.setEmail(str),
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    labelText: 'Email ID *',
+                                    hintText: 'Enter your email',
+                                    errorText: serviceViewModel.serviceViewModelErrorState.email,
+                                    icon: Image.asset("image/email.png", height: 24),
+                                    // prefixIcon: Icon(Icons.email_outlined,color: Color(0xff779868)),
+                                    filled: true,
+                                    fillColor: Color(0xffFFFFFF),
+                                    // isDense: true
                                   ),
-                              onChanged: (str) => serviceViewModel.setEmail(str),
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                labelText: 'Email ID *',
-                                hintText: 'Enter your email',
-                                errorText: serviceViewModel.serviceViewModelErrorState.email,
-                                icon: Image.asset("image/email.png", height: 24),
-                                // prefixIcon: Icon(Icons.email_outlined,color: Color(0xff779868)),
-                                filled: true,
-                                fillColor: Color(0xffFFFFFF),
-                                // isDense: true
-                              ),
+                                );
+                              }
                             ),
                           ),
                           SizedBox(
@@ -456,25 +465,29 @@ class _ContactusPageState extends State<ContactusPage> {
                                 color: Colors.white,
                                 boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
                             padding: EdgeInsets.only(left: 8),
-                            child: TextField(
-                              controller: mobilenoController,
-                              keyboardType: TextInputType.phone,
-                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500,
+                            child: Observer(
+                              builder: (context) {
+                                return TextField(
+                                  controller: mobilenoController,
+                                  keyboardType: TextInputType.phone,
+                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                  onChanged: (str) => serviceViewModel.setMobile(str),
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    labelText: 'Mobile No.*',
+                                    hintText: 'Enter your mobile no.',
+                                    errorText: serviceViewModel.serviceViewModelErrorState.mobile,
+                                    icon: Image.asset("image/phone.png", height: 28),
+                                    // prefixIcon: Icon(Icons.call,color: Color(0xff779868),),
+                                    filled: true,
+                                    fillColor: Color(0xffFFFFFF),
+                                    // isDense: true
                                   ),
-                              onChanged: (str) => serviceViewModel.setMobile(str),
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                labelText: 'Mobile No.*',
-                                hintText: 'Enter your mobile no.',
-                                errorText: serviceViewModel.serviceViewModelErrorState.mobile,
-                                icon: Image.asset("image/phone.png", height: 28),
-                                // prefixIcon: Icon(Icons.call,color: Color(0xff779868),),
-                                filled: true,
-                                fillColor: Color(0xffFFFFFF),
-                                // isDense: true
-                              ),
+                                );
+                              }
                             ),
                           ),
                           SizedBox(
@@ -485,26 +498,30 @@ class _ContactusPageState extends State<ContactusPage> {
                                 color: Colors.white,
                                 boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
                             padding: EdgeInsets.only(left: 8),
-                            child: TextField(
-                              // controller: nameController,
+                            child: Observer(
+                              builder: (context) {
+                                return TextField(
+                                  // controller: nameController,
 
-                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500,
+                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                  onChanged: (str) => serviceViewModel.setQuery(str),
+
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    labelText: 'Queries *',
+                                    errorText: serviceViewModel.serviceViewModelErrorState.query,
+
+                                    icon: Image.asset("image/pqueries.png", height: 28),
+                                    // prefixIcon: Image.asset("image/pass.png",height: 8),
+                                    filled: true,
+                                    fillColor: Color(0xffFFFFFF),
+                                    // isDense: true
                                   ),
-                              onChanged: (str) => serviceViewModel.setQuery(str),
-
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                labelText: 'Queries',
-                                errorText: serviceViewModel.serviceViewModelErrorState.query,
-
-                                icon: Image.asset("image/pqueries.png", height: 28),
-                                // prefixIcon: Image.asset("image/pass.png",height: 8),
-                                filled: true,
-                                fillColor: Color(0xffFFFFFF),
-                                // isDense: true
-                              ),
+                                );
+                              }
                             ),
                           ),
                           SizedBox(
@@ -515,25 +532,36 @@ class _ContactusPageState extends State<ContactusPage> {
                           ),
                           InkWell(
                             onTap: () async {
-                              HttpResponse res= await serviceViewModel.InsertReachUsForm();
-                                    if (res.status == 200)
-                                      {
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                          SnackBar(
-                                            content: Text(res.message??''),
-                                            backgroundColor: Colors.green,
-                                          ),
-                                        );
-                                      }
-                                    else
-                                      {
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                          SnackBar(
-                                            content: Text(res.message??''),
-                                            backgroundColor: Colors.orangeAccent,
-                                          ),
-                                        );
-                                      }
+                              serviceViewModel.validateAll();
+                              if(serviceViewModel.serviceViewModelErrorState.hasErrors){
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text('Please Enter All Mandatory Fields.'),
+                                    backgroundColor: Colors.redAccent,
+                                  ),
+                                );
+                              }else{
+                                HttpResponse res= await serviceViewModel.InsertReachUsForm();
+                                if (res.status == 200)
+                                {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(res.message??''),
+                                      backgroundColor: Colors.green,
+                                    ),
+                                  );
+                                }
+                                else
+                                {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(res.message??''),
+                                      backgroundColor: Colors.orangeAccent,
+                                    ),
+                                  );
+                                }
+                              }
+
 
                             },
                             child: Container(

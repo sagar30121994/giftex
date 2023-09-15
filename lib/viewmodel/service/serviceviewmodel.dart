@@ -13,6 +13,7 @@ import 'package:giftex/data/network/repository/service/servicerepo.dart';
 import 'package:giftex/data/network/repository/webapimodel/webapimodelrepo.dart';
 import 'package:giftex/data/network/repository/webcmsapimodel/webcmsapimodelrepo.dart';
 import 'package:mobx/mobx.dart';
+import 'package:validators/validators.dart';
 
 part 'serviceviewmodel.g.dart';
 
@@ -71,6 +72,15 @@ abstract class _ServiceViewModel with Store {
   String mobile = '';
 
   @observable
+  String career_fullname = '';
+
+  @observable
+  String career_email = '';
+
+  @observable
+  String career_mobile = '';
+
+  @observable
   String resume = '';
 
   @observable
@@ -92,6 +102,21 @@ abstract class _ServiceViewModel with Store {
   }
 
   @action
+  setCareerFullName(String value) {
+    career_fullname = value;
+  }
+
+  @action
+  setCareerEmail(String value) {
+    career_email = value;
+  }
+
+  @action
+  setCareerMobile(String value) {
+    career_mobile = value;
+  }
+
+  @action
   setResume(String value) {
     resume = value;
   }
@@ -100,6 +125,7 @@ abstract class _ServiceViewModel with Store {
   setQuery(String value) {
     query = value;
   }
+  ServiceViewModelCareerErrorState serviceViewModelCareerErrorState=ServiceViewModelCareerErrorState();
 
   late List<ReactionDisposer> _disposers;
 
@@ -112,12 +138,29 @@ abstract class _ServiceViewModel with Store {
     ];
   }
 
+  void setupValidationsCareer() {
+    _disposers = [
+      reaction((_) => career_fullname, validatecareer_Name),
+      reaction((_) =>  career_email, validatecareer_Email),
+      reaction((_) =>  career_mobile, validatecareer_Mobile),
+
+    ];
+  }
+
   @action
   validateAll() {
     validateName(fullname);
     validateEmail(email);
     validateMobile(mobile);
     validateQuery(query);
+  }
+
+  @action
+  validateAllCareer() {
+    validatecareer_Name(career_fullname);
+    validatecareer_Email(career_email);
+    validatecareer_Mobile(career_mobile);
+
   }
 
   void dispose() {
@@ -137,19 +180,46 @@ abstract class _ServiceViewModel with Store {
 
   @action
   void validateEmail(String? value) {
-    if (value == null || value.trim() == "") {
-      serviceViewModelErrorState.email = "Please Enter Valid Email";
-    } else {
+    if (isEmail(value??'')) {
       serviceViewModelErrorState.email = null;
+    } else {
+      serviceViewModelErrorState.email = "Please Enter Valid Email";
     }
   }
 
   @action
   void validateMobile(String? value) {
-    if (value == null || value.trim() == "") {
-      serviceViewModelErrorState.mobile = "Please Enter Valid Mobile Number";
-    } else {
+    if (isNumeric(value??"")&&((value??"").length==10)) {
       serviceViewModelErrorState.mobile = null;
+    } else {
+      serviceViewModelErrorState.mobile = "Please Enter Valid Mobile Number";
+    }
+  }
+
+  @action
+  void validatecareer_Name(String? value) {
+    if (value == null || value.trim() == "") {
+      serviceViewModelCareerErrorState.fullname = "Please Enter Valid Name";
+    } else {
+      serviceViewModelCareerErrorState.fullname = null;
+    }
+  }
+
+  @action
+  void validatecareer_Email(String? value) {
+    if (isEmail(value??'')) {
+      serviceViewModelCareerErrorState.email = null;
+    } else {
+      serviceViewModelCareerErrorState.email = "Please Enter Valid Email";
+    }
+  }
+
+  @action
+  void validatecareer_Mobile(String? value) {
+    if (isNumeric(value??"")&&((value??"").length==10)) {
+      serviceViewModelCareerErrorState.mobile = null;
+    } else {
+      serviceViewModelCareerErrorState.mobile = "Please Enter Valid Mobile Number";
     }
   }
 
@@ -188,7 +258,7 @@ abstract class _ServiceViewModel with Store {
 
   Future<HttpResponse> insertCareerForm() async {
     isloading = true;
-    HttpResponse httpResponse = await webCmsApiModelRepo.insertCareerForm(fullname, email, mobile, resume);
+    HttpResponse httpResponse = await webCmsApiModelRepo.insertCareerForm(career_fullname, career_email, career_mobile, resume);
     if (httpResponse.status == 200) {
       insertCareerFormResponse = httpResponse.data;
     }
@@ -301,4 +371,22 @@ abstract class _ServiceViewModelErrorState with Store {
 
   @computed
   bool get hasErrors => fullname != null || email != null || mobile != null || query != null;
+}
+
+
+class ServiceViewModelCareerErrorState = _ServiceViewModelCareerErrorState with _$ServiceViewModelCareerErrorState;
+
+abstract class _ServiceViewModelCareerErrorState with Store {
+  @observable
+  String? fullname;
+
+  @observable
+  String? email;
+
+  @observable
+  String? mobile;
+
+
+  @computed
+  bool get hasErrors => fullname != null || email != null || mobile != null ;
 }

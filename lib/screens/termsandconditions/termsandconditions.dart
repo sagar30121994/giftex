@@ -31,7 +31,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
       body: SingleChildScrollView(
         child: Container(
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * .90,
+      //    height: MediaQuery.of(context).size.height * .90,
           child: SingleChildScrollView(
               child: Column(
             children: [
@@ -493,7 +493,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                   //     ],),
                   // ),
                   title: Text(
-                    "Authenticity Gurantee",
+                    "Authenticity Guarantee",
                     textAlign: TextAlign.start,
                     style: Theme.of(context).textTheme.subtitle1!.copyWith(
                           color: Color(0XFF000000),
@@ -1009,12 +1009,10 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                 height: 30,
               ),
               SizedBox(height: 820, width: MediaQuery.of(context).size.width, child: Footer()),
-              SliverToBoxAdapter(
-                child: Container(
-                  color: Color(0xff1F2A52),
-                  height: 30,
-                  width: MediaQuery.of(context).size.width,
-                ),
+              Container(
+                color: Color(0xff1F2A52),
+                height: 30,
+                width: MediaQuery.of(context).size.width,
               ),
             ],
           )),
