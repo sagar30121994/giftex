@@ -138,7 +138,7 @@ class _ArtMovement extends State<ArtMovement> {
                               bottom: 54,
                               child: Image.network(
                                 "${homeViewModel.getArtMovementResponse!.pageContent!.bannerItem!.image!.mobile ?? ''}",
-                                height: 200,
+                                height: 260,
                               )),
                         ],
                       ),

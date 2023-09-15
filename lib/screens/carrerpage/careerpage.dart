@@ -268,8 +268,9 @@ class _CareerPageState extends State<CareerPage> {
             child: Column(
               children: [
                 ListTile(
+
                   title: Text(
-                    "Job Description",
+                    "Job Description",textAlign: TextAlign.left,
                     style: Theme.of(context).textTheme.subtitle1!.copyWith(
                           color: Color(0XFF000000),
                           fontWeight: FontWeight.w400,
@@ -277,7 +278,7 @@ class _CareerPageState extends State<CareerPage> {
                   ),
                 ),
                 SizedBox(
-                  height: 16,
+                  height: 0,
                 ),
                 Padding(
                   padding: EdgeInsets.all(16),

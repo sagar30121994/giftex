@@ -1060,7 +1060,7 @@ class _SearchBarUiState extends State<SearchBarUi> {
   }
 
   getErrorMEssage() {
-    return Column(
+    return const Column(
       children: [
         SizedBox(
           height: 24,
