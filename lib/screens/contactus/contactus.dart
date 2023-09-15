@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:giftex/data/local/client/prefs.dart';
+import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/screens/components/footer/footer.dart';
 import 'package:giftex/screens/components/header.dart';
 import 'package:giftex/viewmodel/service/serviceviewmodel.dart';
@@ -405,7 +406,7 @@ class _ContactusPageState extends State<ContactusPage> {
                               onChanged: (str) => serviceViewModel.setFullName(str),
                               decoration: InputDecoration(
                                 border: InputBorder.none,
-                                labelText: 'Name',
+                                labelText: 'Name *',
                                 hintText: 'Enter Your Name',
                                 errorText: serviceViewModel.serviceViewModelErrorState.fullname,
                                 // prefixIcon:
@@ -436,7 +437,7 @@ class _ContactusPageState extends State<ContactusPage> {
                               onChanged: (str) => serviceViewModel.setEmail(str),
                               decoration: InputDecoration(
                                 border: InputBorder.none,
-                                labelText: 'Email ID',
+                                labelText: 'Email ID *',
                                 hintText: 'Enter your email',
                                 errorText: serviceViewModel.serviceViewModelErrorState.email,
                                 icon: Image.asset("image/email.png", height: 24),
@@ -465,7 +466,7 @@ class _ContactusPageState extends State<ContactusPage> {
                               onChanged: (str) => serviceViewModel.setMobile(str),
                               decoration: InputDecoration(
                                 border: InputBorder.none,
-                                labelText: 'Mobile No.',
+                                labelText: 'Mobile No.*',
                                 hintText: 'Enter your mobile no.',
                                 errorText: serviceViewModel.serviceViewModelErrorState.mobile,
                                 icon: Image.asset("image/phone.png", height: 28),
@@ -513,27 +514,27 @@ class _ContactusPageState extends State<ContactusPage> {
                             height: 5,
                           ),
                           InkWell(
-                            onTap: () {
-                              serviceViewModel.InsertReachUsForm().then((value) => {
-                                    if (value.status == 200)
+                            onTap: () async {
+                              HttpResponse res= await serviceViewModel.InsertReachUsForm();
+                                    if (res.status == 200)
                                       {
                                         ScaffoldMessenger.of(context).showSnackBar(
                                           SnackBar(
-                                            content: Text(value.message!),
+                                            content: Text(res.message??''),
                                             backgroundColor: Colors.green,
                                           ),
-                                        )
+                                        );
                                       }
                                     else
                                       {
                                         ScaffoldMessenger.of(context).showSnackBar(
                                           SnackBar(
-                                            content: Text(value.message!),
-                                            backgroundColor: Colors.green,
+                                            content: Text(res.message??''),
+                                            backgroundColor: Colors.orangeAccent,
                                           ),
-                                        )
+                                        );
                                       }
-                                  });
+
                             },
                             child: Container(
                               height: 50,

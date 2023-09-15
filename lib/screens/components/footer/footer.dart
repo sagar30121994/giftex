@@ -2,6 +2,7 @@ import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/data/local/client/prefs.dart';
+import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
 import 'package:giftex/screens/termsandconditions/termsandconditions.dart';
 import 'package:giftex/viewmodel/user/footerviewmodel.dart';
@@ -157,7 +158,7 @@ class _FooterState extends State<Footer> {
                   left: 0,
                   right: 0,
                   child: InkWell(
-                    onTap: () {
+                    onTap: () async {
                       if (nameController.text == "") {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text("Please Enter A Valid Name"),
@@ -174,14 +175,20 @@ class _FooterState extends State<Footer> {
                       }
 
                       if (!footerViewModel.subscribeViewModelErrorState.hasErrors) {
-                        footerViewModel.insertsubscribeForm().then((value) => {
-                              emailController.text = "",
-                              nameController.text = "",
-                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                                content: Text("Thank you for subscribing"),
-                                backgroundColor: Colors.green,
-                              ))
-                            });
+                        HttpResponse res= await footerViewModel.insertsubscribeForm();
+                        emailController.text = "";
+                        nameController.text = "";
+                        if(res.status==200){
+                          ScaffoldMessenger.of(context).showSnackBar(  SnackBar(
+                            content: Text("Thank you for subscribing"),
+                            backgroundColor: Colors.green,
+                          ));
+                          }else{
+                          ScaffoldMessenger.of(context).showSnackBar(  SnackBar(
+                            content: Text(res.message??''),
+                            backgroundColor: Colors.orangeAccent,
+                          ));
+                        }
                       }
                     },
                     child: SizedBox(

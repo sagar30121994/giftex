@@ -41,7 +41,7 @@ class _UpcommingItemState extends State<UpcommingItem> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.grid
+    return widget.auctionViewModel.isGrid
         ? Observer(builder: (context) {
             return Padding(
               padding: const EdgeInsets.all(15.0),

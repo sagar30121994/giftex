@@ -270,7 +270,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                             ),
                             widget.lots.auctionType == "1"
                                 ? Text(
-                                    "${widget.lots.info!.title}",
+                                    "${widget.lots.info!.title??''}",
                                     textAlign: TextAlign.center,
                                     style: Theme.of(context).textTheme.headline6!.copyWith(
                                           color: Colors.black,
@@ -283,7 +283,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                               height: 8,
                             ),
                             Text(
-                              "${widget.lots.lotTitle}",
+                              "${widget.lots.lotTitle??''}",
                               textAlign: TextAlign.center,
                               style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                     color: Color(0xff747474),
@@ -300,7 +300,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "₹${formateNumber(widget.lots.leadingUser!.bid!.iNR ?? "0")}}",
+                                          "\u20b9 ${formateNumber(widget.lots.leadingUser!.bid!.iNR ?? "0")}}",
                                           textAlign: TextAlign.center,
                                           style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                 color: Color(0xff747474),
@@ -341,7 +341,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                             height: 10,
                                           ),
                                           Text(
-                                            "₹${formateNumber(widget.lots.estimateFrom!.iNR ?? "0")} - ${formateNumber(widget.lots.estimateTo!.iNR ?? "")}",
+                                            "\u20b9 ${formateNumber(widget.lots.estimateFrom!.iNR ?? "0")} - ${formateNumber(widget.lots.estimateTo!.iNR ?? "")}",
                                             textAlign: TextAlign.center,
                                             style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                   color: Color(0xff202232),
@@ -448,7 +448,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                             height: 10,
                                           ),
                                           Text(
-                                            "₹${formateNumber(widget.lots.liveStatus!.currentBid!.iNR ?? "0")}",
+                                            "\u20b9 ${formateNumber(widget.lots.liveStatus!.currentBid!.iNR ?? "0")}",
                                             textAlign: TextAlign.center,
                                             style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                   color: Color(0xff202232),
@@ -474,7 +474,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                             height: 10,
                                           ),
                                           Text(
-                                            "₹${formateNumber(widget.lots.liveStatus!.nextValidBid!.iNR ?? "0")}",
+                                            "\u20b9 ${formateNumber(widget.lots.liveStatus!.nextValidBid!.iNR ?? "0")}",
                                             textAlign: TextAlign.center,
                                             style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                   color: Theme.of(context).colorScheme.primary,

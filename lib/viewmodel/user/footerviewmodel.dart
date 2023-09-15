@@ -55,7 +55,7 @@ abstract class _FooterViewModel with Store {
   Future<HttpResponse> insertsubscribeForm() async {
     isLoadingForUpCommingAuction = true;
 
-    HttpResponse httpResponse = await loginRepo.insertsubscribeForm(email!, name!);
+    HttpResponse httpResponse = await loginRepo.insertsubscribeForm(email??"", name??"");
 
     if (httpResponse.status == 200) {
       // upComingLotsResponse = httpResponse.data;
