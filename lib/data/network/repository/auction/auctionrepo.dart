@@ -224,7 +224,7 @@ class AuctionRepo {
     String userid = localSharedPrefrence!.getUserId();
     String authKey = localSharedPrefrence!.getAuthKeyWeb();
     String crmClientId = localSharedPrefrence!.getCrmClinetId();
-    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
+    // httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
     await httpClient!.post(BaseUrl.baseUrl + endPoints.WebApiModel().getlotdetails, body: {
       "userId": userid,
       "authkey_mobile": "",
