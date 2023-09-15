@@ -19,8 +19,18 @@ abstract class _FooterViewModel with Store {
   @observable
   String? email;
 
+  @action
+  setEmail(String value) {
+    email = value;
+  }
+
   @observable
   String? name;
+
+  @action
+  setName(String value) {
+    name = value;
+  }
 
   @observable
   bool isLoadingForUpCommingAuction = false;

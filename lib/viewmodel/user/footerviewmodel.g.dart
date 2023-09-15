@@ -70,6 +70,28 @@ mixin _$FooterViewModel on _FooterViewModel, Store {
       ActionController(name: '_FooterViewModel', context: context);
 
   @override
+  dynamic setEmail(String value) {
+    final _$actionInfo = _$_FooterViewModelActionController.startAction(
+        name: '_FooterViewModel.setEmail');
+    try {
+      return super.setEmail(value);
+    } finally {
+      _$_FooterViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setName(String value) {
+    final _$actionInfo = _$_FooterViewModelActionController.startAction(
+        name: '_FooterViewModel.setName');
+    try {
+      return super.setName(value);
+    } finally {
+      _$_FooterViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setupValidations() {
     final _$actionInfo = _$_FooterViewModelActionController.startAction(
         name: '_FooterViewModel.setupValidations');
