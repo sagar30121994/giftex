@@ -70,22 +70,22 @@ mixin _$FooterViewModel on _FooterViewModel, Store {
       ActionController(name: '_FooterViewModel', context: context);
 
   @override
-  dynamic setEmail(String value) {
+  dynamic setfirstName(String value) {
     final _$actionInfo = _$_FooterViewModelActionController.startAction(
-        name: '_FooterViewModel.setEmail');
+        name: '_FooterViewModel.setfirstName');
     try {
-      return super.setEmail(value);
+      return super.setfirstName(value);
     } finally {
       _$_FooterViewModelActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic setName(String value) {
+  dynamic setemail(String value) {
     final _$actionInfo = _$_FooterViewModelActionController.startAction(
-        name: '_FooterViewModel.setName');
+        name: '_FooterViewModel.setemail');
     try {
-      return super.setName(value);
+      return super.setemail(value);
     } finally {
       _$_FooterViewModelActionController.endAction(_$actionInfo);
     }

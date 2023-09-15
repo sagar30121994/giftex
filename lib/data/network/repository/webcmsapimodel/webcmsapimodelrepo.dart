@@ -1380,10 +1380,44 @@ class WebCmsApiModelRepo {
   Future<HttpResponse> getDepartmentsDetails() async {
     HttpResponse httpResponse = HttpResponse();
     String userlogin = json.encode(LoginReqestModel);
-    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
     await httpClient!
         .post(BaseUrl.notificationbaseUrl + endPoints.WebCMSApiModel().getdepartmentdetails, body: userlogin)
         .then((responce) async {
+      print(responce);
+
+      if (responce.statusCode == 200) {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = 'Successful';
+        // httpResponse.data = LoginResponse.fromJson(responce.data);
+      } else {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = responce.data['message'];
+        httpResponse.data = null;
+      }
+      return httpResponse;
+    }).catchError((err) {
+      print(err);
+      httpResponse.status = 400;
+      httpResponse.message = err.toString();
+      httpResponse.data = err.toString();
+      return httpResponse;
+    });
+
+    return httpResponse;
+  }
+
+  Future<HttpResponse> getDepartmentDetails(String pageID) async {
+    HttpResponse httpResponse = HttpResponse();
+    // String userlogin = json.encode(LoginReqestModel);
+    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
+    await httpClient!.post(BaseUrl.notificationbaseUrl + endPoints.WebCMSApiModel().GetDepartmentDetails, body: {
+      "authkey_web": "${localSharedPrefrence!.getAuthKeyWeb() ?? ''}",
+      "authkey_mobile": "",
+      "userid": "${localSharedPrefrence!.getUserId() ?? ''}",
+      "CRMClientID": "${localSharedPrefrence!.getCrmClinetId() ?? ''}",
+      "pageId": pageID
+    }).then((responce) async {
       print(responce);
 
       if (responce.statusCode == 200) {

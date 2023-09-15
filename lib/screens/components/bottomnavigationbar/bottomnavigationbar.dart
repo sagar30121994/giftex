@@ -9,6 +9,7 @@ import 'package:giftex/screens/blogsdetail/blogdetails.dart';
 import 'package:giftex/screens/carrerpage/careerpage.dart';
 import 'package:giftex/screens/components/drawer/drawermain.dart';
 import 'package:giftex/screens/contactus/contactus.dart';
+import 'package:giftex/screens/departments/departmentdetails.dart';
 import 'package:giftex/screens/faq/faq.dart';
 import 'package:giftex/screens/homepage/homapage.dart';
 import 'package:giftex/screens/homepage/searchpage.dart';
@@ -118,6 +119,10 @@ class _DashboardUiState extends State<DashboardUi> {
             } else if (bottomViewModel.selectedIndex == 36) {
               setState(() {
                 bottomViewModel.selectedIndex = 33;
+              });
+            } else if (bottomViewModel.selectedIndex == 37) {
+              setState(() {
+                bottomViewModel.selectedIndex = 27;
               });
             } else {
               setState(() {
@@ -907,7 +912,7 @@ class _DashboardUiState extends State<DashboardUi> {
             ),
 
             body: Observer(builder: (context) {
-           //   bottomViewModel.selectedIndex;
+              //   bottomViewModel.selectedIndex;
               return getPage();
             }),
           ),
@@ -1005,6 +1010,8 @@ class _DashboardUiState extends State<DashboardUi> {
         return NewsDetails();
       case 36:
         return BlogDetails();
+      case 37:
+        return DepartmentDetails();
 
       default:
         {
