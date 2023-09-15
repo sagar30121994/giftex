@@ -340,6 +340,48 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
           auctionViewModel.auctionType == "upcoming" ? UpcommingTabs(auctionViewModel) : SliverToBoxAdapter(),
           auctionViewModel.auctionType == "live" ? LiveData(auctionViewModel) : SliverToBoxAdapter(),
           auctionViewModel.auctionType == "past" ? PastTabs(auctionViewModel) : SliverToBoxAdapter(),
+
+          SliverToBoxAdapter(
+            child: auctionViewModel.liveAuctionType == "browselots"
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      // Icon(Icons.menu_sharp,size: 30,),
+                      InkWell(
+                          onTap: () {
+                            setState(() {
+                              auctionViewModel.isGrid = false;
+                            });
+                          },
+                          child: Image.asset(
+                            "image/list.png",
+                            height: 30,
+                            color: auctionViewModel.isGrid ? Colors.indigo : Colors.black,
+                          )),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      InkWell(
+                          onTap: () {
+                            setState(() {
+                              auctionViewModel.isGrid = true;
+                            });
+                            // auctionViewModel.isGrid=true;
+                          },
+                          child: Image.asset(
+                            "image/grid.png",
+                            height: 30,
+                            color: auctionViewModel.isGrid ? Colors.indigo : Colors.black,
+                          )),
+                      SizedBox(
+                        width: 10,
+                      ),
+                    ],
+                  )
+                : Container(),
+          ),
+
           auctionViewModel.isLoadingForUpCommingAuction
               ? SliverToBoxAdapter(child: LinearProgressIndicator())
               : auctionViewModel.upComingLotsResponse == null

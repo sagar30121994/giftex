@@ -512,37 +512,37 @@ class _MyOrderHistorypageState extends State<MyOrderHistorypage> {
                                                                   ],
                                                                 ),
                                                                 Spacer(),
-                                                                Column(
-                                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                                  children: [
-                                                                    SizedBox(
-                                                                      height: 16,
-                                                                    ),
-                                                                    Text(
-                                                                      "In Transit",
-                                                                      textAlign: TextAlign.center,
-                                                                      style: Theme.of(context)
-                                                                          .textTheme
-                                                                          .bodyText1!
-                                                                          .copyWith(
-                                                                            color: Color(0xff747474),
-                                                                            fontWeight: FontWeight.w400,
-                                                                          ),
-                                                                    ),
-                                                                    Text(
-                                                                      "20th Jan, 2022",
-                                                                      textAlign: TextAlign.center,
-                                                                      style: Theme.of(context)
-                                                                          .textTheme
-                                                                          .subtitle1!
-                                                                          .copyWith(
-                                                                            color: Color(0xff202232),
-                                                                            fontWeight: FontWeight.w500,
-                                                                          ),
-                                                                    ),
-                                                                  ],
-                                                                ),
+                                                                // Column(
+                                                                //   mainAxisAlignment: MainAxisAlignment.start,
+                                                                //   crossAxisAlignment: CrossAxisAlignment.start,
+                                                                //   children: [
+                                                                //     SizedBox(
+                                                                //       height: 16,
+                                                                //     ),
+                                                                //     Text(
+                                                                //       "In Transit",
+                                                                //       textAlign: TextAlign.center,
+                                                                //       style: Theme.of(context)
+                                                                //           .textTheme
+                                                                //           .bodyText1!
+                                                                //           .copyWith(
+                                                                //             color: Color(0xff747474),
+                                                                //             fontWeight: FontWeight.w400,
+                                                                //           ),
+                                                                //     ),
+                                                                //     Text(
+                                                                //       "20th Jan, 2022",
+                                                                //       textAlign: TextAlign.center,
+                                                                //       style: Theme.of(context)
+                                                                //           .textTheme
+                                                                //           .subtitle1!
+                                                                //           .copyWith(
+                                                                //             color: Color(0xff202232),
+                                                                //             fontWeight: FontWeight.w500,
+                                                                //           ),
+                                                                //     ),
+                                                                //   ],
+                                                                // ),
                                                               ],
                                                             )
                                                           ],

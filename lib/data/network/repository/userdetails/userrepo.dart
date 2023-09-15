@@ -8,9 +8,9 @@ import 'package:giftex/data/network/models/request/userdeails/usersavesettingreq
 import 'package:giftex/data/network/models/responce/lot/upcominglotsresponse.dart';
 import 'package:giftex/data/network/models/responce/payment/paymentresponce.dart';
 import 'package:giftex/data/network/models/responce/payments/paymentgridrepsonse.dart';
+import 'package:giftex/data/network/models/responce/purchase/mypurchasereponse.dart';
 import 'package:giftex/data/network/models/responce/user/dashboardauctioncalenderresponce.dart';
 import 'package:giftex/data/network/models/responce/user/dashboardoverviewreponse.dart';
-import 'package:giftex/data/network/models/responce/user/getlastbidresponce.dart';
 import 'package:giftex/data/network/models/responce/user/getlastpurchaseresponce.dart';
 import 'package:giftex/data/network/models/responce/user/highligtsresponce.dart';
 import 'package:giftex/data/network/models/responce/user/liveauctionreviewresponce.dart';
@@ -140,7 +140,42 @@ class UserRepo {
       if (responce.statusCode == 200) {
         httpResponse.status = responce.statusCode;
         httpResponse.message = 'Successful';
-        httpResponse.data = GetLastBidsResponce.fromJson(responce.data);
+        httpResponse.data = UpComingLotsResponse.fromJson(responce.data);
+      } else {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = responce.data['message'];
+        httpResponse.data = null;
+      }
+      return httpResponse;
+    }).catchError((err) {
+      print(err);
+      httpResponse.status = 400;
+      httpResponse.message = err.toString();
+      httpResponse.data = err.toString();
+      return httpResponse;
+    });
+
+    return httpResponse;
+  }
+
+  Future<HttpResponse> getLast5Purchases() async {
+    HttpResponse httpResponse = HttpResponse();
+    String userid = localSharedPrefrence!.getUserId();
+    String authKey = localSharedPrefrence!.getAuthKeyWeb();
+    String crmClientId = localSharedPrefrence!.getCrmClinetId();
+    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
+    await httpClient!.post(BaseUrl.baseUrl + endPoints.User().getLast5Purchase, body: {
+      "userId": userid,
+      "authkey_mobile": "",
+      "authkey_web": authKey,
+      "CRMClientID": crmClientId,
+    }).then((responce) async {
+      print(responce);
+
+      if (responce.statusCode == 200) {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = 'Successful';
+        httpResponse.data = MyPurchaseReponse.fromJson(responce.data);
       } else {
         httpResponse.status = responce.statusCode;
         httpResponse.message = responce.data['message'];

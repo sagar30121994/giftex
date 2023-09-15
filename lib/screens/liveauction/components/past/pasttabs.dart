@@ -94,48 +94,6 @@ class _LiveTabsState extends State<PastTabs> {
               SizedBox(
                 height: 20,
               ),
-              widget.auctionViewModel.liveAuctionType == "browselots"
-                  ? Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            // Icon(Icons.menu_sharp,size: 30,),
-                            InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    widget.auctionViewModel.isGrid = false;
-                                  });
-                                },
-                                child: Image.asset(
-                                  "image/list.png",
-                                  height: 30,
-                                  color: !widget.auctionViewModel.isGrid ? Colors.indigo : Colors.black,
-                                )),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    widget.auctionViewModel.isGrid = true;
-                                  });
-                                  // auctionViewModel.isGrid=true;
-                                },
-                                child: Image.asset(
-                                  "image/grid.png",
-                                  height: 30,
-                                  color: widget.auctionViewModel.isGrid ? Colors.indigo : Colors.black,
-                                )),
-                            SizedBox(
-                              width: 10,
-                            ),
-                          ],
-                        ),
-                      ],
-                    )
-                  : Container(),
             ],
           ),
           // Container()

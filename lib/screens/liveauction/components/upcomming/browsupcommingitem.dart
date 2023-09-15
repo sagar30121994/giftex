@@ -733,10 +733,14 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                                 //
                                 //   ),
                                 // )
-                                Image.asset(
-                                  "image/earth.png",
-                                  height: 50,
-                                )
+                                (widget.lots.exportType ?? "").toLowerCase() == "none"
+                                    ? Container()
+                                    : (widget.lots.exportType ?? "").toLowerCase() == "international"
+                                        ? Image.asset(
+                                            "image/earth.png",
+                                            height: 50,
+                                          )
+                                        : Container()
                               ],
                             ),
                           )
@@ -965,10 +969,14 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                                     //
                                     //   ),
                                     // )
-                                    Image.asset(
-                                      "image/earth.png",
-                                      height: 50,
-                                    )
+                                    (widget.lots.exportType ?? "").toLowerCase() == "none"
+                                        ? Container()
+                                        : (widget.lots.exportType ?? "").toLowerCase() == "international"
+                                            ? Image.asset(
+                                                "image/earth.png",
+                                                height: 50,
+                                              )
+                                            : Container()
                                   ],
                                 ),
                               )

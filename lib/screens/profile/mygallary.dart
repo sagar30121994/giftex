@@ -307,13 +307,15 @@ class _MyGallarypageState extends State<MyGallarypage> {
 
                           widget.profileViewModel.isloading
                               ? LinearProgressIndicator()
-                              : Column(
-                                  children: widget.profileViewModel.myAuctionGalleryResponce!.result!.lots!
-                                      .map(
-                                        (e) => BrowseItemListItem(e, false, auctionViewModel),
-                                      )
-                                      .toList(),
-                                ),
+                              : widget.profileViewModel.myAuctionGalleryResponce == null
+                                  ? Container()
+                                  : Column(
+                                      children: widget.profileViewModel.myAuctionGalleryResponce!.result!.lots!
+                                          .map(
+                                            (e) => BrowseItemListItem(e, false, auctionViewModel),
+                                          )
+                                          .toList(),
+                                    ),
 
                           // SizedBox(
                           //   height: 500,

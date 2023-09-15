@@ -3,6 +3,7 @@ import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/data/network/models/request/kyc/UpdateRegBankingDetailsRequest.dart';
 import 'package:giftex/data/network/models/request/kyc/UpdateRegMyAddressRequest.dart';
 import 'package:giftex/data/network/models/request/kyc/UpdateRegPersonalDetailsRequest.dart';
+import 'package:giftex/data/network/models/request/webapimodel/getcityrequestmodel.dart';
 import 'package:giftex/data/network/models/request/webapimodel/updateaddressRequest.dart';
 import 'package:giftex/data/network/models/responce/lot/upcominglotsresponse.dart';
 import 'package:giftex/data/network/models/responce/payment/paymentresponce.dart';
@@ -12,13 +13,10 @@ import 'package:giftex/data/network/models/responce/profile/GetRegInfoResponse.d
 import 'package:giftex/data/network/models/responce/profile/GetUserAllDetailsResponse.dart';
 import 'package:giftex/data/network/models/responce/purchase/mypurchasereponse.dart';
 import 'package:giftex/data/network/models/responce/user/dashboardoverviewreponse.dart';
-import 'package:giftex/data/network/models/responce/user/getlastbidresponce.dart';
 import 'package:giftex/data/network/repository/auction/auctionrepo.dart';
 import 'package:giftex/data/network/repository/profile/profileRopo.dart';
 import 'package:giftex/data/network/repository/userdetails/userrepo.dart';
 import 'package:mobx/mobx.dart';
-
-import '../../data/network/models/request/webapimodel/getcityrequestmodel.dart';
 
 part 'profileviewmodel.g.dart';
 
@@ -47,6 +45,9 @@ abstract class _ProfileViewModel with Store {
   MyPurchaseReponse? myPurchaseReponse;
 
   @observable
+  MyPurchaseReponse? mylast5PurchaseReponse;
+
+  @observable
   UpComingLotsResponse? myAuctionGalleryResponce;
 
   @observable
@@ -59,7 +60,7 @@ abstract class _ProfileViewModel with Store {
   PaymentGridResponse? paymentGridResponse;
 
   @observable
-  GetLastBidsResponce? getLastBidsResponce;
+  UpComingLotsResponse? getLastBidsResponce;
 
   @action
   Future<HttpResponse> getUserAllDetails() async {
@@ -460,6 +461,18 @@ abstract class _ProfileViewModel with Store {
 
     if (httpResponse.status == 200) {
       getLastBidsResponce = httpResponse.data;
+    }
+    isloading = false;
+    return httpResponse;
+  }
+
+  Future<HttpResponse> getLast5Purchases() async {
+    isloading = true;
+
+    HttpResponse httpResponse = await userRepo!.getLast5Purchases();
+
+    if (httpResponse.status == 200) {
+      mylast5PurchaseReponse = httpResponse.data;
     }
     isloading = false;
     return httpResponse;
