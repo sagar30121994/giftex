@@ -185,13 +185,15 @@ abstract class _HomeViewModel with Store {
   }
 
   @observable
+  String pageID = '';
+  @observable
   GetDepartmentdetailsResponse? getDepartmentDetailsResponse = GetDepartmentdetailsResponse();
   @observable
   bool isloadingdepartmentdetails = false;
 
-  Future<HttpResponse> getDepartmentDetails(String pageID) async {
+  Future<HttpResponse> getDepartmentDetails() async {
     isloadingdepartmentdetails = true;
-    getDepartmentDetailsResponse = null;
+    // getDepartmentDetailsResponse = null;
     HttpResponse httpResponse = await webCmsApiModelRepo!.getDepartmentDetails(pageID);
     if (httpResponse.status == 200) {
       getDepartmentDetailsResponse = httpResponse.data;

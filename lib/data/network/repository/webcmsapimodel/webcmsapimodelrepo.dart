@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:giftex/data/local/client/prefs.dart';
 import 'package:giftex/data/network/models/responce/cmsweb/careersresponse.dart';
+import 'package:giftex/data/network/models/responce/cmsweb/getDepartmentDetails.dart';
 import 'package:giftex/data/network/models/responce/cmsweb/insertCareerFormResponse.dart';
 import 'package:giftex/data/network/models/responce/cmsweb/whoweare.dart';
 import 'package:giftex/data/network/models/responce/home/CheckAppVersionResponse.dart';
@@ -1411,7 +1412,7 @@ class WebCmsApiModelRepo {
     HttpResponse httpResponse = HttpResponse();
     // String userlogin = json.encode(LoginReqestModel);
     httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
-    await httpClient!.post(BaseUrl.notificationbaseUrl + endPoints.WebCMSApiModel().GetDepartmentDetails, body: {
+    await httpClient!.post(BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().GetDepartmentDetails, body: {
       "authkey_web": "${localSharedPrefrence!.getAuthKeyWeb() ?? ''}",
       "authkey_mobile": "",
       "userid": "${localSharedPrefrence!.getUserId() ?? ''}",
@@ -1423,7 +1424,7 @@ class WebCmsApiModelRepo {
       if (responce.statusCode == 200) {
         httpResponse.status = responce.statusCode;
         httpResponse.message = 'Successful';
-        // httpResponse.data = LoginResponse.fromJson(responce.data);
+        httpResponse.data = GetDepartmentdetailsResponse.fromJson(responce.data);
       } else {
         httpResponse.status = responce.statusCode;
         httpResponse.message = responce.data['message'];

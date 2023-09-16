@@ -46,11 +46,11 @@ class _ProfilepageState extends State<Profilepage> {
             ),
             TextButton(
               child: Text('Logout'),
-              onPressed: () async{
+              onPressed: () async {
                 await auctionViewModel.logout();
 
-                Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (BuildContext context) => Loginpage()));
+                Navigator.pushAndRemoveUntil(
+                    context, MaterialPageRoute(builder: (BuildContext context) => Loginpage()), (_) => false);
               },
             ),
           ],
@@ -59,10 +59,8 @@ class _ProfilepageState extends State<Profilepage> {
     );
   }
 
-
   @override
-  Widget build(BuildContext context)
-  {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: NavBar(),
       backgroundColor: Colors.white,
@@ -458,9 +456,8 @@ class _ProfilepageState extends State<Profilepage> {
                                   height: 70,
                                 ),
                                 InkWell(
-                                  onTap: ()  {
+                                  onTap: () {
                                     _showLogoutConfirmationDialog(context);
-
                                   },
                                   child: Container(
                                     color: Color(0xffE6EEF0),

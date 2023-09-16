@@ -13,8 +13,9 @@ class Departments extends StatefulWidget {
   State<Departments> createState() => _DepartmentsState();
 }
 
+HomeViewModel homeViewModel = HomeViewModel();
+
 class _DepartmentsState extends State<Departments> {
-  HomeViewModel homeViewModel = HomeViewModel();
   @override
   void initState() {
     homeViewModel.getDepartments();
@@ -147,6 +148,7 @@ class _DepartmentsState extends State<Departments> {
                                   children: [
                                     InkWell(
                                       onTap: () {
+                                        homeViewModel.pageID = e.id ?? '';
                                         Navigator.push(
                                             context, MaterialPageRoute(builder: (context) => DashboardUi(37)));
                                       },

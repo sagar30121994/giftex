@@ -15,8 +15,7 @@ class PopupWidget extends StatelessWidget {
         TextButton(
           onPressed: () {
             Navigator.of(context).pop(false);
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Loginpage()));
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Loginpage()), (_) => false);
           },
           child: Text('Ok'),
         ),

@@ -346,8 +346,10 @@ class _GetOtppageState extends State<GetOtppage> {
                               {
                                 if (widget.loginViewModel.loginResponse!.status == "true")
                                   {
-                                    Navigator.pushReplacement(
-                                        context, MaterialPageRoute(builder: (BuildContext context) => DashboardUi(0))),
+                                    Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(builder: (BuildContext context) => DashboardUi(0)),
+                                        (_) => false),
                                   }
                                 else
                                   {

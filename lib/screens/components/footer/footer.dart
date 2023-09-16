@@ -2,6 +2,7 @@ import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/data/local/client/prefs.dart';
+import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
 import 'package:giftex/screens/termsandconditions/termsandconditions.dart';
 import 'package:giftex/viewmodel/user/footerviewmodel.dart';
@@ -39,8 +40,8 @@ class _FooterState extends State<Footer> {
   final GlobalKey<ExpansionTileCardState> cardB = new GlobalKey();
   final GlobalKey<ExpansionTileCardState> cardC = new GlobalKey();
 
-  final nameController = TextEditingController();
-  final emailController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -107,42 +108,38 @@ class _FooterState extends State<Footer> {
                         // SizedBox(height: 10,),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
-                          child: Observer(builder: (context) {
-                            return TextField(
-                              controller: nameController,
-                              onChanged: (str) {
-                                footerViewModel.setfirstName(str);
-                              },
-                              decoration: InputDecoration(
-                                  isDense: true,
-                                  labelText: 'Name',
-                                  // filled: true,
-                                  errorText: footerViewModel.subscribeViewModelErrorState.name,
-                                  enabledBorder:
-                                      UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey.shade400))),
-                            );
-                          }),
+                          child: TextField(
+                            controller: nameController,
+                            onChanged: (str) {
+                              footerViewModel.setfirstName(str);
+                            },
+                            decoration: InputDecoration(
+                                isDense: true,
+                                labelText: 'Name',
+                                // filled: true,
+                                errorText: footerViewModel.subscribeViewModelErrorState.name,
+                                enabledBorder:
+                                    UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey.shade400))),
+                          ),
                         ),
                         // SizedBox(height: 10,),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
-                          child: Observer(builder: (context) {
-                            return TextField(
-                              controller: emailController,
-                              onChanged: (str) {
-                                footerViewModel.setemail(str);
-                              },
-                              keyboardType: TextInputType.emailAddress,
-                              decoration: InputDecoration(
-                                  isDense: true,
-                                  labelText: 'Email',
-                                  errorText: footerViewModel.subscribeViewModelErrorState.email,
-                                  // filled: true,
-                                  border: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                  enabledBorder:
-                                      UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey.shade400))),
-                            );
-                          }),
+                          child: TextField(
+                            controller: emailController,
+                            onChanged: (str) {
+                              footerViewModel.setemail(str);
+                            },
+                            keyboardType: TextInputType.emailAddress,
+                            decoration: InputDecoration(
+                                isDense: true,
+                                labelText: 'Email',
+                                errorText: footerViewModel.subscribeViewModelErrorState.email,
+                                // filled: true,
+                                border: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                enabledBorder:
+                                    UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey.shade400))),
+                          ),
                         ),
 
                         SizedBox(
@@ -166,20 +163,21 @@ class _FooterState extends State<Footer> {
                   right: 0,
                   child: InkWell(
                     onTap: () async {
-                      if (nameController.text == "") {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text("Please Enter A Valid Name"),
-                          backgroundColor: Colors.red,
-                        ));
-                        return;
-                      }
-                      if (emailController.text == "") {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text("Please Enter A Valid Email"),
-                          backgroundColor: Colors.red,
-                        ));
-                        return;
-                      }
+                      if (prefrence!.getLoginStatus()) {
+                        if (nameController.text == "") {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text("Please Enter A Valid Name"),
+                            backgroundColor: Colors.red,
+                          ));
+                          return;
+                        }
+                        if (emailController.text == "") {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text("Please Enter A Valid Email"),
+                            backgroundColor: Colors.red,
+                          ));
+                          return;
+                        }
 
                       if (!footerViewModel.subscribeViewModelErrorState.hasErrors) {
                         HttpResponse res = await footerViewModel.insertsubscribeForm();
