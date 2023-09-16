@@ -197,7 +197,7 @@ class _ServicepageState extends State<Servicepage> {
                     Padding(
                       padding: EdgeInsets.only(
                         left: 130,
-                        top: 90,
+                        top: 80,
                       ),
                       child: Container(
                         //replace this Container with your Card
@@ -303,7 +303,7 @@ class _ServicepageState extends State<Servicepage> {
                     Padding(
                       padding: EdgeInsets.only(
                         right: 130,
-                        top: 90,
+                        top: 75,
                       ),
                       child: Container(
                         //replace this Container with your Card
@@ -408,7 +408,7 @@ class _ServicepageState extends State<Servicepage> {
                     Padding(
                       padding: EdgeInsets.only(
                         left: 130,
-                        top: 90,
+                        top: 75,
                       ),
                       child: Container(
                         //replace this Container with your Card
@@ -521,7 +521,7 @@ class _ServicepageState extends State<Servicepage> {
                     Padding(
                       padding: EdgeInsets.only(
                         right: 130,
-                        top: 90,
+                        top: 80,
                       ),
                       child: Container(
                         //replace this Container with your Card
