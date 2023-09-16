@@ -117,11 +117,9 @@ class _FooterState extends State<Footer> {
                                   isDense: true,
                                   labelText: 'Name',
                                   // filled: true,
-                                  errorText: footerViewModel
-                                      .subscribeViewModelErrorState.name,
-                                  enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.grey.shade400))),
+                                  errorText: footerViewModel.subscribeViewModelErrorState.name,
+                                  enabledBorder:
+                                      UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey.shade400))),
                             );
                           }),
                         ),
@@ -138,15 +136,11 @@ class _FooterState extends State<Footer> {
                               decoration: InputDecoration(
                                   isDense: true,
                                   labelText: 'Email',
-                                  errorText: footerViewModel
-                                      .subscribeViewModelErrorState.email,
+                                  errorText: footerViewModel.subscribeViewModelErrorState.email,
                                   // filled: true,
-                                  border: UnderlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.black)),
-                                  enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.grey.shade400))),
+                                  border: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                  enabledBorder:
+                                      UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey.shade400))),
                             );
                           }),
                         ),
@@ -187,14 +181,11 @@ class _FooterState extends State<Footer> {
                         return;
                       }
 
-                      if (!footerViewModel
-                          .subscribeViewModelErrorState.hasErrors) {
-                        HttpResponse res =
-                            await footerViewModel.insertsubscribeForm();
+                      if (!footerViewModel.subscribeViewModelErrorState.hasErrors) {
+                        HttpResponse res = await footerViewModel.insertsubscribeForm();
 
                         if (res.status == 200) {
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(const SnackBar(
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                             content: Text("Thank you for subscribing"),
                             backgroundColor: Colors.green,
                           ));
@@ -202,7 +193,6 @@ class _FooterState extends State<Footer> {
                           nameController.text = "";
                           footerViewModel.subscribeViewModelErrorState.name = null;
                           footerViewModel.subscribeViewModelErrorState.email = null;
-
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text("${res.message}"),
@@ -429,7 +419,7 @@ class _FooterState extends State<Footer> {
                                   ),
                                 ),
                                 InkWell(
-                                  onTap: (){
+                                  onTap: () {
                                     bottomViewModel.selectedIndex = 33;
                                   },
                                   child: Padding(
@@ -526,7 +516,7 @@ class _FooterState extends State<Footer> {
                                 InkWell(
                                   onTap: () {
                                     bottomViewModel.selectedIndex = 18;
-                                 //   Navigator.push(context, MaterialPageRoute(builder: (context) => DashboardUi(18)));
+                                    //   Navigator.push(context, MaterialPageRoute(builder: (context) => DashboardUi(18)));
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 20.0, top: 10),
