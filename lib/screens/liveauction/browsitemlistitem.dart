@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:giftex/data/local/client/prefs.dart';
 import 'package:giftex/screens/liveauction/components/image/imagecomponent.dart';
 import 'package:giftex/screens/liveauction/liveauction.dart';
@@ -13,6 +14,7 @@ import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
 import 'package:intl/intl.dart';
 
 import '../../data/network/models/responce/lot/upcominglotsresponse.dart';
+import '../signup/login.dart';
 
 // DashboardUi ui = DashboardUi();
 class BrowseItemListItem extends StatefulWidget {
@@ -756,11 +758,17 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                                   Row(
                                                                     children: [
                                                                       Checkbox(
-                                                                          value: checked,
+                                                                          value: preference!.getAgreed(),
                                                                           onChanged: (check) {
+
                                                                             builder(() {
                                                                               checked = check ?? false;
                                                                             });
+                                                                            if(check!){
+                                                                              preference!.setAgreed(false);
+                                                                            }else{
+                                                                              preference!.setAgreed(true);
+                                                                            }
                                                                           }),
                                                                       Text(
                                                                         "I agree to",
@@ -984,8 +992,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                           : InkWell(
                                               onTap: () {
                                                 if (preference!.getLoginStatus()) {
-                                                  bool checked =
-                                                      widget.auctionViewModel.localSharedPrefrence.getTermstatus();
+                                                  bool checked = preference!.getAgreed();
 
                                                   showModalBottomSheet<void>(
                                                     // context and builder are
@@ -999,7 +1006,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                       // we create center column and display text
 
                                                       // Returning SizedBox instead of a Container
-                                                      return StatefulBuilder(builder: (_, builder) {
+                                                      return StatefulBuilder(builder: (context, setState) {
                                                         return SizedBox(
                                                           height: MediaQuery.of(ctx).size.height - 150,
                                                           child: Observer(builder: (ctx) {
@@ -1139,14 +1146,17 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                                   Row(
                                                                     children: [
                                                                       Checkbox(
-                                                                          value: checked,
-                                                                          onChanged: (check) {
-                                                                            builder(() {
-                                                                              checked = check ?? false;
+                                                                          value:  checked,
+                                                                          onChanged: (check) async {
+                                                                            setState(() {
+                                                                              if(checked){
+                                                                                 preference!.setAgreed(false);
+                                                                              }else{
+                                                                                preference!.setAgreed(true);
+                                                                              }
                                                                             });
 
-                                                                            widget.auctionViewModel.localSharedPrefrence
-                                                                                .setLoginStatus(checked);
+
                                                                           }),
                                                                       Text(
                                                                         "I agree to",
@@ -2062,11 +2072,13 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                               Row(
                                                                 children: [
                                                                   Checkbox(
-                                                                      value: checked,
+                                                                      value: preference!.getAgreed(),
                                                                       onChanged: (check) {
-                                                                        builder(() {
-                                                                          checked = check ?? false;
-                                                                        });
+                                                                        if(check!){
+                                                                          preference!.setAgreed(false);
+                                                                        }else{
+                                                                          preference!.setAgreed(true);
+                                                                        }
                                                                       }),
                                                                   Text(
                                                                     "I agree to",
@@ -2433,11 +2445,13 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                               Row(
                                                                 children: [
                                                                   Checkbox(
-                                                                      value: checked,
+                                                                      value: preference!.getAgreed(),
                                                                       onChanged: (check) {
-                                                                        builder(() {
-                                                                          checked = check ?? false;
-                                                                        });
+                                                                        if(check!){
+                                                                          preference!.setAgreed(false);
+                                                                        }else{
+                                                                          preference!.setAgreed(true);
+                                                                        }
                                                                       }),
                                                                   Text(
                                                                     "I agree to",

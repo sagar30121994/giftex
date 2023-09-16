@@ -7,6 +7,7 @@ import 'package:giftex/screens/signup/getotp.dart';
 import 'package:giftex/viewmodel/user/loginviewmodel.dart';
 import 'package:validators/validators.dart';
 
+import '../../data/local/client/prefs.dart';
 import '../components/bottomnavigationbar/bottomnavigationbar.dart';
 import '../kyc/kycpage.dart';
 
@@ -18,6 +19,7 @@ class Loginpage extends StatefulWidget {
 }
 
 class _LoginpageState extends State<Loginpage> {
+  LocalSharedPrefrence prefrence=LocalSharedPrefrence();
   String loginType = "signup";
   bool isMobile = true;
   bool isEmailVerified = false;
@@ -523,6 +525,7 @@ class _LoginpageState extends State<Loginpage> {
                                                                         setState(() {
                                                                           isCheked = false;
                                                                         });
+                                                                        prefrence!.setAgreed(false);
                                                                         Navigator.of(context).pop();
                                                                       },
                                                                       child: Text(
@@ -537,6 +540,7 @@ class _LoginpageState extends State<Loginpage> {
                                                                         setState(() {
                                                                           isCheked = true;
                                                                         });
+                                                                        prefrence!.setAgreed(true);
                                                                         Navigator.of(context).pop();
                                                                       },
                                                                       child: Text(

@@ -21,6 +21,7 @@ class LocalSharedPrefrence {
   String token = 'accesstoken';
   String name = 'name';
   String authkey = 'authkey';
+  String isAgreed='isAgreed';
 
   Future<void> setToken(String flag) async {
     if (prefsAvailable) {
@@ -163,6 +164,18 @@ class LocalSharedPrefrence {
   bool getSliderStatus() {
     if (prefsAvailable) {
       return myGlobalPreference!.getBool(slider) ?? false;
+    }
+    return false;
+  }
+  Future<void> setAgreed(bool flag) async {
+    if (prefsAvailable) {
+      await myGlobalPreference!.setBool(isAgreed, flag);
+    }
+  }
+
+  bool getAgreed() {
+    if (prefsAvailable) {
+      return myGlobalPreference!.getBool(isAgreed) ?? false;
     }
     return false;
   }
