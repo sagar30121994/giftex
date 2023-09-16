@@ -525,7 +525,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                           borderRadius: BorderRadius.circular(20.0),
                                                           side: BorderSide(color: Color(0xff747474), width: 0.38)))),
                                               onPressed: () async {
-                                                bool checked = false;
+                                                bool checked = preference!.getAgreed();
                                                 final textEditingController = TextEditingController();
                                                 await auctionViewModel.getProxyAmountByLot(widget.lots);
 
@@ -543,7 +543,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                       // we create center column and display text
 
                                                       // Returning SizedBox instead of a Container
-                                                      return StatefulBuilder(builder: (_, builder) {
+                                                      return StatefulBuilder(builder: (context, setState)  {
                                                         return SizedBox(
                                                           height: MediaQuery.of(context).size.height - 150,
                                                           child: Observer(builder: (context) {
@@ -758,17 +758,18 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                                   Row(
                                                                     children: [
                                                                       Checkbox(
-                                                                          value: preference!.getAgreed(),
-                                                                          onChanged: (check) {
+                                                                          value:  checked,
+                                                                          onChanged: (check) async {
 
-                                                                            builder(() {
-                                                                              checked = check ?? false;
-                                                                            });
-                                                                            if(check!){
-                                                                              preference!.setAgreed(false);
+                                                                            if(preference!.getAgreed()){
+                                                                              await  preference!.setAgreed(false);
+
                                                                             }else{
-                                                                              preference!.setAgreed(true);
+                                                                              await preference!.setAgreed(true);
                                                                             }
+                                                                            setState(() {
+                                                                              checked=!checked;
+                                                                            });
                                                                           }),
                                                                       Text(
                                                                         "I agree to",
@@ -1006,7 +1007,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                       // we create center column and display text
 
                                                       // Returning SizedBox instead of a Container
-                                                      return StatefulBuilder(builder: (context, setState) {
+                                                      return StatefulBuilder(builder: (context, setState)  {
                                                         return SizedBox(
                                                           height: MediaQuery.of(ctx).size.height - 150,
                                                           child: Observer(builder: (ctx) {
@@ -1143,41 +1144,190 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                                   //   ],
                                                                   // ),
 
-                                                                  Row(
-                                                                    children: [
-                                                                      Checkbox(
-                                                                          value:  checked,
-                                                                          onChanged: (check) async {
-                                                                            setState(() {
-                                                                              if(checked){
-                                                                                 preference!.setAgreed(false);
-                                                                              }else{
-                                                                                preference!.setAgreed(true);
-                                                                              }
-                                                                            });
+                                                                  InkWell(
+                                                                    onTap: () async {
+                                                                    /*  await showDialog(
+                                                                          context: context,
+                                                                          builder: (BuildContext dialogContext) {
+                                                                        return AlertDialog(
+                                                                          contentPadding: EdgeInsets.all(0),
+                                                                          content: Container(
+                                                                            height: 580,
+                                                                            child: Stack(
+                                                                              children: [
+                                                                                Container(
+                                                                                  padding: EdgeInsets.all(16),
+                                                                                  width: MediaQuery.of(context).size.width,
+                                                                                  color: Color(0xffEAEEF2),
+                                                                                  child: SingleChildScrollView(
+                                                                                    child: Column(
+                                                                                      mainAxisAlignment: MainAxisAlignment.start,
+                                                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                      children: [
+                                                                                        Row(
+                                                                                          mainAxisAlignment: MainAxisAlignment.end,
+                                                                                          crossAxisAlignment: CrossAxisAlignment.end,
+                                                                                          children: [
+                                                                                            InkWell(
+                                                                                                onTap: () {
+                                                                                                  Navigator.of(context).pop();
+                                                                                                },
+                                                                                                child: Icon(
+                                                                                                  Icons.close,
+                                                                                                  size: 20,
+                                                                                                  color: Color(0xff979797),
+                                                                                                ))
+                                                                                          ],
+                                                                                        ),
+                                                                                        Row(
+                                                                                          children: [
+                                                                                            Image.asset(
+                                                                                              "image/Vector (22).png",
+                                                                                              color: Color(0XFF202232),
+                                                                                            ),
+                                                                                            SizedBox(
+                                                                                              width: 5,
+                                                                                            ),
+                                                                                            Text(
+                                                                                              'TERMS & CONDITIONS',
+                                                                                              style: Theme.of(context)
+                                                                                                  .textTheme
+                                                                                                  .subtitle1!
+                                                                                                  .copyWith(
+                                                                                                  color: Color(0XFF202232),
+                                                                                                  fontWeight: FontWeight.w400,
+                                                                                                  letterSpacing: 2),
+                                                                                            ),
+                                                                                          ],
+                                                                                        ),
+                                                                                        SizedBox(
+                                                                                          height: 16,
+                                                                                        ),
+                                                                                        SizedBox(
+                                                                                          height: 8,
+                                                                                        ),
+                                                                                        SizedBox(
+                                                                                          height: 380,
+                                                                                          child: SingleChildScrollView(
+                                                                                            child: HtmlWidget(
+                                                                                              // the first parameter (`html`) is required
+
+                                                                                              // all other parameters are optional, a few notable params:
+
+                                                                                              // specify custom styling for an element
+                                                                                              '${loginViewModel.termsAndConditionsResponse!.pageContent!.accordion![0].desc}',
+
+                                                                                              // render a custom widget
+
+                                                                                              // these callbacks are called when a complicated element is loading
+                                                                                              // or failed to render allowing the app to render progress indicator
+                                                                                              // and fallback widget
+
+                                                                                              // select the render mode for HTML body
+                                                                                              // by default, a simple `Column` is rendered
+                                                                                              // consider using `ListView` or `SliverList` for better performance
+
+                                                                                              // set the default styling for text
+                                                                                              textStyle: TextStyle(fontSize: 14),
+
+                                                                                              // turn on `webView` if you need IFRAME support (it's disabled by default)
+                                                                                            ),
+                                                                                          ),
+                                                                                        ),
+                                                                                        // Text(
+                                                                                        //   '${loginViewModel.termsAndConditionsResponse!.pageContent!.accordion![0].desc}',
+                                                                                        //   textAlign: TextAlign.center,
+                                                                                        //   style: Theme.of(context).textTheme.caption!.copyWith(
+                                                                                        //         color: Color(0XFF202232).withOpacity(0.61),
+                                                                                        //         fontWeight: FontWeight.w400,
+                                                                                        //       ),
+                                                                                        // ),
+                                                                                        Row(
+                                                                                          children: [
+                                                                                            Spacer(),
+                                                                                            TextButton(
+                                                                                                onPressed: () {
+                                                                                                  setState(() {
+                                                                                                    preference!.setAgreed(false);
+                                                                                                  });
+                                                                                                  Navigator.of(context).pop();
+                                                                                                },
+                                                                                                child: Text(
+                                                                                                  "DISAGREE",
+                                                                                                  style: Theme.of(context).textTheme.button,
+                                                                                                )),
+                                                                                            SizedBox(
+                                                                                              width: 24,
+                                                                                            ),
+                                                                                            ElevatedButton(
+                                                                                                onPressed: () {
+                                                                                                  setState(() {
+                                                                                                    preference!.setAgreed(true);
+                                                                                                  });
+                                                                                                  Navigator.of(context).pop();
+                                                                                                },
+                                                                                                child: Text(
+                                                                                                  "AGREE",
+                                                                                                  style: Theme.of(context)
+                                                                                                      .textTheme
+                                                                                                      .button!
+                                                                                                      .copyWith(color: Colors.white),
+                                                                                                ))
+                                                                                          ],
+                                                                                        ),
+                                                                                        SizedBox(
+                                                                                          height: 10,
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                              ],
+                                                                            ),
+                                                                          ),
+                                                                        );
+                                                                      });*/
+                                                                    },
+                                                                    child: Row(
+                                                                      children: [
+                                                                        Checkbox(
+                                                                            value:  checked,
+                                                                            onChanged: (check) async {
+
+                                                                                if(preference!.getAgreed()){
+                                                                                 await  preference!.setAgreed(false);
+
+                                                                                }else{
+                                                                                  await preference!.setAgreed(true);
+                                                                                }
+                                                                                setState(() {
+                                                                                  checked=!checked;
+                                                                                });
 
 
-                                                                          }),
-                                                                      Text(
-                                                                        "I agree to",
-                                                                        style: Theme.of(ctx)
-                                                                            .textTheme
-                                                                            .subtitle2!
-                                                                            .copyWith(color: Colors.grey),
-                                                                      ),
-                                                                      SizedBox(
-                                                                        width: 2,
-                                                                      ),
-                                                                      Text(
-                                                                        "Terms & Conditions",
-                                                                        style: Theme.of(ctx)
-                                                                            .textTheme
-                                                                            .subtitle2!
-                                                                            .copyWith(
-                                                                                decoration: TextDecoration.underline,
-                                                                                fontWeight: FontWeight.bold),
-                                                                      ),
-                                                                    ],
+
+                                                                            }),
+                                                                        Text(
+                                                                          "I agree to 1",
+                                                                          style: Theme.of(ctx)
+                                                                              .textTheme
+                                                                              .subtitle2!
+                                                                              .copyWith(color: Colors.grey),
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width: 2,
+                                                                        ),
+                                                                        Text(
+                                                                          "Terms & Conditions",
+                                                                          style: Theme.of(ctx)
+                                                                              .textTheme
+                                                                              .subtitle2!
+                                                                              .copyWith(
+                                                                                  decoration: TextDecoration.underline,
+                                                                                  fontWeight: FontWeight.bold),
+                                                                        ),
+                                                                      ],
+                                                                    ),
                                                                   ),
                                                                   SizedBox(
                                                                     height: 4,
@@ -1854,7 +2004,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                       borderRadius: BorderRadius.circular(20.0),
                                                       side: BorderSide(color: Color(0xff747474), width: 0.38)))),
                                           onPressed: () async {
-                                            bool checked = false;
+                                            bool checked = preference!.getAgreed();
                                             final textEditingController = TextEditingController();
                                             await auctionViewModel.getProxyAmountByLot(widget.lots);
 
@@ -1872,7 +2022,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                   // we create center column and display text
 
                                                   // Returning SizedBox instead of a Container
-                                                  return StatefulBuilder(builder: (_, builder) {
+                                                  return StatefulBuilder(builder: (context, setState) {
                                                     return SizedBox(
                                                       height: MediaQuery.of(context).size.height - 150,
                                                       child: Observer(builder: (context) {
@@ -2072,13 +2222,18 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                               Row(
                                                                 children: [
                                                                   Checkbox(
-                                                                      value: preference!.getAgreed(),
-                                                                      onChanged: (check) {
-                                                                        if(check!){
-                                                                          preference!.setAgreed(false);
+                                                                      value:  checked,
+                                                                      onChanged: (check) async {
+
+                                                                        if(preference!.getAgreed()){
+                                                                          await  preference!.setAgreed(false);
+
                                                                         }else{
-                                                                          preference!.setAgreed(true);
+                                                                          await preference!.setAgreed(true);
                                                                         }
+                                                                        setState(() {
+                                                                          checked=!checked;
+                                                                        });
                                                                       }),
                                                                   Text(
                                                                     "I agree to",
@@ -2296,7 +2451,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                       : InkWell(
                                           onTap: () {
                                             if (preference!.getLoginStatus()) {
-                                              bool checked = false;
+                                              bool checked = preference!.getAgreed();
                                               showModalBottomSheet<void>(
                                                 // context and builder are
                                                 // required properties in this widget
@@ -2309,7 +2464,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                   // we create center column and display text
 
                                                   // Returning SizedBox instead of a Container
-                                                  return StatefulBuilder(builder: (_, builder) {
+                                                  return StatefulBuilder(builder: (context, setState)  {
                                                     return SizedBox(
                                                       height: MediaQuery.of(ctx).size.height - 150,
                                                       child: Observer(builder: (ctx) {
@@ -2445,13 +2600,18 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                               Row(
                                                                 children: [
                                                                   Checkbox(
-                                                                      value: preference!.getAgreed(),
-                                                                      onChanged: (check) {
-                                                                        if(check!){
-                                                                          preference!.setAgreed(false);
+                                                                      value:  checked,
+                                                                      onChanged: (check) async {
+
+                                                                        if(preference!.getAgreed()){
+                                                                          await  preference!.setAgreed(false);
+
                                                                         }else{
-                                                                          preference!.setAgreed(true);
+                                                                          await preference!.setAgreed(true);
                                                                         }
+                                                                        setState(() {
+                                                                          checked=!checked;
+                                                                        });
                                                                       }),
                                                                   Text(
                                                                     "I agree to",
