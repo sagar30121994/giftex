@@ -25,6 +25,9 @@ class _FooterState extends State<Footer> {
     prefrence = LocalSharedPrefrence();
     nameController.text = prefrence?.getFullname() ?? '';
     emailController.text = prefrence?.getEmail() ?? '';
+    footerViewModel.setfirstName(nameController.text);
+    footerViewModel.setfirstName(emailController.text);
+
     footerViewModel.setupValidations();
     super.initState();
   }

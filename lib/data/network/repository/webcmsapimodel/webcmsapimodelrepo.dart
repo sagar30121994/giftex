@@ -348,7 +348,7 @@ class WebCmsApiModelRepo {
   Future<HttpResponse> getNews() async {
     HttpResponse httpResponse = HttpResponse();
     // String userlogin = json.encode(LoginReqestModel);
-    httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
+    httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
     await httpClient!.post(BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().getnews, body: {
       "authkey_web": "${localSharedPrefrence!.authkey ?? ''}",
       "authkey_mobile": "",
@@ -381,7 +381,7 @@ class WebCmsApiModelRepo {
   Future<HttpResponse> getBlogs() async {
     HttpResponse httpResponse = HttpResponse();
     // String userlogin = json.encode(LoginReqestModel);
-    // httpClient!.client!.options = BaseOptions(contentType: Headers.formUrlEncodedContentType);
+     httpClient!.client!.options = BaseOptions(contentType: Headers.jsonContentType);
     await httpClient!.post(BaseUrl.CMSBaseurl + endPoints.WebCMSApiModel().getblogs, body: {
       "authkey_web": "${localSharedPrefrence!.authkey ?? ''}",
       "authkey_mobile": "",
@@ -768,7 +768,7 @@ class WebCmsApiModelRepo {
     HttpResponse httpResponse = HttpResponse();
     // String userlogin=json.encode(LoginReqestModel);
     // httpClient!.client!.options =
-    //     BaseOptions(contentType: Headers.formUrlEncodedContentType);
+         BaseOptions(contentType: Headers.jsonContentType);
     String userid = localSharedPrefrence!.getUserId();
     String authKey = localSharedPrefrence!.getAuthKeyWeb();
     String crmClientId = localSharedPrefrence!.getCrmClinetId();
