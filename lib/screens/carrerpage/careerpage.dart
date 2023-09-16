@@ -268,7 +268,6 @@ class _CareerPageState extends State<CareerPage> {
             child: Column(
               children: [
                 ListTile(
-
                   title: Text(
                     "Job Description",textAlign: TextAlign.left,
                     style: Theme.of(context).textTheme.subtitle1!.copyWith(
