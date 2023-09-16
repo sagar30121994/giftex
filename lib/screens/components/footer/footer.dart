@@ -158,84 +158,81 @@ class _FooterState extends State<Footer> {
                   ),
                 ),
                 Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: InkWell(
-                    onTap: () async {
-                      if (prefrence!.getLoginStatus()) {
-                        if (nameController.text == "") {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text("Please Enter A Valid Name"),
-                            backgroundColor: Colors.red,
-                          ));
-                          return;
-                        }
-                        if (emailController.text == "") {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text("Please Enter A Valid Email"),
-                            backgroundColor: Colors.red,
-                          ));
-                          return;
-                        }
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: InkWell(
+                        onTap: () async {
+                          if (nameController.text == "") {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("Please Enter A Valid Name"),
+                              backgroundColor: Colors.red,
+                            ));
+                            return;
+                          }
+                          if (emailController.text == "") {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("Please Enter A Valid Email"),
+                              backgroundColor: Colors.red,
+                            ));
+                            return;
+                          }
 
-                      if (!footerViewModel.subscribeViewModelErrorState.hasErrors) {
-                        HttpResponse res = await footerViewModel.insertsubscribeForm();
+                          if (!footerViewModel.subscribeViewModelErrorState.hasErrors) {
+                            HttpResponse res = await footerViewModel.insertsubscribeForm();
 
-                        if (res.status == 200) {
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                            content: Text("Thank you for subscribing"),
-                            backgroundColor: Colors.green,
-                          ));
-                          emailController.text = "";
-                          nameController.text = "";
-                          footerViewModel.subscribeViewModelErrorState.name = null;
-                          footerViewModel.subscribeViewModelErrorState.email = null;
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text("${res.message}"),
-                            backgroundColor: Colors.green,
-                          ));
-                        }
-                      }
-                    },
-                    child: SizedBox(
-                      height: 50,
-                      child: Center(
-                        child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 2),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(22.0),
-                              gradient: LinearGradient(
-                                begin: Alignment.bottomLeft,
-                                end: Alignment.topRight,
-                                colors: [
-                                  Color(0xffB45156),
-                                  Color(0xffE74B52),
-                                ],
-                              )),
-                          child: footerViewModel.isLoadingForUpCommingAuction
-                              ? Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: CircularProgressIndicator(
-                                    color: Colors.white,
-                                  ),
-                                )
-                              : Padding(
-                                  padding: const EdgeInsets.only(right: 8.0, left: 8, top: 12, bottom: 12),
-                                  child: Text(
-                                    'SUBMIT',
-                                    style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                          color: Color(0XFFFFFFFF),
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                  ),
-                                ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                            if (res.status == 200) {
+                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                content: Text("Thank you for subscribing"),
+                                backgroundColor: Colors.green,
+                              ));
+                              emailController.text = "";
+                              nameController.text = "";
+                              footerViewModel.subscribeViewModelErrorState.name = null;
+                              footerViewModel.subscribeViewModelErrorState.email = null;
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text("${res.message}"),
+                                backgroundColor: Colors.green,
+                              ));
+                            }
+                          }
+                        },
+                        child: SizedBox(
+                          height: 50,
+                          child: Center(
+                            child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(22.0),
+                                  gradient: LinearGradient(
+                                    begin: Alignment.bottomLeft,
+                                    end: Alignment.topRight,
+                                    colors: [
+                                      Color(0xffB45156),
+                                      Color(0xffE74B52),
+                                    ],
+                                  )),
+                              child: footerViewModel.isLoadingForUpCommingAuction
+                                  ? Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: CircularProgressIndicator(
+                                        color: Colors.white,
+                                      ),
+                                    )
+                                  : Padding(
+                                      padding: const EdgeInsets.only(right: 8.0, left: 8, top: 12, bottom: 12),
+                                      child: Text(
+                                        'SUBMIT',
+                                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                              color: Color(0XFFFFFFFF),
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                      ),
+                                    ),
+                            ),
+                          ),
+                        ))),
               ],
             ),
             Padding(

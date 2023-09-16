@@ -161,12 +161,9 @@ class _BlogDetailsState extends State<BlogDetails> {
                           ],
                         ),
                       ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
+                      // const SizedBox(
+                      //   height: 8,
+                      // ),
                       Padding(
                         padding: EdgeInsets.all(16),
                         child: HtmlWidget(
