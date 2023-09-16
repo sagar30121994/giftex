@@ -58,6 +58,23 @@ mixin _$ProfileViewModel on _ProfileViewModel, Store {
     });
   }
 
+  late final _$mylast5PurchaseReponseAtom =
+      Atom(name: '_ProfileViewModel.mylast5PurchaseReponse', context: context);
+
+  @override
+  MyPurchaseReponse? get mylast5PurchaseReponse {
+    _$mylast5PurchaseReponseAtom.reportRead();
+    return super.mylast5PurchaseReponse;
+  }
+
+  @override
+  set mylast5PurchaseReponse(MyPurchaseReponse? value) {
+    _$mylast5PurchaseReponseAtom
+        .reportWrite(value, super.mylast5PurchaseReponse, () {
+      super.mylast5PurchaseReponse = value;
+    });
+  }
+
   late final _$myAuctionGalleryResponceAtom = Atom(
       name: '_ProfileViewModel.myAuctionGalleryResponce', context: context);
 
@@ -128,13 +145,13 @@ mixin _$ProfileViewModel on _ProfileViewModel, Store {
       Atom(name: '_ProfileViewModel.getLastBidsResponce', context: context);
 
   @override
-  GetLastBidsResponce? get getLastBidsResponce {
+  UpComingLotsResponse? get getLastBidsResponce {
     _$getLastBidsResponceAtom.reportRead();
     return super.getLastBidsResponce;
   }
 
   @override
-  set getLastBidsResponce(GetLastBidsResponce? value) {
+  set getLastBidsResponce(UpComingLotsResponse? value) {
     _$getLastBidsResponceAtom.reportWrite(value, super.getLastBidsResponce, () {
       super.getLastBidsResponce = value;
     });
@@ -605,6 +622,7 @@ mixin _$ProfileViewModel on _ProfileViewModel, Store {
 isloading: ${isloading},
 getUserAllDetailsResponse: ${getUserAllDetailsResponse},
 myPurchaseReponse: ${myPurchaseReponse},
+mylast5PurchaseReponse: ${mylast5PurchaseReponse},
 myAuctionGalleryResponce: ${myAuctionGalleryResponce},
 dashboradOverviewResponse: ${dashboradOverviewResponse},
 paymentResponce: ${paymentResponce},

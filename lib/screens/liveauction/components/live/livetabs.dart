@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:giftex/screens/popwidget.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
@@ -56,13 +57,24 @@ class _LiveTabsState extends State<LiveTabs> {
                           });
                         }
                         if (index == 1) {
-                          tabColor = Color(0xffE74B52);
-                          setState(() {
-                            widget.auctionViewModel.liveAuctionType = "mygallery";
+                          if (widget.auctionViewModel.localSharedPrefrence.getLoginStatus() == false) {
+                            WidgetsBinding.instance?.addPostFrameCallback((_) {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return PopupWidget();
+                                },
+                              );
+                            });
+                          } else {
+                            tabColor = Color(0xffE74B52);
+                            setState(() {
+                              widget.auctionViewModel.liveAuctionType = "mygallery";
 
-                            widget.auctionViewModel.page = 1;
-                            widget.auctionViewModel.myAuctionGallery();
-                          });
+                              widget.auctionViewModel.page = 1;
+                              widget.auctionViewModel.myAuctionGallery();
+                            });
+                          }
                         }
                         if (index == 2) {
                           tabColor = Color(0xffE74B52);

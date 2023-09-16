@@ -17,6 +17,7 @@ class User {
   final String verifyEmail = 'verifyEmail';
   final String verifyMobile = 'verifyMobile';
   final String getLast5Bids = 'User/getLast5Bids';
+  final String getLast5Purchase = 'User/mypurchases';
   final String insertreg = 'InsertReg';
 }
 

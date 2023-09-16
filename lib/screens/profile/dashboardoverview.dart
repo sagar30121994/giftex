@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:giftex/data/network/base/base.dart';
+import 'package:giftex/screens/liveauction/browsitemlistitem.dart';
+import 'package:giftex/screens/profile/orderproductdetails.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
 import 'package:giftex/viewmodel/profile/profileviewmodel.dart';
 import 'package:intl/intl.dart';
@@ -42,6 +43,7 @@ class _MyAuctionDashboardState extends State<MyAuctionDashboard> {
 
     widget.profileViewModel.getDashboardOverview();
     widget.profileViewModel.getLast5Bids();
+    widget.profileViewModel.getLast5Purchases();
     super.initState();
   }
 
@@ -83,7 +85,7 @@ class _MyAuctionDashboardState extends State<MyAuctionDashboard> {
                           ),
                           CircleAvatar(
                             radius: 37,
-                            backgroundImage:  NetworkImage(
+                            backgroundImage: NetworkImage(
                                 '${(widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.basicDetails!.profilePicUrl ?? '')}'),
                             // child: Image.asset("image/image 40.png",fit: BoxFit.fill,),
                           ),
@@ -405,7 +407,213 @@ class _MyAuctionDashboardState extends State<MyAuctionDashboard> {
                             : Column(
                                 children: widget.profileViewModel.getLastBidsResponce!.result!.lots!
                                     .map(
-                                      (e) => Container(),
+                                      (e) => BrowseItemListItem(e, false, auctionViewModel),
+                                    )
+                                    .toList(),
+                              ),
+                      )
+                    : Container(),
+
+                type == "LAST 5 PURCHASES"
+                    ? Container(
+                        child: widget.profileViewModel.mylast5PurchaseReponse == null
+                            ? Container()
+                            : Column(
+                                children: widget.profileViewModel.mylast5PurchaseReponse!.data!
+                                    .map(
+                                      (e) => Padding(
+                                        padding: const EdgeInsets.only(left: 0.0, right: 0.0, top: 10),
+                                        child: Container(
+                                            height: 180,
+                                            alignment: Alignment.center,
+                                            width: MediaQuery.of(context).size.width,
+                                            padding: const EdgeInsets.only(left: 0.0, right: 0.0),
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  "${e.deliveryDate ?? ""}",
+                                                  textAlign: TextAlign.center,
+                                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                        color: Color(0xff747474),
+                                                        fontWeight: FontWeight.w400,
+                                                      ),
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    e.lot!.thumbImage == null
+                                                        ? Container(
+                                                            height: 140,
+                                                            width: 60,
+                                                          )
+                                                        : InkWell(
+                                                            onTap: () async {
+                                                              Navigator.push(
+                                                                  context,
+                                                                  MaterialPageRoute(
+                                                                      builder: (context) => MyOrderProductpage(
+                                                                          widget.profileViewModel, e)));
+                                                            },
+                                                            child: Image.network(
+                                                              "${e.lot!.thumbImage}",
+                                                              height: 140,
+                                                              width: 90,
+                                                              fit: BoxFit.contain,
+                                                            ),
+                                                          ),
+                                                    SizedBox(
+                                                      width: 8,
+                                                    ),
+                                                    Container(
+                                                      width: MediaQuery.of(context).size.width * .60,
+                                                      child: Column(
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              Column(
+                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                children: [
+                                                                  SizedBox(
+                                                                    height: 16,
+                                                                  ),
+                                                                  Text(
+                                                                    "ORDER ID",
+                                                                    textAlign: TextAlign.center,
+                                                                    style:
+                                                                        Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                                              color: Color(0xff2D2D2D),
+                                                                              fontWeight: FontWeight.w600,
+                                                                            ),
+                                                                  ),
+                                                                  Text(
+                                                                    "#${e.orderNumber}",
+                                                                    textAlign: TextAlign.center,
+                                                                    style:
+                                                                        Theme.of(context).textTheme.caption!.copyWith(
+                                                                              color: Color(0xff747474),
+                                                                              fontWeight: FontWeight.w400,
+                                                                            ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              Spacer(),
+                                                              Column(
+                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                children: [
+                                                                  SizedBox(
+                                                                    height: 16,
+                                                                  ),
+                                                                  Text(
+                                                                    "Status",
+                                                                    textAlign: TextAlign.center,
+                                                                    style:
+                                                                        Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                                              color: Color(0xff747474),
+                                                                              fontWeight: FontWeight.w400,
+                                                                            ),
+                                                                  ),
+                                                                  Text(
+                                                                    "${getOrderStatus("${e.completedStage}")}",
+                                                                    textAlign: TextAlign.center,
+                                                                    style: Theme.of(context)
+                                                                        .textTheme
+                                                                        .subtitle1!
+                                                                        .copyWith(
+                                                                          color: Theme.of(context).colorScheme.primary,
+                                                                          fontWeight: FontWeight.w600,
+                                                                        ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              Spacer(),
+                                                              InkWell(
+                                                                  onTap: () {
+                                                                    // Navigator.push(
+                                                                    //     context,
+                                                                    //     MaterialPageRoute(
+                                                                    //         builder: (context) =>
+                                                                    //             MyOrderProductpage()));
+                                                                  },
+                                                                  child: Icon(
+                                                                    Icons.arrow_forward_ios_rounded,
+                                                                    size: 16,
+                                                                    color: Color(0xff747474),
+                                                                  )),
+                                                            ],
+                                                          ),
+                                                          Row(
+                                                            children: [
+                                                              Column(
+                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                children: [
+                                                                  SizedBox(
+                                                                    height: 16,
+                                                                  ),
+                                                                  Text(
+                                                                    "Price",
+                                                                    textAlign: TextAlign.center,
+                                                                    style:
+                                                                        Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                                              color: Color(0xff747474),
+                                                                              fontWeight: FontWeight.w400,
+                                                                            ),
+                                                                  ),
+                                                                  Text(
+                                                                    "₹${e.buyerInvoiceTotalAmount}",
+                                                                    textAlign: TextAlign.center,
+                                                                    style:
+                                                                        Theme.of(context).textTheme.bodySmall!.copyWith(
+                                                                              color: Color(0xff202232),
+                                                                              fontWeight: FontWeight.bold,
+                                                                            ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              Spacer(),
+                                                              // Column(
+                                                              //   mainAxisAlignment: MainAxisAlignment.start,
+                                                              //   crossAxisAlignment: CrossAxisAlignment.start,
+                                                              //   children: [
+                                                              //     SizedBox(
+                                                              //       height: 16,
+                                                              //     ),
+                                                              //     // Text(
+                                                              //     //   "In Transit",
+                                                              //     //   textAlign: TextAlign.center,
+                                                              //     //   style:
+                                                              //     //       Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                              //     //             color: Color(0xff747474),
+                                                              //     //             fontWeight: FontWeight.w400,
+                                                              //     //           ),
+                                                              //     // ),
+                                                              //     // Text(
+                                                              //     //   "20th Jan, 2022",
+                                                              //     //   textAlign: TextAlign.center,
+                                                              //     //   style:
+                                                              //     //       Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                              //     //             color: Color(0xff202232),
+                                                              //     //             fontWeight: FontWeight.w500,
+                                                              //     //           ),
+                                                              //     // ),
+                                                              //   ],
+                                                              // ),
+                                                            ],
+                                                          )
+                                                        ],
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ],
+                                            )),
+                                      ),
                                     )
                                     .toList(),
                               ),
@@ -427,6 +635,38 @@ class _MyAuctionDashboardState extends State<MyAuctionDashboard> {
         }),
       ),
     );
+  }
+
+  String getOrderStatus(String status) {
+    if (status == "1") {
+      return "Order Placed";
+    }
+
+    if (status == "2") {
+      return "Processing";
+    }
+
+    if (status == "3") {
+      return "Preparing For Shopping";
+    }
+
+    if (status == "4") {
+      return "Shipped";
+    }
+
+    if (status == "5") {
+      return "Shipped";
+    }
+
+    if (status == "6") {
+      return "Delivered";
+    }
+
+    if (status == "7") {
+      return "Delivered";
+    }
+
+    return "Order Placed";
   }
 }
 
