@@ -14,8 +14,6 @@ class DepartmentDetails extends StatefulWidget {
 class _DepartmentDetails extends State<DepartmentDetails> {
   @override
   void initState() {
-    // TODO: implement initState
-
     homeViewModel.getDepartmentDetails("");
     super.initState();
   }

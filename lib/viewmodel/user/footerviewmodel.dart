@@ -16,20 +16,19 @@ abstract class _FooterViewModel with Store {
   _FooterViewModel() {
     loginRepo = LoginRepo();
   }
+
   @observable
   String? email;
-
   @action
-  setfirstName(String value) {
-    name = value;
+  setemail(String value) {
+    email = value;
   }
 
   @observable
   String? name;
-
   @action
-  setemail(String value) {
-    email = value;
+  setfirstName(String value) {
+    name = value;
   }
 
   @observable
