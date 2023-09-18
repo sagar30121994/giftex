@@ -766,6 +766,7 @@ class _DashboardUiState extends State<DashboardUi> {
 
             floatingActionButton: FloatingActionButton(
               backgroundColor: Color(0xffE74B52),
+              splashColor: Color(0xffE74B52),
               onPressed: () {
                 showModalBottomSheet(
                     backgroundColor: Colors.transparent,

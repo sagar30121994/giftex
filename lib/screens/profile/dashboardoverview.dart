@@ -534,11 +534,11 @@ class _MyAuctionDashboardState extends State<MyAuctionDashboard> {
                                                               Spacer(),
                                                               InkWell(
                                                                   onTap: () {
-                                                                    // Navigator.push(
-                                                                    //     context,
-                                                                    //     MaterialPageRoute(
-                                                                    //         builder: (context) =>
-                                                                    //             MyOrderProductpage()));
+                                                                    Navigator.push(
+                                                                        context,
+                                                                        MaterialPageRoute(
+                                                                            builder: (context) => MyOrderProductpage(
+                                                                                widget.profileViewModel, e)));
                                                                   },
                                                                   child: Icon(
                                                                     Icons.arrow_forward_ios_rounded,

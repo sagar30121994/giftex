@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:giftex/data/local/client/prefs.dart';
+import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
 import 'package:giftex/screens/liveauction/liveauction.dart';
 import 'package:giftex/screens/popwidget.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
@@ -272,35 +273,39 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    ElevatedButton(
-                                      style: ButtonStyle(
-                                          backgroundColor: MaterialStateProperty.all(Color(0XFFF9F9F9)),
-                                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                              RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius.circular(20.0),
-                                                  side: BorderSide(color: Color(0xffFFFFFF), width: 0.38)))),
-                                      onPressed: () {},
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(right: 5.0, left: 5, top: 10, bottom: 10),
-                                        child: Text(
-                                          'View in room',
-                                          style: Theme.of(context).textTheme.caption!.copyWith(
-                                                color: Color(0XFF2D2D2D),
-                                                fontWeight: FontWeight.w400,
-                                              ),
+                                    // ElevatedButton(
+                                    //   style: ButtonStyle(
+                                    //       backgroundColor: MaterialStateProperty.all(Color(0XFFF9F9F9)),
+                                    //       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                    //           RoundedRectangleBorder(
+                                    //               borderRadius: BorderRadius.circular(20.0),
+                                    //               side: BorderSide(color: Color(0xffFFFFFF), width: 0.38)))),
+                                    //   onPressed: () {},
+                                    //   child: Padding(
+                                    //     padding: const EdgeInsets.only(right: 5.0, left: 5, top: 10, bottom: 10),
+                                    //     child: Text(
+                                    //       'View in room',
+                                    //       style: Theme.of(context).textTheme.caption!.copyWith(
+                                    //             color: Color(0XFF2D2D2D),
+                                    //             fontWeight: FontWeight.w400,
+                                    //           ),
+                                    //     ),
+                                    //   ),
+                                    // ),
+                                    // SizedBox(
+                                    //   width: 100,
+                                    // ),
+                                    Spacer(),
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 16.0),
+                                      child: InkWell(
+                                        onTap: () {
+                                          Share.share('${widget.lots == null ? '' : widget.lots.lotURL ?? ''}');
+                                        },
+                                        child: Image.asset(
+                                          "image/share.png",
+                                          height: 32,
                                         ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 100,
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        Share.share('${widget.lots == null ? '' : widget.lots.lotURL ?? ''}');
-                                      },
-                                      child: Image.asset(
-                                        "image/share.png",
-                                        height: 32,
                                       ),
                                     ),
 
@@ -952,7 +957,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                                 height: 20,
                                               ),
                                               Container(
-                                                height: 210,
+                                                height: 214,
                                                 width: MediaQuery.of(context).size.width * .7,
                                                 color: Color(0xffD9D9D9),
                                                 padding: EdgeInsets.all(16),
@@ -1086,7 +1091,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                                           RoundedRectangleBorder(
                                                               borderRadius: BorderRadius.circular(20.0),
                                                               side: BorderSide(color: Color(0XFFB45156), width: 0.5)))),
-                                                  onPressed: () {},
+                                                  onPressed: () {
+                                                    Navigator.pushReplacement(context,
+                                                        MaterialPageRoute(builder: (context) => DashboardUi(12)));
+                                                  },
                                                   child: Padding(
                                                     padding:
                                                         const EdgeInsets.only(right: 0.0, left: 0, top: 12, bottom: 12),

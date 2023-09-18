@@ -332,6 +332,7 @@ class _MyProfilepageState extends State<MyProfilepage> implements PayUCheckoutPr
                               boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
                           child: TextField(
                             controller: nameController,
+                            readOnly: true,
                             style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w500,
@@ -340,7 +341,8 @@ class _MyProfilepageState extends State<MyProfilepage> implements PayUCheckoutPr
                                 labelText: 'Full Name',
                                 hintText: 'Enter Your Name',
                                 fillColor: Colors.white,
-                                isDense: true),
+                                isDense: true,
+                                border: InputBorder.none),
                           ),
                         ),
                         Container(
@@ -351,11 +353,16 @@ class _MyProfilepageState extends State<MyProfilepage> implements PayUCheckoutPr
                               boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
                           child: TextField(
                             controller: adharController,
+                            readOnly: true,
                             style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w500,
                                 ),
-                            decoration: InputDecoration(labelText: 'Aadhar Details', hintText: '*1234', isDense: true),
+                            decoration: InputDecoration(
+                                labelText: 'Aadhar Details',
+                                hintText: '*1234',
+                                isDense: true,
+                                border: InputBorder.none),
                           ),
                         ),
                         Container(
@@ -366,12 +373,16 @@ class _MyProfilepageState extends State<MyProfilepage> implements PayUCheckoutPr
                               boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
                           child: TextField(
                             controller: panController,
+                            readOnly: true,
                             style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w500,
                                 ),
-                            decoration:
-                                InputDecoration(labelText: 'PAN Card Details', hintText: '*1234', isDense: true),
+                            decoration: InputDecoration(
+                                labelText: 'PAN Card Details',
+                                hintText: '*1234',
+                                isDense: true,
+                                border: InputBorder.none),
                           ),
                         ),
                         Container(
@@ -409,13 +420,14 @@ class _MyProfilepageState extends State<MyProfilepage> implements PayUCheckoutPr
                                   fontWeight: FontWeight.w500,
                                 ),
                             decoration: InputDecoration(
-                                labelText: 'Contact Number',
-                                // hintText: '91+ 9867345212',
-                                suffixIcon: Icon(
-                                  Icons.edit,
-                                  color: Colors.black,
-                                ),
-                                isDense: true),
+                              labelText: 'Contact Number',
+                              // hintText: '91+ 9867345212',
+                              suffixIcon: Icon(
+                                Icons.edit,
+                                color: Colors.black,
+                              ),
+                              isDense: true,
+                            ),
                           ),
                         ),
                         Container(
@@ -426,6 +438,7 @@ class _MyProfilepageState extends State<MyProfilepage> implements PayUCheckoutPr
                               boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
                           child: TextField(
                             controller: dobController,
+                            readOnly: true,
                             style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w500,
@@ -433,7 +446,8 @@ class _MyProfilepageState extends State<MyProfilepage> implements PayUCheckoutPr
                             decoration: InputDecoration(
                                 labelText: 'Date of Birth',
                                 // hintText: '22/03/1998',
-                                isDense: true),
+                                isDense: true,
+                                border: InputBorder.none),
                           ),
                         ),
                         Container(
@@ -444,6 +458,7 @@ class _MyProfilepageState extends State<MyProfilepage> implements PayUCheckoutPr
                               boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
                           child: TextField(
                             controller: genderController,
+                            readOnly: true,
                             style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w500,
@@ -451,7 +466,8 @@ class _MyProfilepageState extends State<MyProfilepage> implements PayUCheckoutPr
                             decoration: InputDecoration(
                                 labelText: 'Gender',
                                 // hintText: 'Male',
-                                isDense: true),
+                                isDense: true,
+                                border: InputBorder.none),
                           ),
                         ),
                         Container(
@@ -462,11 +478,13 @@ class _MyProfilepageState extends State<MyProfilepage> implements PayUCheckoutPr
                               boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
                           child: TextField(
                             controller: nationalityController,
+                            readOnly: true,
                             style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w500,
                                 ),
-                            decoration: InputDecoration(labelText: 'Nationality', hintText: 'Indian', isDense: true),
+                            decoration: InputDecoration(
+                                labelText: 'Nationality', hintText: 'Indian', isDense: true, border: InputBorder.none),
                           ),
                         ),
                         SizedBox(
@@ -696,24 +714,24 @@ class _MyProfilepageState extends State<MyProfilepage> implements PayUCheckoutPr
                             SizedBox(
                               width: 20,
                             ),
-                            ElevatedButton(
-                              style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(Color(0XFFF9F9F9)),
-                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: BorderSide(color: Color(0xff747474), width: 0.38)))),
-                              onPressed: () {},
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 8.0, left: 8, top: 10, bottom: 10),
-                                child: Text(
-                                  'Default',
-                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                        color: Theme.of(context).colorScheme.primary,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                ),
-                              ),
-                            ),
+                            // ElevatedButton(
+                            //   style: ButtonStyle(
+                            //       backgroundColor: MaterialStateProperty.all(Color(0XFFF9F9F9)),
+                            //       shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
+                            //           borderRadius: BorderRadius.circular(18.0),
+                            //           side: BorderSide(color: Color(0xff747474), width: 0.38)))),
+                            //   onPressed: () {},
+                            //   child: Padding(
+                            //     padding: const EdgeInsets.only(right: 8.0, left: 8, top: 10, bottom: 10),
+                            //     child: Text(
+                            //       'Default',
+                            //       style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            //             color: Theme.of(context).colorScheme.primary,
+                            //             fontWeight: FontWeight.w400,
+                            //           ),
+                            //     ),
+                            //   ),
+                            // ),
                             Spacer(),
                           ],
                         ),
