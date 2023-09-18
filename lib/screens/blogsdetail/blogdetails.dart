@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
-
 import '../components/footer/footer.dart';
 import '../components/header.dart';
 import '../newsandupdates/newsandupdates.dart';
