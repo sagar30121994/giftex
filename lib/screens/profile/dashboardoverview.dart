@@ -538,7 +538,9 @@ class _MyAuctionDashboardState extends State<MyAuctionDashboard> {
                                                                         context,
                                                                         MaterialPageRoute(
                                                                             builder: (context) => MyOrderProductpage(
-                                                                                widget.profileViewModel, e)));
+                                                                                widget
+                                                                                    .bottomViewModel.profileViewModel!,
+                                                                                e)));
                                                                   },
                                                                   child: Icon(
                                                                     Icons.arrow_forward_ios_rounded,

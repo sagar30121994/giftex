@@ -7,16 +7,18 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:giftex/data/local/client/prefs.dart';
 import 'package:giftex/screens/popwidget.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
+import 'package:giftex/viewmodel/bottomviewmodel.dart';
 import 'package:intl/intl.dart';
 import 'package:share/share.dart';
 
 import '../components/header.dart';
 
 class ProductDetailPage extends StatefulWidget {
-  ProductDetailPage( this.auctionViewModel);
+  ProductDetailPage(this.bottomViewModel,this.auctionViewModel);
   //
   // Lots lots;
   AuctionViewModel auctionViewModel;
+  BottomViewModel bottomViewModel;
 
   @override
   _ProductDetailPageState createState() => _ProductDetailPageState();
@@ -77,8 +79,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
 
   void checkEvent() {
     final lotReference = FirebaseDatabase.instance.ref("Lot/" + widget.auctionViewModel.selectedLots!.lotId!);
-    final likeReference = FirebaseDatabase.instance
-        .ref("like/" + widget.auctionViewModel.localSharedPrefrence.getUserId() + "/" + widget.auctionViewModel.selectedLots!.lotId!);
+    final likeReference = FirebaseDatabase.instance.ref("like/" +
+        widget.auctionViewModel.localSharedPrefrence.getUserId() +
+        "/" +
+        widget.auctionViewModel.selectedLots!.lotId!);
 
     final userlikeReference =
         FirebaseDatabase.instance.ref("userlike/" + widget.auctionViewModel.localSharedPrefrence.getUserId());
@@ -127,8 +131,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
       widget.auctionViewModel.selectedLots = widget.auctionViewModel.getsingleResponse!.result!.lots![0];
     });
 
-    if ((widget.auctionViewModel.selectedLots!.status ?? "") == "Live" && widget.auctionViewModel.auctionType == "live") {
-      myDuration = Duration(seconds: int.parse(widget.auctionViewModel.selectedLots!.liveStatus!.remainingSeconds ?? "0"));
+    if ((widget.auctionViewModel.selectedLots!.status ?? "") == "Live" &&
+        widget.auctionViewModel.auctionType == "live") {
+      myDuration =
+          Duration(seconds: int.parse(widget.auctionViewModel.selectedLots!.liveStatus!.remainingSeconds ?? "0"));
 
       // if (countdownTimer != null) {
       //   setState(() => countdownTimer!.cancel());
@@ -254,7 +260,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                         height: 190,
                                         child: Padding(
                                           padding: const EdgeInsets.only(left: 25.0, right: 25),
-                                          child: Image.network("${widget.auctionViewModel.selectedLots!.images![pos].bigImage}",
+                                          child: Image.network(
+                                              "${widget.auctionViewModel.selectedLots!.images![pos].bigImage}",
                                               fit: BoxFit.contain,
                                               height: 220,
                                               width: MediaQuery.of(context).size.width),
@@ -294,7 +301,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                     // ),
                                     InkWell(
                                       onTap: () {
-                                        Share.share('${widget.auctionViewModel.selectedLots! == null ? '' : widget.auctionViewModel.selectedLots!.lotURL ?? ''}');
+                                        Share.share(
+                                            '${widget.auctionViewModel.selectedLots! == null ? '' : widget.auctionViewModel.selectedLots!.lotURL ?? ''}');
                                       },
                                       child: Image.asset(
                                         "image/share.png",
@@ -500,7 +508,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                               onPressed: () {
                                 if (preference!.getLoginStatus()) {
                                   widget.auctionViewModel.addRemoveLotToWishlist(
-                                      widget.auctionViewModel.selectedLots!, (widget.auctionViewModel.selectedLots!.isLiked ?? "false") == "true" ? "false" : "true");
+                                      widget.auctionViewModel.selectedLots!,
+                                      (widget.auctionViewModel.selectedLots!.isLiked ?? "false") == "true"
+                                          ? "false"
+                                          : "true");
                                 } else {
                                   WidgetsBinding.instance?.addPostFrameCallback((_) {
                                     showDialog(
@@ -514,10 +525,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                 }
                               },
                               icon: Icon(
-                                (widget.auctionViewModel.selectedLots!.isLiked ?? "false") == "true" && preference!.getLoginStatus()
+                                (widget.auctionViewModel.selectedLots!.isLiked ?? "false") == "true" &&
+                                        preference!.getLoginStatus()
                                     ? Icons.favorite
                                     : Icons.favorite_border,
-                                color: (widget.auctionViewModel.selectedLots!.isLiked ?? "false") == "true" && preference!.getLoginStatus()
+                                color: (widget.auctionViewModel.selectedLots!.isLiked ?? "false") == "true" &&
+                                        preference!.getLoginStatus()
                                     ? Colors.pink
                                     : Colors.grey,
                               ),
@@ -761,7 +774,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                           height: 16,
                         ),
 
-                  ((widget.auctionViewModel.selectedLots!.proxyStatus == null ? '' : widget.auctionViewModel.selectedLots!.proxyStatus!.status) != "CanBid" &&
+                  ((widget.auctionViewModel.selectedLots!.proxyStatus == null
+                                  ? ''
+                                  : widget.auctionViewModel.selectedLots!.proxyStatus!.status) !=
+                              "CanBid" &&
                           widget.auctionViewModel.selectedLots!.status!.toLowerCase() == "upcoming")
                       ? InkWell(
                           onTap: () {},
@@ -1092,7 +1108,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                                               borderRadius: BorderRadius.circular(20.0),
                                                               side: BorderSide(color: Color(0XFFB45156), width: 0.5)))),
                                                   onPressed: () {
-                                                    widget.bottomviewmodel.setIndex(12);
+                                                    widget.bottomViewModel.setIndex(12);
                                                   },
                                                   child: Padding(
                                                     padding:
@@ -1388,9 +1404,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                             )
                           : Container(),
                       Spacer(),
-                      (widget.auctionViewModel.selectedLots!.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId())
+                      (widget.auctionViewModel.selectedLots!.leadingUser!.id ==
+                              widget.auctionViewModel.localSharedPrefrence.getUserId())
                           ? Container()
-                          : ((widget.auctionViewModel.selectedLots!.proxyStatus == null ? '' : widget.auctionViewModel.selectedLots!.proxyStatus!.status) == "CanBid" &&
+                          : ((widget.auctionViewModel.selectedLots!.proxyStatus == null
+                                          ? ''
+                                          : widget.auctionViewModel.selectedLots!.proxyStatus!.status) ==
+                                      "CanBid" &&
                                   widget.auctionViewModel.selectedLots!.status!.toLowerCase() == "upcoming")
                               ? ElevatedButton(
                                   style: ButtonStyle(
@@ -1401,7 +1421,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                   onPressed: () async {
                                     bool checked = false;
                                     final textEditingController = TextEditingController();
-                                    await widget.auctionViewModel.getProxyAmountByLot(widget.auctionViewModel.selectedLots!);
+                                    await widget.auctionViewModel
+                                        .getProxyAmountByLot(widget.auctionViewModel.selectedLots!);
 
                                     if (widget.auctionViewModel.getProxyBidAmountResponse!.status == "true") {
                                       showModalBottomSheet<void>(
@@ -1662,8 +1683,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                                                 elevation: 42,
                                                               ));
                                                             } else {
-                                                              await widget.auctionViewModel.placeBid(widget.auctionViewModel.selectedLots!,
-                                                                  widget.auctionViewModel.selectedProxyBid, "0");
+                                                              await widget.auctionViewModel.placeBid(
+                                                                  widget.auctionViewModel.selectedLots!,
+                                                                  widget.auctionViewModel.selectedProxyBid,
+                                                                  "0");
 
                                                               if (widget.auctionViewModel.proxyBidResponse!.status ==
                                                                   "true") {
@@ -1791,7 +1814,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                       onPressed: () async {
                                         bool checked = false;
                                         final textEditingController = TextEditingController();
-                                        await widget.auctionViewModel.getProxyAmountByLot(widget.auctionViewModel.selectedLots!);
+                                        await widget.auctionViewModel
+                                            .getProxyAmountByLot(widget.auctionViewModel.selectedLots!);
 
                                         if (widget.auctionViewModel.getProxyBidAmountResponse!.status == "true") {
                                           showModalBottomSheet<void>(
@@ -2053,8 +2077,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                                                     elevation: 42,
                                                                   ));
                                                                 } else {
-                                                                  await widget.auctionViewModel.placeBid(widget.auctionViewModel.selectedLots!,
-                                                                      widget.auctionViewModel.selectedProxyBid, "0");
+                                                                  await widget.auctionViewModel.placeBid(
+                                                                      widget.auctionViewModel.selectedLots!,
+                                                                      widget.auctionViewModel.selectedProxyBid,
+                                                                      "0");
 
                                                                   if (widget
                                                                           .auctionViewModel.proxyBidResponse!.status ==
@@ -2178,7 +2204,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                       ),
                       (widget.auctionViewModel.selectedLots!.status!.toLowerCase() == "live" &&
                               (hours != "00" && minutes != "00" && seconds != "00"))
-                          ? (widget.auctionViewModel.selectedLots!.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId())
+                          ? (widget.auctionViewModel.selectedLots!.leadingUser!.id ==
+                                  widget.auctionViewModel.localSharedPrefrence.getUserId())
                               ? Container()
                               : InkWell(
                                   onTap: () {
@@ -2376,8 +2403,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                                     InkWell(
                                                       onTap: () {
                                                         if (checked) {
-                                                          widget.auctionViewModel.placeBid(widget.auctionViewModel.selectedLots!, "0",
-                                                              widget.auctionViewModel.selectedLots!.liveStatus!.nextValidBid!.iNR!);
+                                                          widget.auctionViewModel.placeBid(
+                                                              widget.auctionViewModel.selectedLots!,
+                                                              "0",
+                                                              widget.auctionViewModel.selectedLots!.liveStatus!
+                                                                  .nextValidBid!.iNR!);
 
                                                           if (widget.auctionViewModel.proxyBidResponse!.status ==
                                                               "true") {

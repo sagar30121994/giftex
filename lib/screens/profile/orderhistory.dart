@@ -345,216 +345,186 @@ class _MyOrderHistorypageState extends State<MyOrderHistorypage> {
                                       children:
                                           widget.bottomViewModel.profileViewModel!.myPurchaseReponse!.data!.map((e) {
                                         return Padding(
-                                          padding: const EdgeInsets.only(left: 0.0, right: 0.0, top: 10),
-                                          child: Container(
-                                              height: 200,
-                                              alignment: Alignment.center,
-                                              width: MediaQuery.of(context).size.width,
-                                              padding: const EdgeInsets.only(left: 0.0, right: 0.0,top:24),
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    "${e.deliveryDate ?? ""}",
-                                                    textAlign: TextAlign.center,
-                                                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                          color: Color(0xff747474),
-                                                          fontWeight: FontWeight.w400,
-                                                        ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 5,
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      e.lot!.thumbImage == null
-                                                          ? Container(
-                                                              height: 140,
-                                                              width: 60,
-                                                            )
-                                                          : InkWell(
-                                                              onTap: () async {
-                                                                Navigator.push(
-                                                                    context,
-                                                                    MaterialPageRoute(
-                                                                        builder: (context) => MyOrderProductpage(
-                                                                            widget.bottomViewModel.profileViewModel!,
-                                                                            e)));
-                                                              },
-                                                              child: Image.network(
-                                                                "${e.lot!.thumbImage}",
+                                            padding: const EdgeInsets.only(left: 0.0, right: 0.0, top: 10),
+                                            child: Container(
+                                                height: 200,
+                                                alignment: Alignment.center,
+                                                width: MediaQuery.of(context).size.width,
+                                                padding: const EdgeInsets.only(left: 0.0, right: 0.0, top: 24),
+                                                child: Column(
+                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      "${e.deliveryDate ?? ""}",
+                                                      textAlign: TextAlign.center,
+                                                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                            color: Color(0xff747474),
+                                                            fontWeight: FontWeight.w400,
+                                                          ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        e.lot!.thumbImage == null
+                                                            ? Container(
                                                                 height: 140,
-                                                                width: 90,
-                                                                fit: BoxFit.contain,
+                                                                width: 60,
+                                                              )
+                                                            : InkWell(
+                                                                onTap: () async {
+                                                                  Navigator.push(
+                                                                      context,
+                                                                      MaterialPageRoute(
+                                                                          builder: (context) => MyOrderProductpage(
+                                                                              widget.bottomViewModel.profileViewModel!,
+                                                                              e)));
+                                                                },
+                                                                child: Image.network(
+                                                                  "${e.lot!.thumbImage}",
+                                                                  height: 140,
+                                                                  width: 90,
+                                                                  fit: BoxFit.contain,
+                                                                ),
                                                               ),
-                                                            ),
-                                                      SizedBox(
-                                                        width: 8,
-                                                      ),
-                                                      Container(
-                                                        width: MediaQuery.of(context).size.width * .60,
-                                                        child: Column(
-                                                          children: [
-                                                            Row(
-                                                              children: [
-                                                                Column(
-                                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                        SizedBox(
+                                                          width: 8,
+                                                        ),
+                                                        Container(
+                                                          width: MediaQuery.of(context).size.width * .60,
+                                                          child: Column(
+                                                            children: [
+                                                              Row(
+                                                                children: [
+                                                                  Column(
+                                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                                    children: [
+                                                                      SizedBox(
+                                                                        height: 16,
+                                                                      ),
+                                                                      Text(
+                                                                        "ORDER ID",
+                                                                        textAlign: TextAlign.center,
+                                                                        style: Theme.of(context)
+                                                                            .textTheme
+                                                                            .bodyText1!
+                                                                            .copyWith(
+                                                                              color: Color(0xff2D2D2D),
+                                                                              fontWeight: FontWeight.w600,
+                                                                            ),
+                                                                      ),
+                                                                      Text(
+                                                                        "#${e.orderNumber}",
+                                                                        textAlign: TextAlign.center,
+                                                                        style: Theme.of(context)
+                                                                            .textTheme
+                                                                            .caption!
+                                                                            .copyWith(
+                                                                              color: Color(0xff747474),
+                                                                              fontWeight: FontWeight.w400,
+                                                                            ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  // Spacer(),
+                                                                  SizedBox(width: 4),
+                                                                  Column(
+                                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                                    children: [
+                                                                      SizedBox(
+                                                                        height: 16,
+                                                                      ),
+                                                                      Text(
+                                                                        "Status",
+                                                                        textAlign: TextAlign.center,
+                                                                        style: Theme.of(context)
+                                                                            .textTheme
+                                                                            .bodyText1!
+                                                                            .copyWith(
+                                                                              color: Color(0xff747474),
+                                                                              fontWeight: FontWeight.w400,
+                                                                            ),
+                                                                      ),
+                                                                      Text(
+                                                                        "${getOrderStatus("${e.completedStage}")}",
+                                                                        textAlign: TextAlign.center,
+                                                                        style: Theme.of(context)
+                                                                            .textTheme
+                                                                            .subtitle1!
+                                                                            .copyWith(
+                                                                              color:
+                                                                                  Theme.of(context).colorScheme.primary,
+                                                                              fontWeight: FontWeight.w600,
+                                                                            ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  Spacer(),
+                                                                  InkWell(
+                                                                      onTap: () {
+                                                                        // Navigator.push(
+                                                                        //     context,
+                                                                        //     MaterialPageRoute(
+                                                                        //         builder: (context) =>
+                                                                        //             MyOrderProductpage()));
+                                                                      },
+                                                                      child: Icon(
+                                                                        Icons.arrow_forward_ios_rounded,
+                                                                        size: 16,
+                                                                        color: Color(0xff747474),
+                                                                      )),
+                                                                ],
+                                                              ),
+                                                              Padding(
+                                                                padding: const EdgeInsets.only(left: 8.0),
+                                                                child: Row(
                                                                   children: [
-                                                                    SizedBox(
-                                                                      height: 16,
-                                                                    ),
-                                                                    Text(
-                                                                      "ORDER ID",
-                                                                      textAlign: TextAlign.center,
-                                                                      style: Theme.of(context)
-                                                                          .textTheme
-                                                                          .bodyText1!
-                                                                          .copyWith(
-                                                                            color: Color(0xff2D2D2D),
-                                                                            fontWeight: FontWeight.w600,
-                                                                          ),
-                                                                    ),
-                                                                    Text(
-                                                                      "#${e.orderNumber}",
-                                                                      textAlign: TextAlign.center,
-                                                                      style:
-                                                                          Theme.of(context).textTheme.caption!.copyWith(
+                                                                    Column(
+                                                                      mainAxisAlignment: MainAxisAlignment.start,
+                                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                                      children: [
+                                                                        SizedBox(
+                                                                          height: 16,
+                                                                        ),
+                                                                        Text(
+                                                                          "Price",
+                                                                          textAlign: TextAlign.center,
+                                                                          style: Theme.of(context)
+                                                                              .textTheme
+                                                                              .bodyText1!
+                                                                              .copyWith(
                                                                                 color: Color(0xff747474),
                                                                                 fontWeight: FontWeight.w400,
                                                                               ),
+                                                                        ),
+                                                                        Text(
+                                                                          "₹${e.buyerInvoiceTotalAmount}",
+                                                                          textAlign: TextAlign.center,
+                                                                          style: Theme.of(context)
+                                                                              .textTheme
+                                                                              .bodySmall!
+                                                                              .copyWith(
+                                                                                color: Color(0xff202232),
+                                                                                fontWeight: FontWeight.bold,
+                                                                              ),
+                                                                        ),
+                                                                      ],
                                                                     ),
+                                                                    Spacer(),
                                                                   ],
                                                                 ),
-                                                                // Spacer(),
-                                                                SizedBox(width: 4),
-                                                                Column(
-                                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                                  children: [
-                                                                    SizedBox(
-                                                                      height: 16,
-                                                                    ),
-                                                                    Text(
-                                                                      "Status",
-                                                                      textAlign: TextAlign.center,
-                                                                      style: Theme.of(context)
-                                                                          .textTheme
-                                                                          .bodyText1!
-                                                                          .copyWith(
-                                                                            color: Color(0xff747474),
-                                                                            fontWeight: FontWeight.w400,
-                                                                          ),
-                                                                    ),
-                                                                    Text(
-                                                                      "${getOrderStatus("${e.completedStage}")}",
-                                                                      textAlign: TextAlign.center,
-                                                                      style: Theme.of(context)
-                                                                          .textTheme
-                                                                          .subtitle1!
-                                                                          .copyWith(
-                                                                            color:
-                                                                                Theme.of(context).colorScheme.primary,
-                                                                            fontWeight: FontWeight.w600,
-                                                                          ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                                Spacer(),
-                                                                InkWell(
-                                                                    onTap: () {
-                                                                      // Navigator.push(
-                                                                      //     context,
-                                                                      //     MaterialPageRoute(
-                                                                      //         builder: (context) =>
-                                                                      //             MyOrderProductpage()));
-                                                                    },
-                                                                    child: Icon(
-                                                                      Icons.arrow_forward_ios_rounded,
-                                                                      size: 16,
-                                                                      color: Color(0xff747474),
-                                                                    )),
-                                                              ],
-                                                            ),
+                                                              )
+                                                            ],
                                                           ),
-                                                          Padding(
-                                                            padding: const EdgeInsets.only(left: 8.0),
-                                                            child: Row(
-                                                              children: [
-                                                                Column(
-                                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                                  children: [
-                                                                    SizedBox(
-                                                                      height: 16,
-                                                                    ),
-                                                                    Text(
-                                                                      "Price",
-                                                                      textAlign: TextAlign.center,
-                                                                      style: Theme.of(context)
-                                                                          .textTheme
-                                                                          .bodyText1!
-                                                                          .copyWith(
-                                                                            color: Color(0xff747474),
-                                                                            fontWeight: FontWeight.w400,
-                                                                          ),
-                                                                    ),
-                                                                    Text(
-                                                                      "₹${e.buyerInvoiceTotalAmount}",
-                                                                      textAlign: TextAlign.center,
-                                                                      style: Theme.of(context)
-                                                                          .textTheme
-                                                                          .bodySmall!
-                                                                          .copyWith(
-                                                                            color: Color(0xff202232),
-                                                                            fontWeight: FontWeight.bold,
-                                                                          ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                                Spacer(),
-                                                                // Column(
-                                                                //   mainAxisAlignment: MainAxisAlignment.start,
-                                                                //   crossAxisAlignment: CrossAxisAlignment.start,
-                                                                //   children: [
-                                                                //     SizedBox(
-                                                                //       height: 16,
-                                                                //     ),
-                                                                //     Text(
-                                                                //       "In Transit",
-                                                                //       textAlign: TextAlign.center,
-                                                                //       style: Theme.of(context)
-                                                                //           .textTheme
-                                                                //           .bodyText1!
-                                                                //           .copyWith(
-                                                                //             color: Color(0xff747474),
-                                                                //             fontWeight: FontWeight.w400,
-                                                                //           ),
-                                                                //     ),
-                                                                //     Text(
-                                                                //       "20th Jan, 2022",
-                                                                //       textAlign: TextAlign.center,
-                                                                //       style: Theme.of(context)
-                                                                //           .textTheme
-                                                                //           .subtitle1!
-                                                                //           .copyWith(
-                                                                //             color: Color(0xff202232),
-                                                                //             fontWeight: FontWeight.w500,
-                                                                //           ),
-                                                                //     ),
-                                                                //   ],
-                                                                // ),
-                                                              ],
-                                                            ),
-                                                          )
-                                                        ],
-                                                      ),
-                                                    )
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ],
-                                                ),
-                                              ],
-                                            ));
+                                                )));
                                       }).toList(),
                                     ),
 

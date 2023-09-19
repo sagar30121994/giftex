@@ -564,7 +564,7 @@ class _DashboardUiState extends State<DashboardUi> {
         return DepartmentDetails();
 
       case 38:
-        return ProductDetailPage(auctionViewModel);
+        return ProductDetailPage(bottomViewModel, auctionViewModel);
 
       default:
         {
