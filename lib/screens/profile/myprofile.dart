@@ -8,8 +8,8 @@ import 'package:giftex/screens/profile/hashservice.dart';
 import 'package:giftex/viewmodel/bottomviewmodel.dart';
 import 'package:giftex/viewmodel/profile/profileviewmodel.dart';
 import 'package:intl/intl.dart';
-import 'package:payu_checkoutpro_flutter/PayUConstantKeys.dart';
-import 'package:payu_checkoutpro_flutter/payu_checkoutpro_flutter.dart';
+// import 'package:payu_checkoutpro_flutter/PayUConstantKeys.dart';
+// import 'package:payu_checkoutpro_flutter/payu_checkoutpro_flutter.dart';
 
 import '../../data/network/models/responce/profile/GetCityResponse.dart';
 import '../components/footer/footer.dart';
@@ -26,7 +26,8 @@ class MyProfilepage extends StatefulWidget {
   _MyProfilepageState createState() => _MyProfilepageState();
 }
 
-class _MyProfilepageState extends State<MyProfilepage> implements PayUCheckoutProProtocol {
+// class _MyProfilepageState extends State<MyProfilepage> implements PayUCheckoutProProtocol {
+class _MyProfilepageState extends State<MyProfilepage>  {
   int _pageIndex = 0;
   CountryList? selectedCountry;
   IndianStateList? selectedState;
@@ -90,7 +91,7 @@ class _MyProfilepageState extends State<MyProfilepage> implements PayUCheckoutPr
     addressCount = widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address!.length;
   }
 
-  late PayUCheckoutProFlutter _checkoutPro;
+  // late PayUCheckoutProFlutter _checkoutPro;
 
   @override
   void initState() {
@@ -98,7 +99,7 @@ class _MyProfilepageState extends State<MyProfilepage> implements PayUCheckoutPr
     laodData();
 
     super.initState();
-    _checkoutPro = PayUCheckoutProFlutter(this);
+    // _checkoutPro = PayUCheckoutProFlutter(this);
   }
 
   String formateNumber(String number) {
@@ -1766,23 +1767,23 @@ class _MyProfilepageState extends State<MyProfilepage> implements PayUCheckoutPr
                                     await widget.bottomViewModel.profileViewModel!.getPayment(e.paymentAmount!);
                                     // await widget.bottomViewModel.profileViewModel!.getPayment("1");
 
-                                    _checkoutPro.openCheckoutScreen(
-                                      payUPaymentParams: PayUParams.createPayUPaymentParams(
-                                        widget.bottomViewModel.profileViewModel!.paymentResponce!.udf1!,
-                                        widget.bottomViewModel.profileViewModel!.paymentResponce!.udf2!,
-                                        widget.bottomViewModel.profileViewModel!.paymentResponce!.udf5!,
-                                        widget.bottomViewModel.profileViewModel!.paymentResponce!.key,
-                                        widget.bottomViewModel.profileViewModel!.paymentResponce!.amount,
-                                        // "1",
-                                        widget.bottomViewModel.profileViewModel!.paymentResponce!.productinfo,
-                                        widget.bottomViewModel.profileViewModel!.paymentResponce!.firstname,
-                                        widget.bottomViewModel.profileViewModel!.paymentResponce!.email,
-                                        widget.bottomViewModel.profileViewModel!.paymentResponce!.phone,
-                                        widget.bottomViewModel.profileViewModel!.paymentResponce!.surl,
-                                        widget.bottomViewModel.profileViewModel!.paymentResponce!.furl,
-                                      ),
-                                      payUCheckoutProConfig: PayUParams.createPayUConfigParams(),
-                                    );
+                                    // _checkoutPro.openCheckoutScreen(
+                                    //   payUPaymentParams: PayUParams.createPayUPaymentParams(
+                                    //     widget.bottomViewModel.profileViewModel!.paymentResponce!.udf1!,
+                                    //     widget.bottomViewModel.profileViewModel!.paymentResponce!.udf2!,
+                                    //     widget.bottomViewModel.profileViewModel!.paymentResponce!.udf5!,
+                                    //     widget.bottomViewModel.profileViewModel!.paymentResponce!.key,
+                                    //     widget.bottomViewModel.profileViewModel!.paymentResponce!.amount,
+                                    //     // "1",
+                                    //     widget.bottomViewModel.profileViewModel!.paymentResponce!.productinfo,
+                                    //     widget.bottomViewModel.profileViewModel!.paymentResponce!.firstname,
+                                    //     widget.bottomViewModel.profileViewModel!.paymentResponce!.email,
+                                    //     widget.bottomViewModel.profileViewModel!.paymentResponce!.phone,
+                                    //     widget.bottomViewModel.profileViewModel!.paymentResponce!.surl,
+                                    //     widget.bottomViewModel.profileViewModel!.paymentResponce!.furl,
+                                    //   ),
+                                    //   payUCheckoutProConfig: PayUParams.createPayUConfigParams(),
+                                    // );
                                     Navigator.of(context).pop();
                                   },
                                   child: Text(
@@ -1883,156 +1884,156 @@ class _MyProfilepageState extends State<MyProfilepage> implements PayUCheckoutPr
       },
     );
   }
-
-  @override
-  generateHash(Map response) {
-    // TODO: implement generateHash
-    Map hashResponse = {};
-
-    //Keep the salt and hash calculation logic in the backend for security reasons. Don't use local hash logic.
-    //Uncomment following line to test the test hash.
-    hashResponse = HashService.generateHash(response);
-
-    _checkoutPro.hashGenerated(hash: hashResponse);
-  }
-
-  @override
-  onError(Map? response) {
-    // TODO: implement onError
-    paymentStatus(context, false, false);
-  }
-
-  @override
-  onPaymentCancel(Map? response) {
-    // TODO: implement onPaymentCancel
-    paymentStatus(context, false, true);
-  }
-
-  @override
-  onPaymentFailure(response) {
-    // TODO: implement onPaymentFailure
-    paymentStatus(context, false, false);
-  }
-
-  @override
-  onPaymentSuccess(response) {
-    // TODO: implement onPaymentSuccess
-    paymentStatus(context, true, false);
-  }
-}
-
-class PayUParams {
   //
-  // PayUParams(this.udf1,this.udf2,this.udf5,this.mkey,this.phone,this.fname,this.email,this.tr_id,this.productinfo,this.surl,this.furl,this.amount);
-  // String udf1,udf2,udf5,mkey,phone,fname,email,tr_id,productinfo,surl,furl,amount;
-
-  static Map createPayUPaymentParams(
-      String udf1, udf2, udf5, mkey, amount, productinfo, fname, email, phone, surl, furl) {
-    var siParams = {
-      PayUSIParamsKeys.isFreeTrial: true,
-      PayUSIParamsKeys.billingAmount: amount, //Required
-      PayUSIParamsKeys.billingInterval: 2, //Required
-      PayUSIParamsKeys.paymentStartDate:
-          '${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day}', //Required
-      PayUSIParamsKeys.paymentEndDate:
-          '${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day}', //Required
-      PayUSIParamsKeys.billingCycle: //Required
-          'once', //Can be any of 'daily','weekly','yearly','adhoc','once','monthly'
-      PayUSIParamsKeys.remarks: 'Test SI transaction',
-      PayUSIParamsKeys.billingCurrency: 'INR',
-      PayUSIParamsKeys.billingLimit: 'ON', //ON, BEFORE, AFTER
-      PayUSIParamsKeys.billingRule: 'MAX', //MAX, EXACT
-    };
-
-    var additionalParam = {
-      PayUAdditionalParamKeys.udf1: udf1,
-      PayUAdditionalParamKeys.udf2: udf2,
-      PayUAdditionalParamKeys.udf5: udf5,
-      PayUAdditionalParamKeys.merchantAccessKey: mkey,
-    };
-
-    //
-    // var spitPaymentDetails =
-    // {
-    //   "type": "absolute",
-    //   "splitInfo": {
-    //     PayUTestCredentials.merchantKey: {
-    //       "aggregatorSubTxnId": "1234567540099887766650092", //unique for each transaction
-    //       "aggregatorSubAmt": "1"
-    //     },
-    //     /* "qOoYIv": {
-    //       "aggregatorSubTxnId": "12345678",
-    //       "aggregatorSubAmt": "40"
-    //    },*/
-    //   }
-    // };
-
-    var payUPaymentParams = {
-      PayUPaymentParamKey.key: mkey,
-      PayUPaymentParamKey.amount: amount,
-      PayUPaymentParamKey.productInfo: productinfo,
-      PayUPaymentParamKey.firstName: fname,
-      PayUPaymentParamKey.email: email,
-      PayUPaymentParamKey.phone: phone,
-      PayUPaymentParamKey.ios_surl: surl,
-      PayUPaymentParamKey.ios_furl: furl,
-      PayUPaymentParamKey.android_surl: surl,
-      PayUPaymentParamKey.android_furl: furl,
-      PayUPaymentParamKey.environment: "1", //0 => Production 1 => Test
-      PayUPaymentParamKey.userCredential: null, //TODO: Pass user credential to fetch saved cards => A:B - Optional
-      PayUPaymentParamKey.transactionId: DateTime.now().millisecondsSinceEpoch.toString(),
-      PayUPaymentParamKey.additionalParam: additionalParam,
-      PayUPaymentParamKey.enableNativeOTP: true,
-      // PayUPaymentParamKey.splitPaymentDetails:json.encode(spitPaymentDetails),
-      // PayUPaymentParamKey.userToken: "", //TODO: Pass a unique token to fetch offers. - Optional
-    };
-
-    return payUPaymentParams;
-  }
-
-  static Map createPayUConfigParams() {
-    // var paymentModesOrder = [
-    //   {"Wallets": "PHONEPE"},
-    //   {"UPI": "TEZ"},
-    //   {"Wallets": ""},
-    //   {"EMI": ""},
-    //   {"NetBanking": ""},
-    // ];
-    //
-    // var cartDetails = [
-    //   {"GST": "5%"},
-    //   {"Delivery Date": "25 Dec"},
-    //   {"Status": "In Progress"}
-    // ];
-    // var enforcePaymentList = [
-    //   {"payment_type": "CARD", "enforce_ibiboCode": "UTIBENCC"},
-    // ];
-    //
-    // var customNotes = [
-    //   {
-    //     "custom_note": "Its Common custom note for testing purpose",
-    //     "custom_note_category": [PayUPaymentTypeKeys.emi, PayUPaymentTypeKeys.card]
-    //   },
-    //   {"custom_note": "Payment options custom note", "custom_note_category": null}
-    // ];
-
-    var payUCheckoutProConfig = {
-      PayUCheckoutProConfigKeys.primaryColor: "#4994EC",
-      PayUCheckoutProConfigKeys.secondaryColor: "#FFFFFF",
-      PayUCheckoutProConfigKeys.merchantName: "Giftex",
-      // PayUCheckoutProConfigKeys.merchantLogo: "logo",
-      PayUCheckoutProConfigKeys.showExitConfirmationOnCheckoutScreen: true,
-      PayUCheckoutProConfigKeys.showExitConfirmationOnPaymentScreen: true,
-      // PayUCheckoutProConfigKeys.cartDetails: cartDetails,
-      PayUCheckoutProConfigKeys.merchantResponseTimeout: 30000,
-
-      PayUCheckoutProConfigKeys.autoSelectOtp: true,
-      // PayUCheckoutProConfigKeys.enforcePaymentList: enforcePaymentList,
-      PayUCheckoutProConfigKeys.waitingTime: 30000,
-      PayUCheckoutProConfigKeys.autoApprove: true,
-      PayUCheckoutProConfigKeys.merchantSMSPermission: true,
-      PayUCheckoutProConfigKeys.showCbToolbar: true,
-    };
-    return payUCheckoutProConfig;
-  }
+  // @override
+  // generateHash(Map response) {
+  //   // TODO: implement generateHash
+  //   Map hashResponse = {};
+  //
+  //   //Keep the salt and hash calculation logic in the backend for security reasons. Don't use local hash logic.
+  //   //Uncomment following line to test the test hash.
+  //   hashResponse = HashService.generateHash(response);
+  //
+  //   _checkoutPro.hashGenerated(hash: hashResponse);
+  // }
+  //
+  // @override
+  // onError(Map? response) {
+  //   // TODO: implement onError
+  //   paymentStatus(context, false, false);
+  // }
+  //
+  // @override
+  // onPaymentCancel(Map? response) {
+  //   // TODO: implement onPaymentCancel
+  //   paymentStatus(context, false, true);
+  // }
+  //
+  // @override
+  // onPaymentFailure(response) {
+  //   // TODO: implement onPaymentFailure
+  //   paymentStatus(context, false, false);
+  // }
+  //
+  // @override
+  // onPaymentSuccess(response) {
+  //   // TODO: implement onPaymentSuccess
+  //   paymentStatus(context, true, false);
+  // }
 }
+//
+// class PayUParams {
+//   //
+//   // PayUParams(this.udf1,this.udf2,this.udf5,this.mkey,this.phone,this.fname,this.email,this.tr_id,this.productinfo,this.surl,this.furl,this.amount);
+//   // String udf1,udf2,udf5,mkey,phone,fname,email,tr_id,productinfo,surl,furl,amount;
+//
+//   static Map createPayUPaymentParams(
+//       String udf1, udf2, udf5, mkey, amount, productinfo, fname, email, phone, surl, furl) {
+//     var siParams = {
+//       PayUSIParamsKeys.isFreeTrial: true,
+//       PayUSIParamsKeys.billingAmount: amount, //Required
+//       PayUSIParamsKeys.billingInterval: 2, //Required
+//       PayUSIParamsKeys.paymentStartDate:
+//           '${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day}', //Required
+//       PayUSIParamsKeys.paymentEndDate:
+//           '${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day}', //Required
+//       PayUSIParamsKeys.billingCycle: //Required
+//           'once', //Can be any of 'daily','weekly','yearly','adhoc','once','monthly'
+//       PayUSIParamsKeys.remarks: 'Test SI transaction',
+//       PayUSIParamsKeys.billingCurrency: 'INR',
+//       PayUSIParamsKeys.billingLimit: 'ON', //ON, BEFORE, AFTER
+//       PayUSIParamsKeys.billingRule: 'MAX', //MAX, EXACT
+//     };
+//
+//     var additionalParam = {
+//       PayUAdditionalParamKeys.udf1: udf1,
+//       PayUAdditionalParamKeys.udf2: udf2,
+//       PayUAdditionalParamKeys.udf5: udf5,
+//       PayUAdditionalParamKeys.merchantAccessKey: mkey,
+//     };
+//
+//     //
+//     // var spitPaymentDetails =
+//     // {
+//     //   "type": "absolute",
+//     //   "splitInfo": {
+//     //     PayUTestCredentials.merchantKey: {
+//     //       "aggregatorSubTxnId": "1234567540099887766650092", //unique for each transaction
+//     //       "aggregatorSubAmt": "1"
+//     //     },
+//     //     /* "qOoYIv": {
+//     //       "aggregatorSubTxnId": "12345678",
+//     //       "aggregatorSubAmt": "40"
+//     //    },*/
+//     //   }
+//     // };
+//
+//     var payUPaymentParams = {
+//       PayUPaymentParamKey.key: mkey,
+//       PayUPaymentParamKey.amount: amount,
+//       PayUPaymentParamKey.productInfo: productinfo,
+//       PayUPaymentParamKey.firstName: fname,
+//       PayUPaymentParamKey.email: email,
+//       PayUPaymentParamKey.phone: phone,
+//       PayUPaymentParamKey.ios_surl: surl,
+//       PayUPaymentParamKey.ios_furl: furl,
+//       PayUPaymentParamKey.android_surl: surl,
+//       PayUPaymentParamKey.android_furl: furl,
+//       PayUPaymentParamKey.environment: "1", //0 => Production 1 => Test
+//       PayUPaymentParamKey.userCredential: null, //TODO: Pass user credential to fetch saved cards => A:B - Optional
+//       PayUPaymentParamKey.transactionId: DateTime.now().millisecondsSinceEpoch.toString(),
+//       PayUPaymentParamKey.additionalParam: additionalParam,
+//       PayUPaymentParamKey.enableNativeOTP: true,
+//       // PayUPaymentParamKey.splitPaymentDetails:json.encode(spitPaymentDetails),
+//       // PayUPaymentParamKey.userToken: "", //TODO: Pass a unique token to fetch offers. - Optional
+//     };
+//
+//     return payUPaymentParams;
+//   }
+//
+//   static Map createPayUConfigParams() {
+//     // var paymentModesOrder = [
+//     //   {"Wallets": "PHONEPE"},
+//     //   {"UPI": "TEZ"},
+//     //   {"Wallets": ""},
+//     //   {"EMI": ""},
+//     //   {"NetBanking": ""},
+//     // ];
+//     //
+//     // var cartDetails = [
+//     //   {"GST": "5%"},
+//     //   {"Delivery Date": "25 Dec"},
+//     //   {"Status": "In Progress"}
+//     // ];
+//     // var enforcePaymentList = [
+//     //   {"payment_type": "CARD", "enforce_ibiboCode": "UTIBENCC"},
+//     // ];
+//     //
+//     // var customNotes = [
+//     //   {
+//     //     "custom_note": "Its Common custom note for testing purpose",
+//     //     "custom_note_category": [PayUPaymentTypeKeys.emi, PayUPaymentTypeKeys.card]
+//     //   },
+//     //   {"custom_note": "Payment options custom note", "custom_note_category": null}
+//     // ];
+//
+//     var payUCheckoutProConfig = {
+//       PayUCheckoutProConfigKeys.primaryColor: "#4994EC",
+//       PayUCheckoutProConfigKeys.secondaryColor: "#FFFFFF",
+//       PayUCheckoutProConfigKeys.merchantName: "Giftex",
+//       // PayUCheckoutProConfigKeys.merchantLogo: "logo",
+//       PayUCheckoutProConfigKeys.showExitConfirmationOnCheckoutScreen: true,
+//       PayUCheckoutProConfigKeys.showExitConfirmationOnPaymentScreen: true,
+//       // PayUCheckoutProConfigKeys.cartDetails: cartDetails,
+//       PayUCheckoutProConfigKeys.merchantResponseTimeout: 30000,
+//
+//       PayUCheckoutProConfigKeys.autoSelectOtp: true,
+//       // PayUCheckoutProConfigKeys.enforcePaymentList: enforcePaymentList,
+//       PayUCheckoutProConfigKeys.waitingTime: 30000,
+//       PayUCheckoutProConfigKeys.autoApprove: true,
+//       PayUCheckoutProConfigKeys.merchantSMSPermission: true,
+//       PayUCheckoutProConfigKeys.showCbToolbar: true,
+//     };
+//     return payUCheckoutProConfig;
+//   }
+// }

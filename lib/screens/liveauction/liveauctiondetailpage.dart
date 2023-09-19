@@ -12,11 +12,10 @@ import 'package:giftex/screens/liveauction/components/past/pastdata.dart';
 import 'package:giftex/screens/liveauction/components/past/pasttabs.dart';
 import 'package:giftex/screens/liveauction/components/upcomming/upcommingdata.dart';
 import 'package:giftex/screens/liveauction/components/upcomming/upcommingtabs.dart';
-import 'package:giftex/screens/liveauction/liveauction.dart';
+import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
+import 'package:giftex/viewmodel/bottomviewmodel.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
-// import 'package:signalr_netcore/signalr_client.dart';
-import '../components/bottomnavigationbar/bottomnavigationbar.dart';
 import '../components/footer/footer.dart';
 import '../components/header.dart';
 
@@ -29,7 +28,10 @@ class HttpOverrideCertificateVerificationInDev extends HttpOverrides {
 }
 
 class LiveAuctionUiDetails extends StatefulWidget {
-  LiveAuctionUiDetails();
+  LiveAuctionUiDetails(this.auctionViewModel, this.bottomViewModel);
+
+  AuctionViewModel auctionViewModel;
+  BottomViewModel bottomViewModel;
 
   @override
   _LiveAuctionUiDetailsState createState() => _LiveAuctionUiDetailsState();
@@ -58,29 +60,29 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
     });
     // auctionViewModel.auctionType = "live";
 
-    if (auctionViewModel.auctionType == "live") {
-      auctionViewModel.page = 1;
-      auctionViewModel.getUpcommingAuction("Live");
-    } else if (auctionViewModel.auctionType == "past") {
-      auctionViewModel.page = 1;
-      auctionViewModel.getUpcommingAuction("Past");
+    if (widget.auctionViewModel.auctionType == "live") {
+      widget.auctionViewModel.page = 1;
+      widget.auctionViewModel.getUpcommingAuction("Live");
+    } else if (widget.auctionViewModel.auctionType == "past") {
+      widget.auctionViewModel.page = 1;
+      widget.auctionViewModel.getUpcommingAuction("Past");
     } else {
-      auctionViewModel.page = 1;
-      auctionViewModel.getUpcommingAuction("UpComing");
+      widget.auctionViewModel.page = 1;
+      widget.auctionViewModel.getUpcommingAuction("UpComing");
     }
 
-    userlikeReference = database.ref("userlike/" + auctionViewModel.localSharedPrefrence.getUserId());
+    userlikeReference = database.ref("userlike/" + widget.auctionViewModel.localSharedPrefrence.getUserId());
 
     userlikeReference!.onValue.listen((DatabaseEvent event) {
       print("live action event");
       final data = event.snapshot.value;
-      if (auctionViewModel.liveAuctionType == "mygallery") {
-        auctionViewModel.myAuctionGallery();
+      if (widget.auctionViewModel.liveAuctionType == "mygallery") {
+        widget.auctionViewModel.myAuctionGallery();
       }
     });
 
-    auctionViewModel.getSingleAuctionDetails(auctionViewModel.selectedAuction!.auctionId!);
-    auctionViewModel.getUpcommingBidAuction(auctionViewModel.selectedAuction!.auctionId!);
+    widget.auctionViewModel.getSingleAuctionDetails(widget.auctionViewModel.selectedAuction!.auctionId!);
+    widget.auctionViewModel.getUpcommingBidAuction(widget.auctionViewModel.selectedAuction!.auctionId!);
 
     super.initState();
     reset();
@@ -168,16 +170,16 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
               height: 16,
             ),
           ),
-          auctionViewModel.isLoadingForUpCommingAuction
+          widget.auctionViewModel.isLoadingForUpCommingAuction
               ? SliverToBoxAdapter(child: LinearProgressIndicator())
-              : auctionViewModel.singleAuctionDetsilaResponse == null
+              : widget.auctionViewModel.singleAuctionDetsilaResponse == null
                   ? SliverToBoxAdapter()
                   : SliverToBoxAdapter(
                       child: Align(
                         child: Padding(
                           padding: const EdgeInsets.only(left: 12, right: 12.0),
                           child: Text(
-                            "${auctionViewModel.singleAuctionDetsilaResponse!.result!.auctionTitle!}",
+                            "${widget.auctionViewModel.singleAuctionDetsilaResponse!.result!.auctionTitle!}",
                             textAlign: TextAlign.left,
                             style: Theme.of(context).textTheme.headline6!.copyWith(
                                   color: Colors.black,
@@ -187,7 +189,7 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
                         ),
                       ),
                     ),
-          auctionViewModel.isLoadingForUpCommingAuction
+          widget.auctionViewModel.isLoadingForUpCommingAuction
               ? SliverToBoxAdapter(child: LinearProgressIndicator())
               : SliverToBoxAdapter(
                   child: Container(
@@ -203,7 +205,7 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
                     ),
                   ),
                 ),
-          auctionViewModel.isLoadingForUpCommingAuction
+          widget.auctionViewModel.isLoadingForUpCommingAuction
               ? SliverToBoxAdapter(child: LinearProgressIndicator())
               : SliverToBoxAdapter(
                   child: Observer(builder: (context) {
@@ -224,7 +226,7 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
                             Padding(
                               padding: const EdgeInsets.only(left: 25.0, right: 25),
                               child: Image.network(
-                                "${auctionViewModel.singleAuctionDetsilaResponse!.result!.banner}",
+                                "${widget.auctionViewModel.singleAuctionDetsilaResponse!.result!.banner}",
                                 fit: BoxFit.contain,
                                 width: MediaQuery.of(context).size.width,
                                 height: 200,
@@ -247,7 +249,7 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
                                       width: 20,
                                     ),
                                     Text(
-                                      "${auctionViewModel.selectedAuction!.displayDate}",
+                                      "${widget.auctionViewModel.selectedAuction!.displayDate}",
                                       textAlign: TextAlign.center,
                                       style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                             color: Colors.white,
@@ -290,9 +292,9 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
               color: Theme.of(context).colorScheme.onPrimary,
               child: DefaultTabController(
                 length: 3,
-                initialIndex: auctionViewModel.auctionType == "live"
+                initialIndex: widget.auctionViewModel.auctionType == "live"
                     ? 0
-                    : auctionViewModel.auctionType == "upcoming"
+                    : widget.auctionViewModel.auctionType == "upcoming"
                         ? 1
                         : 2,
                 child: TabBar(
@@ -300,16 +302,16 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
                     setState(() async {
                       if (index == 0) {
                         tabColor = Color(0xffE74B52);
-                        auctionViewModel.auctionType = "live";
-                        bottomViewModel.selectedIndex = 5;
+                        widget.auctionViewModel.auctionType = "live";
+                        widget.bottomViewModel.selectedIndex = 5;
                       } else if (index == 1) {
                         tabColor = Color(0xffE74B52);
-                        auctionViewModel.auctionType = "upcoming";
-                        bottomViewModel.selectedIndex = 6;
+                        widget.auctionViewModel.auctionType = "upcoming";
+                        widget.bottomViewModel.selectedIndex = 6;
                       } else if (index == 2) {
                         tabColor = Color(0xffE74B52);
-                        auctionViewModel.auctionType = "past";
-                        bottomViewModel.selectedIndex = 7;
+                        widget.auctionViewModel.auctionType = "past";
+                        widget.bottomViewModel.selectedIndex = 7;
                       }
                     });
                     print(index);
@@ -336,13 +338,16 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
               ),
             ),
           ),
-          auctionViewModel.auctionType == "live" ? LiveTabs(auctionViewModel) : SliverToBoxAdapter(),
-          auctionViewModel.auctionType == "upcoming" ? UpcommingTabs(auctionViewModel) : SliverToBoxAdapter(),
-          auctionViewModel.auctionType == "live" ? LiveData(auctionViewModel) : SliverToBoxAdapter(),
-          auctionViewModel.auctionType == "past" ? PastTabs(auctionViewModel) : SliverToBoxAdapter(),
+          widget.auctionViewModel.auctionType == "live" ? LiveTabs(widget.auctionViewModel) : SliverToBoxAdapter(),
+          widget.auctionViewModel.auctionType == "upcoming"
+              ? UpcommingTabs(widget.auctionViewModel)
+              : SliverToBoxAdapter(),
+
+          widget.auctionViewModel.auctionType == "past" ? PastTabs(widget.auctionViewModel) : SliverToBoxAdapter(),
 
           SliverToBoxAdapter(
-            child: auctionViewModel.liveAuctionType == "browselots"
+            child: widget.auctionViewModel.liveAuctionType == "browselots" ||
+                    widget.auctionViewModel.liveAuctionType == "browselist"
                 ? Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -351,13 +356,13 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
                       InkWell(
                           onTap: () {
                             setState(() {
-                              auctionViewModel.isGrid = false;
+                              widget.auctionViewModel.isGrid = false;
                             });
                           },
                           child: Image.asset(
                             "image/list.png",
                             height: 30,
-                            color: auctionViewModel.isGrid ? Colors.indigo : Colors.black,
+                            color: widget.auctionViewModel.isGrid ? Colors.black : Colors.indigo,
                           )),
                       SizedBox(
                         width: 10,
@@ -365,14 +370,14 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
                       InkWell(
                           onTap: () {
                             setState(() {
-                              auctionViewModel.isGrid = true;
+                              widget.auctionViewModel.isGrid = true;
                             });
-                            // auctionViewModel.isGrid=true;
+                            // widget.auctionViewModel.isGrid=true;
                           },
                           child: Image.asset(
                             "image/grid.png",
                             height: 30,
-                            color: auctionViewModel.isGrid ? Colors.indigo : Colors.black,
+                            color: widget.auctionViewModel.isGrid ? Colors.indigo : Colors.black,
                           )),
                       SizedBox(
                         width: 10,
@@ -381,15 +386,15 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
                   )
                 : Container(),
           ),
-
-          auctionViewModel.isLoadingForUpCommingAuction
+          widget.auctionViewModel.auctionType == "live" ? LiveData(widget.auctionViewModel) : SliverToBoxAdapter(),
+          widget.auctionViewModel.isLoadingForUpCommingAuction
               ? SliverToBoxAdapter(child: LinearProgressIndicator())
-              : auctionViewModel.upComingLotsResponse == null
+              : widget.auctionViewModel.upComingLotsResponse == null
                   ? SliverToBoxAdapter()
                   : SliverToBoxAdapter(
                       child: Observer(builder: (context) {
                         return Container(
-                            child: (auctionViewModel.upComingLotsResponse!.result!.lots ?? []).length == 0
+                            child: (widget.auctionViewModel.upComingLotsResponse!.result!.lots ?? []).length == 0
                                 ? Column(
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
@@ -435,17 +440,17 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
                                 : Container());
                       }),
                     ),
-          auctionViewModel.auctionType == "past" && auctionViewModel.liveAuctionType == "browselots"
-              ? PastData(auctionViewModel)
+          widget.auctionViewModel.auctionType == "past" && widget.auctionViewModel.liveAuctionType == "browselots"
+              ? PastData(widget.auctionViewModel)
               : SliverToBoxAdapter(),
-          auctionViewModel.auctionType == "upcoming" && auctionViewModel.liveAuctionType == "lots"
-              ? UpcommingData(auctionViewModel)
+          widget.auctionViewModel.auctionType == "upcoming" && widget.auctionViewModel.liveAuctionType == "lots"
+              ? UpcommingData(widget.auctionViewModel)
               : SliverToBoxAdapter(),
-          auctionViewModel.auctionType == "past" && auctionViewModel.liveAuctionType == "auctionresult"
-              ? PastAuctionResultData(auctionViewModel)
+          widget.auctionViewModel.auctionType == "past" && widget.auctionViewModel.liveAuctionType == "auctionresult"
+              ? PastAuctionResultData(widget.auctionViewModel)
               : SliverToBoxAdapter(),
           SliverToBoxAdapter(
-            child: auctionViewModel.liveAuctionType != "closingschedule"
+            child: widget.auctionViewModel.liveAuctionType != "closingschedule"
                 ? Container()
                 : Observer(builder: (context) {
                     return SizedBox(
@@ -455,7 +460,7 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
           ),
 
           SliverToBoxAdapter(
-            child: auctionViewModel.liveAuctionType == "closingschedule"
+            child: widget.auctionViewModel.liveAuctionType == "closingschedule"
                 ? Container(
                     padding: EdgeInsets.all(16),
                     child: Column(
@@ -474,7 +479,7 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
                             Container(
                               width: MediaQuery.of(context).size.width * .8,
                               child: Text(
-                                "CLOSING SCHEDULE FOR ${auctionViewModel.selectedAuction!.auctionName}, ${auctionViewModel.selectedAuction!.displayDate}",
+                                "CLOSING SCHEDULE FOR ${widget.auctionViewModel.selectedAuction!.auctionName}, ${widget.auctionViewModel.selectedAuction!.displayDate}",
                                 textAlign: TextAlign.start,
                                 style: Theme.of(context)
                                     .textTheme
@@ -800,141 +805,141 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
                                   padding: const EdgeInsets.only(left: 8.0),
                                   child: Column(
                                       mainAxisAlignment: MainAxisAlignment.start,
-                                      children:
-                                          auctionViewModel.singleAuctionDetsilaResponse!.result!.closingScheduleList!
-                                              .map((e) => Column(
+                                      children: widget
+                                          .auctionViewModel.singleAuctionDetsilaResponse!.result!.closingScheduleList!
+                                          .map((e) => Column(
+                                                children: [
+                                                  Row(
                                                     children: [
-                                                      Row(
-                                                        children: [
-                                                          Container(
-                                                            padding: EdgeInsets.only(left: 20),
-                                                            width: MediaQuery.of(context).size.width / 3.6,
-                                                            child: Text(
-                                                              '${e.groups}',
-                                                              textAlign: TextAlign.center,
-                                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                    color: Color(0XFF2D2D2D),
-                                                                    fontWeight: FontWeight.w400,
-                                                                  ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          Container(
-                                                            padding: EdgeInsets.only(left: 20),
-                                                            width: MediaQuery.of(context).size.width / 2.4,
-                                                            child: Text(
-                                                              '${e.lotNumber}',
-                                                              textAlign: TextAlign.center,
-                                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                    color: Color(0XFF2D2D2D),
-                                                                    fontWeight: FontWeight.w400,
-                                                                  ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          Container(
-                                                            padding: EdgeInsets.only(left: 20),
-                                                            width: MediaQuery.of(context).size.width / 2.4,
-                                                            child: Text(
-                                                              '${e.iST}',
-                                                              textAlign: TextAlign.center,
-                                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                    color: Color(0XFF2D2D2D),
-                                                                    fontWeight: FontWeight.w400,
-                                                                  ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          Container(
-                                                            padding: EdgeInsets.only(left: 20),
-                                                            width: MediaQuery.of(context).size.width / 2.4,
-                                                            child: Text(
-                                                              '10:30PM',
-                                                              textAlign: TextAlign.center,
-                                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                    color: Color(0XFF2D2D2D),
-                                                                    fontWeight: FontWeight.w400,
-                                                                  ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          Container(
-                                                            padding: EdgeInsets.only(left: 20),
-                                                            width: MediaQuery.of(context).size.width / 2.4,
-                                                            child: Text(
-                                                              '07:30PM',
-                                                              textAlign: TextAlign.center,
-                                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                    color: Color(0XFF2D2D2D),
-                                                                    fontWeight: FontWeight.w400,
-                                                                  ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          Container(
-                                                            padding: EdgeInsets.only(left: 20),
-                                                            width: MediaQuery.of(context).size.width / 2.4,
-                                                            child: Text(
-                                                              ' ${e.uK}',
-                                                              textAlign: TextAlign.center,
-                                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                    color: Color(0XFF2D2D2D),
-                                                                    fontWeight: FontWeight.w400,
-                                                                  ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          Container(
-                                                            padding: EdgeInsets.only(left: 20),
-                                                            width: MediaQuery.of(context).size.width / 2.4,
-                                                            child: Text(
-                                                              ' ${e.japan}',
-                                                              textAlign: TextAlign.center,
-                                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                    color: Color(0XFF2D2D2D),
-                                                                    fontWeight: FontWeight.w400,
-                                                                  ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          Container(
-                                                            padding: EdgeInsets.only(left: 20),
-                                                            width: MediaQuery.of(context).size.width / 2.4,
-                                                            child: Text(
-                                                              ' ${e.china}',
-                                                              textAlign: TextAlign.center,
-                                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                    color: Color(0XFF2D2D2D),
-                                                                    fontWeight: FontWeight.w400,
-                                                                  ),
-                                                            ),
-                                                          ),
-                                                        ],
+                                                      Container(
+                                                        padding: EdgeInsets.only(left: 20),
+                                                        width: MediaQuery.of(context).size.width / 3.6,
+                                                        child: Text(
+                                                          '${e.groups}',
+                                                          textAlign: TextAlign.center,
+                                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                color: Color(0XFF2D2D2D),
+                                                                fontWeight: FontWeight.w400,
+                                                              ),
+                                                        ),
                                                       ),
                                                       SizedBox(
-                                                        height: 10,
+                                                        width: 5,
                                                       ),
-                                                      Image.asset(
-                                                        "image/Line 4.png",
-                                                        fit: BoxFit.cover,
+                                                      Container(
+                                                        padding: EdgeInsets.only(left: 20),
+                                                        width: MediaQuery.of(context).size.width / 2.4,
+                                                        child: Text(
+                                                          '${e.lotNumber}',
+                                                          textAlign: TextAlign.center,
+                                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                color: Color(0XFF2D2D2D),
+                                                                fontWeight: FontWeight.w400,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 5,
+                                                      ),
+                                                      Container(
+                                                        padding: EdgeInsets.only(left: 20),
+                                                        width: MediaQuery.of(context).size.width / 2.4,
+                                                        child: Text(
+                                                          '${e.iST}',
+                                                          textAlign: TextAlign.center,
+                                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                color: Color(0XFF2D2D2D),
+                                                                fontWeight: FontWeight.w400,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 5,
+                                                      ),
+                                                      Container(
+                                                        padding: EdgeInsets.only(left: 20),
+                                                        width: MediaQuery.of(context).size.width / 2.4,
+                                                        child: Text(
+                                                          '10:30PM',
+                                                          textAlign: TextAlign.center,
+                                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                color: Color(0XFF2D2D2D),
+                                                                fontWeight: FontWeight.w400,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 5,
+                                                      ),
+                                                      Container(
+                                                        padding: EdgeInsets.only(left: 20),
+                                                        width: MediaQuery.of(context).size.width / 2.4,
+                                                        child: Text(
+                                                          '07:30PM',
+                                                          textAlign: TextAlign.center,
+                                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                color: Color(0XFF2D2D2D),
+                                                                fontWeight: FontWeight.w400,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 5,
+                                                      ),
+                                                      Container(
+                                                        padding: EdgeInsets.only(left: 20),
+                                                        width: MediaQuery.of(context).size.width / 2.4,
+                                                        child: Text(
+                                                          ' ${e.uK}',
+                                                          textAlign: TextAlign.center,
+                                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                color: Color(0XFF2D2D2D),
+                                                                fontWeight: FontWeight.w400,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 5,
+                                                      ),
+                                                      Container(
+                                                        padding: EdgeInsets.only(left: 20),
+                                                        width: MediaQuery.of(context).size.width / 2.4,
+                                                        child: Text(
+                                                          ' ${e.japan}',
+                                                          textAlign: TextAlign.center,
+                                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                color: Color(0XFF2D2D2D),
+                                                                fontWeight: FontWeight.w400,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 5,
+                                                      ),
+                                                      Container(
+                                                        padding: EdgeInsets.only(left: 20),
+                                                        width: MediaQuery.of(context).size.width / 2.4,
+                                                        child: Text(
+                                                          ' ${e.china}',
+                                                          textAlign: TextAlign.center,
+                                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                color: Color(0XFF2D2D2D),
+                                                                fontWeight: FontWeight.w400,
+                                                              ),
+                                                        ),
                                                       ),
                                                     ],
-                                                  ))
-                                              .toList()
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  Image.asset(
+                                                    "image/Line 4.png",
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ],
+                                              ))
+                                          .toList()
                                       // children: [
                                       //
                                       //
@@ -1042,7 +1047,7 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
                 : Container(),
           ),
           // SliverToBoxAdapter(
-          //   child: auctionViewModel.liveAuctionType == "closingschedule"
+          //   child: widget.auctionViewModel.liveAuctionType == "closingschedule"
           //       ? Container(
           //           padding: EdgeInsets.all(16),
           //           child: Column(
@@ -1388,7 +1393,7 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
           //                         child: Column(
           //                             mainAxisAlignment: MainAxisAlignment.start,
           //                             children:
-          //                                 auctionViewModel.singleAuctionDetsilaResponse!.result!.closingScheduleList!
+          //                                 widget.auctionViewModel.singleAuctionDetsilaResponse!.result!.closingScheduleList!
           //                                     .map((e) => Column(
           //                                           children: [
           //                                             Row(
@@ -1630,7 +1635,7 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
           // ),
 
           SliverToBoxAdapter(
-              child: auctionViewModel.liveAuctionType == "review"
+              child: widget.auctionViewModel.liveAuctionType == "review"
                   ? Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -1841,13 +1846,13 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
                                             Column(children: [
                                               ListTile(
                                                 leading: Checkbox(
-                                                  value: auctionViewModel.sort == "LatestLots",
+                                                  value: widget.auctionViewModel.sort == "LatestLots",
                                                   onChanged: (bool? value) {
                                                     state(() {
                                                       if (value ?? false) {
-                                                        auctionViewModel.sort = "LatestLots";
+                                                        widget.auctionViewModel.sort = "LatestLots";
                                                       } else {
-                                                        auctionViewModel.sort = "";
+                                                        widget.auctionViewModel.sort = "";
                                                       }
                                                     });
                                                   },
@@ -1862,19 +1867,19 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
                                                 onTap: () {
                                                   // Navigator.pop(context);
                                                   state(() {
-                                                    auctionViewModel.sort = "LatestLots";
+                                                    widget.auctionViewModel.sort = "LatestLots";
                                                   });
                                                 },
                                               ),
                                               ListTile(
                                                 leading: Checkbox(
-                                                  value: auctionViewModel.sort == "SignificantLots",
+                                                  value: widget.auctionViewModel.sort == "SignificantLots",
                                                   onChanged: (bool? value) {
                                                     state(() {
                                                       if (value ?? false) {
-                                                        auctionViewModel.sort = "SignificantLots";
+                                                        widget.auctionViewModel.sort = "SignificantLots";
                                                       } else {
-                                                        auctionViewModel.sort = "";
+                                                        widget.auctionViewModel.sort = "";
                                                       }
                                                     });
                                                   },
@@ -1888,19 +1893,19 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
                                                 ),
                                                 onTap: () {
                                                   state(() {
-                                                    auctionViewModel.sort = "SignificantLots";
+                                                    widget.auctionViewModel.sort = "SignificantLots";
                                                   });
                                                 },
                                               ),
                                               ListTile(
                                                 leading: Checkbox(
-                                                  value: auctionViewModel.sort == "NoOfBidsLots",
+                                                  value: widget.auctionViewModel.sort == "NoOfBidsLots",
                                                   onChanged: (bool? value) {
                                                     state(() {
                                                       if (value ?? false) {
-                                                        auctionViewModel.sort = "NoOfBidsLots";
+                                                        widget.auctionViewModel.sort = "NoOfBidsLots";
                                                       } else {
-                                                        auctionViewModel.sort = "";
+                                                        widget.auctionViewModel.sort = "";
                                                       }
                                                     });
                                                   },
@@ -1914,22 +1919,22 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
                                                 ),
                                                 onTap: () {
                                                   state(() {
-                                                    auctionViewModel.sort = "NoOfBidsLots";
+                                                    widget.auctionViewModel.sort = "NoOfBidsLots";
                                                   });
                                                 },
                                               ),
                                               ListTile(
                                                 leading: Checkbox(
-                                                  value: auctionViewModel.sort == "ClosingLots",
+                                                  value: widget.auctionViewModel.sort == "ClosingLots",
                                                   onChanged: (bool? value) {
                                                     state(() {
                                                       if (value ?? false) {
-                                                        auctionViewModel.sort = "ClosingLots";
+                                                        widget.auctionViewModel.sort = "ClosingLots";
                                                       } else {
-                                                        auctionViewModel.sort = "";
+                                                        widget.auctionViewModel.sort = "";
                                                       }
                                                     });
-                                                    // auctionViewModel.sort =
+                                                    // widget.auctionViewModel.sort =
                                                     //     "Closing_Lots";
                                                   },
                                                 ),
@@ -1942,7 +1947,7 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
                                                 ),
                                                 onTap: () {
                                                   state(() {
-                                                    auctionViewModel.sort = "ClosingLots";
+                                                    widget.auctionViewModel.sort = "ClosingLots";
                                                   });
                                                 },
                                               ),
@@ -1964,7 +1969,7 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
                                                                   BorderSide(color: Color(0xff747474), width: 0.38)))),
                                                   onPressed: () {
                                                     state(() {
-                                                      auctionViewModel.sort = "";
+                                                      widget.auctionViewModel.sort = "";
                                                     });
                                                     Navigator.of(context).pop();
                                                   },
@@ -1999,9 +2004,9 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
                                                     //     MaterialPageRoute(
                                                     //         builder: (context) =>
                                                     //             FillterSearchpage()));
-                                                    await auctionViewModel.sortAUction(
-                                                        auctionViewModel.selectedAuction!.auctionId!,
-                                                        auctionViewModel.sort);
+                                                    await widget.auctionViewModel.sortAUction(
+                                                        widget.auctionViewModel.selectedAuction!.auctionId!,
+                                                        widget.auctionViewModel.sort);
                                                     Navigator.of(context).pop();
                                                   },
                                                   child: Padding(
@@ -2065,24 +2070,28 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
             ),
           ),
           SliverToBoxAdapter(
-              child: auctionViewModel.auctionType == "upcoming"
+              child: widget.auctionViewModel.auctionType == "upcoming"
                   ? Container()
-                  : auctionViewModel.isLoadingForlots
+                  : widget.auctionViewModel.isLoadingForlots
                       ? Container()
                       : Center(
                           child: getPageNavigator(
-                              auctionViewModel.liveAuctionType == "browselist"
-                                  ? auctionViewModel.upComingLotsResponse == null
+                              widget.auctionViewModel.liveAuctionType == "browselist"
+                                  ? widget.auctionViewModel.upComingLotsResponse == null
                                       ? 0
-                                      : auctionViewModel.upComingLotsResponse!.result!.lots!.last.PaginationSize ?? 1
-                                  : auctionViewModel.liveAuctionType == "review"
-                                      ? auctionViewModel.getliveauctionsResponse!.result!.lots!.last.PaginationSize ?? 1
-                                      : auctionViewModel.liveAuctionType == "browselist"
-                                          ? auctionViewModel
-                                                  .myAuctionGalleryResponse!.result!.lots!.last.PaginationSize ??
+                                      : widget.auctionViewModel.upComingLotsResponse!.result!.lots!.last
+                                              .PaginationSize ??
+                                          1
+                                  : widget.auctionViewModel.liveAuctionType == "review"
+                                      ? widget.auctionViewModel.getliveauctionsResponse!.result!.lots!.last
+                                              .PaginationSize ??
+                                          1
+                                      : widget.auctionViewModel.liveAuctionType == "browselist"
+                                          ? widget.auctionViewModel.myAuctionGalleryResponse!.result!.lots!.last
+                                                  .PaginationSize ??
                                               1
                                           : 1,
-                              auctionViewModel.page),
+                              widget.auctionViewModel.page),
                         )),
           SliverToBoxAdapter(
             child: Container(
@@ -2174,8 +2183,9 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
             children: numList
                 .map((index) => InkWell(
                       onTap: () async {
-                        auctionViewModel.page = index + 1;
-                        await auctionViewModel.getUpcommingBidAuction(auctionViewModel.selectedAuction!.auctionId!);
+                        widget.auctionViewModel.page = index + 1;
+                        await widget.auctionViewModel
+                            .getUpcommingBidAuction(widget.auctionViewModel.selectedAuction!.auctionId!);
                         setState(() {});
                       },
                       child: Container(

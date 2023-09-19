@@ -5,20 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:giftex/data/local/client/prefs.dart';
-import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
-import 'package:giftex/screens/liveauction/liveauction.dart';
 import 'package:giftex/screens/popwidget.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
 import 'package:intl/intl.dart';
 import 'package:share/share.dart';
 
-import '../../data/network/models/responce/lot/upcominglotsresponse.dart';
 import '../components/header.dart';
 
 class ProductDetailPage extends StatefulWidget {
-  ProductDetailPage(this.lots, this.auctionViewModel);
-
-  Lots lots;
+  ProductDetailPage( this.auctionViewModel);
+  //
+  // Lots lots;
   AuctionViewModel auctionViewModel;
 
   @override
@@ -39,7 +36,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
     await showMenu(
       context: context,
       position: RelativeRect.fromLTRB(10, top, left, 0),
-      items: widget.lots.liveStatus!.next5ValidBid!
+      items: widget.auctionViewModel.selectedLots!.liveStatus!.next5ValidBid!
           .map((e) => PopupMenuItem(
                 value: 1,
                 child: Text(
@@ -79,9 +76,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
   bool isFirstLot = false;
 
   void checkEvent() {
-    final lotReference = FirebaseDatabase.instance.ref("Lot/" + widget.lots.lotId!);
+    final lotReference = FirebaseDatabase.instance.ref("Lot/" + widget.auctionViewModel.selectedLots!.lotId!);
     final likeReference = FirebaseDatabase.instance
-        .ref("like/" + widget.auctionViewModel.localSharedPrefrence.getUserId() + "/" + widget.lots.lotId!);
+        .ref("like/" + widget.auctionViewModel.localSharedPrefrence.getUserId() + "/" + widget.auctionViewModel.selectedLots!.lotId!);
 
     final userlikeReference =
         FirebaseDatabase.instance.ref("userlike/" + widget.auctionViewModel.localSharedPrefrence.getUserId());
@@ -117,21 +114,21 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
       final data = event.snapshot.value;
       if (data.toString() != "null") {
         setState(() {
-          widget.lots.isLiked = data.toString();
+          widget.auctionViewModel.selectedLots!.isLiked = data.toString();
         });
       }
     });
   }
 
   void initData() async {
-    await widget.auctionViewModel.getBidHistoryAuction(widget.lots.lotId!);
-    await widget.auctionViewModel.getLotById(widget.lots.lotId!);
+    await widget.auctionViewModel.getBidHistoryAuction(widget.auctionViewModel.selectedLots!.lotId!);
+    await widget.auctionViewModel.getLotById(widget.auctionViewModel.selectedLots!.lotId!);
     setState(() {
-      widget.lots = widget.auctionViewModel.getsingleResponse!.result!.lots![0];
+      widget.auctionViewModel.selectedLots = widget.auctionViewModel.getsingleResponse!.result!.lots![0];
     });
 
-    if ((widget.lots.status ?? "") == "Live" && widget.auctionViewModel.auctionType == "live") {
-      myDuration = Duration(seconds: int.parse(widget.lots.liveStatus!.remainingSeconds ?? "0"));
+    if ((widget.auctionViewModel.selectedLots!.status ?? "") == "Live" && widget.auctionViewModel.auctionType == "live") {
+      myDuration = Duration(seconds: int.parse(widget.auctionViewModel.selectedLots!.liveStatus!.remainingSeconds ?? "0"));
 
       // if (countdownTimer != null) {
       //   setState(() => countdownTimer!.cancel());
@@ -190,9 +187,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
   startTimerForSlider() {
     timerForTimer = Timer.periodic(Duration(seconds: 4), (_) async {
       setState(() {
-        if (widget.lots.images == null) {
+        if (widget.auctionViewModel.selectedLots!.images == null) {
         } else {
-          if (position != widget.lots.images!.length - 1) {
+          if (position != widget.auctionViewModel.selectedLots!.images!.length - 1) {
             position++;
             sliderController.nextPage(duration: Duration(milliseconds: 500), curve: Curves.easeInCirc);
           } else {
@@ -227,7 +224,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                   child: LinearProgressIndicator(),
                 )
               : SliverToBoxAdapter(
-                  child: (widget.lots.images ?? []).length == 0
+                  child: (widget.auctionViewModel.selectedLots!.images ?? []).length == 0
                       ? Container()
                       : Observer(builder: (context) {
                           return Container(
@@ -250,14 +247,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                         position = pos % 4;
                                       });
                                     },
-                                    itemCount: (widget.lots.images ?? []).length,
+                                    itemCount: (widget.auctionViewModel.selectedLots!.images ?? []).length,
                                     itemBuilder: (context, pos) => SizedBox(
                                       width: MediaQuery.of(context).size.width,
                                       child: Container(
                                         height: 190,
                                         child: Padding(
                                           padding: const EdgeInsets.only(left: 25.0, right: 25),
-                                          child: Image.network("${widget.lots.images![pos].bigImage}",
+                                          child: Image.network("${widget.auctionViewModel.selectedLots!.images![pos].bigImage}",
                                               fit: BoxFit.contain,
                                               height: 220,
                                               width: MediaQuery.of(context).size.width),
@@ -271,7 +268,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     // ElevatedButton(
                                     //   style: ButtonStyle(
@@ -295,17 +292,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                     // SizedBox(
                                     //   width: 100,
                                     // ),
-                                    Spacer(),
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 16.0),
-                                      child: InkWell(
-                                        onTap: () {
-                                          Share.share('${widget.lots == null ? '' : widget.lots.lotURL ?? ''}');
-                                        },
-                                        child: Image.asset(
-                                          "image/share.png",
-                                          height: 32,
-                                        ),
+                                    InkWell(
+                                      onTap: () {
+                                        Share.share('${widget.auctionViewModel.selectedLots! == null ? '' : widget.auctionViewModel.selectedLots!.lotURL ?? ''}');
+                                      },
+                                      child: Image.asset(
+                                        "image/share.png",
+                                        height: 32,
                                       ),
                                     ),
 
@@ -388,11 +381,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                 ),
           SliverToBoxAdapter(
             child: SizedBox(
-              child: auctionViewModel.isLoadingForlots ? LinearProgressIndicator() : Container(),
+              child: widget.auctionViewModel.isLoadingForlots ? LinearProgressIndicator() : Container(),
             ),
           ),
           newsType == "ARTWORK DETAIL"
-              ? auctionViewModel.isLoadingForlots
+              ? widget.auctionViewModel.isLoadingForlots
                   ? SliverToBoxAdapter()
                   : widget.auctionViewModel.isLoadingForUpCommingAuction
                       ? SliverToBoxAdapter()
@@ -409,7 +402,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                               ),
                             )
               : newsType == "PROVENANCE DETAILS"
-                  ? auctionViewModel.isLoadingForlots
+                  ? widget.auctionViewModel.isLoadingForlots
                       ? SliverToBoxAdapter()
                       : SliverToBoxAdapter(
                           child: Padding(
@@ -460,7 +453,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                           color: Color.fromRGBO(117, 206, 246, 0.249918),
                         ),
                         child: Text(
-                          'Lot ${widget.lots.lotNumber}',
+                          'Lot ${widget.auctionViewModel.selectedLots!.lotNumber}',
                           style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                 color: Color(0XFF2D2D2D),
                                 fontWeight: FontWeight.w600,
@@ -487,13 +480,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                     height: 16,
                   ),
 
-                  widget.lots.auctionType == "1"
+                  widget.auctionViewModel.selectedLots!.auctionType == "1"
                       ? Row(
                           children: [
                             SizedBox(
                               width: MediaQuery.of(context).size.width * .5,
                               child: Text(
-                                "${widget.lots.lotTitle}",
+                                "${widget.auctionViewModel.selectedLots!.lotTitle}",
                                 textAlign: TextAlign.start,
                                 style: Theme.of(context).textTheme.headline6!.copyWith(
                                       color: Colors.black,
@@ -507,7 +500,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                               onPressed: () {
                                 if (preference!.getLoginStatus()) {
                                   widget.auctionViewModel.addRemoveLotToWishlist(
-                                      widget.lots, (widget.lots.isLiked ?? "false") == "true" ? "false" : "true");
+                                      widget.auctionViewModel.selectedLots!, (widget.auctionViewModel.selectedLots!.isLiked ?? "false") == "true" ? "false" : "true");
                                 } else {
                                   WidgetsBinding.instance?.addPostFrameCallback((_) {
                                     showDialog(
@@ -521,10 +514,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                 }
                               },
                               icon: Icon(
-                                (widget.lots.isLiked ?? "false") == "true" && preference!.getLoginStatus()
+                                (widget.auctionViewModel.selectedLots!.isLiked ?? "false") == "true" && preference!.getLoginStatus()
                                     ? Icons.favorite
                                     : Icons.favorite_border,
-                                color: (widget.lots.isLiked ?? "false") == "true" && preference!.getLoginStatus()
+                                color: (widget.auctionViewModel.selectedLots!.isLiked ?? "false") == "true" && preference!.getLoginStatus()
                                     ? Colors.pink
                                     : Colors.grey,
                               ),
@@ -556,14 +549,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                   SizedBox(
                     height: 16,
                   ),
-                  ((widget.lots.info!.title ?? "") == "")
+                  ((widget.auctionViewModel.selectedLots!.info!.title ?? "") == "")
                       ? Container()
                       : Row(
                           children: [
                             SizedBox(
                               width: MediaQuery.of(context).size.width * .5,
                               child: Text(
-                                '${widget.lots.info!.title}',
+                                '${widget.auctionViewModel.selectedLots!.info!.title}',
                                 style: Theme.of(context).textTheme.headline6!.copyWith(
                                       color: Color(0xffE74B52),
                                       fontWeight: FontWeight.bold,
@@ -592,7 +585,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                   // SizedBox(height: 16,),
                   widget.auctionViewModel.auctionType == "past"
                       ? Container()
-                      : widget.lots.status!.toLowerCase() == "upcoming"
+                      : widget.auctionViewModel.selectedLots!.status!.toLowerCase() == "upcoming"
                           ? Text(
                               'Opening Bid',
                               style: Theme.of(context).textTheme.subtitle1!.copyWith(
@@ -610,9 +603,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                   SizedBox(
                     height: 10,
                   ),
-                  widget.lots.status!.toLowerCase() == "upcoming"
+                  widget.auctionViewModel.selectedLots!.status!.toLowerCase() == "upcoming"
                       ? Text(
-                          '₹${formateNumber(widget.lots.openingBid!.iNR ?? "")}',
+                          '₹${formateNumber(widget.auctionViewModel.selectedLots!.openingBid!.iNR ?? "")}',
                           style: Theme.of(context).textTheme.headline6!.copyWith(
                                 color: Color(0XFF202232),
                                 fontWeight: FontWeight.w500,
@@ -622,14 +615,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                           ? Column(
                               children: [
                                 Text(
-                                  '₹${formateNumber(widget.lots.leadingUser!.bid!.iNR ?? "0")}',
+                                  '₹${formateNumber(widget.auctionViewModel.selectedLots!.leadingUser!.bid!.iNR ?? "0")}',
                                   style: Theme.of(context).textTheme.headline6!.copyWith(
                                         color: Color(0XFF202232),
                                         fontWeight: FontWeight.w500,
                                       ),
                                 ),
                                 Text(
-                                  "${widget.lots.leadingUser!.notes ?? ""}",
+                                  "${widget.auctionViewModel.selectedLots!.leadingUser!.notes ?? ""}",
                                   textAlign: TextAlign.center,
                                   style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                         color: Theme.of(context).colorScheme.primary,
@@ -639,7 +632,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                               ],
                             )
                           : Text(
-                              '₹${formateNumber(widget.lots.estimateFrom!.iNR ?? "0")} - ₹${formateNumber(widget.lots.estimateTo!.iNR ?? "")}',
+                              '₹${formateNumber(widget.auctionViewModel.selectedLots!.estimateFrom!.iNR ?? "0")} - ₹${formateNumber(widget.auctionViewModel.selectedLots!.estimateTo!.iNR ?? "")}',
                               style: Theme.of(context).textTheme.headline6!.copyWith(
                                     color: Color(0XFF202232),
                                     fontWeight: FontWeight.w500,
@@ -651,64 +644,67 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                   Observer(builder: (context) {
                     return widget.auctionViewModel.auctionType == "past"
                         ? Container()
-                        : widget.lots!.status!.toLowerCase() == "live"
-                            ? Row(
-                                children: [
-                                  Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Current Bid',
-                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                color: Color(0XFF202232),
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Text(
-                                          '₹${formateNumber(widget.lots.liveStatus!.currentBid!.iNR ?? "0")}',
-                                          // style: Theme.of(context).textTheme.headline6!.copyWith(
-
-                                          style: Theme.of(context).textTheme.headline6!.copyWith(
-                                                color: Color(0XFF202232),
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                        )
-                                      ]),
-                                  IntrinsicHeight(
-                                      child: VerticalDivider(color: Color.fromRGBO(226, 238, 220, 1), thickness: 2.0)),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                        : widget.auctionViewModel.selectedLots!.status!.toLowerCase() == "live"
+                            ? (hours == "00" && minutes == "00" && seconds == "00")
+                                ? Container()
+                                : Row(
                                     children: [
-                                      Text(
-                                        'Next Valid Bid',
-                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                              color: Color(0XFF202232),
-                                              fontWeight: FontWeight.w400,
+                                      Column(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Current Bid',
+                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                    color: Color(0XFF202232),
+                                                    fontWeight: FontWeight.w400,
+                                                  ),
                                             ),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        '₹${formateNumber(widget.lots.liveStatus!.nextValidBid!.iNR ?? "0")}',
-                                        style: Theme.of(context).textTheme.headline6!.copyWith(
-                                              color: Color(0xffE74B52),
-                                              fontWeight: FontWeight.bold,
+                                            SizedBox(
+                                              height: 10,
                                             ),
-                                      ),
+                                            Text(
+                                              '₹${formateNumber(widget.auctionViewModel.selectedLots!.liveStatus!.currentBid!.iNR ?? "0")}',
+                                              // style: Theme.of(context).textTheme.headline6!.copyWith(
+
+                                              style: Theme.of(context).textTheme.headline6!.copyWith(
+                                                    color: Color(0XFF202232),
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                            )
+                                          ]),
+                                      IntrinsicHeight(
+                                          child:
+                                              VerticalDivider(color: Color.fromRGBO(226, 238, 220, 1), thickness: 2.0)),
+                                      Column(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Next Valid Bid',
+                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                  color: Color(0XFF202232),
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Text(
+                                            '₹${formateNumber(widget.auctionViewModel.selectedLots!.liveStatus!.nextValidBid!.iNR ?? "0")}',
+                                            style: Theme.of(context).textTheme.headline6!.copyWith(
+                                                  color: Color(0xffE74B52),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                          ),
+                                        ],
+                                      )
                                     ],
                                   )
-                                ],
-                              )
-                            : widget.lots!.status!.toLowerCase() == "upcoming"
-                                ? (widget.lots!.proxyStatus == null
+                            : widget.auctionViewModel.selectedLots!.status!.toLowerCase() == "upcoming"
+                                ? (widget.auctionViewModel.selectedLots!.proxyStatus == null
                                             ? '0'
-                                            : widget.lots.proxyStatus!.proxyAmount!.iNR) ==
+                                            : widget.auctionViewModel.selectedLots!.proxyStatus!.proxyAmount!.iNR) ==
                                         "0"
                                     ? Container()
                                     : InkWell(
@@ -745,7 +741,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                               ),
                                               Spacer(),
                                               Text(
-                                                "₹${formateNumber((widget.lots!.proxyStatus == null ? '0' : widget.lots!.proxyStatus!.proxyAmount!.iNR ?? "0"))}",
+                                                "₹${formateNumber((widget.auctionViewModel.selectedLots!.proxyStatus == null ? '0' : widget.auctionViewModel.selectedLots!.proxyStatus!.proxyAmount!.iNR ?? "0"))}",
                                                 textAlign: TextAlign.center,
                                                 style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                       color: Color(0xff202232),
@@ -759,12 +755,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                 : Container();
                   }),
 
-                  SizedBox(
-                    height: 16,
-                  ),
+                  (hours == "00" && minutes == "00" && seconds == "00")
+                      ? Container()
+                      : SizedBox(
+                          height: 16,
+                        ),
 
-                  ((widget.lots.proxyStatus == null ? '' : widget.lots.proxyStatus!.status) != "CanBid" &&
-                          widget.lots.status!.toLowerCase() == "upcoming")
+                  ((widget.auctionViewModel.selectedLots!.proxyStatus == null ? '' : widget.auctionViewModel.selectedLots!.proxyStatus!.status) != "CanBid" &&
+                          widget.auctionViewModel.selectedLots!.status!.toLowerCase() == "upcoming")
                       ? InkWell(
                           onTap: () {},
                           child: Container(
@@ -784,9 +782,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                       : Container(),
                   widget.auctionViewModel.auctionType == "past"
                       ? Container()
-                      : SizedBox(
-                          height: 16,
-                        ),
+                      : (hours == "00" && minutes == "00" && seconds == "00")
+                          ? Container()
+                          : SizedBox(
+                              height: 16,
+                            ),
                   widget.auctionViewModel.auctionType == "past"
                       ? Container()
                       : ElevatedButton(
@@ -796,7 +796,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                   borderRadius: BorderRadius.circular(20.0),
                                   side: BorderSide(color: Color(0xffFFFFFF), width: 0.38)))),
                           onPressed: () async {
-                            await widget.auctionViewModel.getAdditionCharge(widget.lots);
+                            await widget.auctionViewModel.getAdditionCharge(widget.auctionViewModel.selectedLots!);
 
                             if (widget.auctionViewModel.additionalChargeResponse!.status == "false") {
                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -863,7 +863,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                                   color: Color(0xffB45156),
                                                 ),
                                                 child: Text(
-                                                  'Lot ${widget.lots.lotNumber}',
+                                                  'Lot ${widget.auctionViewModel.selectedLots!.lotNumber}',
                                                   style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                         color: Colors.white,
                                                         fontWeight: FontWeight.w600,
@@ -874,7 +874,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                                 height: 16,
                                               ),
                                               Text(
-                                                '${widget.lots.artistName}',
+                                                '${widget.auctionViewModel.selectedLots!.artistName}',
                                                 style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                       color: Color(0XFF2D2D2D),
                                                       fontWeight: FontWeight.w600,
@@ -897,7 +897,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                                   SizedBox(
                                                     width: MediaQuery.of(context).size.width * .35,
                                                     child: Text(
-                                                      'Medium: ${widget.lots.info!.medium}',
+                                                      'Medium: ${widget.auctionViewModel.selectedLots!.info!.medium}',
                                                       style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                             color: Color(0XFF2D2D2D),
                                                             fontWeight: FontWeight.w500,
@@ -922,7 +922,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                                     width: 16,
                                                   ),
                                                   Text(
-                                                    'Year: ${widget.lots.info!.year}',
+                                                    'Year: ${widget.auctionViewModel.selectedLots!.info!.year}',
                                                     style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                           color: Color(0XFF2D2D2D),
                                                           fontWeight: FontWeight.w500,
@@ -945,7 +945,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                                     width: 16,
                                                   ),
                                                   Text(
-                                                    'Size: ${widget.lots.info!.size}',
+                                                    'Size: ${widget.auctionViewModel.selectedLots!.info!.size}',
                                                     style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                           color: Color(0XFF2D2D2D),
                                                           fontWeight: FontWeight.w500,
@@ -957,7 +957,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                                 height: 20,
                                               ),
                                               Container(
-                                                height: 214,
+                                                height: 215,
                                                 width: MediaQuery.of(context).size.width * .7,
                                                 color: Color(0xffD9D9D9),
                                                 padding: EdgeInsets.all(16),
@@ -1092,8 +1092,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                                               borderRadius: BorderRadius.circular(20.0),
                                                               side: BorderSide(color: Color(0XFFB45156), width: 0.5)))),
                                                   onPressed: () {
-                                                    Navigator.pushReplacement(context,
-                                                        MaterialPageRoute(builder: (context) => DashboardUi(12)));
+                                                    widget.bottomviewmodel.setIndex(12);
                                                   },
                                                   child: Padding(
                                                     padding:
@@ -1141,7 +1140,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                   SizedBox(
                     height: 16,
                   ),
-                  widget.lots.auctionType == "2"
+                  widget.auctionViewModel.selectedLots!.auctionType == "2"
                       ? Text(
                           'Description',
                           style: Theme.of(context).textTheme.subtitle1!.copyWith(
@@ -1153,9 +1152,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                   SizedBox(
                     height: 10,
                   ),
-                  widget.lots.auctionType == "2"
+                  widget.auctionViewModel.selectedLots!.auctionType == "2"
                       ? Text(
-                          '${(widget.lots.info!.lotTitle ?? "") == "" ? "NA" : widget.lots.info!.lotTitle}',
+                          '${(widget.auctionViewModel.selectedLots!.info!.lotTitle ?? "") == "" ? "NA" : widget.auctionViewModel.selectedLots!.info!.lotTitle}',
                           style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                 color: Color(0XFF747474),
                                 fontWeight: FontWeight.w400,
@@ -1165,7 +1164,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                   SizedBox(
                     height: 16,
                   ),
-                  widget.lots.auctionType == "1"
+                  widget.auctionViewModel.selectedLots!.auctionType == "1"
                       ? Row(
                           children: [
                             Image.asset("image/Vector.png", height: 20, width: 20),
@@ -1173,7 +1172,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                               width: 16,
                             ),
                             Text(
-                              'Medium: ${widget.lots.info!.medium}',
+                              'Medium: ${widget.auctionViewModel.selectedLots!.info!.medium}',
                               style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                     color: Color(0XFF2D2D2D),
                                     fontWeight: FontWeight.w500,
@@ -1182,12 +1181,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                           ],
                         )
                       : Container(),
-                  widget.lots.auctionType == "1"
+                  widget.auctionViewModel.selectedLots!.auctionType == "1"
                       ? SizedBox(
                           height: 16,
                         )
                       : Container(),
-                  widget.lots.auctionType == "1"
+                  widget.auctionViewModel.selectedLots!.auctionType == "1"
                       ? Row(
                           children: [
                             Image.asset("image/Shape (8).png", height: 20, width: 20),
@@ -1195,7 +1194,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                               width: 16,
                             ),
                             Text(
-                              'Year: ${widget.lots.info!.year}',
+                              'Year: ${widget.auctionViewModel.selectedLots!.info!.year}',
                               style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                     color: Color(0XFF2D2D2D),
                                     fontWeight: FontWeight.w500,
@@ -1204,12 +1203,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                           ],
                         )
                       : Container(),
-                  widget.lots.auctionType == "1"
+                  widget.auctionViewModel.selectedLots!.auctionType == "1"
                       ? SizedBox(
                           height: 16,
                         )
                       : Container(),
-                  widget.lots.auctionType == "1"
+                  widget.auctionViewModel.selectedLots!.auctionType == "1"
                       ? Row(
                           children: [
                             Image.asset("image/Vector (1).png", height: 20, width: 20),
@@ -1217,7 +1216,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                               width: 16,
                             ),
                             Text(
-                              'Size: ${widget.lots.info!.size}',
+                              'Size: ${widget.auctionViewModel.selectedLots!.info!.size}',
                               style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                     color: Color(0XFF2D2D2D),
                                     fontWeight: FontWeight.w500,
@@ -1226,13 +1225,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                           ],
                         )
                       : Container(),
-                  widget.lots.auctionType == "1"
+                  widget.auctionViewModel.selectedLots!.auctionType == "1"
                       ? SizedBox(
                           height: 16,
                         )
                       : Container(),
 
-                  (myDuration.inSeconds > 1 && widget.lots.status!.toLowerCase() == "live")
+                  (myDuration.inSeconds > 1 && widget.auctionViewModel.selectedLots!.status!.toLowerCase() == "live")
                       ? widget.auctionViewModel.auctionType == "past"
                           ? Container()
                           : Row(
@@ -1326,7 +1325,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      (widget.lots.status!.toLowerCase() == "live" &&
+                      (widget.auctionViewModel.selectedLots!.status!.toLowerCase() == "live" &&
                               (hours != "00" && minutes != "00" && seconds != "00"))
                           ? Column(
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -1389,10 +1388,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                             )
                           : Container(),
                       Spacer(),
-                      (widget.lots.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId())
+                      (widget.auctionViewModel.selectedLots!.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId())
                           ? Container()
-                          : ((widget.lots.proxyStatus == null ? '' : widget.lots.proxyStatus!.status) == "CanBid" &&
-                                  widget.lots.status!.toLowerCase() == "upcoming")
+                          : ((widget.auctionViewModel.selectedLots!.proxyStatus == null ? '' : widget.auctionViewModel.selectedLots!.proxyStatus!.status) == "CanBid" &&
+                                  widget.auctionViewModel.selectedLots!.status!.toLowerCase() == "upcoming")
                               ? ElevatedButton(
                                   style: ButtonStyle(
                                       backgroundColor: MaterialStateProperty.all(Color(0XFFF9F9F9)),
@@ -1402,7 +1401,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                   onPressed: () async {
                                     bool checked = false;
                                     final textEditingController = TextEditingController();
-                                    await widget.auctionViewModel.getProxyAmountByLot(widget.lots);
+                                    await widget.auctionViewModel.getProxyAmountByLot(widget.auctionViewModel.selectedLots!);
 
                                     if (widget.auctionViewModel.getProxyBidAmountResponse!.status == "true") {
                                       showModalBottomSheet<void>(
@@ -1663,7 +1662,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                                                 elevation: 42,
                                                               ));
                                                             } else {
-                                                              await widget.auctionViewModel.placeBid(widget.lots,
+                                                              await widget.auctionViewModel.placeBid(widget.auctionViewModel.selectedLots!,
                                                                   widget.auctionViewModel.selectedProxyBid, "0");
 
                                                               if (widget.auctionViewModel.proxyBidResponse!.status ==
@@ -1792,7 +1791,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                       onPressed: () async {
                                         bool checked = false;
                                         final textEditingController = TextEditingController();
-                                        await widget.auctionViewModel.getProxyAmountByLot(widget.lots);
+                                        await widget.auctionViewModel.getProxyAmountByLot(widget.auctionViewModel.selectedLots!);
 
                                         if (widget.auctionViewModel.getProxyBidAmountResponse!.status == "true") {
                                           showModalBottomSheet<void>(
@@ -2054,7 +2053,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                                                     elevation: 42,
                                                                   ));
                                                                 } else {
-                                                                  await widget.auctionViewModel.placeBid(widget.lots,
+                                                                  await widget.auctionViewModel.placeBid(widget.auctionViewModel.selectedLots!,
                                                                       widget.auctionViewModel.selectedProxyBid, "0");
 
                                                                   if (widget
@@ -2177,9 +2176,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                       SizedBox(
                         width: 16,
                       ),
-                      (widget.lots.status!.toLowerCase() == "live" &&
+                      (widget.auctionViewModel.selectedLots!.status!.toLowerCase() == "live" &&
                               (hours != "00" && minutes != "00" && seconds != "00"))
-                          ? (widget.lots.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId())
+                          ? (widget.auctionViewModel.selectedLots!.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId())
                               ? Container()
                               : InkWell(
                                   onTap: () {
@@ -2319,7 +2318,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                                             color: Color(0xffB45156),
                                                             borderRadius: BorderRadius.circular(8)),
                                                         child: Text(
-                                                            "Your Next Valid Bid ₹${formateNumber(widget.lots.liveStatus!.nextValidBid!.iNR!)}",
+                                                            "Your Next Valid Bid ₹${formateNumber(widget.auctionViewModel.selectedLots!.liveStatus!.nextValidBid!.iNR!)}",
                                                             style: Theme.of(context)
                                                                 .textTheme
                                                                 .subtitle1!
@@ -2377,8 +2376,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                                     InkWell(
                                                       onTap: () {
                                                         if (checked) {
-                                                          widget.auctionViewModel.placeBid(widget.lots, "0",
-                                                              widget.lots.liveStatus!.nextValidBid!.iNR!);
+                                                          widget.auctionViewModel.placeBid(widget.auctionViewModel.selectedLots!, "0",
+                                                              widget.auctionViewModel.selectedLots!.liveStatus!.nextValidBid!.iNR!);
 
                                                           if (widget.auctionViewModel.proxyBidResponse!.status ==
                                                               "true") {
@@ -2512,41 +2511,41 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                               child: Container(
                                 padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
                                 decoration: BoxDecoration(
-                                    color: (widget.lots.leadingUser!.id ==
+                                    color: (widget.auctionViewModel.selectedLots!.leadingUser!.id ==
                                             widget.auctionViewModel.localSharedPrefrence.getUserId())
                                         ? Colors.blue
                                         : Colors.red,
                                     borderRadius: BorderRadius.circular(16)),
                                 child: Text(
-                                    "${(widget.lots.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId()) ? "YOU WON" : widget.lots.bidCount == "0" ? "BOUGHT IN" : "BID CLOSED"}",
+                                    "${(widget.auctionViewModel.selectedLots!.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId()) ? "YOU WON" : widget.auctionViewModel.selectedLots!.bidCount == "0" ? "BOUGHT IN" : "BID CLOSED"}",
                                     style: Theme.of(context).textTheme.subtitle2!.copyWith(color: Colors.white)),
                               ),
                             )
-                          : (widget.lots.status!.toLowerCase() == "live" &&
+                          : (widget.auctionViewModel.selectedLots!.status!.toLowerCase() == "live" &&
                                   (hours == "00" && minutes == "00" && seconds == "00"))
                               ? Align(
                                   alignment: Alignment.topRight,
                                   child: Container(
                                     padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
                                     decoration: BoxDecoration(
-                                        color: (widget.lots.leadingUser!.id ==
+                                        color: (widget.auctionViewModel.selectedLots!.leadingUser!.id ==
                                                 widget.auctionViewModel.localSharedPrefrence.getUserId())
                                             ? Colors.blue
                                             : Colors.red,
                                         borderRadius: BorderRadius.circular(16)),
                                     child: Text(
-                                        "${(widget.lots.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId()) ? "YOU WON" : widget.lots.bidCount == "0" ? "BOUGHT IN" : "BID CLOSED"}",
+                                        "${(widget.auctionViewModel.selectedLots!.leadingUser!.id == widget.auctionViewModel.localSharedPrefrence.getUserId()) ? "YOU WON" : widget.auctionViewModel.selectedLots!.bidCount == "0" ? "BOUGHT IN" : "BID CLOSED"}",
                                         style: Theme.of(context).textTheme.subtitle2!.copyWith(color: Colors.white)),
                                   ),
                                 )
-                              : (widget.lots.leadingUser!.id ==
+                              : (widget.auctionViewModel.selectedLots!.leadingUser!.id ==
                                       widget.auctionViewModel.localSharedPrefrence.getUserId())
                                   ? Align(
                                       alignment: Alignment.topRight,
                                       child: Container(
                                         padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
                                         decoration: BoxDecoration(
-                                            color: (widget.lots.leadingUser!.id ==
+                                            color: (widget.auctionViewModel.selectedLots!.leadingUser!.id ==
                                                     widget.auctionViewModel.localSharedPrefrence.getUserId())
                                                 ? Colors.blue
                                                 : Colors.red,
@@ -2567,7 +2566,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                       ? Container()
                       : widget.auctionViewModel.bidInfoResponse!.result == null
                           ? Container()
-                          : widget.lots.status!.toLowerCase() == "live"
+                          : widget.auctionViewModel.selectedLots!.status!.toLowerCase() == "live"
                               ? widget.auctionViewModel.auctionType == "past"
                                   ? Container()
                                   : Text(
@@ -2586,7 +2585,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                       ? Container()
                       : widget.auctionViewModel.bidInfoResponse!.result == null
                           ? Container()
-                          : widget.lots.status!.toLowerCase() == "live"
+                          : widget.auctionViewModel.selectedLots!.status!.toLowerCase() == "live"
                               ? widget.auctionViewModel.auctionType == "past"
                                   ? Container()
                                   : Container(
@@ -2786,12 +2785,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                           height: 16,
                         ),
 
-                  widget.lots.info!.artistDescription == null
+                  widget.auctionViewModel.selectedLots!.info!.artistDescription == null
                       ? Container()
                       : SizedBox(
                           height: 32,
                         ),
-                  widget.lots.info!.artistDescription == null
+                  widget.auctionViewModel.selectedLots!.info!.artistDescription == null
                       ? Container()
                       : Text(
                           'About Artist',
@@ -2800,15 +2799,15 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                 fontWeight: FontWeight.bold,
                               ),
                         ),
-                  widget.lots.info!.artistDescription == null
+                  widget.auctionViewModel.selectedLots!.info!.artistDescription == null
                       ? Container()
                       : SizedBox(
                           height: 10,
                         ),
-                  widget.lots.info!.artistDescription == null
+                  widget.auctionViewModel.selectedLots!.info!.artistDescription == null
                       ? Container()
                       : HtmlWidget(
-                          '${widget.lots.info!.artistDescription}',
+                          '${widget.auctionViewModel.selectedLots!.info!.artistDescription}',
                           // style: Theme.of(context).textTheme.bodyText1!.copyWith(
                           //       color: Color(0XFF000000),
                           //       fontWeight: FontWeight.w400,

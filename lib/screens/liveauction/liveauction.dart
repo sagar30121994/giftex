@@ -6,22 +6,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/data/network/models/responce/profile/GetRegInfoResponse.dart';
-import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
 import 'package:giftex/screens/components/footer/footer.dart';
 import 'package:giftex/screens/components/header.dart';
 import 'package:giftex/screens/homepage/liveitem.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
-import 'package:giftex/viewmodel/profile/profileviewmodel.dart';
+import 'package:giftex/viewmodel/bottomviewmodel.dart';
 import 'package:intl/intl.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
-AuctionViewModel auctionViewModel = AuctionViewModel();
-ProfileViewModel profileViewModel = ProfileViewModel();
-
 class LiveAuctionUi extends StatefulWidget {
   String auction;
+  AuctionViewModel auctionViewModel;
+  BottomViewModel bottomViewModel;
 
-  LiveAuctionUi(this.auction);
+  LiveAuctionUi(this.auction, this.auctionViewModel, this.bottomViewModel);
 
   @override
   _LiveAuctionUiState createState() => _LiveAuctionUiState();
@@ -39,7 +37,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
   bool countDown = true, selected = false;
 
   Future laodData() async {
-    await profileViewModel.getRegInfo();
+    await widget.bottomViewModel.profileViewModel!.getRegInfo();
     setState(() {});
   }
 
@@ -49,14 +47,14 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
     dataList.forEach((element) {
       data.add(Menu.fromJson(element));
     });
-    auctionViewModel.auctionType = widget.auction;
+    widget.auctionViewModel.auctionType = widget.auction;
 
     if (widget.auction == "live") {
-      auctionViewModel.getUpcommingAuction("Live");
+      widget.auctionViewModel.getUpcommingAuction("Live");
     } else if (widget.auction == "past") {
-      auctionViewModel.getUpcommingAuction("Past");
+      widget.auctionViewModel.getUpcommingAuction("Past");
     } else {
-      auctionViewModel.getUpcommingAuction("UpComing");
+      widget.auctionViewModel.getUpcommingAuction("UpComing");
     }
     laodData();
     super.initState();
@@ -98,36 +96,6 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
       reset();
     }
     setState(() => timer?.cancel());
-  }
-
-  Widget _buildList(Menu list) {
-    if (list.subMenu!.isEmpty)
-      return Builder(builder: (context) {
-        return ListTile(
-            // onTap:() => Navigator.push(context, MaterialPageRoute(builder: (context) => SubCategory(list.name))),
-            leading: Checkbox(
-              value: selected,
-              shape: RoundedRectangleBorder(),
-              onChanged: (bool? value) {},
-            ),
-            title: Text(
-              list.name!,
-              style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w400,
-                  ),
-            ));
-      });
-    return ExpansionTile(
-      title: Text(
-        list.name!,
-        style: Theme.of(context).textTheme.subtitle1!.copyWith(
-              color: Colors.black,
-              fontWeight: FontWeight.w600,
-            ),
-      ),
-      children: list.subMenu!.map(_buildList).toList(),
-    );
   }
 
   @override
@@ -265,16 +233,16 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                     setState(() async {
                       if (index == 0) {
                         tabColor = Color(0xffE74B52);
-                        auctionViewModel.auctionType = "live";
-                        await auctionViewModel.getUpcommingAuction("Live");
+                        widget.auctionViewModel.auctionType = "live";
+                        await widget.auctionViewModel.getUpcommingAuction("Live");
                       } else if (index == 1) {
                         tabColor = Color(0xffE74B52);
-                        auctionViewModel.auctionType = "upcoming";
-                        auctionViewModel.getUpcommingAuction("UpComing");
+                        widget.auctionViewModel.auctionType = "upcoming";
+                        widget.auctionViewModel.getUpcommingAuction("UpComing");
                       } else if (index == 2) {
                         tabColor = Color(0xffE74B52);
-                        auctionViewModel.auctionType = "past";
-                        auctionViewModel.getUpcommingAuction("Past");
+                        widget.auctionViewModel.auctionType = "past";
+                        widget.auctionViewModel.getUpcommingAuction("Past");
                       }
                     });
                     print(index);
@@ -304,10 +272,10 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
             );
           }),
         ),
-        auctionViewModel.auctionType == "live"
-            ? auctionViewModel.upcomingAuctionResponse == null
+        widget.auctionViewModel.auctionType == "live"
+            ? widget.auctionViewModel.upcomingAuctionResponse == null
                 ? SliverToBoxAdapter(child: Container())
-                : (auctionViewModel.upcomingAuctionResponse!.result?.auctions ?? []).length == 0
+                : (widget.auctionViewModel.upcomingAuctionResponse!.result?.auctions ?? []).length == 0
                     ? SliverToBoxAdapter(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -358,24 +326,25 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                           addAutomaticKeepAlives: true,
                           addSemanticIndexes: true,
                           (BuildContext context, int index) {
-                            return LiveItem(auctionViewModel.upcomingAuctionResponse!.result!.auctions![index], index);
+                            return LiveItem(
+                                widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions![index], index);
                           },
                           // 40 list items
-                          childCount: auctionViewModel.upcomingAuctionResponse!.result == null
+                          childCount: widget.auctionViewModel.upcomingAuctionResponse!.result == null
                               ? 0
-                              : auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length,
+                              : widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length,
                         ),
                       )
             : SliverToBoxAdapter(child: Container()),
-        auctionViewModel.isLoadingForUpCommingAuction
+        widget.auctionViewModel.isLoadingForUpCommingAuction
             ? SliverToBoxAdapter(child: LinearProgressIndicator())
             : SliverToBoxAdapter(
                 child: Observer(builder: (context) {
-                  return auctionViewModel.auctionType == "upcoming"
+                  return widget.auctionViewModel.auctionType == "upcoming"
                       ? Container(
-                          child: auctionViewModel.upcomingAuctionResponse == null
+                          child: widget.auctionViewModel.upcomingAuctionResponse == null
                               ? Container()
-                              : auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length == 0
+                              : widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length == 0
                                   ? Column(
                                       crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
@@ -418,7 +387,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                         ),
                                       ],
                                     )
-                                  : auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length > 1
+                                  : widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length > 1
                                       ? Container(
                                           padding: EdgeInsets.all(16),
                                           color: Colors.white,
@@ -426,80 +395,130 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                             mainAxisAlignment: MainAxisAlignment.start,
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              Text(
-                                                "5 Days Until Online \nBidding Opens",
-                                                textAlign: TextAlign.start,
-                                                style: Theme.of(context).textTheme.headline5!.copyWith(
-                                                      color: Color(0xff2d2d2d),
-                                                      fontWeight: FontWeight.w400,
-                                                    ),
-                                              ),
+                                              (widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions![0]
+                                                          .auctionDate!) !=
+                                                      "TBA"
+                                                  ? DateTime.now()
+                                                              .difference(DateTime.parse(widget
+                                                                  .auctionViewModel
+                                                                  .upcomingAuctionResponse!
+                                                                  .result!
+                                                                  .auctions![0]!
+                                                                  .auctionDate!))
+                                                              .inDays >
+                                                          1
+                                                      ? Text(
+                                                          "${DateTime.now().difference(DateTime.parse(widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions![0]!.auctionDate!)).inDays} Days Until Online \nBidding Opens",
+                                                          textAlign: TextAlign.start,
+                                                          style: Theme.of(context).textTheme.headline5!.copyWith(
+                                                                color: Color(0xff2d2d2d),
+                                                                fontWeight: FontWeight.w400,
+                                                              ),
+                                                        )
+                                                      : DateTime.now()
+                                                                  .difference(DateTime.parse(widget
+                                                                      .auctionViewModel
+                                                                      .upcomingAuctionResponse!
+                                                                      .result!
+                                                                      .auctions![0]!
+                                                                      .auctionDate!))
+                                                                  .inDays ==
+                                                              0
+                                                          ? Text(
+                                                              "Auction Will Be Live Today",
+                                                              textAlign: TextAlign.start,
+                                                              style: Theme.of(context).textTheme.headline5!.copyWith(
+                                                                    color: Color(0xff2d2d2d),
+                                                                    fontWeight: FontWeight.w400,
+                                                                  ),
+                                                            )
+                                                          : Text("")
+                                                  : Container(),
                                               SizedBox(
                                                 height: 16,
                                               ),
-                                              InkWell(
-                                                onTap: () {
-                                                  // Navigator.push(context, MaterialPageRoute(builder: (context) => GetOtppage()));
-                                                  final Event event = Event(
-                                                    title:
-                                                        '${auctionViewModel.upcomingAuctionResponse!.result!.auctions![0].auctionName}',
-                                                    description:
-                                                        '${auctionViewModel.upcomingAuctionResponse!.result!.auctions![0].auctionName}',
-                                                    location: 'Event location',
-                                                    startDate: DateTime.parse(auctionViewModel
-                                                        .upcomingAuctionResponse!.result!.auctions![0]!.auctionDate!),
-                                                    endDate: DateTime.parse(auctionViewModel.upcomingAuctionResponse!
-                                                        .result!.auctions![0]!.auctionEndDate!),
-                                                    iosParams: IOSParams(
-                                                      reminder: Duration(
-                                                          /* Ex. hours:1 */), // on iOS, you can set alarm notification after your event.
-                                                      url:
-                                                          '${auctionViewModel.upcomingAuctionResponse!.result!.auctions![0].auctionURL}', // on iOS, you can set url to your event.
-                                                    ),
-                                                    androidParams: AndroidParams(
-                                                      emailInvites: [], // on Android, you can add invite emails to your event.
-                                                    ),
-                                                  );
+                                              DateTime.now()
+                                                          .difference(DateTime.parse(widget
+                                                              .auctionViewModel
+                                                              .upcomingAuctionResponse!
+                                                              .result!
+                                                              .auctions![0]!
+                                                              .auctionDate!))
+                                                          .inDays >
+                                                      1
+                                                  ? InkWell(
+                                                      onTap: () {
+                                                        // Navigator.push(context, MaterialPageRoute(builder: (context) => GetOtppage()));
+                                                        final Event event = Event(
+                                                          title:
+                                                              '${widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions![0].auctionName}',
+                                                          description:
+                                                              '${widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions![0].auctionName}',
+                                                          location: 'Event location',
+                                                          startDate: DateTime.parse(widget
+                                                              .auctionViewModel
+                                                              .upcomingAuctionResponse!
+                                                              .result!
+                                                              .auctions![0]!
+                                                              .auctionDate!),
+                                                          endDate: DateTime.parse(widget
+                                                              .auctionViewModel
+                                                              .upcomingAuctionResponse!
+                                                              .result!
+                                                              .auctions![0]!
+                                                              .auctionEndDate!),
+                                                          iosParams: IOSParams(
+                                                            reminder: Duration(
+                                                                /* Ex. hours:1 */), // on iOS, you can set alarm notification after your event.
+                                                            url:
+                                                                '${widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions![0].auctionURL}', // on iOS, you can set url to your event.
+                                                          ),
+                                                          androidParams: AndroidParams(
+                                                            emailInvites: [], // on Android, you can add invite emails to your event.
+                                                          ),
+                                                        );
 
-                                                  Add2Calendar.addEvent2Cal(event);
-                                                },
-                                                child: Container(
-                                                    height: 50,
-                                                    width: MediaQuery.of(context).size.width * .65,
-                                                    decoration: BoxDecoration(
-                                                        gradient: LinearGradient(colors: [
-                                                          Color(0xffB45156),
-                                                          Color(0xffE74B52),
-                                                        ]),
-                                                        borderRadius: BorderRadius.circular(20)),
-                                                    child: Padding(
-                                                      padding: const EdgeInsets.only(
-                                                          right: 5.0, left: 5, top: 12, bottom: 12),
-                                                      child: Center(
-                                                        child: Row(
-                                                          mainAxisAlignment: MainAxisAlignment.center,
-                                                          children: [
-                                                            Text(
-                                                              'ADD TO CALENDER',
-                                                              style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                                    color: Color(0XFFFFFFFF),
-                                                                    fontWeight: FontWeight.w600,
+                                                        Add2Calendar.addEvent2Cal(event);
+                                                      },
+                                                      child: Container(
+                                                          height: 50,
+                                                          width: MediaQuery.of(context).size.width * .65,
+                                                          decoration: BoxDecoration(
+                                                              gradient: LinearGradient(colors: [
+                                                                Color(0xffB45156),
+                                                                Color(0xffE74B52),
+                                                              ]),
+                                                              borderRadius: BorderRadius.circular(20)),
+                                                          child: Padding(
+                                                            padding: const EdgeInsets.only(
+                                                                right: 5.0, left: 5, top: 12, bottom: 12),
+                                                            child: Center(
+                                                              child: Row(
+                                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                                children: [
+                                                                  Text(
+                                                                    'ADD TO CALENDER',
+                                                                    style:
+                                                                        Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                                              color: Color(0XFFFFFFFF),
+                                                                              fontWeight: FontWeight.w600,
+                                                                            ),
                                                                   ),
+                                                                  SizedBox(
+                                                                    width: 16,
+                                                                  ),
+                                                                  Image.asset(
+                                                                    "image/cal.png",
+                                                                    height: 25,
+                                                                    width: 25,
+                                                                    color: Color(0XFFFFFFFF),
+                                                                  )
+                                                                ],
+                                                              ),
                                                             ),
-                                                            SizedBox(
-                                                              width: 16,
-                                                            ),
-                                                            Image.asset(
-                                                              "image/cal.png",
-                                                              height: 25,
-                                                              width: 25,
-                                                              color: Color(0XFFFFFFFF),
-                                                            )
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    )),
-                                              ),
+                                                          )),
+                                                    )
+                                                  : Container(),
                                               SizedBox(
                                                 height: 16,
                                               ),
@@ -520,7 +539,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                         crossAxisAlignment: CrossAxisAlignment.start,
                                                         children: [
                                                           Image.network(
-                                                            "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![0].image}",
+                                                            "${widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions![0].image}",
                                                             fit: BoxFit.contain,
                                                           ),
                                                           Container(
@@ -531,7 +550,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                                 // mainAxisSize: MainAxisSize.max,
                                                                 children: [
                                                                   Text(
-                                                                      "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![0].auctionName}",
+                                                                      "${widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions![0].auctionName}",
                                                                       style: Theme.of(context)
                                                                           .textTheme
                                                                           .headline6!
@@ -543,12 +562,12 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                                   SizedBox(
                                                                     width: 8,
                                                                   ),
-                                                                  Text(
-                                                                      "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![0].auctionName}",
-                                                                      style: Theme.of(context)
-                                                                          .textTheme
-                                                                          .headline6!
-                                                                          .copyWith(fontWeight: FontWeight.normal)),
+                                                                  // Text(
+                                                                  //     "${widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions![0].auctionName}",
+                                                                  //     style: Theme.of(context)
+                                                                  //         .textTheme
+                                                                  //         .headline6!
+                                                                  //         .copyWith(fontWeight: FontWeight.normal)),
                                                                 ],
                                                               ),
                                                             ),
@@ -560,18 +579,22 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                             onTap: () {
                                                               // Navigator.push(context, MaterialPageRoute(builder: (context) => LiveAuctionUiDetails(widget.auction)));
 
-                                                              if ((auctionViewModel.upcomingAuctionResponse!.result!
-                                                                      .auctions![0].auctionDate!) !=
+                                                              if ((widget.auctionViewModel.upcomingAuctionResponse!
+                                                                      .result!.auctions![0].auctionDate!) !=
                                                                   "TBA") {
-                                                                auctionViewModel.upComingLotsResponse = null;
+                                                                widget.auctionViewModel.upComingLotsResponse = null;
                                                                 setState(() {
-                                                                  auctionViewModel.selectedAuction = auctionViewModel
-                                                                      .upcomingAuctionResponse!.result!.auctions![0];
+                                                                  widget.auctionViewModel.selectedAuction = widget
+                                                                      .auctionViewModel
+                                                                      .upcomingAuctionResponse!
+                                                                      .result!
+                                                                      .auctions![0];
 
-                                                                  bottomViewModel.setIndex(8);
+                                                                  widget.bottomViewModel.setIndex(8);
                                                                 });
                                                               } else {
-                                                                showinterestPopup(auctionViewModel
+                                                                showinterestPopup(widget
+                                                                    .auctionViewModel
                                                                     .upcomingAuctionResponse!
                                                                     .result!
                                                                     .auctions![0]
@@ -585,8 +608,8 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                                   color: Color(0xffEAEEF2),
                                                                   borderRadius: BorderRadius.all(Radius.circular(10))),
                                                               child: Text(
-                                                                (auctionViewModel.upcomingAuctionResponse!.result!
-                                                                                .auctions![0].auctionDate ??
+                                                                (widget.auctionViewModel.upcomingAuctionResponse!
+                                                                                .result!.auctions![0].auctionDate ??
                                                                             '') ==
                                                                         "TBA"
                                                                     ? "SHOW INTEREST"
@@ -603,7 +626,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                             height: 8,
                                                           ),
                                                           Text(
-                                                              "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![0].displayDate!.split(",")[0].trim()}",
+                                                              "${widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions![0].displayDate!.split(",")[0].trim()}",
                                                               style: Theme.of(context).textTheme.headline5!.copyWith(
                                                                   fontWeight: FontWeight.normal,
                                                                   color: Theme.of(context).colorScheme.primary,
@@ -612,7 +635,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                             height: 8,
                                                           ),
                                                           Text(
-                                                              "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![0].displayDate!.split(",")[1].trim()}",
+                                                              "${widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions![0].displayDate!.split(",")[1].trim()}",
                                                               style: Theme.of(context)
                                                                   .textTheme
                                                                   .subtitle1!
@@ -623,301 +646,6 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                   ],
                                                 ),
                                               ),
-
-                                              // ListView.builder(itemBuilder: ()P),
-                                              // auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length > 2
-                                              //     ? Container(
-                                              //         decoration: BoxDecoration(color: Color(0xffEAEEF2)),
-                                              //         padding: EdgeInsets.symmetric(vertical: 32, horizontal: 4),
-                                              //         margin: EdgeInsets.only(top: 32),
-                                              //         width: MediaQuery.of(context).size.width,
-                                              //         child: Row(
-                                              //           crossAxisAlignment: CrossAxisAlignment.start,
-                                              //           mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                              //           children: [
-                                              //             Image.network(
-                                              //               "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![1].image}",
-                                              //               fit: BoxFit.contain,
-                                              //               height: 120,
-                                              //               width: MediaQuery.of(context).size.width * .35,
-                                              //             ),
-                                              //             SizedBox(
-                                              //               width: 16,
-                                              //             ),
-                                              //             Column(
-                                              //               crossAxisAlignment: CrossAxisAlignment.end,
-                                              //               children: [
-                                              //                 SizedBox(
-                                              //                   height: 16,
-                                              //                 ),
-                                              //                 SizedBox(
-                                              //                   width: MediaQuery.of(context).size.width * .5,
-                                              //                   child: Text(
-                                              //                     "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![1].auctionName!}",
-                                              //                     style: Theme.of(context).textTheme.headline6!.copyWith(
-                                              //                         color: Colors.black, fontWeight: FontWeight.bold),
-                                              //                     textAlign: TextAlign.justify,
-                                              //                   ),
-                                              //                 ),
-                                              //                 SizedBox(
-                                              //                   height: 8,
-                                              //                 ),
-                                              //                 Text(
-                                              //                   "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![1].displayDate!.split(",")[0].trim()}",
-                                              //                   style: Theme.of(context).textTheme.headline5!.copyWith(
-                                              //                       fontWeight: FontWeight.normal,
-                                              //                       color: Colors.black,
-                                              //                       letterSpacing: 2),
-                                              //                 ),
-                                              //                 SizedBox(
-                                              //                   height: 8,
-                                              //                 ),
-                                              //                 Text(
-                                              //                     "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![1].displayDate!.split(",")[1].trim()}",
-                                              //                     style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                              //                           color: Colors.black,
-                                              //                         )),
-                                              //                 SizedBox(
-                                              //                   height: 8,
-                                              //                 ),
-                                              //                 InkWell(
-                                              //                   onTap: () {
-                                              //                     if ((auctionViewModel.upcomingAuctionResponse!.result!
-                                              //                             .auctions![1].auctionDate!) !=
-                                              //                         "TBA") {
-                                              //                       auctionViewModel.upComingLotsResponse = null;
-                                              //                       setState(() {
-                                              //                         auctionViewModel.selectedAuction = auctionViewModel
-                                              //                             .upcomingAuctionResponse!.result!.auctions![1];
-                                              //
-                                              //                         bottomViewModel.setIndex(8);
-                                              //                       });
-                                              //                     } else {
-                                              //                       showinterestPopup(auctionViewModel
-                                              //                           .upcomingAuctionResponse!
-                                              //                           .result!
-                                              //                           .auctions![1]
-                                              //                           .auctionId
-                                              //                           .toString());
-                                              //                     }
-                                              //                   },
-                                              //                   child: Container(
-                                              //                     padding: EdgeInsets.all(8),
-                                              //                     decoration: BoxDecoration(
-                                              //                         color: Color(0xffEAEEF2),
-                                              //                         borderRadius: BorderRadius.all(Radius.circular(10))),
-                                              //                     child: Text(
-                                              //                       (auctionViewModel.upcomingAuctionResponse!.result!
-                                              //                                   .auctions![1].auctionDate!) ==
-                                              //                               "TBA"
-                                              //                           ? "SHOW INTEREST"
-                                              //                           : "EXPLORE",
-                                              //                       textAlign: TextAlign.start,
-                                              //                       style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                              //                           color: Colors.black,
-                                              //                           fontWeight: FontWeight.bold,
-                                              //                           letterSpacing: 2),
-                                              //                     ),
-                                              //                   ),
-                                              //                 ),
-                                              //               ],
-                                              //             ),
-                                              //           ],
-                                              //         ),
-                                              //       )
-                                              //     : Container(),
-                                              // auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length > 3
-                                              //     ? Container(
-                                              //         decoration: BoxDecoration(
-                                              //             color: Colors.red,
-                                              //             image: DecorationImage(
-                                              //                 image: NetworkImage(
-                                              //                     "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![2].image}"),
-                                              //                 fit: BoxFit.fill,
-                                              //                 opacity: .2)),
-                                              //         padding: EdgeInsets.symmetric(vertical: 32, horizontal: 4),
-                                              //         // margin: EdgeInsets.symmetric(vertical: 32),
-                                              //         width: MediaQuery.of(context).size.width,
-                                              //         child: Row(
-                                              //           crossAxisAlignment: CrossAxisAlignment.start,
-                                              //           // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                              //           children: [
-                                              //             // Image.network("${auctionViewModel.upcomingAuctionResponse!.result!.auctions![2].image}",height: 120,),
-                                              //             Column(
-                                              //               crossAxisAlignment: CrossAxisAlignment.start,
-                                              //               children: [
-                                              //                 SizedBox(
-                                              //                   height: 16,
-                                              //                 ),
-                                              //                 SizedBox(
-                                              //                   width: MediaQuery.of(context).size.width * .8,
-                                              //                   child: Text(
-                                              //                     "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![2].auctionName!}",
-                                              //                     style: Theme.of(context).textTheme.headline6!.copyWith(
-                                              //                         color: Colors.white, fontWeight: FontWeight.bold),
-                                              //                     textAlign: TextAlign.justify,
-                                              //                   ),
-                                              //                 ),
-                                              //                 SizedBox(
-                                              //                   height: 32,
-                                              //                 ),
-                                              //                 Text(
-                                              //                     "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![2].displayDate!.split(",")[0].trim()}",
-                                              //                     style: Theme.of(context).textTheme.headline5!.copyWith(
-                                              //                         fontWeight: FontWeight.normal,
-                                              //                         color: Colors.white,
-                                              //                         letterSpacing: 2)),
-                                              //                 SizedBox(
-                                              //                   height: 8,
-                                              //                 ),
-                                              //                 Text(
-                                              //                     "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![2].displayDate!.split(",")[1].trim()}",
-                                              //                     style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                              //                           color: Colors.white,
-                                              //                         )),
-                                              //                 SizedBox(
-                                              //                   height: 8,
-                                              //                 ),
-                                              //                 InkWell(
-                                              //                   onTap: () {
-                                              //                     if ((auctionViewModel.upcomingAuctionResponse!.result!
-                                              //                             .auctions![2].auctionDate!) !=
-                                              //                         "TBA") {
-                                              //                       auctionViewModel.upComingLotsResponse = null;
-                                              //                       setState(() {
-                                              //                         auctionViewModel.selectedAuction = auctionViewModel
-                                              //                             .upcomingAuctionResponse!.result!.auctions![3];
-                                              //
-                                              //                         bottomViewModel.setIndex(8);
-                                              //                       });
-                                              //                     } else {
-                                              //                       showinterestPopup(auctionViewModel
-                                              //                           .upcomingAuctionResponse!
-                                              //                           .result!
-                                              //                           .auctions![2]
-                                              //                           .auctionId
-                                              //                           .toString());
-                                              //                     }
-                                              //                   },
-                                              //                   child: Container(
-                                              //                     padding: EdgeInsets.all(8),
-                                              //                     decoration: BoxDecoration(
-                                              //                         color: Color(0xffEAEEF2),
-                                              //                         borderRadius: BorderRadius.all(Radius.circular(10))),
-                                              //                     child: Text(
-                                              //                       (auctionViewModel.upcomingAuctionResponse!.result!
-                                              //                                   .auctions![2].auctionDate!) ==
-                                              //                               "TBA"
-                                              //                           ? "SHOW INTEREST"
-                                              //                           : "EXPLORE",
-                                              //                       textAlign: TextAlign.start,
-                                              //                       style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                              //                           color: Colors.black,
-                                              //                           fontWeight: FontWeight.bold,
-                                              //                           letterSpacing: 2),
-                                              //                     ),
-                                              //                   ),
-                                              //                 ),
-                                              //               ],
-                                              //             ),
-                                              //           ],
-                                              //         ),
-                                              //       )
-                                              //     : Container(),
-                                              // auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length > 4
-                                              //     ? Container(
-                                              //         decoration: BoxDecoration(color: Color(0xffF8F8F8)),
-                                              //         padding: EdgeInsets.symmetric(vertical: 32, horizontal: 4),
-                                              //         // margin: EdgeInsets.symmetric(vertical: 32),
-                                              //         width: MediaQuery.of(context).size.width,
-                                              //         child: Row(
-                                              //           crossAxisAlignment: CrossAxisAlignment.start,
-                                              //           mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                              //           children: [
-                                              //             Image.network(
-                                              //               "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![3].image}",
-                                              //               height: 120,
-                                              //               fit: BoxFit.contain,
-                                              //             ),
-                                              //             Column(
-                                              //               crossAxisAlignment: CrossAxisAlignment.end,
-                                              //               children: [
-                                              //                 SizedBox(
-                                              //                   height: 16,
-                                              //                 ),
-                                              //                 SizedBox(
-                                              //                   width: MediaQuery.of(context).size.width * .5,
-                                              //                   child: Text(
-                                              //                       "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![3].auctionName!}",
-                                              //                       style: Theme.of(context).textTheme.headline6!.copyWith(
-                                              //                           color: Colors.black, fontWeight: FontWeight.bold)),
-                                              //                 ),
-                                              //                 SizedBox(
-                                              //                   height: 32,
-                                              //                 ),
-                                              //                 Text(
-                                              //                     "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![3].displayDate!.split(",")[0].trim()}",
-                                              //                     style: Theme.of(context).textTheme.headline5!.copyWith(
-                                              //                         fontWeight: FontWeight.normal,
-                                              //                         color: Colors.black,
-                                              //                         letterSpacing: 2)),
-                                              //                 SizedBox(
-                                              //                   height: 8,
-                                              //                 ),
-                                              //                 Text(
-                                              //                     "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![3].displayDate!.split(",")[1].trim()}",
-                                              //                     style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                              //                           color: Colors.black,
-                                              //                         )),
-                                              //                 SizedBox(
-                                              //                   height: 8,
-                                              //                 ),
-                                              //                 InkWell(
-                                              //                   onTap: () {
-                                              //                     if ((auctionViewModel.upcomingAuctionResponse!.result!
-                                              //                             .auctions![3].auctionDate!) !=
-                                              //                         "TBA") {
-                                              //                       setState(() {
-                                              //                         auctionViewModel.upComingLotsResponse = null;
-                                              //                         auctionViewModel.selectedAuction = auctionViewModel
-                                              //                             .upcomingAuctionResponse!.result!.auctions![3];
-                                              //
-                                              //                         bottomViewModel.setIndex(8);
-                                              //                       });
-                                              //                     } else {
-                                              //                       showinterestPopup(auctionViewModel
-                                              //                           .upcomingAuctionResponse!
-                                              //                           .result!
-                                              //                           .auctions![3]
-                                              //                           .auctionId
-                                              //                           .toString());
-                                              //                     }
-                                              //                   },
-                                              //                   child: Container(
-                                              //                     padding: EdgeInsets.all(8),
-                                              //                     decoration: BoxDecoration(
-                                              //                         color: Color(0xffEAEEF2),
-                                              //                         borderRadius: BorderRadius.all(Radius.circular(10))),
-                                              //                     child: Text(
-                                              //                       (auctionViewModel.upcomingAuctionResponse!.result!
-                                              //                                   .auctions![3].auctionDate!) ==
-                                              //                               "TBA"
-                                              //                           ? "SHOW INTEREST"
-                                              //                           : "EXPLORE",
-                                              //                       textAlign: TextAlign.start,
-                                              //                       style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                              //                           color: Colors.black,
-                                              //                           fontWeight: FontWeight.bold,
-                                              //                           letterSpacing: 2),
-                                              //                     ),
-                                              //                   ),
-                                              //                 ),
-                                              //               ],
-                                              //             ),
-                                              //           ],
-                                              //         ),
-                                              //       )
-                                              //     : Container(),
                                             ],
                                           ),
                                         )
@@ -926,26 +654,16 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                       : Container();
                 }),
               ),
-        // auctionViewModel.isLoadingForUpCommingAuction
-        //     ? SliverToBoxAdapter(child: LinearProgressIndicator())
-        //     : SliverList(
-        //         delegate: SliverChildBuilderDelegate(
-        //         addAutomaticKeepAlives: true,
-        //         childCount: (auctionViewModel.upcomingAuctionResponse!.result!.auctions ?? []).length - 1,
-        //         (BuildContext context, int index) {
-        //           return UpcomingAuctionItem(index + 1, auctionViewModel, bottomViewModel);
-        //         },
-        //       )),
-        auctionViewModel.isLoadingForUpCommingAuction
+        widget.auctionViewModel.isLoadingForUpCommingAuction
             ? SliverToBoxAdapter(child: LinearProgressIndicator())
             : SliverToBoxAdapter(
                 child: Observer(builder: (context) {
-                  print(auctionViewModel.auctionType);
-                  return auctionViewModel.auctionType == "past"
+                  print(widget.auctionViewModel.auctionType);
+                  return widget.auctionViewModel.auctionType == "past"
                       ? Container(
-                          child: auctionViewModel.upcomingAuctionResponse == null
+                          child: widget.auctionViewModel.upcomingAuctionResponse == null
                               ? Container()
-                              : auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length == 0
+                              : widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length == 0
                                   ? Column(
                                       crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
@@ -1052,14 +770,14 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                       : Container();
                 }),
               ),
-        auctionViewModel.isLoadingForUpCommingAuction
+        widget.auctionViewModel.isLoadingForUpCommingAuction
             ? SliverToBoxAdapter(child: LinearProgressIndicator())
-            : auctionViewModel.upcomingAuctionResponse == null
+            : widget.auctionViewModel.upcomingAuctionResponse == null
                 ? SliverToBoxAdapter(child: Container())
-                : auctionViewModel.upcomingAuctionResponse!.result == null
+                : widget.auctionViewModel.upcomingAuctionResponse!.result == null
                     ? SliverToBoxAdapter(child: Container())
-                    : auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length > 1
-                        ? auctionViewModel.auctionType == "past"
+                    : widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length > 1
+                        ? widget.auctionViewModel.auctionType == "past"
                             ? SliverList(
                                 delegate: SliverChildBuilderDelegate(
                                   addAutomaticKeepAlives: true,
@@ -1067,10 +785,10 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                   (BuildContext context, int index) {
                                     return InkWell(
                                       onTap: () {
-                                        auctionViewModel.selectedAuction =
-                                            auctionViewModel.upcomingAuctionResponse!.result!.auctions![index];
+                                        widget.auctionViewModel.selectedAuction =
+                                            widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions![index];
 
-                                        bottomViewModel.selectedIndex = 8;
+                                        widget.bottomViewModel.selectedIndex = 8;
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.all(16.0),
@@ -1095,7 +813,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                 child: Padding(
                                                   padding: const EdgeInsets.only(left: 35.0, right: 25),
                                                   child: Image.network(
-                                                    "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![index].image}",
+                                                    "${widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions![index].image}",
                                                     height: 300,
                                                     width: MediaQuery.of(context).size.width * .8,
                                                     fit: BoxFit.contain,
@@ -1112,7 +830,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                         width: 20,
                                                       ),
                                                       Text(
-                                                        "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![index].auctionName}",
+                                                        "${widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions![index].auctionName}",
                                                         textAlign: TextAlign.center,
                                                         style: Theme.of(context).textTheme.headline5!.copyWith(
                                                               color: Colors.black,
@@ -1125,7 +843,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                         height: 10,
                                                       ),
                                                       Text(
-                                                        "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![index].auctionDate}",
+                                                        "${widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions![index].auctionDate}",
                                                         textAlign: TextAlign.center,
                                                         style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                               color: Color(0xff747474),
@@ -1155,7 +873,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                                 height: 10,
                                                               ),
                                                               Text(
-                                                                "₹${auctionViewModel.upcomingAuctionResponse!.result!.auctions![index].totalSaleValue}",
+                                                                "₹${widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions![index].totalSaleValue}",
                                                                 textAlign: TextAlign.center,
                                                                 style: Theme.of(context).textTheme.headline6!.copyWith(
                                                                       color: Theme.of(context).colorScheme.primary,
@@ -1197,13 +915,13 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                     );
                                   },
                                   // 40 list items
-                                  childCount: auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length,
+                                  childCount: widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length,
                                 ),
                               )
                             : SliverToBoxAdapter(child: Container())
                         : SliverToBoxAdapter(child: Container()),
         SliverToBoxAdapter(
-          child: auctionViewModel.liveAuctionType != "closingschedule"
+          child: widget.auctionViewModel.liveAuctionType != "closingschedule"
               ? Container()
               : Observer(builder: (context) {
                   return SizedBox(
@@ -1309,7 +1027,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                       height: 16,
                     ),
                     Observer(builder: (context) {
-                      return profileViewModel.isloading
+                      return widget.bottomViewModel.profileViewModel!.isloading
                           ? LinearProgressIndicator(
                               minHeight: 2,
                             )
@@ -1333,16 +1051,17 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                   contentPadding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 8),
                                   //  fillColor: Colors.blue.shade100
                                 ),
-                                dropdownMenuEntries: profileViewModel.getRegInfoResponse!.countryList!
-                                    .map((e) => DropdownMenuEntry(
-                                        value: e,
-                                        label: "${e.name ?? ''} (${e.code ?? ''})",
-                                        style: ButtonStyle(
-                                          foregroundColor: MaterialStatePropertyAll(Colors.black),
-                                          padding: MaterialStatePropertyAll(EdgeInsets.symmetric(horizontal: 8)),
-                                          backgroundColor: MaterialStatePropertyAll(Colors.white),
-                                        )))
-                                    .toList(),
+                                dropdownMenuEntries:
+                                    widget.bottomViewModel.profileViewModel!.getRegInfoResponse!.countryList!
+                                        .map((e) => DropdownMenuEntry(
+                                            value: e,
+                                            label: "${e.name ?? ''} (${e.code ?? ''})",
+                                            style: ButtonStyle(
+                                              foregroundColor: MaterialStatePropertyAll(Colors.black),
+                                              padding: MaterialStatePropertyAll(EdgeInsets.symmetric(horizontal: 8)),
+                                              backgroundColor: MaterialStatePropertyAll(Colors.white),
+                                            )))
+                                        .toList(),
                                 width: MediaQuery.of(dialogContext).size.width * .70,
                                 hintText: "Country Code",
                                 // errorText: err_counrtyCode
@@ -1399,7 +1118,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                               err_counrtyCode = 'Please enter Country Code';
                             }
                           } else {
-                            HttpResponse res = await auctionViewModel.showIntrestInAuction(
+                            HttpResponse res = await widget.auctionViewModel.showIntrestInAuction(
                                 name.text, email.text, countrycode.text, phone.text, message.text, auctionId);
                             if (res.status == 200) {
                               ScaffoldMessenger.maybeOf(context)!.showSnackBar(SnackBar(

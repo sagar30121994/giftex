@@ -67,17 +67,18 @@ class _MyOrderProductpageState extends State<MyOrderProductpage> {
                         Image.asset(
                           "image/Ellipse 94.png",
                           height: 95,
-                          color: Color(0xffF3E8E9),
+                          color: const Color(0xffF3E8E9),
                         ),
                         CircleAvatar(
                           radius: 37,
-                          backgroundImage: NetworkImage(
-                              '${(widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.basicDetails!.profilePicUrl ?? '')}'),
+                          backgroundImage: NetworkImage(widget.profileViewModel.getUserAllDetailsResponse!.result!
+                                  .profile!.basicDetails!.profilePicUrl ??
+                              ''),
                           // child: Image.asset("image/image 40.png",fit: BoxFit.fill,),
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Column(
@@ -104,8 +105,9 @@ class _MyOrderProductpageState extends State<MyOrderProductpage> {
                                             ),
                                       ),
                                       TextSpan(
-                                        text:
-                                            '${(widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.basicDetails!.firstName ?? '')}',
+                                        text: widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!
+                                                .basicDetails!.firstName ??
+                                            '',
                                         style: Theme.of(context).textTheme.headline6!.copyWith(
                                               color: Colors.black,
                                               fontWeight: FontWeight.bold,
@@ -114,7 +116,7 @@ class _MyOrderProductpageState extends State<MyOrderProductpage> {
                                     ],
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 3,
                                 ),
                                 Row(
@@ -124,13 +126,15 @@ class _MyOrderProductpageState extends State<MyOrderProductpage> {
                                       height: 16,
                                       color: Colors.red,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 3,
                                     ),
                                     widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.address!.isEmpty
                                         ? Container()
                                         : Text(
-                                            '${(widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.address!.first!.city ?? '')}',
+                                            widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.address!
+                                                    .first.city ??
+                                                '',
                                             textAlign: TextAlign.center,
                                             style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                   color: Color(0xff2D2D2D),

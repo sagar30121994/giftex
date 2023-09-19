@@ -154,6 +154,22 @@ mixin _$AuctionViewModel on _AuctionViewModel, Store {
     });
   }
 
+  late final _$selectedLotsAtom =
+      Atom(name: '_AuctionViewModel.selectedLots', context: context);
+
+  @override
+  Lots? get selectedLots {
+    _$selectedLotsAtom.reportRead();
+    return super.selectedLots;
+  }
+
+  @override
+  set selectedLots(Lots? value) {
+    _$selectedLotsAtom.reportWrite(value, super.selectedLots, () {
+      super.selectedLots = value;
+    });
+  }
+
   late final _$autionResultResponseAtom =
       Atom(name: '_AuctionViewModel.autionResultResponse', context: context);
 
@@ -561,6 +577,7 @@ isGrid: ${isGrid},
 selectedProxyBid: ${selectedProxyBid},
 count: ${count},
 selectedAuction: ${selectedAuction},
+selectedLots: ${selectedLots},
 autionResultResponse: ${autionResultResponse},
 searchResponse: ${searchResponse},
 upcomingAuctionResponse: ${upcomingAuctionResponse},

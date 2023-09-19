@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
-import 'package:giftex/screens/liveauction/liveauction.dart';
 import 'package:giftex/screens/signup/login.dart';
+import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
+import 'package:giftex/viewmodel/bottomviewmodel.dart';
 
 import '../components/header.dart';
 
 // ProfileViewModel profileViewModel = ProfileViewModel();
 
 class Profilepage extends StatefulWidget {
+  Profilepage(this.bottomViewModel, this.auctionViewModel);
+  BottomViewModel bottomViewModel;
+  AuctionViewModel auctionViewModel;
   @override
   _ProfilepageState createState() => _ProfilepageState();
 }
@@ -18,7 +21,7 @@ class _ProfilepageState extends State<Profilepage> {
 
   @override
   void initState() {
-    bottomViewModel.profileViewModel!.getUserAllDetails();
+    widget.bottomViewModel.profileViewModel!.getUserAllDetails();
     // TODO: implement initState
     super.initState();
   }
@@ -47,7 +50,7 @@ class _ProfilepageState extends State<Profilepage> {
             TextButton(
               child: Text('Logout'),
               onPressed: () async {
-                await auctionViewModel.logout();
+                await widget.auctionViewModel.logout();
 
                 Navigator.pushAndRemoveUntil(
                     context, MaterialPageRoute(builder: (BuildContext context) => Loginpage()), (_) => false);
@@ -66,7 +69,7 @@ class _ProfilepageState extends State<Profilepage> {
       backgroundColor: Colors.white,
       // bottomNavigationBar: BottomNavigationBarUi(),
       body: Observer(builder: (context) {
-        return bottomViewModel.profileViewModel!.isloading
+        return widget.bottomViewModel.profileViewModel!.isloading
             ? Center(child: CircularProgressIndicator())
             : Container(
                 width: MediaQuery.of(context).size.width,
@@ -95,7 +98,7 @@ class _ProfilepageState extends State<Profilepage> {
                               CircleAvatar(
                                 radius: 37,
                                 backgroundImage: NetworkImage(
-                                    '${(bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.basicDetails!.profilePicUrl ?? '')}'),
+                                    '${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.basicDetails!.profilePicUrl ?? '')}'),
                                 // child: Image.asset("image/image 40.png",fit: BoxFit.fill,),
                               ),
                             ],
@@ -128,7 +131,7 @@ class _ProfilepageState extends State<Profilepage> {
                                             ),
                                             TextSpan(
                                               text:
-                                                  '${bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.basicDetails!.firstName ?? ''}',
+                                                  '${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.basicDetails!.firstName ?? ''}',
                                               style: Theme.of(context).textTheme.titleLarge!.copyWith(
                                                     color: Colors.black,
                                                     fontWeight: FontWeight.bold,
@@ -150,11 +153,11 @@ class _ProfilepageState extends State<Profilepage> {
                                           SizedBox(
                                             width: 1,
                                           ),
-                                          bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!
-                                                  .address!.isEmpty
+                                          widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!
+                                                  .profile!.address!.isEmpty
                                               ? Container()
                                               : Text(
-                                                  '${bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address!.first.city ?? ''},${bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address!.first.country ?? ''}',
+                                                  '${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address!.first.city ?? ''},${widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address!.first.country ?? ''}',
                                                   textAlign: TextAlign.center,
                                                   style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                         color: Color(0xff2D2D2D),
@@ -172,8 +175,9 @@ class _ProfilepageState extends State<Profilepage> {
                                                         borderRadius: BorderRadius.circular(20.0),
                                                         side: BorderSide(color: Color(0xff747474), width: 0.38)))),
                                             onPressed: () {
-                                              Navigator.pushReplacement(
-                                                  context, MaterialPageRoute(builder: (context) => DashboardUi(12)));
+                                              widget.bottomViewModel.setIndex(12);
+                                              // Navigator.pushReplacement(
+                                              //     context, MaterialPageRoute(builder: (context) => DashboardUi(12)));
                                             },
                                             child: Padding(
                                               padding: const EdgeInsets.only(right: 0.0, left: 8, top: 12, bottom: 12),
@@ -256,7 +260,7 @@ class _ProfilepageState extends State<Profilepage> {
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    bottomViewModel.selectedIndex = 12;
+                                    widget.bottomViewModel.selectedIndex = 12;
 
                                     // Navigator.push(
                                     //     context,
@@ -297,7 +301,7 @@ class _ProfilepageState extends State<Profilepage> {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    bottomViewModel.selectedIndex = 13;
+                                    widget.bottomViewModel.selectedIndex = 13;
 
                                     // Navigator.push(
                                     //     context,
@@ -338,11 +342,11 @@ class _ProfilepageState extends State<Profilepage> {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    bottomViewModel.selectedIndex = 14;
+                                    widget.bottomViewModel.selectedIndex = 14;
                                     // Navigator.push(
                                     //     context,
                                     //     MaterialPageRoute(
-                                    //         builder: (context) => MyGallarypage(bottomViewModel.profileViewModel!)));
+                                    //         builder: (context) => MyGallarypage(widget.bottomViewModel.profileViewModel!)));
                                   },
                                   child: Row(
                                     children: [
@@ -377,12 +381,12 @@ class _ProfilepageState extends State<Profilepage> {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    bottomViewModel.selectedIndex = 15;
+                                    widget.bottomViewModel.selectedIndex = 15;
                                     // Navigator.push(
                                     //     context,
                                     //     MaterialPageRoute(
                                     //         builder: (context) =>
-                                    //             MyAuctionReviewpage(bottomViewModel.profileViewModel!)));
+                                    //             MyAuctionReviewpage(widget.bottomViewModel.profileViewModel!)));
                                   },
                                   child: Row(
                                     children: [
@@ -417,12 +421,12 @@ class _ProfilepageState extends State<Profilepage> {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    bottomViewModel.selectedIndex = 16;
+                                    widget.bottomViewModel.selectedIndex = 16;
                                     // Navigator.push(
                                     //     context,
                                     //     MaterialPageRoute(
                                     //         builder: (context) =>
-                                    //             MyAuctionDashboard(bottomViewModel.profileViewModel!)));
+                                    //             MyAuctionDashboard(widget.bottomViewModel.profileViewModel!)));
                                   },
                                   child: Row(
                                     children: [

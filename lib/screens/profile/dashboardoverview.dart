@@ -3,17 +3,17 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/screens/liveauction/browsitemlistitem.dart';
 import 'package:giftex/screens/profile/orderproductdetails.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
-import 'package:giftex/viewmodel/profile/profileviewmodel.dart';
+import 'package:giftex/viewmodel/bottomviewmodel.dart';
 import 'package:intl/intl.dart';
 
-import '../components/bottomnavigationbar/bottomnavigationbar.dart';
 import '../components/footer/footer.dart';
 import '../components/header.dart';
 
 class MyAuctionDashboard extends StatefulWidget {
-  MyAuctionDashboard(this.profileViewModel);
+  MyAuctionDashboard(this.bottomViewModel, this.auctionViewModel);
 
-  ProfileViewModel profileViewModel;
+  BottomViewModel bottomViewModel;
+  AuctionViewModel auctionViewModel;
 
   @override
   _MyAuctionDashboardState createState() => _MyAuctionDashboardState();
@@ -27,8 +27,6 @@ class _MyAuctionDashboardState extends State<MyAuctionDashboard> {
   static const countdownDuration = Duration(minutes: 10);
   Duration duration = Duration();
 
-  AuctionViewModel auctionViewModel = AuctionViewModel();
-
   // Timer? timer;
   String auctionType = "";
   bool countDown = true, selected = false;
@@ -41,9 +39,9 @@ class _MyAuctionDashboardState extends State<MyAuctionDashboard> {
     // });
     // nameController.text = "Aryan Raj";
 
-    widget.profileViewModel.getDashboardOverview();
-    widget.profileViewModel.getLast5Bids();
-    widget.profileViewModel.getLast5Purchases();
+    widget.bottomViewModel.profileViewModel!.getDashboardOverview();
+    widget.bottomViewModel.profileViewModel!.getLast5Bids();
+    widget.bottomViewModel.profileViewModel!.getLast5Purchases();
     super.initState();
   }
 
@@ -86,7 +84,7 @@ class _MyAuctionDashboardState extends State<MyAuctionDashboard> {
                           CircleAvatar(
                             radius: 37,
                             backgroundImage: NetworkImage(
-                                '${(widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.basicDetails!.profilePicUrl ?? '')}'),
+                                '${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.basicDetails!.profilePicUrl ?? '')}'),
                             // child: Image.asset("image/image 40.png",fit: BoxFit.fill,),
                           ),
                         ],
@@ -119,7 +117,7 @@ class _MyAuctionDashboardState extends State<MyAuctionDashboard> {
                                         ),
                                         TextSpan(
                                           text:
-                                              '${(widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.basicDetails!.firstName ?? '')}',
+                                              '${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.basicDetails!.firstName ?? '')}',
                                           style: Theme.of(context).textTheme.headline6!.copyWith(
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.bold,
@@ -141,11 +139,11 @@ class _MyAuctionDashboardState extends State<MyAuctionDashboard> {
                                       SizedBox(
                                         width: 3,
                                       ),
-                                      widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.address!
-                                              .isEmpty
+                                      widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!
+                                              .profile!.address!.isEmpty
                                           ? Container()
                                           : Text(
-                                              '${(widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.address!.first!.city ?? '')}',
+                                              '${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address!.first!.city ?? '')}',
                                               textAlign: TextAlign.center,
                                               style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                     color: Color(0xff2D2D2D),
@@ -163,8 +161,9 @@ class _MyAuctionDashboardState extends State<MyAuctionDashboard> {
                                                     borderRadius: BorderRadius.circular(20.0),
                                                     side: BorderSide(color: Color(0xff747474), width: 0.38)))),
                                         onPressed: () {
-                                          Navigator.pushReplacement(
-                                              context, MaterialPageRoute(builder: (context) => DashboardUi(12)));
+                                          widget.bottomViewModel.setIndex(12);
+                                          // Navigator.pushReplacement(
+                                          //     context, MaterialPageRoute(builder: (context) => DashboardUi(12)));
                                         },
                                         child: Padding(
                                           padding: const EdgeInsets.only(right: 8.0, left: 8, top: 12, bottom: 12),
@@ -234,10 +233,10 @@ class _MyAuctionDashboardState extends State<MyAuctionDashboard> {
                 SizedBox(
                   height: 10,
                 ),
-                widget.profileViewModel.isloading ? LinearProgressIndicator() : Container(),
-                widget.profileViewModel.isloading
+                widget.bottomViewModel.profileViewModel!.isloading ? LinearProgressIndicator() : Container(),
+                widget.bottomViewModel.profileViewModel!.isloading
                     ? Container()
-                    : widget.profileViewModel.dashboradOverviewResponse != null
+                    : widget.bottomViewModel.profileViewModel!.dashboradOverviewResponse != null
                         ? Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Container(
@@ -259,7 +258,7 @@ class _MyAuctionDashboardState extends State<MyAuctionDashboard> {
                                             children: <InlineSpan>[
                                               TextSpan(
                                                 text:
-                                                    " ₹${formateNumber('${widget.profileViewModel.dashboradOverviewResponse!.availableAmount}')}",
+                                                    " ₹${formateNumber('${widget.bottomViewModel.profileViewModel!.dashboradOverviewResponse!.availableAmount}')}",
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .bodyLarge!
@@ -272,7 +271,7 @@ class _MyAuctionDashboardState extends State<MyAuctionDashboard> {
                                             children: <InlineSpan>[
                                               TextSpan(
                                                 text:
-                                                    " ₹${formateNumber('${widget.profileViewModel.dashboradOverviewResponse!.actualAmount}')}",
+                                                    " ₹${formateNumber('${widget.bottomViewModel.profileViewModel!.dashboradOverviewResponse!.actualAmount}')}",
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .bodyLarge!
@@ -304,7 +303,7 @@ class _MyAuctionDashboardState extends State<MyAuctionDashboard> {
                                             children: <InlineSpan>[
                                               TextSpan(
                                                 text:
-                                                    " ₹${formateNumber('${widget.profileViewModel.dashboradOverviewResponse!.totalSpent}')}",
+                                                    " ₹${formateNumber('${widget.bottomViewModel.profileViewModel!.dashboradOverviewResponse!.totalSpent}')}",
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .bodyLarge!
@@ -317,7 +316,7 @@ class _MyAuctionDashboardState extends State<MyAuctionDashboard> {
                                         //     children: <InlineSpan>[
                                         //       TextSpan(
                                         //         text:
-                                        //             " ₹${formateNumber('${widget.profileViewModel.dashboradOverviewResponse!.actualAmount}')}",
+                                        //             " ₹${formateNumber('${widget.bottomViewModel.profileViewModel!.dashboradOverviewResponse!.actualAmount}')}",
                                         //         style: Theme.of(context)
                                         //             .textTheme
                                         //             .bodyLarge!
@@ -402,12 +401,12 @@ class _MyAuctionDashboardState extends State<MyAuctionDashboard> {
 
                 type == "LAST 5 BIDS"
                     ? Container(
-                        child: widget.profileViewModel.getLastBidsResponce == null
+                        child: widget.bottomViewModel.profileViewModel!.getLastBidsResponce == null
                             ? Container()
                             : Column(
-                                children: widget.profileViewModel.getLastBidsResponce!.result!.lots!
+                                children: widget.bottomViewModel.profileViewModel!.getLastBidsResponce!.result!.lots!
                                     .map(
-                                      (e) => BrowseItemListItem(e, false, auctionViewModel),
+                                      (e) => BrowseItemListItem(e, false, widget.auctionViewModel),
                                     )
                                     .toList(),
                               ),
@@ -416,10 +415,10 @@ class _MyAuctionDashboardState extends State<MyAuctionDashboard> {
 
                 type == "LAST 5 PURCHASES"
                     ? Container(
-                        child: widget.profileViewModel.mylast5PurchaseReponse == null
+                        child: widget.bottomViewModel.profileViewModel!.mylast5PurchaseReponse == null
                             ? Container()
                             : Column(
-                                children: widget.profileViewModel.mylast5PurchaseReponse!.data!
+                                children: widget.bottomViewModel.profileViewModel!.mylast5PurchaseReponse!.data!
                                     .map(
                                       (e) => Padding(
                                         padding: const EdgeInsets.only(left: 0.0, right: 0.0, top: 10),
@@ -456,7 +455,8 @@ class _MyAuctionDashboardState extends State<MyAuctionDashboard> {
                                                                   context,
                                                                   MaterialPageRoute(
                                                                       builder: (context) => MyOrderProductpage(
-                                                                          widget.profileViewModel, e)));
+                                                                          widget.bottomViewModel.profileViewModel!,
+                                                                          e)));
                                                             },
                                                             child: Image.network(
                                                               "${e.lot!.thumbImage}",
