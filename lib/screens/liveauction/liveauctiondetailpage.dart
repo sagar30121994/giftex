@@ -160,11 +160,11 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
   Widget build(BuildContext context) {
     return Observer(builder: (context) {
       return Scaffold(
-        appBar: NavBar(),
+        // appBar: NavBar(),
         body: CustomScrollView(slivers: <Widget>[
-          // SliverToBoxAdapter(
-          //   child: NavBar(),
-          // ),
+          SliverPinnedHeader(
+            child: NavBar(),
+          ),
           SliverToBoxAdapter(
             child: SizedBox(
               height: 16,

@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/data/local/client/prefs.dart';
 import 'package:giftex/screens/liveauction/components/image/imagecomponent.dart';
-import 'package:giftex/screens/liveauction/liveauction.dart';
 import 'package:giftex/screens/popwidget.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
 import 'package:intl/intl.dart';
@@ -238,7 +237,11 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
             padding: const EdgeInsets.all(15.0),
             child: Container(
                 color: Color(0xffFFFFFF),
-                height: widget.auctionViewModel.auctionType == "past" ? 440 : 570,
+                height: widget.auctionViewModel.auctionType == "past"
+                    ? 440
+                    : (hours == "00" && minutes == "00" && seconds == "00")
+                        ? 470
+                        : 570,
                 alignment: Alignment.center,
                 child: Stack(
                   children: [
@@ -247,7 +250,11 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                       child: Container(
                         //replace this Container with your Card
                         color: Color(0xffF9F9F9),
-                        height: widget.auctionViewModel.auctionType == "past" ? 440 : 600.0,
+                        height: widget.auctionViewModel.auctionType == "past"
+                            ? 440
+                            : (hours == "00" && minutes == "00" && seconds == "00")
+                                ? 470
+                                : 600.0,
                       ),
                     ),
                     InkWell(
@@ -309,7 +316,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "\u20b9 ${formateNumber(widget.lots.leadingUser!.bid!.iNR ?? "0")}}",
+                                          "\u20b9 ${formateNumber(widget.lots.leadingUser!.bid!.iNR ?? "0")}",
                                           textAlign: TextAlign.center,
                                           style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                 color: Color(0xff747474),
@@ -1634,7 +1641,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            "₹${formateNumber(widget.lots.leadingUser!.bid!.iNR ?? "0")}}",
+                                            "₹${formateNumber(widget.lots.leadingUser!.bid!.iNR ?? "0")}",
                                             textAlign: TextAlign.center,
                                             style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                   color: Color(0xff747474),
@@ -2738,5 +2745,5 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
 
   @override
   // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => false;
+  bool get wantKeepAlive => true;
 }

@@ -102,7 +102,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
   Widget build(BuildContext context) {
     return Observer(builder: (context) {
       return CustomScrollView(slivers: <Widget>[
-        SliverToBoxAdapter(
+        SliverPinnedHeader(
           child: NavBar(),
         ),
         SliverToBoxAdapter(
@@ -923,11 +923,13 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
         SliverToBoxAdapter(
           child: widget.auctionViewModel.liveAuctionType != "closingschedule"
               ? Container()
-              : Observer(builder: (context) {
-                  return SizedBox(
-                    height: 40,
-                  );
-                }),
+              : widget.auctionViewModel.auctionType == "past"
+                  ? Container()
+                  : Observer(builder: (context) {
+                      return SizedBox(
+                        height: 40,
+                      );
+                    }),
         ),
         SliverToBoxAdapter(
           child: SizedBox(width: MediaQuery.of(context).size.width, child: Footer()),
