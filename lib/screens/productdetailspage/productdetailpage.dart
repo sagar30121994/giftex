@@ -14,7 +14,7 @@ import 'package:share/share.dart';
 import '../components/header.dart';
 
 class ProductDetailPage extends StatefulWidget {
-  ProductDetailPage(this.bottomViewModel,this.auctionViewModel);
+  ProductDetailPage(this.bottomViewModel, this.auctionViewModel);
   //
   // Lots lots;
   AuctionViewModel auctionViewModel;
@@ -827,9 +827,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                     return AlertDialog(
                                       contentPadding: EdgeInsets.all(0),
                                       content: Container(
-                                        padding: EdgeInsets.all(16),
-                                        height: 580,
-                                        width: MediaQuery.of(context).size.width,
+                                        padding: EdgeInsets.all(8),
+                                        height: 600,
+                                        width: MediaQuery.of(context).size.width * 1.4,
                                         color: Color(0xffEAEEF2),
                                         child: SingleChildScrollView(
                                           child: Column(
@@ -911,7 +911,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                                     width: 16,
                                                   ),
                                                   SizedBox(
-                                                    width: MediaQuery.of(context).size.width * .35,
+                                                    width: MediaQuery.of(context).size.width * .6,
                                                     child: Text(
                                                       'Medium: ${widget.auctionViewModel.selectedLots!.info!.medium}',
                                                       style: Theme.of(context).textTheme.subtitle1!.copyWith(
@@ -973,8 +973,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                                 height: 20,
                                               ),
                                               Container(
-                                                height: 215,
-                                                width: MediaQuery.of(context).size.width * .7,
+                                                height: 250,
+                                                width: MediaQuery.of(context).size.width * .9,
                                                 color: Color(0xffD9D9D9),
                                                 padding: EdgeInsets.all(16),
                                                 child: Column(
@@ -1026,21 +1026,28 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                                       height: 10,
                                                     ),
                                                     Row(
+                                                      mainAxisSize: MainAxisSize.max,
                                                       children: [
-                                                        Text(
-                                                          '${widget.auctionViewModel.additionalChargeResponse!.result!.taxation![1].name}',
-                                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                color: Color(0XFF202232),
-                                                                fontWeight: FontWeight.w400,
-                                                              ),
+                                                        Expanded(
+                                                          flex: 6,
+                                                          child: Text(
+                                                            '${widget.auctionViewModel.additionalChargeResponse!.result!.taxation![1].name!}',
+                                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                  color: Color(0XFF202232),
+                                                                  fontWeight: FontWeight.w400,
+                                                                ),
+                                                          ),
                                                         ),
-                                                        Spacer(),
-                                                        Text(
-                                                          '₹ ${formateNumber(widget.auctionViewModel.additionalChargeResponse!.result!.taxation![1].value!.iNR!)}',
-                                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                color: Color(0XFF202232),
-                                                                fontWeight: FontWeight.w400,
-                                                              ),
+                                                        Expanded(
+                                                          flex: 4,
+                                                          child: Text(
+                                                            '₹ ${formateNumber(widget.auctionViewModel.additionalChargeResponse!.result!.taxation![1].value!.iNR!)}',
+                                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                  color: Color(0XFF202232),
+                                                                  fontWeight: FontWeight.w400,
+                                                                ),
+                                                            textAlign: TextAlign.end,
+                                                          ),
                                                         ),
                                                       ],
                                                     ),
@@ -1109,6 +1116,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                                               side: BorderSide(color: Color(0XFFB45156), width: 0.5)))),
                                                   onPressed: () {
                                                     widget.bottomViewModel.setIndex(12);
+                                                    Navigator.of(context).pop();
                                                   },
                                                   child: Padding(
                                                     padding:

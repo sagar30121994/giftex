@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
-import 'package:http/http.dart' as http;
 import 'package:giftex/screens/components/footer/footer.dart';
 import 'package:giftex/screens/components/header.dart';
 import 'package:giftex/viewmodel/service/serviceviewmodel.dart';
@@ -20,7 +19,6 @@ class CareerPage extends StatefulWidget {
 }
 
 class _CareerPageState extends State<CareerPage> {
-
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController mobileController = TextEditingController();
@@ -75,7 +73,7 @@ class _CareerPageState extends State<CareerPage> {
                         height: 16,
                       ),
                       Text(
-                        "${serviceViewModel.careersResponse!.pageContent!.title}",
+                        "${serviceViewModel.careersResponse!.pageContent!.title}".toUpperCase(),
                         textAlign: TextAlign.left,
                         style: Theme.of(context).textTheme.headline6!.copyWith(
                               color: Colors.black,
@@ -86,7 +84,7 @@ class _CareerPageState extends State<CareerPage> {
                         height: 10,
                       ),
                       Text(
-                        "${serviceViewModel.careersResponse!.pageContent!.bannerItem!.title}",
+                        "${serviceViewModel.careersResponse!.pageContent!.bannerItem!.title}".toUpperCase(),
                         textAlign: TextAlign.left,
                         style: Theme.of(context).textTheme.bodyText1!.copyWith(
                               color: Theme.of(context).colorScheme.primary,
@@ -173,7 +171,7 @@ class _CareerPageState extends State<CareerPage> {
                       Container(
                         color: Color(0xffFFFFFF),
                         child: DefaultTabController(
-                          length: 3,
+                          length: 1,
                           child: SingleChildScrollView(
                             child: TabBar(
                               onTap: (index) {
@@ -197,8 +195,8 @@ class _CareerPageState extends State<CareerPage> {
                                   ),
                               tabs: [
                                 Tab(text: "Show All"),
-                                Tab(text: "Full time opportunities "),
-                                Tab(text: "internship opportunities"),
+                                // Tab(text: "Full time opportunities "),
+                                // Tab(text: "internship opportunities"),
                               ],
                             ),
                           ),
@@ -269,7 +267,8 @@ class _CareerPageState extends State<CareerPage> {
               children: [
                 ListTile(
                   title: Text(
-                    "Job Description",textAlign: TextAlign.left,
+                    "Job Description",
+                    textAlign: TextAlign.left,
                     style: Theme.of(context).textTheme.subtitle1!.copyWith(
                           color: Color(0XFF000000),
                           fontWeight: FontWeight.w400,
@@ -290,11 +289,10 @@ class _CareerPageState extends State<CareerPage> {
                   height: 16,
                 ),
                 Container(
-
                   child: Stack(
                     children: [
                       Container(
-                      //  height: 380,
+                        //  height: 380,
                         width: 410,
                         color: Color(0xffF9F9F9).withOpacity(0.7),
                         padding: EdgeInsets.all(16),
@@ -321,77 +319,68 @@ class _CareerPageState extends State<CareerPage> {
                             ),
                             Padding(
                               padding: EdgeInsets.only(top: 15),
-                              child: Observer(
-                                builder: (context) {
-                                  return TextField(
-                                    inputFormatters: [
-                                      FilteringTextInputFormatter.allow(RegExp('[a-zA-Z]')),
-                                    ],
-                                    decoration: InputDecoration(
-                                        border: OutlineInputBorder(),
-                                        labelText: 'Name',
-                                        hintText: 'Enter Your Name',
-                                        prefixIcon: Icon(Icons.person_outline_sharp),
-                                        filled: true,
-                                        errorText: serviceViewModel.serviceViewModelCareerErrorState.fullname,
-                                        fillColor: Color(0xffFFFFFF),
-                                        isDense: true),
-
-                                    onChanged: (str) => serviceViewModel.setCareerFullName(str),
-
-                                  );
-                                }
-                              ),
+                              child: Observer(builder: (context) {
+                                return TextField(
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(RegExp('[a-zA-Z]')),
+                                  ],
+                                  decoration: InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      labelText: 'Name',
+                                      hintText: 'Enter Your Name',
+                                      prefixIcon: Icon(Icons.person_outline_sharp),
+                                      filled: true,
+                                      errorText: serviceViewModel.serviceViewModelCareerErrorState.fullname,
+                                      fillColor: Color(0xffFFFFFF),
+                                      isDense: true),
+                                  onChanged: (str) => serviceViewModel.setCareerFullName(str),
+                                );
+                              }),
                             ),
                             Padding(
                               padding: EdgeInsets.only(top: 15),
-                              child: Observer(
-                                builder: (context) {
-                                  return TextField(
-                                    keyboardType: TextInputType.emailAddress,
-                                    decoration: InputDecoration(
-                                        border: OutlineInputBorder(),
-                                        labelText: 'Email Id',
-                                        hintText: 'Enter Your Email',
-                                        errorText: serviceViewModel.serviceViewModelCareerErrorState.email,
-                                        prefixIcon: Icon(Icons.email_outlined),
-                                        filled: true,
-                                        fillColor: Color(0xffFFFFFF),
-                                        isDense: true),
-                                    onChanged: (str) => serviceViewModel.setCareerEmail(str),
-                                  );
-                                }
-                              ),
+                              child: Observer(builder: (context) {
+                                return TextField(
+                                  keyboardType: TextInputType.emailAddress,
+                                  decoration: InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      labelText: 'Email Id',
+                                      hintText: 'Enter Your Email',
+                                      errorText: serviceViewModel.serviceViewModelCareerErrorState.email,
+                                      prefixIcon: Icon(Icons.email_outlined),
+                                      filled: true,
+                                      fillColor: Color(0xffFFFFFF),
+                                      isDense: true),
+                                  onChanged: (str) => serviceViewModel.setCareerEmail(str),
+                                );
+                              }),
                             ),
                             Padding(
                               padding: EdgeInsets.only(top: 15),
-                              child: Observer(
-                                builder: (context) {
-                                  return TextField(
-                                    keyboardType: TextInputType.phone,
-                                    maxLength: 10,
-                                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                                    decoration: InputDecoration(
-                                        border: OutlineInputBorder(),
-                                        counter: Container(),
-                                        labelText: 'Mobile No',
-                                        hintText: 'Enter Your No',
-                                        errorText: serviceViewModel.serviceViewModelCareerErrorState.mobile,
-                                        prefixIcon: Icon(Icons.add_ic_call),
-                                        filled: true,
-                                        fillColor: Color(0xffFFFFFF),
-                                        isDense: true),
-                                    onChanged: (str) => serviceViewModel.setCareerMobile(str),
-
-                                  );
-                                }
-                              ),
+                              child: Observer(builder: (context) {
+                                return TextField(
+                                  keyboardType: TextInputType.phone,
+                                  maxLength: 10,
+                                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                                  decoration: InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      counter: Container(),
+                                      labelText: 'Mobile No',
+                                      hintText: 'Enter Your No',
+                                      errorText: serviceViewModel.serviceViewModelCareerErrorState.mobile,
+                                      prefixIcon: Icon(Icons.add_ic_call),
+                                      filled: true,
+                                      fillColor: Color(0xffFFFFFF),
+                                      isDense: true),
+                                  onChanged: (str) => serviceViewModel.setCareerMobile(str),
+                                );
+                              }),
                             ),
-                            SizedBox(height: 8,),
+                            SizedBox(
+                              height: 8,
+                            ),
                             ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.white
-                              ),
+                              style: ElevatedButton.styleFrom(primary: Colors.white),
                               onPressed: () async {
                                 FilePickerResult? result = await FilePicker.platform.pickFiles(
                                   type: FileType.custom,
@@ -409,14 +398,12 @@ class _CareerPageState extends State<CareerPage> {
                                       File pdfFile = File(file.path!);
                                       List<int> bytes = pdfFile.readAsBytesSync();
                                       String file64 = base64Encode(bytes);
-                                      print("data:application/pdf;base64,"+file64);
+                                      print("data:application/pdf;base64," + file64);
                                       selectedFileName = fileName;
-                                      baseURI = "data:application/pdf;base64,"+file64;
-
-                                });
-                                serviceViewModel.setResume(baseURI);
-
-                                } else {
+                                      baseURI = "data:application/pdf;base64," + file64;
+                                    });
+                                    serviceViewModel.setResume(baseURI);
+                                  } else {
                                     // Show a dialog indicating that the file does not meet the criteria
                                     String message = '';
 
@@ -464,27 +451,34 @@ class _CareerPageState extends State<CareerPage> {
                                   borderRadius: BorderRadius.circular(20.0),
                                   // side: BorderSide(color: Colors.red)
                                 ))),
-                            onPressed: ()
-                              async {
-                                serviceViewModel.validateAllCareer();
-                                if(serviceViewModel.serviceViewModelCareerErrorState.hasErrors){
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please Enter All Mandatory Fields.'),
-                                    backgroundColor: Colors.orangeAccent,),);
-                                }else{
-
-                                 HttpResponse res= await serviceViewModel.insertCareerForm();
-                                    if (res.status == 200)
-                                      {
-                                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(res.message??''),
-                                          backgroundColor: Colors.green,),);
-                                      }else{
-                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(res.message??''),
-                                        backgroundColor: Colors.orangeAccent,),);
-                                    }
-
+                            onPressed: () async {
+                              serviceViewModel.validateAllCareer();
+                              if (serviceViewModel.serviceViewModelCareerErrorState.hasErrors) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text('Please Enter All Mandatory Fields.'),
+                                    backgroundColor: Colors.orangeAccent,
+                                  ),
+                                );
+                              } else {
+                                HttpResponse res = await serviceViewModel.insertCareerForm();
+                                if (res.status == 200) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(res.message ?? ''),
+                                      backgroundColor: Colors.green,
+                                    ),
+                                  );
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(res.message ?? ''),
+                                      backgroundColor: Colors.orangeAccent,
+                                    ),
+                                  );
                                 }
-
-                              },
+                              }
+                            },
                             child: Padding(
                               padding: const EdgeInsets.only(right: 8.0, left: 8, top: 12, bottom: 12),
                               child: Text(

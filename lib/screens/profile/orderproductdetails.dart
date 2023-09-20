@@ -356,7 +356,7 @@ class _MyOrderProductpageState extends State<MyOrderProductpage> {
               Stack(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 28.0),
+                    padding: const EdgeInsets.only(left: 16.0),
                     child: Image.asset(
                       "image/Rectangle (8).png",
                       fit: BoxFit.cover,
@@ -371,11 +371,11 @@ class _MyOrderProductpageState extends State<MyOrderProductpage> {
                       Image.network(
                         widget.lot.lot!.thumbImage ?? "",
                         height: 140,
-                        width: 120,
+                        width: 110,
                         fit: BoxFit.contain,
                       ),
                       SizedBox(
-                        width: 16,
+                        width: 8,
                       ),
                       Column(
                         children: [
@@ -537,9 +537,7 @@ class _MyOrderProductpageState extends State<MyOrderProductpage> {
                         ),
                       ],
                     ),
-                    SizedBox(
-                      width: 24,
-                    ),
+                    SizedBox(width: 16),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -557,6 +555,7 @@ class _MyOrderProductpageState extends State<MyOrderProductpage> {
                         ),
                         Text(
                           "${widget.lot.clientEmailid ?? ""}",
+                          overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.center,
                           style: Theme.of(context).textTheme.caption!.copyWith(
                                 color: Color(0xff202232),
