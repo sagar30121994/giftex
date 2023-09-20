@@ -4,10 +4,10 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/data/network/models/responce/profile/GetRegInfoResponse.dart';
 import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
-import 'package:giftex/screens/profile/hashservice.dart';
 import 'package:giftex/viewmodel/bottomviewmodel.dart';
 import 'package:giftex/viewmodel/profile/profileviewmodel.dart';
 import 'package:intl/intl.dart';
+
 // import 'package:payu_checkoutpro_flutter/PayUConstantKeys.dart';
 // import 'package:payu_checkoutpro_flutter/payu_checkoutpro_flutter.dart';
 
@@ -27,7 +27,7 @@ class MyProfilepage extends StatefulWidget {
 }
 
 // class _MyProfilepageState extends State<MyProfilepage> implements PayUCheckoutProProtocol {
-class _MyProfilepageState extends State<MyProfilepage>  {
+class _MyProfilepageState extends State<MyProfilepage> {
   int _pageIndex = 0;
   CountryList? selectedCountry;
   IndianStateList? selectedState;
@@ -53,10 +53,13 @@ class _MyProfilepageState extends State<MyProfilepage>  {
   TextEditingController depositAmountController = TextEditingController();
   TextEditingController bidLimitController = TextEditingController();
   String newAddress = '';
+  bool isEditingField1 = false;
+  bool isEditingField2 = false;
 
   Future laodData() async {
     await bottomViewModel.profileViewModel!.getUserAllDetails();
     await profileViewModel.getRegInfo();
+
     setState(() {
       selectedCountry = profileViewModel.getRegInfoResponse!.countryList!.first;
       selectedState = profileViewModel.getRegInfoResponse!.indianStateList!.first;
@@ -386,51 +389,111 @@ class _MyProfilepageState extends State<MyProfilepage>  {
                                 border: InputBorder.none),
                           ),
                         ),
+
                         Container(
                           margin: EdgeInsets.only(top: 24),
                           padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
                           decoration: BoxDecoration(
-                              color: Colors.white,
-                              boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
-                          child: TextField(
-                            controller: emailController,
-                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w500,
+                            color: Colors.white,
+                            boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))],
+                          ),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: TextField(
+                                  controller: emailController,
+                                  // widget.controller,
+                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                  decoration: InputDecoration(
+                                    labelText: 'Email Address',
+                                    isDense: true,
+                                  ),
+                                  enabled: isEditingField1,
                                 ),
-                            decoration: InputDecoration(
-                                labelText: 'Email Address',
-                                // hintText: 'aryansethi@gmail.com',
-                                suffixIcon: Icon(
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    isEditingField1 = true;
+                                  });
+                                },
+                                child: Icon(
                                   Icons.edit,
                                   color: Colors.black,
                                 ),
-                                isDense: true),
+                              ),
+                            ],
                           ),
                         ),
+                        // Container(
+                        //   margin: EdgeInsets.only(top: 24),
+                        //   padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+                        //   decoration: BoxDecoration(
+                        //       color: Colors.white,
+                        //       boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
+                        //   child: TextField(
+                        //     controller: contactController,
+                        //     style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                        //           color: Colors.black,
+                        //           fontWeight: FontWeight.w500,
+                        //         ),
+                        //     decoration: InputDecoration(
+                        //       labelText: 'Contact Number',
+                        //       // hintText: '91+ 9867345212',
+                        //       suffixIcon: InkWell(
+                        //         onTap: () {},
+                        //         child: Icon(
+                        //           Icons.edit,
+                        //           color: Colors.black,
+                        //         ),
+                        //       ),
+                        //       isDense: true,
+                        //     ),
+                        //   ),
+                        // ),
                         Container(
                           margin: EdgeInsets.only(top: 24),
                           padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
                           decoration: BoxDecoration(
-                              color: Colors.white,
-                              boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))]),
-                          child: TextField(
-                            controller: contactController,
-                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w500,
+                            color: Colors.white,
+                            boxShadow: [BoxShadow(color: Color(0xffEAEEF2), blurRadius: 2, offset: Offset(2, 2))],
+                          ),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: TextField(
+                                  // onChanged: (),
+                                  controller: contactController,
+                                  // widget.controller,
+                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                  decoration: InputDecoration(
+                                    labelText: 'Contact Number',
+                                    isDense: true,
+                                  ),
+                                  enabled: isEditingField2,
                                 ),
-                            decoration: InputDecoration(
-                              labelText: 'Contact Number',
-                              // hintText: '91+ 9867345212',
-                              suffixIcon: Icon(
-                                Icons.edit,
-                                color: Colors.black,
                               ),
-                              isDense: true,
-                            ),
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    isEditingField2 = true;
+                                  });
+                                },
+                                child: Icon(
+                                  Icons.edit,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
+
                         Container(
                           margin: EdgeInsets.only(top: 24),
                           padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
@@ -486,6 +549,21 @@ class _MyProfilepageState extends State<MyProfilepage>  {
                                 ),
                             decoration: InputDecoration(
                                 labelText: 'Nationality', hintText: 'Indian', isDense: true, border: InputBorder.none),
+                          ),
+                        ),
+                        SizedBox(height: 16),
+
+                        Visibility(
+                          visible: isEditingField1 || isEditingField2,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                isEditingField1 = false;
+                                isEditingField2 = false; // Disable editing when the submit button is clicked
+                              });
+                              // Implement your submit logic here
+                            },
+                            child: Text("Submit"),
                           ),
                         ),
                         SizedBox(

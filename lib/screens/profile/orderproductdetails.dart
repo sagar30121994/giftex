@@ -511,6 +511,7 @@ class _MyOrderProductpageState extends State<MyOrderProductpage> {
               Padding(
                 padding: const EdgeInsets.only(left: 8.0),
                 child: Row(
+                  mainAxisSize: MainAxisSize.max,
                   children: [
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,

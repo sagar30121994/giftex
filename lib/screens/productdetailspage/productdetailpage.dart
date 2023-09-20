@@ -828,8 +828,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                       contentPadding: EdgeInsets.all(0),
                                       content: Container(
                                         padding: EdgeInsets.all(8),
-                                        height: 600,
-                                        width: MediaQuery.of(context).size.width * 1.4,
+                                        height: 580,
+                                        width: MediaQuery.of(context).size.width,
                                         color: Color(0xffEAEEF2),
                                         child: SingleChildScrollView(
                                           child: Column(
