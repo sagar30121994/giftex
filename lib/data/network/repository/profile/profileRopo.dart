@@ -130,11 +130,15 @@ class ProfileRepo {
     String userid = localSharedPrefrence!.getUserId();
     String authKey = localSharedPrefrence!.getAuthKeyWeb();
     String crmClientId = localSharedPrefrence!.getCrmClinetId();
-
-    await httpClient!
-        .post(BaseUrl.baseUrl + endPoints.WebApiModel().updateprofiledetails,
-            body: updateProfilePersonalDetailRequestModel!.toJson())
-        .then((responce) async {
+    await httpClient!.post(BaseUrl.baseUrl + endPoints.WebApiModel().updateprofiledetails, body: {
+      "authkey_web": authKey,
+      "authkey_mobile": "",
+      "userid": userid,
+      "CRMClientID": crmClientId,
+      "email": updateProfilePersonalDetailRequestModel!.toJson(),
+      "mobile": updateProfilePersonalDetailRequestModel!.toJson(),
+      "your_name": "",
+    }).then((responce) async {
       print(responce);
 
       if (responce.statusCode == 200) {

@@ -8,6 +8,7 @@ import 'package:giftex/data/network/models/responce/liveauction/upcommingauction
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
 import 'package:giftex/viewmodel/bottomviewmodel.dart';
 import 'package:giftex/viewmodel/home/homeviewmodel.dart';
+import 'package:giftex/viewmodel/service/serviceviewmodel.dart';
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -16,6 +17,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../components/footer/footer.dart';
 import '../components/header.dart';
+
+ServiceViewModel serviceViewModel = ServiceViewModel();
 
 class Homepage extends StatefulWidget {
   Homepage(this.homeViewModel, this.auctionViewModel, this.bottomViewModel);
@@ -1428,10 +1431,17 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                         // crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           widget.homeViewModel.selectedNewsTabIndex == 0
-                                              ? Image.network(
-                                                  "${widget.homeViewModel.homeNewsVideosBlogsResponse!.news![pos].image!.mobile}",
-                                                  fit: BoxFit.contain,
-                                                  height: 200)
+                                              ? InkWell(
+                                                  onTap: () {
+                                                    // serviceViewModel.newsArry =
+                                                    //     serviceViewModel.pressResponse!.pageContent!.array![pos];
+                                                    // bottomViewModel.selectedIndex = 35;
+                                                  },
+                                                  child: Image.network(
+                                                      "${widget.homeViewModel.homeNewsVideosBlogsResponse!.news![pos].image!.mobile}",
+                                                      fit: BoxFit.contain,
+                                                      height: 200),
+                                                )
                                               : widget.homeViewModel.selectedNewsTabIndex == 1
                                                   ? Image.network(
                                                       "${widget.homeViewModel.homeNewsVideosBlogsResponse!.videos![pos].image!.mobile}",

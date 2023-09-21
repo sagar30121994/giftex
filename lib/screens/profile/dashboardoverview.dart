@@ -401,8 +401,10 @@ class _MyAuctionDashboardState extends State<MyAuctionDashboard> {
 
                 type == "LAST 5 BIDS"
                     ? Container(
-                        child: widget.bottomViewModel.profileViewModel!.getLastBidsResponce == null
-                            ? Container()
+                        child: widget.bottomViewModel.profileViewModel!.getLastBidsResponce?.result?.lots?.length == 0
+                            ? Container(
+                                child: Center(child: Text("You have no active bids placed currently.")),
+                              )
                             : Column(
                                 children: widget.bottomViewModel.profileViewModel!.getLastBidsResponce!.result!.lots!
                                     .map(
@@ -416,12 +418,18 @@ class _MyAuctionDashboardState extends State<MyAuctionDashboard> {
                 type == "LAST 5 PURCHASES"
                     ? Container(
                         child: widget.bottomViewModel.profileViewModel!.mylast5PurchaseReponse == null
-                            ? Container()
+                            ? Container(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(right: 16, left: 16),
+                                  child: Text(
+                                      "You do not have any purchases with us at this moment,View your future auction winnings here "),
+                                ),
+                              )
                             : Column(
                                 children: widget.bottomViewModel.profileViewModel!.mylast5PurchaseReponse!.data!
                                     .map(
                                       (e) => Padding(
-                                        padding: const EdgeInsets.only(left: 0.0, right: 0.0, top: 10),
+                                        padding: const EdgeInsets.only(left: 16.0, right: 12.0, top: 10),
                                         child: Container(
                                             height: 180,
                                             alignment: Alignment.center,

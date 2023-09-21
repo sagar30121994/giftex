@@ -165,14 +165,14 @@ class _FooterState extends State<Footer> {
                         onTap: () async {
                           if (nameController.text == "") {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text("Please Enter A Valid Name"),
+                              content: Text("Please Enter Name"),
                               backgroundColor: Colors.red,
                             ));
                             return;
                           }
                           if (emailController.text == "") {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text("Please Enter A Valid Email"),
+                              content: Text("Please Enter Email"),
                               backgroundColor: Colors.red,
                             ));
                             return;

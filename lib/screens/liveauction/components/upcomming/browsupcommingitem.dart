@@ -5,7 +5,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/data/local/client/prefs.dart';
-import 'package:giftex/screens/liveauction/liveauction.dart';
 import 'package:giftex/screens/popwidget.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
 import 'package:intl/intl.dart';
@@ -84,13 +83,12 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
         final cleanup = jsonDecode(jsonEncode(data));
         Lots l1 = Lots.fromJson(cleanup as Map<String, dynamic>);
 
-        if(mounted){
+        if (mounted) {
           setState(() {
             widget.lots = l1;
             // widget.auctionViewModel.replaceLots(l1);
           });
         }
-
       }
 
       // }
@@ -1102,9 +1100,17 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
                                       ),
                                     ),
                                     SizedBox(height: 12),
-                                    Icon(
-                                      Icons.open_in_full,
-                                      color: Colors.grey,
+                                    InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => ImageConponent(widget.lots.thumbImage ?? "")));
+                                      },
+                                      child: Icon(
+                                        Icons.open_in_full,
+                                        color: Colors.grey,
+                                      ),
                                     ),
                                     SizedBox(height: 12),
                                     // Container(

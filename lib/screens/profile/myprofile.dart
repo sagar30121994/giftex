@@ -553,18 +553,60 @@ class _MyProfilepageState extends State<MyProfilepage> {
                         ),
                         SizedBox(height: 16),
 
-                        Visibility(
-                          visible: isEditingField1 || isEditingField2,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                isEditingField1 = false;
-                                isEditingField2 = false; // Disable editing when the submit button is clicked
-                              });
-                              // Implement your submit logic here
-                            },
-                            child: Text("Submit"),
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Visibility(
+                              visible: isEditingField1 || isEditingField2,
+                              child: ElevatedButton(
+                                style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(Color(0XffB45156)),
+                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      // side: BorderSide(color: Colors.red)
+                                    ))),
+                                onPressed: () {
+                                  setState(() {
+                                    isEditingField1 = false;
+                                    isEditingField2 = false;
+                                  });
+                                  // Implement your submit logic here
+                                },
+                                child: Text(
+                                  "Submit",
+                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                        color: Color(0XFFFFFFFF),
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 8),
+                            Visibility(
+                              visible: isEditingField1 || isEditingField2,
+                              child: ElevatedButton(
+                                style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(Color(0XffB45156)),
+                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      // side: BorderSide(color: Colors.red)
+                                    ))),
+                                onPressed: () {
+                                  setState(() {
+                                    isEditingField1 = false;
+                                    isEditingField2 = false;
+                                  });
+                                },
+                                child: Text(
+                                  "Cancle",
+                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                        color: Color(0XFFFFFFFF),
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                         SizedBox(
                           height: 100,

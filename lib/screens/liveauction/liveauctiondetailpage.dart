@@ -1695,7 +1695,6 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
           //         )
           //       : Container(),
           // ),
-
           SliverToBoxAdapter(
               child: widget.auctionViewModel.liveAuctionType == "review"
                   ? Row(

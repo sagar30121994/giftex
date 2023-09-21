@@ -5,6 +5,7 @@ import 'package:giftex/data/network/models/request/kyc/UpdateRegMyAddressRequest
 import 'package:giftex/data/network/models/request/kyc/UpdateRegPersonalDetailsRequest.dart';
 import 'package:giftex/data/network/models/request/webapimodel/getcityrequestmodel.dart';
 import 'package:giftex/data/network/models/request/webapimodel/updateaddressRequest.dart';
+import 'package:giftex/data/network/models/request/webapimodel/updateprofiledetailsrequestmodel.dart';
 import 'package:giftex/data/network/models/responce/lot/upcominglotsresponse.dart';
 import 'package:giftex/data/network/models/responce/payment/paymentresponce.dart';
 import 'package:giftex/data/network/models/responce/payments/paymentgridrepsonse.dart';
@@ -117,6 +118,9 @@ abstract class _ProfileViewModel with Store {
 
   @observable
   UpdateAddressRequest? updateAddressRequest;
+
+  @observable
+  UpdateProfilePersonalDetailRequestModel? updateProfilePersonalDetailRequestModel;
 
   @action
   setaadharNo(saadharNo) {
@@ -374,6 +378,41 @@ abstract class _ProfileViewModel with Store {
     updateAddressRequest!.location = "";
 
     HttpResponse httpResponse = await profileRepo!.AddMyAddress(updateAddressRequest);
+
+    if (httpResponse.status == 200) {}
+    isloading = false;
+    return httpResponse;
+  }
+
+  Future<HttpResponse> updateprofiledetails(
+      String address_id,
+      String YourName,
+      String AddressLine1,
+      String AddressLine2,
+      String PinCode,
+      String GSTNumber,
+      String selectedCountry_name,
+      String selectedState_name,
+      String selectedCity_name,
+      String type,
+      String action) async {
+    isloading = true;
+    updateProfilePersonalDetailRequestModel = UpdateProfilePersonalDetailRequestModel();
+
+    updateAddressRequest!.yourName = YourName;
+    updateAddressRequest!.addLine1 = AddressLine1;
+    updateAddressRequest!.addLine2 = AddressLine2;
+    updateAddressRequest!.pinCode = PinCode;
+    updateAddressRequest!.country = selectedCountry_name;
+    updateAddressRequest!.state = selectedState_name;
+    updateAddressRequest!.city = selectedCity_name;
+    updateAddressRequest!.gstNum = GSTNumber;
+    updateAddressRequest!.type = type;
+    updateAddressRequest!.id = address_id;
+    updateAddressRequest!.action = action;
+    updateAddressRequest!.location = "";
+
+    HttpResponse httpResponse = await profileRepo!.updateprofiledetails(updateProfilePersonalDetailRequestModel);
 
     if (httpResponse.status == 200) {}
     isloading = false;

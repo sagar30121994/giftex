@@ -812,342 +812,353 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                                   borderRadius: BorderRadius.circular(20.0),
                                   side: BorderSide(color: Color(0xffFFFFFF), width: 0.38)))),
                           onPressed: () async {
-                            await widget.auctionViewModel.getAdditionCharge(widget.auctionViewModel.selectedLots!);
-
-                            if (widget.auctionViewModel.additionalChargeResponse!.status == "false") {
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                content: Text("${widget.auctionViewModel.additionalChargeResponse!.message}",
-                                    style: Theme.of(context).textTheme.subtitle2!.copyWith(color: Colors.white)),
-                                backgroundColor: Colors.red,
-                              ));
-                            } else {
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext dialogContext) {
-                                    return AlertDialog(
-                                      contentPadding: EdgeInsets.all(0),
-                                      content: Container(
-                                        padding: EdgeInsets.all(8),
-                                        height: 580,
-                                        width: MediaQuery.of(context).size.width,
-                                        color: Color(0xffEAEEF2),
-                                        child: SingleChildScrollView(
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.start,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment: MainAxisAlignment.end,
-                                                crossAxisAlignment: CrossAxisAlignment.end,
-                                                children: [
-                                                  InkWell(
-                                                      onTap: () {
-                                                        Navigator.of(context).pop();
-                                                      },
-                                                      child: Icon(
-                                                        Icons.close,
-                                                        size: 20,
-                                                        color: Color(0xff979797),
-                                                      ))
-                                                ],
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Image.asset(
-                                                    "image/Vector (22).png",
-                                                    color: Color(0XFF202232),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  Text(
-                                                    'ADDITIONAL CHARGES',
-                                                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                        color: Color(0XFF202232),
-                                                        fontWeight: FontWeight.w400,
-                                                        letterSpacing: 2),
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                height: 16,
-                                              ),
-                                              Container(
-                                                padding: EdgeInsets.all(10),
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.all(Radius.circular(16)),
-                                                  color: Color(0xffB45156),
+                            if (preference!.getLoginStatus()) {
+                              await widget.auctionViewModel.getAdditionCharge(widget.auctionViewModel.selectedLots!);
+                              if (widget.auctionViewModel.additionalChargeResponse!.status == "false") {
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                  content: Text("${widget.auctionViewModel.additionalChargeResponse!.message}",
+                                      style: Theme.of(context).textTheme.subtitle2!.copyWith(color: Colors.white)),
+                                  backgroundColor: Colors.red,
+                                ));
+                              } else {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext dialogContext) {
+                                      return AlertDialog(
+                                        contentPadding: EdgeInsets.all(0),
+                                        content: Container(
+                                          padding: EdgeInsets.all(8),
+                                          height: 580,
+                                          width: MediaQuery.of(context).size.width,
+                                          color: Color(0xffEAEEF2),
+                                          child: SingleChildScrollView(
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.end,
+                                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                                  children: [
+                                                    InkWell(
+                                                        onTap: () {
+                                                          Navigator.of(context).pop();
+                                                        },
+                                                        child: Icon(
+                                                          Icons.close,
+                                                          size: 20,
+                                                          color: Color(0xff979797),
+                                                        ))
+                                                  ],
                                                 ),
-                                                child: Text(
-                                                  'Lot ${widget.auctionViewModel.selectedLots!.lotNumber}',
-                                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                        color: Colors.white,
+                                                Row(
+                                                  children: [
+                                                    Image.asset(
+                                                      "image/Vector (22).png",
+                                                      color: Color(0XFF202232),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Text(
+                                                      'ADDITIONAL CHARGES',
+                                                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                          color: Color(0XFF202232),
+                                                          fontWeight: FontWeight.w400,
+                                                          letterSpacing: 2),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 16,
+                                                ),
+                                                Container(
+                                                  padding: EdgeInsets.all(10),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.all(Radius.circular(16)),
+                                                    color: Color(0xffB45156),
+                                                  ),
+                                                  child: Text(
+                                                    'Lot ${widget.auctionViewModel.selectedLots!.lotNumber}',
+                                                    style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                          color: Colors.white,
+                                                          fontWeight: FontWeight.w600,
+                                                        ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 16,
+                                                ),
+                                                Text(
+                                                  '${widget.auctionViewModel.selectedLots!.artistName}',
+                                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                        color: Color(0XFF2D2D2D),
                                                         fontWeight: FontWeight.w600,
                                                       ),
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                height: 16,
-                                              ),
-                                              Text(
-                                                '${widget.auctionViewModel.selectedLots!.artistName}',
-                                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                      color: Color(0XFF2D2D2D),
-                                                      fontWeight: FontWeight.w600,
+                                                SizedBox(
+                                                  height: 16,
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Image.asset(
+                                                      "image/Vector.png",
+                                                      height: 20,
+                                                      width: 20,
+                                                      color: Color(0XFF202232),
                                                     ),
-                                              ),
-                                              SizedBox(
-                                                height: 16,
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Image.asset(
-                                                    "image/Vector.png",
-                                                    height: 20,
-                                                    width: 20,
-                                                    color: Color(0XFF202232),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 16,
-                                                  ),
-                                                  SizedBox(
-                                                    width: MediaQuery.of(context).size.width * .6,
-                                                    child: Text(
-                                                      'Medium: ${widget.auctionViewModel.selectedLots!.info!.medium}',
+                                                    SizedBox(
+                                                      width: 16,
+                                                    ),
+                                                    SizedBox(
+                                                      width: MediaQuery.of(context).size.width * .6,
+                                                      child: Text(
+                                                        'Medium: ${widget.auctionViewModel.selectedLots!.info!.medium}',
+                                                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                              color: Color(0XFF2D2D2D),
+                                                              fontWeight: FontWeight.w500,
+                                                            ),
+                                                        overflow: TextOverflow.ellipsis,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 16,
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Image.asset(
+                                                      "image/Shape (8).png",
+                                                      height: 20,
+                                                      width: 20,
+                                                      color: Color(0XFF202232),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 16,
+                                                    ),
+                                                    Text(
+                                                      'Year: ${widget.auctionViewModel.selectedLots!.info!.year}',
                                                       style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                             color: Color(0XFF2D2D2D),
                                                             fontWeight: FontWeight.w500,
                                                           ),
-                                                      overflow: TextOverflow.ellipsis,
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                height: 16,
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Image.asset(
-                                                    "image/Shape (8).png",
-                                                    height: 20,
-                                                    width: 20,
-                                                    color: Color(0XFF202232),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 16,
-                                                  ),
-                                                  Text(
-                                                    'Year: ${widget.auctionViewModel.selectedLots!.info!.year}',
-                                                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                          color: Color(0XFF2D2D2D),
-                                                          fontWeight: FontWeight.w500,
-                                                        ),
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                height: 16,
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Image.asset(
-                                                    "image/Vector (1).png",
-                                                    height: 20,
-                                                    width: 20,
-                                                    color: Color(0XFF202232),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 16,
-                                                  ),
-                                                  Text(
-                                                    'Size: ${widget.auctionViewModel.selectedLots!.info!.size}',
-                                                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                          color: Color(0XFF2D2D2D),
-                                                          fontWeight: FontWeight.w500,
-                                                        ),
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                height: 20,
-                                              ),
-                                              Container(
-                                                height: 250,
-                                                width: MediaQuery.of(context).size.width * .9,
-                                                color: Color(0xffD9D9D9),
-                                                padding: EdgeInsets.all(16),
-                                                child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    Row(
-                                                      children: [
-                                                        Text(
-                                                          'Price',
-                                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                color: Color(0XFF202232),
-                                                                fontWeight: FontWeight.w400,
-                                                              ),
-                                                        ),
-                                                        Spacer(),
-                                                        Text(
-                                                          '₹ ${formateNumber(widget.auctionViewModel.additionalChargeResponse!.result!.price!.iNR!)}',
-                                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                color: Color(0XFF202232),
-                                                                fontWeight: FontWeight.w400,
-                                                              ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        Text(
-                                                          '${widget.auctionViewModel.additionalChargeResponse!.result!.taxation![0].name}',
-                                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                color: Color(0XFF202232),
-                                                                fontWeight: FontWeight.w400,
-                                                              ),
-                                                        ),
-                                                        Spacer(),
-                                                        Text(
-                                                          '₹ ${formateNumber(widget.auctionViewModel.additionalChargeResponse!.result!.taxation![0].value!.iNR!)}',
-                                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                color: Color(0XFF202232),
-                                                                fontWeight: FontWeight.w400,
-                                                              ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    Row(
-                                                      mainAxisSize: MainAxisSize.max,
-                                                      children: [
-                                                        Expanded(
-                                                          flex: 6,
-                                                          child: Text(
-                                                            '${widget.auctionViewModel.additionalChargeResponse!.result!.taxation![1].name!}',
-                                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                  color: Color(0XFF202232),
-                                                                  fontWeight: FontWeight.w400,
-                                                                ),
-                                                          ),
-                                                        ),
-                                                        Expanded(
-                                                          flex: 4,
-                                                          child: Text(
-                                                            '₹ ${formateNumber(widget.auctionViewModel.additionalChargeResponse!.result!.taxation![1].value!.iNR!)}',
-                                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                  color: Color(0XFF202232),
-                                                                  fontWeight: FontWeight.w400,
-                                                                ),
-                                                            textAlign: TextAlign.end,
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        Text(
-                                                          '${widget.auctionViewModel.additionalChargeResponse!.result!.taxation![2].name}',
-                                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                color: Color(0XFF202232),
-                                                                fontWeight: FontWeight.w400,
-                                                              ),
-                                                        ),
-                                                        Spacer(),
-                                                        Text(
-                                                          '₹ ${formateNumber(widget.auctionViewModel.additionalChargeResponse!.result!.taxation![2].value!.iNR!)}',
-                                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                color: Color(0XFF202232),
-                                                                fontWeight: FontWeight.w400,
-                                                              ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    Image.asset("image/Line 24.png"),
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        Text(
-                                                          'Total',
-                                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                color: Color(0XFF202232),
-                                                                fontWeight: FontWeight.w600,
-                                                              ),
-                                                        ),
-                                                        Spacer(),
-                                                        Text(
-                                                          '₹ ${formateNumber(widget.auctionViewModel.additionalChargeResponse!.result!.total!.iNR!)}',
-                                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                                color: Color(0XFF202232),
-                                                                fontWeight: FontWeight.w600,
-                                                              ),
-                                                        ),
-                                                      ],
-                                                    )
                                                   ],
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                height: 20,
-                                              ),
-                                              Align(
-                                                alignment: Alignment.topCenter,
-                                                child: ElevatedButton(
-                                                  style: ButtonStyle(
-                                                      backgroundColor: MaterialStateProperty.all(Colors.transparent),
-                                                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                                          RoundedRectangleBorder(
-                                                              borderRadius: BorderRadius.circular(20.0),
-                                                              side: BorderSide(color: Color(0XFFB45156), width: 0.5)))),
-                                                  onPressed: () {
-                                                    widget.bottomViewModel.setIndex(12);
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(right: 0.0, left: 0, top: 12, bottom: 12),
-                                                    child: Text(
-                                                      'UPDATE YOUR BILLING DETAILS',
-                                                      style: Theme.of(context).textTheme.caption!.copyWith(
-                                                          color: Color(0XFFB45156),
-                                                          fontWeight: FontWeight.w700,
-                                                          letterSpacing: 1.33333),
+                                                SizedBox(
+                                                  height: 16,
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Image.asset(
+                                                      "image/Vector (1).png",
+                                                      height: 20,
+                                                      width: 20,
+                                                      color: Color(0XFF202232),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 16,
+                                                    ),
+                                                    Text(
+                                                      'Size: ${widget.auctionViewModel.selectedLots!.info!.size}',
+                                                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                            color: Color(0XFF2D2D2D),
+                                                            fontWeight: FontWeight.w500,
+                                                          ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 20,
+                                                ),
+                                                Container(
+                                                  height: 250,
+                                                  width: MediaQuery.of(context).size.width * .9,
+                                                  color: Color(0xffD9D9D9),
+                                                  padding: EdgeInsets.all(16),
+                                                  child: Column(
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            'Price',
+                                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                  color: Color(0XFF202232),
+                                                                  fontWeight: FontWeight.w400,
+                                                                ),
+                                                          ),
+                                                          Spacer(),
+                                                          Text(
+                                                            '₹ ${formateNumber(widget.auctionViewModel.additionalChargeResponse!.result!.price!.iNR!)}',
+                                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                  color: Color(0XFF202232),
+                                                                  fontWeight: FontWeight.w400,
+                                                                ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            '${widget.auctionViewModel.additionalChargeResponse!.result!.taxation![0].name}',
+                                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                  color: Color(0XFF202232),
+                                                                  fontWeight: FontWeight.w400,
+                                                                ),
+                                                          ),
+                                                          Spacer(),
+                                                          Text(
+                                                            '₹ ${formateNumber(widget.auctionViewModel.additionalChargeResponse!.result!.taxation![0].value!.iNR!)}',
+                                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                  color: Color(0XFF202232),
+                                                                  fontWeight: FontWeight.w400,
+                                                                ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      Row(
+                                                        mainAxisSize: MainAxisSize.max,
+                                                        children: [
+                                                          Expanded(
+                                                            flex: 6,
+                                                            child: Text(
+                                                              '${widget.auctionViewModel.additionalChargeResponse!.result!.taxation![1].name!}',
+                                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                    color: Color(0XFF202232),
+                                                                    fontWeight: FontWeight.w400,
+                                                                  ),
+                                                            ),
+                                                          ),
+                                                          Expanded(
+                                                            flex: 4,
+                                                            child: Text(
+                                                              '₹ ${formateNumber(widget.auctionViewModel.additionalChargeResponse!.result!.taxation![1].value!.iNR!)}',
+                                                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                    color: Color(0XFF202232),
+                                                                    fontWeight: FontWeight.w400,
+                                                                  ),
+                                                              textAlign: TextAlign.end,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            '${widget.auctionViewModel.additionalChargeResponse!.result!.taxation![2].name}',
+                                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                  color: Color(0XFF202232),
+                                                                  fontWeight: FontWeight.w400,
+                                                                ),
+                                                          ),
+                                                          Spacer(),
+                                                          Text(
+                                                            '₹ ${formateNumber(widget.auctionViewModel.additionalChargeResponse!.result!.taxation![2].value!.iNR!)}',
+                                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                  color: Color(0XFF202232),
+                                                                  fontWeight: FontWeight.w400,
+                                                                ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      Image.asset("image/Line 24.png"),
+                                                      SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            'Total',
+                                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                  color: Color(0XFF202232),
+                                                                  fontWeight: FontWeight.w600,
+                                                                ),
+                                                          ),
+                                                          Spacer(),
+                                                          Text(
+                                                            '₹ ${formateNumber(widget.auctionViewModel.additionalChargeResponse!.result!.total!.iNR!)}',
+                                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                                                  color: Color(0XFF202232),
+                                                                  fontWeight: FontWeight.w600,
+                                                                ),
+                                                          ),
+                                                        ],
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 20,
+                                                ),
+                                                Align(
+                                                  alignment: Alignment.topCenter,
+                                                  child: ElevatedButton(
+                                                    style: ButtonStyle(
+                                                        backgroundColor: MaterialStateProperty.all(Colors.transparent),
+                                                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                            RoundedRectangleBorder(
+                                                                borderRadius: BorderRadius.circular(20.0),
+                                                                side:
+                                                                    BorderSide(color: Color(0XFFB45156), width: 0.5)))),
+                                                    onPressed: () {
+                                                      widget.bottomViewModel.setIndex(12);
+                                                      Navigator.of(context).pop();
+                                                    },
+                                                    child: Padding(
+                                                      padding: const EdgeInsets.only(
+                                                          right: 0.0, left: 0, top: 12, bottom: 12),
+                                                      child: Text(
+                                                        'UPDATE YOUR BILLING DETAILS',
+                                                        style: Theme.of(context).textTheme.caption!.copyWith(
+                                                            color: Color(0XFFB45156),
+                                                            fontWeight: FontWeight.w700,
+                                                            letterSpacing: 1.33333),
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                              Text(
-                                                'Note: Crating and shipping charged separately depending on delivery location.',
-                                                textAlign: TextAlign.center,
-                                                style: Theme.of(context).textTheme.caption!.copyWith(
-                                                      color: Color(0XFF202232).withOpacity(0.61),
-                                                      fontWeight: FontWeight.w400,
-                                                    ),
-                                              ),
-                                            ],
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Text(
+                                                  'Note: Crating and shipping charged separately depending on delivery location.',
+                                                  textAlign: TextAlign.center,
+                                                  style: Theme.of(context).textTheme.caption!.copyWith(
+                                                        color: Color(0XFF202232).withOpacity(0.61),
+                                                        fontWeight: FontWeight.w400,
+                                                      ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    );
-                                  });
+                                      );
+                                    });
+                              }
+                            } else {
+                              WidgetsBinding.instance?.addPostFrameCallback((_) {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return PopupWidget();
+                                  },
+                                );
+                              });
                             }
                           },
                           child: Padding(
@@ -2626,195 +2637,198 @@ class _ProductDetailPageState extends State<ProductDetailPage> with AutomaticKee
                           : widget.auctionViewModel.selectedLots!.status!.toLowerCase() == "live"
                               ? widget.auctionViewModel.auctionType == "past"
                                   ? Container()
-                                  : Container(
-                                      // height: 280,
-                                      child: Column(children: [
-                                        Row(
-                                          children: [
-                                            Flexible(
-                                              flex: 1,
-                                              child: Container(
-                                                height: 60,
+                                  : Visibility(
+                                      visible: widget.auctionViewModel.bidInfoResponse!.result!.bidHistory!.length > 0,
+                                      child: Container(
+                                        // height: 280,
+                                        child: Column(children: [
+                                          Row(
+                                            children: [
+                                              Flexible(
+                                                flex: 1,
+                                                child: Container(
+                                                  height: 60,
 
-                                                width: MediaQuery.of(context).size.width / 3.2,
-                                                // decoration: BoxDecoration(
-                                                //     color: Color(0xffFAF7E5),
-                                                //   image: DecorationImage(
-                                                //     image: AssetImage("image/Shape (7).png"), fit: BoxFit.cover,
-                                                //   )
-                                                // ),
-                                                child: Image.asset(
-                                                  "image/bidder.png",
-                                                  height: 65,
-                                                  fit: BoxFit.fill,
+                                                  width: MediaQuery.of(context).size.width / 3.2,
+                                                  // decoration: BoxDecoration(
+                                                  //     color: Color(0xffFAF7E5),
+                                                  //   image: DecorationImage(
+                                                  //     image: AssetImage("image/Shape (7).png"), fit: BoxFit.cover,
+                                                  //   )
+                                                  // ),
+                                                  child: Image.asset(
+                                                    "image/bidder.png",
+                                                    height: 65,
+                                                    fit: BoxFit.fill,
+                                                  ),
+
+                                                  // Row(
+                                                  //   mainAxisAlignment: MainAxisAlignment.center,
+                                                  //   crossAxisAlignment: CrossAxisAlignment.center,
+                                                  //   children: [
+                                                  //
+                                                  //     // SizedBox(width: 5,),
+                                                  //     // Text('BIDDER', style:
+                                                  //     // Theme.of(context).textTheme.caption!.copyWith(
+                                                  //     //   color: Color(0XFF2D2D2D),
+                                                  //     //   fontWeight: FontWeight.w600,
+                                                  //     / Image.asset("image/bidder.png",height: 20,),/ ),),
+                                                  //   ],
+                                                  // ),
                                                 ),
-
-                                                // Row(
-                                                //   mainAxisAlignment: MainAxisAlignment.center,
-                                                //   crossAxisAlignment: CrossAxisAlignment.center,
-                                                //   children: [
-                                                //
-                                                //     // SizedBox(width: 5,),
-                                                //     // Text('BIDDER', style:
-                                                //     // Theme.of(context).textTheme.caption!.copyWith(
-                                                //     //   color: Color(0XFF2D2D2D),
-                                                //     //   fontWeight: FontWeight.w600,
-                                                //     / Image.asset("image/bidder.png",height: 20,),/ ),),
-                                                //   ],
-                                                // ),
                                               ),
-                                            ),
-                                            // SizedBox(width: 5,),
-                                            Flexible(
-                                              flex: 1,
-                                              child: Container(
-                                                height: 60,
+                                              // SizedBox(width: 5,),
+                                              Flexible(
+                                                flex: 1,
+                                                child: Container(
+                                                  height: 60,
 
-                                                width: MediaQuery.of(context).size.width / 3.2,
-                                                // decoration: BoxDecoration(
-                                                //     color: Color(0xffFAF7E5),
-                                                //   image: DecorationImage(
-                                                //     image: AssetImage("image/Shape (7).png"), fit: BoxFit.cover,
-                                                //   )
-                                                // ),
-                                                child: Image.asset(
-                                                  "image/datentime.png",
-                                                  height: 65,
-                                                  fit: BoxFit.fill,
+                                                  width: MediaQuery.of(context).size.width / 3.2,
+                                                  // decoration: BoxDecoration(
+                                                  //     color: Color(0xffFAF7E5),
+                                                  //   image: DecorationImage(
+                                                  //     image: AssetImage("image/Shape (7).png"), fit: BoxFit.cover,
+                                                  //   )
+                                                  // ),
+                                                  child: Image.asset(
+                                                    "image/datentime.png",
+                                                    height: 65,
+                                                    fit: BoxFit.fill,
+                                                  ),
+
+                                                  // Row(
+                                                  //   mainAxisAlignment: MainAxisAlignment.center,
+                                                  //   crossAxisAlignment: CrossAxisAlignment.center,
+                                                  //   children: [
+                                                  //
+                                                  //     // SizedBox(width: 5,),
+                                                  //     // Text('BIDDER', style:
+                                                  //     // Theme.of(context).textTheme.caption!.copyWith(
+                                                  //     //   color: Color(0XFF2D2D2D),
+                                                  //     //   fontWeight: FontWeight.w600,
+                                                  //     / Image.asset("image/bidder.png",height: 20,),/ ),),
+                                                  //   ],
+                                                  // ),
                                                 ),
-
-                                                // Row(
-                                                //   mainAxisAlignment: MainAxisAlignment.center,
-                                                //   crossAxisAlignment: CrossAxisAlignment.center,
-                                                //   children: [
-                                                //
-                                                //     // SizedBox(width: 5,),
-                                                //     // Text('BIDDER', style:
-                                                //     // Theme.of(context).textTheme.caption!.copyWith(
-                                                //     //   color: Color(0XFF2D2D2D),
-                                                //     //   fontWeight: FontWeight.w600,
-                                                //     / Image.asset("image/bidder.png",height: 20,),/ ),),
-                                                //   ],
-                                                // ),
                                               ),
-                                            ),
-                                            // SizedBox(width: 5,),
-                                            Flexible(
-                                              flex: 1,
-                                              child: Container(
-                                                height: 60,
+                                              // SizedBox(width: 5,),
+                                              Flexible(
+                                                flex: 1,
+                                                child: Container(
+                                                  height: 60,
 
-                                                width: MediaQuery.of(context).size.width / 3.2,
-                                                // decoration: BoxDecoration(
-                                                //     color: Color(0xffFAF7E5),
-                                                //   image: DecorationImage(
-                                                //     image: AssetImage("image/Shape (7).png"), fit: BoxFit.cover,
-                                                //   )
-                                                // ),
-                                                child: Image.asset(
-                                                  "image/amount.png",
-                                                  height: 65,
-                                                  fit: BoxFit.fill,
+                                                  width: MediaQuery.of(context).size.width / 3.2,
+                                                  // decoration: BoxDecoration(
+                                                  //     color: Color(0xffFAF7E5),
+                                                  //   image: DecorationImage(
+                                                  //     image: AssetImage("image/Shape (7).png"), fit: BoxFit.cover,
+                                                  //   )
+                                                  // ),
+                                                  child: Image.asset(
+                                                    "image/amount.png",
+                                                    height: 65,
+                                                    fit: BoxFit.fill,
+                                                  ),
+
+                                                  // Row(
+                                                  //   mainAxisAlignment: MainAxisAlignment.center,
+                                                  //   crossAxisAlignment: CrossAxisAlignment.center,
+                                                  //   children: [
+                                                  //
+                                                  //     // SizedBox(width: 5,),
+                                                  //     // Text('BIDDER', style:
+                                                  //     // Theme.of(context).textTheme.caption!.copyWith(
+                                                  //     //   color: Color(0XFF2D2D2D),
+                                                  //     //   fontWeight: FontWeight.w600,
+                                                  //     / Image.asset("image/bidder.png",height: 20,),/ ),),
+                                                  //   ],
+                                                  // ),
                                                 ),
-
-                                                // Row(
-                                                //   mainAxisAlignment: MainAxisAlignment.center,
-                                                //   crossAxisAlignment: CrossAxisAlignment.center,
-                                                //   children: [
-                                                //
-                                                //     // SizedBox(width: 5,),
-                                                //     // Text('BIDDER', style:
-                                                //     // Theme.of(context).textTheme.caption!.copyWith(
-                                                //     //   color: Color(0XFF2D2D2D),
-                                                //     //   fontWeight: FontWeight.w600,
-                                                //     / Image.asset("image/bidder.png",height: 20,),/ ),),
-                                                //   ],
-                                                // ),
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                        widget.auctionViewModel.bidInfoResponse == null
-                                            ? Container()
-                                            : widget.auctionViewModel.bidInfoResponse!.result == null
-                                                ? Container()
-                                                : Column(
-                                                    children: widget
-                                                        .auctionViewModel.bidInfoResponse!.result!.bidHistory!
-                                                        .map((e) => Container(
-                                                            padding: EdgeInsets.only(top: 10),
-                                                            color: Color(0xffFFFFFF),
-                                                            alignment: Alignment.center,
-                                                            child: Column(
-                                                              children: [
-                                                                Row(
-                                                                  children: [
-                                                                    Container(
-                                                                      // padding: EdgeInsets.all(15),
-                                                                      width: MediaQuery.of(context).size.width / 3.5,
-                                                                      child: Text(
-                                                                        '${e.name}',
-                                                                        style: Theme.of(context)
-                                                                            .textTheme
-                                                                            .subtitle1!
-                                                                            .copyWith(
-                                                                              color: Color(0XFF2D2D2D),
-                                                                              fontWeight: FontWeight.w400,
-                                                                            ),
+                                            ],
+                                          ),
+                                          widget.auctionViewModel.bidInfoResponse == null
+                                              ? Container()
+                                              : widget.auctionViewModel.bidInfoResponse!.result == null
+                                                  ? Container()
+                                                  : Column(
+                                                      children: widget
+                                                          .auctionViewModel.bidInfoResponse!.result!.bidHistory!
+                                                          .map((e) => Container(
+                                                              padding: EdgeInsets.only(top: 10),
+                                                              color: Color(0xffFFFFFF),
+                                                              alignment: Alignment.center,
+                                                              child: Column(
+                                                                children: [
+                                                                  Row(
+                                                                    children: [
+                                                                      Container(
+                                                                        // padding: EdgeInsets.all(15),
+                                                                        width: MediaQuery.of(context).size.width / 3.9,
+                                                                        child: Text(
+                                                                          '${e.name}',
+                                                                          style: Theme.of(context)
+                                                                              .textTheme
+                                                                              .subtitle1!
+                                                                              .copyWith(
+                                                                                color: Color(0XFF2D2D2D),
+                                                                                fontWeight: FontWeight.w400,
+                                                                              ),
+                                                                        ),
                                                                       ),
-                                                                    ),
-                                                                    SizedBox(
-                                                                      width: 15,
-                                                                    ),
-                                                                    Container(
-                                                                      // padding: EdgeInsets.all(15),
-                                                                      width: MediaQuery.of(context).size.width / 3.4,
-                                                                      child: Text(
-                                                                        '${e.dateTime}',
-                                                                        textAlign: TextAlign.center,
-                                                                        style: Theme.of(context)
-                                                                            .textTheme
-                                                                            .subtitle1!
-                                                                            .copyWith(
-                                                                              color: Color(0XFF2D2D2D),
-                                                                              fontWeight: FontWeight.w400,
-                                                                            ),
+                                                                      SizedBox(
+                                                                        width: 15,
                                                                       ),
-                                                                    ),
-                                                                    SizedBox(
-                                                                      width: 5,
-                                                                    ),
-                                                                    Container(
-                                                                      // padding: EdgeInsets.all(15),
-                                                                      width: MediaQuery.of(context).size.width / 3.5,
-                                                                      child: Text(
-                                                                        '₹${formateNumber(e.amount!.iNR ?? "0")}',
-                                                                        style: Theme.of(context)
-                                                                            .textTheme
-                                                                            .subtitle1!
-                                                                            .copyWith(
-                                                                              color: Color(0XFF2D2D2D),
-                                                                              fontWeight: FontWeight.w400,
-                                                                            ),
+                                                                      Container(
+                                                                        // padding: EdgeInsets.all(15),
+                                                                        width: MediaQuery.of(context).size.width / 3.4,
+                                                                        child: Text(
+                                                                          '${e.dateTime}',
+                                                                          textAlign: TextAlign.center,
+                                                                          style: Theme.of(context)
+                                                                              .textTheme
+                                                                              .subtitle1!
+                                                                              .copyWith(
+                                                                                color: Color(0XFF2D2D2D),
+                                                                                fontWeight: FontWeight.w400,
+                                                                              ),
+                                                                        ),
                                                                       ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                                SizedBox(
-                                                                  height: 5,
-                                                                ),
-                                                                CustomPaint(painter: DrawDottedhorizontalline()),
-                                                                SizedBox(
-                                                                  height: 5,
-                                                                ),
-                                                              ],
-                                                            )))
-                                                        .toList()
+                                                                      SizedBox(
+                                                                        width: 5,
+                                                                      ),
+                                                                      Container(
+                                                                        // padding: EdgeInsets.all(15),
+                                                                        width: MediaQuery.of(context).size.width / 3.5,
+                                                                        child: Text(
+                                                                          '₹${formateNumber(e.amount!.iNR ?? "0")}',
+                                                                          style: Theme.of(context)
+                                                                              .textTheme
+                                                                              .subtitle1!
+                                                                              .copyWith(
+                                                                                color: Color(0XFF2D2D2D),
+                                                                                fontWeight: FontWeight.w400,
+                                                                              ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  SizedBox(
+                                                                    height: 5,
+                                                                  ),
+                                                                  CustomPaint(painter: DrawDottedhorizontalline()),
+                                                                  SizedBox(
+                                                                    height: 5,
+                                                                  ),
+                                                                ],
+                                                              )))
+                                                          .toList()
 
-                                                    // 40 list items
-                                                    // childCount:widget.auctionViewModel.bidInfoResponse==null?0:widget.auctionViewModel.bidInfoResponse!.result!.bidHistory!.length,
-                                                    ),
-                                      ]),
+                                                      // 40 list items
+                                                      // childCount:widget.auctionViewModel.bidInfoResponse==null?0:widget.auctionViewModel.bidInfoResponse!.result!.bidHistory!.length,
+                                                      ),
+                                        ]),
+                                      ),
                                     )
                               : Container(),
                   widget.auctionViewModel.auctionType == "past"

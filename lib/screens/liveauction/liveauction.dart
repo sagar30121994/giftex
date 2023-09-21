@@ -667,7 +667,8 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                             return UpcomingAuctionItem(
                                 widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions![index + 1],
                                 index + 1,
-                                widget.auctionViewModel,widget.bottomViewModel);
+                                widget.auctionViewModel,
+                                widget.bottomViewModel);
                           },
                           // 40 list items
                           childCount: widget.auctionViewModel.upcomingAuctionResponse!.result == null
@@ -730,7 +731,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                       ],
                                     )
                                   : Container(
-                                      padding: EdgeInsets.all(16),
+                                      // padding: EdgeInsets.all(16),
                                       // child: Column(
                                       //   mainAxisAlignment: MainAxisAlignment.start,
                                       //   crossAxisAlignment: CrossAxisAlignment.start,
@@ -788,7 +789,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                       //     ),
                                       //   ],
                                       // ),
-                                    ),
+                                      ),
                         )
                       : Container();
                 }),
@@ -814,21 +815,23 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                         widget.bottomViewModel.selectedIndex = 8;
                                       },
                                       child: Padding(
-                                        padding: const EdgeInsets.all(16.0),
+                                        padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
                                         child: Container(
-                                            color: Color(0xffFFFFFF),
-                                            height: 500.0,
-                                            margin: const EdgeInsets.only(top: 8.0),
+                                            // color: Color(0xffFFFFFF),
+                                            height: 480.0,
+                                            margin: const EdgeInsets.only(bottom: 8.0),
                                             width: MediaQuery.of(context).size.width * .8,
                                             alignment: Alignment.center,
                                             // margin: EdgeInsets.only(bottom: 17),
                                             child: Stack(children: [
                                               Padding(
-                                                padding: EdgeInsets.only(top: 80 / 2.0, bottom: 0),
+                                                padding: EdgeInsets.only(
+                                                  top: 100 / 2.0,
+                                                ),
                                                 child: Container(
                                                   //replace this Container with your Card
                                                   color: Colors.black.withOpacity(0.05),
-                                                  height: 500.0,
+                                                  height: 480.0,
                                                 ),
                                               ),
                                               Align(
@@ -837,7 +840,7 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                                   padding: const EdgeInsets.only(left: 35.0, right: 25),
                                                   child: Image.network(
                                                     "${widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions![index].image}",
-                                                    height: 300,
+                                                    height: 280,
                                                     width: MediaQuery.of(context).size.width * .8,
                                                     fit: BoxFit.contain,
                                                   ),
