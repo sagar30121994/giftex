@@ -25,6 +25,22 @@ mixin _$AuctionViewModel on _AuctionViewModel, Store {
     });
   }
 
+  late final _$navigateFromAtom =
+      Atom(name: '_AuctionViewModel.navigateFrom', context: context);
+
+  @override
+  String get navigateFrom {
+    _$navigateFromAtom.reportRead();
+    return super.navigateFrom;
+  }
+
+  @override
+  set navigateFrom(String value) {
+    _$navigateFromAtom.reportWrite(value, super.navigateFrom, () {
+      super.navigateFrom = value;
+    });
+  }
+
   late final _$liveAuctionTypeAtom =
       Atom(name: '_AuctionViewModel.liveAuctionType', context: context);
 
@@ -569,6 +585,7 @@ mixin _$AuctionViewModel on _AuctionViewModel, Store {
   String toString() {
     return '''
 auctionType: ${auctionType},
+navigateFrom: ${navigateFrom},
 liveAuctionType: ${liveAuctionType},
 isLoadingForUpCommingAuction: ${isLoadingForUpCommingAuction},
 isLoadingForlots: ${isLoadingForlots},
