@@ -1,8 +1,10 @@
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:giftex/screens/components/header.dart';
 import 'package:giftex/viewmodel/home/homeviewmodel.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../components/footer/footer.dart';
 
@@ -54,10 +56,10 @@ class _HowToSellPageState extends State<HowToSellPage> {
                     Text(
                       "${homeViewModel.getSellDetailsResponse!.pageContent!.banner!.title ?? ''}",
                       textAlign: TextAlign.left,
-                      style: Theme.of(context).textTheme.headline5!.copyWith(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 0.888889),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline5!
+                          .copyWith(color: Colors.black, fontWeight: FontWeight.bold, letterSpacing: 0.888889),
                     ),
                     const SizedBox(
                       height: 10,
@@ -81,10 +83,10 @@ class _HowToSellPageState extends State<HowToSellPage> {
                           Text(
                         "We feature premium artworks including modern, contemporary, and street art",
                         textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                            color: Color(0XFF000000),
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1),
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText1!
+                            .copyWith(color: Color(0XFF000000), fontWeight: FontWeight.bold, letterSpacing: 1),
                       ),
                     ),
                     const SizedBox(
@@ -114,8 +116,7 @@ class _HowToSellPageState extends State<HowToSellPage> {
                             child: Padding(
                               padding: EdgeInsets.only(top: 30, bottom: 0),
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 40.0),
+                                padding: const EdgeInsets.symmetric(horizontal: 40.0),
                                 child: Container(
                                   decoration: const BoxDecoration(
                                     color: Color(0xff8C9FB1),
@@ -146,10 +147,10 @@ class _HowToSellPageState extends State<HowToSellPage> {
                     Text(
                       "${homeViewModel.getSellDetailsResponse!.pageContent!.steps!.title ?? ''}",
                       textAlign: TextAlign.left,
-                      style: Theme.of(context).textTheme.headline6!.copyWith(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 0.888889),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline6!
+                          .copyWith(color: Colors.black, fontWeight: FontWeight.w600, letterSpacing: 0.888889),
                     ),
                     const SizedBox(
                       height: 30,
@@ -177,10 +178,7 @@ class _HowToSellPageState extends State<HowToSellPage> {
                               child: Text(
                                 "1",
                                 textAlign: TextAlign.left,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline6!
-                                    .copyWith(
+                                style: Theme.of(context).textTheme.headline6!.copyWith(
                                       color: Colors.white,
                                       fontWeight: FontWeight.w600,
                                     ),
@@ -202,31 +200,21 @@ class _HowToSellPageState extends State<HowToSellPage> {
                               children: <TextSpan>[
                                 TextSpan(
                                   text: 'Take ',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText1!
-                                      .copyWith(
+                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w400,
                                       ),
                                 ),
                                 TextSpan(
                                   text: 'clear pictures ',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText1!
-                                      .copyWith(
+                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w600,
                                       ),
                                 ),
                                 TextSpan(
-                                  text:
-                                      'of your item.\nFront and back should be clearly visible.',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText1!
-                                      .copyWith(
+                                  text: 'of your item.\nFront and back should be clearly visible.',
+                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -259,10 +247,7 @@ class _HowToSellPageState extends State<HowToSellPage> {
                               child: Text(
                                 "2",
                                 textAlign: TextAlign.left,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline6!
-                                    .copyWith(
+                                style: Theme.of(context).textTheme.headline6!.copyWith(
                                       color: Colors.white,
                                       fontWeight: FontWeight.w600,
                                     ),
@@ -283,31 +268,21 @@ class _HowToSellPageState extends State<HowToSellPage> {
                               children: <TextSpan>[
                                 TextSpan(
                                   text: 'Provide us the ',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText1!
-                                      .copyWith(
+                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w400,
                                       ),
                                 ),
                                 TextSpan(
                                   text: 'documentation ',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText1!
-                                      .copyWith(
+                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w600,
                                       ),
                                 ),
                                 TextSpan(
-                                  text:
-                                      'history & complete details of your item.',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText1!
-                                      .copyWith(
+                                  text: 'history & complete details of your item.',
+                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -340,10 +315,7 @@ class _HowToSellPageState extends State<HowToSellPage> {
                               child: Text(
                                 "3",
                                 textAlign: TextAlign.left,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline6!
-                                    .copyWith(
+                                style: Theme.of(context).textTheme.headline6!.copyWith(
                                       color: Colors.white,
                                       fontWeight: FontWeight.w600,
                                     ),
@@ -364,30 +336,21 @@ class _HowToSellPageState extends State<HowToSellPage> {
                               children: <TextSpan>[
                                 TextSpan(
                                   text: 'That’s it! Our specialist will ',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText1!
-                                      .copyWith(
+                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w400,
                                       ),
                                 ),
                                 TextSpan(
                                   text: 'review ',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText1!
-                                      .copyWith(
+                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w600,
                                       ),
                                 ),
                                 TextSpan(
                                   text: 'your submission and get back to you.',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText1!
-                                      .copyWith(
+                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -406,12 +369,11 @@ class _HowToSellPageState extends State<HowToSellPage> {
                       child: Stack(
                         children: [
                           Padding(
-                            padding:
-                                EdgeInsets.only(left: 5, top: 10, bottom: 10),
+                            padding: EdgeInsets.only(bottom: 10),
                             child: Container(
                               //replace this Container with your Card
                               color: Color(0xffF5F5F5),
-                              height: 320.0,
+                              height: 500.0,
                               width: MediaQuery.of(context).size.width,
                             ),
                           ),
@@ -421,95 +383,117 @@ class _HowToSellPageState extends State<HowToSellPage> {
                                 height: 16,
                               ),
                               SizedBox(
-                                width: MediaQuery.of(context).size.width * .80,
-                                child: RichText(
-                                  textAlign: TextAlign.start,
-                                  text: TextSpan(
-                                    // Note: Styles for TextSpans must be explicitly defined.
-                                    // Child text spans will inherit styles from parent
-                                    children: <TextSpan>[
-                                      TextSpan(
-                                        text: 'IT’S EFFORT LESS SELL\nWITH ',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .subtitle1!
-                                            .copyWith(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w600,
-                                                letterSpacing: 0.888889),
-                                      ),
-                                      TextSpan(
-                                        text: 'GIFTEX',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .subtitle1!
-                                            .copyWith(
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .primary,
-                                                fontWeight: FontWeight.w600,
-                                                letterSpacing: 0.888889),
-                                      ),
-                                    ],
+                                width: MediaQuery.of(context).size.width * 1,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 16.0),
+                                  child: RichText(
+                                    textAlign: TextAlign.start,
+                                    text: TextSpan(
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text:
+                                              "${homeViewModel.getSellDetailsResponse!.pageContent!.guide!.title ?? ''}"
+                                                  .toUpperCase(),
+                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold,
+                                              letterSpacing: 0.888889,
+                                              fontSize: 24),
+                                        ),
+                                        // TextSpan(
+                                        //   text: 'GIFTEX',
+                                        //   style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                        //       color: Theme.of(context).colorScheme.primary,
+                                        //       fontWeight: FontWeight.w600,
+                                        //       letterSpacing: 0.888889),
+                                        // ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
                               SizedBox(
                                 height: 16,
                               ),
+
+                              Padding(
+                                padding: const EdgeInsets.only(top: 16.0, right: 16, left: 16, bottom: 30),
+                                child: HtmlWidget(
+                                    '${homeViewModel.getSellDetailsResponse!.pageContent!.guide!.desc ?? ''}'),
+                                // textAlign: TextAlign.left,
+                                // style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                //       color: Colors.black,
+                                //       fontWeight: FontWeight.w400,
+                                //     ),
+                              ),
+
                               Container(
-                                height: 325.0,
-                                width: MediaQuery.of(context).size.width * .9,
+                                height: 280.0,
+                                width: MediaQuery.of(context).size.width * .8,
                                 child: Stack(
+                                  alignment: Alignment.center,
                                   children: [
                                     Container(
-                                      //replace this Container with your Card
-                                      height: 325.0,
-                                      width: MediaQuery.of(context).size.width,
+                                      child: Image.network(
+                                        "${homeViewModel.getSellDetailsResponse!.pageContent!.guide!.image!.mobile ?? ''}",
+                                        fit: BoxFit.contain,
+                                      ),
+                                    ),
+                                    InkWell(
+                                      onTap: () async {
+                                        Uri _url = Uri.parse(
+                                            "${homeViewModel.getSellDetailsResponse!.pageContent!.guide!.videoURL}");
+                                        if (!await launchUrl(_url)) {
+                                          throw Exception('Could not launch $_url');
+                                        }
+                                      },
                                       child: Image.asset(
-                                        "image/Rectangle 1716.png",
-                                        fit: BoxFit.fill,
+                                        "image/Playsymbol.png",
+                                        height: 45,
                                       ),
                                     ),
-                                    Center(
-                                        child: Image.asset(
-                                      "image/6.png",
-                                      height: 55,
-                                    )),
-                                    Center(
-                                      child: CircleAvatar(
-                                        radius: 22,
-                                        backgroundColor: Theme.of(context)
-                                            .colorScheme
-                                            .primary,
-                                      ),
-                                    ),
-                                    Center(
-                                        child: Image.asset(
-                                      "image/7.png",
-                                      height: 13,
-                                    ))
                                   ],
                                 ),
                               ),
+                              // Container(
+                              //   height: 325.0,
+                              //   width: MediaQuery.of(context).size.width * .9,
+                              //   child: Stack(
+                              //     children: [
+                              //       Container(
+                              //         //replace this Container with your Card
+                              //         height: 325.0,
+                              //         width: MediaQuery.of(context).size.width,
+                              //         child: Image.asset(
+                              //           "image/Rectangle 1716.png",
+                              //           fit: BoxFit.fill,
+                              //         ),
+                              //       ),
+                              //       Center(
+                              //           child: Image.asset(
+                              //         "image/6.png",
+                              //         height: 55,
+                              //       )),
+                              //       Center(
+                              //         child: CircleAvatar(
+                              //           radius: 22,
+                              //           backgroundColor: Theme.of(context).colorScheme.primary,
+                              //         ),
+                              //       ),
+                              //       Center(
+                              //           child: Image.asset(
+                              //         "image/7.png",
+                              //         height: 13,
+                              //       ))
+                              //     ],
+                              //   ),
+                              // ),
                             ],
                           ),
                         ],
                       ),
                     ),
 
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: 16.0, right: 16, left: 16, bottom: 32),
-                      child: Text(
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ",
-                        textAlign: TextAlign.left,
-                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w400,
-                            ),
-                      ),
-                    ),
                     // const SizedBox(height: 30,),
                     Container(
                       margin: EdgeInsets.only(left: 16, right: 16),
@@ -535,10 +519,7 @@ class _HowToSellPageState extends State<HowToSellPage> {
                           style: Theme.of(context)
                               .textTheme
                               .subtitle1!
-                              .copyWith(
-                                  color: Color(0XFF414141),
-                                  fontWeight: FontWeight.w500,
-                                  letterSpacing: 0.888889),
+                              .copyWith(color: Color(0XFF414141), fontWeight: FontWeight.w500, letterSpacing: 0.888889),
                         ),
                         children: <Widget>[
                           Padding(
@@ -546,10 +527,7 @@ class _HowToSellPageState extends State<HowToSellPage> {
                             child: Text(
                               "The first step in the process is to arrange a consultation with one of our representatives. You can contact us or email us with details of your property. We shall then study the property and give you a valuation on the same. We will respond to your auction estimate request within 3 working days. It is very important to AstaGuru to provide the highest level of service; accordingly, we cannot rush valuations.",
                               textAlign: TextAlign.start,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText1!
-                                  .copyWith(
+                              style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                     color: Color(0XFF000000),
                                     fontWeight: FontWeight.w400,
                                   ),
@@ -585,10 +563,7 @@ class _HowToSellPageState extends State<HowToSellPage> {
                           style: Theme.of(context)
                               .textTheme
                               .subtitle1!
-                              .copyWith(
-                                  color: Color(0XFF414141),
-                                  fontWeight: FontWeight.w500,
-                                  letterSpacing: 0.888889),
+                              .copyWith(color: Color(0XFF414141), fontWeight: FontWeight.w500, letterSpacing: 0.888889),
                         ),
                         children: <Widget>[
                           Padding(
@@ -596,10 +571,7 @@ class _HowToSellPageState extends State<HowToSellPage> {
                             child: Text(
                               "The first step in the process is to arrange a consultation with one of our representatives. You can contact us or email us with details of your property. We shall then study the property and give you a valuation on the same. We will respond to your auction estimate request within 3 working days. It is very important to AstaGuru to provide the highest level of service; accordingly, we cannot rush valuations.",
                               textAlign: TextAlign.start,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText1!
-                                  .copyWith(
+                              style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                     color: Color(0XFF000000),
                                     fontWeight: FontWeight.w400,
                                   ),
@@ -635,10 +607,7 @@ class _HowToSellPageState extends State<HowToSellPage> {
                           style: Theme.of(context)
                               .textTheme
                               .subtitle1!
-                              .copyWith(
-                                  color: Color(0XFF414141),
-                                  fontWeight: FontWeight.w500,
-                                  letterSpacing: 0.888889),
+                              .copyWith(color: Color(0XFF414141), fontWeight: FontWeight.w500, letterSpacing: 0.888889),
                         ),
                         children: <Widget>[
                           Padding(
@@ -646,10 +615,7 @@ class _HowToSellPageState extends State<HowToSellPage> {
                             child: Text(
                               "The first step in the process is to arrange a consultation with one of our representatives. You can contact us or email us with details of your property. We shall then study the property and give you a valuation on the same. We will respond to your auction estimate request within 3 working days. It is very important to AstaGuru to provide the highest level of service; accordingly, we cannot rush valuations.",
                               textAlign: TextAlign.start,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText1!
-                                  .copyWith(
+                              style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                     color: Color(0XFF000000),
                                     fontWeight: FontWeight.w400,
                                   ),
@@ -685,10 +651,7 @@ class _HowToSellPageState extends State<HowToSellPage> {
                           style: Theme.of(context)
                               .textTheme
                               .subtitle1!
-                              .copyWith(
-                                  color: Color(0XFF414141),
-                                  fontWeight: FontWeight.w500,
-                                  letterSpacing: 0.888889),
+                              .copyWith(color: Color(0XFF414141), fontWeight: FontWeight.w500, letterSpacing: 0.888889),
                         ),
                         children: <Widget>[
                           Padding(
@@ -696,10 +659,7 @@ class _HowToSellPageState extends State<HowToSellPage> {
                             child: Text(
                               "The first step in the process is to arrange a consultation with one of our representatives. You can contact us or email us with details of your property. We shall then study the property and give you a valuation on the same. We will respond to your auction estimate request within 3 working days. It is very important to AstaGuru to provide the highest level of service; accordingly, we cannot rush valuations.",
                               textAlign: TextAlign.start,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText1!
-                                  .copyWith(
+                              style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                     color: Color(0XFF000000),
                                     fontWeight: FontWeight.w400,
                                   ),
@@ -735,10 +695,7 @@ class _HowToSellPageState extends State<HowToSellPage> {
                           style: Theme.of(context)
                               .textTheme
                               .subtitle1!
-                              .copyWith(
-                                  color: Color(0XFF414141),
-                                  fontWeight: FontWeight.w500,
-                                  letterSpacing: 0.888889),
+                              .copyWith(color: Color(0XFF414141), fontWeight: FontWeight.w500, letterSpacing: 0.888889),
                         ),
                         children: <Widget>[
                           Padding(
@@ -746,10 +703,7 @@ class _HowToSellPageState extends State<HowToSellPage> {
                             child: Text(
                               "The first step in the process is to arrange a consultation with one of our representatives. You can contact us or email us with details of your property. We shall then study the property and give you a valuation on the same. We will respond to your auction estimate request within 3 working days. It is very important to AstaGuru to provide the highest level of service; accordingly, we cannot rush valuations.",
                               textAlign: TextAlign.start,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText1!
-                                  .copyWith(
+                              style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                     color: Color(0XFF000000),
                                     fontWeight: FontWeight.w400,
                                   ),
@@ -785,10 +739,7 @@ class _HowToSellPageState extends State<HowToSellPage> {
                           style: Theme.of(context)
                               .textTheme
                               .subtitle1!
-                              .copyWith(
-                                  color: Color(0XFF414141),
-                                  fontWeight: FontWeight.w500,
-                                  letterSpacing: 0.888889),
+                              .copyWith(color: Color(0XFF414141), fontWeight: FontWeight.w500, letterSpacing: 0.888889),
                         ),
                         children: <Widget>[
                           Padding(
@@ -796,10 +747,7 @@ class _HowToSellPageState extends State<HowToSellPage> {
                             child: Text(
                               "The first step in the process is to arrange a consultation with one of our representatives. You can contact us or email us with details of your property. We shall then study the property and give you a valuation on the same. We will respond to your auction estimate request within 3 working days. It is very important to AstaGuru to provide the highest level of service; accordingly, we cannot rush valuations.",
                               textAlign: TextAlign.start,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText1!
-                                  .copyWith(
+                              style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                     color: Color(0XFF000000),
                                     fontWeight: FontWeight.w400,
                                   ),
@@ -811,9 +759,7 @@ class _HowToSellPageState extends State<HowToSellPage> {
                     const SizedBox(
                       height: 48,
                     ),
-                    SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        child: Footer()),
+                    SizedBox(width: MediaQuery.of(context).size.width, child: Footer()),
                     Container(
                       height: 100,
                       color: Color(0xff1F2A52),

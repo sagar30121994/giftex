@@ -171,6 +171,22 @@ abstract class _ProfileViewModel with Store {
     gSTNumber = value;
   }
 
+  @observable
+  String emailId = "";
+
+  @action
+  setEmailId(String value) {
+    emailId = value;
+  }
+
+  @observable
+  String contactNo = "";
+
+  @action
+  setContactNo(String value) {
+    contactNo = value;
+  }
+
   late List<ReactionDisposer> _disposers;
 
   void setupValidations() {
@@ -180,6 +196,8 @@ abstract class _ProfileViewModel with Store {
       reaction((_) => addressLine2, validateAddressLine2),
       reaction((_) => pinCode, validatePinCode),
       reaction((_) => gSTNumber, validateGSTNumber),
+      reaction((_) => emailId, validateEmailId),
+      reaction((_) => contactNo, validateContactNo),
     ];
   }
 
@@ -189,6 +207,8 @@ abstract class _ProfileViewModel with Store {
     validateAddressLine1(addressLine1);
     validateAddressLine2(addressLine2);
     validatePinCode(pinCode);
+    validateEmailId(emailId);
+    validateContactNo(contactNo);
   }
 
   void dispose() {
@@ -239,6 +259,24 @@ abstract class _ProfileViewModel with Store {
       profileViewModelErrorState.gSTNumber = "Please Enter Valid GSTNumber";
     } else {
       profileViewModelErrorState.gSTNumber = null;
+    }
+  }
+
+  @action
+  void validateEmailId(String? value) {
+    if (emailId == null || emailId.trim() == "") {
+      profileViewModelErrorState.emailId = "Please Enter Valid GSTNumber";
+    } else {
+      profileViewModelErrorState.emailId = null;
+    }
+  }
+
+  @action
+  void validateContactNo(String? value) {
+    if (contactNo == null || contactNo.trim() == "") {
+      profileViewModelErrorState.contactNo = "Please Enter Valid GSTNumber";
+    } else {
+      profileViewModelErrorState.contactNo = null;
     }
   }
 
@@ -534,7 +572,19 @@ abstract class _ProfileViewModelErrorState with Store {
   @observable
   String? gSTNumber;
 
+  @observable
+  String? contactNo;
+
+  @observable
+  String? emailId;
+
   @computed
   bool get hasErrors =>
-      yourName != null || addressLine1 != null || addressLine2 != null || pinCode != null || gSTNumber != null;
+      yourName != null ||
+      addressLine1 != null ||
+      addressLine2 != null ||
+      pinCode != null ||
+      gSTNumber != null ||
+      contactNo != null ||
+      emailId != null;
 }
