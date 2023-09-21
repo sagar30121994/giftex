@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
+import 'package:giftex/utils/masterutils.dart';
+import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
+import 'package:giftex/viewmodel/bottomviewmodel.dart';
 
 class MainDrawer extends StatefulWidget {
-  const MainDrawer({Key? key}) : super(key: key);
+  MainDrawer(this.bottomViewModel, this.auctionViewModel);
+  BottomViewModel bottomViewModel;
+  AuctionViewModel auctionViewModel;
 
   @override
   State<MainDrawer> createState() => _MainDrawerState();
@@ -11,7 +15,7 @@ class MainDrawer extends StatefulWidget {
 class _MainDrawerState extends State<MainDrawer> {
   void _onItemTapped(int index) {
     setState(() {
-      bottomViewModel.selectedIndex = index;
+      widget.bottomViewModel.selectedIndex = index;
     });
   }
 
@@ -48,7 +52,7 @@ class _MainDrawerState extends State<MainDrawer> {
 
             ListTile(
               title: const Text('About Giftex'),
-              selected: bottomViewModel.selectedIndex == 29,
+              selected: widget.bottomViewModel.selectedIndex == 29,
               onTap: () {
                 _onItemTapped(29);
                 Navigator.of(context).pop();
@@ -63,7 +67,7 @@ class _MainDrawerState extends State<MainDrawer> {
             ),
             ListTile(
               title: const Text('Our Collectors'),
-              selected: bottomViewModel.selectedIndex == 32,
+              selected: widget.bottomViewModel.selectedIndex == 32,
               onTap: () {
                 _onItemTapped(32);
                 Navigator.of(context).pop();
@@ -74,8 +78,9 @@ class _MainDrawerState extends State<MainDrawer> {
 
             ListTile(
               title: const Text('Record Price Artwork'),
-              selected: bottomViewModel.selectedIndex == 28,
+              selected: widget.bottomViewModel.selectedIndex == 28,
               onTap: () {
+                widget.auctionViewModel.navigateFrom = Record_Price_navigator;
                 _onItemTapped(28);
                 Navigator.of(context).pop();
                 // Update the state of the app.
@@ -85,7 +90,7 @@ class _MainDrawerState extends State<MainDrawer> {
 
             ListTile(
               title: const Text('Art Movement'),
-              selected: bottomViewModel.selectedIndex == 30,
+              selected: widget.bottomViewModel.selectedIndex == 30,
               onTap: () {
                 _onItemTapped(30);
                 Navigator.of(context).pop();
@@ -107,7 +112,7 @@ class _MainDrawerState extends State<MainDrawer> {
 
             ListTile(
                 title: const Text('News & Updates'),
-                selected: bottomViewModel.selectedIndex == 25,
+                selected: widget.bottomViewModel.selectedIndex == 25,
                 onTap: () {
                   _onItemTapped(25);
                   Navigator.pop(context);
@@ -122,7 +127,7 @@ class _MainDrawerState extends State<MainDrawer> {
 
             ListTile(
               title: const Text('Our Services'),
-              selected: bottomViewModel.selectedIndex == 9,
+              selected: widget.bottomViewModel.selectedIndex == 9,
               onTap: () {
                 _onItemTapped(9);
 
@@ -132,10 +137,10 @@ class _MainDrawerState extends State<MainDrawer> {
 
             ListTile(
               title: const Text('Blogs'),
-              selected: bottomViewModel.selectedIndex == 33,
+              selected: widget.bottomViewModel.selectedIndex == 33,
               onTap: () {
-               _onItemTapped(33);
-               Navigator.pop(context);
+                _onItemTapped(33);
+                Navigator.pop(context);
                 // Update the state of the app.
                 // ...
               },
@@ -143,7 +148,7 @@ class _MainDrawerState extends State<MainDrawer> {
 
             ListTile(
                 title: const Text('Departments'),
-                selected: bottomViewModel.selectedIndex == 27,
+                selected: widget.bottomViewModel.selectedIndex == 27,
                 onTap: () {
                   _onItemTapped(27);
 
@@ -168,7 +173,7 @@ class _MainDrawerState extends State<MainDrawer> {
 
             ListTile(
               title: const Text('Contact Us'),
-              selected: bottomViewModel.selectedIndex == 31,
+              selected: widget.bottomViewModel.selectedIndex == 31,
               onTap: () {
                 _onItemTapped(31);
                 Navigator.of(context).pop();
@@ -179,7 +184,7 @@ class _MainDrawerState extends State<MainDrawer> {
 
             ListTile(
               title: const Text('How To Buy'),
-              selected: bottomViewModel.selectedIndex == 11,
+              selected: widget.bottomViewModel.selectedIndex == 11,
               onTap: () {
                 _onItemTapped(11);
                 Navigator.pop(context);
@@ -190,7 +195,7 @@ class _MainDrawerState extends State<MainDrawer> {
 
             ListTile(
               title: const Text('How To Sell'),
-              selected: bottomViewModel.selectedIndex == 10,
+              selected: widget.bottomViewModel.selectedIndex == 10,
               onTap: () {
                 _onItemTapped(10);
                 Navigator.pop(context);
@@ -201,7 +206,7 @@ class _MainDrawerState extends State<MainDrawer> {
 
             ListTile(
               title: const Text('Career'),
-              selected: bottomViewModel.selectedIndex == 26,
+              selected: widget.bottomViewModel.selectedIndex == 26,
               onTap: () {
                 _onItemTapped(26);
                 Navigator.of(context).pop();

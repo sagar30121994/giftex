@@ -23,6 +23,9 @@ abstract class _AuctionViewModel with Store {
   @observable
   String auctionType = "live";
 
+  @observable
+  String navigateFrom = "";
+
   late AuctionRepo auctionRepo;
   late LotRepo lotRepo;
   late WebapimodelRepo webapimodelRepo;

@@ -84,10 +84,13 @@ class _BrowsUpcommingItemState extends State<BrowsUpcommingItem> {
         final cleanup = jsonDecode(jsonEncode(data));
         Lots l1 = Lots.fromJson(cleanup as Map<String, dynamic>);
 
-        setState(() {
-          widget.lots = l1;
-          // widget.auctionViewModel.replaceLots(l1);
-        });
+        if(mounted){
+          setState(() {
+            widget.lots = l1;
+            // widget.auctionViewModel.replaceLots(l1);
+          });
+        }
+
       }
 
       // }

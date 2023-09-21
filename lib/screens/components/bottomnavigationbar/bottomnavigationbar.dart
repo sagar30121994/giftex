@@ -31,6 +31,7 @@ import 'package:giftex/screens/profile/profile.dart';
 import 'package:giftex/screens/record_price_artwork/record_price_artwork.dart';
 import 'package:giftex/screens/servicepage/servicepage.dart';
 import 'package:giftex/screens/services/mainservices.dart';
+import 'package:giftex/utils/masterutils.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
 import 'package:giftex/viewmodel/bottomviewmodel.dart';
 import 'package:giftex/viewmodel/home/homeviewmodel.dart';
@@ -132,9 +133,15 @@ class _DashboardUiState extends State<DashboardUi> {
                 bottomViewModel.selectedIndex = 27;
               });
             } else if (bottomViewModel.selectedIndex == 38) {
-              setState(() {
-                bottomViewModel.selectedIndex = 8;
-              });
+              if (auctionViewModel.navigateFrom == Record_Price_navigator) {
+                setState(() {
+                  bottomViewModel.selectedIndex = 28;
+                });
+              } else {
+                setState(() {
+                  bottomViewModel.selectedIndex = 8;
+                });
+              }
             } else {
               setState(() {
                 bottomViewModel.selectedIndex = 0;
@@ -146,7 +153,7 @@ class _DashboardUiState extends State<DashboardUi> {
           child: Scaffold(
             // backgroundColor: Color(0xffF9F9F9),
             key: bottomViewModel.key,
-            endDrawer: MainDrawer(),
+            endDrawer: MainDrawer(bottomViewModel, auctionViewModel),
             bottomNavigationBar: BottomAppBar(
               shape: CircularNotchedRectangle(),
               color: Color(0xffF9F9F9),
@@ -483,10 +490,13 @@ class _DashboardUiState extends State<DashboardUi> {
       case 3:
         return Profilepage(bottomViewModel, auctionViewModel);
       case 5:
+        auctionViewModel.navigateFrom = LIVE;
         return LiveAuctionUi("live", auctionViewModel, bottomViewModel);
       case 6:
+        auctionViewModel.navigateFrom = UPCOMING;
         return LiveAuctionUi("upcoming", auctionViewModel, bottomViewModel);
       case 7:
+        auctionViewModel.navigateFrom = PAST;
         return LiveAuctionUi("past", auctionViewModel, bottomViewModel);
       case 8:
         return LiveAuctionUiDetails(auctionViewModel, bottomViewModel);
@@ -501,8 +511,10 @@ class _DashboardUiState extends State<DashboardUi> {
       case 13:
         return MyOrderHistorypage(bottomViewModel);
       case 14:
+        auctionViewModel.navigateFrom = GALLERY;
         return MyGallarypage(bottomViewModel);
       case 15:
+        auctionViewModel.navigateFrom = AUCTIONREVIEW;
         return MyAuctionReviewpage(bottomViewModel, auctionViewModel);
       case 16:
         return MyAuctionDashboard(bottomViewModel, auctionViewModel);
@@ -538,6 +550,7 @@ class _DashboardUiState extends State<DashboardUi> {
         return Departments();
 
       case 28:
+        auctionViewModel.navigateFrom = Record_Price_navigator;
         return Record_price_artwork();
 
       case 29:

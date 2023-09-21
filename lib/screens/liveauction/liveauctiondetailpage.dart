@@ -82,11 +82,73 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
     });
 
     widget.auctionViewModel.getSingleAuctionDetails(widget.auctionViewModel.selectedAuction!.auctionId!);
+    // .then((value) => checkEvent());
     widget.auctionViewModel.getUpcommingBidAuction(widget.auctionViewModel.selectedAuction!.auctionId!);
 
     super.initState();
     reset();
   }
+
+  //
+  // void checkEvent() {
+  //   final lotReference = FirebaseDatabase.instance.ref("Lot/" + widget.lots.lotId!);
+  //   final likeReference = FirebaseDatabase.instance
+  //       .ref("like/" + widget.auctionViewModel.localSharedPrefrence.getUserId() + "/" + widget.lots.lotId!);
+  //
+  //   final userlikeReference =
+  //   FirebaseDatabase.instance.ref("userlike/" + widget.auctionViewModel.localSharedPrefrence.getUserId());
+  //
+  //   userlikeReference.onValue.listen((DatabaseEvent event) {
+  //     final data = event.snapshot.value;
+  //     if (data.toString() != "null") {
+  //       //   isFirstLike = true;
+  //       // } else {
+  //       if (widget.auctionViewModel.liveAuctionType == "mygallery") {
+  //         widget.auctionViewModel.myAuctionGallery();
+  //         // initiateTimer();
+  //       }
+  //     }
+  //   });
+  //
+  //   print(FirebaseDatabase.instance.databaseURL);
+  //
+  //   // firebaseRef = database.ref("Lot/" + widget.lots.lotId!);
+  //
+  //   lotReference.onValue.listen((DatabaseEvent event) {
+  //     final data = event.snapshot.value;
+  //     print("*********" + data.toString());
+  //     // initiateTimer();
+  //
+  //     if (data.toString() != "null") {
+  //       // isFirstLot = true;
+  //       // } else {
+  //       final cleanup = jsonDecode(jsonEncode(data));
+  //       Lots l1 = Lots.fromJson(cleanup as Map<String, dynamic>);
+  //
+  //       if(mounted){
+  //         setState(() {
+  //           widget.lots = l1;
+  //           // widget.auctionViewModel.replaceLots(l1);
+  //         });
+  //       }
+  //
+  //     }
+  //
+  //     // }
+  //   });
+  //
+  //   likeReference.onValue.listen((DatabaseEvent event) {
+  //     final data = event.snapshot.value;
+  //     print("******like event${event}");
+  //     if (data.toString() != "null") {
+  //       //   isFirstLike = true;
+  //       // } else {
+  //       setState(() {
+  //         widget.lots.isLiked = data.toString();
+  //       });
+  //     }
+  //   });
+  // }
 
   void reset() {
     if (countDown) {

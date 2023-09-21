@@ -9,6 +9,7 @@ import 'package:giftex/data/network/models/responce/profile/GetRegInfoResponse.d
 import 'package:giftex/screens/components/footer/footer.dart';
 import 'package:giftex/screens/components/header.dart';
 import 'package:giftex/screens/homepage/liveitem.dart';
+import 'package:giftex/screens/liveauction/components/upcomming/upcommingitem.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
 import 'package:giftex/viewmodel/bottomviewmodel.dart';
 import 'package:intl/intl.dart';
@@ -654,6 +655,28 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                       : Container();
                 }),
               ),
+        widget.auctionViewModel.isLoadingForUpCommingAuction
+            ? SliverToBoxAdapter()
+            : Observer(builder: (context) {
+                return widget.auctionViewModel.auctionType == "upcoming"
+                    ? SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                          addAutomaticKeepAlives: true,
+                          addSemanticIndexes: true,
+                          (BuildContext context, int index) {
+                            return UpcomingAuctionItem(
+                                widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions![index + 1],
+                                index + 1,
+                                widget.auctionViewModel,widget.bottomViewModel);
+                          },
+                          // 40 list items
+                          childCount: widget.auctionViewModel.upcomingAuctionResponse!.result == null
+                              ? 0
+                              : widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length - 1,
+                        ),
+                      )
+                    : SliverToBoxAdapter();
+              }),
         widget.auctionViewModel.isLoadingForUpCommingAuction
             ? SliverToBoxAdapter(child: LinearProgressIndicator())
             : SliverToBoxAdapter(
