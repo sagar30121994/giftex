@@ -5,6 +5,7 @@ import 'package:giftex/data/network/models/request/kyc/UpdateRegMyAddressRequest
 import 'package:giftex/data/network/models/request/kyc/UpdateRegPersonalDetailsRequest.dart';
 import 'package:giftex/data/network/models/request/webapimodel/getcityrequestmodel.dart';
 import 'package:giftex/data/network/models/request/webapimodel/updateaddressRequest.dart';
+import 'package:giftex/data/network/models/request/webapimodel/updateprofiledetailsrequestmodel.dart';
 import 'package:giftex/data/network/models/responce/profile/GetCityResponse.dart';
 import 'package:giftex/data/network/models/responce/profile/GetRegInfoResponse.dart';
 import 'package:giftex/data/network/models/responce/profile/GetUserAllDetailsResponse.dart';
@@ -100,6 +101,39 @@ class ProfileRepo {
     await httpClient!
         .post(BaseUrl.baseUrl + endPoints.KYC().UpdateRegPersonalDetails,
             body: updateRegPersonalDetailsRequest!.toJson())
+        .then((responce) async {
+      print(responce);
+
+      if (responce.statusCode == 200) {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = 'Successful';
+      } else {
+        httpResponse.status = responce.statusCode;
+        httpResponse.message = responce.data['message'];
+        httpResponse.data = null;
+      }
+      return httpResponse;
+    }).catchError((err) {
+      print(err);
+      httpResponse.status = 400;
+      httpResponse.message = err.toString();
+      httpResponse.data = err.toString();
+      return httpResponse;
+    });
+
+    return httpResponse;
+  }
+
+  Future<HttpResponse> updateprofiledetails(
+      UpdateProfilePersonalDetailRequestModel? updateProfilePersonalDetailRequestModel) async {
+    HttpResponse httpResponse = HttpResponse();
+    String userid = localSharedPrefrence!.getUserId();
+    String authKey = localSharedPrefrence!.getAuthKeyWeb();
+    String crmClientId = localSharedPrefrence!.getCrmClinetId();
+
+    await httpClient!
+        .post(BaseUrl.baseUrl + endPoints.WebApiModel().updateprofiledetails,
+            body: updateProfilePersonalDetailRequestModel!.toJson())
         .then((responce) async {
       print(responce);
 

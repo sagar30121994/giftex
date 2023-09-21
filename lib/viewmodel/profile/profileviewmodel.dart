@@ -220,7 +220,7 @@ abstract class _ProfileViewModel with Store {
   @action
   void validateYourName(String? value) {
     if (value == null || value.trim() == "") {
-      profileViewModelErrorState.yourName = "Please Enter Valid Name";
+      profileViewModelErrorState.yourName = "Please Enter Name";
     } else {
       profileViewModelErrorState.yourName = null;
     }
@@ -229,7 +229,7 @@ abstract class _ProfileViewModel with Store {
   @action
   void validateAddressLine1(String? value) {
     if (addressLine1 == null || addressLine1.trim() == "") {
-      profileViewModelErrorState.addressLine1 = "Please Enter Valid Address";
+      profileViewModelErrorState.addressLine1 = "Please Enter Address";
     } else {
       profileViewModelErrorState.addressLine1 = null;
     }
@@ -238,7 +238,7 @@ abstract class _ProfileViewModel with Store {
   @action
   void validateAddressLine2(String? value) {
     if (addressLine2 == null || addressLine2.trim() == "") {
-      profileViewModelErrorState.addressLine2 = "Please Enter Valid Address";
+      profileViewModelErrorState.addressLine2 = "Please Enter Address";
     } else {
       profileViewModelErrorState.addressLine2 = null;
     }
@@ -247,7 +247,7 @@ abstract class _ProfileViewModel with Store {
   @action
   void validatePinCode(String? value) {
     if (pinCode == null || pinCode.trim() == "") {
-      profileViewModelErrorState.pinCode = "Please Enter Valid Pincode";
+      profileViewModelErrorState.pinCode = "Please Enter Pincode";
     } else {
       profileViewModelErrorState.pinCode = null;
     }
@@ -256,7 +256,7 @@ abstract class _ProfileViewModel with Store {
   @action
   void validateGSTNumber(String? value) {
     if (gSTNumber == null || gSTNumber.trim() == "") {
-      profileViewModelErrorState.gSTNumber = "Please Enter Valid GSTNumber";
+      profileViewModelErrorState.gSTNumber = "Please Enter GSTNumber";
     } else {
       profileViewModelErrorState.gSTNumber = null;
     }
@@ -265,7 +265,7 @@ abstract class _ProfileViewModel with Store {
   @action
   void validateEmailId(String? value) {
     if (emailId == null || emailId.trim() == "") {
-      profileViewModelErrorState.emailId = "Please Enter Valid GSTNumber";
+      profileViewModelErrorState.emailId = "Please Enter EmailId";
     } else {
       profileViewModelErrorState.emailId = null;
     }
@@ -274,7 +274,7 @@ abstract class _ProfileViewModel with Store {
   @action
   void validateContactNo(String? value) {
     if (contactNo == null || contactNo.trim() == "") {
-      profileViewModelErrorState.contactNo = "Please Enter Valid GSTNumber";
+      profileViewModelErrorState.contactNo = "Please Enter Contact No.";
     } else {
       profileViewModelErrorState.contactNo = null;
     }
