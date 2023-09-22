@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/screens/filltersearch/filltersearch.dart';
@@ -47,9 +46,6 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
 
   bool countDown = true, selected = false;
 
-  FirebaseDatabase database = FirebaseDatabase.instance;
-  DatabaseReference? userlikeReference;
-
   @override
   void initState() {
     // TODO: implement initState
@@ -68,16 +64,6 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
       auctionViewModel.page = 1;
       auctionViewModel.getUpcommingAuction("UpComing");
     }
-
-    userlikeReference = database.ref("userlike/" + auctionViewModel.localSharedPrefrence.getUserId());
-
-    userlikeReference!.onValue.listen((DatabaseEvent event) {
-      print("live action event");
-      final data = event.snapshot.value;
-      if (auctionViewModel.liveAuctionType == "mygallery") {
-        auctionViewModel.myAuctionGallery();
-      }
-    });
 
     auctionViewModel.getSingleAuctionDetails(auctionViewModel.selectedAuction!.auctionId!);
     auctionViewModel.getUpcommingBidAuction(auctionViewModel.selectedAuction!.auctionId!);
@@ -205,86 +191,88 @@ class _LiveAuctionUiDetailsState extends State<LiveAuctionUiDetails> {
                 ),
           auctionViewModel.isLoadingForUpCommingAuction
               ? SliverToBoxAdapter(child: LinearProgressIndicator())
-              : SliverToBoxAdapter(
-                  child: Observer(builder: (context) {
-                    return Container(
-                      width: MediaQuery.of(context).size.width * .80,
-                      child: Container(
-                        height: 250,
-                        child: Stack(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(top: 20, bottom: 0),
-                              child: Container(
-                                //replace this Container with your Card
-                                color: Theme.of(context).colorScheme.onPrimary,
-                                height: 250.0,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 25.0, right: 25),
-                              child: Image.network(
-                                "${auctionViewModel.singleAuctionDetsilaResponse!.result!.banner}",
-                                fit: BoxFit.contain,
-                                width: MediaQuery.of(context).size.width,
-                                height: 200,
-                              ),
-                            ),
+              : auctionViewModel.singleAuctionDetsilaResponse == null
+                  ? SliverToBoxAdapter()
+                  : SliverToBoxAdapter(
+                      child: Observer(builder: (context) {
+                        return Container(
+                          width: MediaQuery.of(context).size.width * .80,
+                          child: Container(
+                            height: 250,
+                            child: Stack(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(top: 20, bottom: 0),
+                                  child: Container(
+                                    //replace this Container with your Card
+                                    color: Theme.of(context).colorScheme.onPrimary,
+                                    height: 250.0,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 25.0, right: 25),
+                                  child: Image.network(
+                                    "${auctionViewModel.singleAuctionDetsilaResponse!.result!.banner}",
+                                    fit: BoxFit.contain,
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 200,
+                                  ),
+                                ),
 
-                            Padding(
-                                padding: EdgeInsets.only(top: 400 / 2.0, bottom: 0, left: 25.0, right: 25),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      "image/calender.png",
-                                      color: Colors.white,
-                                      height: 22,
-                                    ),
-                                    // Icon(Icons.calendar_today,size: 22,color: Color(0xff80A071),),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    Text(
-                                      "${auctionViewModel.selectedAuction!.displayDate}",
-                                      textAlign: TextAlign.center,
-                                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                    ),
-                                    Spacer(),
-                                    // InkWell(
-                                    //   onTap: () {},
-                                    //   child: Image.asset(
-                                    //     "image/share.png",
-                                    //     height: 32,
-                                    //   ),
-                                    // ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    /*   Image.asset(
+                                Padding(
+                                    padding: EdgeInsets.only(top: 400 / 2.0, bottom: 0, left: 25.0, right: 25),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Image.asset(
+                                          "image/calender.png",
+                                          color: Colors.white,
+                                          height: 22,
+                                        ),
+                                        // Icon(Icons.calendar_today,size: 22,color: Color(0xff80A071),),
+                                        SizedBox(
+                                          width: 20,
+                                        ),
+                                        Text(
+                                          "${auctionViewModel.selectedAuction!.displayDate}",
+                                          textAlign: TextAlign.center,
+                                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                        ),
+                                        Spacer(),
+                                        // InkWell(
+                                        //   onTap: () {},
+                                        //   child: Image.asset(
+                                        //     "image/share.png",
+                                        //     height: 32,
+                                        //   ),
+                                        // ),
+                                        SizedBox(
+                                          width: 20,
+                                        ),
+                                        /*   Image.asset(
                                       "image/save.png",
                                       height: 32,
                                     ),*/
-                                    // SizedBox(width: 10,),
-                                  ],
-                                )),
-                            // Column(
-                            //   mainAxisAlignment: MainAxisAlignment.end,
-                            //   crossAxisAlignment: CrossAxisAlignment.end,
-                            //   children: [
-                            //     Divider(color: Color(0xff466D33),thickness: 1,),
-                            //   ],
-                            // ),
-                          ],
-                        ),
-                      ),
-                    );
-                  }),
-                ),
+                                        // SizedBox(width: 10,),
+                                      ],
+                                    )),
+                                // Column(
+                                //   mainAxisAlignment: MainAxisAlignment.end,
+                                //   crossAxisAlignment: CrossAxisAlignment.end,
+                                //   children: [
+                                //     Divider(color: Color(0xff466D33),thickness: 1,),
+                                //   ],
+                                // ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }),
+                    ),
           SliverPinnedHeader(
             child: Container(
               color: Theme.of(context).colorScheme.onPrimary,

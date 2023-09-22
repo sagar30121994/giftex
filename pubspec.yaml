@@ -34,7 +34,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.3
 
-  google_fonts: any
+  google_fonts: ^5.1.0
   validators: ^3.0.0
   shared_preferences: ^2.0.6
   json_annotation: ^4.0.0
@@ -49,7 +49,7 @@ dependencies:
   animations: ^2.0.2
   file_picker: ^5.3.0
   open_file: ^3.2.1
-  fl_chart: any
+  fl_chart: ^0.63.0
   readmore: ^2.2.0
   syncfusion_flutter_charts: ^22.1.37
   page_transition: "^2.0.4"
@@ -63,26 +63,30 @@ dependencies:
   expansion_tile_card: ^3.0.0
   flutter_otp_text_field: ^1.1.0+2
   smooth_page_indicator: ^1.0.0+2
-  add_2_calendar: ^2.1.2
+  #  add_2_calendar: ^2.2.4
   intl: ^0.18.0
   url_launcher: ^6.1.8
-  flutter_map: ^2.0.0
   flutter_widget_from_html: ^0.10.2
-#  signalr_netcore: ^1.3.3
-#  flutter_datetime_picker: ^1.5.1
+  #  signalr_netcore: ^1.3.3
+  #  flutter_datetime_picker: ^1.5.1
   logging: ^1.1.1
   change_app_package_name: ^1.1.0
   firebase_core: ^2.13.0
   firebase_database: ^10.2.1
   country_code_picker: ^3.0.0
-#  country_picker: ^1.1.4
-#  validators: ^3.0.0
+  #  country_picker: ^1.1.4
+  #  validators: ^3.0.0
   share: ^2.0.4
   image_picker: ^1.0.1
   firebase_crashlytics: ^3.3.4
-  payu_checkoutpro_flutter: ^1.0.4
+
+
   package_info_plus: ^4.1.0
 
+#  flutter_payu_unofficial: ^1.0.3
+
+#dependency_overrides:
+#  payu_checkoutpro_flutter: ^1.0.0
 
 
 dev_dependencies:

@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/screens/liveauction/browsitemlistitem.dart';
@@ -16,11 +15,6 @@ class LiveData extends StatefulWidget {
 }
 
 class _LiveDataState extends State<LiveData> {
-  FirebaseDatabase database = FirebaseDatabase.instance;
-
-  DatabaseReference? likeReference;
-  DatabaseReference? userlikeReference;
-
   @override
   void initState() {
     // TODO: implement initState

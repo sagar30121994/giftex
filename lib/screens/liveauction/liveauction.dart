@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:add_2_calendar/add_2_calendar.dart';
+// import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
@@ -440,28 +440,28 @@ class _LiveAuctionUiState extends State<LiveAuctionUi> {
                                               InkWell(
                                                 onTap: () {
                                                   // Navigator.push(context, MaterialPageRoute(builder: (context) => GetOtppage()));
-                                                  final Event event = Event(
-                                                    title:
-                                                        '${auctionViewModel.upcomingAuctionResponse!.result!.auctions![0].auctionName}',
-                                                    description:
-                                                        '${auctionViewModel.upcomingAuctionResponse!.result!.auctions![0].auctionName}',
-                                                    location: 'Event location',
-                                                    startDate: DateTime.parse(auctionViewModel
-                                                        .upcomingAuctionResponse!.result!.auctions![0]!.auctionDate!),
-                                                    endDate: DateTime.parse(auctionViewModel.upcomingAuctionResponse!
-                                                        .result!.auctions![0]!.auctionEndDate!),
-                                                    iosParams: IOSParams(
-                                                      reminder: Duration(
-                                                          /* Ex. hours:1 */), // on iOS, you can set alarm notification after your event.
-                                                      url:
-                                                          '${auctionViewModel.upcomingAuctionResponse!.result!.auctions![0].auctionURL}', // on iOS, you can set url to your event.
-                                                    ),
-                                                    androidParams: AndroidParams(
-                                                      emailInvites: [], // on Android, you can add invite emails to your event.
-                                                    ),
-                                                  );
+                                                  // final Event event = Event(
+                                                  //   title:
+                                                  //       '${auctionViewModel.upcomingAuctionResponse!.result!.auctions![0].auctionName}',
+                                                  //   description:
+                                                  //       '${auctionViewModel.upcomingAuctionResponse!.result!.auctions![0].auctionName}',
+                                                  //   location: 'Event location',
+                                                  //   startDate: DateTime.parse(auctionViewModel
+                                                  //       .upcomingAuctionResponse!.result!.auctions![0]!.auctionDate!),
+                                                  //   endDate: DateTime.parse(auctionViewModel.upcomingAuctionResponse!
+                                                  //       .result!.auctions![0]!.auctionEndDate!),
+                                                  //   iosParams: IOSParams(
+                                                  //     reminder: Duration(
+                                                  //         /* Ex. hours:1 */), // on iOS, you can set alarm notification after your event.
+                                                  //     url:
+                                                  //         '${auctionViewModel.upcomingAuctionResponse!.result!.auctions![0].auctionURL}', // on iOS, you can set url to your event.
+                                                  //   ),
+                                                  //   androidParams: AndroidParams(
+                                                  //     emailInvites: [], // on Android, you can add invite emails to your event.
+                                                  //   ),
+                                                  // );
 
-                                                  Add2Calendar.addEvent2Cal(event);
+                                                  // Add2Calendar.addEvent2Cal(event);
                                                 },
                                                 child: Container(
                                                     height: 50,

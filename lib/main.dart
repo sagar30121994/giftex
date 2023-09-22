@@ -16,7 +16,7 @@ void main() async {
   runZonedGuarded<Future<void>>(() async {
     WidgetsFlutterBinding.ensureInitialized();
     if (Platform.isAndroid) {
-      await Firebase.initializeApp();
+      await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
     } else if (Platform.isIOS) {
       await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
     }

@@ -4,8 +4,8 @@ import 'dart:convert';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:giftex/data/local/client/prefs.dart';
+import 'package:giftex/data/network/models/responce/lot/upcominglotsresponse.dart';
 import 'package:giftex/screens/liveauction/components/image/imagecomponent.dart';
 import 'package:giftex/screens/liveauction/liveauction.dart';
 import 'package:giftex/screens/popwidget.dart';
@@ -13,10 +13,6 @@ import 'package:giftex/screens/productdetailspage/productdetailpage.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
 import 'package:intl/intl.dart';
 
-import '../../data/network/models/responce/lot/upcominglotsresponse.dart';
-import '../signup/login.dart';
-
-// DashboardUi ui = DashboardUi();
 class BrowseItemListItem extends StatefulWidget {
   BrowseItemListItem(this.lots, this.grid, this.auctionViewModel);
 
@@ -85,31 +81,53 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
     super.initState();
   }
 
-  void checkEvent() {
-    final lotReference = FirebaseDatabase.instance.ref("Lot/" + widget.lots.lotId!);
-    final likeReference = FirebaseDatabase.instance
-        .ref("like/" + widget.auctionViewModel.localSharedPrefrence.getUserId() + "/" + widget.lots.lotId!);
+  var userlikeReference;
+  var likeReference;
+  var lotReference;
 
-    final userlikeReference =
-        FirebaseDatabase.instance.ref("userlike/" + widget.auctionViewModel.localSharedPrefrence.getUserId());
+  void checkEvent() async {
+    lotReference = FirebaseDatabase.instance.ref("Lot/" + widget.lots.lotId!);
 
-    userlikeReference.onValue.listen((DatabaseEvent event) {
-      print(event);
-      final data = event.snapshot.value;
-      if (data.toString() != "null") {
-        if (!isRFirstLike) {
-          isRFirstLike = true;
-        } else {
-          if (widget.auctionViewModel.liveAuctionType == "mygallery") {
-            widget.auctionViewModel.myAuctionGallery();
+    if (widget.auctionViewModel.localSharedPrefrence.getLoginStatus()) {
+      likeReference = FirebaseDatabase.instance
+          .ref("like/" + widget.auctionViewModel.localSharedPrefrence.getUserId() + "/" + widget.lots.lotId!);
+
+      userlikeReference =
+          FirebaseDatabase.instance.ref("userlike/" + widget.auctionViewModel.localSharedPrefrence.getUserId());
+
+      userlikeReference.onValue.listen((DatabaseEvent event) {
+        print(event);
+        final data = event.snapshot.value;
+        if (data.toString() != "null") {
+          if (!isRFirstLike) {
+            isRFirstLike = true;
+          } else {
+            if (widget.auctionViewModel.liveAuctionType == "mygallery") {
+              widget.auctionViewModel.myAuctionGallery();
+            }
           }
+        } else {
+          isRFirstLike = false;
         }
-      } else {
-        isRFirstLike = false;
-      }
-    });
+      });
 
-    print(FirebaseDatabase.instance.databaseURL);
+      likeReference.onValue.listen((DatabaseEvent event) {
+        print("*********" + event.toString());
+        if (event.snapshot.value != null) {
+          final data = event.snapshot.value;
+          // if (data.toString() != "null") {
+          //   setState(() {
+          //     widget.lots.isLiked = data.toString();
+          //   });
+          // }
+          setState(() {
+            widget.lots.isLiked = data.toString();
+          });
+        }
+      });
+    }
+
+    // print(FirebaseDatabase.instance.databaseURL);
 
     // firebaseRef = database.ref("Lot/" + widget.lots.lotId!);
 
@@ -148,21 +166,6 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
         }
       }
     });
-
-    likeReference.onValue.listen((DatabaseEvent event) {
-      print("*********" + event.toString());
-      if (event.snapshot.value != null) {
-        final data = event.snapshot.value;
-        // if (data.toString() != "null") {
-        //   setState(() {
-        //     widget.lots.isLiked = data.toString();
-        //   });
-        // }
-        setState(() {
-          widget.lots.isLiked = data.toString();
-        });
-      }
-    });
   }
 
   void startTimer() {}
@@ -182,6 +185,9 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
   @override
   void dispose() {
     // resetTimer();
+    userlikeReference!.cancel();
+    likeReference?.cancel();
+    lotReference?.cancel();
     super.dispose();
   }
 
@@ -272,7 +278,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                             ),
                             widget.lots.auctionType == "1"
                                 ? Text(
-                                    "${widget.lots.info!.title??''}",
+                                    "${widget.lots.info!.title ?? ''}",
                                     textAlign: TextAlign.center,
                                     style: Theme.of(context).textTheme.headline6!.copyWith(
                                           color: Colors.black,
@@ -285,7 +291,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                               height: 8,
                             ),
                             Text(
-                              "${widget.lots.lotTitle??''}",
+                              "${widget.lots.lotTitle ?? ''}",
                               textAlign: TextAlign.center,
                               style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                     color: Color(0xff747474),
@@ -543,7 +549,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                       // we create center column and display text
 
                                                       // Returning SizedBox instead of a Container
-                                                      return StatefulBuilder(builder: (context, setState)  {
+                                                      return StatefulBuilder(builder: (context, setState) {
                                                         return SizedBox(
                                                           height: MediaQuery.of(context).size.height - 150,
                                                           child: Observer(builder: (context) {
@@ -758,17 +764,15 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                                   Row(
                                                                     children: [
                                                                       Checkbox(
-                                                                          value:  checked,
+                                                                          value: checked,
                                                                           onChanged: (check) async {
-
-                                                                            if(preference!.getAgreed()){
-                                                                              await  preference!.setAgreed(false);
-
-                                                                            }else{
+                                                                            if (preference!.getAgreed()) {
+                                                                              await preference!.setAgreed(false);
+                                                                            } else {
                                                                               await preference!.setAgreed(true);
                                                                             }
                                                                             setState(() {
-                                                                              checked=!checked;
+                                                                              checked = !checked;
                                                                             });
                                                                           }),
                                                                       Text(
@@ -1007,7 +1011,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                       // we create center column and display text
 
                                                       // Returning SizedBox instead of a Container
-                                                      return StatefulBuilder(builder: (context, setState)  {
+                                                      return StatefulBuilder(builder: (context, setState) {
                                                         return SizedBox(
                                                           height: MediaQuery.of(ctx).size.height - 150,
                                                           child: Observer(builder: (ctx) {
@@ -1146,7 +1150,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
 
                                                                   InkWell(
                                                                     onTap: () async {
-                                                                    /*  await showDialog(
+                                                                      /*  await showDialog(
                                                                           context: context,
                                                                           builder: (BuildContext dialogContext) {
                                                                         return AlertDialog(
@@ -1291,21 +1295,16 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                                     child: Row(
                                                                       children: [
                                                                         Checkbox(
-                                                                            value:  checked,
+                                                                            value: checked,
                                                                             onChanged: (check) async {
-
-                                                                                if(preference!.getAgreed()){
-                                                                                 await  preference!.setAgreed(false);
-
-                                                                                }else{
-                                                                                  await preference!.setAgreed(true);
-                                                                                }
-                                                                                setState(() {
-                                                                                  checked=!checked;
-                                                                                });
-
-
-
+                                                                              if (preference!.getAgreed()) {
+                                                                                await preference!.setAgreed(false);
+                                                                              } else {
+                                                                                await preference!.setAgreed(true);
+                                                                              }
+                                                                              setState(() {
+                                                                                checked = !checked;
+                                                                              });
                                                                             }),
                                                                         Text(
                                                                           "I agree to 1",
@@ -2222,17 +2221,15 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                               Row(
                                                                 children: [
                                                                   Checkbox(
-                                                                      value:  checked,
+                                                                      value: checked,
                                                                       onChanged: (check) async {
-
-                                                                        if(preference!.getAgreed()){
-                                                                          await  preference!.setAgreed(false);
-
-                                                                        }else{
+                                                                        if (preference!.getAgreed()) {
+                                                                          await preference!.setAgreed(false);
+                                                                        } else {
                                                                           await preference!.setAgreed(true);
                                                                         }
                                                                         setState(() {
-                                                                          checked=!checked;
+                                                                          checked = !checked;
                                                                         });
                                                                       }),
                                                                   Text(
@@ -2464,7 +2461,7 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                   // we create center column and display text
 
                                                   // Returning SizedBox instead of a Container
-                                                  return StatefulBuilder(builder: (context, setState)  {
+                                                  return StatefulBuilder(builder: (context, setState) {
                                                     return SizedBox(
                                                       height: MediaQuery.of(ctx).size.height - 150,
                                                       child: Observer(builder: (ctx) {
@@ -2600,17 +2597,15 @@ class _BrowseItemListItemState extends State<BrowseItemListItem> with AutomaticK
                                                               Row(
                                                                 children: [
                                                                   Checkbox(
-                                                                      value:  checked,
+                                                                      value: checked,
                                                                       onChanged: (check) async {
-
-                                                                        if(preference!.getAgreed()){
-                                                                          await  preference!.setAgreed(false);
-
-                                                                        }else{
+                                                                        if (preference!.getAgreed()) {
+                                                                          await preference!.setAgreed(false);
+                                                                        } else {
                                                                           await preference!.setAgreed(true);
                                                                         }
                                                                         setState(() {
-                                                                          checked=!checked;
+                                                                          checked = !checked;
                                                                         });
                                                                       }),
                                                                   Text(
