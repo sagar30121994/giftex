@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/data/local/client/prefs.dart';
-import 'package:giftex/data/network/models/responce/lot/upcominglotsresponse.dart';
 import 'package:giftex/screens/components/footer/footer.dart';
 import 'package:giftex/screens/components/header.dart';
 import 'package:giftex/screens/liveauction/liveauction.dart';
-import 'package:giftex/screens/productdetailspage/productdetailpage.dart';
 import 'package:giftex/viewmodel/home/homeviewmodel.dart';
 import 'package:intl/intl.dart';
+
+import '../components/bottomnavigationbar/bottomnavigationbar.dart';
 
 class Record_price_artwork extends StatefulWidget {
   const Record_price_artwork({Key? key}) : super(key: key);
@@ -241,12 +241,15 @@ class _Record_price_artworkState extends State<Record_price_artwork> {
                                                                         ),
                                                                         InkWell(
                                                                           onTap: () {
-                                                                            Navigator.push(
-                                                                                context,
-                                                                                MaterialPageRoute(
-                                                                                    builder: (context) =>
-                                                                                        ProductDetailPage(
-                                                                                            e, auctionViewModel)));
+                                                                            auctionViewModel.selectedLots = e;
+
+                                                                            bottomViewModel.selectedIndex = 38;
+                                                                            // Navigator.push(
+                                                                            //     context,
+                                                                            //     MaterialPageRoute(
+                                                                            //         builder: (context) =>
+                                                                            //             ProductDetailPage(
+                                                                            //                 e, auctionViewModel)));
                                                                           },
                                                                           child: Padding(
                                                                             padding: const EdgeInsets.only(left: 2.0),
@@ -392,13 +395,18 @@ class _Record_price_artworkState extends State<Record_price_artwork> {
                                                                                                             0xff747474),
                                                                                                         width: 0.38)))),
                                                                                         onPressed: () {
-                                                                                          Navigator.push(
-                                                                                              context,
-                                                                                              MaterialPageRoute(
-                                                                                                  builder: (context) =>
-                                                                                                      ProductDetailPage(
-                                                                                                          e,
-                                                                                                          auctionViewModel)));
+                                                                                          auctionViewModel
+                                                                                              .selectedLots = e;
+
+                                                                                          bottomViewModel
+                                                                                              .selectedIndex = 38;
+                                                                                          // Navigator.push(
+                                                                                          //     context,
+                                                                                          //     MaterialPageRoute(
+                                                                                          //         builder: (context) =>
+                                                                                          //             ProductDetailPage(
+                                                                                          //                 e,
+                                                                                          //                 auctionViewModel)));
                                                                                         },
                                                                                         child: Padding(
                                                                                           padding:
@@ -482,12 +490,15 @@ class _Record_price_artworkState extends State<Record_price_artwork> {
                                                                         ),
                                                                         InkWell(
                                                                           onTap: () {
-                                                                            Navigator.push(
-                                                                                context,
-                                                                                MaterialPageRoute(
-                                                                                    builder: (context) =>
-                                                                                        ProductDetailPage(e as Lots,
-                                                                                            auctionViewModel)));
+                                                                            auctionViewModel.selectedLots = e;
+
+                                                                            bottomViewModel.selectedIndex = 38;
+                                                                            // Navigator.push(
+                                                                            //     context,
+                                                                            //     MaterialPageRoute(
+                                                                            //         builder: (context) =>
+                                                                            //             ProductDetailPage(e as Lots,
+                                                                            //                 auctionViewModel)));
                                                                           },
                                                                           child: Padding(
                                                                             padding: EdgeInsets.all(16.0),
@@ -624,12 +635,15 @@ class _Record_price_artworkState extends State<Record_price_artwork> {
                                                                                                       Color(0xff747474),
                                                                                                   width: 0.38)))),
                                                                                   onPressed: () {
-                                                                                    Navigator.push(
-                                                                                        context,
-                                                                                        MaterialPageRoute(
-                                                                                            builder: (context) =>
-                                                                                                ProductDetailPage(e,
-                                                                                                    auctionViewModel)));
+                                                                                    auctionViewModel.selectedLots = e;
+
+                                                                                    bottomViewModel.selectedIndex = 38;
+                                                                                    // Navigator.push(
+                                                                                    //     context,
+                                                                                    //     MaterialPageRoute(
+                                                                                    //         builder: (context) =>
+                                                                                    //             ProductDetailPage(e,
+                                                                                    //                 auctionViewModel)));
                                                                                   },
                                                                                   child: Text(
                                                                                     'DETAILS',

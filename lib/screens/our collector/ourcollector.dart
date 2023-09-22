@@ -4,6 +4,7 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:giftex/screens/components/footer/footer.dart';
 import 'package:giftex/screens/components/header.dart';
 import 'package:giftex/viewmodel/home/homeviewmodel.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class OurCollectors extends StatefulWidget {
   const OurCollectors({super.key});
@@ -145,9 +146,30 @@ class _OurCollectorsState extends State<OurCollectors> {
 
                                 child: Column(
                                   children: [
-                                    Image.network(
-                                      "${e.image!.mobile ?? ''}",
-                                      fit: BoxFit.contain,
+                                    Container(
+                                      child: Stack(
+                                        alignment: Alignment.center,
+                                        children: [
+                                          Container(
+                                            child: Image.network(
+                                              "${e.image!.mobile ?? ''}",
+                                              fit: BoxFit.contain,
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () async {
+                                              Uri _url = Uri.parse("${e.videoUrl}");
+                                              if (!await launchUrl(_url)) {
+                                                throw Exception('Could not launch $_url');
+                                              }
+                                            },
+                                            child: Image.asset(
+                                              "image/Playsymbol.png",
+                                              height: 45,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                     Text(
                                       e!.name ?? "",

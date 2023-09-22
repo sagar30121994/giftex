@@ -23,6 +23,7 @@ class _PastDataState extends State<PastData> {
               : widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length > 1
                   ? SliverList(
                       delegate: SliverChildBuilderDelegate(
+                        addAutomaticKeepAlives: true,
                         (BuildContext context, int index) {
                           return Observer(builder: (context) {
                             return BrowseItemListItem(

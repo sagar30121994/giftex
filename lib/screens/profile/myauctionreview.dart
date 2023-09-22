@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/screens/liveauction/browsitemlistitem.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
-import 'package:giftex/viewmodel/profile/profileviewmodel.dart';
+import 'package:giftex/viewmodel/bottomviewmodel.dart';
 
-import '../components/bottomnavigationbar/bottomnavigationbar.dart';
 import '../components/footer/footer.dart';
 import '../components/header.dart';
 
 class MyAuctionReviewpage extends StatefulWidget {
-  MyAuctionReviewpage(this.profileViewModel);
+  MyAuctionReviewpage(this.bottomViewModel, this.auctionViewModel);
 
-  ProfileViewModel profileViewModel;
+  BottomViewModel bottomViewModel;
+  AuctionViewModel auctionViewModel;
 
   @override
   _MyAuctionReviewpageState createState() => _MyAuctionReviewpageState();
@@ -25,8 +25,6 @@ class _MyAuctionReviewpageState extends State<MyAuctionReviewpage> {
   static const countdownDuration = Duration(minutes: 10);
   Duration duration = Duration();
 
-  AuctionViewModel auctionViewModel = AuctionViewModel();
-
   // Timer? timer;
   String auctionType = "";
   bool countDown = true, selected = false;
@@ -37,7 +35,7 @@ class _MyAuctionReviewpageState extends State<MyAuctionReviewpage> {
     //   data.add(Menu.fromJson(element));
     // });
     // nameController.text = "Aryan Raj";
-    auctionViewModel.getReviewauctions();
+    widget.auctionViewModel.getReviewauctions();
     super.initState();
   }
 
@@ -74,7 +72,7 @@ class _MyAuctionReviewpageState extends State<MyAuctionReviewpage> {
                           CircleAvatar(
                             radius: 37,
                             backgroundImage: NetworkImage(
-                                '${(widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.basicDetails!.profilePicUrl ?? '')}'),
+                                '${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.basicDetails!.profilePicUrl ?? '')}'),
                             // child: Image.asset("image/image 40.png",fit: BoxFit.fill,),
                           ),
                         ],
@@ -107,7 +105,7 @@ class _MyAuctionReviewpageState extends State<MyAuctionReviewpage> {
                                         ),
                                         TextSpan(
                                           text:
-                                              '${(widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.basicDetails!.firstName ?? '')}',
+                                              '${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.basicDetails!.firstName ?? '')}',
                                           style: Theme.of(context).textTheme.headline6!.copyWith(
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.bold,
@@ -129,11 +127,11 @@ class _MyAuctionReviewpageState extends State<MyAuctionReviewpage> {
                                       SizedBox(
                                         width: 3,
                                       ),
-                                      widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.address!
-                                              .isEmpty
+                                      widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!
+                                              .profile!.address!.isEmpty
                                           ? Container()
                                           : Text(
-                                              '${(widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.address!.first!.city ?? '')}',
+                                              '${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address!.first!.city ?? '')}',
                                               textAlign: TextAlign.center,
                                               style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                     color: Color(0xff2D2D2D),
@@ -151,8 +149,9 @@ class _MyAuctionReviewpageState extends State<MyAuctionReviewpage> {
                                                     borderRadius: BorderRadius.circular(20.0),
                                                     side: BorderSide(color: Color(0xff747474), width: 0.38)))),
                                         onPressed: () {
-                                          Navigator.pushReplacement(
-                                              context, MaterialPageRoute(builder: (context) => DashboardUi(12)));
+                                          widget.bottomViewModel.setIndex(12);
+                                          // Navigator.pushReplacement(
+                                          //     context, MaterialPageRoute(builder: (context) => DashboardUi(12)));
                                         },
                                         child: Padding(
                                           padding: const EdgeInsets.only(right: 8.0, left: 8, top: 12, bottom: 12),
@@ -222,12 +221,12 @@ class _MyAuctionReviewpageState extends State<MyAuctionReviewpage> {
                 SizedBox(
                   height: 10,
                 ),
-                auctionViewModel.isLoadingForlots
+                widget.auctionViewModel.isLoadingForlots
                     ? LinearProgressIndicator()
                     : Column(
-                        children: auctionViewModel.getliveauctionsResponse!.result!.lots!
+                        children: widget.auctionViewModel.getliveauctionsResponse!.result!.lots!
                             .map(
-                              (e) => BrowseItemListItem(e, false, auctionViewModel),
+                              (e) => BrowseItemListItem(e, false, widget.auctionViewModel),
                             )
                             .toList(),
                       ),

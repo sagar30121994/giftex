@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/data/local/client/prefs.dart';
+import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
 import 'package:giftex/screens/components/header.dart';
-import 'package:giftex/screens/liveauction/components/image/imagecomponent.dart';
-import 'package:giftex/screens/productdetailspage/productdetailpage.dart'; // import 'package:giftex/data/network/models/responce/lot/upcominglotsresponsectionviewmodel.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
 import 'package:intl/intl.dart';
-
-import '../../data/network/models/responce/liveauction/liveauctionreviewlotresponce.dart';
 
 class SearchBarUi extends StatefulWidget {
   const SearchBarUi({Key? key}) : super(key: key);
@@ -137,7 +134,11 @@ class _SearchBarUiState extends State<SearchBarUi> {
                           grid = false;
                         });
                       },
-                      child: Image.asset("image/list.png", height: 30,color: !grid?Colors.indigo:Colors.black,)),
+                      child: Image.asset(
+                        "image/list.png",
+                        height: 30,
+                        color: !grid ? Colors.indigo : Colors.black,
+                      )),
                   SizedBox(
                     width: 10,
                   ),
@@ -148,7 +149,11 @@ class _SearchBarUiState extends State<SearchBarUi> {
                         });
                         // auctionViewModel.isGrid=true;
                       },
-                      child: Image.asset("image/grid.png", height: 30,color: grid?Colors.indigo:Colors.black,)),
+                      child: Image.asset(
+                        "image/grid.png",
+                        height: 30,
+                        color: grid ? Colors.indigo : Colors.black,
+                      )),
                   SizedBox(
                     width: 10,
                   ),
@@ -230,14 +235,16 @@ class _SearchBarUiState extends State<SearchBarUi> {
                                                             ),
                                                             InkWell(
                                                               onTap: () {
-                                                                Navigator.push(
-                                                                    context,
-                                                                    MaterialPageRoute(
-                                                                        builder: (context) =>
-                                                                            ProductDetailPage(e, auctionViewModel)));
+                                                                auctionViewModel.selectedLots = e;
+                                                                bottomViewModel.selectedIndex = 38;
+                                                                // Navigator.push(
+                                                                //     context,
+                                                                //     MaterialPageRoute(
+                                                                //         builder: (context) =>
+                                                                //             ProductDetailPage(e, auctionViewModel)));
                                                               },
                                                               child: Padding(
-                                                                padding: const EdgeInsets.only(left: 8.0,top: 24),
+                                                                padding: const EdgeInsets.only(left: 8.0, top: 24),
                                                                 child: Image.network(
                                                                   "${e.thumbImage}",
                                                                   height: 200,
@@ -592,7 +599,7 @@ class _SearchBarUiState extends State<SearchBarUi> {
                                                                   SizedBox(height: 12),
                                                                   InkWell(
                                                                     onTap: () {
-                                                                          Navigator.push(
+                                                                      Navigator.push(
                                                                         context,
                                                                         MaterialPageRoute(
                                                                           builder: (context) => ImageFullScreenDialog(
@@ -648,11 +655,13 @@ class _SearchBarUiState extends State<SearchBarUi> {
                                                                 ),
                                                                 InkWell(
                                                                   onTap: () {
-                                                                    Navigator.push(
-                                                                        context,
-                                                                        MaterialPageRoute(
-                                                                            builder: (context) => ProductDetailPage(
-                                                                                e, auctionViewModel)));
+                                                                    auctionViewModel.selectedLots = e;
+                                                                    bottomViewModel.selectedIndex = 38;
+                                                                    // Navigator.push(
+                                                                    //     context,
+                                                                    //     MaterialPageRoute(
+                                                                    //         builder: (context) => ProductDetailPage(
+                                                                    //             e, auctionViewModel)));
                                                                   },
                                                                   child: Padding(
                                                                     padding: EdgeInsets.all(16.0),
@@ -925,7 +934,8 @@ class _SearchBarUiState extends State<SearchBarUi> {
                                                                             Navigator.push(
                                                                               context,
                                                                               MaterialPageRoute(
-                                                                                builder: (context) => ImageFullScreenDialog(
+                                                                                builder: (context) =>
+                                                                                    ImageFullScreenDialog(
                                                                                   imageUrl: e.thumbImage ?? '',
                                                                                 ),
                                                                               ),
@@ -1082,7 +1092,6 @@ class _SearchBarUiState extends State<SearchBarUi> {
   }
 }
 
-
 // class ImageFullScreenDialog extends StatelessWidget {
 //   final String imageUrl;
 //
@@ -1128,8 +1137,6 @@ class _SearchBarUiState extends State<SearchBarUi> {
 //   }
 // }
 
-
-
 class ImageFullScreenDialog extends StatelessWidget {
   final String imageUrl;
 
@@ -1137,7 +1144,6 @@ class ImageFullScreenDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white.withOpacity(.3),
@@ -1160,18 +1166,19 @@ class ImageFullScreenDialog extends StatelessWidget {
               SizedBox(
                 height: MediaQuery.of(context).size.height * .8,
                 child: Center(
-                    child: Container(
+                  child: Container(
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height,
-                      child: Image.network(imageUrl,
-                      fit: BoxFit.contain,)),
-                  ),
+                      child: Image.network(
+                        imageUrl,
+                        fit: BoxFit.contain,
+                      )),
                 ),
-               ],
               ),
+            ],
           ),
         ),
-      );
+      ),
+    );
   }
 }
-

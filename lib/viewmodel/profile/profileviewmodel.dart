@@ -5,6 +5,7 @@ import 'package:giftex/data/network/models/request/kyc/UpdateRegMyAddressRequest
 import 'package:giftex/data/network/models/request/kyc/UpdateRegPersonalDetailsRequest.dart';
 import 'package:giftex/data/network/models/request/webapimodel/getcityrequestmodel.dart';
 import 'package:giftex/data/network/models/request/webapimodel/updateaddressRequest.dart';
+import 'package:giftex/data/network/models/request/webapimodel/updateprofiledetailsrequestmodel.dart';
 import 'package:giftex/data/network/models/responce/lot/upcominglotsresponse.dart';
 import 'package:giftex/data/network/models/responce/payment/paymentresponce.dart';
 import 'package:giftex/data/network/models/responce/payments/paymentgridrepsonse.dart';
@@ -118,6 +119,9 @@ abstract class _ProfileViewModel with Store {
   @observable
   UpdateAddressRequest? updateAddressRequest;
 
+  @observable
+  UpdateProfilePersonalDetailRequestModel? updateProfilePersonalDetailRequestModel;
+
   @action
   setaadharNo(saadharNo) {
     aadharNo = saadharNo;
@@ -171,6 +175,22 @@ abstract class _ProfileViewModel with Store {
     gSTNumber = value;
   }
 
+  @observable
+  String emailId = "";
+
+  @action
+  setEmailId(String value) {
+    emailId = value;
+  }
+
+  @observable
+  String contactNo = "";
+
+  @action
+  setContactNo(String value) {
+    contactNo = value;
+  }
+
   late List<ReactionDisposer> _disposers;
 
   void setupValidations() {
@@ -180,6 +200,8 @@ abstract class _ProfileViewModel with Store {
       reaction((_) => addressLine2, validateAddressLine2),
       reaction((_) => pinCode, validatePinCode),
       reaction((_) => gSTNumber, validateGSTNumber),
+      reaction((_) => emailId, validateEmailId),
+      reaction((_) => contactNo, validateContactNo),
     ];
   }
 
@@ -189,6 +211,8 @@ abstract class _ProfileViewModel with Store {
     validateAddressLine1(addressLine1);
     validateAddressLine2(addressLine2);
     validatePinCode(pinCode);
+    validateEmailId(emailId);
+    validateContactNo(contactNo);
   }
 
   void dispose() {
@@ -200,7 +224,7 @@ abstract class _ProfileViewModel with Store {
   @action
   void validateYourName(String? value) {
     if (value == null || value.trim() == "") {
-      profileViewModelErrorState.yourName = "Please Enter Valid Name";
+      profileViewModelErrorState.yourName = "Please Enter Name";
     } else {
       profileViewModelErrorState.yourName = null;
     }
@@ -209,7 +233,7 @@ abstract class _ProfileViewModel with Store {
   @action
   void validateAddressLine1(String? value) {
     if (addressLine1 == null || addressLine1.trim() == "") {
-      profileViewModelErrorState.addressLine1 = "Please Enter Valid Address";
+      profileViewModelErrorState.addressLine1 = "Please Enter Address";
     } else {
       profileViewModelErrorState.addressLine1 = null;
     }
@@ -218,7 +242,7 @@ abstract class _ProfileViewModel with Store {
   @action
   void validateAddressLine2(String? value) {
     if (addressLine2 == null || addressLine2.trim() == "") {
-      profileViewModelErrorState.addressLine2 = "Please Enter Valid Address";
+      profileViewModelErrorState.addressLine2 = "Please Enter Address";
     } else {
       profileViewModelErrorState.addressLine2 = null;
     }
@@ -227,7 +251,7 @@ abstract class _ProfileViewModel with Store {
   @action
   void validatePinCode(String? value) {
     if (pinCode == null || pinCode.trim() == "") {
-      profileViewModelErrorState.pinCode = "Please Enter Valid Pincode";
+      profileViewModelErrorState.pinCode = "Please Enter Pincode";
     } else {
       profileViewModelErrorState.pinCode = null;
     }
@@ -236,9 +260,27 @@ abstract class _ProfileViewModel with Store {
   @action
   void validateGSTNumber(String? value) {
     if (gSTNumber == null || gSTNumber.trim() == "") {
-      profileViewModelErrorState.gSTNumber = "Please Enter Valid GSTNumber";
+      profileViewModelErrorState.gSTNumber = "Please Enter GSTNumber";
     } else {
       profileViewModelErrorState.gSTNumber = null;
+    }
+  }
+
+  @action
+  void validateEmailId(String? value) {
+    if (emailId == null || emailId.trim() == "") {
+      profileViewModelErrorState.emailId = "Please Enter EmailId";
+    } else {
+      profileViewModelErrorState.emailId = null;
+    }
+  }
+
+  @action
+  void validateContactNo(String? value) {
+    if (contactNo == null || contactNo.trim() == "") {
+      profileViewModelErrorState.contactNo = "Please Enter Contact No.";
+    } else {
+      profileViewModelErrorState.contactNo = null;
     }
   }
 
@@ -336,6 +378,41 @@ abstract class _ProfileViewModel with Store {
     updateAddressRequest!.location = "";
 
     HttpResponse httpResponse = await profileRepo!.AddMyAddress(updateAddressRequest);
+
+    if (httpResponse.status == 200) {}
+    isloading = false;
+    return httpResponse;
+  }
+
+  Future<HttpResponse> updateprofiledetails(
+      String address_id,
+      String YourName,
+      String AddressLine1,
+      String AddressLine2,
+      String PinCode,
+      String GSTNumber,
+      String selectedCountry_name,
+      String selectedState_name,
+      String selectedCity_name,
+      String type,
+      String action) async {
+    isloading = true;
+    updateProfilePersonalDetailRequestModel = UpdateProfilePersonalDetailRequestModel();
+
+    updateAddressRequest!.yourName = YourName;
+    updateAddressRequest!.addLine1 = AddressLine1;
+    updateAddressRequest!.addLine2 = AddressLine2;
+    updateAddressRequest!.pinCode = PinCode;
+    updateAddressRequest!.country = selectedCountry_name;
+    updateAddressRequest!.state = selectedState_name;
+    updateAddressRequest!.city = selectedCity_name;
+    updateAddressRequest!.gstNum = GSTNumber;
+    updateAddressRequest!.type = type;
+    updateAddressRequest!.id = address_id;
+    updateAddressRequest!.action = action;
+    updateAddressRequest!.location = "";
+
+    HttpResponse httpResponse = await profileRepo!.updateprofiledetails(updateProfilePersonalDetailRequestModel);
 
     if (httpResponse.status == 200) {}
     isloading = false;
@@ -534,7 +611,19 @@ abstract class _ProfileViewModelErrorState with Store {
   @observable
   String? gSTNumber;
 
+  @observable
+  String? contactNo;
+
+  @observable
+  String? emailId;
+
   @computed
   bool get hasErrors =>
-      yourName != null || addressLine1 != null || addressLine2 != null || pinCode != null || gSTNumber != null;
+      yourName != null ||
+      addressLine1 != null ||
+      addressLine2 != null ||
+      pinCode != null ||
+      gSTNumber != null ||
+      contactNo != null ||
+      emailId != null;
 }

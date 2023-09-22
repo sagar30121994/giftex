@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/screens/liveauction/browsitemlistitem.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
-import 'package:giftex/viewmodel/profile/profileviewmodel.dart';
+import 'package:giftex/viewmodel/bottomviewmodel.dart';
 import 'package:intl/intl.dart';
 
-import '../components/bottomnavigationbar/bottomnavigationbar.dart';
 import '../components/footer/footer.dart';
 import '../components/header.dart';
 
 class MyGallarypage extends StatefulWidget {
-  MyGallarypage(this.profileViewModel);
+  MyGallarypage(this.bottomViewModel);
 
-  ProfileViewModel profileViewModel;
+  BottomViewModel bottomViewModel;
 
   @override
   _MyGallarypageState createState() => _MyGallarypageState();
@@ -30,9 +29,9 @@ class _MyGallarypageState extends State<MyGallarypage> {
     // dataList.forEach((element) {
     //   data.add(Menu.fromJson(element));
     // });
-    bottomViewModel.profileViewModel!.getUserAllDetails();
+    widget.bottomViewModel.profileViewModel!.getUserAllDetails();
 
-    widget.profileViewModel.getAuctionGallery();
+    widget.bottomViewModel.profileViewModel!.getAuctionGallery();
 
     // nameController.text="Aryan Raj";
     super.initState();
@@ -76,7 +75,7 @@ class _MyGallarypageState extends State<MyGallarypage> {
                         CircleAvatar(
                           radius: 37,
                           backgroundImage: NetworkImage(
-                              '${(widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.basicDetails!.profilePicUrl ?? '')}'),
+                              '${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.basicDetails!.profilePicUrl ?? '')}'),
                           // child: Image.asset("image/image 40.png",fit: BoxFit.fill,),
                         ),
                       ],
@@ -109,7 +108,7 @@ class _MyGallarypageState extends State<MyGallarypage> {
                                       ),
                                       TextSpan(
                                         text:
-                                            '${(widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.basicDetails!.firstName ?? '')}',
+                                            '${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.basicDetails!.firstName ?? '')}',
                                         style: Theme.of(context).textTheme.headline6!.copyWith(
                                               color: Colors.black,
                                               fontWeight: FontWeight.bold,
@@ -131,10 +130,11 @@ class _MyGallarypageState extends State<MyGallarypage> {
                                     SizedBox(
                                       width: 3,
                                     ),
-                                    widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.address!.isEmpty
+                                    widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!
+                                            .address!.isEmpty
                                         ? Container()
                                         : Text(
-                                            '${(widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.address!.first!.city ?? '')}',
+                                            '${(widget.bottomViewModel.profileViewModel!.getUserAllDetailsResponse!.result!.profile!.address!.first!.city ?? '')}',
                                             textAlign: TextAlign.center,
                                             style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                   color: Color(0xff2D2D2D),
@@ -152,8 +152,9 @@ class _MyGallarypageState extends State<MyGallarypage> {
                                                   borderRadius: BorderRadius.circular(20.0),
                                                   side: BorderSide(color: Color(0xff747474), width: 0.38)))),
                                       onPressed: () {
-                                        Navigator.pushReplacement(
-                                            context, MaterialPageRoute(builder: (context) => DashboardUi(12)));
+                                        widget.bottomViewModel.setIndex(12);
+                                        // Navigator.pushReplacement(
+                                        //     context, MaterialPageRoute(builder: (context) => DashboardUi(12)));
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.only(right: 8.0, left: 8, top: 12, bottom: 12),
@@ -305,12 +306,13 @@ class _MyGallarypageState extends State<MyGallarypage> {
                           //   ],
                           // ),
 
-                          widget.profileViewModel.isloading
+                          widget.bottomViewModel.profileViewModel!.isloading
                               ? LinearProgressIndicator()
-                              : widget.profileViewModel.myAuctionGalleryResponce == null
+                              : widget.bottomViewModel.profileViewModel!.myAuctionGalleryResponce == null
                                   ? Container()
                                   : Column(
-                                      children: widget.profileViewModel.myAuctionGalleryResponce!.result!.lots!
+                                      children: widget
+                                          .bottomViewModel.profileViewModel!.myAuctionGalleryResponce!.result!.lots!
                                           .map(
                                             (e) => BrowseItemListItem(e, false, auctionViewModel),
                                           )

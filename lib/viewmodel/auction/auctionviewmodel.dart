@@ -23,6 +23,9 @@ abstract class _AuctionViewModel with Store {
   @observable
   String auctionType = "live";
 
+  @observable
+  String navigateFrom = "";
+
   late AuctionRepo auctionRepo;
   late LotRepo lotRepo;
   late WebapimodelRepo webapimodelRepo;
@@ -52,6 +55,9 @@ abstract class _AuctionViewModel with Store {
 
   @observable
   Auctions? selectedAuction;
+
+  @observable
+  Lots? selectedLots;
 
   @observable
   AutionResultResponse? autionResultResponse;
@@ -408,12 +414,14 @@ abstract class _AuctionViewModel with Store {
   @action
   Future<void> logout() async {
     await localSharedPrefrence.setLoginStatus(false);
+
     await localSharedPrefrence.setAuthKeyWeb("");
     await localSharedPrefrence.setCrmClinetId("");
     await localSharedPrefrence.setToken("");
     await localSharedPrefrence.setFullname("");
     await localSharedPrefrence.setEmail("");
     await localSharedPrefrence.setMobileno("");
+    await localSharedPrefrence.setUserId("0");
   }
 
   void trackFirebaseEvents() {

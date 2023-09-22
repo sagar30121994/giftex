@@ -5,10 +5,10 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:giftex/data/network/models/httpreponsehandler.dart';
 import 'package:giftex/data/network/models/responce/liveauction/upcommingauctionresponse.dart';
-import 'package:giftex/screens/components/bottomnavigationbar/bottomnavigationbar.dart';
-import 'package:giftex/screens/liveauction/liveauction.dart';
-import 'package:giftex/screens/newsandupdates/newsandupdates.dart';
+import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
+import 'package:giftex/viewmodel/bottomviewmodel.dart';
 import 'package:giftex/viewmodel/home/homeviewmodel.dart';
+import 'package:giftex/viewmodel/service/serviceviewmodel.dart';
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -18,11 +18,14 @@ import 'package:url_launcher/url_launcher.dart';
 import '../components/footer/footer.dart';
 import '../components/header.dart';
 
-HomeViewModel homeViewModel = HomeViewModel();
-// AuctionViewModel auViewModel = AuctionViewModel();
+ServiceViewModel serviceViewModel = ServiceViewModel();
 
 class Homepage extends StatefulWidget {
-  const Homepage({Key? key}) : super(key: key);
+  Homepage(this.homeViewModel, this.auctionViewModel, this.bottomViewModel);
+
+  HomeViewModel homeViewModel;
+  AuctionViewModel auctionViewModel;
+  BottomViewModel bottomViewModel;
 
   @override
   _HomepageState createState() => _HomepageState();
@@ -47,9 +50,9 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
   startTimer() {
     timer = Timer.periodic(Duration(seconds: 5), (_) async {
       setState(() {
-        if (homeViewModel.homeBanerResponse == null) {
+        if (widget.homeViewModel.homeBanerResponse == null) {
         } else {
-          if (position != homeViewModel.homeBanerResponse!.pageContent!.banner!.length - 1) {
+          if (position != widget.homeViewModel.homeBanerResponse!.pageContent!.banner!.length - 1) {
             position++;
             sliderController.nextPage(duration: Duration(milliseconds: 500), curve: Curves.easeInCirc);
           } else {
@@ -64,12 +67,12 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
   @override
   void initState() {
     startTimer();
-    homeViewModel.getHomeBaner();
-    // homeViewModel.getHomeUpcommingAuctionBaner();
-    homeViewModel.gethomeRecordPriceLots();
-    homeViewModel.getNewsVideos();
-    homeViewModel.getfeatureditems();
-    auctionViewModel.getUpcommingAuction("UpComing");
+    widget.homeViewModel.getHomeBaner();
+    // widget.homeViewModel.getHomeUpcommingAuctionBaner();
+    widget.homeViewModel.gethomeRecordPriceLots();
+    widget.homeViewModel.getNewsVideos();
+    widget.homeViewModel.getfeatureditems();
+    widget.auctionViewModel.getUpcommingAuction("UpComing");
 
     checkUpdate();
 
@@ -102,7 +105,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
               children: [
                 // HeaderUi(),
                 Observer(builder: (context) {
-                  return homeViewModel.isLoading
+                  return widget.homeViewModel.isLoading
                       ? CircularProgressIndicator()
                       : SizedBox(
                           height: 450,
@@ -132,9 +135,9 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                         // position = pos % 4;
                                       });
                                     },
-                                    itemCount: homeViewModel.homeBanerResponse == null
+                                    itemCount: widget.homeViewModel.homeBanerResponse == null
                                         ? 0
-                                        : homeViewModel.homeBanerResponse!.pageContent!.banner!.length,
+                                        : widget.homeViewModel.homeBanerResponse!.pageContent!.banner!.length,
                                     itemBuilder: (context, pos) => SizedBox(
                                       width: MediaQuery.of(context).size.width,
                                       child: Column(
@@ -145,7 +148,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                             height: 10,
                                           ),
                                           Text(
-                                            "${homeViewModel.homeBanerResponse!.pageContent!.banner![pos].title1}",
+                                            "${widget.homeViewModel.homeBanerResponse!.pageContent!.banner![pos].title1}",
                                             textAlign: TextAlign.left,
                                             style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                 color: Theme.of(context).colorScheme.primary,
@@ -156,7 +159,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                             height: 8,
                                           ),
                                           Text(
-                                            "${homeViewModel.homeBanerResponse!.pageContent!.banner![pos].title2}",
+                                            "${widget.homeViewModel.homeBanerResponse!.pageContent!.banner![pos].title2}",
                                             textAlign: TextAlign.left,
                                             style: Theme.of(context).textTheme.headline5!.copyWith(
                                                   color: Colors.black,
@@ -169,7 +172,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                           Container(
                                             width: MediaQuery.of(context).size.width * .80,
                                             child: Text(
-                                              "${homeViewModel.homeBanerResponse!.pageContent!.banner![pos].title3}",
+                                              "${widget.homeViewModel.homeBanerResponse!.pageContent!.banner![pos].title3}",
                                               textAlign: TextAlign.center,
                                               style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                   color: Color(0XFF747474),
@@ -187,7 +190,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                 Padding(
                                                   padding: const EdgeInsets.only(left: 25.0, right: 25),
                                                   child: Image.network(
-                                                      "${homeViewModel.homeBanerResponse!.pageContent!.banner![pos].image!.mobile}",
+                                                      "${widget.homeViewModel.homeBanerResponse!.pageContent!.banner![pos].image!.mobile}",
                                                       fit: BoxFit.cover,
                                                       height: 220,
                                                       width: MediaQuery.of(context).size.width),
@@ -198,23 +201,31 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                 InkWell(
                                                   onTap: () {
                                                     setState(() {
-                                                      auctionViewModel.selectedAuction = Auctions(
-                                                        auctionId: homeViewModel.homeBanerResponse!.pageContent!
+                                                      widget.auctionViewModel.selectedAuction = Auctions(
+                                                        auctionId: widget.homeViewModel.homeBanerResponse!.pageContent!
                                                             .banner![pos].button!.result!.auctions!.first.auctionId,
-                                                        image: homeViewModel.homeBanerResponse!.pageContent!
+                                                        image: widget.homeViewModel.homeBanerResponse!.pageContent!
                                                             .banner![pos].button!.result!.auctions!.first.image,
-                                                        displayDate: homeViewModel.homeBanerResponse!.pageContent!
-                                                            .banner![pos].button!.result!.auctions!.first.displayDate,
-                                                        // displayDate: homeViewModel.homeBanerResponse!.pageContent!
+                                                        displayDate: widget
+                                                            .homeViewModel
+                                                            .homeBanerResponse!
+                                                            .pageContent!
+                                                            .banner![pos]
+                                                            .button!
+                                                            .result!
+                                                            .auctions!
+                                                            .first
+                                                            .displayDate,
+                                                        // displayDate: widget.homeViewModel.homeBanerResponse!.pageContent!
                                                         //     .banner![pos].button!.result!.auctions!.first.displayDate,
                                                       );
 
-                                                      bottomViewModel.setIndex(8);
+                                                      widget.bottomViewModel.setIndex(8);
                                                     });
-                                                    auctionViewModel.liveAuctionType = "lots";
-                                                    auctionViewModel.auctionType = "upcoming";
+                                                    widget.auctionViewModel.liveAuctionType = "lots";
+                                                    widget.auctionViewModel.auctionType = "upcoming";
                                                     // launchUrl(
-                                                    //   Uri.parse(homeViewModel.homeBanerResponse!.pageContent!.banner![pos]
+                                                    //   Uri.parse(widget.homeViewModel.homeBanerResponse!.pageContent!.banner![pos]
                                                     //       .button!.cta!.link!),
                                                     //   mode: LaunchMode.externalApplication,
                                                     // );
@@ -239,7 +250,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                           padding: const EdgeInsets.only(
                                                               right: 8.0, left: 8, top: 12, bottom: 12),
                                                           child: Text(
-                                                            '${homeViewModel.homeBanerResponse!.pageContent!.banner![pos].button!.text}',
+                                                            '${widget.homeViewModel.homeBanerResponse!.pageContent!.banner![pos].button!.text}',
                                                             style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                                 color: Color(0XFFFFFFFF),
                                                                 fontWeight: FontWeight.w600,
@@ -263,10 +274,10 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                           ),
                         );
                 }),
-                homeViewModel.homeBanerResponse == null
+                widget.homeViewModel.homeBanerResponse == null
                     ? Container()
                     : Observer(builder: (context) {
-                        return homeViewModel.isLoading
+                        return widget.homeViewModel.isLoading
                             ? Container()
                             : Row(
                                 children: [
@@ -274,7 +285,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                     width: 10,
                                   ),
                                   Text(
-                                    "0${position + 1}/0${homeViewModel.homeBanerResponse!.pageContent!.banner!.length}",
+                                    "0${position + 1}/0${widget.homeViewModel.homeBanerResponse!.pageContent!.banner!.length}",
                                     textAlign: TextAlign.left,
                                     style: Theme.of(context).textTheme.headline6!.copyWith(
                                           color: Colors.black,
@@ -312,7 +323,9 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                 ],
                               );
                       }),
-                SizedBox(height: 16,),
+                SizedBox(
+                  height: 16,
+                ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width * .80,
                   child: Text(
@@ -324,7 +337,9 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                         .copyWith(color: Colors.black, fontWeight: FontWeight.w700, letterSpacing: 0.666667),
                   ),
                 ),
-                const SizedBox(height: 16,),
+                const SizedBox(
+                  height: 16,
+                ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width * .80,
                   child: Text(
@@ -339,7 +354,9 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                         ),
                   ),
                 ),
-                const SizedBox(height: 16,),
+                const SizedBox(
+                  height: 16,
+                ),
                 Container(
                   height: 460,
                   width: MediaQuery.of(context).size.width,
@@ -366,7 +383,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                         height: 16,
                       ),
                       Observer(builder: (context) {
-                        return homeViewModel.isloadingfeatureditems
+                        return widget.homeViewModel.isloadingfeatureditems
                             ? Container()
                             : Container(
                                 height: 320,
@@ -393,7 +410,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                           Padding(
                                             padding: const EdgeInsets.only(left: 25.0, right: 25),
                                             child: Image.network(
-                                              "${homeViewModel.getFeaturedItemsResponse!.result!.lots![pos].thumbImage}",
+                                              "${widget.homeViewModel.getFeaturedItemsResponse!.result!.lots![pos].thumbImage}",
                                               height: 210,
                                               width: 155,
                                               fit: BoxFit.fill,
@@ -411,7 +428,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                     width: 20,
                                                   ),
                                                   Text(
-                                                    "${homeViewModel.getFeaturedItemsResponse!.result!.lots![pos].info!.title ?? ''}",
+                                                    "${widget.homeViewModel.getFeaturedItemsResponse!.result!.lots![pos].info!.title ?? ''}",
                                                     textAlign: TextAlign.start,
                                                     maxLines: 1,
                                                     style: Theme.of(context).textTheme.subtitle1!.copyWith(
@@ -424,7 +441,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                     height: 4,
                                                   ),
                                                   Text(
-                                                    "₹ ${formateNumber(homeViewModel.getFeaturedItemsResponse!.result!.lots![pos].liveStatus!.currentBid!.iNR ?? "0")}",
+                                                    "₹ ${formateNumber(widget.homeViewModel.getFeaturedItemsResponse!.result!.lots![pos].liveStatus!.currentBid!.iNR ?? "0")}",
                                                     // "₹${formateNumber(widget.lots.liveStatus!.nextValidBid!.iNR ?? "0")}"
                                                     textAlign: TextAlign.center,
                                                     style: Theme.of(context).textTheme.subtitle1!.copyWith(
@@ -438,9 +455,9 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                       ),
                                     );
                                   },
-                                  itemCount: homeViewModel.getFeaturedItemsResponse == null
+                                  itemCount: widget.homeViewModel.getFeaturedItemsResponse == null
                                       ? 0
-                                      : homeViewModel.getFeaturedItemsResponse!.result!.lots!.length,
+                                      : widget.homeViewModel.getFeaturedItemsResponse!.result!.lots!.length,
                                 ),
                               );
                       }),
@@ -484,7 +501,8 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                         child: Center(
                           child: InkWell(
                             onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => DashboardUi(7)));
+                              widget.bottomViewModel.setIndex(7);
+                              // Navigator.push(context, MaterialPageRoute(builder: (context) => DashboardUi(7)));
                             },
                             child: Container(
                               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 2),
@@ -513,7 +531,9 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                     ],
                   ),
                 ),
-                const SizedBox(height: 30,),
+                const SizedBox(
+                  height: 30,
+                ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width * .70,
                   child: Text(
@@ -525,43 +545,46 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                         .copyWith(color: Colors.black, fontWeight: FontWeight.bold, letterSpacing: 2.14286),
                   ),
                 ),
-                const SizedBox(height: 30,),
-                auctionViewModel.upcomingAuctionResponse == null
+                const SizedBox(
+                  height: 30,
+                ),
+                widget.auctionViewModel.upcomingAuctionResponse == null
                     ? Container()
                     : Observer(builder: (context) {
-                        return auctionViewModel.isLoadingForUpCommingAuction
+                        return widget.auctionViewModel.isLoadingForUpCommingAuction
                             ? LinearProgressIndicator()
                             : Container(
                                 height: 500,
                                 child: PageView.builder(
-                                    itemCount: (auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length / 2)
-                                        .toInt(),
+                                    itemCount:
+                                        (widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length / 2)
+                                            .toInt(),
                                     itemBuilder: (context, position) {
                                       if (position != 0) {
                                         position = position * 2;
                                       }
                                       return Column(
                                         children: [
-                                          auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length > position
+                                          widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length >
+                                                  position
                                               ? Container(
                                                   width: MediaQuery.of(context).size.width,
                                                   height: 245,
                                                   decoration: BoxDecoration(
                                                     image: DecorationImage(
                                                       image: NetworkImage(
-                                                          "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![position].image}"),
+                                                          "${widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions![position].image}"),
                                                       fit: BoxFit.cover,
                                                     ),
                                                   ),
-                                                  child: Column(
-                                                      children: [
-                                                    // homeViewModel.homeUpcommingAuctionResponse!.auctionArray!.map((e) =>
+                                                  child: Column(children: [
+                                                    // widget.homeViewModel.homeUpcommingAuctionResponse!.auctionArray!.map((e) =>
                                                     Container(
                                                       width: MediaQuery.of(context).size.width,
                                                       height: 245,
                                                       color: Color(0xffEAEEF2).withOpacity(.4),
                                                       child: Padding(
-                                                        padding: const EdgeInsets.only(top: 42.0,bottom: 12,left: 12),
+                                                        padding: const EdgeInsets.only(top: 42.0, bottom: 12, left: 12),
                                                         child: Column(
                                                           mainAxisAlignment: MainAxisAlignment.start,
                                                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -572,7 +595,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                             SizedBox(
                                                               width: MediaQuery.of(context).size.width * .70,
                                                               child: Text(
-                                                                "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![position].auctionName}",
+                                                                "${widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions![position].auctionName}",
                                                                 textAlign: TextAlign.start,
                                                                 style: Theme.of(context).textTheme.headline6!.copyWith(
                                                                       color: Colors.black,
@@ -587,17 +610,18 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                             InkWell(
                                                               onTap: () {
                                                                 setState(() {
-                                                                  auctionViewModel.upComingLotsResponse = null;
+                                                                  widget.auctionViewModel.upComingLotsResponse = null;
                                                                   setState(() {
-                                                                    auctionViewModel.selectedAuction = auctionViewModel
+                                                                    widget.auctionViewModel.selectedAuction = widget
+                                                                        .auctionViewModel
                                                                         .upcomingAuctionResponse!
                                                                         .result!
                                                                         .auctions![position];
 
-                                                                    bottomViewModel.setIndex(8);
+                                                                    widget.bottomViewModel.setIndex(8);
                                                                   });
-                                                                  auctionViewModel.liveAuctionType = "lots";
-                                                                  auctionViewModel.auctionType = "upcoming";
+                                                                  widget.auctionViewModel.liveAuctionType = "lots";
+                                                                  widget.auctionViewModel.auctionType = "upcoming";
                                                                 });
                                                               },
                                                               child: Container(
@@ -623,7 +647,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                             SizedBox(
                                                               width: MediaQuery.of(context).size.width * .70,
                                                               child: Text(
-                                                                "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![position].displayDate}",
+                                                                "${widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions![position].displayDate}",
                                                                 textAlign: TextAlign.start,
                                                                 style: Theme.of(context).textTheme.headline6!.copyWith(
                                                                       color: Colors.black87,
@@ -637,7 +661,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                             // SizedBox(
                                                             //   width: MediaQuery.of(context).size.width * .70,
                                                             //   child: Text(
-                                                            //     "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![position].displayDate}",
+                                                            //     "${widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions![position].displayDate}",
                                                             //     textAlign: TextAlign.start,
                                                             //     style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                             //         color: Colors.black87,
@@ -655,7 +679,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                   ]),
                                                 )
                                               : Container(),
-                                          auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length >
+                                          widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions!.length >
                                                   (position + 1)
                                               ? Container(
                                                   width: MediaQuery.of(context).size.width,
@@ -663,7 +687,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                   decoration: BoxDecoration(
                                                       image: DecorationImage(
                                                         image: NetworkImage(
-                                                            "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![position + 1].image}"),
+                                                            "${widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions![position + 1].image}"),
                                                         fit: BoxFit.cover,
                                                       ),
                                                       color: Color(0xff495E93).withOpacity(1)),
@@ -676,7 +700,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                           height: 230,
                                                           color: Color(0xffEAEEF2).withOpacity(.4),
                                                           child: Padding(
-                                                            padding: EdgeInsets.only(right: 12.0,top: 34),
+                                                            padding: EdgeInsets.only(right: 12.0, top: 34),
                                                             child: Column(
                                                               crossAxisAlignment: CrossAxisAlignment.end,
                                                               children: [
@@ -686,7 +710,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                                 SizedBox(
                                                                   width: MediaQuery.of(context).size.width * .70,
                                                                   child: Text(
-                                                                    "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![position + 1].auctionName}",
+                                                                    "${widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions![position + 1].auctionName}",
                                                                     textAlign: TextAlign.end,
                                                                     style:
                                                                         Theme.of(context).textTheme.headline6!.copyWith(
@@ -701,13 +725,15 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                                 InkWell(
                                                                   onTap: () {
                                                                     setState(() {
-                                                                      auctionViewModel.liveAuctionType = "lots";
-                                                                      auctionViewModel.auctionType = "upcoming";
-                                                                      auctionViewModel.selectedAuction =
-                                                                          auctionViewModel.upcomingAuctionResponse!
-                                                                              .result!.auctions![position + 1];
+                                                                      widget.auctionViewModel.liveAuctionType = "lots";
+                                                                      widget.auctionViewModel.auctionType = "upcoming";
+                                                                      widget.auctionViewModel.selectedAuction = widget
+                                                                          .auctionViewModel
+                                                                          .upcomingAuctionResponse!
+                                                                          .result!
+                                                                          .auctions![position + 1];
 
-                                                                      bottomViewModel.setIndex(8);
+                                                                      widget.bottomViewModel.setIndex(8);
                                                                     });
                                                                   },
                                                                   child: Container(
@@ -736,7 +762,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                                 SizedBox(
                                                                   width: MediaQuery.of(context).size.width * .70,
                                                                   child: Text(
-                                                                    "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![position + 1].displayDate}",
+                                                                    "${widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions![position + 1].displayDate}",
                                                                     textAlign: TextAlign.end,
                                                                     style:
                                                                         Theme.of(context).textTheme.headline6!.copyWith(
@@ -751,7 +777,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                                 // SizedBox(
                                                                 //   width: MediaQuery.of(context).size.width * .70,
                                                                 //   child: Text(
-                                                                //     "${auctionViewModel.upcomingAuctionResponse!.result!.auctions![position + 1].displayDate}",
+                                                                //     "${widget.auctionViewModel.upcomingAuctionResponse!.result!.auctions![position + 1].displayDate}",
                                                                 //     textAlign: TextAlign.end,
                                                                 //     style:
                                                                 //         Theme.of(context).textTheme.bodyText1!.copyWith(
@@ -856,7 +882,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                   children: [
                     InkWell(
                       onTap: () {
-                        bottomViewModel.selectedIndex = 10;
+                        widget.bottomViewModel.selectedIndex = 10;
                         // Navigator.push(context, MaterialPageRoute(builder: (context) => HowToSellPage()));
                       },
                       child: Container(
@@ -888,7 +914,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                     ),
                     InkWell(
                       onTap: () {
-                        bottomViewModel.selectedIndex = 11;
+                        widget.bottomViewModel.selectedIndex = 11;
                         // Navigator.push(context, MaterialPageRoute(builder: (context) => HowToBuyPage()));
                       },
                       child: Container(
@@ -920,7 +946,9 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                     )
                   ],
                 ),
-                const SizedBox(height: 24,),
+                const SizedBox(
+                  height: 24,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -938,17 +966,19 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                     ),
                   ],
                 ),
-                SizedBox(height: 24,),
+                SizedBox(
+                  height: 24,
+                ),
                 Observer(builder: (context) {
-                  return homeViewModel.isLoadingForLots
+                  return widget.homeViewModel.isLoadingForLots
                       ? LinearProgressIndicator()
-                      : homeViewModel.recordPriceLots == null
+                      : widget.homeViewModel.recordPriceLots == null
                           ? Container()
                           : Container(
                               padding: EdgeInsets.all(16),
                               color: Color(0xffFFFFFF),
                               child: DefaultTabController(
-                                length: homeViewModel.recordPriceLots!.tabArray!.length,
+                                length: widget.homeViewModel.recordPriceLots!.tabArray!.length,
                                 child: DecoratedBox(
                                   decoration: BoxDecoration(
                                     //This is for background color
@@ -959,7 +989,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                   ),
                                   child: TabBar(
                                       onTap: (index) {
-                                        homeViewModel.selectedTabIndex = index;
+                                        widget.homeViewModel.selectedTabIndex = index;
                                         print(index);
                                       },
                                       indicator: UnderlineTabIndicator(
@@ -975,7 +1005,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                             fontWeight: FontWeight.w600,
                                           ),
                                       isScrollable: true,
-                                      tabs: homeViewModel.recordPriceLots!.tabArray!
+                                      tabs: widget.homeViewModel.recordPriceLots!.tabArray!
                                           .map(
                                             (e) => Tab(
                                               text: e.tabName,
@@ -986,9 +1016,11 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                               ),
                             );
                 }),
-                SizedBox(height: 16,),
+                SizedBox(
+                  height: 16,
+                ),
                 Observer(builder: (context) {
-                  return homeViewModel.isLoadingForLots
+                  return widget.homeViewModel.isLoadingForLots
                       ? Container()
                       : Container(
                           color: Color(0xffFFFFFF),
@@ -1022,7 +1054,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                         Padding(
                                           padding: const EdgeInsets.only(left: 25.0, right: 25),
                                           child: Image.network(
-                                            "${homeViewModel.recordPriceLots!.tabArray![homeViewModel.selectedTabIndex].lots![pos].ThumbImage}",
+                                            "${widget.homeViewModel.recordPriceLots!.tabArray![widget.homeViewModel.selectedTabIndex].lots![pos].ThumbImage}",
                                             height: 210,
                                             width: 150,
                                             fit: BoxFit.fill,
@@ -1039,7 +1071,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                   width: 20,
                                                 ),
                                                 Text(
-                                                  "${homeViewModel.recordPriceLots!.tabArray![homeViewModel.selectedTabIndex].lots![pos].info!.title}",
+                                                  "${widget.homeViewModel.recordPriceLots!.tabArray![widget.homeViewModel.selectedTabIndex].lots![pos].info!.title}",
                                                   textAlign: TextAlign.start,
                                                   style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                       color: Color(0xff2D2D2D),
@@ -1047,9 +1079,8 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                       letterSpacing: 1.5,
                                                       overflow: TextOverflow.ellipsis),
                                                 ),
-
                                                 Text(
-                                                  "${homeViewModel.recordPriceLots!.tabArray![homeViewModel.selectedTabIndex].lots![pos].info!.description}",
+                                                  "${widget.homeViewModel.recordPriceLots!.tabArray![widget.homeViewModel.selectedTabIndex].lots![pos].info!.description}",
                                                   textAlign: TextAlign.start,
                                                   style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                       color: Color(0xff2D2D2D),
@@ -1061,7 +1092,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                   height: 4,
                                                 ),
                                                 Text(
-                                                  "₹ ${formateNumber(homeViewModel.recordPriceLots!.tabArray![homeViewModel.selectedTabIndex].lots![pos].estimateFrom!.iNR ?? "0")}",
+                                                  "₹ ${formateNumber(widget.homeViewModel.recordPriceLots!.tabArray![widget.homeViewModel.selectedTabIndex].lots![pos].estimateFrom!.iNR ?? "0")}",
                                                   textAlign: TextAlign.center,
                                                   style: Theme.of(context).textTheme.subtitle1!.copyWith(
                                                         color: Theme.of(context).colorScheme.primary,
@@ -1074,16 +1105,20 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                     )),
                               );
                             },
-                            itemCount: homeViewModel.recordPriceLots == null
+                            itemCount: widget.homeViewModel.recordPriceLots == null
                                 ? 0
-                                : homeViewModel.recordPriceLots!.tabArray![homeViewModel.selectedTabIndex].lots!.length,
+                                : widget.homeViewModel.recordPriceLots!.tabArray![widget.homeViewModel.selectedTabIndex]
+                                    .lots!.length,
                           ),
                         );
                 }),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => DashboardUi(28)));
+                    widget.bottomViewModel.setIndex(28);
+                    // Navigator.push(context, MaterialPageRoute(builder: (context) => DashboardUi(28)));
                   },
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 2),
@@ -1112,9 +1147,15 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20,),
-                const SizedBox(height: 20,),
-                SizedBox(height: 24,),
+                const SizedBox(
+                  height: 20,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
+                  height: 24,
+                ),
                 Container(
                   height: 360,
                   width: MediaQuery.of(context).size.width,
@@ -1288,8 +1329,12 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                     ],
                   ),
                 ),
-                const SizedBox(height: 30,),
-                const SizedBox(height: 20,),
+                const SizedBox(
+                  height: 30,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -1307,9 +1352,11 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                     ),
                   ],
                 ),
-                const SizedBox(height: 30,),
+                const SizedBox(
+                  height: 30,
+                ),
                 Observer(builder: (context) {
-                  return homeViewModel.isLoadingForNews
+                  return widget.homeViewModel.isLoadingForNews
                       ? Container()
                       : Container(
                           color: Color(0xffFFFFFF),
@@ -1325,7 +1372,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                               ),
                               child: TabBar(
                                 onTap: (index) {
-                                  homeViewModel.selectedNewsTabIndex = index;
+                                  widget.homeViewModel.selectedNewsTabIndex = index;
                                   print(index);
                                 },
                                 indicator: UnderlineTabIndicator(
@@ -1350,9 +1397,11 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                           ),
                         );
                 }),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 Observer(builder: (context) {
-                  return homeViewModel.isLoadingForNews
+                  return widget.homeViewModel.isLoadingForNews
                       ? Container()
                       : Container(
                           color: Color(0xffFFFFFF),
@@ -1381,35 +1430,42 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                       child: Column(
                                         // crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          homeViewModel.selectedNewsTabIndex == 0
-                                              ? Image.network(
-                                                  "${homeViewModel.homeNewsVideosBlogsResponse!.news![pos].image!.mobile}",
-                                                  fit: BoxFit.contain,
-                                                  height: 200)
-                                              : homeViewModel.selectedNewsTabIndex == 1
+                                          widget.homeViewModel.selectedNewsTabIndex == 0
+                                              ? InkWell(
+                                                  onTap: () {
+                                                    // serviceViewModel.newsArry =
+                                                    //     serviceViewModel.pressResponse!.pageContent!.array![pos];
+                                                    // bottomViewModel.selectedIndex = 35;
+                                                  },
+                                                  child: Image.network(
+                                                      "${widget.homeViewModel.homeNewsVideosBlogsResponse!.news![pos].image!.mobile}",
+                                                      fit: BoxFit.contain,
+                                                      height: 200),
+                                                )
+                                              : widget.homeViewModel.selectedNewsTabIndex == 1
                                                   ? Image.network(
-                                                      "${homeViewModel.homeNewsVideosBlogsResponse!.videos![pos].image!.mobile}",
+                                                      "${widget.homeViewModel.homeNewsVideosBlogsResponse!.videos![pos].image!.mobile}",
                                                       fit: BoxFit.contain,
                                                       height: 200)
                                                   : Image.network(
-                                                      "${homeViewModel.homeNewsVideosBlogsResponse!.blogs![pos].image!.mobile}",
+                                                      "${widget.homeViewModel.homeNewsVideosBlogsResponse!.blogs![pos].image!.mobile}",
                                                       fit: BoxFit.contain,
                                                       height: 200),
                                           SizedBox(
                                             height: 16,
                                           ),
-                                          homeViewModel.selectedNewsTabIndex == 0
+                                          widget.homeViewModel.selectedNewsTabIndex == 0
                                               ? Text(
-                                                  "${homeViewModel.homeNewsVideosBlogsResponse!.news![pos].timestamp}",
+                                                  "${widget.homeViewModel.homeNewsVideosBlogsResponse!.news![pos].timestamp}",
                                                   textAlign: TextAlign.center,
                                                   style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                         color: Theme.of(context).colorScheme.primary,
                                                         fontWeight: FontWeight.w700,
                                                       ),
                                                 )
-                                              : homeViewModel.selectedNewsTabIndex == 1
+                                              : widget.homeViewModel.selectedNewsTabIndex == 1
                                                   ? Text(
-                                                      "${homeViewModel.homeNewsVideosBlogsResponse!.videos![pos].timestamp}",
+                                                      "${widget.homeViewModel.homeNewsVideosBlogsResponse!.videos![pos].timestamp}",
                                                       textAlign: TextAlign.center,
                                                       style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                             color: Theme.of(context).colorScheme.primary,
@@ -1417,7 +1473,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                                           ),
                                                     )
                                                   : Text(
-                                                      "${homeViewModel.homeNewsVideosBlogsResponse!.blogs![pos].timestamp}",
+                                                      "${widget.homeViewModel.homeNewsVideosBlogsResponse!.blogs![pos].timestamp}",
                                                       textAlign: TextAlign.center,
                                                       style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                             color: Theme.of(context).colorScheme.primary,
@@ -1427,53 +1483,53 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                           const SizedBox(
                                             height: 10,
                                           ),
-                                          homeViewModel.selectedNewsTabIndex == 0
+                                          widget.homeViewModel.selectedNewsTabIndex == 0
                                               ? Container(
                                                   height: 70,
                                                   child: HtmlWidget(
                                                     textStyle: TextStyle(overflow: TextOverflow.ellipsis),
-                                                    "${homeViewModel.homeNewsVideosBlogsResponse!.news![pos].title}",
+                                                    "${widget.homeViewModel.homeNewsVideosBlogsResponse!.news![pos].title}",
                                                   ),
                                                 )
-                                              : homeViewModel.selectedNewsTabIndex == 1
+                                              : widget.homeViewModel.selectedNewsTabIndex == 1
                                                   ? Container(
                                                       height: 70,
                                                       child: HtmlWidget(
                                                         textStyle: TextStyle(overflow: TextOverflow.ellipsis),
-                                                        "${homeViewModel.homeNewsVideosBlogsResponse!.videos![pos].title}",
+                                                        "${widget.homeViewModel.homeNewsVideosBlogsResponse!.videos![pos].title}",
                                                       ),
                                                     )
                                                   : Container(
                                                       height: 70,
                                                       child: HtmlWidget(
                                                         textStyle: TextStyle(overflow: TextOverflow.ellipsis),
-                                                        "${homeViewModel.homeNewsVideosBlogsResponse!.blogs![pos].title}",
+                                                        "${widget.homeViewModel.homeNewsVideosBlogsResponse!.blogs![pos].title}",
                                                       ),
                                                     ),
                                           const SizedBox(
                                             height: 10,
                                           ),
-                                          // homeViewModel.selectedNewsTabIndex == 0
+                                          // widget.homeViewModel.selectedNewsTabIndex == 0
                                           //     ? SizedBox(
                                           //         height: 40,
                                           //         child: HtmlWidget(
                                           //           textStyle: TextStyle(overflow: TextOverflow.ellipsis),
-                                          //           "${homeViewModel.homeNewsVideosBlogsResponse!.news![pos].desc!.length > 200 ? homeViewModel.homeNewsVideosBlogsResponse!.news![pos].desc!.substring(0, 150) : homeViewModel.homeNewsVideosBlogsResponse!.news![pos].desc}",
+                                          //           "${widget.homeViewModel.homeNewsVideosBlogsResponse!.news![pos].desc!.length > 200 ? widget.homeViewModel.homeNewsVideosBlogsResponse!.news![pos].desc!.substring(0, 150) : widget.homeViewModel.homeNewsVideosBlogsResponse!.news![pos].desc}",
                                           //         ),
                                           //       )
-                                          //     : homeViewModel.selectedNewsTabIndex == 1
+                                          //     : widget.homeViewModel.selectedNewsTabIndex == 1
                                           //         ? SizedBox(
                                           //             height: 40,
                                           //             child: HtmlWidget(
                                           //               textStyle: TextStyle(overflow: TextOverflow.ellipsis),
-                                          //               "${homeViewModel.homeNewsVideosBlogsResponse!.videos![pos].desc!.length > 200 ? homeViewModel.homeNewsVideosBlogsResponse!.videos![pos].desc!.substring(0, 150) : homeViewModel.homeNewsVideosBlogsResponse!.videos![pos].desc}",
+                                          //               "${widget.homeViewModel.homeNewsVideosBlogsResponse!.videos![pos].desc!.length > 200 ? widget.homeViewModel.homeNewsVideosBlogsResponse!.videos![pos].desc!.substring(0, 150) : widget.homeViewModel.homeNewsVideosBlogsResponse!.videos![pos].desc}",
                                           //             ),
                                           //           )
                                           //         : SizedBox(
                                           //             height: 40,
                                           //             child: HtmlWidget(
                                           //               textStyle: TextStyle(overflow: TextOverflow.ellipsis),
-                                          //               "${homeViewModel.homeNewsVideosBlogsResponse!.blogs![pos].desc!.length > 200 ? homeViewModel.homeNewsVideosBlogsResponse!.blogs![pos].desc!.substring(0, 150) : homeViewModel.homeNewsVideosBlogsResponse!.blogs![pos].desc}",
+                                          //               "${widget.homeViewModel.homeNewsVideosBlogsResponse!.blogs![pos].desc!.length > 200 ? widget.homeViewModel.homeNewsVideosBlogsResponse!.blogs![pos].desc!.substring(0, 150) : widget.homeViewModel.homeNewsVideosBlogsResponse!.blogs![pos].desc}",
                                           //             ),
                                           //           ),
                                           const SizedBox(
@@ -1486,30 +1542,32 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                                 ),
                               );
                             },
-                            itemCount: homeViewModel.selectedNewsTabIndex == 0
-                                ? homeViewModel.homeNewsVideosBlogsResponse == null
+                            itemCount: widget.homeViewModel.selectedNewsTabIndex == 0
+                                ? widget.homeViewModel.homeNewsVideosBlogsResponse == null
                                     ? 0
-                                    : homeViewModel.homeNewsVideosBlogsResponse!.news!.length
-                                : homeViewModel.selectedNewsTabIndex == 1
-                                    ? homeViewModel.homeNewsVideosBlogsResponse!.videos!.length
-                                    : homeViewModel.homeNewsVideosBlogsResponse!.blogs!.length,
+                                    : widget.homeViewModel.homeNewsVideosBlogsResponse!.news!.length
+                                : widget.homeViewModel.selectedNewsTabIndex == 1
+                                    ? widget.homeViewModel.homeNewsVideosBlogsResponse!.videos!.length
+                                    : widget.homeViewModel.homeNewsVideosBlogsResponse!.blogs!.length,
                           ),
                         );
                 }),
-                SizedBox(height: 24,),
+                SizedBox(
+                  height: 24,
+                ),
                 Observer(builder: (context) {
-                  return homeViewModel.isLoadingForNews
+                  return widget.homeViewModel.isLoadingForNews
                       ? Container()
-                      : homeViewModel.homeNewsVideosBlogsResponse == null
+                      : widget.homeViewModel.homeNewsVideosBlogsResponse == null
                           ? Container()
                           : Center(
                               child: SmoothPageIndicator(
                                 controller: controller1,
-                                count: homeViewModel.selectedNewsTabIndex == 0
-                                    ? homeViewModel.homeNewsVideosBlogsResponse!.news!.length
-                                    : homeViewModel.selectedNewsTabIndex == 1
-                                        ? homeViewModel.homeNewsVideosBlogsResponse!.videos!.length
-                                        : homeViewModel.homeNewsVideosBlogsResponse!.blogs!.length,
+                                count: widget.homeViewModel.selectedNewsTabIndex == 0
+                                    ? widget.homeViewModel.homeNewsVideosBlogsResponse!.news!.length
+                                    : widget.homeViewModel.selectedNewsTabIndex == 1
+                                        ? widget.homeViewModel.homeNewsVideosBlogsResponse!.videos!.length
+                                        : widget.homeViewModel.homeNewsVideosBlogsResponse!.blogs!.length,
                                 effect: WormEffect(
                                     dotHeight: 10,
                                     dotWidth: 10,
@@ -1521,10 +1579,13 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                               ),
                             );
                 }),
-                SizedBox(height: 34,),
+                SizedBox(
+                  height: 34,
+                ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => DashboardUi(25)));
+                    widget.bottomViewModel.setIndex(25);
+                    // Navigator.push(context, MaterialPageRoute(builder: (context) => DashboardUi(25)));
                   },
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 2),
@@ -1563,7 +1624,9 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                     ),
                   ),
                 ),
-                SizedBox(height: 16,),
+                SizedBox(
+                  height: 16,
+                ),
                 Container(
                   color: Color(0Xff2D2D2D),
                   child: Column(
@@ -1579,7 +1642,6 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                 )
               ],
             ),
-
           ],
         ),
       ),
@@ -1587,19 +1649,19 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
   }
 
   Future checkUpdate() async {
-    HttpResponse res = await homeViewModel.checkFeature();
+    HttpResponse res = await widget.homeViewModel.checkFeature();
     if (res.status == 200) {
-      if ((homeViewModel.checkFeatureResponse!.status ?? "") == "true") {
-        HttpResponse res1 = await homeViewModel.checkAppVersion();
+      if ((widget.homeViewModel.checkFeatureResponse!.status ?? "") == "true") {
+        HttpResponse res1 = await widget.homeViewModel.checkAppVersion();
         if (res1.status == 200) {
-          if ((homeViewModel.checkAppVersionResponse!.status ?? "") == "true") {
+          if ((widget.homeViewModel.checkAppVersionResponse!.status ?? "") == "true") {
             PackageInfo packageInfo = await PackageInfo.fromPlatform();
             String version = packageInfo.version;
 
             print("++++++++++++++++++++++++++++App Version : ${version}");
             print(
-                "++++++++++++++++++++++++++++API Version : ${homeViewModel.checkAppVersionResponse!.result!.version}");
-            if (version != homeViewModel.checkAppVersionResponse!.result!.version) {
+                "++++++++++++++++++++++++++++API Version : ${widget.homeViewModel.checkAppVersionResponse!.result!.version}");
+            if (version != widget.homeViewModel.checkAppVersionResponse!.result!.version) {
               await showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
@@ -1659,10 +1721,11 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                           padding: EdgeInsets.all(8),
                         ),
                         onPressed: () async {
-                          String strurl="https://play.google.com/store/apps/details?id=com.astaguru&pcampaignid=web_share";
-                          Uri _url=Uri.parse(strurl);
+                          String strurl =
+                              "https://play.google.com/store/apps/details?id=com.astaguru&pcampaignid=web_share";
+                          Uri _url = Uri.parse(strurl);
                           if (!await launchUrl(_url)) {
-                          throw Exception('Could not launch $_url');
+                            throw Exception('Could not launch $_url');
                           }
 
                           Navigator.of(context).pop();

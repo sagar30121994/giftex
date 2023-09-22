@@ -67,17 +67,18 @@ class _MyOrderProductpageState extends State<MyOrderProductpage> {
                         Image.asset(
                           "image/Ellipse 94.png",
                           height: 95,
-                          color: Color(0xffF3E8E9),
+                          color: const Color(0xffF3E8E9),
                         ),
                         CircleAvatar(
                           radius: 37,
-                          backgroundImage: NetworkImage(
-                              '${(widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.basicDetails!.profilePicUrl ?? '')}'),
+                          backgroundImage: NetworkImage(widget.profileViewModel.getUserAllDetailsResponse!.result!
+                                  .profile!.basicDetails!.profilePicUrl ??
+                              ''),
                           // child: Image.asset("image/image 40.png",fit: BoxFit.fill,),
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Column(
@@ -104,8 +105,9 @@ class _MyOrderProductpageState extends State<MyOrderProductpage> {
                                             ),
                                       ),
                                       TextSpan(
-                                        text:
-                                            '${(widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.basicDetails!.firstName ?? '')}',
+                                        text: widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!
+                                                .basicDetails!.firstName ??
+                                            '',
                                         style: Theme.of(context).textTheme.headline6!.copyWith(
                                               color: Colors.black,
                                               fontWeight: FontWeight.bold,
@@ -114,7 +116,7 @@ class _MyOrderProductpageState extends State<MyOrderProductpage> {
                                     ],
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 3,
                                 ),
                                 Row(
@@ -124,13 +126,15 @@ class _MyOrderProductpageState extends State<MyOrderProductpage> {
                                       height: 16,
                                       color: Colors.red,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 3,
                                     ),
                                     widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.address!.isEmpty
                                         ? Container()
                                         : Text(
-                                            '${(widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.address!.first!.city ?? '')}',
+                                            widget.profileViewModel.getUserAllDetailsResponse!.result!.profile!.address!
+                                                    .first.city ??
+                                                '',
                                             textAlign: TextAlign.center,
                                             style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                   color: Color(0xff2D2D2D),
@@ -205,13 +209,16 @@ class _MyOrderProductpageState extends State<MyOrderProductpage> {
               SizedBox(
                 height: 16,
               ),
-              Text(
-                "Order Id  #${widget.lot.orderNumber}",
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                      color: Color(0xff2D2D2D),
-                      fontWeight: FontWeight.w600,
-                    ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Text(
+                  "Order Id  #${widget.lot.orderNumber}",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                        color: Color(0xff2D2D2D),
+                        fontWeight: FontWeight.w600,
+                      ),
+                ),
               ),
               SizedBox(
                 height: 16,
@@ -332,13 +339,16 @@ class _MyOrderProductpageState extends State<MyOrderProductpage> {
               SizedBox(
                 height: 10,
               ),
-              Text(
-                "Product Details",
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                      color: Color(0xff2D2D2D),
-                      fontWeight: FontWeight.w600,
-                    ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Text(
+                  "Product Details",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                        color: Color(0xff2D2D2D),
+                        fontWeight: FontWeight.w600,
+                      ),
+                ),
               ),
               SizedBox(
                 height: 20,
@@ -346,7 +356,7 @@ class _MyOrderProductpageState extends State<MyOrderProductpage> {
               Stack(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 28.0),
+                    padding: const EdgeInsets.only(left: 16.0),
                     child: Image.asset(
                       "image/Rectangle (8).png",
                       fit: BoxFit.cover,
@@ -361,11 +371,11 @@ class _MyOrderProductpageState extends State<MyOrderProductpage> {
                       Image.network(
                         widget.lot.lot!.thumbImage ?? "",
                         height: 140,
-                        width: 120,
+                        width: 110,
                         fit: BoxFit.contain,
                       ),
                       SizedBox(
-                        width: 16,
+                        width: 8,
                       ),
                       Column(
                         children: [
@@ -390,13 +400,14 @@ class _MyOrderProductpageState extends State<MyOrderProductpage> {
                                     "Artist name",
                                     textAlign: TextAlign.center,
                                     style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                          color: Color(0xff747474),
+                                          color: Color(0xff202232),
+                                          // color: Color(0xff747474),
                                           fontWeight: FontWeight.w400,
                                         ),
                                   ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
+                                  // SizedBox(
+                                  //   height: 5,
+                                  // ),
                                   Text(
                                     "${widget.lot.artistName}",
                                     textAlign: TextAlign.center,
@@ -406,9 +417,9 @@ class _MyOrderProductpageState extends State<MyOrderProductpage> {
                                           fontWeight: FontWeight.w600,
                                         ),
                                   ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
+                                  // SizedBox(
+                                  //   height: 5,
+                                  // ),
                                   Text(
                                     "${widget.lot.lot!.lotTitle}",
                                     textAlign: TextAlign.center,
@@ -418,23 +429,28 @@ class _MyOrderProductpageState extends State<MyOrderProductpage> {
                                           fontWeight: FontWeight.w400,
                                         ),
                                   ),
-                                  Text(
-                                    "Category: ${widget.lot.lot!.category}",
-                                    textAlign: TextAlign.center,
-                                    style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                          color: Color(0xff747580),
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                  ),
                                   SizedBox(
                                     height: 10,
                                   ),
                                   Text(
-                                    "${widget.lot.lot!.info!.size}",
+                                    "Category: ${widget.lot.lot!.category}",
                                     textAlign: TextAlign.center,
                                     style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                           color: Color(0xff202232),
-                                          fontWeight: FontWeight.w600,
+                                          // color: Color(0xff747580),
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                  ),
+                                  // SizedBox(
+                                  //   height: 10,
+                                  // ),
+                                  Text(
+                                    "${widget.lot.lot!.info!.size}",
+                                    textAlign: TextAlign.center,
+                                    style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                          color: Color(0xff747474),
+                                          // color: Color(0xff202232),
+                                          fontWeight: FontWeight.w400,
                                         ),
                                   ),
                                 ],
@@ -450,141 +466,159 @@ class _MyOrderProductpageState extends State<MyOrderProductpage> {
               SizedBox(
                 height: 20,
               ),
-              Text(
-                "Payment Details",
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                      color: Color(0xff2D2D2D),
-                      fontWeight: FontWeight.w600,
-                    ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Text(
+                  "Payment Details",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                        color: Color(0xff2D2D2D),
+                        fontWeight: FontWeight.w600,
+                      ),
+                ),
               ),
               SizedBox(
                 height: 16,
               ),
-              Text(
-                "Shipping Details",
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                      color: Color(0xff2D2D2D),
-                      fontWeight: FontWeight.w600,
-                    ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Text(
+                  "Shipping Details",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        color: Color(0xff2D2D2D),
+                        fontWeight: FontWeight.w600,
+                      ),
+                ),
               ),
               SizedBox(
                 height: 16,
               ),
-              Text(
-                "${widget.lot.clientName}\nAddress : ${widget.lot.address!.addressLine1 ?? ""} ${widget.lot.address!.addressLine2 ?? ""} ${widget.lot.address!.city ?? ""} ${widget.lot.address!.state ?? ""} ${widget.lot.address!.pincode ?? ""}",
-                textAlign: TextAlign.start,
-                style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                      color: Color(0xff2D2D2D),
-                      fontWeight: FontWeight.w400,
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Text(
+                  "${widget.lot.clientName}\nAddress : ${widget.lot.address!.addressLine1 ?? ""} ${widget.lot.address!.addressLine2 ?? ""} ${widget.lot.address!.city ?? ""} ${widget.lot.address!.state ?? ""} ${widget.lot.address!.pincode ?? ""}",
+                  textAlign: TextAlign.start,
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        color: Color(0xff2D2D2D),
+                        fontWeight: FontWeight.w400,
+                      ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Phone Number",
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                color: Color(0xff2D2D2D),
+                                fontWeight: FontWeight.w600,
+                              ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          "+91 ${widget.lot.mobilenumber ?? ""}",
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.caption!.copyWith(
+                                color: Color(0xff202232),
+                                fontWeight: FontWeight.w400,
+                              ),
+                        ),
+                      ],
                     ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Phone Number",
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                              color: Color(0xff2D2D2D),
-                              fontWeight: FontWeight.w600,
-                            ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "+91 ${widget.lot.mobilenumber ?? ""}",
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.caption!.copyWith(
-                              color: Color(0xff202232),
-                              fontWeight: FontWeight.w400,
-                            ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Email Id",
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                              color: Color(0xff2D2D2D),
-                              fontWeight: FontWeight.w600,
-                            ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "${widget.lot.clientEmailid ?? ""}",
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.caption!.copyWith(
-                              color: Color(0xff202232),
-                              fontWeight: FontWeight.w400,
-                            ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Payment Details",
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                              color: Color(0xff2D2D2D),
-                              fontWeight: FontWeight.w600,
-                            ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "${"Net Banking"}",
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                              color: Color(0xff202232),
-                              fontWeight: FontWeight.w400,
-                            ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                "Order Summary",
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                      color: Color(0xff2D2D2D),
-                      fontWeight: FontWeight.w600,
+                    SizedBox(width: 16),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Email Id",
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                color: Color(0xff2D2D2D),
+                                fontWeight: FontWeight.w600,
+                              ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          "${widget.lot.clientEmailid ?? ""}",
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.caption!.copyWith(
+                                color: Color(0xff202232),
+                                fontWeight: FontWeight.w400,
+                              ),
+                        ),
+                      ],
                     ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Row(
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Payment Details",
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                color: Color(0xff2D2D2D),
+                                fontWeight: FontWeight.w600,
+                              ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          "${"Net Banking"}",
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                color: Color(0xff202232),
+                                fontWeight: FontWeight.w400,
+                              ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Text(
+                  "Order Summary",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                        color: Color(0xff2D2D2D),
+                        fontWeight: FontWeight.w600,
+                      ),
+                ),
               ),
               SizedBox(
                 height: 20,

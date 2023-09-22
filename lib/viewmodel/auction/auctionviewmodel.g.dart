@@ -25,6 +25,22 @@ mixin _$AuctionViewModel on _AuctionViewModel, Store {
     });
   }
 
+  late final _$navigateFromAtom =
+      Atom(name: '_AuctionViewModel.navigateFrom', context: context);
+
+  @override
+  String get navigateFrom {
+    _$navigateFromAtom.reportRead();
+    return super.navigateFrom;
+  }
+
+  @override
+  set navigateFrom(String value) {
+    _$navigateFromAtom.reportWrite(value, super.navigateFrom, () {
+      super.navigateFrom = value;
+    });
+  }
+
   late final _$liveAuctionTypeAtom =
       Atom(name: '_AuctionViewModel.liveAuctionType', context: context);
 
@@ -151,6 +167,22 @@ mixin _$AuctionViewModel on _AuctionViewModel, Store {
   set selectedAuction(Auctions? value) {
     _$selectedAuctionAtom.reportWrite(value, super.selectedAuction, () {
       super.selectedAuction = value;
+    });
+  }
+
+  late final _$selectedLotsAtom =
+      Atom(name: '_AuctionViewModel.selectedLots', context: context);
+
+  @override
+  Lots? get selectedLots {
+    _$selectedLotsAtom.reportRead();
+    return super.selectedLots;
+  }
+
+  @override
+  set selectedLots(Lots? value) {
+    _$selectedLotsAtom.reportWrite(value, super.selectedLots, () {
+      super.selectedLots = value;
     });
   }
 
@@ -553,6 +585,7 @@ mixin _$AuctionViewModel on _AuctionViewModel, Store {
   String toString() {
     return '''
 auctionType: ${auctionType},
+navigateFrom: ${navigateFrom},
 liveAuctionType: ${liveAuctionType},
 isLoadingForUpCommingAuction: ${isLoadingForUpCommingAuction},
 isLoadingForlots: ${isLoadingForlots},
@@ -561,6 +594,7 @@ isGrid: ${isGrid},
 selectedProxyBid: ${selectedProxyBid},
 count: ${count},
 selectedAuction: ${selectedAuction},
+selectedLots: ${selectedLots},
 autionResultResponse: ${autionResultResponse},
 searchResponse: ${searchResponse},
 upcomingAuctionResponse: ${upcomingAuctionResponse},

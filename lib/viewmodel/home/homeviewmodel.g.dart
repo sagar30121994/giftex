@@ -324,6 +324,22 @@ mixin _$HomeViewModel on _HomeViewModel, Store {
     });
   }
 
+  late final _$pageIDAtom =
+      Atom(name: '_HomeViewModel.pageID', context: context);
+
+  @override
+  String get pageID {
+    _$pageIDAtom.reportRead();
+    return super.pageID;
+  }
+
+  @override
+  set pageID(String value) {
+    _$pageIDAtom.reportWrite(value, super.pageID, () {
+      super.pageID = value;
+    });
+  }
+
   late final _$getDepartmentDetailsResponseAtom = Atom(
       name: '_HomeViewModel.getDepartmentDetailsResponse', context: context);
 
@@ -548,6 +564,7 @@ getSellDetailsResponse: ${getSellDetailsResponse},
 isloadingsellDetails: ${isloadingsellDetails},
 getDepartmentsResponse: ${getDepartmentsResponse},
 isloadingdepartments: ${isloadingdepartments},
+pageID: ${pageID},
 getDepartmentDetailsResponse: ${getDepartmentDetailsResponse},
 isloadingdepartmentdetails: ${isloadingdepartmentdetails},
 getOurCollectorResponse: ${getOurCollectorResponse},
