@@ -11,10 +11,10 @@ import 'package:giftex/screens/liveauction/components/past/pastdata.dart';
 import 'package:giftex/screens/liveauction/components/past/pasttabs.dart';
 import 'package:giftex/screens/liveauction/components/upcomming/upcommingdata.dart';
 import 'package:giftex/screens/liveauction/components/upcomming/upcommingtabs.dart';
-import 'package:giftex/screens/liveauction/liveauction.dart';
+import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
+import 'package:giftex/viewmodel/bottomviewmodel.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
-// import 'package:signalr_netcore/signalr_client.dart';
 import '../components/bottomnavigationbar/bottomnavigationbar.dart';
 import '../components/footer/footer.dart';
 import '../components/header.dart';
@@ -28,7 +28,10 @@ class HttpOverrideCertificateVerificationInDev extends HttpOverrides {
 }
 
 class LiveAuctionUiDetails extends StatefulWidget {
-  LiveAuctionUiDetails();
+  LiveAuctionUiDetails(this.auctionViewModel, this.bottomViewModel);
+
+  AuctionViewModel auctionViewModel;
+  BottomViewModel bottomViewModel;
 
   @override
   _LiveAuctionUiDetailsState createState() => _LiveAuctionUiDetailsState();

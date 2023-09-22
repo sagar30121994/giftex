@@ -11,6 +11,7 @@ import 'package:giftex/screens/components/footer/footer.dart';
 import 'package:giftex/screens/components/header.dart';
 import 'package:giftex/screens/homepage/liveitem.dart';
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
+import 'package:giftex/viewmodel/bottomviewmodel.dart';
 import 'package:giftex/viewmodel/profile/profileviewmodel.dart';
 import 'package:intl/intl.dart';
 import 'package:sliver_tools/sliver_tools.dart';
@@ -21,7 +22,10 @@ ProfileViewModel profileViewModel = ProfileViewModel();
 class LiveAuctionUi extends StatefulWidget {
   String auction;
 
-  LiveAuctionUi(this.auction);
+  LiveAuctionUi(this.auction, this.auctionViewModel, this.bottomViewModel);
+
+  AuctionViewModel auctionViewModel;
+  BottomViewModel bottomViewModel;
 
   @override
   _LiveAuctionUiState createState() => _LiveAuctionUiState();
