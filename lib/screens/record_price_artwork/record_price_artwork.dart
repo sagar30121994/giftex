@@ -3,7 +3,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:giftex/data/local/client/prefs.dart';
 import 'package:giftex/screens/components/footer/footer.dart';
 import 'package:giftex/screens/components/header.dart';
-import 'package:giftex/screens/liveauction/liveauction.dart';
 import 'package:giftex/viewmodel/home/homeviewmodel.dart';
 import 'package:intl/intl.dart';
 
