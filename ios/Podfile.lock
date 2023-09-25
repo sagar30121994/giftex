@@ -1,6 +1,4 @@
 PODS:
-  - add_2_calendar (0.0.1):
-    - Flutter
   - audio_session (0.0.1):
     - Flutter
   - DKImagePickerController/Core (4.3.4):
@@ -45,14 +43,14 @@ PODS:
   - Firebase/Database (10.12.0):
     - Firebase/CoreOnly
     - FirebaseDatabase (~> 10.12.0)
-  - firebase_core (2.15.0):
+  - firebase_core (2.15.1):
     - Firebase/CoreOnly (= 10.12.0)
     - Flutter
-  - firebase_crashlytics (3.3.4):
+  - firebase_crashlytics (3.3.5):
     - Firebase/Crashlytics (= 10.12.0)
     - firebase_core
     - Flutter
-  - firebase_database (10.2.4):
+  - firebase_database (10.2.5):
     - Firebase/Database (= 10.12.0)
     - firebase_core
     - Flutter
@@ -120,28 +118,25 @@ PODS:
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
-  - payu_checkoutpro_flutter (1.0.1):
-    - Flutter
-    - PayUIndia-CheckoutPro (~> 6.0)
   - PayUIndia-Analytics (3.0.0):
     - PayUIndia-NetworkReachability (~> 1.0)
   - PayUIndia-AssetLibrary (3.3.0)
   - PayUIndia-CardScanner (1.0.0)
-  - PayUIndia-CheckoutPro (6.0.1):
+  - PayUIndia-CheckoutPro (7.2.1):
     - PayUIndia-Analytics (= 3.0)
     - PayUIndia-AssetLibrary (~> 3.3)
     - PayUIndia-CardScanner (~> 1.0)
-    - PayUIndia-CheckoutProBase (~> 6.0)
-    - PayUIndia-CommonUI (~> 1.0)
+    - PayUIndia-CheckoutProBase (~> 7.2)
+    - PayUIndia-CommonUI (~> 1.1)
     - PayUIndia-CrashReporter (~> 2.1)
-    - PayUIndia-Custom-Browser (~> 10.0)
-    - PayUIndia-NativeOtpAssist (~> 2.2)
+    - PayUIndia-Custom-Browser (~> 10.1)
+    - PayUIndia-NativeOtpAssist (~> 3.0)
     - PayUIndia-NetworkReachability (~> 1.0)
-    - PayUIndia-PayUParams (~> 4.9)
-    - PayUIndia-PG-SDK (~> 9.3)
-    - PayUIndia-UPICore (~> 7.1)
-  - PayUIndia-CheckoutProBase (6.0.1):
-    - PayUIndia-PayUParams (~> 4.9)
+    - PayUIndia-PayUParams (~> 5.1)
+    - PayUIndia-PG-SDK (~> 10.2)
+    - PayUIndia-UPICore (~> 8.1)
+  - PayUIndia-CheckoutProBase (7.2.0):
+    - PayUIndia-PayUParams (~> 5.1)
   - PayUIndia-CommonUI (1.1.2):
     - PayUIndia-Analytics (= 3.0)
   - PayUIndia-CrashReporter (2.1.0)
@@ -149,23 +144,24 @@ PODS:
     - PayUIndia-Analytics (= 3.0)
     - PayUIndia-CommonUI (~> 1.1)
   - PayUIndia-Logger (4.0.0)
-  - PayUIndia-NativeOtpAssist (2.2.1):
+  - PayUIndia-NativeOtpAssist (3.0.0):
     - PayUIndia-Analytics (~> 3.0)
-    - PayUIndia-CommonUI (~> 1.0)
+    - PayUIndia-CommonUI (~> 1.1)
     - PayUIndia-CrashReporter (~> 2.1)
     - PayUIndia-NetworkReachability (~> 1.0)
-    - PayUIndia-PayUParams (~> 4.9)
+    - PayUIndia-PayUParams (~> 5.0)
   - PayUIndia-Networking (4.0.0):
     - PayUIndia-Logger (= 4.0.0)
   - PayUIndia-NetworkReachability (1.0.1)
-  - PayUIndia-PayUParams (4.9.0)
-  - PayUIndia-PG-SDK (9.3.0):
+  - PayUIndia-PayUParams (5.1.0)
+  - PayUIndia-PG-SDK (10.2.0):
     - PayUIndia-CrashReporter (~> 2.1)
     - PayUIndia-NetworkReachability (~> 1.0)
-    - PayUIndia-PayUParams (~> 4.9)
-  - PayUIndia-UPICore (7.1.1):
+    - PayUIndia-PayUParams (~> 5.1)
+  - PayUIndia-UPICore (8.1.1):
+    - PayUIndia-CommonUI (~> 1.1)
     - PayUIndia-Networking (~> 4.0)
-    - PayUIndia-PayUParams (~> 4.5)
+    - PayUIndia-PayUParams (~> 5.0)
   - PromisesObjC (2.3.1)
   - PromisesSwift (2.3.1):
     - PromisesObjC (= 2.3.1)
@@ -191,7 +187,6 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
-  - add_2_calendar (from `.symlinks/plugins/add_2_calendar/ios`)
   - audio_session (from `.symlinks/plugins/audio_session/ios`)
   - file_picker (from `.symlinks/plugins/file_picker/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
@@ -203,7 +198,7 @@ DEPENDENCIES:
   - open_file (from `.symlinks/plugins/open_file/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
-  - payu_checkoutpro_flutter (from `.symlinks/plugins/payu_checkoutpro_flutter/ios`)
+  - PayUIndia-CheckoutPro
   - share (from `.symlinks/plugins/share/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
@@ -250,8 +245,6 @@ SPEC REPOS:
     - SwiftyGif
 
 EXTERNAL SOURCES:
-  add_2_calendar:
-    :path: ".symlinks/plugins/add_2_calendar/ios"
   audio_session:
     :path: ".symlinks/plugins/audio_session/ios"
   file_picker:
@@ -274,8 +267,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/package_info_plus/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
-  payu_checkoutpro_flutter:
-    :path: ".symlinks/plugins/payu_checkoutpro_flutter/ios"
   share:
     :path: ".symlinks/plugins/share/ios"
   shared_preferences_foundation:
@@ -292,15 +283,14 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
 
 SPEC CHECKSUMS:
-  add_2_calendar: e9d68636aed37fb18e12f5a3d74c2e0589487af0
   audio_session: 4f3e461722055d21515cf3261b64c973c062f345
   DKImagePickerController: b512c28220a2b8ac7419f21c491fc8534b7601ac
   DKPhotoGallery: fdfad5125a9fdda9cc57df834d49df790dbb4179
   file_picker: ce3938a0df3cc1ef404671531facef740d03f920
   Firebase: 07150e75d142fb9399f6777fa56a187b17f833a0
-  firebase_core: e477125798fc37cd4ab43ca6a8536bf7e0929c00
-  firebase_crashlytics: 6043ce85800f96e53f15ee5051f9cfad10cce73d
-  firebase_database: 37ea2144bf40525d3ae4df40f70ae4bc3db715a5
+  firebase_core: 4a3246a02f828a01c74a2c26427037786d90f17f
+  firebase_crashlytics: df144edf7d04ace42beb3a3e29d825bfa49dd04b
+  firebase_database: ae8b70d7f5867c5f65a08353d81521896d850771
   FirebaseCore: f86a1394906b97ac445ae49c92552a9425831bed
   FirebaseCoreExtension: 0ce5ac36042001cfa233ce7bfa28e5c313cf80f4
   FirebaseCoreInternal: 950500ad8a08963657f6d8c67b579740c06d6aa1
@@ -319,22 +309,21 @@ SPEC CHECKSUMS:
   open_file: 02eb5cb6b21264bd3a696876f5afbfb7ca4f4b7d
   package_info_plus: fd030dabf36271f146f1f3beacd48f564b0f17f7
   path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943
-  payu_checkoutpro_flutter: 537ba3aa2d63b65b1a611550eb147124653d1074
   PayUIndia-Analytics: a23768b29283ef781783f38a99c1cf2235020d58
   PayUIndia-AssetLibrary: d72c575888a38b1f172fcda4e7eac1cdb3ded908
   PayUIndia-CardScanner: 42a10e1112f1bc954fdb407dd6de472fbf31fa27
-  PayUIndia-CheckoutPro: 91693a14c873a23e775695d5b0bd745fba7ad1e0
-  PayUIndia-CheckoutProBase: d782ba8c5048edb14d965933cb6b14ab5598252e
+  PayUIndia-CheckoutPro: 8243fca34e0f4c349d07d059c0a088cbe74355ab
+  PayUIndia-CheckoutProBase: e73be1bdd6fa3ae0a79f61216e9b89fef37e716c
   PayUIndia-CommonUI: 44b89551abe8d8ad043cc5120f3680fd8bcf9b6f
   PayUIndia-CrashReporter: 597caf134e85f9b3bde7d2045cae2def1b86c544
   PayUIndia-Custom-Browser: 1b6e603c571320692930375a249926602919ee50
   PayUIndia-Logger: e353d9dd576bac593e428dfbadedf337cbb48b78
-  PayUIndia-NativeOtpAssist: a8acd1c15358eb931f94b3ea2f9c08ea6fec32b7
+  PayUIndia-NativeOtpAssist: 15df5134d2b4fef886b73289e5decf59671cc0df
   PayUIndia-Networking: bf53f743484256303e24d4e763e6097f04af769c
   PayUIndia-NetworkReachability: 99e69781b3be99d7b713075ab7b73e6d73a153e4
-  PayUIndia-PayUParams: a78c869ad7684a264c0f2be27c4e5dc7f9e806ce
-  PayUIndia-PG-SDK: c25283160df7cb0fc551f44f5ea9acb7b972ad63
-  PayUIndia-UPICore: 5b1e5e4acbfff3fc5fa253c9219b7e1deb89bd41
+  PayUIndia-PayUParams: a4029a34a95e3c1b6ab4b4103f8723ff7323cb20
+  PayUIndia-PG-SDK: 11612a1cdf6df1e2c24ed7bdcee3f57fcb7a9842
+  PayUIndia-UPICore: 8355e0807543ba703c1407798f9f7af39cc746e8
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   PromisesSwift: 28dca69a9c40779916ac2d6985a0192a5cb4a265
   SDWebImage: 750adf017a315a280c60fde706ab1e552a3ae4e9
@@ -347,6 +336,6 @@ SPEC CHECKSUMS:
   wakelock_plus: 8b09852c8876491e4b6d179e17dfe2a0b5f60d47
   webview_flutter_wkwebview: 2e2d318f21a5e036e2c3f26171342e95908bd60a
 
-PODFILE CHECKSUM: 70d9d25280d0dd177a5f637cdb0f0b0b12c6a189
+PODFILE CHECKSUM: c8e8d659dd19e228fda023ce9c621dc630774631
 
 COCOAPODS: 1.12.1
