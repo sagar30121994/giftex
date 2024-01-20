@@ -172,7 +172,7 @@ class _KYCDetailspageState extends State<KYCDetailspage> {
                                     data: ThemeData.light().copyWith(
                                       colorScheme: ColorScheme.fromSwatch(
                                         primarySwatch: Colors.teal,
-                                        primaryColorDark: Colors.teal,
+                                        //primaryColorDark: Colors.teal,
                                         accentColor: Colors.teal,
                                       ),
                                       dialogBackgroundColor:Colors.white,
