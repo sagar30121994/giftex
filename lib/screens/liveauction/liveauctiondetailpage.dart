@@ -14,7 +14,6 @@ import 'package:giftex/screens/liveauction/components/upcomming/upcommingtabs.da
 import 'package:giftex/viewmodel/auction/auctionviewmodel.dart';
 import 'package:giftex/viewmodel/bottomviewmodel.dart';
 import 'package:sliver_tools/sliver_tools.dart';
-
 import '../components/bottomnavigationbar/bottomnavigationbar.dart';
 import '../components/footer/footer.dart';
 import '../components/header.dart';
